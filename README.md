@@ -2,20 +2,16 @@
 
 ## About
 
-## Style guide
+## Project structure / style guide
 
-As suggested in the [offical Godot documentation](https://docs.godotengine.org/en/stable/tutorials/best_practices/project_organization.html):
-* Use **snake_case** for folder and file names (this avoids case sensitivity issues).
-* Use **PascalCase** for node names.
-
-Project structure:
-
-**TBD**
+* Use **snake_case** for folders and file names inside the `godot_game` folder(this avoids case sensitivity issues).
 
 
 ## Useful Links
 
-https://www.photopea.com (A free web=based Photoshop alternative).
+[Official Godot documentation](https://docs.godotengine.org/en/stable/index.html)
+
+https://www.photopea.com (A free web=based Photoshop alternative)
 
 [Godot 4.2.2 Linux download link](https://github.com/godotengine/godot/releases/download/4.2.2-stable/Godot_v4.2.2-stable_linux.x86_64.zip)
 
