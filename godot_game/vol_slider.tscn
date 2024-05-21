@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbn0dv1k0onpb"]
+
+[ext_resource type="Script" path="res://HSlider.gd" id="1_vfrrs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3wc6t"]
+bg_color = Color(0.694142, 0.0044108, 0.476965, 1)
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_color = Color(0.664967, 0.512857, 0.34599, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_50jio"]
+bg_color = Color(0.858268, 0, 0.333833, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v7i66"]
+bg_color = Color(0.194764, 0.693458, 0.55881, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.868456, 0.810006, 0.424329, 1)
+
+[node name="HSlider" type="HSlider"]
+offset_right = 8.0
+offset_bottom = 16.0
+theme_override_styles/slider = SubResource("StyleBoxFlat_3wc6t")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_50jio")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_v7i66")
+max_value = 1.0
+step = 0.01
+value = 0.5
+script = ExtResource("1_vfrrs")
