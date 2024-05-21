@@ -22,7 +22,3 @@ Globals="*res://Globals.gd"
 [dotnet]
 
 project/assembly_name="Godot Game"
-
-[rendering]
-
-renderer/rendering_method="mobile"

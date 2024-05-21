@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://cbn0dv1k0onpb"]
+[gd_scene load_steps=5 format=3 uid="uid://cx04rs1osmd55"]
 
-[ext_resource type="Script" path="res://HSlider.gd" id="1_vfrrs"]
+[ext_resource type="Script" path="res://volume_slider.gd" id="1_vfrrs"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3wc6t"]
 bg_color = Color(0.694142, 0.0044108, 0.476965, 1)
@@ -21,9 +21,9 @@ border_width_right = 4
 border_width_bottom = 4
 border_color = Color(0.868456, 0.810006, 0.424329, 1)
 
-[node name="HSlider" type="HSlider"]
-offset_right = 8.0
-offset_bottom = 16.0
+[node name="VolumeSlider" type="HSlider"]
+offset_right = 1110.0
+offset_bottom = 304.0
 theme_override_styles/slider = SubResource("StyleBoxFlat_3wc6t")
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_50jio")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_v7i66")

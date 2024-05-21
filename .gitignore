@@ -2,7 +2,7 @@
 .import/
 export.cfg
 export_presets.cfg
-save_data.save
+*.save
 
 # Imported translations (automatically generated from CSV files)
 *.translation

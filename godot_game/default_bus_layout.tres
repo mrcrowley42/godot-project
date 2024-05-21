@@ -1,6 +1,14 @@
-[gd_resource type="AudioBusLayout" format=3 uid="uid://dfspa4bjtaaa"]
+[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://c3xqv61akjmu3"]
+
+[sub_resource type="AudioEffectPhaser" id="AudioEffectPhaser_pgkjs"]
+resource_name = "Phaser"
+range_max_hz = 2815.0
+rate_hz = 2.571
+depth = 0.8
 
 [resource]
+bus/0/effect/0/effect = SubResource("AudioEffectPhaser_pgkjs")
+bus/0/effect/0/enabled = true
 bus/1/name = &"Music"
 bus/1/solo = false
 bus/1/mute = false

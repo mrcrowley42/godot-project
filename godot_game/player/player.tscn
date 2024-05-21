@@ -48,3 +48,4 @@ animation = &"walk"
 
 [node name="yip" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_fhvfk")
+bus = &"SFX"
