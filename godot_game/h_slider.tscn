@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://ufmv4sdb8j70"]
+[gd_scene load_steps=5 format=3 uid="uid://fywuuyj5p16u"]
 
-[ext_resource type="Script" path="res://HSlider.gd" id="1_e6u5m"]
+[ext_resource type="Script" path="res://volume_slider.gd" id="1_e6u5m"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3wlub"]
 bg_color = Color(1, 0.247059, 0.603922, 1)
