@@ -1,12 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dluxliytmon0"]
 [gd_scene load_steps=12 format=3 uid="uid://fw0gdw6x54wk"]
 
 [ext_resource type="PackedScene" uid="uid://cejd53nhpxam1" path="res://player/player.tscn" id="1_prcg2"]
 [ext_resource type="PackedScene" uid="uid://cehjp604hlr4r" path="res://bg/parallax_background.tscn" id="2_r2x62"]
 [ext_resource type="Script" path="res://Area2D.gd" id="3_t8sia"]
 [ext_resource type="AudioStream" uid="uid://dcet1hpt70t42" path="res://perfection.mp3" id="4_u1gso"]
-[ext_resource type="PackedScene" uid="uid://cbn0dv1k0onpb" path="res://vol_slider.tscn" id="5_851i2"]
-[ext_resource type="PackedScene" path="res://h_slider.tscn" id="5_g6fg5"]
+[ext_resource type="PackedScene" path="res://vol_slider.tscn" id="5_851i2"]
 [ext_resource type="Script" path="res://SaveButton.gd" id="6_wxj3e"]
 [ext_resource type="Script" path="res://LoadButton.gd" id="7_6isjc"]
 [ext_resource type="Script" path="res://LineEdit.gd" id="7_bda2u"]
@@ -52,6 +50,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="HSlider7" parent="Control" instance=ExtResource("5_851i2")]
+layout_mode = 0
 offset_left = 835.0
 offset_top = 282.0
 offset_right = 1135.0
@@ -59,6 +58,7 @@ offset_bottom = 374.0
 bus_name = "Master"
 
 [node name="HSlider6" parent="Control" instance=ExtResource("5_851i2")]
+layout_mode = 0
 offset_left = 832.0
 offset_top = 189.0
 offset_right = 1132.0
@@ -66,6 +66,7 @@ offset_bottom = 281.0
 bus_name = "SFX"
 
 [node name="HSlider5" parent="Control" instance=ExtResource("5_851i2")]
+layout_mode = 0
 offset_left = 838.0
 offset_top = 103.0
 offset_right = 1138.0
