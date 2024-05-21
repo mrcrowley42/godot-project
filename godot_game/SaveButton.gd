@@ -16,7 +16,10 @@ func save_all_data():
 			print("Node '%s' doesnt have a %s() function" % [node.name, SAVE])
 			continue
 		
-		var node_data = node.call(SAVE)
+		var node_data = {
+			Globals.PATH: node.get_path(),
+			Globals.DATA: node.call(SAVE)
+		}
 		var serialized_data = JSON.stringify(node_data)
 		
 		save_file.store_line(serialized_data)
