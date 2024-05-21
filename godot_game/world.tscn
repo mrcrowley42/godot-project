@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://fw0gdw6x54wk"]
+[gd_scene load_steps=9 format=3 uid="uid://dluxliytmon0"]
 
 [ext_resource type="PackedScene" uid="uid://cejd53nhpxam1" path="res://player/player.tscn" id="1_prcg2"]
 [ext_resource type="PackedScene" uid="uid://cehjp604hlr4r" path="res://bg/parallax_background.tscn" id="2_r2x62"]
@@ -14,6 +14,9 @@ size = Vector2(1344, 333)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s3s0p"]
 size = Vector2(242, 742)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o5itl"]
+bg_color = Color(0.720606, 1.34285e-05, 0.493821, 1)
 
 [node name="World" type="Node2D"]
 
@@ -73,32 +76,13 @@ offset_right = 1094.0
 offset_bottom = 98.0
 bus_name = "Master"
 
-[node name="SaveButton" type="Button" parent="Control"]
+[node name="HSlider4" type="HSlider" parent="Control"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 0
-offset_left = 11.0
-offset_top = 10.0
-offset_right = 55.0
-offset_bottom = 41.0
-text = "Save"
-script = ExtResource("6_wxj3e")
-
-[node name="LoadButton" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 65.0
-offset_top = 10.0
-offset_right = 111.0
-offset_bottom = 41.0
-text = "Load"
-script = ExtResource("7_6isjc")
-
-[node name="TextBox" type="LineEdit" parent="Control" groups=["save_data"]]
-layout_mode = 0
-offset_left = 11.0
-offset_top = 48.0
-offset_right = 78.0625
-offset_bottom = 79.0
-max_length = 10
-expand_to_text_length = true
-script = ExtResource("7_bda2u")
+offset_left = 865.0
+offset_top = 199.0
+offset_right = 873.0
+offset_bottom = 215.0
+theme_override_styles/slider = SubResource("StyleBoxFlat_o5itl")
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
