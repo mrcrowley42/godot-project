@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cehjp604hlr4r" path="res://bg/parallax_background.tscn" id="2_r2x62"]
 [ext_resource type="Script" path="res://Area2D.gd" id="3_t8sia"]
 [ext_resource type="AudioStream" uid="uid://dcet1hpt70t42" path="res://perfection.mp3" id="4_u1gso"]
-[ext_resource type="PackedScene" path="res://vol_slider.tscn" id="5_851i2"]
+[ext_resource type="PackedScene" uid="uid://cbn0dv1k0onpb" path="res://vol_slider.tscn" id="5_851i2"]
 [ext_resource type="Script" path="res://SaveButton.gd" id="6_wxj3e"]
 [ext_resource type="Script" path="res://LoadButton.gd" id="7_6isjc"]
 [ext_resource type="Script" path="res://LineEdit.gd" id="7_bda2u"]
