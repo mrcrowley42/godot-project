@@ -1,14 +1,13 @@
-[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://c3xqv61akjmu3"]
+[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://dfspa4bjtaaa"]
 
-[sub_resource type="AudioEffectPhaser" id="AudioEffectPhaser_pgkjs"]
-resource_name = "Phaser"
-range_max_hz = 2815.0
-rate_hz = 2.571
-depth = 0.8
+[sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_adn1e"]
+resource_name = "Distortion"
+pre_gain = 10.81
+keep_hf_hz = 2000.0
+drive = 0.4
+post_gain = 1.87
 
 [resource]
-bus/0/effect/0/effect = SubResource("AudioEffectPhaser_pgkjs")
-bus/0/effect/0/enabled = true
 bus/1/name = &"Music"
 bus/1/solo = false
 bus/1/mute = false
@@ -21,3 +20,5 @@ bus/2/mute = false
 bus/2/bypass_fx = false
 bus/2/volume_db = 0.0
 bus/2/send = &"Master"
+bus/2/effect/0/effect = SubResource("AudioEffectDistortion_adn1e")
+bus/2/effect/0/enabled = false
