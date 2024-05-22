@@ -42,6 +42,7 @@ shape = SubResource("RectangleShape2D_s3s0p")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_u1gso")
 autoplay = true
+bus = &"Music"
 
 [node name="Controls" type="Control" parent="."]
 layout_mode = 3
