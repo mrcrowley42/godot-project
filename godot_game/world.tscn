@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dluxliytmon0"]
+[gd_scene load_steps=17 format=3 uid="uid://dluxliytmon0"]
 
 [ext_resource type="PackedScene" uid="uid://cejd53nhpxam1" path="res://player/player.tscn" id="1_prcg2"]
 [ext_resource type="Script" path="res://world.gd" id="1_tukm0"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://PlusButton.gd" id="9_2p85b"]
 [ext_resource type="Script" path="res://ProgressBar.gd" id="10_clydk"]
 [ext_resource type="Script" path="res://MinusButton.gd" id="12_j88wj"]
+[ext_resource type="Script" path="res://TimerButton.gd" id="13_8tn55"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sghcm"]
 size = Vector2(1344, 333)
@@ -119,6 +120,7 @@ offset_top = 49.0
 offset_right = 78.0625
 offset_bottom = 80.0
 script = ExtResource("7_bda2u")
+
 [node name="ProgressBar" type="ProgressBar" parent="Controls"]
 layout_mode = 0
 offset_left = 315.0
@@ -148,6 +150,28 @@ offset_bottom = 556.0
 theme_override_font_sizes/font_size = 40
 text = "-"
 script = ExtResource("12_j88wj")
+
+[node name="TimerButton" type="Button" parent="Controls"]
+layout_mode = 0
+offset_left = 1053.0
+offset_top = 599.0
+offset_right = 1145.0
+offset_bottom = 630.0
+text = "Start timer"
+script = ExtResource("13_8tn55")
+
+[node name="TimerSecs" type="SpinBox" parent="Controls"]
+layout_mode = 0
+offset_left = 1061.0
+offset_top = 562.0
+offset_right = 1144.06
+offset_bottom = 593.0
+min_value = 1.0
+max_value = 10.0
+step = 0.1
+value = 1.0
+alignment = 2
+custom_arrow_step = 1.0
 
 [connection signal="body_entered" from="OutOfBounds" to="OutOfBounds" method="_on_body_entered"]
 [connection signal="button_down" from="Controls/PlusButton" to="Controls/PlusButton" method="_on_button_down"]
