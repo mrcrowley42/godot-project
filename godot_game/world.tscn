@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dluxliytmon0"]
+[gd_scene load_steps=20 format=3 uid="uid://dluxliytmon0"]
 
 [ext_resource type="PackedScene" uid="uid://cejd53nhpxam1" path="res://player/player.tscn" id="1_prcg2"]
 [ext_resource type="Script" path="res://world.gd" id="1_tukm0"]
@@ -12,6 +12,9 @@
 [ext_resource type="Script" path="res://PlusButton.gd" id="9_2p85b"]
 [ext_resource type="Script" path="res://ProgressBar.gd" id="10_clydk"]
 [ext_resource type="Script" path="res://MinusButton.gd" id="12_j88wj"]
+[ext_resource type="Script" path="res://pipe.gd" id="13_8eitr"]
+[ext_resource type="Texture2D" uid="uid://pbxnymt0cqn7" path="res://c345a48674507fd3f61aad362db1b21b.jpg" id="14_cuo3p"]
+[ext_resource type="AudioStream" uid="uid://dat0sfue6jjr5" path="res://metal-pipe-falling-sound-effect-made-with-Voicemod.mp3" id="15_6gvbs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sghcm"]
 size = Vector2(1344, 333)
@@ -21,6 +24,9 @@ size = Vector2(242, 742)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lviop"]
 bg_color = Color(0.808514, 0, 0.269554, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ge36l"]
+size = Vector2(204.5, 132.5)
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_tukm0")
@@ -142,6 +148,22 @@ theme_override_font_sizes/font_size = 40
 text = "-"
 script = ExtResource("12_j88wj")
 
+[node name="PIPE" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_6gvbs")
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("13_8eitr")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+position = Vector2(99, 511)
+scale = Vector2(0.274038, 0.272837)
+texture = ExtResource("14_cuo3p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(101.75, 512.75)
+shape = SubResource("RectangleShape2D_ge36l")
+
 [connection signal="body_entered" from="OutOfBounds" to="OutOfBounds" method="_on_body_entered"]
 [connection signal="button_down" from="Controls/PlusButton" to="Controls/PlusButton" method="_on_button_down"]
 [connection signal="button_down" from="Controls/MinusButton" to="Controls/MinusButton" method="_on_button_down"]
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
