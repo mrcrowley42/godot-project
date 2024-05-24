@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+var health = 100
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -32,3 +33,7 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+
+
+func _on_plus_button_button_down():
+	pass # Replace with function body.
