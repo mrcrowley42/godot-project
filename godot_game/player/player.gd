@@ -9,6 +9,14 @@ const JUMP_VELOCITY = -400.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var flipped = false
 
+func dead():
+	get_tree().change_scene_to_file("res://dead.tscn")
+
+func _process(delta):
+	if health <=0:
+		call_deferred("dead")
+		
+		
 
 func _physics_process(delta):
 	# Add the gravity.
