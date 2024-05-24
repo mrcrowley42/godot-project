@@ -95,18 +95,18 @@ bus_name = "Music"
 [node name="SaveButton" type="Button" parent="Controls"]
 layout_mode = 0
 offset_left = 11.0
-offset_top = 49.0
+offset_top = 88.0
 offset_right = 55.0
-offset_bottom = 80.0
+offset_bottom = 119.0
 text = "Save"
 script = ExtResource("6_wxj3e")
 
 [node name="LoadButton" type="Button" parent="Controls"]
 layout_mode = 0
 offset_left = 67.0
-offset_top = 49.0
+offset_top = 88.0
 offset_right = 113.0
-offset_bottom = 80.0
+offset_bottom = 119.0
 text = "Load"
 script = ExtResource("7_6isjc")
 
@@ -118,6 +118,13 @@ offset_right = 78.0625
 offset_bottom = 40.0
 script = ExtResource("7_bda2u")
 
+[node name="TextBox2" type="LineEdit" parent="Controls" groups=["save_data"]]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 49.0
+offset_right = 78.0625
+offset_bottom = 80.0
+script = ExtResource("7_bda2u")
 [node name="ProgressBar" type="ProgressBar" parent="Controls"]
 layout_mode = 0
 offset_left = 315.0

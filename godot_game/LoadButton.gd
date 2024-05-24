@@ -13,23 +13,27 @@ func load_all_data():
 		return
 	
 	var save_file = FileAccess.open(Globals.SAVE_FILE, FileAccess.READ)
+	var data_lines: Array = bytes_to_var(save_file.get_var())
 	
-	while save_file.get_position() < save_file.get_length():
-		var json_string = save_file.get_line()
-		var parsed_data = JSON.parse_string(json_string)
+	var metadata_line = data_lines.pop_at(0)
+	print("metadata: ", metadata_line)
+	
+	for line in data_lines:
+		var parsed_line = JSON.parse_string(line)
 		
 		# check data has necessary values
-		if Globals.PATH not in parsed_data or Globals.DATA not in parsed_data:
+		if Globals.PATH not in parsed_line or Globals.DATA not in parsed_line:
 			print("ERROR: Missing '%s' or '%s' value for data, skipping" % [Globals.PATH, Globals.DATA])
 			continue
 		
 		# get data
-		var node = get_node(parsed_data[Globals.PATH])
-		var data = parsed_data[Globals.DATA]
+		var node = get_node(parsed_line[Globals.PATH])
+		var data = parsed_line[Globals.DATA]
 		
 		# pass data to node for it to load
 		if !node.has_method(LOAD):
 			print("ERROR: Node '%s' doesnt have a %s() function" % [node.name, LOAD])
 			continue
 		node.call(LOAD, data)
+	
 	print("Loaded data!")
