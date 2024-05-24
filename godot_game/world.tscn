@@ -125,6 +125,7 @@ offset_top = 49.0
 offset_right = 78.0625
 offset_bottom = 80.0
 script = ExtResource("7_bda2u")
+
 [node name="ProgressBar" type="ProgressBar" parent="Controls"]
 layout_mode = 0
 offset_left = 315.0
