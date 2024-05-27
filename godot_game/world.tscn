@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dluxliytmon0"]
+[gd_scene load_steps=26 format=3 uid="uid://dluxliytmon0"]
 
 [ext_resource type="PackedScene" uid="uid://cejd53nhpxam1" path="res://player/player.tscn" id="1_prcg2"]
 [ext_resource type="Script" path="res://world.gd" id="1_tukm0"]
@@ -203,7 +203,7 @@ offset_top = 598.0
 offset_right = 1032.06
 offset_bottom = 629.0
 theme = SubResource("Theme_rjori")
-max_value = 999999.0
+max_value = 999.0
 alignment = 1
 script = ExtResource("14_ntyh0")
 
@@ -223,6 +223,7 @@ position = Vector2(101.75, 512.75)
 shape = SubResource("RectangleShape2D_ge36l")
 
 [node name="Ticker" type="Timer" parent="."]
+wait_time = 0.2
 autostart = true
 script = ExtResource("18_auxc6")
 
@@ -231,3 +232,4 @@ script = ExtResource("18_auxc6")
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
 [connection signal="body_entered" from="OutOfBounds" to="OutOfBounds" method="_on_body_entered"]
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[connection signal="tick" from="Ticker" to="Controls/TickDisplay" method="_on_ticker_tick"]
