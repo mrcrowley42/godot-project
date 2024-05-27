@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dluxliytmon0"]
+[gd_scene load_steps=25 format=3 uid="uid://dluxliytmon0"]
 
 [ext_resource type="PackedScene" uid="uid://cejd53nhpxam1" path="res://player/player.tscn" id="1_prcg2"]
 [ext_resource type="Script" path="res://world.gd" id="1_tukm0"]
@@ -14,19 +14,21 @@
 [ext_resource type="Script" path="res://MinusButton.gd" id="12_j88wj"]
 [ext_resource type="Script" path="res://pipe.gd" id="13_8eitr"]
 [ext_resource type="Script" path="res://TimerButton.gd" id="13_8tn55"]
+[ext_resource type="Theme" uid="uid://qdicgq5ie0km" path="res://themes/badtheme.tres" id="13_m356y"]
+[ext_resource type="Script" path="res://Button.gd" id="14_c3qnk"]
 [ext_resource type="Texture2D" uid="uid://pbxnymt0cqn7" path="res://c345a48674507fd3f61aad362db1b21b.jpg" id="14_cuo3p"]
 [ext_resource type="Script" path="res://TickDisplay.gd" id="14_ntyh0"]
 [ext_resource type="AudioStream" uid="uid://dat0sfue6jjr5" path="res://metal-pipe-falling-sound-effect-made-with-Voicemod.mp3" id="15_6gvbs"]
 [ext_resource type="Script" path="res://Ticker.gd" id="18_auxc6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lviop"]
+bg_color = Color(0.808514, 0, 0.269554, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sghcm"]
 size = Vector2(1344, 333)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s3s0p"]
 size = Vector2(242, 742)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lviop"]
-bg_color = Color(0.808514, 0, 0.269554, 1)
 
 [sub_resource type="Theme" id="Theme_rjori"]
 
@@ -36,8 +38,77 @@ size = Vector2(204.5, 132.5)
 [node name="World" type="Node2D"]
 script = ExtResource("1_tukm0")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
+offset_left = 800.0
+offset_top = 100.0
+offset_right = 840.0
+offset_bottom = 228.0
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 10
+
+[node name="VolumeMaster" parent="CanvasLayer/GridContainer" instance=ExtResource("5_851i2")]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+tick_count = 1
+bus_name = "Master"
+
+[node name="VolumeSfx" parent="CanvasLayer/GridContainer" instance=ExtResource("5_851i2")]
+layout_mode = 2
+value = 0.0
+tick_count = 1
+bus_name = "SFX"
+
+[node name="VolumeMusic" parent="CanvasLayer/GridContainer" instance=ExtResource("5_851i2")]
+layout_mode = 2
+tooltip_text = "Music"
+tick_count = 1
+bus_name = "Music"
+
+[node name="GridContainer2" type="GridContainer" parent="CanvasLayer"]
+offset_left = 316.0
+offset_top = 475.0
+offset_right = 856.0
+offset_bottom = 538.0
+theme_override_constants/h_separation = 20
+columns = 3
+
+[node name="MinusButton" type="Button" parent="CanvasLayer/GridContainer2"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "-"
+script = ExtResource("12_j88wj")
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/GridContainer2"]
+custom_minimum_size = Vector2(400, 40)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_lviop")
+value = 50.0
+script = ExtResource("10_clydk")
+
+[node name="PlusButton" type="Button" parent="CanvasLayer/GridContainer2"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "+"
+script = ExtResource("9_2p85b")
+
 [node name="Player" parent="." groups=["player"] instance=ExtResource("1_prcg2")]
+unique_name_in_owner = true
 position = Vector2(520, 221)
+
+[node name="Button" type="Button" parent="."]
+offset_left = 412.0
+offset_top = 394.0
+offset_right = 751.0
+offset_bottom = 461.0
+theme = ExtResource("13_m356y")
+theme_override_font_sizes/font_size = 43
+text = "CHANGE THEME"
+script = ExtResource("14_c3qnk")
 
 [node name="Floor" type="StaticBody2D" parent="."]
 
@@ -68,34 +139,6 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="VolumeMaster" parent="Controls" instance=ExtResource("5_851i2")]
-layout_mode = 0
-offset_left = 805.0
-offset_top = 31.0
-offset_right = 1105.0
-offset_bottom = 123.0
-bus_name = "Master"
-
-[node name="VolumeSfx" parent="Controls" instance=ExtResource("5_851i2")]
-layout_mode = 0
-offset_left = 808.0
-offset_top = 170.0
-offset_right = 1108.0
-offset_bottom = 262.0
-value = 0.0
-tick_count = 5
-ticks_on_borders = true
-bus_name = "SFX"
-
-[node name="VolumeMusic" parent="Controls" instance=ExtResource("5_851i2")]
-layout_mode = 0
-offset_left = 814.0
-offset_top = 99.0
-offset_right = 1114.0
-offset_bottom = 191.0
-tooltip_text = "Music"
-bus_name = "Music"
 
 [node name="SaveButton" type="Button" parent="Controls"]
 layout_mode = 0
@@ -130,36 +173,6 @@ offset_top = 49.0
 offset_right = 78.0625
 offset_bottom = 80.0
 script = ExtResource("7_bda2u")
-
-[node name="ProgressBar" type="ProgressBar" parent="Controls"]
-layout_mode = 0
-offset_left = 315.0
-offset_top = 487.0
-offset_right = 786.0
-offset_bottom = 544.0
-theme_override_styles/background = SubResource("StyleBoxFlat_lviop")
-value = 50.0
-script = ExtResource("10_clydk")
-
-[node name="PlusButton" type="Button" parent="Controls"]
-layout_mode = 0
-offset_left = 806.0
-offset_top = 492.0
-offset_right = 872.0
-offset_bottom = 542.0
-theme_override_font_sizes/font_size = 40
-text = "+"
-script = ExtResource("9_2p85b")
-
-[node name="MinusButton" type="Button" parent="Controls"]
-layout_mode = 0
-offset_left = 230.0
-offset_top = 493.0
-offset_right = 296.0
-offset_bottom = 556.0
-theme_override_font_sizes/font_size = 40
-text = "-"
-script = ExtResource("12_j88wj")
 
 [node name="TimerButton" type="Button" parent="Controls"]
 layout_mode = 0
@@ -213,7 +226,8 @@ shape = SubResource("RectangleShape2D_ge36l")
 autostart = true
 script = ExtResource("18_auxc6")
 
+[connection signal="button_down" from="CanvasLayer/GridContainer2/MinusButton" to="CanvasLayer/GridContainer2/MinusButton" method="_on_button_down"]
+[connection signal="button_down" from="CanvasLayer/GridContainer2/PlusButton" to="CanvasLayer/GridContainer2/PlusButton" method="_on_button_down"]
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
 [connection signal="body_entered" from="OutOfBounds" to="OutOfBounds" method="_on_body_entered"]
-[connection signal="button_down" from="Controls/PlusButton" to="Controls/PlusButton" method="_on_button_down"]
-[connection signal="button_down" from="Controls/MinusButton" to="Controls/MinusButton" method="_on_button_down"]
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
