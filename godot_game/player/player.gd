@@ -12,11 +12,9 @@ var flipped = false
 func dead():
 	get_tree().change_scene_to_file("res://dead.tscn")
 
-func _process(delta):
-	if health <=0:
+func _process(_delta):
+	if health <= 0:
 		call_deferred("dead")
-		
-		
 
 func _physics_process(delta):
 	# Add the gravity.
