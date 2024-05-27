@@ -1,5 +1,4 @@
 # Style Guide
-
 > [!IMPORTANT]  
 > For folders and file names **inside** the `godot_game` folder please use **snake_case** (this avoids case sensitivity issues).
 
@@ -36,7 +35,6 @@ func example_func():
 ## Description of function.
 ## etc.
 ```
-___
-
-> [!TIP] When in doubt
-> Follow Python's PEP8 conventions or Consult Godot's [official style guide](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html).
+---
+> [!TIP]
+> When in doubt, follow Python's PEP8 conventions or Consult Godot's [official style guide](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html).
