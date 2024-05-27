@@ -12,5 +12,5 @@ func _process(delta):
 
 
 func _on_button_down():
-	get_node("../../Player").health += 10
+	%Player.health += 10
 	

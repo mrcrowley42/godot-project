@@ -5,8 +5,7 @@ func _ready():
 	pass # Replace with function body.
 	
 func _on_button_down():
-	var hp = get_node("../../Player")
-	
+	var hp = %Player
 	
 	hp.health -= 10
 	
