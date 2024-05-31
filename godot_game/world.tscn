@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dluxliytmon0"]
+[gd_scene load_steps=27 format=3 uid="uid://dluxliytmon0"]
 
 [ext_resource type="PackedScene" uid="uid://cejd53nhpxam1" path="res://player/player.tscn" id="1_prcg2"]
 [ext_resource type="Script" path="res://world.gd" id="1_tukm0"]
@@ -20,6 +20,12 @@
 [ext_resource type="Script" path="res://TickDisplay.gd" id="14_ntyh0"]
 [ext_resource type="AudioStream" uid="uid://dat0sfue6jjr5" path="res://metal-pipe-falling-sound-effect-made-with-Voicemod.mp3" id="15_6gvbs"]
 [ext_resource type="Script" path="res://Ticker.gd" id="18_auxc6"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_2mmog"]
+color = Color(0.793417, 0.388279, 0.00261003, 1)
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 40
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lviop"]
 bg_color = Color(0.808514, 0, 0.269554, 1)
@@ -63,6 +69,7 @@ bus_name = "SFX"
 [node name="VolumeMusic" parent="CanvasLayer/GridContainer" instance=ExtResource("5_851i2")]
 layout_mode = 2
 tooltip_text = "Music"
+theme_override_styles/slider = SubResource("StyleBoxLine_2mmog")
 tick_count = 1
 bus_name = "Music"
 
@@ -223,7 +230,7 @@ position = Vector2(101.75, 512.75)
 shape = SubResource("RectangleShape2D_ge36l")
 
 [node name="Ticker" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.5
 autostart = true
 script = ExtResource("18_auxc6")
 
@@ -232,4 +239,5 @@ script = ExtResource("18_auxc6")
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
 [connection signal="body_entered" from="OutOfBounds" to="OutOfBounds" method="_on_body_entered"]
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[connection signal="tick" from="Ticker" to="Player" method="_on_ticker_tick"]
 [connection signal="tick" from="Ticker" to="Controls/TickDisplay" method="_on_ticker_tick"]

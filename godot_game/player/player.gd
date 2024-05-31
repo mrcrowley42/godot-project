@@ -40,6 +40,9 @@ func _physics_process(delta):
 
 	move_and_slide()
 
-
 func _on_plus_button_button_down():
 	pass # Replace with function body.
+
+func _on_ticker_tick():
+	self.health -= .5
+	#pass # Replace with function body.

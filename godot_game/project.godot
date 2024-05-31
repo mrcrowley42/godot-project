@@ -11,13 +11,19 @@ config_version=5
 [application]
 
 config/name="Godot Game"
-run/main_scene="res://main.tscn"
+run/main_scene="res://prototype.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Globals="*res://Globals.gd"
+
+[display]
+
+window/size/viewport_width=540
+window/size/viewport_height=675
+window/size/resizable=false
 
 [dotnet]
 
