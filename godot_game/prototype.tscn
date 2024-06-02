@@ -1,14 +1,41 @@
-[gd_scene load_steps=5 format=3 uid="uid://c282rwt57fvoc"]
+[gd_scene load_steps=9 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Texture2D" uid="uid://cp7bc08m4mp5g" path="res://Green Palette UI base.png" id="1_0smlk"]
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://bg/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
 [ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://player/little-guy.png" id="1_7ktla"]
+[ext_resource type="Shader" path="res://test.gdshader" id="4_fvaj5"]
+[ext_resource type="Shader" path="res://crt.gdshader" id="4_vo6tf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kju6g"]
+shader = ExtResource("4_fvaj5")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3jge7"]
+shader = ExtResource("4_vo6tf")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.069
+shader_parameter/scanlines_width = 0.39
+shader_parameter/grille_opacity = 0.081
+shader_parameter/resolution = Vector2(1080, 1350)
+shader_parameter/pixelate = false
+shader_parameter/roll = false
+shader_parameter/roll_speed = 8.0
+shader_parameter/roll_size = 61.577
+shader_parameter/roll_variation = 1.8
+shader_parameter/distort_intensity = 0.05
+shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = -0.02
+shader_parameter/brightness = 1.0
+shader_parameter/discolor = false
+shader_parameter/warp_amount = 0.0
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_abt4t"]
 
 [node name="Node" type="Node"]
-
-[node name="Node2D" type="Node2D" parent="."]
 
 [node name="1000F4850764565LstQo9j5DamMa3cFsOiuCsj1eSpc888" type="Sprite2D" parent="."]
 position = Vector2(273, 337)
@@ -18,44 +45,6 @@ texture = ExtResource("1_7g4je")
 position = Vector2(270, 393.5)
 scale = Vector2(0.225, 0.225)
 texture = ExtResource("1_7ktla")
-
-[node name="PanelContainer" type="PanelContainer" parent="."]
-offset_left = 19.0
-offset_top = 579.0
-offset_right = 521.0
-offset_bottom = 663.0
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 40
-theme_override_constants/margin_bottom = 20
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 20
-alignment = 1
-
-[node name="Button 1" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/normal = SubResource("StyleBoxFlat_abt4t")
-text = "Button 1"
-
-[node name="Button 2" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/normal = SubResource("StyleBoxFlat_abt4t")
-text = "Button 2
-"
-
-[node name="Button 3" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/normal = SubResource("StyleBoxFlat_abt4t")
-text = "Button 3
-"
 
 [node name="GreenPaletteUiBase" type="Sprite2D" parent="."]
 visible = false
@@ -69,3 +58,62 @@ offset_top = 120.5
 offset_right = 487.0
 offset_bottom = 554.5
 border_width = 4.0
+
+[node name="CRT" type="CanvasLayer" parent="."]
+
+[node name="ColorRect2" type="ColorRect" parent="CRT"]
+material = SubResource("ShaderMaterial_kju6g")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CRT"]
+visible = false
+material = SubResource("ShaderMaterial_3jge7")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="PanelContainer" type="PanelContainer" parent="UI"]
+offset_left = 19.0
+offset_top = 579.0
+offset_right = 521.0
+offset_bottom = 663.0
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Button 1" type="Button" parent="UI/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_abt4t")
+text = "Button 1"
+
+[node name="Button 2" type="Button" parent="UI/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_abt4t")
+text = "Button 2
+"
+
+[node name="Button 3" type="Button" parent="UI/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_abt4t")
+text = "Button 3
+"
