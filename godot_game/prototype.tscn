@@ -8,7 +8,7 @@
 
 [node name="Node" type="Node"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Node2D" type="Node2D" parent="."]
 
 [node name="1000F4850764565LstQo9j5DamMa3cFsOiuCsj1eSpc888" type="Sprite2D" parent="."]
 position = Vector2(273, 337)
@@ -18,11 +18,6 @@ texture = ExtResource("1_7g4je")
 position = Vector2(270, 393.5)
 scale = Vector2(0.225, 0.225)
 texture = ExtResource("1_7ktla")
-
-[node name="GreenPaletteUiBase" type="Sprite2D" parent="."]
-position = Vector2(270, 337.5)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_0smlk")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 offset_left = 19.0
@@ -61,3 +56,16 @@ size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_abt4t")
 text = "Button 3
 "
+
+[node name="GreenPaletteUiBase" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(270, 337.5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_0smlk")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+offset_left = 53.0
+offset_top = 120.5
+offset_right = 487.0
+offset_bottom = 554.5
+border_width = 4.0
