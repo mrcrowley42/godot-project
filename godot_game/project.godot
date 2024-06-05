@@ -24,6 +24,7 @@ Globals="*res://Globals.gd"
 window/size/viewport_width=540
 window/size/viewport_height=675
 window/size/resizable=false
+window/subwindows/embed_subwindows=false
 
 [dotnet]
 

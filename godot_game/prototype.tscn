@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c282rwt57fvoc"]
+[gd_scene load_steps=23 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Texture2D" uid="uid://cp7bc08m4mp5g" path="res://Green Palette UI base.png" id="1_0smlk"]
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://bg/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
@@ -8,8 +8,12 @@
 [ext_resource type="Script" path="res://Creature.gd" id="4_5f5be"]
 [ext_resource type="Shader" path="res://test.gdshader" id="4_fvaj5"]
 [ext_resource type="Shader" path="res://crt.gdshader" id="4_vo6tf"]
-[ext_resource type="Texture2D" uid="uid://brypq6cac45np" path="res://icons/gear-fill.svg" id="6_orbqj"]
 [ext_resource type="Script" path="res://Button 1.gd" id="8_0ys56"]
+[ext_resource type="Texture2D" uid="uid://ct00htjp1rtjn" path="res://icons/settings_24dp_FILL1_wght500_GRAD-25_opsz24.svg" id="9_4we8d"]
+[ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://VCR_OSD_MONO_1.001.ttf" id="9_wn204"]
+[ext_resource type="Script" path="res://Button 2.gd" id="11_nbfug"]
+[ext_resource type="Script" path="res://Label.gd" id="13_2u7g3"]
+[ext_resource type="Script" path="res://Label2.gd" id="14_j428r"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kju6g"]
 shader = ExtResource("4_fvaj5")
@@ -38,19 +42,61 @@ shader_parameter/clip_warp = false
 shader_parameter/vignette_intensity = 0.4
 shader_parameter/vignette_opacity = 0.5
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_325id"]
+bg_color = Color(0.303925, 0.654195, 0.750562, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.111197, 0.111197, 0.111197, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3elyl"]
 bg_color = Color(0.176419, 0.176419, 0.176419, 0.85098)
 draw_center = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_abt4t"]
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k0yik"]
-bg_color = Color(0.808514, 0, 0.269554, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1jn5s"]
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+corner_detail = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o1dc8"]
+bg_color = Color(0.92, 0.3036, 0.36524, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_bottom = 3
+corner_radius_top_left = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vk3l5"]
+bg_color = Color(0.333189, 0.545631, 0.906432, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_bottom = 3
+corner_radius_top_left = 100
+corner_radius_bottom_left = 100
 
 [node name="Game" type="Node"]
+metadata/_edit_vertical_guides_ = [532.0, 8.0, 45.0, 53.0, 487.0, 495.0]
+metadata/_edit_horizontal_guides_ = [8.0, 667.0, 112.0, 120.0, 554.0, 562.0]
 
 [node name="HealthTimer" type="Timer" parent="."]
-wait_time = 0.04
+wait_time = 0.1
 autostart = true
 script = ExtResource("1_ajpg5")
 
@@ -65,17 +111,18 @@ position = Vector2(270, 393.5)
 scale = Vector2(0.225, 0.225)
 texture = ExtResource("1_7ktla")
 script = ExtResource("4_5f5be")
+dying_colour = Color(1, 0, 0, 1)
 
 [node name="UI-Overlay" type="Sprite2D" parent="."]
-modulate = Color(12.973, 7.568, 4.865, 1)
+modulate = Color(1.3, 1.3, 1.3, 1)
 position = Vector2(270, 337.5)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_0smlk")
 
 [node name="CRT" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="ColorRect2" type="ColorRect" parent="CRT"]
-visible = false
 material = SubResource("ShaderMaterial_kju6g")
 anchors_preset = 15
 anchor_right = 1.0
@@ -96,6 +143,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ReferenceLines" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="StatusOutline" type="ReferenceRect" parent="ReferenceLines"]
 anchors_preset = 2
@@ -105,11 +153,19 @@ offset_top = -121.0
 offset_right = 540.0
 grow_vertical = 0
 
-[node name="ScreenOutline" type="ReferenceRect" parent="ReferenceLines"]
+[node name="ScreenOutlineInner" type="ReferenceRect" parent="ReferenceLines"]
 offset_left = 53.0
 offset_top = 120.0
 offset_right = 487.0
 offset_bottom = 554.0
+border_color = Color(1, 0, 0.65098, 1)
+
+[node name="ScreenOutline" type="ReferenceRect" parent="ReferenceLines"]
+offset_left = 45.0
+offset_top = 112.0
+offset_right = 495.0
+offset_bottom = 562.0
+border_color = Color(1, 0, 0.65098, 1)
 
 [node name="BorderOutline" type="ReferenceRect" parent="ReferenceLines"]
 anchors_preset = 15
@@ -117,13 +173,59 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-border_color = Color(0.923295, 0.000559087, 0.899123, 1)
+border_color = Color(0.445483, 0.513227, 1, 1)
+
+[node name="BorderOutlineInner" type="ReferenceRect" parent="ReferenceLines"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+border_color = Color(0.445483, 0.513227, 1, 1)
 
 [node name="ControlsOutline" type="ReferenceRect" parent="ReferenceLines"]
 offset_right = 540.0
 offset_bottom = 120.0
 
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -56.0
+offset_bottom = 56.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Button 3" type="Button" parent="UI/Control/MarginContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+size_flags_stretch_ratio = 0.25
+theme_override_colors/icon_normal_color = Color(0.522243, 0.511023, 0.822765, 1)
+theme_override_colors/icon_hover_color = Color(0.717171, 0.473279, 0.194183, 1)
+theme_override_constants/icon_max_width = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_325id")
+icon = ExtResource("9_4we8d")
+icon_alignment = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="UI"]
 anchors_preset = 5
@@ -138,60 +240,115 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_3elyl")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/PanelContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 10
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/PanelContainer/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 16
 alignment = 1
 
 [node name="Button 1" type="Button" parent="UI/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_fonts/font = ExtResource("9_wn204")
+theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_abt4t")
-text = "Keep Alive!"
+text = "SAVE"
 script = ExtResource("8_0ys56")
 
 [node name="Button 2" type="Button" parent="UI/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
+theme_override_fonts/font = ExtResource("9_wn204")
+theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_abt4t")
-text = "Button 2
-"
+text = "KILL"
+script = ExtResource("11_nbfug")
 
-[node name="Button 3" type="Button" parent="UI/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="UI"]
+offset_left = 62.0
+offset_top = 581.0
+offset_right = 481.0
+offset_bottom = 654.0
+columns = 2
+
+[node name="Label" type="Label" parent="UI/GridContainer"]
+layout_mode = 2
+text = "HP"
+
+[node name="HealthBar" type="ProgressBar" parent="UI/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.353603, 0.183867, 0.495413, 1)
-theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_hover_color = Color(0.509804, 0.419608, 1, 1)
-theme_override_constants/icon_max_width = 64
-icon = ExtResource("6_orbqj")
-icon_alignment = 1
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_1jn5s")
+theme_override_styles/fill = SubResource("StyleBoxFlat_o1dc8")
+max_value = 1000.0
+step = 1.0
+value = 700.0
+show_percentage = false
+script = ExtResource("2_a07j0")
 
-[node name="HealthBar" type="ProgressBar" parent="UI"]
-custom_minimum_size = Vector2(400, 40)
+[node name="Label2" type="Label" parent="UI/GridContainer"]
+layout_mode = 2
+text = "MP"
+
+[node name="Bar2" type="ProgressBar" parent="UI/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_1jn5s")
+theme_override_styles/fill = SubResource("StyleBoxFlat_vk3l5")
+max_value = 1000.0
+step = 1.0
+value = 700.0
+show_percentage = false
+script = ExtResource("2_a07j0")
+
+[node name="DebugWindow" type="Window" parent="."]
+title = "Debug Window"
+position = Vector2i(100, 55)
+size = Vector2i(500, 500)
+
+[node name="Label" type="Label" parent="DebugWindow"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = 242.5
-offset_right = 200.0
-offset_bottom = 282.5
+offset_left = -137.5
+offset_top = -27.5
+offset_right = 137.5
+offset_bottom = 27.5
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_vertical = 1
-theme_override_styles/background = SubResource("StyleBoxFlat_k0yik")
-max_value = 1000.0
-step = 1.0
-value = 700.0
-rounded = true
-script = ExtResource("2_a07j0")
+theme_override_font_sizes/font_size = 40
+text = "Creature Health: 1000"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("13_2u7g3")
+
+[node name="Label2" type="Label" parent="DebugWindow"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -210.0
+offset_top = 50.0
+offset_right = 210.0
+offset_bottom = 105.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "Creature Health: 1000"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("14_j428r")
 
 [connection signal="tick" from="HealthTimer" to="Creature" method="_on_health_timer_tick"]
 [connection signal="button_down" from="UI/PanelContainer/MarginContainer/HBoxContainer/Button 1" to="UI/PanelContainer/MarginContainer/HBoxContainer/Button 1" method="_on_button_down"]
+[connection signal="button_down" from="UI/PanelContainer/MarginContainer/HBoxContainer/Button 2" to="UI/PanelContainer/MarginContainer/HBoxContainer/Button 2" method="_on_button_down"]
