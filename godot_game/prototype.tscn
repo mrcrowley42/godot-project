@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c282rwt57fvoc"]
+[gd_scene load_steps=27 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Texture2D" uid="uid://cp7bc08m4mp5g" path="res://Green Palette UI base.png" id="1_0smlk"]
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://bg/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" path="res://Button 1.gd" id="8_0ys56"]
 [ext_resource type="Texture2D" uid="uid://ct00htjp1rtjn" path="res://icons/settings_24dp_FILL1_wght500_GRAD-25_opsz24.svg" id="9_4we8d"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://VCR_OSD_MONO_1.001.ttf" id="9_wn204"]
+[ext_resource type="Script" path="res://button_submenu.gd" id="10_y36nk"]
+[ext_resource type="Script" path="res://Butto.gd" id="11_6jjvb"]
 [ext_resource type="Script" path="res://Button 2.gd" id="11_nbfug"]
 [ext_resource type="Script" path="res://Label.gd" id="13_2u7g3"]
 [ext_resource type="Script" path="res://Label2.gd" id="14_j428r"]
@@ -91,6 +93,20 @@ border_width_bottom = 3
 corner_radius_top_left = 100
 corner_radius_bottom_left = 100
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_88ikc"]
+bg_color = Color(0, 0, 0, 0.4)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_golou"]
+bg_color = Color(0.282353, 0.67451, 0.627451, 0.345098)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
 [node name="Game" type="Node"]
 metadata/_edit_vertical_guides_ = [532.0, 8.0, 45.0, 53.0, 487.0, 495.0]
 metadata/_edit_horizontal_guides_ = [8.0, 667.0, 112.0, 120.0, 554.0, 562.0]
@@ -121,7 +137,6 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_0smlk")
 
 [node name="CRT" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="ColorRect2" type="ColorRect" parent="CRT"]
 material = SubResource("ShaderMaterial_kju6g")
@@ -132,7 +147,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="CRT"]
-visible = false
 material = SubResource("ShaderMaterial_3jge7")
 anchors_preset = 15
 anchor_right = 1.0
@@ -145,7 +159,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ReferenceLines" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="StatusOutline" type="ReferenceRect" parent="ReferenceLines"]
 anchors_preset = 2
@@ -195,7 +208,7 @@ offset_bottom = 120.0
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Control" type="Control" parent="UI"]
+[node name="SettingsButton" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -203,7 +216,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/Control"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/SettingsButton"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -216,7 +229,7 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Button 3" type="Button" parent="UI/Control/MarginContainer"]
+[node name="Button 3" type="Button" parent="UI/SettingsButton/MarginContainer"]
 clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -229,7 +242,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_325id")
 icon = ExtResource("9_4we8d")
 icon_alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="UI"]
+[node name="ControlsContainer" type="PanelContainer" parent="UI"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -240,19 +253,19 @@ offset_bottom = 104.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3elyl")
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/ControlsContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/PanelContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/ControlsContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="Button 1" type="Button" parent="UI/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="Button 1" type="Button" parent="UI/ControlsContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
@@ -260,9 +273,9 @@ theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_abt4t")
 text = "SAVE"
-script = ExtResource("8_0ys56")
+script = ExtResource("10_y36nk")
 
-[node name="Button 2" type="Button" parent="UI/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="Button 2" type="Button" parent="UI/ControlsContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
@@ -270,20 +283,20 @@ theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_abt4t")
 text = "KILL"
-script = ExtResource("11_nbfug")
+script = ExtResource("11_6jjvb")
 
-[node name="GridContainer" type="GridContainer" parent="UI"]
+[node name="StatusContainer" type="GridContainer" parent="UI"]
 offset_left = 62.0
 offset_top = 581.0
 offset_right = 481.0
 offset_bottom = 654.0
 columns = 2
 
-[node name="Label" type="Label" parent="UI/GridContainer"]
+[node name="Label" type="Label" parent="UI/StatusContainer"]
 layout_mode = 2
 text = "HP"
 
-[node name="HealthBar" type="ProgressBar" parent="UI/GridContainer"]
+[node name="HealthBar" type="ProgressBar" parent="UI/StatusContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -295,11 +308,11 @@ value = 700.0
 show_percentage = false
 script = ExtResource("2_a07j0")
 
-[node name="Label2" type="Label" parent="UI/GridContainer"]
+[node name="Label2" type="Label" parent="UI/StatusContainer"]
 layout_mode = 2
 text = "MP"
 
-[node name="Bar2" type="ProgressBar" parent="UI/GridContainer"]
+[node name="Bar2" type="ProgressBar" parent="UI/StatusContainer"]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_styles/background = SubResource("StyleBoxFlat_1jn5s")
@@ -309,6 +322,75 @@ step = 1.0
 value = 700.0
 show_percentage = false
 script = ExtResource("2_a07j0")
+
+[node name="SaveControls" type="PanelContainer" parent="UI"]
+visible = false
+custom_minimum_size = Vector2(400, 400)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_88ikc")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/SaveControls"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="GridContainer" type="GridContainer" parent="UI/SaveControls/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="Button 1" type="Button" parent="UI/SaveControls/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_fonts/font = ExtResource("9_wn204")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
+text = "SAVE"
+script = ExtResource("8_0ys56")
+
+[node name="Button 2" type="Button" parent="UI/SaveControls/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
+theme_override_fonts/font = ExtResource("9_wn204")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
+text = "KILL"
+script = ExtResource("11_nbfug")
+
+[node name="Button 3" type="Button" parent="UI/SaveControls/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_fonts/font = ExtResource("9_wn204")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
+text = "SAVE"
+script = ExtResource("8_0ys56")
+
+[node name="Button 4" type="Button" parent="UI/SaveControls/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
+theme_override_fonts/font = ExtResource("9_wn204")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
+text = "KILL"
+script = ExtResource("11_nbfug")
 
 [node name="DebugWindow" type="Window" parent="."]
 title = "Debug Window"
@@ -352,5 +434,9 @@ vertical_alignment = 1
 script = ExtResource("14_j428r")
 
 [connection signal="tick" from="HealthTimer" to="Creature" method="_on_health_timer_tick"]
-[connection signal="button_down" from="UI/PanelContainer/MarginContainer/HBoxContainer/Button 1" to="UI/PanelContainer/MarginContainer/HBoxContainer/Button 1" method="_on_button_down"]
-[connection signal="button_down" from="UI/PanelContainer/MarginContainer/HBoxContainer/Button 2" to="UI/PanelContainer/MarginContainer/HBoxContainer/Button 2" method="_on_button_down"]
+[connection signal="button_down" from="UI/ControlsContainer/MarginContainer/HBoxContainer/Button 1" to="UI/ControlsContainer/MarginContainer/HBoxContainer/Button 1" method="_on_button_down"]
+[connection signal="button_down" from="UI/ControlsContainer/MarginContainer/HBoxContainer/Button 2" to="UI/ControlsContainer/MarginContainer/HBoxContainer/Button 2" method="_on_button_down"]
+[connection signal="button_down" from="UI/SaveControls/MarginContainer/GridContainer/Button 1" to="UI/SaveControls/MarginContainer/GridContainer/Button 1" method="_on_button_down"]
+[connection signal="button_down" from="UI/SaveControls/MarginContainer/GridContainer/Button 2" to="UI/SaveControls/MarginContainer/GridContainer/Button 2" method="_on_button_down"]
+[connection signal="button_down" from="UI/SaveControls/MarginContainer/GridContainer/Button 3" to="UI/SaveControls/MarginContainer/GridContainer/Button 3" method="_on_button_down"]
+[connection signal="button_down" from="UI/SaveControls/MarginContainer/GridContainer/Button 4" to="UI/SaveControls/MarginContainer/GridContainer/Button 4" method="_on_button_down"]
