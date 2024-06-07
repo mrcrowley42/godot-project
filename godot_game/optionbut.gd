@@ -7,4 +7,5 @@ func _ready():
 
 
 func _on_button_down():
-	$"../../../OptionsMenu".show()
+	%OptionsMenu.visible = !%OptionsMenu.visible
+

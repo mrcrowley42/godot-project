@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bli71caomj5rr"]
+[gd_scene load_steps=35 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Texture2D" uid="uid://cp7bc08m4mp5g" path="res://Green Palette UI base.png" id="1_0smlk"]
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://bg/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
@@ -18,8 +18,8 @@
 [ext_resource type="Script" path="res://Label.gd" id="13_2u7g3"]
 [ext_resource type="Script" path="res://SaveControls.gd" id="14_dx6xt"]
 [ext_resource type="Script" path="res://Label2.gd" id="14_j428r"]
+[ext_resource type="Texture2D" uid="uid://cap3k33q4q73n" path="res://Creatures/playstation.svg" id="14_kdtew"]
 [ext_resource type="PackedScene" uid="uid://cbn0dv1k0onpb" path="res://vol_slider.tscn" id="15_lmno7"]
-[ext_resource type="Script" path="res://sclo.gd" id="17_njbfh"]
 [ext_resource type="AudioStream" uid="uid://dcet1hpt70t42" path="res://perfection.mp3" id="17_oqlhs"]
 [ext_resource type="AudioStream" uid="uid://8ifwm2tjitur" path="res://sound/yippee.mp3" id="18_6dihm"]
 
@@ -50,23 +50,17 @@ shader_parameter/clip_warp = false
 shader_parameter/vignette_intensity = 0.4
 shader_parameter/vignette_opacity = 0.5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_325id"]
-bg_color = Color(0.303925, 0.654195, 0.750562, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.111197, 0.111197, 0.111197, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3elyl"]
 bg_color = Color(0.176419, 0.176419, 0.176419, 0.85098)
 draw_center = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_abt4t"]
+bg_color = Color(0, 0, 0, 0.32549)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.921569, 0.752941, 0.752941, 0.286275)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -100,20 +94,43 @@ corner_radius_top_left = 100
 corner_radius_bottom_left = 100
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_88ikc"]
-bg_color = Color(0.313726, 0.309804, 0.317647, 1)
+bg_color = Color(0, 0, 0, 0.384314)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_golou"]
-bg_color = Color(0.282353, 0.67451, 0.627451, 0.345098)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
+bg_color = Color(0.282353, 0.67451, 0.627451, 0.631373)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kxv3i"]
+bg_color = Color(0, 0, 0, 0.741176)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_kxflm"]
 color = Color(0.793417, 0.388279, 0.00261003, 1)
 grow_begin = 0.0
 grow_end = 0.0
 thickness = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_325id"]
+bg_color = Color(0.303925, 0.654195, 0.750562, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.111197, 0.111197, 0.111197, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [node name="Game" type="Node"]
 metadata/_edit_vertical_guides_ = [532.0, 8.0, 45.0, 53.0, 487.0, 495.0]
@@ -217,41 +234,6 @@ offset_bottom = 120.0
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="SettingsButton" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="UI/SettingsButton"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -56.0
-offset_bottom = 56.0
-grow_horizontal = 0
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="Button 3" type="Button" parent="UI/SettingsButton/MarginContainer"]
-clip_contents = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-size_flags_stretch_ratio = 0.25
-theme_override_colors/icon_normal_color = Color(0.522243, 0.511023, 0.822765, 1)
-theme_override_colors/icon_hover_color = Color(0.717171, 0.473279, 0.194183, 1)
-theme_override_constants/icon_max_width = 48
-theme_override_styles/normal = SubResource("StyleBoxFlat_325id")
-icon = ExtResource("9_4we8d")
-icon_alignment = 1
-script = ExtResource("9_jsl5b")
-
 [node name="ControlsContainer" type="PanelContainer" parent="UI"]
 anchors_preset = 5
 anchor_left = 0.5
@@ -272,7 +254,7 @@ theme_override_constants/margin_bottom = 10
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/ControlsContainer/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 16
+theme_override_constants/separation = 24
 alignment = 1
 
 [node name="Button 1" type="Button" parent="UI/ControlsContainer/MarginContainer/HBoxContainer"]
@@ -282,7 +264,7 @@ theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
 theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_abt4t")
-text = "SAVE"
+text = "Group 1"
 script = ExtResource("10_y36nk")
 
 [node name="Button 2" type="Button" parent="UI/ControlsContainer/MarginContainer/HBoxContainer"]
@@ -292,7 +274,7 @@ theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
 theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_abt4t")
-text = "KILL"
+text = "Group 2"
 script = ExtResource("11_6jjvb")
 
 [node name="StatusContainer" type="GridContainer" parent="UI"]
@@ -307,6 +289,7 @@ layout_mode = 2
 text = "HP"
 
 [node name="HealthBar" type="ProgressBar" parent="UI/StatusContainer"]
+clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -334,7 +317,6 @@ show_percentage = false
 script = ExtResource("2_a07j0")
 
 [node name="SaveControls" type="PanelContainer" parent="UI"]
-visible = false
 custom_minimum_size = Vector2(400, 400)
 anchors_preset = 8
 anchor_left = 0.5
@@ -375,10 +357,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
+theme_override_constants/icon_max_width = 100
 theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
-text = "KILL"
+icon = ExtResource("14_kdtew")
+icon_alignment = 1
+expand_icon = true
 script = ExtResource("11_nbfug")
 
 [node name="Button 3" type="Button" parent="UI/SaveControls/MarginContainer/GridContainer"]
@@ -404,6 +389,7 @@ text = "KILL"
 script = ExtResource("11_nbfug")
 
 [node name="OptionsMenu" type="PanelContainer" parent="UI"]
+unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(510, 640)
 anchors_preset = 8
@@ -413,37 +399,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_88ikc")
-
-[node name="closebut" type="Control" parent="UI/OptionsMenu"]
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/closebut"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -56.0
-offset_bottom = 56.0
-grow_horizontal = 0
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="Button 3" type="Button" parent="UI/OptionsMenu/closebut/MarginContainer"]
-clip_contents = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-size_flags_stretch_ratio = 0.25
-theme_override_colors/icon_normal_color = Color(0.522243, 0.511023, 0.822765, 1)
-theme_override_colors/icon_hover_color = Color(0.717171, 0.473279, 0.194183, 1)
-theme_override_constants/icon_max_width = 48
-theme_override_styles/normal = SubResource("StyleBoxFlat_325id")
-icon = ExtResource("9_4we8d")
-icon_alignment = 1
-script = ExtResource("17_njbfh")
+theme_override_styles/panel = SubResource("StyleBoxFlat_kxv3i")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu"]
 layout_mode = 2
@@ -489,6 +445,35 @@ tooltip_text = "Music"
 theme_override_styles/slider = SubResource("StyleBoxLine_kxflm")
 tick_count = 1
 bus_name = "Music"
+
+[node name="SettingButtonContainer" type="MarginContainer" parent="UI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -71.0
+offset_top = 25.0
+offset_right = 13.0
+offset_bottom = 109.0
+grow_horizontal = 0
+scale = Vector2(0.75, 0.75)
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Button 3" type="Button" parent="UI/SettingButtonContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+size_flags_stretch_ratio = 0.25
+theme_override_colors/icon_normal_color = Color(0.522243, 0.511023, 0.822765, 1)
+theme_override_colors/icon_hover_color = Color(0.717171, 0.473279, 0.194183, 1)
+theme_override_constants/icon_max_width = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_325id")
+icon = ExtResource("9_4we8d")
+icon_alignment = 1
+script = ExtResource("9_jsl5b")
 
 [node name="DebugWindow" type="Window" parent="."]
 title = "Debug Window"
@@ -544,11 +529,10 @@ stream = ExtResource("18_6dihm")
 bus = &"SFX"
 
 [connection signal="tick" from="HealthTimer" to="Creature" method="_on_health_timer_tick"]
-[connection signal="button_down" from="UI/SettingsButton/MarginContainer/Button 3" to="UI/SettingsButton/MarginContainer/Button 3" method="_on_button_down"]
 [connection signal="button_down" from="UI/ControlsContainer/MarginContainer/HBoxContainer/Button 1" to="UI/ControlsContainer/MarginContainer/HBoxContainer/Button 1" method="_on_button_down"]
 [connection signal="button_down" from="UI/ControlsContainer/MarginContainer/HBoxContainer/Button 2" to="UI/ControlsContainer/MarginContainer/HBoxContainer/Button 2" method="_on_button_down"]
 [connection signal="button_down" from="UI/SaveControls/MarginContainer/GridContainer/Button 1" to="UI/SaveControls/MarginContainer/GridContainer/Button 1" method="_on_button_down"]
 [connection signal="button_down" from="UI/SaveControls/MarginContainer/GridContainer/Button 2" to="UI/SaveControls/MarginContainer/GridContainer/Button 2" method="_on_button_down"]
 [connection signal="button_down" from="UI/SaveControls/MarginContainer/GridContainer/Button 3" to="UI/SaveControls/MarginContainer/GridContainer/Button 3" method="_on_button_down"]
 [connection signal="button_down" from="UI/SaveControls/MarginContainer/GridContainer/Button 4" to="UI/SaveControls/MarginContainer/GridContainer/Button 4" method="_on_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/closebut/MarginContainer/Button 3" to="UI/OptionsMenu/closebut/MarginContainer/Button 3" method="_on_button_down"]
+[connection signal="button_down" from="UI/SettingButtonContainer/Button 3" to="UI/SettingButtonContainer/Button 3" method="_on_button_down"]
