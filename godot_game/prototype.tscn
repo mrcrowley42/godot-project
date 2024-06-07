@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://c282rwt57fvoc"]
+[gd_scene load_steps=34 format=3 uid="uid://bli71caomj5rr"]
 
 [ext_resource type="Texture2D" uid="uid://cp7bc08m4mp5g" path="res://Green Palette UI base.png" id="1_0smlk"]
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://bg/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" path="res://Butto.gd" id="11_6jjvb"]
 [ext_resource type="Script" path="res://Button 2.gd" id="11_nbfug"]
 [ext_resource type="Script" path="res://Label.gd" id="13_2u7g3"]
+[ext_resource type="Script" path="res://SaveControls.gd" id="14_dx6xt"]
 [ext_resource type="Script" path="res://Label2.gd" id="14_j428r"]
 [ext_resource type="PackedScene" uid="uid://cbn0dv1k0onpb" path="res://vol_slider.tscn" id="15_lmno7"]
 [ext_resource type="Script" path="res://sclo.gd" id="17_njbfh"]
@@ -343,6 +344,7 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_88ikc")
+script = ExtResource("14_dx6xt")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/SaveControls"]
 layout_mode = 2
