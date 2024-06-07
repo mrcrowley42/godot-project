@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c282rwt57fvoc"]
+[gd_scene load_steps=33 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Texture2D" uid="uid://cp7bc08m4mp5g" path="res://Green Palette UI base.png" id="1_0smlk"]
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://bg/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
@@ -10,12 +10,17 @@
 [ext_resource type="Shader" path="res://crt.gdshader" id="4_vo6tf"]
 [ext_resource type="Script" path="res://Button 1.gd" id="8_0ys56"]
 [ext_resource type="Texture2D" uid="uid://ct00htjp1rtjn" path="res://icons/settings_24dp_FILL1_wght500_GRAD-25_opsz24.svg" id="9_4we8d"]
+[ext_resource type="Script" path="res://optionbut.gd" id="9_jsl5b"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://VCR_OSD_MONO_1.001.ttf" id="9_wn204"]
 [ext_resource type="Script" path="res://button_submenu.gd" id="10_y36nk"]
 [ext_resource type="Script" path="res://Butto.gd" id="11_6jjvb"]
 [ext_resource type="Script" path="res://Button 2.gd" id="11_nbfug"]
 [ext_resource type="Script" path="res://Label.gd" id="13_2u7g3"]
 [ext_resource type="Script" path="res://Label2.gd" id="14_j428r"]
+[ext_resource type="PackedScene" uid="uid://cbn0dv1k0onpb" path="res://vol_slider.tscn" id="15_lmno7"]
+[ext_resource type="Script" path="res://sclo.gd" id="17_njbfh"]
+[ext_resource type="AudioStream" uid="uid://dcet1hpt70t42" path="res://perfection.mp3" id="17_oqlhs"]
+[ext_resource type="AudioStream" uid="uid://8ifwm2tjitur" path="res://sound/yippee.mp3" id="18_6dihm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kju6g"]
 shader = ExtResource("4_fvaj5")
@@ -94,11 +99,7 @@ corner_radius_top_left = 100
 corner_radius_bottom_left = 100
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_88ikc"]
-bg_color = Color(0, 0, 0, 0.4)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
+bg_color = Color(0.313726, 0.309804, 0.317647, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_golou"]
 bg_color = Color(0.282353, 0.67451, 0.627451, 0.345098)
@@ -106,6 +107,12 @@ corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_kxflm"]
+color = Color(0.793417, 0.388279, 0.00261003, 1)
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 40
 
 [node name="Game" type="Node"]
 metadata/_edit_vertical_guides_ = [532.0, 8.0, 45.0, 53.0, 487.0, 495.0]
@@ -137,6 +144,7 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_0smlk")
 
 [node name="CRT" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="ColorRect2" type="ColorRect" parent="CRT"]
 material = SubResource("ShaderMaterial_kju6g")
@@ -241,6 +249,7 @@ theme_override_constants/icon_max_width = 48
 theme_override_styles/normal = SubResource("StyleBoxFlat_325id")
 icon = ExtResource("9_4we8d")
 icon_alignment = 1
+script = ExtResource("9_jsl5b")
 
 [node name="ControlsContainer" type="PanelContainer" parent="UI"]
 anchors_preset = 5
@@ -392,10 +401,97 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
 text = "KILL"
 script = ExtResource("11_nbfug")
 
+[node name="OptionsMenu" type="PanelContainer" parent="UI"]
+custom_minimum_size = Vector2(510, 640)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_88ikc")
+
+[node name="closebut" type="Control" parent="UI/OptionsMenu"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/closebut"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -56.0
+offset_bottom = 56.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Button 3" type="Button" parent="UI/OptionsMenu/closebut/MarginContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+size_flags_stretch_ratio = 0.25
+theme_override_colors/icon_normal_color = Color(0.522243, 0.511023, 0.822765, 1)
+theme_override_colors/icon_hover_color = Color(0.717171, 0.473279, 0.194183, 1)
+theme_override_constants/icon_max_width = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_325id")
+icon = ExtResource("9_4we8d")
+icon_alignment = 1
+script = ExtResource("17_njbfh")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="GridContainer2" type="GridContainer" parent="UI/OptionsMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="Label" type="Label" parent="UI/OptionsMenu/MarginContainer/GridContainer2"]
+layout_mode = 2
+text = "Master"
+
+[node name="VolumeMaster" parent="UI/OptionsMenu/MarginContainer/GridContainer2" instance=ExtResource("15_lmno7")]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+tick_count = 1
+bus_name = "Master"
+
+[node name="Label2" type="Label" parent="UI/OptionsMenu/MarginContainer/GridContainer2"]
+layout_mode = 2
+text = "SFX"
+
+[node name="VolumeSfx" parent="UI/OptionsMenu/MarginContainer/GridContainer2" instance=ExtResource("15_lmno7")]
+layout_mode = 2
+value = 0.0
+tick_count = 1
+bus_name = "SFX"
+
+[node name="Label3" type="Label" parent="UI/OptionsMenu/MarginContainer/GridContainer2"]
+layout_mode = 2
+text = "Music
+"
+
+[node name="VolumeMusic" parent="UI/OptionsMenu/MarginContainer/GridContainer2" instance=ExtResource("15_lmno7")]
+layout_mode = 2
+tooltip_text = "Music"
+theme_override_styles/slider = SubResource("StyleBoxLine_kxflm")
+tick_count = 1
+bus_name = "Music"
+
 [node name="DebugWindow" type="Window" parent="."]
 title = "Debug Window"
 position = Vector2i(100, 55)
 size = Vector2i(500, 500)
+visible = false
 
 [node name="Label" type="Label" parent="DebugWindow"]
 anchors_preset = 8
@@ -433,10 +529,23 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("14_j428r")
 
+[node name="Sounds" type="Node" parent="."]
+
+[node name="MainMusic" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("17_oqlhs")
+autoplay = true
+bus = &"Music"
+
+[node name="Yip" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("18_6dihm")
+bus = &"SFX"
+
 [connection signal="tick" from="HealthTimer" to="Creature" method="_on_health_timer_tick"]
+[connection signal="button_down" from="UI/SettingsButton/MarginContainer/Button 3" to="UI/SettingsButton/MarginContainer/Button 3" method="_on_button_down"]
 [connection signal="button_down" from="UI/ControlsContainer/MarginContainer/HBoxContainer/Button 1" to="UI/ControlsContainer/MarginContainer/HBoxContainer/Button 1" method="_on_button_down"]
 [connection signal="button_down" from="UI/ControlsContainer/MarginContainer/HBoxContainer/Button 2" to="UI/ControlsContainer/MarginContainer/HBoxContainer/Button 2" method="_on_button_down"]
 [connection signal="button_down" from="UI/SaveControls/MarginContainer/GridContainer/Button 1" to="UI/SaveControls/MarginContainer/GridContainer/Button 1" method="_on_button_down"]
 [connection signal="button_down" from="UI/SaveControls/MarginContainer/GridContainer/Button 2" to="UI/SaveControls/MarginContainer/GridContainer/Button 2" method="_on_button_down"]
 [connection signal="button_down" from="UI/SaveControls/MarginContainer/GridContainer/Button 3" to="UI/SaveControls/MarginContainer/GridContainer/Button 3" method="_on_button_down"]
 [connection signal="button_down" from="UI/SaveControls/MarginContainer/GridContainer/Button 4" to="UI/SaveControls/MarginContainer/GridContainer/Button 4" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/closebut/MarginContainer/Button 3" to="UI/OptionsMenu/closebut/MarginContainer/Button 3" method="_on_button_down"]
