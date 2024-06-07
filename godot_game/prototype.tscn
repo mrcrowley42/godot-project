@@ -402,6 +402,7 @@ text = "KILL"
 script = ExtResource("11_nbfug")
 
 [node name="OptionsMenu" type="PanelContainer" parent="UI"]
+visible = false
 custom_minimum_size = Vector2(510, 640)
 anchors_preset = 8
 anchor_left = 0.5
