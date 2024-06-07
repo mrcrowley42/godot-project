@@ -1,19 +1,19 @@
 extends Node2D
 
 # initializes a new creature's stats object for game mechanic purposes 
-var Autismo = Stats.new()
-
-
+var Creature_01 = Stats.new()
+var Creature_02 = Stats.new()
+var Creature_03 = Stats.new()
 # function to set all creaturs stats on load that can be quickly changed
-func SetCeatures():
-	Autismo.SetStats(100, 100, 100, 5)
-	
-	
+func SetCreatures():
+	Creature_01.SetStats(100, 100, 100, 5)
+	Creature_02.SetStats(100,100,5, 4)
+	Creature_03.SetStats(100,100,100, -1)
 
 # Called when the node enters the scene tree for the first time.  
 func _ready():
 	
-	SetCeatures()
+	SetCreatures()
 
 	
 	
