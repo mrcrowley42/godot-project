@@ -7,4 +7,4 @@ func _ready():
 
 
 func _on_button_down():
-	$"../../../../SaveControls"	.show()
+	%SaveControls.show()

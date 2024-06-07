@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-[gd_scene load_steps=35 format=3 uid="uid://c282rwt57fvoc"]
-=======
-[gd_scene load_steps=35 format=3 uid="uid://bli71caomj5rr"]
->>>>>>> 64638f31c22bf83309a6fed9d2088b688af4e6ae
+[gd_scene load_steps=38 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Texture2D" uid="uid://cp7bc08m4mp5g" path="res://Green Palette UI base.png" id="1_0smlk"]
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://bg/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
@@ -25,6 +21,7 @@
 [ext_resource type="Script" path="res://Label2.gd" id="14_j428r"]
 [ext_resource type="Texture2D" uid="uid://cap3k33q4q73n" path="res://Creatures/playstation.svg" id="14_kdtew"]
 [ext_resource type="PackedScene" uid="uid://cbn0dv1k0onpb" path="res://vol_slider.tscn" id="15_lmno7"]
+[ext_resource type="Texture2D" uid="uid://skpiw6bdlna3" path="res://restaurant_24dp_FILL0_wght400_GRAD0_opsz24.svg" id="17_ektss"]
 [ext_resource type="AudioStream" uid="uid://dcet1hpt70t42" path="res://perfection.mp3" id="17_oqlhs"]
 [ext_resource type="AudioStream" uid="uid://8ifwm2tjitur" path="res://sound/yippee.mp3" id="18_6dihm"]
 
@@ -107,6 +104,13 @@ corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_golou"]
 bg_color = Color(0.282353, 0.67451, 0.627451, 0.631373)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k7dc5"]
+bg_color = Color(0, 0, 1, 0.384314)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
@@ -323,6 +327,8 @@ show_percentage = false
 script = ExtResource("2_a07j0")
 
 [node name="SaveControls" type="PanelContainer" parent="UI"]
+unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(400, 400)
 anchors_preset = 8
 anchor_left = 0.5
@@ -393,6 +399,76 @@ theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
 text = "KILL"
 script = ExtResource("11_nbfug")
+
+[node name="KillControls" type="PanelContainer" parent="UI"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(400, 400)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_k7dc5")
+script = ExtResource("14_dx6xt")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/KillControls"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="GridContainer" type="GridContainer" parent="UI/KillControls/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="Button 1" type="Button" parent="UI/KillControls/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_fonts/font = ExtResource("9_wn204")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
+text = "SAVE"
+
+[node name="Button 2" type="Button" parent="UI/KillControls/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
+theme_override_constants/icon_max_width = 100
+theme_override_fonts/font = ExtResource("9_wn204")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
+icon = ExtResource("17_ektss")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Button 3" type="Button" parent="UI/KillControls/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_fonts/font = ExtResource("9_wn204")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
+text = "SAVE"
+
+[node name="Button 4" type="Button" parent="UI/KillControls/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
+theme_override_fonts/font = ExtResource("9_wn204")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
+text = "KILL"
 
 [node name="OptionsMenu" type="PanelContainer" parent="UI"]
 unique_name_in_owner = true
@@ -541,4 +617,8 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/SaveControls/MarginContainer/GridContainer/Button 2" to="UI/SaveControls/MarginContainer/GridContainer/Button 2" method="_on_button_down"]
 [connection signal="button_down" from="UI/SaveControls/MarginContainer/GridContainer/Button 3" to="UI/SaveControls/MarginContainer/GridContainer/Button 3" method="_on_button_down"]
 [connection signal="button_down" from="UI/SaveControls/MarginContainer/GridContainer/Button 4" to="UI/SaveControls/MarginContainer/GridContainer/Button 4" method="_on_button_down"]
+[connection signal="button_down" from="UI/KillControls/MarginContainer/GridContainer/Button 1" to="UI/KillControls/MarginContainer/GridContainer/Button 1" method="_on_button_down"]
+[connection signal="button_down" from="UI/KillControls/MarginContainer/GridContainer/Button 2" to="UI/KillControls/MarginContainer/GridContainer/Button 2" method="_on_button_down"]
+[connection signal="button_down" from="UI/KillControls/MarginContainer/GridContainer/Button 3" to="UI/KillControls/MarginContainer/GridContainer/Button 3" method="_on_button_down"]
+[connection signal="button_down" from="UI/KillControls/MarginContainer/GridContainer/Button 4" to="UI/KillControls/MarginContainer/GridContainer/Button 4" method="_on_button_down"]
 [connection signal="button_down" from="UI/SettingButtonContainer/Button 3" to="UI/SettingButtonContainer/Button 3" method="_on_button_down"]
