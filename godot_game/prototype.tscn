@@ -1,9 +1,14 @@
+<<<<<<< HEAD
 [gd_scene load_steps=35 format=3 uid="uid://c282rwt57fvoc"]
+=======
+[gd_scene load_steps=35 format=3 uid="uid://bli71caomj5rr"]
+>>>>>>> 64638f31c22bf83309a6fed9d2088b688af4e6ae
 
 [ext_resource type="Texture2D" uid="uid://cp7bc08m4mp5g" path="res://Green Palette UI base.png" id="1_0smlk"]
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://bg/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
 [ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://player/little-guy.png" id="1_7ktla"]
 [ext_resource type="Script" path="res://HealthTImer.gd" id="1_ajpg5"]
+[ext_resource type="Script" path="res://prototype.gd" id="1_of2kb"]
 [ext_resource type="Script" path="res://ProgressBar.gd" id="2_a07j0"]
 [ext_resource type="Script" path="res://Creature.gd" id="4_5f5be"]
 [ext_resource type="Shader" path="res://test.gdshader" id="4_fvaj5"]
@@ -133,6 +138,7 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
 [node name="Game" type="Node"]
+script = ExtResource("1_of2kb")
 metadata/_edit_vertical_guides_ = [532.0, 8.0, 45.0, 53.0, 487.0, 495.0]
 metadata/_edit_horizontal_guides_ = [8.0, 667.0, 112.0, 120.0, 554.0, 562.0]
 
