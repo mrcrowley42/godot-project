@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cbn0dv1k0onpb"]
 
-[ext_resource type="Script" path="res://volume_slider.gd" id="1_vfrrs"]
+[ext_resource type="Script" path="res://gd_scripts/volume_slider.gd" id="1_vfrrs"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_elks1"]
 color = Color(0.34688, 0.524621, 0.762641, 1)

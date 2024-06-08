@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cp7bc08m4mp5g"
-path="res://.godot/imported/Green Palette UI base.png-cdc4b13c48e3cd684249b134482c87c8.ctex"
+uid="uid://e4fa5a836ri0"
+path="res://.godot/imported/icon.svg-3629612f1967f9e645af99eed2b8b758.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Green Palette UI base.png"
-dest_files=["res://.godot/imported/Green Palette UI base.png-cdc4b13c48e3cd684249b134482c87c8.ctex"]
+source_file="res://icons/icon.svg"
+dest_files=["res://.godot/imported/icon.svg-3629612f1967f9e645af99eed2b8b758.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

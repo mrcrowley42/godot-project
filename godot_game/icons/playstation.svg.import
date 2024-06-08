@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1gd0xwopljsy"
-path="res://.godot/imported/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg-f6fd5d75c006b956f928244c509eaac5.ctex"
+uid="uid://cap3k33q4q73n"
+path="res://.godot/imported/playstation.svg-943a4cd894066d10bd0b1743522070ba.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bg/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg"
-dest_files=["res://.godot/imported/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg-f6fd5d75c006b956f928244c509eaac5.ctex"]
+source_file="res://icons/playstation.svg"
+dest_files=["res://.godot/imported/playstation.svg-943a4cd894066d10bd0b1743522070ba.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=10.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0lxegb22c3do"
-path="res://.godot/imported/gear.svg-41994bebeedd7958b12844956f6a8c46.ctex"
+uid="uid://cp7bc08m4mp5g"
+path="res://.godot/imported/Green Palette UI base.png-c5998fce82f6b59911734753fb3fb712.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://gear.svg"
-dest_files=["res://.godot/imported/gear.svg-41994bebeedd7958b12844956f6a8c46.ctex"]
+source_file="res://placeholder/Green Palette UI base.png"
+dest_files=["res://.godot/imported/Green Palette UI base.png-c5998fce82f6b59911734753fb3fb712.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

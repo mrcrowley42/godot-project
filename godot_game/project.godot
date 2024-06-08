@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="Godot Game"
-run/main_scene="res://prototype.tscn"
+run/main_scene="res://scenes/prototype.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
-config/icon="res://icon.svg"
+config/icon="res://icons/icon.svg"
 
 [autoload]
 
-Globals="*res://Globals.gd"
+Globals="*res://gd_scripts/Globals.gd"
 
 [display]
 

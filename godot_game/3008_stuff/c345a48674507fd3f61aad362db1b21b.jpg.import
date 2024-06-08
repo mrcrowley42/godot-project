@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://e4fa5a836ri0"
-path="res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
+uid="uid://pbxnymt0cqn7"
+path="res://.godot/imported/c345a48674507fd3f61aad362db1b21b.jpg-40687e8af3ab6ca889faf70c70b3523d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icon.svg"
-dest_files=["res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"]
+source_file="res://3008_stuff/c345a48674507fd3f61aad362db1b21b.jpg"
+dest_files=["res://.godot/imported/c345a48674507fd3f61aad362db1b21b.jpg-40687e8af3ab6ca889faf70c70b3523d.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

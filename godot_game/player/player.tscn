@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://player/little-guy.png" id="1_ea7fj"]
 [ext_resource type="Script" path="res://player/player.gd" id="1_uyl6v"]
-[ext_resource type="AudioStream" uid="uid://8ifwm2tjitur" path="res://sound/yippee.mp3" id="2_fhvfk"]
+[ext_resource type="AudioStream" uid="uid://8ifwm2tjitur" path="res://sound_effects/yippee.mp3" id="2_fhvfk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ghx2k"]
 size = Vector2(225.5, 268.5)
