@@ -1,6 +1,5 @@
-[gd_scene load_steps=38 format=3 uid="uid://c282rwt57fvoc"]
+[gd_scene load_steps=43 format=3 uid="uid://c282rwt57fvoc"]
 
-[ext_resource type="Texture2D" uid="uid://cp7bc08m4mp5g" path="res://placeholder/Green Palette UI base.png" id="1_0smlk"]
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://placeholder/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
 [ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://player/little-guy.png" id="1_7ktla"]
 [ext_resource type="Script" path="res://gd_scripts/HealthTImer.gd" id="1_ajpg5"]
@@ -9,7 +8,10 @@
 [ext_resource type="Script" path="res://gd_scripts/Creature.gd" id="4_5f5be"]
 [ext_resource type="Shader" path="res://shaders/test.gdshader" id="4_fvaj5"]
 [ext_resource type="Shader" path="res://shaders/crt.gdshader" id="4_vo6tf"]
+[ext_resource type="Texture2D" uid="uid://cawudmxbjamv0" path="res://placeholder/ui_green.png" id="6_vadio"]
+[ext_resource type="Texture2D" uid="uid://c3835drqnfvy" path="res://placeholder/ui_orange.png" id="7_ebtg7"]
 [ext_resource type="Script" path="res://gd_scripts/Button 1.gd" id="8_0ys56"]
+[ext_resource type="Texture2D" uid="uid://dm0iwje4s7uu8" path="res://placeholder/ui_pink.png" id="8_djtbd"]
 [ext_resource type="Texture2D" uid="uid://ct00htjp1rtjn" path="res://icons/settings_24dp_FILL1_wght500_GRAD-25_opsz24.svg" id="9_4we8d"]
 [ext_resource type="Script" path="res://gd_scripts/optionbut.gd" id="9_jsl5b"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="9_wn204"]
@@ -24,6 +26,34 @@
 [ext_resource type="Texture2D" uid="uid://skpiw6bdlna3" path="res://icons/restaurant_24dp_FILL0_wght400_GRAD0_opsz24.svg" id="17_ektss"]
 [ext_resource type="AudioStream" uid="uid://dcet1hpt70t42" path="res://music/perfection.mp3" id="17_oqlhs"]
 [ext_resource type="AudioStream" uid="uid://8ifwm2tjitur" path="res://sound_effects/yippee.mp3" id="18_6dihm"]
+[ext_resource type="Script" path="res://scenes/styletog.gd" id="21_noh54"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o0sfq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_vadio")
+}],
+"loop": true,
+"name": &"green",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_ebtg7")
+}],
+"loop": true,
+"name": &"orange",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_djtbd")
+}],
+"loop": true,
+"name": &"pink",
+"speed": 5.0
+}]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3jge7"]
 shader = ExtResource("4_vo6tf")
@@ -68,6 +98,27 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_88ikc"]
+bg_color = Color(0.423529, 0, 0.537255, 0.384314)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_golou"]
+bg_color = Color(0.282353, 0.67451, 0.627451, 0.631373)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k7dc5"]
+bg_color = Color(0, 0, 1, 0.384314)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1jn5s"]
 border_width_left = 3
 border_width_top = 3
@@ -95,29 +146,8 @@ border_width_bottom = 3
 corner_radius_top_left = 100
 corner_radius_bottom_left = 100
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_88ikc"]
-bg_color = Color(0.423529, 0, 0.537255, 0.384314)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_golou"]
-bg_color = Color(0.282353, 0.67451, 0.627451, 0.631373)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k7dc5"]
-bg_color = Color(0, 0, 1, 0.384314)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kxv3i"]
-bg_color = Color(0, 0, 0, 0.741176)
+bg_color = Color(0, 0, 0, 0.505882)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
@@ -128,6 +158,8 @@ color = Color(0.793417, 0.388279, 0.00261003, 1)
 grow_begin = 0.0
 grow_end = 0.0
 thickness = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3535b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_325id"]
 bg_color = Color(0.303925, 0.654195, 0.750562, 1)
@@ -165,11 +197,12 @@ texture = ExtResource("1_7ktla")
 script = ExtResource("4_5f5be")
 dying_colour = Color(1, 0, 0, 1)
 
-[node name="UI-Overlay" type="Sprite2D" parent="."]
-modulate = Color(1.3, 1.3, 1.3, 1)
+[node name="UI_Overlay" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(270, 337.5)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_0smlk")
+sprite_frames = SubResource("SpriteFrames_o0sfq")
+animation = &"green"
 
 [node name="CRT" type="CanvasLayer" parent="."]
 visible = false
@@ -246,30 +279,37 @@ offset_bottom = 120.0
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="ControlsContainer" type="PanelContainer" parent="UI"]
+[node name="Controls" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ControlsContainer" type="PanelContainer" parent="UI/Controls"]
+layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -217.0
+offset_left = 33.0
 offset_top = 16.0
-offset_right = 217.0
+offset_right = 467.0
 offset_bottom = 104.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3elyl")
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/ControlsContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/Controls/ControlsContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/ControlsContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Controls/ControlsContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 24
 alignment = 1
 
-[node name="Button 1" type="Button" parent="UI/ControlsContainer/MarginContainer/HBoxContainer"]
+[node name="Button 1" type="Button" parent="UI/Controls/ControlsContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
@@ -279,7 +319,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_abt4t")
 text = "Group 1"
 script = ExtResource("10_y36nk")
 
-[node name="Button 2" type="Button" parent="UI/ControlsContainer/MarginContainer/HBoxContainer"]
+[node name="Button 2" type="Button" parent="UI/Controls/ControlsContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
@@ -288,6 +328,160 @@ theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_abt4t")
 text = "Group 2"
 script = ExtResource("11_6jjvb")
+
+[node name="SaveControls" type="PanelContainer" parent="UI/Controls"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 50.0
+offset_top = 117.5
+offset_right = 450.0
+offset_bottom = 517.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_88ikc")
+script = ExtResource("14_dx6xt")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Controls/SaveControls"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="GridContainer" type="GridContainer" parent="UI/Controls/SaveControls/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="Button 1" type="Button" parent="UI/Controls/SaveControls/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_fonts/font = ExtResource("9_wn204")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
+text = "SAVE"
+script = ExtResource("8_0ys56")
+
+[node name="Button 2" type="Button" parent="UI/Controls/SaveControls/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
+theme_override_constants/icon_max_width = 100
+theme_override_fonts/font = ExtResource("9_wn204")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
+icon = ExtResource("14_kdtew")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("11_nbfug")
+
+[node name="Button 3" type="Button" parent="UI/Controls/SaveControls/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_fonts/font = ExtResource("9_wn204")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
+text = "SAVE"
+script = ExtResource("8_0ys56")
+
+[node name="Button 4" type="Button" parent="UI/Controls/SaveControls/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
+theme_override_fonts/font = ExtResource("9_wn204")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
+text = "KILL"
+script = ExtResource("11_nbfug")
+
+[node name="KillControls" type="PanelContainer" parent="UI/Controls"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 50.0
+offset_top = 117.5
+offset_right = 450.0
+offset_bottom = 517.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_k7dc5")
+script = ExtResource("14_dx6xt")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Controls/KillControls"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="GridContainer" type="GridContainer" parent="UI/Controls/KillControls/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="Button 1" type="Button" parent="UI/Controls/KillControls/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_fonts/font = ExtResource("9_wn204")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
+text = "SAVE"
+
+[node name="Button 2" type="Button" parent="UI/Controls/KillControls/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
+theme_override_constants/icon_max_width = 100
+theme_override_fonts/font = ExtResource("9_wn204")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
+icon = ExtResource("17_ektss")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Button 3" type="Button" parent="UI/Controls/KillControls/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_fonts/font = ExtResource("9_wn204")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
+text = "SAVE"
+
+[node name="Button 4" type="Button" parent="UI/Controls/KillControls/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
+theme_override_fonts/font = ExtResource("9_wn204")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
+text = "KILL"
 
 [node name="StatusContainer" type="GridContainer" parent="UI"]
 offset_left = 62.0
@@ -328,215 +522,107 @@ value = 700.0
 show_percentage = false
 script = ExtResource("2_a07j0")
 
-[node name="SaveControls" type="PanelContainer" parent="UI"]
+[node name="Options" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="OptionsMenu" type="PanelContainer" parent="UI/Options"]
 unique_name_in_owner = true
-visible = false
-custom_minimum_size = Vector2(400, 400)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_88ikc")
-script = ExtResource("14_dx6xt")
-
-[node name="MarginContainer" type="MarginContainer" parent="UI/SaveControls"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="GridContainer" type="GridContainer" parent="UI/SaveControls/MarginContainer"]
-layout_mode = 2
-theme_override_constants/h_separation = 20
-theme_override_constants/v_separation = 20
-columns = 2
-
-[node name="Button 1" type="Button" parent="UI/SaveControls/MarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
-theme_override_fonts/font = ExtResource("9_wn204")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
-text = "SAVE"
-script = ExtResource("8_0ys56")
-
-[node name="Button 2" type="Button" parent="UI/SaveControls/MarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
-theme_override_constants/icon_max_width = 100
-theme_override_fonts/font = ExtResource("9_wn204")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
-icon = ExtResource("14_kdtew")
-icon_alignment = 1
-expand_icon = true
-script = ExtResource("11_nbfug")
-
-[node name="Button 3" type="Button" parent="UI/SaveControls/MarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
-theme_override_fonts/font = ExtResource("9_wn204")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
-text = "SAVE"
-script = ExtResource("8_0ys56")
-
-[node name="Button 4" type="Button" parent="UI/SaveControls/MarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
-theme_override_fonts/font = ExtResource("9_wn204")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
-text = "KILL"
-script = ExtResource("11_nbfug")
-
-[node name="KillControls" type="PanelContainer" parent="UI"]
-unique_name_in_owner = true
-visible = false
-custom_minimum_size = Vector2(400, 400)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_k7dc5")
-script = ExtResource("14_dx6xt")
-
-[node name="MarginContainer" type="MarginContainer" parent="UI/KillControls"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="GridContainer" type="GridContainer" parent="UI/KillControls/MarginContainer"]
-layout_mode = 2
-theme_override_constants/h_separation = 20
-theme_override_constants/v_separation = 20
-columns = 2
-
-[node name="Button 1" type="Button" parent="UI/KillControls/MarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
-theme_override_fonts/font = ExtResource("9_wn204")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
-text = "SAVE"
-
-[node name="Button 2" type="Button" parent="UI/KillControls/MarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
-theme_override_constants/icon_max_width = 100
-theme_override_fonts/font = ExtResource("9_wn204")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
-icon = ExtResource("17_ektss")
-icon_alignment = 1
-expand_icon = true
-
-[node name="Button 3" type="Button" parent="UI/KillControls/MarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
-theme_override_fonts/font = ExtResource("9_wn204")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
-text = "SAVE"
-
-[node name="Button 4" type="Button" parent="UI/KillControls/MarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
-theme_override_fonts/font = ExtResource("9_wn204")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
-text = "KILL"
-
-[node name="OptionsMenu" type="PanelContainer" parent="UI"]
-unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(510, 640)
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -2.5
+offset_right = 505.0
+offset_bottom = 637.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_kxv3i")
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/Options/OptionsMenu"]
 layout_mode = 2
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 100
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 40
 
-[node name="GridContainer2" type="GridContainer" parent="UI/OptionsMenu/MarginContainer"]
+[node name="GridContainer2" type="GridContainer" parent="UI/Options/OptionsMenu/MarginContainer"]
 layout_mode = 2
+size_flags_vertical = 0
 theme_override_constants/h_separation = 30
 theme_override_constants/v_separation = 10
 columns = 2
 
-[node name="Label" type="Label" parent="UI/OptionsMenu/MarginContainer/GridContainer2"]
+[node name="Label" type="Label" parent="UI/Options/OptionsMenu/MarginContainer/GridContainer2"]
 layout_mode = 2
 text = "Master"
 
-[node name="VolumeMaster" parent="UI/OptionsMenu/MarginContainer/GridContainer2" instance=ExtResource("15_lmno7")]
+[node name="VolumeMaster" parent="UI/Options/OptionsMenu/MarginContainer/GridContainer2" instance=ExtResource("15_lmno7")]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 tick_count = 1
 bus_name = "Master"
 
-[node name="Label2" type="Label" parent="UI/OptionsMenu/MarginContainer/GridContainer2"]
+[node name="Label2" type="Label" parent="UI/Options/OptionsMenu/MarginContainer/GridContainer2"]
 layout_mode = 2
 text = "SFX"
 
-[node name="VolumeSfx" parent="UI/OptionsMenu/MarginContainer/GridContainer2" instance=ExtResource("15_lmno7")]
+[node name="VolumeSfx" parent="UI/Options/OptionsMenu/MarginContainer/GridContainer2" instance=ExtResource("15_lmno7")]
 layout_mode = 2
 value = 0.0
 tick_count = 1
 bus_name = "SFX"
 
-[node name="Label3" type="Label" parent="UI/OptionsMenu/MarginContainer/GridContainer2"]
+[node name="Label3" type="Label" parent="UI/Options/OptionsMenu/MarginContainer/GridContainer2"]
 layout_mode = 2
 text = "Music
 "
 
-[node name="VolumeMusic" parent="UI/OptionsMenu/MarginContainer/GridContainer2" instance=ExtResource("15_lmno7")]
+[node name="VolumeMusic" parent="UI/Options/OptionsMenu/MarginContainer/GridContainer2" instance=ExtResource("15_lmno7")]
 layout_mode = 2
 tooltip_text = "Music"
 theme_override_styles/slider = SubResource("StyleBoxLine_kxflm")
 tick_count = 1
 bus_name = "Music"
 
-[node name="SettingButtonContainer" type="MarginContainer" parent="UI"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Options/OptionsMenu/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Button2" type="Button" parent="UI/Options/OptionsMenu/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 44
+theme_override_styles/normal = SubResource("StyleBoxFlat_3535b")
+text = "<"
+
+[node name="Button" type="Button" parent="UI/Options/OptionsMenu/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 44
+theme_override_styles/normal = SubResource("StyleBoxFlat_3535b")
+text = ">"
+script = ExtResource("21_noh54")
+
+[node name="SettingButtonContainer" type="MarginContainer" parent="UI/Options"]
+layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -71.0
+offset_left = 429.0
 offset_top = 25.0
-offset_right = 13.0
+offset_right = 513.0
 offset_bottom = 109.0
 grow_horizontal = 0
 scale = Vector2(0.75, 0.75)
@@ -545,7 +631,7 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Button 3" type="Button" parent="UI/SettingButtonContainer"]
+[node name="Button 3" type="Button" parent="UI/Options/SettingButtonContainer"]
 clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -613,14 +699,15 @@ stream = ExtResource("18_6dihm")
 bus = &"SFX"
 
 [connection signal="tick" from="HealthTimer" to="Creature" method="_on_health_timer_tick"]
-[connection signal="button_down" from="UI/ControlsContainer/MarginContainer/HBoxContainer/Button 1" to="UI/ControlsContainer/MarginContainer/HBoxContainer/Button 1" method="_on_button_down"]
-[connection signal="button_down" from="UI/ControlsContainer/MarginContainer/HBoxContainer/Button 2" to="UI/ControlsContainer/MarginContainer/HBoxContainer/Button 2" method="_on_button_down"]
-[connection signal="button_down" from="UI/SaveControls/MarginContainer/GridContainer/Button 1" to="UI/SaveControls/MarginContainer/GridContainer/Button 1" method="_on_button_down"]
-[connection signal="button_down" from="UI/SaveControls/MarginContainer/GridContainer/Button 2" to="UI/SaveControls/MarginContainer/GridContainer/Button 2" method="_on_button_down"]
-[connection signal="button_down" from="UI/SaveControls/MarginContainer/GridContainer/Button 3" to="UI/SaveControls/MarginContainer/GridContainer/Button 3" method="_on_button_down"]
-[connection signal="button_down" from="UI/SaveControls/MarginContainer/GridContainer/Button 4" to="UI/SaveControls/MarginContainer/GridContainer/Button 4" method="_on_button_down"]
-[connection signal="button_down" from="UI/KillControls/MarginContainer/GridContainer/Button 1" to="UI/KillControls/MarginContainer/GridContainer/Button 1" method="_on_button_down"]
-[connection signal="button_down" from="UI/KillControls/MarginContainer/GridContainer/Button 2" to="UI/KillControls/MarginContainer/GridContainer/Button 2" method="_on_button_down"]
-[connection signal="button_down" from="UI/KillControls/MarginContainer/GridContainer/Button 3" to="UI/KillControls/MarginContainer/GridContainer/Button 3" method="_on_button_down"]
-[connection signal="button_down" from="UI/KillControls/MarginContainer/GridContainer/Button 4" to="UI/KillControls/MarginContainer/GridContainer/Button 4" method="_on_button_down"]
-[connection signal="button_down" from="UI/SettingButtonContainer/Button 3" to="UI/SettingButtonContainer/Button 3" method="_on_button_down"]
+[connection signal="button_down" from="UI/Controls/ControlsContainer/MarginContainer/HBoxContainer/Button 1" to="UI/Controls/ControlsContainer/MarginContainer/HBoxContainer/Button 1" method="_on_button_down"]
+[connection signal="button_down" from="UI/Controls/ControlsContainer/MarginContainer/HBoxContainer/Button 2" to="UI/Controls/ControlsContainer/MarginContainer/HBoxContainer/Button 2" method="_on_button_down"]
+[connection signal="button_down" from="UI/Controls/SaveControls/MarginContainer/GridContainer/Button 1" to="UI/Controls/SaveControls/MarginContainer/GridContainer/Button 1" method="_on_button_down"]
+[connection signal="button_down" from="UI/Controls/SaveControls/MarginContainer/GridContainer/Button 2" to="UI/Controls/SaveControls/MarginContainer/GridContainer/Button 2" method="_on_button_down"]
+[connection signal="button_down" from="UI/Controls/SaveControls/MarginContainer/GridContainer/Button 3" to="UI/Controls/SaveControls/MarginContainer/GridContainer/Button 3" method="_on_button_down"]
+[connection signal="button_down" from="UI/Controls/SaveControls/MarginContainer/GridContainer/Button 4" to="UI/Controls/SaveControls/MarginContainer/GridContainer/Button 4" method="_on_button_down"]
+[connection signal="button_down" from="UI/Controls/KillControls/MarginContainer/GridContainer/Button 1" to="UI/Controls/KillControls/MarginContainer/GridContainer/Button 1" method="_on_button_down"]
+[connection signal="button_down" from="UI/Controls/KillControls/MarginContainer/GridContainer/Button 2" to="UI/Controls/KillControls/MarginContainer/GridContainer/Button 2" method="_on_button_down"]
+[connection signal="button_down" from="UI/Controls/KillControls/MarginContainer/GridContainer/Button 3" to="UI/Controls/KillControls/MarginContainer/GridContainer/Button 3" method="_on_button_down"]
+[connection signal="button_down" from="UI/Controls/KillControls/MarginContainer/GridContainer/Button 4" to="UI/Controls/KillControls/MarginContainer/GridContainer/Button 4" method="_on_button_down"]
+[connection signal="button_down" from="UI/Options/OptionsMenu/MarginContainer/HBoxContainer/Button" to="UI/Options/OptionsMenu/MarginContainer/HBoxContainer/Button" method="_on_button_down"]
+[connection signal="button_down" from="UI/Options/SettingButtonContainer/Button 3" to="UI/Options/SettingButtonContainer/Button 3" method="_on_button_down"]
