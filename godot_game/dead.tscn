@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://duucock0yfeav"]
+[gd_scene load_steps=2 format=3 uid="uid://duucock0yfeav"]
+
+[ext_resource type="Script" path="res://Scripts/RestartBttn.gd" id="1_tpdkx"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -9,3 +11,13 @@ offset_right = 325.0
 offset_bottom = 452.0
 theme_override_font_sizes/font_size = 200
 text = ":("
+
+[node name="Restart" type="Button" parent="."]
+offset_left = 215.0
+offset_top = 519.0
+offset_right = 346.0
+offset_bottom = 617.0
+text = "RESTART"
+script = ExtResource("1_tpdkx")
+
+[connection signal="pressed" from="Restart" to="Restart" method="_on_pressed"]
