@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://c282rwt57fvoc"]
+[gd_scene load_steps=45 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://placeholder/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
 [ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://player/little-guy.png" id="1_7ktla"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://gd_scripts/Creature.gd" id="4_5f5be"]
 [ext_resource type="Shader" path="res://shaders/test.gdshader" id="4_fvaj5"]
 [ext_resource type="Shader" path="res://shaders/crt.gdshader" id="4_vo6tf"]
+[ext_resource type="Script" path="res://scenes/UI_Overlay.gd" id="6_tise3"]
 [ext_resource type="Texture2D" uid="uid://cawudmxbjamv0" path="res://placeholder/ui_green.png" id="6_vadio"]
 [ext_resource type="Texture2D" uid="uid://c3835drqnfvy" path="res://placeholder/ui_orange.png" id="7_ebtg7"]
 [ext_resource type="Script" path="res://gd_scripts/Button 1.gd" id="8_0ys56"]
@@ -27,33 +28,8 @@
 [ext_resource type="AudioStream" uid="uid://dcet1hpt70t42" path="res://music/perfection.mp3" id="17_oqlhs"]
 [ext_resource type="AudioStream" uid="uid://8ifwm2tjitur" path="res://sound_effects/yippee.mp3" id="18_6dihm"]
 [ext_resource type="Script" path="res://scenes/styletog.gd" id="21_noh54"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_o0sfq"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("6_vadio")
-}],
-"loop": true,
-"name": &"green",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("7_ebtg7")
-}],
-"loop": true,
-"name": &"orange",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("8_djtbd")
-}],
-"loop": true,
-"name": &"pink",
-"speed": 5.0
-}]
+[ext_resource type="Script" path="res://scenes/backthemeb.gd" id="22_bxo36"]
+[ext_resource type="Script" path="res://scenes/Label3.gd" id="28_5nh86"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3jge7"]
 shader = ExtResource("4_vo6tf")
@@ -197,12 +173,13 @@ texture = ExtResource("1_7ktla")
 script = ExtResource("4_5f5be")
 dying_colour = Color(1, 0, 0, 1)
 
-[node name="UI_Overlay" type="AnimatedSprite2D" parent="."]
+[node name="UI_Overlay" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(270, 337.5)
 scale = Vector2(0.5, 0.5)
-sprite_frames = SubResource("SpriteFrames_o0sfq")
-animation = &"green"
+texture = ExtResource("7_ebtg7")
+script = ExtResource("6_tise3")
+palletes = Array[Texture2D]([ExtResource("6_vadio"), ExtResource("7_ebtg7"), ExtResource("8_djtbd")])
 
 [node name="CRT" type="CanvasLayer" parent="."]
 visible = false
@@ -530,6 +507,7 @@ offset_bottom = 40.0
 
 [node name="OptionsMenu" type="PanelContainer" parent="UI/Options"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(510, 640)
 layout_mode = 1
 anchors_preset = 8
@@ -604,6 +582,7 @@ size_flags_vertical = 4
 theme_override_font_sizes/font_size = 44
 theme_override_styles/normal = SubResource("StyleBoxFlat_3535b")
 text = "<"
+script = ExtResource("22_bxo36")
 
 [node name="Button" type="Button" parent="UI/Options/OptionsMenu/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(65, 0)
@@ -649,7 +628,6 @@ script = ExtResource("9_jsl5b")
 title = "Debug Window"
 position = Vector2i(100, 55)
 size = Vector2i(500, 500)
-visible = false
 
 [node name="Label" type="Label" parent="DebugWindow"]
 anchors_preset = 8
@@ -686,6 +664,24 @@ text = "Creature Health: 1000"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("14_j428r")
+
+[node name="Label3" type="Label" parent="DebugWindow"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -210.0
+offset_top = 150.0
+offset_right = -10.0
+offset_bottom = 205.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "index"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("28_5nh86")
 
 [node name="Sounds" type="Node" parent="."]
 

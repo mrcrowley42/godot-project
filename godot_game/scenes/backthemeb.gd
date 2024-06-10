@@ -12,4 +12,4 @@ func _process(_delta):
 
 
 func _on_button_down():
-	%UI_Overlay.cycle_forward()
+	%UI_Overlay.cycle_backwards()
