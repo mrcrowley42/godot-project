@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://c282rwt57fvoc"]
+[gd_scene load_steps=58 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://placeholder/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
 [ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://player/little-guy.png" id="1_7ktla"]
@@ -139,10 +139,34 @@ corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kxv3i"]
 bg_color = Color(0, 0, 0, 0.317647)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0.411765)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_16vbq"]
+bg_color = Color(0.6, 0.6, 0.6, 0.831373)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_kxflm"]
 color = Color(0.793417, 0.388279, 0.00261003, 1)
@@ -568,20 +592,12 @@ offset_bottom = 40.0
 
 [node name="OptionsMenu" type="PanelContainer" parent="UI/Options"]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(510, 640)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -5.0
-offset_top = -2.5
-offset_right = 505.0
-offset_bottom = 637.5
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 526.0
+offset_bottom = 656.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_kxv3i")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/Options/OptionsMenu"]
@@ -590,6 +606,33 @@ theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 100
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 40
+
+[node name="SaveButtons" type="Node2D" parent="UI/Options/OptionsMenu/MarginContainer"]
+position = Vector2(-16, -16)
+
+[node name="Save" type="Button" parent="UI/Options/OptionsMenu/MarginContainer/SaveButtons"]
+offset_left = 90.0
+offset_top = 482.0
+offset_right = 234.0
+offset_bottom = 530.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.4947, 0.97, 0.4947, 1)
+theme_override_fonts/font = ExtResource("9_wn204")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_16vbq")
+text = "Save Settings"
+
+[node name="Cancel" type="Button" parent="UI/Options/OptionsMenu/MarginContainer/SaveButtons"]
+offset_left = 317.0
+offset_top = 482.0
+offset_right = 450.0
+offset_bottom = 530.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
+theme_override_fonts/font = ExtResource("9_wn204")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_16vbq")
+text = "Cancel"
 
 [node name="GridContainer2" type="GridContainer" parent="UI/Options/OptionsMenu/MarginContainer"]
 layout_mode = 2
@@ -641,6 +684,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 20
+alignment = 1
 
 [node name="Button2" type="Button" parent="UI/Options/OptionsMenu/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(65, 0)
@@ -684,11 +728,10 @@ vertical_alignment = 1
 [node name="Button 3" type="Button" parent="UI/Options"]
 self_modulate = Color(1, 1, 1, 0.815686)
 clip_contents = true
-layout_mode = 2
-offset_left = 473.0
-offset_top = 14.0
-offset_right = 525.0
-offset_bottom = 66.0
+offset_left = 476.0
+offset_top = 18.0
+offset_right = 528.0
+offset_bottom = 70.0
 scale = Vector2(0.8, 0.8)
 pivot_offset = Vector2(26, 26)
 size_flags_horizontal = 3
