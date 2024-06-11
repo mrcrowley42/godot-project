@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://c282rwt57fvoc"]
+[gd_scene load_steps=52 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://placeholder/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
 [ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://player/little-guy.png" id="1_7ktla"]
@@ -21,6 +21,7 @@
 [ext_resource type="Shader" path="res://shaders/test.gdshader" id="11_g0l74"]
 [ext_resource type="Script" path="res://gd_scripts/Button 2.gd" id="11_nbfug"]
 [ext_resource type="Script" path="res://gd_scripts/Label.gd" id="13_2u7g3"]
+[ext_resource type="Theme" uid="uid://dpeh5d2xu80up" path="res://themes/prototype_theme.tres" id="13_tapur"]
 [ext_resource type="Script" path="res://gd_scripts/SaveControls.gd" id="14_dx6xt"]
 [ext_resource type="Script" path="res://gd_scripts/Label2.gd" id="14_j428r"]
 [ext_resource type="Texture2D" uid="uid://cap3k33q4q73n" path="res://icons/playstation.svg" id="14_kdtew"]
@@ -90,10 +91,10 @@ draw_center = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_abt4t"]
 bg_color = Color(0, 0, 0, 0.32549)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 border_color = Color(0.921569, 0.752941, 0.752941, 0.286275)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
@@ -137,8 +138,11 @@ corner_detail = 10
 bg_color = Color(0.92, 0.3036, 0.36524, 1)
 border_width_left = 3
 border_width_top = 3
+border_width_right = 3
 border_width_bottom = 3
 corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 corner_detail = 10
 
@@ -146,8 +150,11 @@ corner_detail = 10
 bg_color = Color(0.333189, 0.545631, 0.906432, 1)
 border_width_left = 3
 border_width_top = 3
+border_width_right = 3
 border_width_bottom = 3
 corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kxv3i"]
@@ -370,6 +377,7 @@ alignment = 1
 [node name="Button 1" type="Button" parent="UI/Controls/ControlsContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("13_tapur")
 theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
 theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 24
@@ -695,8 +703,9 @@ script = ExtResource("9_jsl5b")
 
 [node name="DebugWindow" type="Window" parent="."]
 title = "Debug Window"
-position = Vector2i(200, 55)
+position = Vector2i(155, 36)
 size = Vector2i(500, 500)
+visible = false
 unfocusable = true
 script = SubResource("GDScript_o2bb2")
 enabled = true
