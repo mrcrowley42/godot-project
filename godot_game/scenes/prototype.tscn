@@ -399,6 +399,7 @@ script = ExtResource("11_6jjvb")
 
 [node name="SaveControls" type="PanelContainer" parent="UI/Controls"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(400, 400)
 layout_mode = 1
 anchors_preset = 8
