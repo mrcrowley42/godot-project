@@ -20,7 +20,7 @@
 [ext_resource type="Script" path="res://gd_scripts/Butto.gd" id="11_6jjvb"]
 [ext_resource type="Script" path="res://gd_scripts/Button 2.gd" id="11_nbfug"]
 [ext_resource type="Script" path="res://gd_scripts/Label.gd" id="13_2u7g3"]
-[ext_resource type="Theme" uid="uid://dpeh5d2xu80up" path="res://themes/prototype_theme.tres" id="13_tapur"]
+[ext_resource type="Theme" path="res://themes/prototype_theme.tres" id="13_tapur"]
 [ext_resource type="Script" path="res://gd_scripts/SaveControls.gd" id="14_dx6xt"]
 [ext_resource type="Script" path="res://gd_scripts/Label2.gd" id="14_j428r"]
 [ext_resource type="Texture2D" uid="uid://cap3k33q4q73n" path="res://icons/playstation.svg" id="14_kdtew"]
@@ -335,7 +335,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = SubResource("GDScript_j4fl7")
 
-[node name="UI_Overlay" type="Sprite2D" parent="Gameplay"]
+[node name="UI_Overlay" type="Sprite2D" parent="Gameplay" groups=["settings_data"]]
 unique_name_in_owner = true
 position = Vector2(270, 337.5)
 scale = Vector2(0.5, 0.5)
@@ -604,7 +604,7 @@ theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 24
 text = "Master"
 
-[node name="VolumeMaster" parent="UI/Options/OptionsMenu/MarginContainer/GridContainer2" instance=ExtResource("15_lmno7")]
+[node name="VolumeMaster" parent="UI/Options/OptionsMenu/MarginContainer/GridContainer2" groups=["settings_data"] instance=ExtResource("15_lmno7")]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 tick_count = 1
@@ -616,7 +616,7 @@ theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 24
 text = "SFX"
 
-[node name="VolumeSfx" parent="UI/Options/OptionsMenu/MarginContainer/GridContainer2" instance=ExtResource("15_lmno7")]
+[node name="VolumeSfx" parent="UI/Options/OptionsMenu/MarginContainer/GridContainer2" groups=["settings_data"] instance=ExtResource("15_lmno7")]
 layout_mode = 2
 value = 0.0
 tick_count = 1
@@ -629,7 +629,7 @@ theme_override_font_sizes/font_size = 24
 text = "Music
 "
 
-[node name="VolumeMusic" parent="UI/Options/OptionsMenu/MarginContainer/GridContainer2" instance=ExtResource("15_lmno7")]
+[node name="VolumeMusic" parent="UI/Options/OptionsMenu/MarginContainer/GridContainer2" groups=["settings_data"] instance=ExtResource("15_lmno7")]
 layout_mode = 2
 tooltip_text = "Music"
 theme_override_styles/slider = SubResource("StyleBoxLine_kxflm")
@@ -792,7 +792,6 @@ size = Vector2i(500, 500)
 visible = false
 unfocusable = true
 script = SubResource("GDScript_o2bb2")
-enabled = true
 
 [node name="Label" type="Label" parent="DebugWindow"]
 anchors_preset = 8
@@ -883,6 +882,7 @@ unique_name_in_owner = true
 stream = ExtResource("33_ipuqk")
 bus = &"SFX"
 
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
 [connection signal="tick" from="HealthTimer" to="Gameplay/Creature" method="_on_health_timer_tick"]
 [connection signal="button_down" from="UI/Controls/ControlsContainer/MarginContainer/HBoxContainer/Button 1" to="UI/Controls/ControlsContainer/MarginContainer/HBoxContainer/Button 1" method="_on_button_down"]
 [connection signal="button_down" from="UI/Controls/ControlsContainer/MarginContainer/HBoxContainer/Button 2" to="UI/Controls/ControlsContainer/MarginContainer/HBoxContainer/Button 2" method="_on_button_down"]
