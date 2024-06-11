@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://c282rwt57fvoc"]
+[gd_scene load_steps=57 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://placeholder/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
 [ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://player/little-guy.png" id="1_7ktla"]
@@ -18,7 +18,6 @@
 [ext_resource type="Script" path="res://gd_scripts/button_submenu.gd" id="10_y36nk"]
 [ext_resource type="Shader" path="res://scenes/new_shader.gdshader" id="11_1vr7d"]
 [ext_resource type="Script" path="res://gd_scripts/Butto.gd" id="11_6jjvb"]
-[ext_resource type="Shader" path="res://shaders/test.gdshader" id="11_g0l74"]
 [ext_resource type="Script" path="res://gd_scripts/Button 2.gd" id="11_nbfug"]
 [ext_resource type="Script" path="res://gd_scripts/Label.gd" id="13_2u7g3"]
 [ext_resource type="Theme" uid="uid://dpeh5d2xu80up" path="res://themes/prototype_theme.tres" id="13_tapur"]
@@ -29,9 +28,11 @@
 [ext_resource type="Texture2D" uid="uid://skpiw6bdlna3" path="res://icons/restaurant_24dp_FILL0_wght400_GRAD0_opsz24.svg" id="17_ektss"]
 [ext_resource type="AudioStream" uid="uid://dcet1hpt70t42" path="res://music/perfection.mp3" id="17_oqlhs"]
 [ext_resource type="AudioStream" uid="uid://8ifwm2tjitur" path="res://sound_effects/yippee.mp3" id="18_6dihm"]
+[ext_resource type="Texture2D" uid="uid://pbxnymt0cqn7" path="res://3008_stuff/c345a48674507fd3f61aad362db1b21b.jpg" id="20_dkmvt"]
 [ext_resource type="Script" path="res://scenes/styletog.gd" id="21_noh54"]
 [ext_resource type="Script" path="res://scenes/backthemeb.gd" id="22_bxo36"]
 [ext_resource type="Script" path="res://scenes/Label3.gd" id="28_5nh86"]
+[ext_resource type="AudioStream" uid="uid://dat0sfue6jjr5" path="res://sound_effects/metal-pipe-falling-sound-effect-made-with-Voicemod.mp3" id="33_ipuqk"]
 
 [sub_resource type="GDScript" id="GDScript_7ecg8"]
 script/source = "extends ColorRect
@@ -65,9 +66,6 @@ shader_parameter/clip_warp = false
 shader_parameter/vignette_intensity = 0.4
 shader_parameter/vignette_opacity = 0.5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kju6g"]
-shader = ExtResource("11_g0l74")
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_igbp3"]
 shader = ExtResource("11_1vr7d")
 
@@ -82,7 +80,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	color = $\"../../ColorRect\".color
+	color = %ScreenColours.color
 "
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3elyl"]
@@ -116,12 +114,69 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
+[sub_resource type="GDScript" id="GDScript_ovb2u"]
+script/source = "extends Button
+
+func _on_button_down():
+	%Yip.play()
+"
+
+[sub_resource type="GDScript" id="GDScript_ve7ha"]
+script/source = "extends Button
+
+
+
+func _on_button_down():
+	%PIPE.play()
+"
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k7dc5"]
 bg_color = Color(0, 0, 1, 0.384314)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kxv3i"]
+bg_color = Color(0, 0, 0, 0.317647)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_kxflm"]
+color = Color(0.793417, 0.388279, 0.00261003, 1)
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3535b"]
+bg_color = Color(0.822295, 0.511699, 0.352571, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_325id"]
+resource_local_to_scene = true
+bg_color = Color(0.201526, 0.201527, 0.201526, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.25098)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2mbbg"]
+bg_color = Color(0, 0, 0, 0.227451)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1jn5s"]
 border_width_left = 3
@@ -135,7 +190,7 @@ corner_radius_bottom_left = 10
 corner_detail = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o1dc8"]
-bg_color = Color(0.92, 0.3036, 0.36524, 1)
+bg_color = Color(0.865294, 0.372259, 0.373089, 1)
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
@@ -157,33 +212,29 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kxv3i"]
-bg_color = Color(0, 0, 0, 0.27451)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s0vyl"]
+bg_color = Color(0.269819, 0.638372, 0.413971, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 10
+shadow_color = Color(0, 0.74902, 0, 1)
 
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_kxflm"]
-color = Color(0.793417, 0.388279, 0.00261003, 1)
-grow_begin = 0.0
-grow_end = 0.0
-thickness = 40
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3535b"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_325id"]
-resource_local_to_scene = true
-bg_color = Color(0.201526, 0.201527, 0.201526, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 1, 1, 0.25098)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ia234"]
+bg_color = Color(1, 0.839216, 0.376471, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="GDScript" id="GDScript_o2bb2"]
 script/source = "extends Window
@@ -220,13 +271,15 @@ autostart = true
 script = ExtResource("1_ajpg5")
 ticks_per_second = 1.0
 
-[node name="BG" type="Sprite2D" parent="."]
+[node name="Gameplay" type="Node2D" parent="."]
+
+[node name="BG" type="Sprite2D" parent="Gameplay"]
 position = Vector2(273, 337)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("1_7g4je")
 metadata/_edit_lock_ = true
 
-[node name="Creature" type="Sprite2D" parent="."]
+[node name="Creature" type="Sprite2D" parent="Gameplay"]
 unique_name_in_owner = true
 position = Vector2(270, 393.5)
 scale = Vector2(0.225, 0.225)
@@ -234,7 +287,8 @@ texture = ExtResource("1_7ktla")
 script = ExtResource("4_5f5be")
 dying_colour = Color(1, 0, 0, 1)
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ScreenColours" type="ColorRect" parent="Gameplay"]
+unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(450, 450)
 anchors_preset = 8
@@ -242,27 +296,19 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -225.0
-offset_top = -225.0
-offset_right = 225.0
-offset_bottom = 225.0
+offset_left = 45.0
+offset_top = 112.5
+offset_right = 495.0
+offset_bottom = 562.5
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.655034, 0.247851, 0.431647, 1)
 script = SubResource("GDScript_7ecg8")
 colours = Array[Color]([Color(0.870588, 0.984314, 0.87451, 1), Color(0.835294, 0.576471, 0.439216, 1), Color(0.901961, 0.67451, 0.768627, 1)])
 
-[node name="UI_Overlay" type="Sprite2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(270, 337.5)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_ebtg7")
-script = ExtResource("6_tise3")
-palletes = Array[Texture2D]([ExtResource("6_vadio"), ExtResource("7_ebtg7"), ExtResource("8_djtbd")])
+[node name="ScreenShaders" type="CanvasLayer" parent="Gameplay"]
 
-[node name="CRT" type="CanvasLayer" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="CRT"]
+[node name="CRT" type="ColorRect" parent="Gameplay/ScreenShaders"]
 visible = false
 material = SubResource("ShaderMaterial_3jge7")
 anchors_preset = 15
@@ -275,74 +321,30 @@ offset_bottom = -121.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect2" type="ColorRect" parent="CRT"]
-visible = false
-material = SubResource("ShaderMaterial_kju6g")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ColorRect3" type="ColorRect" parent="CRT"]
+[node name="ScreenTint" type="ColorRect" parent="Gameplay/ScreenShaders"]
 material = SubResource("ShaderMaterial_igbp3")
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -217.0
+offset_top = 120.0
+offset_right = 217.0
+offset_bottom = -121.0
 grow_horizontal = 2
 grow_vertical = 2
 script = SubResource("GDScript_j4fl7")
 
-[node name="ReferenceLines" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="StatusOutline" type="ReferenceRect" parent="ReferenceLines"]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -121.0
-offset_right = 540.0
-grow_vertical = 0
-
-[node name="ScreenOutlineInner" type="ReferenceRect" parent="ReferenceLines"]
-offset_left = 53.0
-offset_top = 120.0
-offset_right = 487.0
-offset_bottom = 554.0
-border_color = Color(1, 0, 0.65098, 1)
-
-[node name="ScreenOutline" type="ReferenceRect" parent="ReferenceLines"]
-offset_left = 45.0
-offset_top = 112.0
-offset_right = 495.0
-offset_bottom = 562.0
-border_color = Color(1, 0, 0.65098, 1)
-
-[node name="BorderOutline" type="ReferenceRect" parent="ReferenceLines"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-border_color = Color(0.445483, 0.513227, 1, 1)
-
-[node name="BorderOutlineInner" type="ReferenceRect" parent="ReferenceLines"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = -8.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 2
-border_color = Color(0.445483, 0.513227, 1, 1)
-
-[node name="ControlsOutline" type="ReferenceRect" parent="ReferenceLines"]
-offset_right = 540.0
-offset_bottom = 120.0
+[node name="UI_Overlay" type="Sprite2D" parent="Gameplay"]
+unique_name_in_owner = true
+position = Vector2(270, 337.5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_ebtg7")
+script = ExtResource("6_tise3")
+palletes = Array[Texture2D]([ExtResource("6_vadio"), ExtResource("7_ebtg7"), ExtResource("8_djtbd")])
 
 [node name="UI" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="Controls" type="Control" parent="UI"]
 layout_mode = 3
@@ -397,7 +399,6 @@ script = ExtResource("11_6jjvb")
 
 [node name="SaveControls" type="PanelContainer" parent="UI/Controls"]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(400, 400)
 layout_mode = 1
 anchors_preset = 8
@@ -442,26 +443,35 @@ script = ExtResource("8_0ys56")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
+theme_override_colors/font_color = Color(1, 0.721569, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
 theme_override_constants/icon_max_width = 100
 theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
+text = "vidya game"
 icon = ExtResource("14_kdtew")
 icon_alignment = 1
 expand_icon = true
-script = ExtResource("11_nbfug")
+script = SubResource("GDScript_ovb2u")
 
 [node name="Button 3" type="Button" parent="UI/Controls/SaveControls/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_constants/icon_max_width = 150
 theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
-text = "SAVE"
-script = ExtResource("8_0ys56")
+text = "PIPE!"
+icon = ExtResource("20_dkmvt")
+icon_alignment = 1
+expand_icon = true
+script = SubResource("GDScript_ve7ha")
 
 [node name="Button 4" type="Button" parent="UI/Controls/SaveControls/MarginContainer/GridContainer"]
 layout_mode = 2
@@ -549,45 +559,6 @@ theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
 text = "KILL"
 
-[node name="StatusContainer" type="GridContainer" parent="UI"]
-offset_left = 62.0
-offset_top = 581.0
-offset_right = 272.0
-offset_bottom = 654.0
-columns = 2
-
-[node name="Label" type="Label" parent="UI/StatusContainer"]
-layout_mode = 2
-text = "HP"
-
-[node name="HealthBar" type="ProgressBar" parent="UI/StatusContainer"]
-clip_contents = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-theme_override_styles/background = SubResource("StyleBoxFlat_1jn5s")
-theme_override_styles/fill = SubResource("StyleBoxFlat_o1dc8")
-max_value = 1000.0
-step = 1.0
-value = 700.0
-show_percentage = false
-script = ExtResource("2_a07j0")
-
-[node name="Label2" type="Label" parent="UI/StatusContainer"]
-layout_mode = 2
-text = "MP"
-
-[node name="Bar2" type="ProgressBar" parent="UI/StatusContainer"]
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_styles/background = SubResource("StyleBoxFlat_1jn5s")
-theme_override_styles/fill = SubResource("StyleBoxFlat_vk3l5")
-max_value = 1000.0
-step = 1.0
-value = 700.0
-show_percentage = false
-script = ExtResource("2_a07j0")
-
 [node name="Options" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 0
@@ -628,6 +599,8 @@ columns = 2
 
 [node name="Label" type="Label" parent="UI/Options/OptionsMenu/MarginContainer/GridContainer2"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("9_wn204")
+theme_override_font_sizes/font_size = 24
 text = "Master"
 
 [node name="VolumeMaster" parent="UI/Options/OptionsMenu/MarginContainer/GridContainer2" instance=ExtResource("15_lmno7")]
@@ -638,6 +611,8 @@ bus_name = "Master"
 
 [node name="Label2" type="Label" parent="UI/Options/OptionsMenu/MarginContainer/GridContainer2"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("9_wn204")
+theme_override_font_sizes/font_size = 24
 text = "SFX"
 
 [node name="VolumeSfx" parent="UI/Options/OptionsMenu/MarginContainer/GridContainer2" instance=ExtResource("15_lmno7")]
@@ -648,6 +623,8 @@ bus_name = "SFX"
 
 [node name="Label3" type="Label" parent="UI/Options/OptionsMenu/MarginContainer/GridContainer2"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("9_wn204")
+theme_override_font_sizes/font_size = 24
 text = "Music
 "
 
@@ -662,12 +639,15 @@ bus_name = "Music"
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_constants/separation = 20
 
 [node name="Button2" type="Button" parent="UI/Options/OptionsMenu/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(65, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_colors/font_outline_color = Color(0.835294, 0.517647, 0, 0.619608)
+theme_override_constants/outline_size = 3
 theme_override_font_sizes/font_size = 44
 theme_override_styles/normal = SubResource("StyleBoxFlat_3535b")
 text = "<"
@@ -678,19 +658,37 @@ custom_minimum_size = Vector2(65, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_colors/font_outline_color = Color(0.835294, 0.517647, 0, 0.619608)
+theme_override_constants/outline_size = 3
 theme_override_font_sizes/font_size = 44
 theme_override_styles/normal = SubResource("StyleBoxFlat_3535b")
 text = ">"
 script = ExtResource("21_noh54")
 
+[node name="Node2D" type="Node2D" parent="UI/Options/OptionsMenu/MarginContainer"]
+scale = Vector2(0.5, 0.5)
+
+[node name="Label" type="Label" parent="UI/Options/OptionsMenu/MarginContainer/Node2D"]
+offset_left = 406.0
+offset_top = 553.0
+offset_right = 596.0
+offset_bottom = 610.0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("9_wn204")
+theme_override_font_sizes/font_size = 64
+text = "Theme"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Button 3" type="Button" parent="UI/Options"]
+self_modulate = Color(1, 1, 1, 0.815686)
 clip_contents = true
 layout_mode = 2
-offset_left = 469.0
-offset_top = 35.0
-offset_right = 521.0
-offset_bottom = 87.0
-scale = Vector2(0.75, 0.75)
+offset_left = 473.0
+offset_top = 14.0
+offset_right = 525.0
+offset_bottom = 66.0
+scale = Vector2(0.8, 0.8)
 pivot_offset = Vector2(26, 26)
 size_flags_horizontal = 3
 theme_override_colors/icon_normal_color = Color(0.763988, 0.797803, 0.780601, 1)
@@ -700,6 +698,91 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_325id")
 icon = ExtResource("9_4we8d")
 icon_alignment = 1
 script = ExtResource("9_jsl5b")
+
+[node name="StatsContainer" type="PanelContainer" parent="UI"]
+offset_left = 34.0
+offset_top = 570.0
+offset_right = 506.0
+offset_bottom = 658.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_2mbbg")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/StatsContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="StatusContainer" type="GridContainer" parent="UI/StatsContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 4
+
+[node name="Label" type="Label" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
+layout_mode = 2
+text = "HP"
+
+[node name="HealthBar" type="ProgressBar" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_1jn5s")
+theme_override_styles/fill = SubResource("StyleBoxFlat_o1dc8")
+max_value = 1000.0
+step = 1.0
+value = 700.0
+show_percentage = false
+script = ExtResource("2_a07j0")
+
+[node name="Label2" type="Label" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
+layout_mode = 2
+text = "MP"
+
+[node name="Bar2" type="ProgressBar" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_1jn5s")
+theme_override_styles/fill = SubResource("StyleBoxFlat_vk3l5")
+max_value = 1000.0
+step = 1.0
+value = 700.0
+show_percentage = false
+script = ExtResource("2_a07j0")
+
+[node name="Label3" type="Label" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
+layout_mode = 2
+text = "SP"
+
+[node name="HealthBar2" type="ProgressBar" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_1jn5s")
+theme_override_styles/fill = SubResource("StyleBoxFlat_s0vyl")
+max_value = 1000.0
+step = 1.0
+value = 700.0
+show_percentage = false
+script = ExtResource("2_a07j0")
+
+[node name="Label4" type="Label" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
+layout_mode = 2
+text = "AP"
+
+[node name="Bar3" type="ProgressBar" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_1jn5s")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ia234")
+max_value = 1000.0
+step = 1.0
+value = 700.0
+show_percentage = false
+script = ExtResource("2_a07j0")
 
 [node name="DebugWindow" type="Window" parent="."]
 title = "Debug Window"
@@ -790,10 +873,16 @@ autoplay = true
 bus = &"Music"
 
 [node name="Yip" type="AudioStreamPlayer" parent="Sounds"]
+unique_name_in_owner = true
 stream = ExtResource("18_6dihm")
 bus = &"SFX"
 
-[connection signal="tick" from="HealthTimer" to="Creature" method="_on_health_timer_tick"]
+[node name="PIPE" type="AudioStreamPlayer" parent="Sounds"]
+unique_name_in_owner = true
+stream = ExtResource("33_ipuqk")
+bus = &"SFX"
+
+[connection signal="tick" from="HealthTimer" to="Gameplay/Creature" method="_on_health_timer_tick"]
 [connection signal="button_down" from="UI/Controls/ControlsContainer/MarginContainer/HBoxContainer/Button 1" to="UI/Controls/ControlsContainer/MarginContainer/HBoxContainer/Button 1" method="_on_button_down"]
 [connection signal="button_down" from="UI/Controls/ControlsContainer/MarginContainer/HBoxContainer/Button 2" to="UI/Controls/ControlsContainer/MarginContainer/HBoxContainer/Button 2" method="_on_button_down"]
 [connection signal="button_down" from="UI/Controls/SaveControls/MarginContainer/GridContainer/Button 1" to="UI/Controls/SaveControls/MarginContainer/GridContainer/Button 1" method="_on_button_down"]

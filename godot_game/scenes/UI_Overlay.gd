@@ -15,9 +15,9 @@ func _process(_delta):
 func cycle_forward():
 	i = (i+1) % palletes.size()
 	texture = palletes[i]
-	$"../ColorRect".color = $"../ColorRect".colours[i]
+	%ScreenColours.color = %ScreenColours.colours[i]
 
 func cycle_backwards():
 	i = (i-1) % palletes.size()
 	texture = palletes[i]
-	$"../ColorRect".color = $"../ColorRect".colours[i]
+	%ScreenColours.color = %ScreenColours.colours[i]
