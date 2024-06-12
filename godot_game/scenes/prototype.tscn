@@ -1,11 +1,10 @@
-[gd_scene load_steps=60 format=3 uid="uid://c282rwt57fvoc"]
+[gd_scene load_steps=59 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://placeholder/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
 [ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://player/little-guy.png" id="1_7ktla"]
-[ext_resource type="Script" path="res://gd_scripts/HealthTImer.gd" id="1_ajpg5"]
 [ext_resource type="Script" path="res://gd_scripts/prototype.gd" id="1_of2kb"]
 [ext_resource type="Script" path="res://gd_scripts/ProgressBar.gd" id="2_a07j0"]
-[ext_resource type="Script" path="res://scenes/MPTimer.gd" id="3_44f3s"]
+[ext_resource type="Script" path="res://scenes/status_manager.gd" id="2_a8vep"]
 [ext_resource type="Script" path="res://gd_scripts/Creature.gd" id="4_5f5be"]
 [ext_resource type="Shader" path="res://shaders/crt.gdshader" id="4_vo6tf"]
 [ext_resource type="Script" path="res://scenes/UI_Overlay.gd" id="6_tise3"]
@@ -282,7 +281,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	text = str($%HealthTimer.wait_time)
+	text = str(%StatusManager.hp_rate)
 "
 
 [node name="Game" type="Node"]
@@ -290,33 +289,9 @@ script = ExtResource("1_of2kb")
 metadata/_edit_vertical_guides_ = [532.0, 8.0, 45.0, 53.0, 487.0, 495.0]
 metadata/_edit_horizontal_guides_ = [8.0, 667.0, 112.0, 120.0, 554.0, 562.0]
 
-[node name="HealthTimer" type="Timer" parent="."]
+[node name="StatusManager" type="Node2D" parent="."]
 unique_name_in_owner = true
-wait_time = 0.1
-autostart = true
-script = ExtResource("1_ajpg5")
-ticks_per_second = 1.0
-
-[node name="MPTimer" type="Timer" parent="."]
-unique_name_in_owner = true
-wait_time = 0.1
-autostart = true
-script = ExtResource("3_44f3s")
-ticks_per_second = 5.0
-
-[node name="SPTimer" type="Timer" parent="."]
-unique_name_in_owner = true
-wait_time = 0.1
-autostart = true
-script = ExtResource("1_ajpg5")
-ticks_per_second = 1.0
-
-[node name="APTImer" type="Timer" parent="."]
-unique_name_in_owner = true
-wait_time = 0.1
-autostart = true
-script = ExtResource("1_ajpg5")
-ticks_per_second = 1.0
+script = ExtResource("2_a8vep")
 
 [node name="Gameplay" type="Node2D" parent="."]
 
@@ -950,8 +925,6 @@ unique_name_in_owner = true
 stream = ExtResource("33_ipuqk")
 bus = &"SFX"
 
-[connection signal="tick" from="HealthTimer" to="Gameplay/Creature" method="_on_health_timer_tick"]
-[connection signal="tick" from="MPTimer" to="Gameplay/Creature" method="_on_mp_timer_tick"]
 [connection signal="button_down" from="UI/Controls/ControlsContainer/MarginContainer/HBoxContainer/Button 1" to="UI/Controls/ControlsContainer/MarginContainer/HBoxContainer/Button 1" method="_on_button_down"]
 [connection signal="button_down" from="UI/Controls/ControlsContainer/MarginContainer/HBoxContainer/Button 2" to="UI/Controls/ControlsContainer/MarginContainer/HBoxContainer/Button 2" method="_on_button_down"]
 [connection signal="button_down" from="UI/Controls/SaveControls/MarginContainer/GridContainer/Button 1" to="UI/Controls/SaveControls/MarginContainer/GridContainer/Button 1" method="_on_button_down"]

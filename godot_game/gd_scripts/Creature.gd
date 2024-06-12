@@ -20,7 +20,6 @@ func dmg(amount:float, stat:String):
 		self.mp -= amount
 	
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	 # Ensure health can't go below 0 or above the max health.
@@ -31,10 +30,6 @@ func _process(_delta):
 	apply_dmg_tint()
 
 	
-func _on_health_timer_tick():
-	dmg(5, "hp")
-
-	
 func dead():
 	get_tree().change_scene_to_file("res://scenes/dead.tscn")
 
@@ -43,7 +38,3 @@ func apply_dmg_tint():
 	self.modulate.b = clampf(1 - (1 - self.health/1000) + dying_colour.b,0,1)
 	self.modulate.g = clampf(1 - (1 - self.health/1000) + dying_colour.g,0,1)
 	self.modulate.r = clampf(1 - (1 - self.health/1000) + dying_colour.r,0,1)
-
-
-func _on_mp_timer_tick():
-	dmg(5, "mp")
