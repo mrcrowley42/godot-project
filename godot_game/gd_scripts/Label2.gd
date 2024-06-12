@@ -8,4 +8,5 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	text = str(%Creature.modulate)
+	var colour =  get_node("..").creature.modulate
+	text = str(colour)

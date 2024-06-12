@@ -1,0 +1,94 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlt7ckcyjmlna"]
+
+[ext_resource type="Script" path="res://gd_scripts/Label.gd" id="1_6uwfd"]
+[ext_resource type="Script" path="res://gd_scripts/Label2.gd" id="2_xg4rt"]
+[ext_resource type="Script" path="res://scenes/Label3.gd" id="3_08jcg"]
+
+[sub_resource type="GDScript" id="GDScript_2pl8q"]
+script/source = "extends Label
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta):
+	var rate = get_node(\"..\").stat_man.hp_rate
+	text = str(rate)
+"
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 40.0
+offset_top = 222.5
+offset_right = 460.0
+offset_bottom = 277.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "Creature Health: 1000"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_6uwfd")
+
+[node name="Label2" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 40.0
+offset_top = 300.0
+offset_right = 460.0
+offset_bottom = 355.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "Creature Health: 1000"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_xg4rt")
+
+[node name="Label4" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.5
+offset_top = 100.0
+offset_right = 231.5
+offset_bottom = 155.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "Ticks per sec"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = SubResource("GDScript_2pl8q")
+
+[node name="Label3" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 40.0
+offset_top = 400.0
+offset_right = 240.0
+offset_bottom = 455.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "index"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_08jcg")
