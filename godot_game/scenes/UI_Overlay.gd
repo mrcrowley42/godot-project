@@ -12,12 +12,21 @@ func _ready():
 func _process(_delta):
 	pass
 
+func change_texture(num):
+	texture = palletes[num]
+	%ScreenColours.color = %ScreenColours.colours[num]
+
 func cycle_forward():
 	i = (i+1) % palletes.size()
-	texture = palletes[i]
-	%ScreenColours.color = %ScreenColours.colours[i]
+	change_texture(i)
 
 func cycle_backwards():
 	i = (i-1) % palletes.size()
-	texture = palletes[i]
-	%ScreenColours.color = %ScreenColours.colours[i]
+	change_texture(i)
+
+func save():
+	return {"texture": abs(i)}
+
+func load(data):
+	var text = int(data["texture"])
+	change_texture(i)

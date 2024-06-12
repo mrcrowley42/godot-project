@@ -53,7 +53,8 @@ shape = SubResource("RectangleShape2D_ghx2k")
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_7nyvr")
 animation = &"idle"
-frame_progress = 0.222319
+frame = 1
+frame_progress = 0.685872
 
 [node name="yip" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_fhvfk")

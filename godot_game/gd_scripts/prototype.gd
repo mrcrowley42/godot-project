@@ -5,7 +5,7 @@ const SAVE_DATA_GROUP = "save_data"
 const SAVE_DATA_FILE = "res://save_data.save"
 
 const SAVE_SETTINGS_GROUP = "settings_data"
-const SAVE_SETTINGS_FILE = "res://settings.conf"
+const SAVE_SETTINGS_FILE = "res://settings.txt"
 
 const PATH = "path"
 const DATA = "data"
@@ -14,20 +14,23 @@ const LOAD = "load"
 
 
 func _ready():
-	#load_all_data(SAVE_DATA_FILE)
-	#load_all_data(SAVE_SETTINGS_FILE)
-	pass
+	load_data(SAVE_DATA_FILE, true, true)
+	load_data(SAVE_SETTINGS_FILE)
 
 
-func save_all_data():
-	var save_file = FileAccess.open(SAVE_DATA_FILE, FileAccess.WRITE)
-	var save_nodes = get_tree().get_nodes_in_group(SAVE_DATA_GROUP)
-	
+func _on_save_pressed():
+	save_data(SAVE_DATA_FILE, SAVE_DATA_GROUP, true, true)
+	save_data(SAVE_SETTINGS_FILE, SAVE_SETTINGS_GROUP)
+
+
+func save_data(file, group, encode_binary=false, save_metadata=false):
+	var save_file = FileAccess.open(file, FileAccess.WRITE)
+	var save_nodes = get_tree().get_nodes_in_group(group)
 	var all_data = []
 	
-	# save metadata
-	var metadata = {"time_saved": Time.get_unix_time_from_system()}
-	all_data.append(metadata)
+	if save_metadata:
+		var metadata = {"time_saved": Time.get_unix_time_from_system()}
+		all_data.append(metadata)
 	
 	# save node data
 	for node in save_nodes:
@@ -41,21 +44,32 @@ func save_all_data():
 		}
 		all_data.append(JSON.stringify(node_data))
 	
-	var binary_data: PackedByteArray = var_to_bytes(all_data)
-	save_file.store_var(binary_data)
+	if encode_binary:
+		var bytes_array: PackedByteArray = var_to_bytes(all_data)
+		save_file.store_var(bytes_array)
+	else:
+		for l in all_data:
+			save_file.store_line(l)
 
 
-func load_all_data(file):
-	# no save data, cancel
+func load_data(file, binary_encoded=false, has_metadata=false):
 	if not FileAccess.file_exists(file):
-		print("no file " + file)
 		return
 	
 	var save_file = FileAccess.open(file, FileAccess.READ)
-	var data_lines: Array = bytes_to_var(save_file.get_var())
-	var metadata_line = data_lines.pop_at(0)
+	var metadata = ""
+	var file_lines: Array
+
+	if binary_encoded:
+		file_lines = bytes_to_var(save_file.get_var())
+	else:
+		while save_file.get_position() < save_file.get_length():
+			file_lines.append(save_file.get_line())
 	
-	for line in data_lines:
+	if has_metadata:
+		metadata = file_lines.pop_at(0)
+	
+	for line in file_lines:
 		var parsed_line = JSON.parse_string(line)
 		
 		# check data has necessary values
@@ -65,13 +79,12 @@ func load_all_data(file):
 		
 		# get data
 		var node = get_node(parsed_line[PATH])
-		var data = parsed_line[DATA]
 		
-		# pass data to node for it to load
-		if !node.has_method(LOAD):
-			print("ERROR: Node '%s' doesnt have a %s() function" % [node.name, LOAD])
-			continue
-		node.call(LOAD, data)
+		if node and node.has_method(LOAD):
+			var data = parsed_line[DATA]
+			node.call(LOAD, data)
+		else:
+			print("ERROR: Node '%s' is null or doesnt have a %s() function" % [node.name, LOAD])
 
 
 func _input(event):

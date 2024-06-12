@@ -592,6 +592,7 @@ offset_bottom = 40.0
 
 [node name="OptionsMenu" type="PanelContainer" parent="UI/Options"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(510, 640)
 layout_mode = 0
 offset_left = 16.0
@@ -728,6 +729,7 @@ vertical_alignment = 1
 [node name="Button 3" type="Button" parent="UI/Options"]
 self_modulate = Color(1, 1, 1, 0.815686)
 clip_contents = true
+layout_mode = 0
 offset_left = 476.0
 offset_top = 18.0
 offset_right = 528.0
@@ -937,6 +939,7 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/Controls/KillControls/MarginContainer/GridContainer/Button 2" to="UI/Controls/KillControls/MarginContainer/GridContainer/Button 2" method="_on_button_down"]
 [connection signal="button_down" from="UI/Controls/KillControls/MarginContainer/GridContainer/Button 3" to="UI/Controls/KillControls/MarginContainer/GridContainer/Button 3" method="_on_button_down"]
 [connection signal="button_down" from="UI/Controls/KillControls/MarginContainer/GridContainer/Button 4" to="UI/Controls/KillControls/MarginContainer/GridContainer/Button 4" method="_on_button_down"]
+[connection signal="pressed" from="UI/Options/OptionsMenu/MarginContainer/SaveButtons/Save" to="." method="_on_save_pressed"]
 [connection signal="button_down" from="UI/Options/OptionsMenu/MarginContainer/HBoxContainer/Button2" to="UI/Options/OptionsMenu/MarginContainer/HBoxContainer/Button2" method="_on_button_down"]
 [connection signal="button_down" from="UI/Options/OptionsMenu/MarginContainer/HBoxContainer/Button" to="UI/Options/OptionsMenu/MarginContainer/HBoxContainer/Button" method="_on_button_down"]
 [connection signal="button_down" from="UI/Options/Button 3" to="UI/Options/Button 3" method="_on_button_down"]
