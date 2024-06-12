@@ -2,6 +2,7 @@ extends Sprite2D
 
 @export_color_no_alpha var dying_colour;
 var max_health: float = 1000.0
+var max_mp: float = 1000.0
 var health:float
 var mp:float
 
@@ -17,15 +18,12 @@ func dmg(amount:float, stat:String):
 		self.health -= amount
 	elif stat == "mp":
 		self.mp -= amount
-	
-	self.mp = max(0, self.mp)
-	self.health = max(0, self.health)
-	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	 # Ensure health can't go below 0 or above the max health.
 	health = clampf(health, 0, max_health)
+	mp = clamp(mp, 0, max_mp)
 	# Upon reaching 0 HP change the scene to dead scene.
 	if health <= 0:
 		call_deferred("dead")
