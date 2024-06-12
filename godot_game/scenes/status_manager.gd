@@ -20,5 +20,5 @@ func hp_timeout():
 	get_tree().create_timer(1/hp_rate).timeout.connect(hp_timeout)
 	
 func mp_timeout():
-	creature.dmg(hp_amount, 'mp')
+	creature.dmg(mp_amount, 'mp')
 	get_tree().create_timer(1/mp_rate).timeout.connect(mp_timeout)

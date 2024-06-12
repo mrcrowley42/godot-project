@@ -13,11 +13,13 @@ func _ready():
 
 ## function to damage/heal the Creature (use a negative value to heal)
 func dmg(amount:float, stat:String):
-	# This is awful
 	if stat == "hp":
 		self.health -= amount
 	elif stat == "mp":
 		self.mp -= amount
+	
+	self.mp = max(0, self.mp)
+	self.health = max(0, self.health)
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
