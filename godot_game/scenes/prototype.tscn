@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://c282rwt57fvoc"]
+[gd_scene load_steps=57 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://placeholder/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
 [ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://player/little-guy.png" id="1_7ktla"]
@@ -19,8 +19,7 @@
 [ext_resource type="Shader" path="res://scenes/new_shader.gdshader" id="11_1vr7d"]
 [ext_resource type="Script" path="res://gd_scripts/Butto.gd" id="11_6jjvb"]
 [ext_resource type="Script" path="res://gd_scripts/Button 2.gd" id="11_nbfug"]
-[ext_resource type="Script" path="res://gd_scripts/HPLabel.gd" id="13_2u7g3"]
-[ext_resource type="Theme" path="res://themes/prototype_theme.tres" id="13_tapur"]
+[ext_resource type="Theme" uid="uid://dpeh5d2xu80up" path="res://themes/prototype_theme.tres" id="13_tapur"]
 [ext_resource type="Script" path="res://gd_scripts/SaveControls.gd" id="14_dx6xt"]
 [ext_resource type="Texture2D" uid="uid://cap3k33q4q73n" path="res://icons/playstation.svg" id="14_kdtew"]
 [ext_resource type="PackedScene" uid="uid://cbn0dv1k0onpb" path="res://scenes/vol_slider.tscn" id="15_lmno7"]
@@ -31,8 +30,8 @@
 [ext_resource type="Script" path="res://scenes/styletog.gd" id="21_noh54"]
 [ext_resource type="Script" path="res://scenes/backthemeb.gd" id="22_bxo36"]
 [ext_resource type="Script" path="res://scenes/Bar2.gd" id="28_sltmf"]
-[ext_resource type="Script" path="res://gd_scripts/ModuLabel.gd" id="31_1tvgf"]
-[ext_resource type="Script" path="res://gd_scripts/MPLabel.gd" id="31_wquoh"]
+[ext_resource type="PackedScene" uid="uid://dlt7ckcyjmlna" path="res://scenes/debug_content.tscn" id="29_le63d"]
+[ext_resource type="Script" path="res://scenes/debug_content.gd" id="30_yjdom"]
 [ext_resource type="AudioStream" uid="uid://dat0sfue6jjr5" path="res://sound_effects/metal-pipe-falling-sound-effect-made-with-Voicemod.mp3" id="33_ipuqk"]
 
 [sub_resource type="GDScript" id="GDScript_7ecg8"]
@@ -270,9 +269,6 @@ script/source = "extends Window
 func _ready():
 	visible = enabled
 "
-
-[sub_resource type="LabelSettings" id="LabelSettings_fysoe"]
-font_size = 20
 
 [node name="Game" type="Node"]
 script = ExtResource("1_of2kb")
@@ -821,37 +817,14 @@ script = ExtResource("2_a07j0")
 [node name="DebugWindow" type="Window" parent="."]
 title = "Debug Window"
 position = Vector2i(155, 36)
-size = Vector2i(500, 500)
+size = Vector2i(540, 675)
+visible = false
 unfocusable = true
 script = SubResource("GDScript_o2bb2")
 enabled = true
 
-[node name="HPLabel" type="Label" parent="DebugWindow"]
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 50.0
-offset_bottom = 33.0
-text = "HP: %s (%s/sec)"
-label_settings = SubResource("LabelSettings_fysoe")
-script = ExtResource("13_2u7g3")
-
-[node name="MPLabel" type="Label" parent="DebugWindow"]
-offset_left = 200.0
-offset_top = 10.0
-offset_right = 353.0
-offset_bottom = 38.0
-text = "MP: %s (%s/sec)"
-label_settings = SubResource("LabelSettings_fysoe")
-script = ExtResource("31_wquoh")
-
-[node name="ModuLabel" type="Label" parent="DebugWindow"]
-offset_left = 10.0
-offset_top = 40.0
-offset_right = 163.0
-offset_bottom = 68.0
-text = "Creature col %s"
-label_settings = SubResource("LabelSettings_fysoe")
-script = ExtResource("31_1tvgf")
+[node name="DebugContent" parent="DebugWindow" instance=ExtResource("29_le63d")]
+script = ExtResource("30_yjdom")
 
 [node name="Sounds" type="Node" parent="."]
 
