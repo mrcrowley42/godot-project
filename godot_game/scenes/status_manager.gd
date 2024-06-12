@@ -8,17 +8,21 @@ extends Node2D
 @export var mp_amount: float = 8
 @onready var creature = %Creature
 
+
+func new_timer(rate, timeout_func):
+	var timer = Timer.new()
+	timer.wait_time = 1 / rate
+	timer.autostart = true
+	timer.timeout.connect(timeout_func)
+	add_child(timer)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	hp_timeout()
-	mp_timeout()
-	pass # Replace with function body.
-
+	new_timer(hp_rate, hp_timeout)
+	new_timer(mp_rate, mp_timeout)
 
 func hp_timeout():
 	creature.dmg(hp_amount, 'hp')
-	get_tree().create_timer(1/hp_rate).timeout.connect(hp_timeout)
 	
 func mp_timeout():
 	creature.dmg(mp_amount, 'mp')
-	get_tree().create_timer(1/mp_rate).timeout.connect(mp_timeout)
