@@ -19,7 +19,7 @@ func _on_value_changed(vol_value: float) -> void:
 		AudioServer.set_bus_volume_db(bus_index, linear_to_db(vol_value))
 
 func save():
-	return {"value": self.value}
+	return {"section": Globals.AUDIO_SECTION, self.name: self.value}
 
 func load(data):
-	self.value = data["value"]
+	self.value = data[self.name]

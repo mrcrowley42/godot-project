@@ -1,4 +1,0 @@
-{"data":{"texture":0},"path":"/root/Game/Gameplay/UI_Overlay"}
-{"data":{"value":0.13},"path":"/root/Game/UI/Options/OptionsMenu/MarginContainer/GridContainer2/VolumeMaster"}
-{"data":{"value":0.36},"path":"/root/Game/UI/Options/OptionsMenu/MarginContainer/GridContainer2/VolumeSfx"}
-{"data":{"value":0},"path":"/root/Game/UI/Options/OptionsMenu/MarginContainer/GridContainer2/VolumeMusic"}

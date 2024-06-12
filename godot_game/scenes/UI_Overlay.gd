@@ -5,28 +5,22 @@ extends Sprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	texture = palletes[i]
+	texture = palletes[self.i]
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
-
-func change_texture(num):
-	texture = palletes[num]
-	%ScreenColours.color = %ScreenColours.colours[num]
+func change_texture(addition=0):
+	self.i = (self.i + addition) % palletes.size()
+	texture = palletes[self.i]
+	%ScreenColours.color = %ScreenColours.colours[self.i]
 
 func cycle_forward():
-	i = (i+1) % palletes.size()
-	change_texture(i)
+	change_texture(1)
 
 func cycle_backwards():
-	i = (i-1) % palletes.size()
-	change_texture(i)
+	change_texture(-1)
 
 func save():
-	return {"texture": abs(i)}
+	return {"section": Globals.UI_SECTION, self.name: abs(self.i)}
 
 func load(data):
-	var text = int(data["texture"])
-	change_texture(i)
+	self.i = int(data[self.name])
+	change_texture()
