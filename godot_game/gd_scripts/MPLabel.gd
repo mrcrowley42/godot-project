@@ -1,8 +1,9 @@
 extends Label
 
-
 var og_text = self.text
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	self.text = og_text % [str(%Creature.mp), str(%StatusManager.mp_rate)]
+	self.text = og_text % [
+			str(get_node("..").creature.mp), 
+			str(get_node("..").stat_man.mp_rate)
+		]

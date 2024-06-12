@@ -1,94 +1,47 @@
-[gd_scene load_steps=5 format=3 uid="uid://dlt7ckcyjmlna"]
+[gd_scene load_steps=6 format=3 uid="uid://b6wocr0vo5s4v"]
 
-[ext_resource type="Script" path="res://gd_scripts/Label.gd" id="1_6uwfd"]
-[ext_resource type="Script" path="res://gd_scripts/Label2.gd" id="2_xg4rt"]
-[ext_resource type="Script" path="res://scenes/Label3.gd" id="3_08jcg"]
+[ext_resource type="Script" path="res://gd_scripts/HPLabel.gd" id="1_178tx"]
+[ext_resource type="Script" path="res://gd_scripts/MPLabel.gd" id="2_3h2jk"]
+[ext_resource type="Script" path="res://gd_scripts/ColLabel.gd" id="3_aal3r"]
+[ext_resource type="Script" path="res://gd_scripts/ThemeLabel.gd" id="4_pa4py"]
 
-[sub_resource type="GDScript" id="GDScript_2pl8q"]
-script/source = "extends Label
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	var rate = get_node(\"..\").stat_man.hp_rate
-	text = str(rate)
-"
+[sub_resource type="LabelSettings" id="LabelSettings_35mdd"]
+font_size = 20
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Label" type="Label" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 40.0
-offset_top = 222.5
-offset_right = 460.0
-offset_bottom = 277.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 40
-text = "Creature Health: 1000"
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("1_6uwfd")
+[node name="HPLabel" type="Label" parent="."]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 159.0
+offset_bottom = 38.0
+text = "HP: %s (%s/sec)"
+label_settings = SubResource("LabelSettings_35mdd")
+script = ExtResource("1_178tx")
 
-[node name="Label2" type="Label" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 40.0
-offset_top = 300.0
-offset_right = 460.0
-offset_bottom = 355.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 40
-text = "Creature Health: 1000"
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("2_xg4rt")
+[node name="MPLabel" type="Label" parent="."]
+offset_left = 200.0
+offset_top = 10.0
+offset_right = 353.0
+offset_bottom = 38.0
+text = "MP: %s (%s/sec)"
+label_settings = SubResource("LabelSettings_35mdd")
+script = ExtResource("2_3h2jk")
 
-[node name="Label4" type="Label" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -11.5
-offset_top = 100.0
-offset_right = 231.5
-offset_bottom = 155.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 40
-text = "Ticks per sec"
-horizontal_alignment = 1
-vertical_alignment = 1
-script = SubResource("GDScript_2pl8q")
+[node name="ColLabel" type="Label" parent="."]
+offset_left = 10.0
+offset_top = 40.0
+offset_right = 159.0
+offset_bottom = 68.0
+text = "Col: %s"
+label_settings = SubResource("LabelSettings_35mdd")
+script = ExtResource("3_aal3r")
 
-[node name="Label3" type="Label" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 40.0
-offset_top = 400.0
-offset_right = 240.0
-offset_bottom = 455.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 40
-text = "index"
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("3_08jcg")
+[node name="ThemeLabel" type="Label" parent="."]
+offset_left = 10.0
+offset_top = 130.0
+offset_right = 166.0
+offset_bottom = 158.0
+text = "Theme num: %s"
+label_settings = SubResource("LabelSettings_35mdd")
+script = ExtResource("4_pa4py")
