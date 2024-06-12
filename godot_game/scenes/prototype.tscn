@@ -19,10 +19,9 @@
 [ext_resource type="Shader" path="res://scenes/new_shader.gdshader" id="11_1vr7d"]
 [ext_resource type="Script" path="res://gd_scripts/Butto.gd" id="11_6jjvb"]
 [ext_resource type="Script" path="res://gd_scripts/Button 2.gd" id="11_nbfug"]
-[ext_resource type="Script" path="res://gd_scripts/Label.gd" id="13_2u7g3"]
+[ext_resource type="Script" path="res://gd_scripts/HPLabel.gd" id="13_2u7g3"]
 [ext_resource type="Theme" path="res://themes/prototype_theme.tres" id="13_tapur"]
 [ext_resource type="Script" path="res://gd_scripts/SaveControls.gd" id="14_dx6xt"]
-[ext_resource type="Script" path="res://gd_scripts/Label2.gd" id="14_j428r"]
 [ext_resource type="Texture2D" uid="uid://cap3k33q4q73n" path="res://icons/playstation.svg" id="14_kdtew"]
 [ext_resource type="PackedScene" uid="uid://cbn0dv1k0onpb" path="res://scenes/vol_slider.tscn" id="15_lmno7"]
 [ext_resource type="Texture2D" uid="uid://skpiw6bdlna3" path="res://icons/restaurant_24dp_FILL0_wght400_GRAD0_opsz24.svg" id="17_ektss"]
@@ -31,8 +30,9 @@
 [ext_resource type="Texture2D" uid="uid://pbxnymt0cqn7" path="res://3008_stuff/c345a48674507fd3f61aad362db1b21b.jpg" id="20_dkmvt"]
 [ext_resource type="Script" path="res://scenes/styletog.gd" id="21_noh54"]
 [ext_resource type="Script" path="res://scenes/backthemeb.gd" id="22_bxo36"]
-[ext_resource type="Script" path="res://scenes/Label3.gd" id="28_5nh86"]
 [ext_resource type="Script" path="res://scenes/Bar2.gd" id="28_sltmf"]
+[ext_resource type="Script" path="res://gd_scripts/ModuLabel.gd" id="31_1tvgf"]
+[ext_resource type="Script" path="res://gd_scripts/MPLabel.gd" id="31_wquoh"]
 [ext_resource type="AudioStream" uid="uid://dat0sfue6jjr5" path="res://sound_effects/metal-pipe-falling-sound-effect-made-with-Voicemod.mp3" id="33_ipuqk"]
 
 [sub_resource type="GDScript" id="GDScript_7ecg8"]
@@ -271,19 +271,8 @@ func _ready():
 	visible = enabled
 "
 
-[sub_resource type="GDScript" id="GDScript_2pl8q"]
-script/source = "extends Label
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	text = str(%StatusManager.hp_rate)
-"
+[sub_resource type="LabelSettings" id="LabelSettings_fysoe"]
+font_size = 20
 
 [node name="Game" type="Node"]
 script = ExtResource("1_of2kb")
@@ -833,81 +822,36 @@ script = ExtResource("2_a07j0")
 title = "Debug Window"
 position = Vector2i(155, 36)
 size = Vector2i(500, 500)
-visible = false
 unfocusable = true
 script = SubResource("GDScript_o2bb2")
+enabled = true
 
-[node name="Label" type="Label" parent="DebugWindow"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -137.5
-offset_top = -27.5
-offset_right = 137.5
-offset_bottom = 27.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 40
-text = "Creature Health: 1000"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="HPLabel" type="Label" parent="DebugWindow"]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 33.0
+text = "HP: %s (%s/sec)"
+label_settings = SubResource("LabelSettings_fysoe")
 script = ExtResource("13_2u7g3")
 
-[node name="Label2" type="Label" parent="DebugWindow"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -210.0
-offset_top = 50.0
-offset_right = 210.0
-offset_bottom = 105.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 40
-text = "Creature Health: 1000"
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("14_j428r")
+[node name="MPLabel" type="Label" parent="DebugWindow"]
+offset_left = 200.0
+offset_top = 10.0
+offset_right = 353.0
+offset_bottom = 38.0
+text = "MP: %s (%s/sec)"
+label_settings = SubResource("LabelSettings_fysoe")
+script = ExtResource("31_wquoh")
 
-[node name="Label4" type="Label" parent="DebugWindow"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -240.0
-offset_top = -150.0
-offset_right = -40.0
-offset_bottom = -95.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 40
-text = "Ticks per sec"
-horizontal_alignment = 1
-vertical_alignment = 1
-script = SubResource("GDScript_2pl8q")
-
-[node name="Label3" type="Label" parent="DebugWindow"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -210.0
-offset_top = 150.0
-offset_right = -10.0
-offset_bottom = 205.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 40
-text = "index"
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("28_5nh86")
+[node name="ModuLabel" type="Label" parent="DebugWindow"]
+offset_left = 10.0
+offset_top = 40.0
+offset_right = 163.0
+offset_bottom = 68.0
+text = "Creature col %s"
+label_settings = SubResource("LabelSettings_fysoe")
+script = ExtResource("31_1tvgf")
 
 [node name="Sounds" type="Node" parent="."]
 
