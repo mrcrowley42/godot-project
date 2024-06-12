@@ -1,16 +1,19 @@
 extends Sprite2D
 
 @export_color_no_alpha var dying_colour;
-var max_health: float = 1000.0
+@export var max_health: float = 1000.0
 var max_mp: float = 1000.0
 var health:float
 var mp:float
-
+var sp:float
+var ap:float
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.health = max_health
 	self.mp = max_health
+	self.sp = max_health
+	self.ap = max_health
 
 ## function to damage/heal the Creature (use a negative value to heal)
 func dmg(amount:float, stat:String):
@@ -18,6 +21,10 @@ func dmg(amount:float, stat:String):
 		self.health -= amount
 	elif stat == "mp":
 		self.mp -= amount
+	elif stat == "ap":
+		self.ap -= amount
+	elif stat == "sp":
+		self.sp -= amount
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
