@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dlt7ckcyjmlna"]
+[gd_scene load_steps=8 format=3 uid="uid://b6wocr0vo5s4v"]
 
 [ext_resource type="Script" path="res://gd_scripts/HPLabel.gd" id="1_178tx"]
 [ext_resource type="Script" path="res://gd_scripts/MPLabel.gd" id="2_3h2jk"]
@@ -31,28 +31,28 @@ label_settings = SubResource("LabelSettings_35mdd")
 script = ExtResource("2_3h2jk")
 
 [node name="APLabel" type="Label" parent="."]
-offset_left = 10.0
-offset_top = 53.0
-offset_right = 159.0
-offset_bottom = 81.0
+offset_left = 200.0
+offset_top = 50.0
+offset_right = 349.0
+offset_bottom = 78.0
 text = "AP: %s (%s/sec)"
 label_settings = SubResource("LabelSettings_35mdd")
 script = ExtResource("3_qpwvx")
 
 [node name="SPLabel" type="Label" parent="."]
-offset_left = 200.0
-offset_top = 53.0
-offset_right = 353.0
-offset_bottom = 81.0
+offset_left = 10.0
+offset_top = 50.0
+offset_right = 163.0
+offset_bottom = 78.0
 text = "SP: %s (%s/sec)"
 label_settings = SubResource("LabelSettings_35mdd")
 script = ExtResource("3_kowqt")
 
 [node name="ColLabel" type="Label" parent="."]
 offset_left = 10.0
-offset_top = 96.0
+offset_top = 90.0
 offset_right = 159.0
-offset_bottom = 124.0
+offset_bottom = 118.0
 text = "Col: %s"
 label_settings = SubResource("LabelSettings_35mdd")
 script = ExtResource("3_aal3r")
