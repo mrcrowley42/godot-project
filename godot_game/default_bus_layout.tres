@@ -1,4 +1,22 @@
-[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://dfspa4bjtaaa"]
+[gd_resource type="AudioBusLayout" load_steps=7 format=3 uid="uid://dfspa4bjtaaa"]
+
+[sub_resource type="AudioEffectDelay" id="AudioEffectDelay_iolka"]
+resource_name = "Delay"
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_12oft"]
+resource_name = "Reverb"
+
+[sub_resource type="AudioEffectPhaser" id="AudioEffectPhaser_nndq0"]
+resource_name = "Phaser"
+
+[sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_ermhb"]
+resource_name = "Distortion"
+pre_gain = 60.0
+post_gain = -34.09
+
+[sub_resource type="AudioEffectAmplify" id="AudioEffectAmplify_dqk8e"]
+resource_name = "Amplify"
+volume_db = 24.0
 
 [sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_adn1e"]
 resource_name = "Distortion"
@@ -12,8 +30,18 @@ bus/1/name = &"Music"
 bus/1/solo = false
 bus/1/mute = false
 bus/1/bypass_fx = false
-bus/1/volume_db = 0.0
+bus/1/volume_db = -0.130497
 bus/1/send = &"Master"
+bus/1/effect/0/effect = SubResource("AudioEffectDelay_iolka")
+bus/1/effect/0/enabled = false
+bus/1/effect/1/effect = SubResource("AudioEffectReverb_12oft")
+bus/1/effect/1/enabled = false
+bus/1/effect/2/effect = SubResource("AudioEffectPhaser_nndq0")
+bus/1/effect/2/enabled = false
+bus/1/effect/3/effect = SubResource("AudioEffectDistortion_ermhb")
+bus/1/effect/3/enabled = false
+bus/1/effect/4/effect = SubResource("AudioEffectAmplify_dqk8e")
+bus/1/effect/4/enabled = false
 bus/2/name = &"SFX"
 bus/2/solo = false
 bus/2/mute = false

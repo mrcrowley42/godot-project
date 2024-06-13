@@ -4,10 +4,10 @@ extends Node2D
 class_name Stats
 
 
-var Health = int()
-var Hunger = int()
-var Sleep = int()
-var Joy = int()
+var Health = float()
+var Hunger = float()
+var Sleep = float()
+var Joy = float()
 
 
 # sets the stats of creatures for faster building and changes
