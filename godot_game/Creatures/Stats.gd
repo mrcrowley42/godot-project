@@ -3,11 +3,11 @@ extends Node2D
 
 class_name Stats
 
-
-var Health = float()
-var Hunger = float()
-var Sleep = float()
-var Joy = float()
+@export_color_no_alpha var dying_colour;
+var Health: float
+var Hunger: float
+var Sleep: float
+var Joy: float
 
 
 # sets the stats of creatures for faster building and changes
@@ -18,3 +18,12 @@ func SetStats(BHealth, BHunger, BSleep, BJoy):
 	Joy = BJoy
 
 
+## Tint the Create using the dying_colour set in inspector scaling the tint based on how low HP is.
+func apply_dmg_tint():
+	self.modulate.b = clampf(1 - (1 - self.health/1000) + dying_colour.b,0,1)
+	self.modulate.g = clampf(1 - (1 - self.health/1000) + dying_colour.g,0,1)
+	self.modulate.r = clampf(1 - (1 - self.health/1000) + dying_colour.r,0,1)
+	
+	
+func dead():
+	get_tree().change_scene_to_file("res://scenes/dead.tscn")
