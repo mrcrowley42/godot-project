@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://bgly0bep64kkp"]
+
+[ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://player/little-guy.png" id="1_obpq1"]
+[ext_resource type="Script" path="res://gd_scripts/Creature.gd" id="2_klgk6"]
+[ext_resource type="Texture2D" uid="uid://4cfpam3be0g" path="res://player/little-guy_2.png" id="3_xm5kq"]
+[ext_resource type="Texture2D" uid="uid://diwxdoruu1sob" path="res://player/little-guy_3.png" id="4_1nivj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3cwqc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_obpq1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xm5kq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_1nivj")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_obpq1")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_obpq1")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("2_klgk6")
+dying_colour = Color(1, 0, 0, 1)
+
+[node name="Creature" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.225, 0.225)
+texture = ExtResource("1_obpq1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.225, 0.225)
+sprite_frames = SubResource("SpriteFrames_3cwqc")
+animation = &"idle"
+autoplay = "idle"

@@ -1,4 +1,4 @@
-extends Sprite2D
+extends Node2D
 
 @export_color_no_alpha var dying_colour;
 @export var max_health: float = 1000.0
