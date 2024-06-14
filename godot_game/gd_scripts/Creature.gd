@@ -2,7 +2,9 @@ extends Node2D
 
 @export_color_no_alpha var dying_colour;
 @export var max_health: float = 1000.0
-var max_mp: float = 1000.0
+@export var max_mp: float = 1000.0
+@export var max_sp: float = 1000
+@export var max_ap: float = 1000
 var health:float
 var mp:float
 var sp:float
@@ -11,9 +13,9 @@ var ap:float
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.health = max_health
-	self.mp = max_health
-	self.sp = max_health
-	self.ap = max_health
+	self.mp = max_mp
+	self.sp = max_sp
+	self.ap = max_ap
 
 ## function to damage/heal the Creature (use a negative value to heal)
 func dmg(amount:float, stat:String):

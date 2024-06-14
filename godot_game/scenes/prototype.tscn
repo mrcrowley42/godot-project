@@ -312,6 +312,7 @@ grow_vertical = 2
 color = Color(0.655034, 0.247851, 0.431647, 1)
 script = SubResource("GDScript_7ecg8")
 colours = Array[Color]([Color(0.870588, 0.984314, 0.87451, 1), Color(0.835294, 0.576471, 0.439216, 1), Color(0.901961, 0.67451, 0.768627, 1)])
+metadata/_edit_lock_ = true
 
 [node name="ScreenShaders" type="CanvasLayer" parent="Gameplay"]
 
@@ -341,6 +342,7 @@ offset_bottom = -121.0
 grow_horizontal = 2
 grow_vertical = 2
 script = SubResource("GDScript_j4fl7")
+metadata/_edit_lock_ = true
 
 [node name="UI_Overlay" type="Sprite2D" parent="Gameplay" groups=["settings_data"]]
 unique_name_in_owner = true
@@ -349,6 +351,7 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_ebtg7")
 script = ExtResource("6_tise3")
 palletes = Array[Texture2D]([ExtResource("6_vadio"), ExtResource("7_ebtg7"), ExtResource("8_djtbd")])
+metadata/_edit_lock_ = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 2
