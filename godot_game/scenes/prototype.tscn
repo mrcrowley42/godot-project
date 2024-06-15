@@ -821,7 +821,6 @@ title = "Debug Window"
 position = Vector2i(155, 36)
 size = Vector2i(540, 675)
 visible = false
-unfocusable = true
 script = SubResource("GDScript_o2bb2")
 enabled = true
 

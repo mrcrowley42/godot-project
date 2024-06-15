@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://du2k4got327pr"
-path="res://.godot/imported/pixel_egg.png-4c4ed9cb93094e100b43c518122adea6.ctex"
+uid="uid://cq2efm5tk8b68"
+path="res://.godot/imported/pixel_baby.png-b65089bc784147aa3514e5bc84bf7f04.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://placeholder/pixel_egg.png"
-dest_files=["res://.godot/imported/pixel_egg.png-4c4ed9cb93094e100b43c518122adea6.ctex"]
+source_file="res://placeholder/pixel_baby.png"
+dest_files=["res://.godot/imported/pixel_baby.png-b65089bc784147aa3514e5bc84bf7f04.ctex"]
 
 [params]
 
