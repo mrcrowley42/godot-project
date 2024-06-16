@@ -1,11 +1,6 @@
 extends Button
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
+@export var pause_game: bool = false
 func _on_button_down():
+	if pause_game:
+		get_tree().paused = !get_tree().paused
 	%OptionsMenu.visible = !%OptionsMenu.visible
-
