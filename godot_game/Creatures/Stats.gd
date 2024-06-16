@@ -8,15 +8,24 @@ var Health: float
 var Hunger: float
 var Sleep: float
 var Joy: float
-
+var Max_health: float
+var Max_Hunger: float
+var Max_Sleep: float
+var Max_Joy: float
 
 # sets the stats of creatures for faster building and changes
-func SetStats(BHealth, BHunger, BSleep, BJoy):
+func set_stats(BHealth, BHunger, BSleep, BJoy):
 	Health = BHealth
 	Hunger = BHunger
 	Sleep = BSleep 
 	Joy = BJoy
 
+func max_stats(m_health, m_hunger, m_sleep, m_joy):
+	Max_health = m_health
+	Max_Hunger = m_hunger
+	Max_Joy = m_joy
+	Max_Sleep = m_sleep
+	
 
 ## Tint the Create using the dying_colour set in inspector scaling the tint based on how low HP is.
 func apply_dmg_tint():
