@@ -2,14 +2,13 @@
 
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://placeholder/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
 [ext_resource type="Script" path="res://gd_scripts/prototype.gd" id="1_of2kb"]
-[ext_resource type="Script" path="res://gd_scripts/ProgressBar.gd" id="2_a07j0"]
 [ext_resource type="Script" path="res://scenes/status_manager.gd" id="2_a8vep"]
 [ext_resource type="PackedScene" uid="uid://bgly0bep64kkp" path="res://scenes/creature.tscn" id="4_iwgh8"]
 [ext_resource type="Shader" path="res://shaders/crt.gdshader" id="4_vo6tf"]
 [ext_resource type="Script" path="res://scenes/UI_Overlay.gd" id="6_tise3"]
 [ext_resource type="Texture2D" uid="uid://cawudmxbjamv0" path="res://placeholder/ui_green.png" id="6_vadio"]
 [ext_resource type="Texture2D" uid="uid://c3835drqnfvy" path="res://placeholder/ui_orange.png" id="7_ebtg7"]
-[ext_resource type="Script" path="res://gd_scripts/Button 1.gd" id="8_0ys56"]
+[ext_resource type="Script" path="res://gd_scripts/heal_button.gd" id="8_0ys56"]
 [ext_resource type="Texture2D" uid="uid://dm0iwje4s7uu8" path="res://placeholder/ui_pink.png" id="8_djtbd"]
 [ext_resource type="Texture2D" uid="uid://ct00htjp1rtjn" path="res://icons/settings_24dp_FILL1_wght500_GRAD-25_opsz24.svg" id="9_4we8d"]
 [ext_resource type="Script" path="res://gd_scripts/optionbut.gd" id="9_jsl5b"]
@@ -17,7 +16,7 @@
 [ext_resource type="Script" path="res://gd_scripts/button_submenu.gd" id="10_y36nk"]
 [ext_resource type="Shader" path="res://scenes/new_shader.gdshader" id="11_1vr7d"]
 [ext_resource type="Script" path="res://gd_scripts/Butto.gd" id="11_6jjvb"]
-[ext_resource type="Script" path="res://gd_scripts/Button 2.gd" id="11_nbfug"]
+[ext_resource type="Script" path="res://gd_scripts/kill_button.gd" id="11_nbfug"]
 [ext_resource type="Theme" uid="uid://dpeh5d2xu80up" path="res://themes/prototype_theme.tres" id="13_tapur"]
 [ext_resource type="Script" path="res://gd_scripts/SaveControls.gd" id="14_dx6xt"]
 [ext_resource type="Texture2D" uid="uid://cap3k33q4q73n" path="res://icons/playstation.svg" id="14_kdtew"]
@@ -27,10 +26,11 @@
 [ext_resource type="AudioStream" uid="uid://8ifwm2tjitur" path="res://sound_effects/yippee.mp3" id="18_6dihm"]
 [ext_resource type="Texture2D" uid="uid://pbxnymt0cqn7" path="res://3008_stuff/c345a48674507fd3f61aad362db1b21b.jpg" id="20_dkmvt"]
 [ext_resource type="Script" path="res://scenes/styletog.gd" id="21_noh54"]
+[ext_resource type="Script" path="res://scenes/hp_bar.gd" id="22_688js"]
 [ext_resource type="Script" path="res://scenes/backthemeb.gd" id="22_bxo36"]
 [ext_resource type="Script" path="res://scenes/sp_bar.gd" id="24_bbo8y"]
 [ext_resource type="Script" path="res://scenes/ap_bar.gd" id="25_6xclj"]
-[ext_resource type="Script" path="res://scenes/Bar2.gd" id="28_sltmf"]
+[ext_resource type="Script" path="res://scenes/mp_bar.gd" id="28_sltmf"]
 [ext_resource type="PackedScene" uid="uid://b6wocr0vo5s4v" path="res://scenes/debug_content.tscn" id="29_le63d"]
 [ext_resource type="Script" path="res://scenes/debug_content.gd" id="30_yjdom"]
 [ext_resource type="AudioStream" uid="uid://dat0sfue6jjr5" path="res://sound_effects/metal-pipe-falling-sound-effect-made-with-Voicemod.mp3" id="33_ipuqk"]
@@ -125,8 +125,6 @@ func _on_button_down():
 
 [sub_resource type="GDScript" id="GDScript_ve7ha"]
 script/source = "extends Button
-
-
 
 func _on_button_down():
 	%PIPE.play()
@@ -279,6 +277,7 @@ metadata/_edit_horizontal_guides_ = [8.0, 667.0, 112.0, 120.0, 554.0, 562.0]
 [node name="StatusManager" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("2_a8vep")
+sp_amount = 4.0
 ap_rate = 1.0
 ap_amount = 12.0
 
@@ -409,7 +408,6 @@ script = ExtResource("11_6jjvb")
 
 [node name="SaveControls" type="PanelContainer" parent="UI/Controls"]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(400, 400)
 layout_mode = 1
 anchors_preset = 8
@@ -594,7 +592,7 @@ columns = 4
 layout_mode = 2
 text = "HP"
 
-[node name="HealthBar" type="ProgressBar" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
+[node name="HP_Bar" type="ProgressBar" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
 clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -605,13 +603,13 @@ max_value = 1000.0
 step = 1.0
 value = 700.0
 show_percentage = false
-script = ExtResource("2_a07j0")
+script = ExtResource("22_688js")
 
 [node name="Label2" type="Label" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
 layout_mode = 2
 text = "MP"
 
-[node name="Bar2" type="ProgressBar" parent="UI/StatsContainer/MarginContainer/StatusContainer" groups=["save_data"]]
+[node name="MP_Bar" type="ProgressBar" parent="UI/StatsContainer/MarginContainer/StatusContainer" groups=["save_data"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1

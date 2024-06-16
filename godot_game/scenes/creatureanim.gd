@@ -1,6 +1,12 @@
 extends AnimatedSprite2D
+@onready var creature = $".."
 
-func _process(_delta):
-	pass
-	#self.sprite_frames.set_animation_speed(
-		#'idle', clampf((4 * (1000/ $"..".health)),4,20))
+func _ready():
+	creature.sp_changed.connect(angry)
+
+func angry():
+	if creature.sp < 600:
+		self.animation = 'angry'
+	else:
+		if self.animation != 'idle':
+			self.animation = 'idle'

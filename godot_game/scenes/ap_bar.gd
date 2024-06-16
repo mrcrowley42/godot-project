@@ -1,8 +1,9 @@
 extends ProgressBar
-
+@onready var creature = %Creature
 
 func _ready():
-	self.max_value = %Creature.max_health
+	creature.ap_changed.connect(update_ap_bar)
+	update_ap_bar()
 
-func _process(_delta):
-	self.value = %Creature.ap
+func update_ap_bar():
+	self.value = creature.ap

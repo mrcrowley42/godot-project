@@ -5,45 +5,70 @@ extends Node2D
 @export var max_mp: float = 1000.0
 @export var max_sp: float = 1000
 @export var max_ap: float = 1000
+
 var health:float
 var mp:float
 var sp:float
 var ap:float
 
-# Called when the node enters the scene tree for the first time.
+signal hp_changed()
+signal sp_changed()
+signal mp_changed()
+signal ap_changed()
+
+var stats = {
+	'hp': damage_hp,
+	'ap': damage_ap,
+	'mp': damage_mp,
+	'sp': damage_sp
+}
+
 func _ready():
 	self.health = max_health
 	self.mp = max_mp
 	self.sp = max_sp
 	self.ap = max_ap
 
+
 ## function to damage/heal the Creature (use a negative value to heal)
 func dmg(amount:float, stat:String):
-	if stat == "hp":
-		self.health -= amount
-	elif stat == "mp":
-		self.mp -= amount
-	elif stat == "ap":
-		self.ap -= amount
-	elif stat == "sp":
-		self.sp -= amount
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	 # Ensure health can't go below 0 or above the max health.
-	health = clampf(health, 0, max_health)
-	mp = clamp(mp, 0, max_mp)
-	# Upon reaching 0 HP change the scene to dead scene.
-	if health <= 0:
-		call_deferred("dead")
-	apply_dmg_tint()
+	stats[stat].call(amount)
 
 	
 func dead():
 	get_tree().change_scene_to_file("res://scenes/dead.tscn")
+
 
 ## Tint the Create using the dying_colour set in inspector scaling the tint based on how low HP is.
 func apply_dmg_tint():
 	self.modulate.b = clampf(1 - (1 - self.health/1000) + dying_colour.b,0,1)
 	self.modulate.g = clampf(1 - (1 - self.health/1000) + dying_colour.g,0,1)
 	self.modulate.r = clampf(1 - (1 - self.health/1000) + dying_colour.r,0,1)
+
+
+func damage_hp(amount):
+	self.health -= amount
+	if health <= 0:
+		call_deferred("dead")
+	self.health = clampf(self.health, 0, max_health)
+	apply_dmg_tint()
+	hp_changed.emit()
+
+	
+func damage_sp(amount):
+	self.sp -= amount
+	self.sp = clampf(self.sp, 0, max_sp)
+	sp_changed.emit()
+
+
+func damage_ap(amount):
+	self.ap -= amount
+	self.ap = clampf(self.ap, 0, max_ap)
+	ap_changed.emit()
+
+	
+func damage_mp(amount):
+	self.mp -= amount
+	self.mp = clampf(self.mp, 0, max_mp)
+	mp_changed.emit()
+	

@@ -1,13 +1,30 @@
-[gd_scene load_steps=7 format=3 uid="uid://bgly0bep64kkp"]
+[gd_scene load_steps=10 format=3 uid="uid://bgly0bep64kkp"]
 
 [ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://player/little-guy.png" id="1_obpq1"]
 [ext_resource type="Script" path="res://gd_scripts/Creature.gd" id="2_klgk6"]
+[ext_resource type="Texture2D" uid="uid://dqtjsny24a3p1" path="res://player/angry-0.png" id="3_b4v78"]
 [ext_resource type="Texture2D" uid="uid://4cfpam3be0g" path="res://player/little-guy_2.png" id="3_xm5kq"]
 [ext_resource type="Texture2D" uid="uid://diwxdoruu1sob" path="res://player/little-guy_3.png" id="4_1nivj"]
+[ext_resource type="Texture2D" uid="uid://cq86852isqqkq" path="res://player/angry-1.png" id="4_i6glr"]
+[ext_resource type="Texture2D" uid="uid://dd12vpparynjh" path="res://player/angry-2.png" id="5_htkse"]
 [ext_resource type="Script" path="res://scenes/creatureanim.gd" id="5_oh7gr"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3cwqc"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_b4v78")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_i6glr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_htkse")
+}],
+"loop": true,
+"name": &"angry",
+"speed": 4.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_obpq1")
@@ -20,7 +37,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
