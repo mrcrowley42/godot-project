@@ -24,11 +24,14 @@ var stats = {
 }
 
 func _ready():
+	reset_stats()
+
+
+func reset_stats():
 	self.health = max_health
 	self.mp = max_mp
 	self.sp = max_sp
 	self.ap = max_ap
-
 
 ## function to damage/heal the Creature (use a negative value to heal)
 func dmg(amount:float, stat:String):
