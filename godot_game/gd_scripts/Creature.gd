@@ -6,6 +6,8 @@ extends Node2D
 @export var max_sp: float = 1000
 @export var max_ap: float = 1000
 
+@export var creature_list: Array[Resource]
+
 var health:float
 var mp:float
 var sp:float
@@ -24,6 +26,8 @@ var stats = {
 }
 
 func _ready():
+	#var sprite = preload(creature_list[0])
+
 	reset_stats()
 
 
