@@ -216,15 +216,7 @@ corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kxv3i"]
 bg_color = Color(0, 0, 0, 0.737255)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
 border_color = Color(0.8, 0.8, 0.8, 0.411765)
-expand_margin_left = 2.0
-expand_margin_top = 2.0
-expand_margin_right = 2.0
-expand_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_16vbq"]
 bg_color = Color(0.6, 0.6, 0.6, 0.831373)
@@ -672,25 +664,24 @@ offset_bottom = 40.0
 [node name="OptionsMenu" type="PanelContainer" parent="UI/Options"]
 unique_name_in_owner = true
 process_mode = 3
-custom_minimum_size = Vector2(510, 640)
-layout_mode = 0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 532.0
-offset_bottom = 667.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 34.0
+offset_top = 101.0
+offset_right = 468.0
+offset_bottom = 535.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_kxv3i")
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/Options/OptionsMenu"]
-layout_mode = 2
-theme_override_constants/margin_left = 80
-theme_override_constants/margin_top = 140
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 40
+[node name="SaveButtons" type="Node2D" parent="UI/Options/OptionsMenu"]
+position = Vector2(-50, -140)
 
-[node name="SaveButtons" type="Node2D" parent="UI/Options/OptionsMenu/MarginContainer"]
-position = Vector2(-16, -16)
-
-[node name="Save" type="Button" parent="UI/Options/OptionsMenu/MarginContainer/SaveButtons"]
+[node name="Save" type="Button" parent="UI/Options/OptionsMenu/SaveButtons"]
 offset_left = 90.0
 offset_top = 482.0
 offset_right = 234.0
@@ -702,7 +693,7 @@ theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxFlat_16vbq")
 text = "Save Settings"
 
-[node name="Cancel" type="Button" parent="UI/Options/OptionsMenu/MarginContainer/SaveButtons"]
+[node name="Cancel" type="Button" parent="UI/Options/OptionsMenu/SaveButtons"]
 offset_left = 317.0
 offset_top = 482.0
 offset_right = 450.0
@@ -714,11 +705,11 @@ theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxFlat_16vbq")
 text = "Cancel"
 
-[node name="Node2D" type="Node2D" parent="UI/Options/OptionsMenu/MarginContainer"]
-position = Vector2(0, 20)
+[node name="Node2D" type="Node2D" parent="UI/Options/OptionsMenu"]
+position = Vector2(-38, -78)
 scale = Vector2(0.5, 0.5)
 
-[node name="Label" type="Label" parent="UI/Options/OptionsMenu/MarginContainer/Node2D"]
+[node name="Label" type="Label" parent="UI/Options/OptionsMenu/Node2D"]
 offset_left = 406.0
 offset_top = 553.0
 offset_right = 596.0
@@ -730,61 +721,61 @@ text = "Theme"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Node2D2" type="Node2D" parent="UI/Options/OptionsMenu/MarginContainer"]
-position = Vector2(-27, 0)
+[node name="Node2D2" type="Node2D" parent="UI/Options/OptionsMenu"]
+position = Vector2(-73, -118)
 
-[node name="GridContainer2" type="GridContainer" parent="UI/Options/OptionsMenu/MarginContainer/Node2D2"]
+[node name="GridContainer2" type="GridContainer" parent="UI/Options/OptionsMenu/Node2D2"]
 offset_left = 80.0
 offset_top = 140.0
-offset_right = 520.0
+offset_right = 494.0
 offset_bottom = 280.0
 size_flags_vertical = 0
-theme_override_constants/h_separation = 30
+theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 10
 columns = 2
 
-[node name="Label" type="Label" parent="UI/Options/OptionsMenu/MarginContainer/Node2D2/GridContainer2"]
+[node name="Label" type="Label" parent="UI/Options/OptionsMenu/Node2D2/GridContainer2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 24
 text = "Master"
 
-[node name="VolumeMaster" parent="UI/Options/OptionsMenu/MarginContainer/Node2D2/GridContainer2" groups=["settings_data"] instance=ExtResource("15_lmno7")]
+[node name="VolumeMaster" parent="UI/Options/OptionsMenu/Node2D2/GridContainer2" groups=["settings_data"] instance=ExtResource("15_lmno7")]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 tick_count = 1
 bus_name = "Master"
 
-[node name="Label2" type="Label" parent="UI/Options/OptionsMenu/MarginContainer/Node2D2/GridContainer2"]
+[node name="Label2" type="Label" parent="UI/Options/OptionsMenu/Node2D2/GridContainer2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 24
 text = "SFX"
 
-[node name="VolumeSfx" parent="UI/Options/OptionsMenu/MarginContainer/Node2D2/GridContainer2" groups=["settings_data"] instance=ExtResource("15_lmno7")]
+[node name="VolumeSfx" parent="UI/Options/OptionsMenu/Node2D2/GridContainer2" groups=["settings_data"] instance=ExtResource("15_lmno7")]
 layout_mode = 2
 value = 0.0
 tick_count = 1
 bus_name = "SFX"
 
-[node name="Label3" type="Label" parent="UI/Options/OptionsMenu/MarginContainer/Node2D2/GridContainer2"]
+[node name="Label3" type="Label" parent="UI/Options/OptionsMenu/Node2D2/GridContainer2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 24
 text = "Music
 "
 
-[node name="VolumeMusic" parent="UI/Options/OptionsMenu/MarginContainer/Node2D2/GridContainer2" groups=["settings_data"] instance=ExtResource("15_lmno7")]
+[node name="VolumeMusic" parent="UI/Options/OptionsMenu/Node2D2/GridContainer2" groups=["settings_data"] instance=ExtResource("15_lmno7")]
 layout_mode = 2
 tooltip_text = "Music"
 theme_override_styles/slider = SubResource("StyleBoxLine_kxflm")
 tick_count = 1
 bus_name = "Music"
 
-[node name="Node2D3" type="Node2D" parent="UI/Options/OptionsMenu/MarginContainer"]
-position = Vector2(-40, 0)
+[node name="Node2D3" type="Node2D" parent="UI/Options/OptionsMenu"]
+position = Vector2(-78, -98)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/Options/OptionsMenu/MarginContainer/Node2D3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Options/OptionsMenu/Node2D3"]
 offset_left = 225.0
 offset_top = 347.0
 offset_right = 375.0
@@ -794,7 +785,7 @@ size_flags_vertical = 4
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="Button2" type="Button" parent="UI/Options/OptionsMenu/MarginContainer/Node2D3/HBoxContainer"]
+[node name="Button2" type="Button" parent="UI/Options/OptionsMenu/Node2D3/HBoxContainer"]
 custom_minimum_size = Vector2(65, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -806,7 +797,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_3535b")
 text = "<"
 script = ExtResource("22_bxo36")
 
-[node name="Button" type="Button" parent="UI/Options/OptionsMenu/MarginContainer/Node2D3/HBoxContainer"]
+[node name="Button" type="Button" parent="UI/Options/OptionsMenu/Node2D3/HBoxContainer"]
 custom_minimum_size = Vector2(65, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -909,9 +900,9 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/Controls/KillControls/MarginContainer/GridContainer/Button 2" to="UI/Controls/KillControls/MarginContainer/GridContainer/Button 2" method="_on_button_down"]
 [connection signal="button_down" from="UI/Controls/KillControls/MarginContainer/GridContainer/Button 3" to="UI/Controls/KillControls/MarginContainer/GridContainer/Button 3" method="_on_button_down"]
 [connection signal="button_down" from="UI/Controls/KillControls/MarginContainer/GridContainer/Button 4" to="UI/Controls/KillControls/MarginContainer/GridContainer/Button 4" method="_on_button_down"]
-[connection signal="pressed" from="UI/Options/OptionsMenu/MarginContainer/SaveButtons/Save" to="." method="_on_save_pressed"]
-[connection signal="button_down" from="UI/Options/OptionsMenu/MarginContainer/Node2D3/HBoxContainer/Button2" to="UI/Options/OptionsMenu/MarginContainer/Node2D3/HBoxContainer/Button2" method="_on_button_down"]
-[connection signal="button_down" from="UI/Options/OptionsMenu/MarginContainer/Node2D3/HBoxContainer/Button" to="UI/Options/OptionsMenu/MarginContainer/Node2D3/HBoxContainer/Button" method="_on_button_down"]
+[connection signal="pressed" from="UI/Options/OptionsMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
+[connection signal="button_down" from="UI/Options/OptionsMenu/Node2D3/HBoxContainer/Button2" to="UI/Options/OptionsMenu/Node2D3/HBoxContainer/Button2" method="_on_button_down"]
+[connection signal="button_down" from="UI/Options/OptionsMenu/Node2D3/HBoxContainer/Button" to="UI/Options/OptionsMenu/Node2D3/HBoxContainer/Button" method="_on_button_down"]
 [connection signal="button_down" from="UI/Options/SettingsButton" to="UI/Options/SettingsButton" method="_on_button_down"]
 [connection signal="button_down" from="UI/HBoxContainer/FoodButton" to="UI/HBoxContainer/FoodButton" method="_on_button_down"]
 [connection signal="button_down" from="UI/HBoxContainer/ActButton" to="UI/HBoxContainer/ActButton" method="_on_button_down"]
