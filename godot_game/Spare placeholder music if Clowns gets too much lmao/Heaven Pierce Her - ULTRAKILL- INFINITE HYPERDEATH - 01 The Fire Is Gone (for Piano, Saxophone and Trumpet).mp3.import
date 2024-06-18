@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b1b1fwlrdpmcp"
+path="res://.godot/imported/Heaven Pierce Her - ULTRAKILL- INFINITE HYPERDEATH - 01 The Fire Is Gone (for Piano, Saxophone and Trumpet).mp3-34e868e72cb83b94fa4982d1625c2f03.mp3str"
+
+[deps]
+
+source_file="res://Spare placeholder music if Clowns gets too much lmao/Heaven Pierce Her - ULTRAKILL- INFINITE HYPERDEATH - 01 The Fire Is Gone (for Piano, Saxophone and Trumpet).mp3"
+dest_files=["res://.godot/imported/Heaven Pierce Her - ULTRAKILL- INFINITE HYPERDEATH - 01 The Fire Is Gone (for Piano, Saxophone and Trumpet).mp3-34e868e72cb83b94fa4982d1625c2f03.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

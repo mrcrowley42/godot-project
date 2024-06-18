@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dnxx75ndliq7c"
+path="res://.godot/imported/Esselfortium - memory=entryrrrr-.mp3-ba77d45cbb23b1f4a72b5dd64e644199.mp3str"
+
+[deps]
+
+source_file="res://Spare placeholder music if Clowns gets too much lmao/Esselfortium - memory=entryrrrr-.mp3"
+dest_files=["res://.godot/imported/Esselfortium - memory=entryrrrr-.mp3-ba77d45cbb23b1f4a72b5dd64e644199.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

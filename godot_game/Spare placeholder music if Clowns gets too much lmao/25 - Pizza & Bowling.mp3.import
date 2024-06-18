@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dshoi5g671o7m"
+path="res://.godot/imported/25 - Pizza & Bowling.mp3-15f68902e7e3539c8da5641a738e52a7.mp3str"
+
+[deps]
+
+source_file="res://Spare placeholder music if Clowns gets too much lmao/25 - Pizza & Bowling.mp3"
+dest_files=["res://.godot/imported/25 - Pizza & Bowling.mp3-15f68902e7e3539c8da5641a738e52a7.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

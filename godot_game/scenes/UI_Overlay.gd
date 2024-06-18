@@ -11,6 +11,10 @@ func change_texture(addition=0):
 	self.i = (self.i + addition) % palletes.size()
 	texture = palletes[self.i]
 	%ScreenColours.color = %ScreenColours.colours[self.i]
+	%FoodButton.texture_normal = %FoodButton.palettes[self.i]
+	%ActButton.texture_normal = %ActButton.palettes[self.i]
+	%SettingButton.texture_normal = %SettingButton.palettes[self.i]
+	
 
 func cycle_forward():
 	change_texture(1)

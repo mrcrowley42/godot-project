@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dwmn4dqcd6k4i"
+path="res://.godot/imported/02 Hollywood Main Theme.mp3-5eb89eba7e813b8c70c6fce72c32879f.mp3str"
+
+[deps]
+
+source_file="res://Spare placeholder music if Clowns gets too much lmao/02 Hollywood Main Theme.mp3"
+dest_files=["res://.godot/imported/02 Hollywood Main Theme.mp3-5eb89eba7e813b8c70c6fce72c32879f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
