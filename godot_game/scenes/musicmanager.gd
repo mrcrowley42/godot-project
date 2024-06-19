@@ -17,3 +17,11 @@ func cycle_forward():
 
 func cycle_backwards():
 	change_texture(-1)
+	
+func save():
+	return {"section": Globals.AUDIO_SECTION, self.name: abs(self.i)}
+
+func load(data):
+	self.i = int(data[self.name])
+	change_texture()
+

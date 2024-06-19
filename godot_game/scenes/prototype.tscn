@@ -938,7 +938,7 @@ script = ExtResource("30_yjdom")
 
 [node name="Sounds" type="Node" parent="."]
 
-[node name="MainMusic" type="AudioStreamPlayer" parent="Sounds"]
+[node name="MainMusic" type="AudioStreamPlayer" parent="Sounds" groups=["settings_data"]]
 unique_name_in_owner = true
 stream = ExtResource("17_oqlhs")
 autoplay = true
