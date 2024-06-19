@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://c282rwt57fvoc"]
+[gd_scene load_steps=77 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://placeholder/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
 [ext_resource type="Script" path="res://gd_scripts/prototype.gd" id="1_of2kb"]
@@ -30,7 +30,9 @@
 [ext_resource type="Script" path="res://scenes/backthemeb.gd" id="22_bxo36"]
 [ext_resource type="Script" path="res://scenes/sp_bar.gd" id="24_bbo8y"]
 [ext_resource type="Script" path="res://scenes/ap_bar.gd" id="25_6xclj"]
+[ext_resource type="Script" path="res://scenes/ackmusic.gd" id="27_dki0q"]
 [ext_resource type="Script" path="res://scenes/mp_bar.gd" id="28_sltmf"]
+[ext_resource type="Script" path="res://scenes/musicforward.gd" id="28_v0nol"]
 [ext_resource type="PackedScene" uid="uid://b6wocr0vo5s4v" path="res://scenes/debug_content.tscn" id="29_le63d"]
 [ext_resource type="Texture2D" uid="uid://d4c1k5m8u1jc0" path="res://UI stuff/Green Palette/green_food_button.png" id="30_h36mb"]
 [ext_resource type="Script" path="res://scenes/debug_content.gd" id="30_yjdom"]
@@ -46,6 +48,11 @@
 [ext_resource type="Script" path="res://scenes/SettingButton.gd" id="37_xw5yl"]
 [ext_resource type="Texture2D" uid="uid://b23jrnmqkd3hb" path="res://UI stuff/Orange Palette/orange_settings_button.png" id="38_xyjpo"]
 [ext_resource type="Texture2D" uid="uid://lb88b636818q" path="res://UI stuff/Pink Palette/pink_settings_button.png" id="39_aoujn"]
+[ext_resource type="Script" path="res://scenes/musicmanager.gd" id="45_f51w5"]
+[ext_resource type="AudioStream" uid="uid://dwmn4dqcd6k4i" path="res://Spare placeholder music if Clowns gets too much lmao/02 Hollywood Main Theme.mp3" id="46_2tpny"]
+[ext_resource type="AudioStream" uid="uid://dshoi5g671o7m" path="res://Spare placeholder music if Clowns gets too much lmao/25 - Pizza & Bowling.mp3" id="47_22k00"]
+[ext_resource type="AudioStream" uid="uid://dnxx75ndliq7c" path="res://Spare placeholder music if Clowns gets too much lmao/Esselfortium - memory=entryrrrr-.mp3" id="48_3k68e"]
+[ext_resource type="AudioStream" uid="uid://b1b1fwlrdpmcp" path="res://Spare placeholder music if Clowns gets too much lmao/Heaven Pierce Her - ULTRAKILL- INFINITE HYPERDEATH - 01 The Fire Is Gone (for Piano, Saxophone and Trumpet).mp3" id="49_fomax"]
 
 [sub_resource type="GDScript" id="GDScript_7ecg8"]
 script/source = "extends ColorRect
@@ -233,12 +240,6 @@ expand_margin_top = 5.0
 expand_margin_right = 5.0
 expand_margin_bottom = 5.0
 
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_kxflm"]
-color = Color(0.793417, 0.388279, 0.00261003, 1)
-grow_begin = 0.0
-grow_end = 0.0
-thickness = 40
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3535b"]
 bg_color = Color(0.822295, 0.511699, 0.352571, 1)
 corner_radius_top_left = 6
@@ -246,6 +247,12 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 corner_detail = 20
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_kxflm"]
+color = Color(0.793417, 0.388279, 0.00261003, 1)
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 40
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_325id"]
 resource_local_to_scene = true
@@ -665,7 +672,6 @@ offset_bottom = 40.0
 [node name="OptionsMenu" type="PanelContainer" parent="UI/Options"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -681,7 +687,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_kxv3i")
 
 [node name="SaveButtons" type="Node2D" parent="UI/Options/OptionsMenu"]
-position = Vector2(-50, -140)
+position = Vector2(-50, -120)
 
 [node name="Save" type="Button" parent="UI/Options/OptionsMenu/SaveButtons"]
 offset_left = 90.0
@@ -708,7 +714,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_16vbq")
 text = "Cancel"
 
 [node name="Node2D" type="Node2D" parent="UI/Options/OptionsMenu"]
-position = Vector2(-38, -78)
+position = Vector2(-138, -54)
 scale = Vector2(0.5, 0.5)
 
 [node name="Label" type="Label" parent="UI/Options/OptionsMenu/Node2D"]
@@ -723,8 +729,100 @@ text = "Theme"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Node2D3" type="Node2D" parent="UI/Options/OptionsMenu"]
+position = Vector2(-108, 16)
+scale = Vector2(0.75, 0.75)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Options/OptionsMenu/Node2D3"]
+offset_left = 225.0
+offset_top = 347.0
+offset_right = 375.0
+offset_bottom = 408.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Button2" type="Button" parent="UI/Options/OptionsMenu/Node2D3/HBoxContainer"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_outline_color = Color(0.835294, 0.517647, 0, 0.619608)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 44
+theme_override_styles/normal = SubResource("StyleBoxFlat_3535b")
+text = "<"
+script = ExtResource("22_bxo36")
+
+[node name="Button" type="Button" parent="UI/Options/OptionsMenu/Node2D3/HBoxContainer"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_outline_color = Color(0.835294, 0.517647, 0, 0.619608)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 44
+theme_override_styles/normal = SubResource("StyleBoxFlat_3535b")
+text = ">"
+script = ExtResource("21_noh54")
+
+[node name="Node2D4" type="Node2D" parent="UI/Options/OptionsMenu"]
+position = Vector2(72, -54)
+scale = Vector2(0.5, 0.5)
+
+[node name="Label" type="Label" parent="UI/Options/OptionsMenu/Node2D4"]
+offset_left = 406.0
+offset_top = 553.0
+offset_right = 596.0
+offset_bottom = 610.0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("9_wn204")
+theme_override_font_sizes/font_size = 64
+text = "Music"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Node2D5" type="Node2D" parent="UI/Options/OptionsMenu"]
+position = Vector2(102, 16)
+scale = Vector2(0.75, 0.75)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Options/OptionsMenu/Node2D5"]
+offset_left = 225.0
+offset_top = 347.0
+offset_right = 375.0
+offset_bottom = 408.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Button2" type="Button" parent="UI/Options/OptionsMenu/Node2D5/HBoxContainer"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_outline_color = Color(0.835294, 0.517647, 0, 0.619608)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 44
+theme_override_styles/normal = SubResource("StyleBoxFlat_3535b")
+text = "<"
+script = ExtResource("27_dki0q")
+
+[node name="Button" type="Button" parent="UI/Options/OptionsMenu/Node2D5/HBoxContainer"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_outline_color = Color(0.835294, 0.517647, 0, 0.619608)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 44
+theme_override_styles/normal = SubResource("StyleBoxFlat_3535b")
+text = ">"
+script = ExtResource("28_v0nol")
+
 [node name="Node2D2" type="Node2D" parent="UI/Options/OptionsMenu"]
-position = Vector2(-73, -118)
+position = Vector2(-63, -118)
 
 [node name="GridContainer2" type="GridContainer" parent="UI/Options/OptionsMenu/Node2D2"]
 offset_left = 80.0
@@ -773,43 +871,6 @@ tooltip_text = "Music"
 theme_override_styles/slider = SubResource("StyleBoxLine_kxflm")
 tick_count = 1
 bus_name = "Music"
-
-[node name="Node2D3" type="Node2D" parent="UI/Options/OptionsMenu"]
-position = Vector2(-78, -98)
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/Options/OptionsMenu/Node2D3"]
-offset_left = 225.0
-offset_top = 347.0
-offset_right = 375.0
-offset_bottom = 408.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/separation = 20
-alignment = 1
-
-[node name="Button2" type="Button" parent="UI/Options/OptionsMenu/Node2D3/HBoxContainer"]
-custom_minimum_size = Vector2(65, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_colors/font_outline_color = Color(0.835294, 0.517647, 0, 0.619608)
-theme_override_constants/outline_size = 3
-theme_override_font_sizes/font_size = 44
-theme_override_styles/normal = SubResource("StyleBoxFlat_3535b")
-text = "<"
-script = ExtResource("22_bxo36")
-
-[node name="Button" type="Button" parent="UI/Options/OptionsMenu/Node2D3/HBoxContainer"]
-custom_minimum_size = Vector2(65, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_colors/font_outline_color = Color(0.835294, 0.517647, 0, 0.619608)
-theme_override_constants/outline_size = 3
-theme_override_font_sizes/font_size = 44
-theme_override_styles/normal = SubResource("StyleBoxFlat_3535b")
-text = ">"
-script = ExtResource("21_noh54")
 
 [node name="SettingsButton" type="Button" parent="UI/Options"]
 process_mode = 3
@@ -878,9 +939,12 @@ script = ExtResource("30_yjdom")
 [node name="Sounds" type="Node" parent="."]
 
 [node name="MainMusic" type="AudioStreamPlayer" parent="Sounds"]
+unique_name_in_owner = true
 stream = ExtResource("17_oqlhs")
 autoplay = true
 bus = &"Music"
+script = ExtResource("45_f51w5")
+music_selection = Array[AudioStreamMP3]([ExtResource("46_2tpny"), ExtResource("47_22k00"), ExtResource("48_3k68e"), ExtResource("49_fomax"), ExtResource("17_oqlhs")])
 
 [node name="Yip" type="AudioStreamPlayer" parent="Sounds"]
 unique_name_in_owner = true
@@ -905,6 +969,8 @@ bus = &"SFX"
 [connection signal="pressed" from="UI/Options/OptionsMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
 [connection signal="button_down" from="UI/Options/OptionsMenu/Node2D3/HBoxContainer/Button2" to="UI/Options/OptionsMenu/Node2D3/HBoxContainer/Button2" method="_on_button_down"]
 [connection signal="button_down" from="UI/Options/OptionsMenu/Node2D3/HBoxContainer/Button" to="UI/Options/OptionsMenu/Node2D3/HBoxContainer/Button" method="_on_button_down"]
+[connection signal="button_down" from="UI/Options/OptionsMenu/Node2D5/HBoxContainer/Button2" to="UI/Options/OptionsMenu/Node2D5/HBoxContainer/Button2" method="_on_button_down"]
+[connection signal="button_down" from="UI/Options/OptionsMenu/Node2D5/HBoxContainer/Button" to="UI/Options/OptionsMenu/Node2D5/HBoxContainer/Button" method="_on_button_down"]
 [connection signal="button_down" from="UI/Options/SettingsButton" to="UI/Options/SettingsButton" method="_on_button_down"]
 [connection signal="button_down" from="UI/HBoxContainer/FoodButton" to="UI/HBoxContainer/FoodButton" method="_on_button_down"]
 [connection signal="button_down" from="UI/HBoxContainer/ActButton" to="UI/HBoxContainer/ActButton" method="_on_button_down"]
