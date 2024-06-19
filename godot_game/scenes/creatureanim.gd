@@ -6,7 +6,7 @@ func _ready():
 
 func angry():
 	if creature.sp < 600:
-		self.animation = 'angry'
+		self.animation = 'confused'
 	else:
 		if self.animation != 'idle':
 			self.animation = 'idle'
