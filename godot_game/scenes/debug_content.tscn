@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://b6wocr0vo5s4v"]
 
-[ext_resource type="Script" path="res://gd_scripts/HPLabel.gd" id="1_178tx"]
-[ext_resource type="Script" path="res://gd_scripts/MPLabel.gd" id="2_3h2jk"]
-[ext_resource type="Script" path="res://gd_scripts/ColLabel.gd" id="3_aal3r"]
-[ext_resource type="Script" path="res://scenes/SPLabel.gd" id="3_kowqt"]
-[ext_resource type="Script" path="res://scenes/APLabel.gd" id="3_qpwvx"]
-[ext_resource type="Script" path="res://gd_scripts/ThemeLabel.gd" id="4_pa4py"]
+[ext_resource type="Script" path="res://scripts/HPLabel.gd" id="1_178tx"]
+[ext_resource type="Script" path="res://scripts/MPLabel.gd" id="2_3h2jk"]
+[ext_resource type="Script" path="res://scripts/ColLabel.gd" id="3_aal3r"]
+[ext_resource type="Script" path="res://scripts/SPLabel.gd" id="3_kowqt"]
+[ext_resource type="Script" path="res://scripts/APLabel.gd" id="3_qpwvx"]
+[ext_resource type="Script" path="res://scripts/ThemeLabel.gd" id="4_pa4py"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_35mdd"]
 font_size = 20

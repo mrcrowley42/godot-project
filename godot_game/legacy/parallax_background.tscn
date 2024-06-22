@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cehjp604hlr4r"]
+
+[ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://placeholder/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_5oc5j"]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+
+[node name="bg" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(601, 342)
+scale = Vector2(1.314, 0.976012)
+texture = ExtResource("1_5oc5j")

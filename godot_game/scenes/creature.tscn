@@ -1,21 +1,21 @@
 [gd_scene load_steps=18 format=3 uid="uid://bgly0bep64kkp"]
 
-[ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://player/little-guy.png" id="1_obpq1"]
-[ext_resource type="Script" path="res://gd_scripts/Creature.gd" id="2_klgk6"]
-[ext_resource type="PackedScene" path="res://Creatures/green_example.tscn" id="2_ppcbc"]
-[ext_resource type="Texture2D" uid="uid://dqtjsny24a3p1" path="res://player/angry-0.png" id="3_b4v78"]
-[ext_resource type="PackedScene" path="res://Creatures/blue_example.tscn" id="3_o0hht"]
-[ext_resource type="Texture2D" uid="uid://4cfpam3be0g" path="res://player/little-guy_2.png" id="3_xm5kq"]
-[ext_resource type="Texture2D" uid="uid://diwxdoruu1sob" path="res://player/little-guy_3.png" id="4_1nivj"]
-[ext_resource type="Texture2D" uid="uid://cq86852isqqkq" path="res://player/angry-1.png" id="4_i6glr"]
-[ext_resource type="Texture2D" uid="uid://dd12vpparynjh" path="res://player/angry-2.png" id="5_htkse"]
-[ext_resource type="Script" path="res://scenes/creatureanim.gd" id="5_oh7gr"]
-[ext_resource type="Texture2D" uid="uid://c44b8y8u8ne7w" path="res://player/confused-0.png" id="6_tpv3k"]
-[ext_resource type="Texture2D" uid="uid://cqyltj7p4b1l7" path="res://player/confused-1.png" id="7_j2qgy"]
-[ext_resource type="Texture2D" uid="uid://bcsj0ibb8s3y0" path="res://player/confused-2.png" id="8_gbg03"]
-[ext_resource type="Texture2D" uid="uid://dxc4uprrmyny8" path="res://player/sadge-0.png" id="8_oddsc"]
-[ext_resource type="Texture2D" uid="uid://dxipq42e3qg72" path="res://player/sadge-1.png" id="9_gsgcf"]
-[ext_resource type="Texture2D" uid="uid://c8vn6brl68787" path="res://player/sadge-2.png" id="10_0ltv5"]
+[ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://placeholder/little-guy.png" id="1_obpq1"]
+[ext_resource type="Script" path="res://scripts/Creature.gd" id="2_klgk6"]
+[ext_resource type="PackedScene" uid="uid://c33ko6eie4hqp" path="res://creatures/green_example.tscn" id="2_ppcbc"]
+[ext_resource type="Texture2D" uid="uid://dqtjsny24a3p1" path="res://placeholder/angry-0.png" id="3_b4v78"]
+[ext_resource type="PackedScene" uid="uid://ckua6xy60buv1" path="res://creatures/blue_example.tscn" id="3_o0hht"]
+[ext_resource type="Texture2D" uid="uid://4cfpam3be0g" path="res://placeholder/little-guy_2.png" id="3_xm5kq"]
+[ext_resource type="Texture2D" uid="uid://diwxdoruu1sob" path="res://placeholder/little-guy_3.png" id="4_1nivj"]
+[ext_resource type="Texture2D" uid="uid://cq86852isqqkq" path="res://placeholder/angry-1.png" id="4_i6glr"]
+[ext_resource type="Texture2D" uid="uid://dd12vpparynjh" path="res://placeholder/angry-2.png" id="5_htkse"]
+[ext_resource type="Script" path="res://scripts/creatureanim.gd" id="5_oh7gr"]
+[ext_resource type="Texture2D" uid="uid://c44b8y8u8ne7w" path="res://placeholder/confused-0.png" id="6_tpv3k"]
+[ext_resource type="Texture2D" uid="uid://cqyltj7p4b1l7" path="res://placeholder/confused-1.png" id="7_j2qgy"]
+[ext_resource type="Texture2D" uid="uid://bcsj0ibb8s3y0" path="res://placeholder/confused-2.png" id="8_gbg03"]
+[ext_resource type="Texture2D" uid="uid://dxc4uprrmyny8" path="res://placeholder/sadge-0.png" id="13_d84xb"]
+[ext_resource type="Texture2D" uid="uid://dxipq42e3qg72" path="res://placeholder/sadge-1.png" id="14_r6peb"]
+[ext_resource type="Texture2D" uid="uid://c8vn6brl68787" path="res://placeholder/sadge-2.png" id="15_xvmeh"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3cwqc"]
 animations = [{
@@ -63,13 +63,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("8_oddsc")
+"texture": ExtResource("13_d84xb")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_gsgcf")
+"texture": ExtResource("14_r6peb")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_0ltv5")
+"texture": ExtResource("15_xvmeh")
 }],
 "loop": true,
 "name": &"sad",

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://jo0k1rqis071"]
 
-[ext_resource type="Script" path="res://Creatures/egg.gd" id="1_a30c6"]
+[ext_resource type="Script" path="res://creatures/egg.gd" id="1_a30c6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k8mmb"]
 

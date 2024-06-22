@@ -17,7 +17,7 @@ config/icon="res://icons/icon.svg"
 
 [autoload]
 
-Globals="*res://gd_scripts/Globals.gd"
+Globals="*res://scripts/Globals.gd"
 
 [display]
 
@@ -25,6 +25,7 @@ window/size/viewport_width=540
 window/size/viewport_height=675
 window/size/resizable=false
 window/subwindows/embed_subwindows=false
+window/handheld/orientation=1
 
 [dotnet]
 

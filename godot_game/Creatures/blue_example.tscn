@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ckua6xy60buv1"]
 
-[ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://player/little-guy.png" id="1_vr515"]
+[ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://placeholder/little-guy.png" id="1_vr515"]
 
 [node name="Creature2" type="Sprite2D"]
 visible = false

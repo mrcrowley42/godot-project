@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dnxx75ndliq7c"
+path="res://.godot/imported/Esselfortium - memory=entryrrrr-.mp3-7d0d8fccdf6c56d1e6630ef8480de84a.mp3str"
+
+[deps]
+
+source_file="res://music/Esselfortium - memory=entryrrrr-.mp3"
+dest_files=["res://.godot/imported/Esselfortium - memory=entryrrrr-.mp3-7d0d8fccdf6c56d1e6630ef8480de84a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
