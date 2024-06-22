@@ -6,6 +6,7 @@ var i:int = 0
 func _ready():
 	self.stream = music_selection[self.i]
 	self.play()
+	
 
 func change_texture(addition=0):
 	self.i = (self.i + addition) % music_selection.size()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=3 uid="uid://c282rwt57fvoc"]
+[gd_scene load_steps=85 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://placeholder/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
 [ext_resource type="Script" path="res://scripts/prototype.gd" id="1_of2kb"]
@@ -253,6 +253,12 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 corner_detail = 20
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_0f7jw"]
+color = Color(0.34688, 0.524621, 0.762641, 1)
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 40
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_kxflm"]
 color = Color(0.793417, 0.388279, 0.00261003, 1)
@@ -719,7 +725,6 @@ offset_bottom = 40.0
 [node name="OptionsMenu" type="PanelContainer" parent="UI/Options"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -750,6 +755,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_16vbq")
 text = "Save Settings"
 
 [node name="Cancel" type="Button" parent="UI/Options/OptionsMenu/SaveButtons"]
+texture_filter = 5
 offset_left = 317.0
 offset_top = 482.0
 offset_right = 450.0
@@ -891,6 +897,7 @@ text = "Master"
 [node name="VolumeMaster" parent="UI/Options/OptionsMenu/Node2D2/GridContainer2" groups=["settings_data"] instance=ExtResource("15_lmno7")]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+theme_override_styles/slider = SubResource("StyleBoxLine_0f7jw")
 tick_count = 1
 bus_name = "Master"
 
@@ -979,6 +986,7 @@ position = Vector2i(155, 36)
 size = Vector2i(540, 675)
 visible = false
 script = SubResource("GDScript_o2bb2")
+enabled = true
 
 [node name="DebugContent" parent="DebugWindow" instance=ExtResource("29_le63d")]
 script = ExtResource("30_yjdom")

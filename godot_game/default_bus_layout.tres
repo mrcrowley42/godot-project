@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=7 format=3 uid="uid://dfspa4bjtaaa"]
+[gd_resource type="AudioBusLayout" load_steps=8 format=3 uid="uid://dfspa4bjtaaa"]
 
 [sub_resource type="AudioEffectDelay" id="AudioEffectDelay_iolka"]
 resource_name = "Delay"
@@ -17,6 +17,11 @@ post_gain = -34.09
 [sub_resource type="AudioEffectAmplify" id="AudioEffectAmplify_dqk8e"]
 resource_name = "Amplify"
 volume_db = 24.0
+
+[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_wke21"]
+resource_name = "Compressor"
+ratio = 14.0
+gain = -7.5
 
 [sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_adn1e"]
 resource_name = "Distortion"
@@ -42,6 +47,8 @@ bus/1/effect/3/effect = SubResource("AudioEffectDistortion_ermhb")
 bus/1/effect/3/enabled = false
 bus/1/effect/4/effect = SubResource("AudioEffectAmplify_dqk8e")
 bus/1/effect/4/enabled = false
+bus/1/effect/5/effect = SubResource("AudioEffectCompressor_wke21")
+bus/1/effect/5/enabled = false
 bus/2/name = &"SFX"
 bus/2/solo = false
 bus/2/mute = false

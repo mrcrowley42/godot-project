@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b6wocr0vo5s4v"]
+[gd_scene load_steps=9 format=3 uid="uid://b6wocr0vo5s4v"]
 
 [ext_resource type="Script" path="res://scripts/HPLabel.gd" id="1_178tx"]
 [ext_resource type="Script" path="res://scripts/MPLabel.gd" id="2_3h2jk"]
@@ -9,6 +9,17 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_35mdd"]
 font_size = 20
+
+[sub_resource type="GDScript" id="GDScript_v57jq"]
+script/source = "extends Label
+
+var og_text = self.text
+
+func _process(_delta):
+	self.text = og_text % [
+		str(get_node(\"..\").music_track.stream.resource_path.get_file().get_basename())
+		]
+"
 
 [node name="Node2D" type="Node2D"]
 
@@ -65,3 +76,11 @@ offset_bottom = 158.0
 text = "Theme num: %s"
 label_settings = SubResource("LabelSettings_35mdd")
 script = ExtResource("4_pa4py")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 19.0
+offset_top = 187.0
+offset_right = 59.0
+offset_bottom = 210.0
+text = "Current Track: %s"
+script = SubResource("GDScript_v57jq")
