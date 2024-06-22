@@ -1,6 +1,9 @@
 extends PanelContainer
 @onready var creature = %Creature
 
+func _ready():
+	visible = false
+
 func _input(event):
 	# hide container if mouse clicks outside of its rect
 	if self.visible and (event is InputEventMouseButton) and event.pressed:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=3 uid="uid://c282rwt57fvoc"]
+[gd_scene load_steps=86 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://placeholder/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
 [ext_resource type="Script" path="res://scripts/prototype.gd" id="1_of2kb"]
@@ -37,6 +37,7 @@
 [ext_resource type="Script" path="res://scripts/ap_bar.gd" id="25_6xclj"]
 [ext_resource type="Texture2D" uid="uid://dckcusgfn24wj" path="res://icons/arrow.svg" id="26_fi2mk"]
 [ext_resource type="Script" path="res://scripts/ackmusic.gd" id="27_dki0q"]
+[ext_resource type="Script" path="res://scenes/arrowscale.gd" id="27_kx1gg"]
 [ext_resource type="Script" path="res://scripts/mp_bar.gd" id="28_sltmf"]
 [ext_resource type="Script" path="res://scripts/musicforward.gd" id="28_v0nol"]
 [ext_resource type="PackedScene" uid="uid://b6wocr0vo5s4v" path="res://scenes/debug_content.tscn" id="29_le63d"]
@@ -522,7 +523,6 @@ script = ExtResource("11_nbfug")
 
 [node name="KillControls" type="PanelContainer" parent="UI/Controls"]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(400, 400)
 layout_mode = 1
 anchors_preset = 8
@@ -608,16 +608,16 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="Arrow" type="Sprite2D" parent="UI/Controls/KillControls"]
-visible = false
 position = Vector2(398, 210.5)
 rotation = 3.14159
 texture = ExtResource("26_fi2mk")
+script = ExtResource("27_kx1gg")
 
 [node name="Arrow2" type="Sprite2D" parent="UI/Controls/KillControls"]
-visible = false
 position = Vector2(17, 204.5)
 scale = Vector2(1.23214, 0.575389)
 texture = ExtResource("26_fi2mk")
+script = ExtResource("27_kx1gg")
 
 [node name="StatsContainer" type="PanelContainer" parent="UI"]
 offset_left = 35.0
@@ -725,6 +725,7 @@ offset_bottom = 40.0
 [node name="OptionsMenu" type="PanelContainer" parent="UI/Options"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
