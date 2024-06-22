@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=3 uid="uid://c282rwt57fvoc"]
+[gd_scene load_steps=84 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://placeholder/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
 [ext_resource type="Script" path="res://scripts/prototype.gd" id="1_of2kb"]
@@ -35,6 +35,7 @@
 [ext_resource type="Texture2D" uid="uid://douy7lywu41bc" path="res://icons/playing_cards_48dp_FILL0_wght400_GRAD0_opsz48.svg" id="23_m81o6"]
 [ext_resource type="Script" path="res://scripts/sp_bar.gd" id="24_bbo8y"]
 [ext_resource type="Script" path="res://scripts/ap_bar.gd" id="25_6xclj"]
+[ext_resource type="Texture2D" uid="uid://dckcusgfn24wj" path="res://icons/arrow.svg" id="26_fi2mk"]
 [ext_resource type="Script" path="res://scripts/ackmusic.gd" id="27_dki0q"]
 [ext_resource type="Script" path="res://scripts/mp_bar.gd" id="28_sltmf"]
 [ext_resource type="Script" path="res://scripts/musicforward.gd" id="28_v0nol"]
@@ -162,6 +163,7 @@ func _on_button_down():
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2mbbg"]
 bg_color = Color(0, 0, 0, 0.227451)
+draw_center = false
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -421,6 +423,7 @@ script = ExtResource("11_6jjvb")
 
 [node name="SaveControls" type="PanelContainer" parent="UI/Controls"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(400, 400)
 layout_mode = 1
 anchors_preset = 8
@@ -597,6 +600,18 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
 icon = ExtResource("23_m81o6")
 icon_alignment = 1
 expand_icon = true
+
+[node name="Arrow" type="Sprite2D" parent="UI/Controls/KillControls"]
+visible = false
+position = Vector2(398, 210.5)
+rotation = 3.14159
+texture = ExtResource("26_fi2mk")
+
+[node name="Arrow2" type="Sprite2D" parent="UI/Controls/KillControls"]
+visible = false
+position = Vector2(17, 204.5)
+scale = Vector2(1.23214, 0.575389)
+texture = ExtResource("26_fi2mk")
 
 [node name="StatsContainer" type="PanelContainer" parent="UI"]
 offset_left = 35.0
