@@ -1,15 +1,6 @@
 extends TextureButton
 @export var palettes: Array[Texture2D]
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
-
+@onready var food_menu = %SaveControls
 
 func _on_button_down():
-	%SaveControls.show()
+	food_menu.visible = !food_menu.visible

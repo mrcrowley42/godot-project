@@ -3,6 +3,7 @@ extends AnimatedSprite2D
 
 func _ready():
 	creature.sp_changed.connect(angry)
+	creature.hp_changed.connect(stop_it)
 
 func angry():
 	if creature.sp < 600:
@@ -10,3 +11,7 @@ func angry():
 	else:
 		if self.animation != 'idle':
 			self.animation = 'idle'
+
+func stop_it():
+	if creature.health < 300:
+		%STAHP.play()

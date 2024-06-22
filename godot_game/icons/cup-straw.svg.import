@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ct473gtaujx7m"
-path="res://.godot/imported/settings_24dp_FILL0_wght400_GRAD0_opsz24.svg-18ddacf0864e6099258c89f49e2db8f7.ctex"
+uid="uid://dckd2hhimpp2x"
+path="res://.godot/imported/cup-straw.svg-edf4febd1a34965469da72257074db52.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icons/settings_24dp_FILL0_wght400_GRAD0_opsz24.svg"
-dest_files=["res://.godot/imported/settings_24dp_FILL0_wght400_GRAD0_opsz24.svg-18ddacf0864e6099258c89f49e2db8f7.ctex"]
+source_file="res://icons/cup-straw.svg"
+dest_files=["res://.godot/imported/cup-straw.svg-edf4febd1a34965469da72257074db52.ctex"]
 
 [params]
 

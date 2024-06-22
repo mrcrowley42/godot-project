@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=3 uid="uid://c282rwt57fvoc"]
+[gd_scene load_steps=83 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://placeholder/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
 [ext_resource type="Script" path="res://scripts/prototype.gd" id="1_of2kb"]
@@ -19,15 +19,20 @@
 [ext_resource type="Script" path="res://scripts/kill_button.gd" id="11_nbfug"]
 [ext_resource type="Theme" uid="uid://dpeh5d2xu80up" path="res://themes/prototype_theme.tres" id="13_tapur"]
 [ext_resource type="Script" path="res://scripts/SaveControls.gd" id="14_dx6xt"]
-[ext_resource type="Texture2D" uid="uid://cap3k33q4q73n" path="res://icons/playstation.svg" id="14_kdtew"]
 [ext_resource type="PackedScene" uid="uid://cbn0dv1k0onpb" path="res://scenes/vol_slider.tscn" id="15_lmno7"]
-[ext_resource type="Texture2D" uid="uid://skpiw6bdlna3" path="res://icons/restaurant_24dp_FILL0_wght400_GRAD0_opsz24.svg" id="17_ektss"]
+[ext_resource type="Texture2D" uid="uid://dckd2hhimpp2x" path="res://icons/cup-straw.svg" id="16_we3t2"]
 [ext_resource type="AudioStream" uid="uid://dcet1hpt70t42" path="res://music/perfection.mp3" id="17_oqlhs"]
 [ext_resource type="AudioStream" uid="uid://8ifwm2tjitur" path="res://sound_effects/yippee.mp3" id="18_6dihm"]
+[ext_resource type="Texture2D" uid="uid://b4pvkkppy44n0" path="res://icons/icecream_48dp_FILL0_wght400_GRAD0_opsz48.svg" id="18_lv553"]
+[ext_resource type="Texture2D" uid="uid://cb64elolo0rtd" path="res://icons/coffee_48dp_FILL0_wght400_GRAD0_opsz48.svg" id="20_40f8v"]
 [ext_resource type="Texture2D" uid="uid://pbxnymt0cqn7" path="res://legacy/c345a48674507fd3f61aad362db1b21b.jpg" id="20_dkmvt"]
+[ext_resource type="Texture2D" uid="uid://tdk02lxiky1m" path="res://icons/controller.svg" id="20_xnus2"]
+[ext_resource type="Texture2D" uid="uid://d3f8r28w20i4e" path="res://icons/crossword_48dp_FILL0_wght400_GRAD0_opsz48.svg" id="21_faowa"]
 [ext_resource type="Script" path="res://scripts/styletog.gd" id="21_noh54"]
 [ext_resource type="Script" path="res://scripts/hp_bar.gd" id="22_688js"]
 [ext_resource type="Script" path="res://scripts/backthemeb.gd" id="22_bxo36"]
+[ext_resource type="Texture2D" uid="uid://kstkvtalfvn4" path="res://icons/piano_48dp_FILL0_wght400_GRAD0_opsz48.svg" id="22_ktcf4"]
+[ext_resource type="Texture2D" uid="uid://douy7lywu41bc" path="res://icons/playing_cards_48dp_FILL0_wght400_GRAD0_opsz48.svg" id="23_m81o6"]
 [ext_resource type="Script" path="res://scripts/sp_bar.gd" id="24_bbo8y"]
 [ext_resource type="Script" path="res://scripts/ap_bar.gd" id="25_6xclj"]
 [ext_resource type="Script" path="res://scripts/ackmusic.gd" id="27_dki0q"]
@@ -55,7 +60,6 @@
 [ext_resource type="AudioStream" uid="uid://b1b1fwlrdpmcp" path="res://music/Heaven Pierce Her - ULTRAKILL- INFINITE HYPERDEATH - 01 The Fire Is Gone (for Piano, Saxophone and Trumpet).mp3" id="49_fomax"]
 [ext_resource type="AudioStream" uid="uid://8ctfl381pnja" path="res://music/15 Seto's Memory.mp3" id="52_30ho7"]
 [ext_resource type="AudioStream" uid="uid://ct8aoiuvdre5f" path="res://music/Aquatic Ambience [Restored].mp3" id="53_ghi24"]
-[ext_resource type="AudioStream" uid="uid://icnqnrm74sjc" path="res://sound_effects/half-life-scientist-stahp.mp3" id="56_bikbi"]
 
 [sub_resource type="GDScript" id="GDScript_7ecg8"]
 script/source = "extends ColorRect
@@ -123,19 +127,19 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 shadow_color = Color(1, 1, 1, 0.6)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_88ikc"]
-bg_color = Color(0.423529, 0, 0.537255, 0.384314)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k7dc5"]
+bg_color = Color(0, 0, 0, 0.384314)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_golou"]
 bg_color = Color(0.282353, 0.67451, 0.627451, 0.631373)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
 [sub_resource type="GDScript" id="GDScript_ovb2u"]
 script/source = "extends Button
@@ -144,22 +148,17 @@ script/source = "extends Button
 
 func _on_button_down():
 	%Yip.play()
-	creature.mp += 40
+	creature.dmg(-100, 'mp')
 "
 
 [sub_resource type="GDScript" id="GDScript_ve7ha"]
 script/source = "extends Button
+@onready var creature = %Creature
 
 func _on_button_down():
 	%PIPE.play()
+	creature.dmg(300, 'hp')
 "
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k7dc5"]
-bg_color = Color(0, 0, 1, 0.384314)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2mbbg"]
 bg_color = Color(0, 0, 0, 0.227451)
@@ -435,7 +434,7 @@ offset_right = 450.0
 offset_bottom = 517.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_88ikc")
+theme_override_styles/panel = SubResource("StyleBoxFlat_k7dc5")
 script = ExtResource("14_dx6xt")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/Controls/SaveControls"]
@@ -456,10 +455,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_constants/icon_max_width = 120
 theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
-text = "SAVE"
+icon = ExtResource("16_we3t2")
+icon_alignment = 1
+expand_icon = true
 script = ExtResource("8_0ys56")
 
 [node name="Button 2" type="Button" parent="UI/Controls/SaveControls/MarginContainer/GridContainer"]
@@ -473,7 +475,7 @@ theme_override_constants/icon_max_width = 120
 theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
-icon = ExtResource("14_kdtew")
+icon = ExtResource("18_lv553")
 icon_alignment = 1
 expand_icon = true
 script = SubResource("GDScript_ovb2u")
@@ -500,10 +502,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
+theme_override_constants/icon_max_width = 120
 theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
-text = "KILL"
+icon = ExtResource("20_40f8v")
+icon_alignment = 1
+expand_icon = true
 script = ExtResource("11_nbfug")
 
 [node name="KillControls" type="PanelContainer" parent="UI/Controls"]
@@ -542,22 +547,26 @@ columns = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_constants/icon_max_width = 120
 theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
-text = "SAVE"
+icon = ExtResource("20_xnus2")
+icon_alignment = 1
+expand_icon = true
 
 [node name="Button 2" type="Button" parent="UI/Controls/KillControls/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
-theme_override_constants/icon_max_width = 100
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_constants/icon_max_width = 120
 theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
-icon = ExtResource("17_ektss")
+icon = ExtResource("21_faowa")
 icon_alignment = 1
 expand_icon = true
 
@@ -566,20 +575,28 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_constants/icon_max_width = 120
 theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
-text = "SAVE"
+icon = ExtResource("22_ktcf4")
+icon_alignment = 1
+expand_icon = true
 
 [node name="Button 4" type="Button" parent="UI/Controls/KillControls/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_constants/icon_max_width = 120
 theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
-text = "KILL"
+icon = ExtResource("23_m81o6")
+icon_alignment = 1
+expand_icon = true
 
 [node name="StatsContainer" type="PanelContainer" parent="UI"]
 offset_left = 35.0
@@ -604,7 +621,7 @@ columns = 4
 [node name="Label" type="Label" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_wn204")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 24
 text = "HP"
 
 [node name="HP_Bar" type="ProgressBar" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
@@ -624,7 +641,7 @@ script = ExtResource("22_688js")
 [node name="Label2" type="Label" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_wn204")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 24
 text = "MP"
 
 [node name="MP_Bar" type="ProgressBar" parent="UI/StatsContainer/MarginContainer/StatusContainer" groups=["save_data"]]
@@ -643,7 +660,7 @@ script = ExtResource("28_sltmf")
 [node name="Label3" type="Label" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_wn204")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 24
 text = "SP"
 
 [node name="SP_Bar" type="ProgressBar" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
@@ -663,7 +680,7 @@ script = ExtResource("24_bbo8y")
 [node name="Label4" type="Label" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_wn204")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 24
 text = "AP"
 
 [node name="AP_Bar" type="ProgressBar" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
@@ -947,7 +964,6 @@ position = Vector2i(155, 36)
 size = Vector2i(540, 675)
 visible = false
 script = SubResource("GDScript_o2bb2")
-enabled = true
 
 [node name="DebugContent" parent="DebugWindow" instance=ExtResource("29_le63d")]
 script = ExtResource("30_yjdom")
@@ -972,21 +988,16 @@ unique_name_in_owner = true
 stream = ExtResource("33_ipuqk")
 bus = &"SFX"
 
-[node name="STAHP" type="AudioStreamPlayer" parent="Audio"]
-unique_name_in_owner = true
-stream = ExtResource("56_bikbi")
-bus = &"SFX"
-
 [connection signal="button_down" from="UI/Controls/ControlsContainer/MarginContainer/HBoxContainer/Button 1" to="UI/Controls/ControlsContainer/MarginContainer/HBoxContainer/Button 1" method="_on_button_down"]
 [connection signal="button_down" from="UI/Controls/ControlsContainer/MarginContainer/HBoxContainer/Button 2" to="UI/Controls/ControlsContainer/MarginContainer/HBoxContainer/Button 2" method="_on_button_down"]
 [connection signal="button_down" from="UI/Controls/SaveControls/MarginContainer/GridContainer/Button 1" to="UI/Controls/SaveControls/MarginContainer/GridContainer/Button 1" method="_on_button_down"]
 [connection signal="button_down" from="UI/Controls/SaveControls/MarginContainer/GridContainer/Button 2" to="UI/Controls/SaveControls/MarginContainer/GridContainer/Button 2" method="_on_button_down"]
 [connection signal="button_down" from="UI/Controls/SaveControls/MarginContainer/GridContainer/Button 3" to="UI/Controls/SaveControls/MarginContainer/GridContainer/Button 3" method="_on_button_down"]
 [connection signal="button_down" from="UI/Controls/SaveControls/MarginContainer/GridContainer/Button 4" to="UI/Controls/SaveControls/MarginContainer/GridContainer/Button 4" method="_on_button_down"]
-[connection signal="button_down" from="UI/Controls/KillControls/MarginContainer/GridContainer/Button 1" to="UI/Controls/KillControls/MarginContainer/GridContainer/Button 1" method="_on_button_down"]
-[connection signal="button_down" from="UI/Controls/KillControls/MarginContainer/GridContainer/Button 2" to="UI/Controls/KillControls/MarginContainer/GridContainer/Button 2" method="_on_button_down"]
-[connection signal="button_down" from="UI/Controls/KillControls/MarginContainer/GridContainer/Button 3" to="UI/Controls/KillControls/MarginContainer/GridContainer/Button 3" method="_on_button_down"]
-[connection signal="button_down" from="UI/Controls/KillControls/MarginContainer/GridContainer/Button 4" to="UI/Controls/KillControls/MarginContainer/GridContainer/Button 4" method="_on_button_down"]
+[connection signal="button_down" from="UI/Controls/KillControls/MarginContainer/GridContainer/Button 1" to="UI/Controls/KillControls" method="_on_button_1_button_down"]
+[connection signal="button_down" from="UI/Controls/KillControls/MarginContainer/GridContainer/Button 2" to="UI/Controls/KillControls" method="_on_button_2_button_down"]
+[connection signal="button_down" from="UI/Controls/KillControls/MarginContainer/GridContainer/Button 3" to="UI/Controls/KillControls" method="_on_button_3_button_down"]
+[connection signal="button_down" from="UI/Controls/KillControls/MarginContainer/GridContainer/Button 4" to="UI/Controls/KillControls" method="_on_button_4_button_down"]
 [connection signal="pressed" from="UI/Options/OptionsMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
 [connection signal="button_down" from="UI/Options/OptionsMenu/Node2D3/HBoxContainer/Button2" to="UI/Options/OptionsMenu/Node2D3/HBoxContainer/Button2" method="_on_button_down"]
 [connection signal="button_down" from="UI/Options/OptionsMenu/Node2D3/HBoxContainer/Button" to="UI/Options/OptionsMenu/Node2D3/HBoxContainer/Button" method="_on_button_down"]

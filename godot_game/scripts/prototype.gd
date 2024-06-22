@@ -115,3 +115,7 @@ func _input(event):
 	if event.is_action_pressed("ui_cancel"):
 		get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
 		get_tree().quit()
+
+
+func _on_button_down():
+	pass # Replace with function body.
