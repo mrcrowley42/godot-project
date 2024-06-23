@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://b6wocr0vo5s4v"]
+[gd_scene load_steps=10 format=3 uid="uid://b6wocr0vo5s4v"]
 
 [ext_resource type="Script" path="res://scripts/HPLabel.gd" id="1_178tx"]
+[ext_resource type="Script" path="res://scripts/debug_content.gd" id="1_jlyus"]
 [ext_resource type="Script" path="res://scripts/MPLabel.gd" id="2_3h2jk"]
 [ext_resource type="Script" path="res://scripts/ColLabel.gd" id="3_aal3r"]
 [ext_resource type="Script" path="res://scripts/SPLabel.gd" id="3_kowqt"]
@@ -22,6 +23,7 @@ func _process(_delta):
 "
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_jlyus")
 
 [node name="HPLabel" type="Label" parent="."]
 offset_left = 10.0
