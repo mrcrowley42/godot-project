@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=3 uid="uid://c282rwt57fvoc"]
+[gd_scene load_steps=86 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://placeholder/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
 [ext_resource type="Script" path="res://scripts/prototype.gd" id="1_of2kb"]
@@ -269,6 +269,18 @@ color = Color(0.793417, 0.388279, 0.00261003, 1)
 grow_begin = 0.0
 grow_end = 0.0
 thickness = 40
+
+[sub_resource type="GDScript" id="GDScript_ao166"]
+script/source = "extends Button
+
+
+func _on_button_down():
+	%CreditsContainer.visible = !%CreditsContainer.visible
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qyod2"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+border_color = Color(0.8, 0.8, 0.8, 0.411765)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_325id"]
 resource_local_to_scene = true
@@ -938,6 +950,50 @@ theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_16vbq")
 text = "View Credits"
+script = SubResource("GDScript_ao166")
+
+[node name="CreditsContainer" type="PanelContainer" parent="UI/OptionsContainer"]
+unique_name_in_owner = true
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 34.0
+offset_top = 101.0
+offset_right = 468.0
+offset_bottom = 535.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qyod2")
+
+[node name="Node2D" type="Node2D" parent="UI/OptionsContainer/CreditsContainer"]
+
+[node name="Button2" type="Button" parent="UI/OptionsContainer/CreditsContainer/Node2D"]
+offset_left = 173.0
+offset_top = 379.0
+offset_right = 249.0
+offset_bottom = 407.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("9_wn204")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_16vbq")
+text = "Close"
+script = SubResource("GDScript_ao166")
+
+[node name="Label" type="Label" parent="UI/OptionsContainer/CreditsContainer/Node2D"]
+offset_right = 433.0
+offset_bottom = 370.0
+theme_override_colors/font_color = Color(0.913725, 0.933333, 0.94902, 1)
+theme_override_constants/line_spacing = 12
+theme_override_fonts/font = ExtResource("9_wn204")
+theme_override_font_sizes/font_size = 24
+text = ":)"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="SettingsButton" type="Button" parent="UI/OptionsContainer"]
 process_mode = 3
@@ -1038,6 +1094,8 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/OptionsContainer/OptionsMenu/ThemeControls/vHBoxContainer/Button" to="UI/OptionsContainer/OptionsMenu/ThemeControls" method="_on_forward_button_down"]
 [connection signal="button_down" from="UI/OptionsContainer/OptionsMenu/MusicControls/HBoxContainer/Button2" to="UI/OptionsContainer/OptionsMenu/MusicControls" method="_on_back_button_down"]
 [connection signal="button_down" from="UI/OptionsContainer/OptionsMenu/MusicControls/HBoxContainer/Button" to="UI/OptionsContainer/OptionsMenu/MusicControls" method="_on_forward_button_down"]
+[connection signal="button_down" from="UI/OptionsContainer/OptionsMenu/Credits/Button" to="UI/OptionsContainer/OptionsMenu/Credits/Button" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsContainer/CreditsContainer/Node2D/Button2" to="UI/OptionsContainer/CreditsContainer/Node2D/Button2" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsContainer/SettingsButton" to="UI/OptionsContainer/SettingsButton" method="_on_button_down"]
 [connection signal="button_down" from="UI/NavigationControls/FoodButton" to="UI/NavigationControls/FoodButton" method="_on_button_down"]
 [connection signal="button_down" from="UI/NavigationControls/ActButton" to="UI/NavigationControls/ActButton" method="_on_button_down"]
