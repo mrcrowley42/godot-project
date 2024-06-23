@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bgly0bep64kkp"]
+[gd_scene load_steps=19 format=3 uid="uid://bgly0bep64kkp"]
 
 [ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://placeholder/little-guy.png" id="1_obpq1"]
 [ext_resource type="Script" path="res://scripts/Creature.gd" id="2_klgk6"]
@@ -77,20 +77,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="GDScript" id="GDScript_od0kw"]
-script/source = "extends AudioStreamPlayer
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-"
-
 [node name="Node2D" type="Node2D"]
 script = ExtResource("2_klgk6")
 dying_colour = Color(1, 0, 0, 1)
@@ -107,4 +93,3 @@ script = ExtResource("5_oh7gr")
 unique_name_in_owner = true
 stream = ExtResource("17_f4vdv")
 bus = &"SFX"
-script = SubResource("GDScript_od0kw")

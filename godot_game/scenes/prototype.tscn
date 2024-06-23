@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://c282rwt57fvoc"]
+[gd_scene load_steps=84 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://placeholder/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
 [ext_resource type="Script" path="res://scripts/prototype.gd" id="1_of2kb"]
@@ -28,25 +28,23 @@
 [ext_resource type="Texture2D" uid="uid://pbxnymt0cqn7" path="res://legacy/c345a48674507fd3f61aad362db1b21b.jpg" id="20_dkmvt"]
 [ext_resource type="Texture2D" uid="uid://tdk02lxiky1m" path="res://icons/controller.svg" id="20_xnus2"]
 [ext_resource type="Texture2D" uid="uid://d3f8r28w20i4e" path="res://icons/crossword_48dp_FILL0_wght400_GRAD0_opsz48.svg" id="21_faowa"]
-[ext_resource type="Script" path="res://scripts/styletog.gd" id="21_noh54"]
 [ext_resource type="Script" path="res://scripts/hp_bar.gd" id="22_688js"]
-[ext_resource type="Script" path="res://scripts/backthemeb.gd" id="22_bxo36"]
 [ext_resource type="Texture2D" uid="uid://kstkvtalfvn4" path="res://icons/piano_48dp_FILL0_wght400_GRAD0_opsz48.svg" id="22_ktcf4"]
 [ext_resource type="Texture2D" uid="uid://douy7lywu41bc" path="res://icons/playing_cards_48dp_FILL0_wght400_GRAD0_opsz48.svg" id="23_m81o6"]
 [ext_resource type="Script" path="res://scripts/sp_bar.gd" id="24_bbo8y"]
 [ext_resource type="Script" path="res://scripts/ap_bar.gd" id="25_6xclj"]
 [ext_resource type="Texture2D" uid="uid://dckcusgfn24wj" path="res://icons/arrow.svg" id="26_fi2mk"]
-[ext_resource type="Script" path="res://scripts/ackmusic.gd" id="27_dki0q"]
 [ext_resource type="Script" path="res://scenes/arrowscale.gd" id="27_kx1gg"]
 [ext_resource type="Script" path="res://scripts/mp_bar.gd" id="28_sltmf"]
-[ext_resource type="Script" path="res://scripts/musicforward.gd" id="28_v0nol"]
 [ext_resource type="PackedScene" uid="uid://b6wocr0vo5s4v" path="res://scenes/debug_content.tscn" id="29_le63d"]
 [ext_resource type="Texture2D" uid="uid://d4c1k5m8u1jc0" path="res://UI stuff/Green Palette/green_food_button.png" id="30_h36mb"]
 [ext_resource type="Script" path="res://scripts/debug_content.gd" id="30_yjdom"]
+[ext_resource type="Script" path="res://scenes/theme_controls.gd" id="32_iab5t"]
 [ext_resource type="Texture2D" uid="uid://cbro8i4w61mun" path="res://UI stuff/Orange Palette/orange_food_button.png" id="32_mhymf"]
 [ext_resource type="Texture2D" uid="uid://jj1g1lm51rt4" path="res://UI stuff/Pink Palette/pink_food_button.png" id="33_d34tv"]
 [ext_resource type="AudioStream" uid="uid://dat0sfue6jjr5" path="res://sound_effects/metal-pipe-falling-sound-effect-made-with-Voicemod.mp3" id="33_ipuqk"]
 [ext_resource type="Texture2D" uid="uid://drv50ynifh37j" path="res://UI stuff/Green Palette/green_activities_button.png" id="34_45f7i"]
+[ext_resource type="Script" path="res://scenes/music_controls.gd" id="34_jfyk1"]
 [ext_resource type="Texture2D" uid="uid://cnoe7iliwc4o4" path="res://UI stuff/Orange Palette/orange_activity_button.png" id="35_dpmji"]
 [ext_resource type="Script" path="res://scripts/ActButton.gd" id="35_iptwc"]
 [ext_resource type="Script" path="res://scripts/foodbutton.gd" id="35_x2dv4"]
@@ -778,6 +776,7 @@ text = "Cancel"
 [node name="ThemeControls" type="Node2D" parent="UI/OptionsContainer/OptionsMenu"]
 position = Vector2(-108, 26)
 scale = Vector2(0.75, 0.75)
+script = ExtResource("32_iab5t")
 
 [node name="Label" type="Label" parent="UI/OptionsContainer/OptionsMenu/ThemeControls"]
 offset_left = 210.0
@@ -811,7 +810,6 @@ theme_override_constants/outline_size = 3
 theme_override_font_sizes/font_size = 44
 theme_override_styles/normal = SubResource("StyleBoxFlat_3535b")
 text = "<"
-script = ExtResource("22_bxo36")
 
 [node name="Button" type="Button" parent="UI/OptionsContainer/OptionsMenu/ThemeControls/vHBoxContainer"]
 custom_minimum_size = Vector2(65, 0)
@@ -823,11 +821,11 @@ theme_override_constants/outline_size = 3
 theme_override_font_sizes/font_size = 44
 theme_override_styles/normal = SubResource("StyleBoxFlat_3535b")
 text = ">"
-script = ExtResource("21_noh54")
 
 [node name="MusicControls" type="Node2D" parent="UI/OptionsContainer/OptionsMenu"]
 position = Vector2(102, 26)
 scale = Vector2(0.75, 0.75)
+script = ExtResource("34_jfyk1")
 
 [node name="Label" type="Label" parent="UI/OptionsContainer/OptionsMenu/MusicControls"]
 offset_left = 210.0
@@ -861,7 +859,6 @@ theme_override_constants/outline_size = 3
 theme_override_font_sizes/font_size = 44
 theme_override_styles/normal = SubResource("StyleBoxFlat_3535b")
 text = "<"
-script = ExtResource("27_dki0q")
 
 [node name="Button" type="Button" parent="UI/OptionsContainer/OptionsMenu/MusicControls/HBoxContainer"]
 custom_minimum_size = Vector2(65, 0)
@@ -873,7 +870,6 @@ theme_override_constants/outline_size = 3
 theme_override_font_sizes/font_size = 44
 theme_override_styles/normal = SubResource("StyleBoxFlat_3535b")
 text = ">"
-script = ExtResource("28_v0nol")
 
 [node name="VolumeControls" type="Node2D" parent="UI/OptionsContainer/OptionsMenu"]
 position = Vector2(-63, -88)
@@ -927,11 +923,11 @@ theme_override_styles/slider = SubResource("StyleBoxLine_kxflm")
 tick_count = 1
 bus_name = "Music"
 
-[node name="Node2D" type="Node2D" parent="UI/OptionsContainer/OptionsMenu"]
+[node name="Credits" type="Node2D" parent="UI/OptionsContainer/OptionsMenu"]
 position = Vector2(180, 240)
 scale = Vector2(0.75, 0.75)
 
-[node name="Button" type="Button" parent="UI/OptionsContainer/OptionsMenu/Node2D"]
+[node name="Button" type="Button" parent="UI/OptionsContainer/OptionsMenu/Credits"]
 offset_left = -40.0
 offset_top = -305.333
 offset_right = 136.0
@@ -1038,10 +1034,10 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/ScreenControls/KillControls/MarginContainer/GridContainer/Button 3" to="UI/ScreenControls/KillControls" method="_on_button_3_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/KillControls/MarginContainer/GridContainer/Button 4" to="UI/ScreenControls/KillControls" method="_on_button_4_button_down"]
 [connection signal="pressed" from="UI/OptionsContainer/OptionsMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
-[connection signal="button_down" from="UI/OptionsContainer/OptionsMenu/ThemeControls/vHBoxContainer/Button2" to="UI/OptionsContainer/OptionsMenu/ThemeControls/vHBoxContainer/Button2" method="_on_button_down"]
-[connection signal="button_down" from="UI/OptionsContainer/OptionsMenu/ThemeControls/vHBoxContainer/Button" to="UI/OptionsContainer/OptionsMenu/ThemeControls/vHBoxContainer/Button" method="_on_button_down"]
-[connection signal="button_down" from="UI/OptionsContainer/OptionsMenu/MusicControls/HBoxContainer/Button2" to="UI/OptionsContainer/OptionsMenu/MusicControls/HBoxContainer/Button2" method="_on_button_down"]
-[connection signal="button_down" from="UI/OptionsContainer/OptionsMenu/MusicControls/HBoxContainer/Button" to="UI/OptionsContainer/OptionsMenu/MusicControls/HBoxContainer/Button" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsContainer/OptionsMenu/ThemeControls/vHBoxContainer/Button2" to="UI/OptionsContainer/OptionsMenu/ThemeControls" method="_on_back_button_down"]
+[connection signal="button_down" from="UI/OptionsContainer/OptionsMenu/ThemeControls/vHBoxContainer/Button" to="UI/OptionsContainer/OptionsMenu/ThemeControls" method="_on_forward_button_down"]
+[connection signal="button_down" from="UI/OptionsContainer/OptionsMenu/MusicControls/HBoxContainer/Button2" to="UI/OptionsContainer/OptionsMenu/MusicControls" method="_on_back_button_down"]
+[connection signal="button_down" from="UI/OptionsContainer/OptionsMenu/MusicControls/HBoxContainer/Button" to="UI/OptionsContainer/OptionsMenu/MusicControls" method="_on_forward_button_down"]
 [connection signal="button_down" from="UI/OptionsContainer/SettingsButton" to="UI/OptionsContainer/SettingsButton" method="_on_button_down"]
 [connection signal="button_down" from="UI/NavigationControls/FoodButton" to="UI/NavigationControls/FoodButton" method="_on_button_down"]
 [connection signal="button_down" from="UI/NavigationControls/ActButton" to="UI/NavigationControls/ActButton" method="_on_button_down"]
