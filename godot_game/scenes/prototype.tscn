@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://c282rwt57fvoc"]
+[gd_scene load_steps=87 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://placeholder/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
 [ext_resource type="Script" path="res://scripts/prototype.gd" id="1_of2kb"]
@@ -34,19 +34,20 @@
 [ext_resource type="Script" path="res://scripts/sp_bar.gd" id="24_bbo8y"]
 [ext_resource type="Script" path="res://scripts/ap_bar.gd" id="25_6xclj"]
 [ext_resource type="Texture2D" uid="uid://dckcusgfn24wj" path="res://icons/arrow.svg" id="26_fi2mk"]
-[ext_resource type="Script" path="res://scenes/arrowscale.gd" id="27_kx1gg"]
+[ext_resource type="Script" path="res://scripts/arrowscale.gd" id="27_kx1gg"]
 [ext_resource type="Script" path="res://scripts/mp_bar.gd" id="28_sltmf"]
 [ext_resource type="PackedScene" uid="uid://b6wocr0vo5s4v" path="res://scenes/debug_content.tscn" id="29_le63d"]
 [ext_resource type="Texture2D" uid="uid://d4c1k5m8u1jc0" path="res://UI stuff/Green Palette/green_food_button.png" id="30_h36mb"]
 [ext_resource type="Script" path="res://scripts/debug_content.gd" id="30_yjdom"]
-[ext_resource type="Script" path="res://scenes/theme_controls.gd" id="32_iab5t"]
+[ext_resource type="Script" path="res://scripts/theme_controls.gd" id="32_iab5t"]
 [ext_resource type="Texture2D" uid="uid://cbro8i4w61mun" path="res://UI stuff/Orange Palette/orange_food_button.png" id="32_mhymf"]
 [ext_resource type="Texture2D" uid="uid://jj1g1lm51rt4" path="res://UI stuff/Pink Palette/pink_food_button.png" id="33_d34tv"]
 [ext_resource type="AudioStream" uid="uid://dat0sfue6jjr5" path="res://sound_effects/metal-pipe-falling-sound-effect-made-with-Voicemod.mp3" id="33_ipuqk"]
 [ext_resource type="Texture2D" uid="uid://drv50ynifh37j" path="res://UI stuff/Green Palette/green_activities_button.png" id="34_45f7i"]
-[ext_resource type="Script" path="res://scenes/music_controls.gd" id="34_jfyk1"]
+[ext_resource type="Script" path="res://scripts/music_controls.gd" id="34_jfyk1"]
 [ext_resource type="Texture2D" uid="uid://cnoe7iliwc4o4" path="res://UI stuff/Orange Palette/orange_activity_button.png" id="35_dpmji"]
 [ext_resource type="Script" path="res://scripts/ActButton.gd" id="35_iptwc"]
+[ext_resource type="Script" path="res://scripts/hidden_menu_panel.gd" id="35_lpgka"]
 [ext_resource type="Script" path="res://scripts/foodbutton.gd" id="35_x2dv4"]
 [ext_resource type="Texture2D" uid="uid://b8y8c6h2qmqds" path="res://UI stuff/Pink Palette/pink_activities_button.png" id="36_2kh6x"]
 [ext_resource type="Texture2D" uid="uid://b5uf4jcvme855" path="res://UI stuff/Green Palette/green_settings_button.png" id="37_gtlc6"]
@@ -743,6 +744,7 @@ offset_bottom = 40.0
 [node name="OptionsMenu" type="PanelContainer" parent="UI/OptionsContainer"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -756,6 +758,7 @@ offset_bottom = 535.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_kxv3i")
+script = ExtResource("35_lpgka")
 
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsContainer/OptionsMenu"]
 position = Vector2(-50, -130)
@@ -955,6 +958,7 @@ script = SubResource("GDScript_ao166")
 [node name="CreditsContainer" type="PanelContainer" parent="UI/OptionsContainer"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -968,6 +972,7 @@ offset_bottom = 535.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_qyod2")
+script = ExtResource("35_lpgka")
 
 [node name="Node2D" type="Node2D" parent="UI/OptionsContainer/CreditsContainer"]
 

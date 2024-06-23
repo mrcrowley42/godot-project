@@ -30,3 +30,9 @@ window/handheld/orientation=1
 [dotnet]
 
 project/assembly_name="Godot Game"
+
+[file_customization]
+
+folder_colors={
+"res://legacy/": "gray"
+}

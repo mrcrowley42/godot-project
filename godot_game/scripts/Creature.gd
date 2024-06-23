@@ -1,5 +1,9 @@
 extends Node2D
 
+class_name Creature
+## Creature base class
+
+## Colour to tint creature as HP approaches 0.
 @export_color_no_alpha var dying_colour;
 @export var max_health: float = 1000.0
 @export var max_mp: float = 1000.0
@@ -25,20 +29,20 @@ var stats = {
 	'sp': damage_sp
 }
 
-func _ready():
+func _ready() -> void:
 	#var sprite = preload(creature_list[0])
 
 	reset_stats()
 
 
-func reset_stats():
+func reset_stats() -> void:
 	self.health = max_health
 	self.mp = max_mp
 	self.sp = max_sp
 	self.ap = max_ap
 
 ## function to damage/heal the Creature (use a negative value to heal)
-func dmg(amount:float, stat:String):
+func dmg(amount:float, stat:String) -> void:
 	stats[stat].call(amount)
 
 	
@@ -47,13 +51,13 @@ func dead():
 
 
 ## Tint the Create using the dying_colour set in inspector scaling the tint based on how low HP is.
-func apply_dmg_tint():
+func apply_dmg_tint() -> void:
 	self.modulate.b = clampf(1 - (1 - self.health/1000) + dying_colour.b,0,1)
 	self.modulate.g = clampf(1 - (1 - self.health/1000) + dying_colour.g,0,1)
 	self.modulate.r = clampf(1 - (1 - self.health/1000) + dying_colour.r,0,1)
 
 
-func damage_hp(amount):
+func damage_hp(amount: float) -> void:
 	self.health -= amount
 	if health <= 0:
 		call_deferred("dead")

@@ -1,7 +1,11 @@
+#@icon("res://icons/gear.svg")
 extends Node2D
 
+class_name StatusManager
+## Script responsible for passive drain of Creature stats
+
 @export_category("Status Controls")
-@export_group("Status drain controls")
+@export_group("Passive drain controls")
 @export var hp_rate: float = 1
 @export var hp_amount: float = 5
 @export var mp_rate: float = 4
@@ -10,10 +14,12 @@ extends Node2D
 @export var sp_amount: float = 2
 @export var ap_rate: float = 30
 @export var ap_amount: float = 1
-@onready var creature = %Creature
 
+@onready var creature: Node2D = %Creature
 
-func new_timer(rate, timeout_func):
+## Creates a new timer that loops [param rate] times per second,
+## and executes the [param timeout_func] at the end of each loop.
+func new_timer(rate: float, timeout_func: Callable) -> void:
 	var timer = Timer.new()
 	timer.wait_time = 1 / rate
 	timer.autostart = true
