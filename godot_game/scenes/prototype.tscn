@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=3 uid="uid://c282rwt57fvoc"]
+[gd_scene load_steps=86 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://placeholder/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
 [ext_resource type="Script" path="res://scripts/prototype.gd" id="1_of2kb"]
@@ -38,7 +38,6 @@
 [ext_resource type="Script" path="res://scripts/mp_bar.gd" id="28_sltmf"]
 [ext_resource type="PackedScene" uid="uid://b6wocr0vo5s4v" path="res://scenes/debug_content.tscn" id="29_le63d"]
 [ext_resource type="Texture2D" uid="uid://d4c1k5m8u1jc0" path="res://UI stuff/Green Palette/green_food_button.png" id="30_h36mb"]
-[ext_resource type="Script" path="res://scripts/debug_content.gd" id="30_yjdom"]
 [ext_resource type="Script" path="res://scripts/theme_controls.gd" id="32_iab5t"]
 [ext_resource type="Texture2D" uid="uid://cbro8i4w61mun" path="res://UI stuff/Orange Palette/orange_food_button.png" id="32_mhymf"]
 [ext_resource type="Texture2D" uid="uid://jj1g1lm51rt4" path="res://UI stuff/Pink Palette/pink_food_button.png" id="33_d34tv"]
@@ -649,7 +648,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_2mbbg")
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
+theme_override_constants/margin_right = 18
 theme_override_constants/margin_bottom = 16
 
 [node name="StatusContainer" type="GridContainer" parent="UI/StatsContainer/MarginContainer"]
@@ -1062,7 +1061,6 @@ script = SubResource("GDScript_o2bb2")
 enabled = true
 
 [node name="DebugContent" parent="DebugWindow" instance=ExtResource("29_le63d")]
-script = ExtResource("30_yjdom")
 
 [node name="Audio" type="Node" parent="."]
 
