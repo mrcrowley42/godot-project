@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b6wocr0vo5s4v"]
+[gd_scene load_steps=13 format=3 uid="uid://b6wocr0vo5s4v"]
 
 [ext_resource type="Script" path="res://scripts/HPLabel.gd" id="1_178tx"]
 [ext_resource type="Script" path="res://scripts/debug_content.gd" id="1_jlyus"]
@@ -31,6 +31,9 @@ func _process(_delta):
 
 [sub_resource type="SystemFont" id="SystemFont_dcah2"]
 font_names = PackedStringArray("Monospace")
+
+[sub_resource type="Theme" id="Theme_kl34c"]
+default_font_size = 24
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_jlyus")
@@ -99,9 +102,9 @@ script = SubResource("GDScript_v57jq")
 
 [node name="Label" type="Label" parent="."]
 offset_left = 317.0
-offset_top = 327.0
+offset_top = 335.0
 offset_right = 431.0
-offset_bottom = 350.0
+offset_bottom = 358.0
 text = "Drain Strength"
 
 [node name="Label2" type="Label" parent="."]
@@ -112,10 +115,10 @@ offset_bottom = 295.0
 script = SubResource("GDScript_1tr3v")
 
 [node name="HSlider" type="HSlider" parent="."]
-offset_left = 300.0
-offset_top = 323.0
-offset_right = 458.0
-offset_bottom = 421.0
+offset_left = 294.0
+offset_top = 356.0
+offset_right = 452.0
+offset_bottom = 415.0
 max_value = 4.0
 step = 0.01
 value = 1.0
@@ -136,5 +139,21 @@ theme_override_fonts/font = SubResource("SystemFont_dcah2")
 theme_override_font_sizes/font_size = 24
 text = "FPS: %s"
 
+[node name="Label4" type="Label" parent="."]
+offset_left = 44.0
+offset_top = 446.0
+offset_right = 84.0
+offset_bottom = 480.0
+text = "Animation Override"
+
+[node name="AnimSelect" type="OptionButton" parent="."]
+offset_left = 219.0
+offset_top = 442.0
+offset_right = 379.0
+offset_bottom = 474.0
+theme = SubResource("Theme_kl34c")
+theme_override_font_sizes/font_size = 24
+
 [connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
+[connection signal="item_selected" from="AnimSelect" to="." method="_on_anim_select_item_selected"]

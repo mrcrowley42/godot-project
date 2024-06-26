@@ -2,7 +2,7 @@ extends AnimatedSprite2D
 @onready var creature = $".."
 
 func _ready():
-	creature.sp_changed.connect(angry)
+	#creature.sp_changed.connect(angry)
 	creature.hp_changed.connect(stop_it)
 
 func angry():
