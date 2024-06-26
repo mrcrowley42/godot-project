@@ -1084,10 +1084,12 @@ bus = &"SFX"
 
 [connection signal="button_down" from="UI/ScreenControls/ControlsContainer/MarginContainer/HBoxContainer/Button 1" to="UI/ScreenControls/ControlsContainer/MarginContainer/HBoxContainer/Button 1" method="_on_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ControlsContainer/MarginContainer/HBoxContainer/Button 2" to="UI/ScreenControls/ControlsContainer/MarginContainer/HBoxContainer/Button 2" method="_on_button_down"]
+[connection signal="visibility_changed" from="UI/ScreenControls/SaveControls" to="UI/ScreenControls/SaveControls" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/ScreenControls/SaveControls/MarginContainer/GridContainer/Button 1" to="UI/ScreenControls/SaveControls/MarginContainer/GridContainer/Button 1" method="_on_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/SaveControls/MarginContainer/GridContainer/Button 2" to="UI/ScreenControls/SaveControls/MarginContainer/GridContainer/Button 2" method="_on_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/SaveControls/MarginContainer/GridContainer/Button 3" to="UI/ScreenControls/SaveControls/MarginContainer/GridContainer/Button 3" method="_on_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/SaveControls/MarginContainer/GridContainer/Button 4" to="UI/ScreenControls/SaveControls/MarginContainer/GridContainer/Button 4" method="_on_button_down"]
+[connection signal="visibility_changed" from="UI/ScreenControls/KillControls" to="UI/ScreenControls/KillControls" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/ScreenControls/KillControls/MarginContainer/GridContainer/Button 1" to="UI/ScreenControls/KillControls" method="_on_button_1_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/KillControls/MarginContainer/GridContainer/Button 2" to="UI/ScreenControls/KillControls" method="_on_button_2_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/KillControls/MarginContainer/GridContainer/Button 3" to="UI/ScreenControls/KillControls" method="_on_button_3_button_down"]
