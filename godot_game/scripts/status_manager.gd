@@ -15,6 +15,8 @@ class_name StatusManager
 @export var ap_rate: float = 30
 @export var ap_amount: float = 1
 
+@export var time_multiplier: float = 1.0
+
 @onready var creature: Node2D = %Creature
 
 ## Creates a new timer that loops [param rate] times per second,
@@ -34,13 +36,13 @@ func _ready():
 	new_timer(ap_rate, ap_timeout)
 
 func hp_timeout():
-	creature.dmg(hp_amount, 'hp')
+	creature.dmg(hp_amount * time_multiplier, 'hp')
 	
 func mp_timeout():
-	creature.dmg(mp_amount, 'mp')
+	creature.dmg(mp_amount * time_multiplier , 'mp')
 
 func sp_timeout():
-	creature.dmg(sp_amount, 'sp')
+	creature.dmg(sp_amount * time_multiplier, 'sp')
 
 func ap_timeout():
-	creature.dmg(ap_amount, 'ap')
+	creature.dmg(ap_amount * time_multiplier, 'ap')

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b6wocr0vo5s4v"]
+[gd_scene load_steps=11 format=3 uid="uid://b6wocr0vo5s4v"]
 
 [ext_resource type="Script" path="res://scripts/HPLabel.gd" id="1_178tx"]
 [ext_resource type="Script" path="res://scripts/debug_content.gd" id="1_jlyus"]
@@ -20,6 +20,13 @@ func _process(_delta):
 	self.text = og_text % [
 		str(get_node(\"..\").music_track.stream.resource_path.get_file().get_basename())
 		]
+"
+
+[sub_resource type="GDScript" id="GDScript_1tr3v"]
+script/source = "extends Label
+
+func _process(_delta):
+	text =  str(get_node(\"..\").stat_man.time_multiplier)
 "
 
 [node name="Node2D" type="Node2D"]
@@ -79,10 +86,35 @@ text = "Theme num: %s"
 label_settings = SubResource("LabelSettings_35mdd")
 script = ExtResource("4_pa4py")
 
-[node name="Label" type="Label" parent="."]
+[node name="MusicTrack" type="Label" parent="."]
 offset_left = 19.0
 offset_top = 187.0
 offset_right = 59.0
 offset_bottom = 210.0
 text = "Current Track: %s"
 script = SubResource("GDScript_v57jq")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 225.0
+offset_top = 236.0
+offset_right = 265.0
+offset_bottom = 259.0
+text = "Drain Strength"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 389.0
+offset_top = 272.0
+offset_right = 429.0
+offset_bottom = 295.0
+script = SubResource("GDScript_1tr3v")
+
+[node name="HSlider" type="HSlider" parent="."]
+offset_left = 208.0
+offset_top = 232.0
+offset_right = 366.0
+offset_bottom = 330.0
+max_value = 4.0
+step = 0.01
+value = 1.0
+
+[connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
