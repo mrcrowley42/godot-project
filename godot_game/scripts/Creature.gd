@@ -40,6 +40,11 @@ func reset_stats() -> void:
 	self.mp = max_mp
 	self.sp = max_sp
 	self.ap = max_ap
+	hp_changed.emit()
+	sp_changed.emit()
+	ap_changed.emit()
+	mp_changed.emit()
+	apply_dmg_tint()
 
 ## function to damage/heal the Creature (use a negative value to heal)
 func dmg(amount:float, stat:String) -> void:
@@ -90,7 +95,7 @@ func load(data):
 	# this is a bit cursed an requires names to match up
 	# maybe this is a better way to do this but this at least
 	# prevents the app from breaking when an old save file is present.
-	for setting in ["mp", "ap", "sp", "hp"]:
+	for setting in ["mp", "ap", "sp"]:
 		if data.has(setting):
 			self[setting] = data[setting]
 			var signal_name = setting + "_changed"
