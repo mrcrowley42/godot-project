@@ -13,5 +13,5 @@ func angry():
 			self.animation = 'idle'
 
 func stop_it():
-	if creature.health < 300:
+	if creature.hp < 300:
 		%STAHP.play()

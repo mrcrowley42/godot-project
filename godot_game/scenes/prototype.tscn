@@ -324,7 +324,7 @@ scale = Vector2(1.2, 1.2)
 texture = ExtResource("1_7g4je")
 metadata/_edit_lock_ = true
 
-[node name="Creature" parent="Gameplay" instance=ExtResource("4_iwgh8")]
+[node name="Creature" parent="Gameplay" groups=["save_data"] instance=ExtResource("4_iwgh8")]
 unique_name_in_owner = true
 position = Vector2(270, 393.5)
 
@@ -683,7 +683,7 @@ theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 24
 text = "MP"
 
-[node name="MP_Bar" type="ProgressBar" parent="UI/StatsContainer/MarginContainer/StatusContainer" groups=["save_data"]]
+[node name="MP_Bar" type="ProgressBar" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
 custom_minimum_size = Vector2(160, 23)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -702,7 +702,7 @@ theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 24
 text = "SP"
 
-[node name="SP_Bar" type="ProgressBar" parent="UI/StatsContainer/MarginContainer/StatusContainer" groups=["save_data"]]
+[node name="SP_Bar" type="ProgressBar" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
 clip_contents = true
 custom_minimum_size = Vector2(160, 23)
 layout_mode = 2

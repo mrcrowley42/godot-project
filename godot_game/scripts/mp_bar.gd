@@ -8,8 +8,3 @@ func _ready():
 func update_mp_bar():
 	self.value = creature.mp
 
-func save():
-	return {"value": self.value}
-
-func load(data):
-	creature.mp = data["value"]

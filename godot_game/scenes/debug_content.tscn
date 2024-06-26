@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b6wocr0vo5s4v"]
+[gd_scene load_steps=12 format=3 uid="uid://b6wocr0vo5s4v"]
 
 [ext_resource type="Script" path="res://scripts/HPLabel.gd" id="1_178tx"]
 [ext_resource type="Script" path="res://scripts/debug_content.gd" id="1_jlyus"]
@@ -28,6 +28,9 @@ script/source = "extends Label
 func _process(_delta):
 	text =  str(get_node(\"..\").stat_man.time_multiplier)
 "
+
+[sub_resource type="SystemFont" id="SystemFont_dcah2"]
+font_names = PackedStringArray("Monospace")
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_jlyus")
@@ -123,6 +126,15 @@ offset_top = 327.0
 offset_right = 227.0
 offset_bottom = 402.0
 text = "FULL RESTORE"
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 10.0
+offset_top = 641.0
+offset_right = 117.0
+offset_bottom = 669.0
+theme_override_fonts/font = SubResource("SystemFont_dcah2")
+theme_override_font_sizes/font_size = 24
+text = "FPS: %s"
 
 [connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]

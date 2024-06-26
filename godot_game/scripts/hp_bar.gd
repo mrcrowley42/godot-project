@@ -6,4 +6,4 @@ func _ready():
 	update_hp_bar()
 
 func update_hp_bar():
-	self.value = creature.health
+	self.value = creature.hp

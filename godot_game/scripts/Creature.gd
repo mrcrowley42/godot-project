@@ -5,14 +5,14 @@ class_name Creature
 
 ## Colour to tint creature as HP approaches 0.
 @export_color_no_alpha var dying_colour;
-@export var max_health: float = 1000.0
+@export var max_hp: float = 1000.0
 @export var max_mp: float = 1000.0
 @export var max_sp: float = 1000
 @export var max_ap: float = 1000
 
 @export var creature_list: Array[Resource]
 
-var health:float
+var hp:float
 var mp:float
 var sp:float
 var ap:float
@@ -36,7 +36,7 @@ func _ready() -> void:
 
 
 func reset_stats() -> void:
-	self.health = max_health
+	self.hp = max_hp
 	self.mp = max_mp
 	self.sp = max_sp
 	self.ap = max_ap
@@ -52,16 +52,16 @@ func dead():
 
 ## Tint the Create using the dying_colour set in inspector scaling the tint based on how low HP is.
 func apply_dmg_tint() -> void:
-	self.modulate.b = clampf(1 - (1 - self.health/1000) + dying_colour.b,0,1)
-	self.modulate.g = clampf(1 - (1 - self.health/1000) + dying_colour.g,0,1)
-	self.modulate.r = clampf(1 - (1 - self.health/1000) + dying_colour.r,0,1)
+	self.modulate.b = clampf(1 - (1 - self.hp/1000) + dying_colour.b,0,1)
+	self.modulate.g = clampf(1 - (1 - self.hp/1000) + dying_colour.g,0,1)
+	self.modulate.r = clampf(1 - (1 - self.hp/1000) + dying_colour.r,0,1)
 
 
 func damage_hp(amount: float) -> void:
-	self.health -= amount
-	if health <= 0:
+	self.hp -= amount
+	if hp <= 0:
 		call_deferred("dead")
-	self.health = clampf(self.health, 0, max_health)
+	self.hp = clampf(self.hp, 0, max_hp)
 	apply_dmg_tint()
 	hp_changed.emit()
 
@@ -82,4 +82,20 @@ func damage_mp(amount):
 	self.mp -= amount
 	self.mp = clampf(self.mp, 0, max_mp)
 	mp_changed.emit()
+
+func save():
+	return {"mp": mp, "sp": sp, "ap": ap, "hp": hp}
 	
+func load(data):
+	# this is a bit cursed an requires names to match up
+	# maybe this is a better way to do this but this at least
+	# prevents the app from breaking when an old save file is present.
+	for setting in ["mp", "ap", "sp", "hp"]:
+		if data.has(setting):
+			self[setting] = data[setting]
+			var signal_name = setting + "_changed"
+			self[signal_name].emit()
+	# like having to call this here, this is kinda a mess
+	# maybe it would be easier to just call everything like this every frame ?
+	# 
+	apply_dmg_tint()
