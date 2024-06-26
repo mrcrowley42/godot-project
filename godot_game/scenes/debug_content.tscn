@@ -87,18 +87,18 @@ label_settings = SubResource("LabelSettings_35mdd")
 script = ExtResource("4_pa4py")
 
 [node name="MusicTrack" type="Label" parent="."]
-offset_left = 19.0
-offset_top = 187.0
-offset_right = 59.0
-offset_bottom = 210.0
+offset_left = 13.0
+offset_top = 174.0
+offset_right = 150.0
+offset_bottom = 197.0
 text = "Current Track: %s"
 script = SubResource("GDScript_v57jq")
 
 [node name="Label" type="Label" parent="."]
-offset_left = 225.0
-offset_top = 236.0
-offset_right = 265.0
-offset_bottom = 259.0
+offset_left = 317.0
+offset_top = 327.0
+offset_right = 431.0
+offset_bottom = 350.0
 text = "Drain Strength"
 
 [node name="Label2" type="Label" parent="."]
@@ -109,19 +109,19 @@ offset_bottom = 295.0
 script = SubResource("GDScript_1tr3v")
 
 [node name="HSlider" type="HSlider" parent="."]
-offset_left = 208.0
-offset_top = 232.0
-offset_right = 366.0
-offset_bottom = 330.0
+offset_left = 300.0
+offset_top = 323.0
+offset_right = 458.0
+offset_bottom = 421.0
 max_value = 4.0
 step = 0.01
 value = 1.0
 
 [node name="Button" type="Button" parent="."]
-offset_left = 45.0
-offset_top = 333.0
-offset_right = 240.0
-offset_bottom = 408.0
+offset_left = 32.0
+offset_top = 327.0
+offset_right = 227.0
+offset_bottom = 402.0
 text = "FULL RESTORE"
 
 [connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
