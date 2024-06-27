@@ -6,6 +6,6 @@ func _process(_delta):
 	var stats = get_node("..").stat_man
 	var rate = -(stats.sp_amount * (stats.sp_rate * stats.time_multiplier))
 	self.text = og_text % [
-			str(round(get_node("..").creature.sp)),
+			str(round(find_parent('DebugContent').creature.sp)),
 			str(rate)
 		]

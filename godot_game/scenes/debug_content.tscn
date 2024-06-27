@@ -1,10 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://b6wocr0vo5s4v"]
+[gd_scene load_steps=13 format=3 uid="uid://b6wocr0vo5s4v"]
 
 [ext_resource type="Script" path="res://scripts/HPLabel.gd" id="1_178tx"]
 [ext_resource type="Script" path="res://scripts/debug_content.gd" id="1_jlyus"]
 [ext_resource type="Script" path="res://scripts/MPLabel.gd" id="2_3h2jk"]
-[ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="2_5bhpe"]
-[ext_resource type="Script" path="res://scripts/ColLabel.gd" id="3_aal3r"]
+[ext_resource type="Theme" uid="uid://ck482qjhod2v2" path="res://themes/monospace_font.tres" id="2_5bhpe"]
 [ext_resource type="Script" path="res://scripts/SPLabel.gd" id="3_kowqt"]
 [ext_resource type="Script" path="res://scripts/APLabel.gd" id="3_qpwvx"]
 [ext_resource type="Script" path="res://scripts/ThemeLabel.gd" id="4_pa4py"]
@@ -30,7 +29,7 @@ var og_text = self.text
 
 func _process(_delta):
 	self.text = og_text % [
-		str(get_node(\"..\").music_track.stream.resource_path.get_file().get_basename())
+		str(find_parent('DebugContent').music_track.stream.resource_path.get_file().get_basename())
 		]
 "
 
@@ -38,14 +37,14 @@ func _process(_delta):
 script/source = "extends Label
 
 func _process(_delta):
-	text =  str(get_node(\"..\").stat_man.time_multiplier)
+	text =  str(find_parent('DebugContent').stat_man.time_multiplier)
 "
 
 [sub_resource type="SystemFont" id="SystemFont_dcah2"]
 font_names = PackedStringArray("Monospace")
 subpixel_positioning = 0
 
-[node name="Node2D" type="Node2D"]
+[node name="DebugContent" type="Node2D"]
 position = Vector2(8, 8)
 script = ExtResource("1_jlyus")
 
@@ -54,6 +53,8 @@ offset_left = 18.0
 offset_top = 26.0
 offset_right = 199.0
 offset_bottom = 54.0
+size_flags_horizontal = 0
+size_flags_vertical = 6
 theme = ExtResource("2_5bhpe")
 text = "HP: %s (%s/sec)"
 label_settings = SubResource("LabelSettings_35mdd")
@@ -64,6 +65,8 @@ offset_left = 248.0
 offset_top = 26.0
 offset_right = 429.0
 offset_bottom = 54.0
+size_flags_horizontal = 0
+size_flags_vertical = 6
 theme = ExtResource("2_5bhpe")
 text = "MP: %s (%s/sec)"
 label_settings = SubResource("LabelSettings_35mdd")
@@ -74,6 +77,8 @@ offset_left = 248.0
 offset_top = 66.0
 offset_right = 429.0
 offset_bottom = 94.0
+size_flags_horizontal = 0
+size_flags_vertical = 6
 theme = ExtResource("2_5bhpe")
 text = "AP: %s (%s/sec)"
 label_settings = SubResource("LabelSettings_35mdd")
@@ -84,21 +89,12 @@ offset_left = 18.0
 offset_top = 66.0
 offset_right = 199.0
 offset_bottom = 94.0
+size_flags_horizontal = 0
+size_flags_vertical = 6
 theme = ExtResource("2_5bhpe")
 text = "SP: %s (%s/sec)"
 label_settings = SubResource("LabelSettings_35mdd")
 script = ExtResource("3_kowqt")
-
-[node name="ColLabel" type="Label" parent="."]
-visible = false
-offset_left = 10.0
-offset_top = 90.0
-offset_right = 159.0
-offset_bottom = 118.0
-theme = ExtResource("2_5bhpe")
-text = "Col: %s"
-label_settings = SubResource("LabelSettings_35mdd")
-script = ExtResource("3_aal3r")
 
 [node name="ThemeLabel" type="Label" parent="."]
 offset_left = 18.0
@@ -182,12 +178,6 @@ offset_right = 440.0
 offset_bottom = 480.0
 theme = ExtResource("2_5bhpe")
 theme_override_font_sizes/font_size = 24
-
-[node name="MarginContainer" type="MarginContainer" parent="."]
-offset_left = 8.0
-offset_top = 16.0
-offset_right = 48.0
-offset_bottom = 56.0
 
 [connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
