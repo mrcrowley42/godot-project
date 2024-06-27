@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=3 uid="uid://c282rwt57fvoc"]
+[gd_scene load_steps=84 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://placeholder/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
 [ext_resource type="Script" path="res://scripts/prototype.gd" id="1_of2kb"]
@@ -13,14 +13,12 @@
 [ext_resource type="Texture2D" uid="uid://ct00htjp1rtjn" path="res://icons/settings_24dp_FILL1_wght500_GRAD-25_opsz24.svg" id="9_4we8d"]
 [ext_resource type="Script" path="res://scripts/optionbut.gd" id="9_jsl5b"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="9_wn204"]
-[ext_resource type="Script" path="res://scripts/button_submenu.gd" id="10_y36nk"]
 [ext_resource type="Shader" path="res://shaders/new_shader.gdshader" id="11_1vr7d"]
-[ext_resource type="Script" path="res://scripts/Butto.gd" id="11_6jjvb"]
 [ext_resource type="Script" path="res://scripts/kill_button.gd" id="11_nbfug"]
-[ext_resource type="Theme" uid="uid://dpeh5d2xu80up" path="res://themes/prototype_theme.tres" id="13_tapur"]
 [ext_resource type="Script" path="res://scripts/SaveControls.gd" id="14_dx6xt"]
 [ext_resource type="PackedScene" uid="uid://cbn0dv1k0onpb" path="res://scenes/vol_slider.tscn" id="15_lmno7"]
 [ext_resource type="Texture2D" uid="uid://dckd2hhimpp2x" path="res://icons/cup-straw.svg" id="16_we3t2"]
+[ext_resource type="Theme" uid="uid://o8jkvw1gdxq0" path="res://themes/actionbtns.tres" id="16_ye11j"]
 [ext_resource type="AudioStream" uid="uid://dcet1hpt70t42" path="res://music/perfection.mp3" id="17_oqlhs"]
 [ext_resource type="AudioStream" uid="uid://8ifwm2tjitur" path="res://sound_effects/yippee.mp3" id="18_6dihm"]
 [ext_resource type="Texture2D" uid="uid://b4pvkkppy44n0" path="res://icons/icecream_48dp_FILL0_wght400_GRAD0_opsz48.svg" id="18_lv553"]
@@ -115,29 +113,22 @@ interpolation_mode = 1
 offsets = PackedFloat32Array(0, 0.12381, 0.290476, 0.452381, 0.652381, 0.819048, 1)
 colors = PackedColorArray(1, 0, 0, 1, 1, 0.482353, 0.321569, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0.509804, 1, 0.529412, 0, 0.745098, 1, 1, 1, 1, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3elyl"]
-bg_color = Color(0.176419, 0.176419, 0.176419, 0.85098)
-draw_center = false
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_abt4t"]
-bg_color = Color(0, 0, 0, 0.32549)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.921569, 0.752941, 0.752941, 0.286275)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-shadow_color = Color(1, 1, 1, 0.6)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k7dc5"]
 bg_color = Color(0, 0, 0, 0.384314)
 corner_radius_top_left = 32
 corner_radius_top_right = 32
 corner_radius_bottom_right = 32
 corner_radius_bottom_left = 32
+
+[sub_resource type="GDScript" id="GDScript_ovb2u"]
+script/source = "extends Button
+
+@onready var creature = %Creature
+
+func _on_button_down():
+	%Yip.play()
+	creature.dmg(-100, 'mp')
+"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_golou"]
 bg_color = Color(0.226455, 0.5709, 0.530033, 0.631373)
@@ -150,16 +141,6 @@ corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
-
-[sub_resource type="GDScript" id="GDScript_ovb2u"]
-script/source = "extends Button
-
-@onready var creature = %Creature
-
-func _on_button_down():
-	%Yip.play()
-	creature.dmg(-100, 'mp')
-"
 
 [sub_resource type="GDScript" id="GDScript_ve7ha"]
 script/source = "extends Button
@@ -451,54 +432,6 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="ControlsContainer" type="PanelContainer" parent="UI/ScreenControls"]
-visible = false
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 33.0
-offset_top = 16.0
-offset_right = 467.0
-offset_bottom = 104.0
-grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_3elyl")
-
-[node name="MarginContainer" type="MarginContainer" parent="UI/ScreenControls/ControlsContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = 10
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/ScreenControls/ControlsContainer/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 24
-alignment = 1
-
-[node name="Button 1" type="Button" parent="UI/ScreenControls/ControlsContainer/MarginContainer/HBoxContainer"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("13_tapur")
-theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
-theme_override_fonts/font = ExtResource("9_wn204")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_abt4t")
-text = "Group 1"
-script = ExtResource("10_y36nk")
-
-[node name="Button 2" type="Button" parent="UI/ScreenControls/ControlsContainer/MarginContainer/HBoxContainer"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
-theme_override_fonts/font = ExtResource("9_wn204")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_abt4t")
-text = "Group 2"
-script = ExtResource("11_6jjvb")
-
 [node name="SaveControls" type="PanelContainer" parent="UI/ScreenControls"]
 unique_name_in_owner = true
 visible = false
@@ -535,11 +468,9 @@ columns = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
-theme_override_constants/icon_max_width = 120
+theme = ExtResource("16_ye11j")
 theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
 icon = ExtResource("16_we3t2")
 icon_alignment = 1
 expand_icon = true
@@ -549,13 +480,7 @@ script = ExtResource("8_0ys56")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_colors/font_color = Color(1, 0.721569, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
-theme_override_constants/icon_max_width = 120
-theme_override_fonts/font = ExtResource("9_wn204")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
+theme = ExtResource("16_ye11j")
 icon = ExtResource("18_lv553")
 icon_alignment = 1
 expand_icon = true
@@ -582,11 +507,7 @@ script = SubResource("GDScript_ve7ha")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
-theme_override_constants/icon_max_width = 120
-theme_override_fonts/font = ExtResource("9_wn204")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
+theme = ExtResource("16_ye11j")
 icon = ExtResource("20_40f8v")
 icon_alignment = 1
 expand_icon = true
@@ -594,7 +515,6 @@ script = ExtResource("11_nbfug")
 
 [node name="KillControls" type="PanelContainer" parent="UI/ScreenControls"]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(400, 400)
 layout_mode = 1
 anchors_preset = 8
@@ -628,11 +548,7 @@ columns = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
-theme_override_constants/icon_max_width = 120
-theme_override_fonts/font = ExtResource("9_wn204")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
+theme = ExtResource("16_ye11j")
 icon = ExtResource("20_xnus2")
 icon_alignment = 1
 expand_icon = true
@@ -641,12 +557,8 @@ expand_icon = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("16_ye11j")
 theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
-theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
-theme_override_constants/icon_max_width = 120
-theme_override_fonts/font = ExtResource("9_wn204")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
 icon = ExtResource("21_faowa")
 icon_alignment = 1
 expand_icon = true
@@ -655,12 +567,8 @@ expand_icon = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("16_ye11j")
 theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
-theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
-theme_override_constants/icon_max_width = 120
-theme_override_fonts/font = ExtResource("9_wn204")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
 icon = ExtResource("22_ktcf4")
 icon_alignment = 1
 expand_icon = true
@@ -669,12 +577,8 @@ expand_icon = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("16_ye11j")
 theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
-theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
-theme_override_constants/icon_max_width = 120
-theme_override_fonts/font = ExtResource("9_wn204")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
 icon = ExtResource("23_m81o6")
 icon_alignment = 1
 expand_icon = true
@@ -1138,8 +1042,6 @@ unique_name_in_owner = true
 stream = ExtResource("33_ipuqk")
 bus = &"SFX"
 
-[connection signal="button_down" from="UI/ScreenControls/ControlsContainer/MarginContainer/HBoxContainer/Button 1" to="UI/ScreenControls/ControlsContainer/MarginContainer/HBoxContainer/Button 1" method="_on_button_down"]
-[connection signal="button_down" from="UI/ScreenControls/ControlsContainer/MarginContainer/HBoxContainer/Button 2" to="UI/ScreenControls/ControlsContainer/MarginContainer/HBoxContainer/Button 2" method="_on_button_down"]
 [connection signal="visibility_changed" from="UI/ScreenControls/SaveControls" to="UI/ScreenControls/SaveControls" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/ScreenControls/SaveControls/MarginContainer/GridContainer/Button 1" to="UI/ScreenControls/SaveControls/MarginContainer/GridContainer/Button 1" method="_on_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/SaveControls/MarginContainer/GridContainer/Button 2" to="UI/ScreenControls/SaveControls/MarginContainer/GridContainer/Button 2" method="_on_button_down"]
