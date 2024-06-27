@@ -31,6 +31,7 @@ func _process(_delta):
 
 [sub_resource type="SystemFont" id="SystemFont_dcah2"]
 font_names = PackedStringArray("Monospace")
+subpixel_positioning = 0
 
 [sub_resource type="Theme" id="Theme_kl34c"]
 default_font_size = 24
@@ -108,10 +109,10 @@ offset_bottom = 358.0
 text = "Drain Strength"
 
 [node name="Label2" type="Label" parent="."]
-offset_left = 389.0
-offset_top = 272.0
-offset_right = 429.0
-offset_bottom = 295.0
+offset_left = 468.0
+offset_top = 373.0
+offset_right = 508.0
+offset_bottom = 396.0
 script = SubResource("GDScript_1tr3v")
 
 [node name="HSlider" type="HSlider" parent="."]

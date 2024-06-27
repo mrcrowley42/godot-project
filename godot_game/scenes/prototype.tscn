@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=3 uid="uid://c282rwt57fvoc"]
+[gd_scene load_steps=88 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://placeholder/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
 [ext_resource type="Script" path="res://scripts/prototype.gd" id="1_of2kb"]
@@ -17,7 +17,7 @@
 [ext_resource type="Shader" path="res://shaders/new_shader.gdshader" id="11_1vr7d"]
 [ext_resource type="Script" path="res://scripts/Butto.gd" id="11_6jjvb"]
 [ext_resource type="Script" path="res://scripts/kill_button.gd" id="11_nbfug"]
-[ext_resource type="Theme" uid="uid://dpeh5d2xu80up" path="res://themes/prototype_theme.tres" id="13_tapur"]
+[ext_resource type="Theme" path="res://themes/prototype_theme.tres" id="13_tapur"]
 [ext_resource type="Script" path="res://scripts/SaveControls.gd" id="14_dx6xt"]
 [ext_resource type="PackedScene" uid="uid://cbn0dv1k0onpb" path="res://scenes/vol_slider.tscn" id="15_lmno7"]
 [ext_resource type="Texture2D" uid="uid://dckd2hhimpp2x" path="res://icons/cup-straw.svg" id="16_we3t2"]
@@ -109,6 +109,11 @@ func _ready():
 func _process(_delta):
 	color = %ScreenColours.color
 "
+
+[sub_resource type="Gradient" id="Gradient_asbj7"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.12381, 0.290476, 0.452381, 0.652381, 0.819048, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.482353, 0.321569, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0.509804, 1, 0.529412, 0, 0.745098, 1, 1, 1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3elyl"]
 bg_color = Color(0.176419, 0.176419, 0.176419, 0.85098)
@@ -385,6 +390,44 @@ grow_horizontal = 2
 grow_vertical = 2
 script = SubResource("GDScript_j4fl7")
 metadata/_edit_lock_ = true
+
+[node name="ConfettiParticleL" type="CPUParticles2D" parent="Gameplay"]
+unique_name_in_owner = true
+position = Vector2(92, 555)
+emitting = false
+amount = 15
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+direction = Vector2(0.1, -1)
+spread = 6.0
+initial_velocity_min = 500.0
+initial_velocity_max = 900.0
+scale_amount_min = 10.0
+scale_amount_max = 15.0
+color_initial_ramp = SubResource("Gradient_asbj7")
+hue_variation_min = 1.0
+hue_variation_max = 1.0
+
+[node name="ConfettiParticleR" type="CPUParticles2D" parent="Gameplay"]
+unique_name_in_owner = true
+position = Vector2(446, 553)
+emitting = false
+amount = 15
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+direction = Vector2(-0.1, -1)
+spread = 6.0
+initial_velocity_min = 500.0
+initial_velocity_max = 900.0
+scale_amount_min = 10.0
+scale_amount_max = 15.0
+color_initial_ramp = SubResource("Gradient_asbj7")
+hue_variation_min = 1.0
+hue_variation_max = 1.0
 
 [node name="UI_Overlay" type="Sprite2D" parent="Gameplay" groups=["settings_data"]]
 unique_name_in_owner = true
