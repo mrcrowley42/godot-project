@@ -17,7 +17,7 @@
 [ext_resource type="Shader" path="res://shaders/new_shader.gdshader" id="11_1vr7d"]
 [ext_resource type="Script" path="res://scripts/Butto.gd" id="11_6jjvb"]
 [ext_resource type="Script" path="res://scripts/kill_button.gd" id="11_nbfug"]
-[ext_resource type="Theme" path="res://themes/prototype_theme.tres" id="13_tapur"]
+[ext_resource type="Theme" uid="uid://dpeh5d2xu80up" path="res://themes/prototype_theme.tres" id="13_tapur"]
 [ext_resource type="Script" path="res://scripts/SaveControls.gd" id="14_dx6xt"]
 [ext_resource type="PackedScene" uid="uid://cbn0dv1k0onpb" path="res://scenes/vol_slider.tscn" id="15_lmno7"]
 [ext_resource type="Texture2D" uid="uid://dckd2hhimpp2x" path="res://icons/cup-straw.svg" id="16_we3t2"]
