@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://ck482qjhod2v2"]
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://c6pbhcyqdefqk"]
 
 [sub_resource type="SystemFont" id="SystemFont_lq500"]
 font_names = PackedStringArray("Monospace")

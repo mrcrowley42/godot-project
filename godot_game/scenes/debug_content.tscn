@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/HPLabel.gd" id="1_178tx"]
 [ext_resource type="Script" path="res://scripts/debug_content.gd" id="1_jlyus"]
 [ext_resource type="Script" path="res://scripts/MPLabel.gd" id="2_3h2jk"]
-[ext_resource type="Theme" uid="uid://ck482qjhod2v2" path="res://themes/monospace_font.tres" id="2_5bhpe"]
+[ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="2_5bhpe"]
 [ext_resource type="Script" path="res://scripts/ColLabel.gd" id="3_aal3r"]
 [ext_resource type="Script" path="res://scripts/SPLabel.gd" id="3_kowqt"]
 [ext_resource type="Script" path="res://scripts/APLabel.gd" id="3_qpwvx"]
