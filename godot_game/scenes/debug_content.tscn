@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b6wocr0vo5s4v"]
+[gd_scene load_steps=14 format=3 uid="uid://b6wocr0vo5s4v"]
 
 [ext_resource type="Script" path="res://scripts/HPLabel.gd" id="1_178tx"]
 [ext_resource type="Script" path="res://scripts/debug_content.gd" id="1_jlyus"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/SPLabel.gd" id="3_kowqt"]
 [ext_resource type="Script" path="res://scripts/APLabel.gd" id="3_qpwvx"]
 [ext_resource type="Script" path="res://scripts/ThemeLabel.gd" id="4_pa4py"]
+[ext_resource type="Theme" uid="uid://dfygv0ddoeco2" path="res://themes/menu_btn.tres" id="8_lqg4h"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_35mdd"]
 font_size = 20
@@ -150,7 +151,7 @@ offset_left = 55.0
 offset_top = 359.0
 offset_right = 238.0
 offset_bottom = 424.0
-theme = ExtResource("2_5bhpe")
+theme = ExtResource("8_lqg4h")
 text = "FULL RESTORE"
 
 [node name="Label3" type="Label" parent="."]
