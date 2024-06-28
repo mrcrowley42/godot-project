@@ -18,7 +18,7 @@
 [ext_resource type="Script" path="res://scripts/SaveControls.gd" id="14_dx6xt"]
 [ext_resource type="PackedScene" uid="uid://cbn0dv1k0onpb" path="res://scenes/vol_slider.tscn" id="15_lmno7"]
 [ext_resource type="Texture2D" uid="uid://dckd2hhimpp2x" path="res://icons/cup-straw.svg" id="16_we3t2"]
-[ext_resource type="Theme" uid="uid://o8jkvw1gdxq0" path="res://themes/actionbtns.tres" id="16_ye11j"]
+[ext_resource type="Theme" uid="uid://b4an46b1e5m7s" path="res://themes/actionbtns.tres" id="16_ye11j"]
 [ext_resource type="AudioStream" uid="uid://dcet1hpt70t42" path="res://music/perfection.mp3" id="17_oqlhs"]
 [ext_resource type="AudioStream" uid="uid://8ifwm2tjitur" path="res://sound_effects/yippee.mp3" id="18_6dihm"]
 [ext_resource type="Texture2D" uid="uid://b4pvkkppy44n0" path="res://icons/icecream_48dp_FILL0_wght400_GRAD0_opsz48.svg" id="18_lv553"]
@@ -36,6 +36,7 @@
 [ext_resource type="Script" path="res://scripts/mp_bar.gd" id="28_sltmf"]
 [ext_resource type="PackedScene" uid="uid://b6wocr0vo5s4v" path="res://scenes/debug_content.tscn" id="29_le63d"]
 [ext_resource type="Texture2D" uid="uid://d4c1k5m8u1jc0" path="res://UI stuff/Green Palette/green_food_button.png" id="30_h36mb"]
+[ext_resource type="Theme" uid="uid://dfygv0ddoeco2" path="res://themes/menu_btn.tres" id="31_4jpkq"]
 [ext_resource type="Script" path="res://scripts/theme_controls.gd" id="32_iab5t"]
 [ext_resource type="Texture2D" uid="uid://cbro8i4w61mun" path="res://UI stuff/Orange Palette/orange_food_button.png" id="32_mhymf"]
 [ext_resource type="Texture2D" uid="uid://jj1g1lm51rt4" path="res://UI stuff/Pink Palette/pink_food_button.png" id="33_d34tv"]
@@ -220,21 +221,6 @@ corner_radius_bottom_left = 10
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kxv3i"]
 bg_color = Color(0, 0, 0, 0.737255)
 border_color = Color(0.8, 0.8, 0.8, 0.411765)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_16vbq"]
-bg_color = Color(0.6, 0.6, 0.6, 0.831373)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-expand_margin_left = 5.0
-expand_margin_top = 5.0
-expand_margin_right = 5.0
-expand_margin_bottom = 5.0
 
 [sub_resource type="GDScript" id="GDScript_xdo0o"]
 script/source = "extends Button
@@ -515,6 +501,7 @@ script = ExtResource("11_nbfug")
 
 [node name="KillControls" type="PanelContainer" parent="UI/ScreenControls"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(400, 400)
 layout_mode = 1
 anchors_preset = 8
@@ -726,11 +713,9 @@ offset_left = 90.0
 offset_top = 482.0
 offset_right = 234.0
 offset_bottom = 530.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme = ExtResource("31_4jpkq")
 theme_override_colors/font_hover_color = Color(0.4947, 0.97, 0.4947, 1)
-theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxFlat_16vbq")
 text = "Save Settings"
 
 [node name="Cancel" type="Button" parent="UI/OptionsContainer/OptionsMenu/SaveButtons"]
@@ -739,11 +724,9 @@ offset_left = 317.0
 offset_top = 482.0
 offset_right = 450.0
 offset_bottom = 530.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme = ExtResource("31_4jpkq")
 theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
-theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxFlat_16vbq")
 text = "Cancel"
 script = SubResource("GDScript_xdo0o")
 
@@ -908,16 +891,14 @@ offset_right = 136.0
 offset_bottom = -275.333
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_fonts/font = ExtResource("9_wn204")
+theme = ExtResource("31_4jpkq")
 theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_16vbq")
 text = "View Credits"
 script = SubResource("GDScript_ao166")
 
 [node name="CreditsContainer" type="PanelContainer" parent="UI/OptionsContainer"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -942,9 +923,8 @@ offset_right = 249.0
 offset_bottom = 407.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_fonts/font = ExtResource("9_wn204")
+theme = ExtResource("31_4jpkq")
 theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_16vbq")
 text = "Close"
 script = SubResource("GDScript_ao166")
 
