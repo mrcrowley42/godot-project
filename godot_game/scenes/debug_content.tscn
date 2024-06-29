@@ -1,12 +1,12 @@
 [gd_scene load_steps=15 format=3 uid="uid://b6wocr0vo5s4v"]
 
-[ext_resource type="Script" path="res://scripts/HPLabel.gd" id="1_178tx"]
 [ext_resource type="Script" path="res://scripts/debug_content.gd" id="1_jlyus"]
-[ext_resource type="Script" path="res://scripts/MPLabel.gd" id="2_3h2jk"]
+[ext_resource type="Script" path="res://scripts/mp_label.gd" id="2_3h2jk"]
 [ext_resource type="Theme" uid="uid://ck482qjhod2v2" path="res://themes/monospace_font.tres" id="2_5bhpe"]
-[ext_resource type="Script" path="res://scripts/SPLabel.gd" id="3_kowqt"]
-[ext_resource type="Script" path="res://scripts/APLabel.gd" id="3_qpwvx"]
-[ext_resource type="Script" path="res://scripts/ThemeLabel.gd" id="4_pa4py"]
+[ext_resource type="Script" path="res://scripts/hp_label.gd" id="3_jj2ny"]
+[ext_resource type="Script" path="res://scripts/sp_label.gd" id="3_kowqt"]
+[ext_resource type="Script" path="res://scripts/ap_label.gd" id="3_qpwvx"]
+[ext_resource type="Script" path="res://scripts/theme_label.gd" id="4_pa4py"]
 [ext_resource type="Theme" uid="uid://dfygv0ddoeco2" path="res://themes/menu_btn.tres" id="8_lqg4h"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_35mdd"]
@@ -67,7 +67,7 @@ size_flags_vertical = 6
 theme = ExtResource("2_5bhpe")
 text = "HP: %s (%s/sec)"
 label_settings = SubResource("LabelSettings_35mdd")
-script = ExtResource("1_178tx")
+script = ExtResource("3_jj2ny")
 
 [node name="MPLabel" type="Label" parent="."]
 offset_left = 272.0
