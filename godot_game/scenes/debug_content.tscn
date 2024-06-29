@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b6wocr0vo5s4v"]
+[gd_scene load_steps=14 format=3 uid="uid://b6wocr0vo5s4v"]
 
 [ext_resource type="Script" path="res://scripts/debug_content.gd" id="1_jlyus"]
 [ext_resource type="Script" path="res://scripts/mp_label.gd" id="2_3h2jk"]
@@ -48,10 +48,6 @@ func _process(_delta):
 	if value >=.55 and value <=1.55:
 		value = 1.0
 "
-
-[sub_resource type="SystemFont" id="SystemFont_dcah2"]
-font_names = PackedStringArray("Monospace")
-subpixel_positioning = 0
 
 [node name="DebugContent" type="Node2D"]
 position = Vector2(8, 8)
@@ -169,7 +165,6 @@ offset_top = 609.0
 offset_right = 133.0
 offset_bottom = 638.0
 theme = ExtResource("2_5bhpe")
-theme_override_fonts/font = SubResource("SystemFont_dcah2")
 theme_override_font_sizes/font_size = 24
 text = "FPS: %s"
 

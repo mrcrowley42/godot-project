@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://duucock0yfeav"]
 
 [ext_resource type="Theme" uid="uid://dfygv0ddoeco2" path="res://themes/menu_btn.tres" id="1_8aans"]
-[ext_resource type="Script" path="res://Scripts/RestartBttn.gd" id="1_tpdkx"]
+[ext_resource type="Script" path="res://Scripts/restart_btn.gd" id="1_tpdkx"]
 
 [node name="Node2D" type="Node2D"]
 

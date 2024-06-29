@@ -1,7 +1,6 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://ck482qjhod2v2"]
 
-[sub_resource type="SystemFont" id="SystemFont_lq500"]
-font_names = PackedStringArray("Monospace")
+[ext_resource type="FontFile" uid="uid://cukp5skadwgit" path="res://fonts/JetBrainsMono-VariableFont_wght.ttf" id="1_4e3ag"]
 
 [resource]
-default_font = SubResource("SystemFont_lq500")
+default_font = ExtResource("1_4e3ag")
