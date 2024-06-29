@@ -23,6 +23,7 @@ Globals="*res://scripts/Globals.gd"
 
 window/size/viewport_width=540
 window/size/viewport_height=675
+window/size/resizable=false
 window/subwindows/embed_subwindows=false
 window/stretch/mode="viewport"
 window/handheld/orientation=1

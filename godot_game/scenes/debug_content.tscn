@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b6wocr0vo5s4v"]
+[gd_scene load_steps=16 format=3 uid="uid://b6wocr0vo5s4v"]
 
 [ext_resource type="Script" path="res://scripts/debug_content.gd" id="1_jlyus"]
 [ext_resource type="Script" path="res://scripts/mp_label.gd" id="2_3h2jk"]
@@ -8,20 +8,22 @@
 [ext_resource type="Script" path="res://scripts/ap_label.gd" id="3_qpwvx"]
 [ext_resource type="Script" path="res://scripts/theme_label.gd" id="4_pa4py"]
 [ext_resource type="Theme" uid="uid://dfygv0ddoeco2" path="res://themes/menu_btn.tres" id="8_lqg4h"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_35mdd"]
-font_size = 20
+[ext_resource type="FontFile" uid="uid://cukp5skadwgit" path="res://fonts/JetBrainsMono-VariableFont_wght.ttf" id="9_y33yi"]
+[ext_resource type="Script" path="res://scenes/minimax.gd" id="10_4e6rj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fjahq"]
 bg_color = Color(0, 0, 0, 0.290196)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-expand_margin_left = 12.0
-expand_margin_top = 12.0
-expand_margin_right = 12.0
-expand_margin_bottom = 12.0
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 14.0
+expand_margin_top = 14.0
+expand_margin_right = 14.0
+expand_margin_bottom = 14.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_itiye"]
+line_spacing = 5.0
 
 [sub_resource type="GDScript" id="GDScript_v57jq"]
 script/source = "extends Label
@@ -38,14 +40,14 @@ func _process(_delta):
 script/source = "extends Label
 
 func _process(_delta):
-	text =  str(find_parent('DebugContent').stat_man.time_multiplier)
+	text = '%.2f' % find_parent('DebugContent').stat_man.time_multiplier
 "
 
 [sub_resource type="GDScript" id="GDScript_n68jj"]
 script/source = "extends HSlider
 
 func _process(_delta):
-	if value >=.55 and value <=1.55:
+	if value >=.95 and value <=1.05:
 		value = 1.0
 "
 
@@ -62,7 +64,6 @@ size_flags_horizontal = 0
 size_flags_vertical = 6
 theme = ExtResource("2_5bhpe")
 text = "HP: %s (%s/sec)"
-label_settings = SubResource("LabelSettings_35mdd")
 script = ExtResource("3_jj2ny")
 
 [node name="MPLabel" type="Label" parent="."]
@@ -74,7 +75,6 @@ size_flags_horizontal = 0
 size_flags_vertical = 6
 theme = ExtResource("2_5bhpe")
 text = "MP: %s (%s/sec)"
-label_settings = SubResource("LabelSettings_35mdd")
 script = ExtResource("2_3h2jk")
 
 [node name="APLabel" type="Label" parent="."]
@@ -86,7 +86,6 @@ size_flags_horizontal = 0
 size_flags_vertical = 6
 theme = ExtResource("2_5bhpe")
 text = "AP: %s (%s/sec)"
-label_settings = SubResource("LabelSettings_35mdd")
 script = ExtResource("3_qpwvx")
 
 [node name="SPLabel" type="Label" parent="."]
@@ -98,7 +97,6 @@ size_flags_horizontal = 0
 size_flags_vertical = 6
 theme = ExtResource("2_5bhpe")
 text = "SP: %s (%s/sec)"
-label_settings = SubResource("LabelSettings_35mdd")
 script = ExtResource("3_kowqt")
 
 [node name="ThemeLabel" type="Label" parent="."]
@@ -107,44 +105,55 @@ offset_top = 130.0
 offset_right = 175.0
 offset_bottom = 158.0
 theme = ExtResource("2_5bhpe")
-text = "Theme num: %s"
-label_settings = SubResource("LabelSettings_35mdd")
+text = "Theme: %s"
 script = ExtResource("4_pa4py")
 
 [node name="MusicTrack" type="Label" parent="."]
 offset_left = 28.0
 offset_top = 190.0
-offset_right = 500.0
-offset_bottom = 253.0
+offset_right = 494.0
+offset_bottom = 239.0
 theme = ExtResource("2_5bhpe")
+theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_fjahq")
-text = "Current Track: 
-
+text = "
 %s"
-autowrap_mode = 2
+label_settings = SubResource("LabelSettings_itiye")
+autowrap_mode = 3
+justification_flags = 171
+text_overrun_behavior = 3
 script = SubResource("GDScript_v57jq")
 
 [node name="Label" type="Label" parent="."]
-offset_left = 305.0
-offset_top = 361.0
-offset_right = 440.0
-offset_bottom = 384.0
+offset_left = 313.0
+offset_top = 302.0
+offset_right = 481.0
+offset_bottom = 329.0
 theme = ExtResource("2_5bhpe")
 text = "Drain Strength"
 
-[node name="Label2" type="Label" parent="."]
-offset_left = 468.0
-offset_top = 373.0
-offset_right = 508.0
-offset_bottom = 396.0
+[node name="Label5" type="Label" parent="."]
+offset_left = 27.0
+offset_top = 187.0
+offset_right = 195.0
+offset_bottom = 214.0
 theme = ExtResource("2_5bhpe")
+text = "Current Track:"
+
+[node name="Strength" type="Label" parent="."]
+offset_left = 466.0
+offset_top = 338.0
+offset_right = 506.0
+offset_bottom = 365.0
+theme = ExtResource("2_5bhpe")
+text = "1.0"
 script = SubResource("GDScript_1tr3v")
 
 [node name="HSlider" type="HSlider" parent="."]
-offset_left = 294.0
-offset_top = 380.0
-offset_right = 452.0
-offset_bottom = 439.0
+offset_left = 286.0
+offset_top = 324.0
+offset_right = 444.0
+offset_bottom = 383.0
 theme = ExtResource("2_5bhpe")
 max_value = 4.0
 step = 0.01
@@ -153,10 +162,12 @@ script = SubResource("GDScript_n68jj")
 
 [node name="Button" type="Button" parent="."]
 offset_left = 55.0
-offset_top = 359.0
+offset_top = 303.0
 offset_right = 238.0
-offset_bottom = 424.0
+offset_bottom = 368.0
 theme = ExtResource("8_lqg4h")
+theme_override_fonts/font = ExtResource("9_y33yi")
+theme_override_font_sizes/font_size = 20
 text = "FULL RESTORE"
 
 [node name="Label3" type="Label" parent="."]
@@ -165,25 +176,52 @@ offset_top = 609.0
 offset_right = 133.0
 offset_bottom = 638.0
 theme = ExtResource("2_5bhpe")
-theme_override_font_sizes/font_size = 24
 text = "FPS: %s"
 
 [node name="Label4" type="Label" parent="."]
-offset_left = 60.0
-offset_top = 447.0
-offset_right = 234.0
-offset_bottom = 481.0
+offset_left = 49.0
+offset_top = 421.0
+offset_right = 265.0
+offset_bottom = 455.0
 theme = ExtResource("2_5bhpe")
 text = "Animation Override"
 
 [node name="AnimSelect" type="OptionButton" parent="."]
-offset_left = 67.0
-offset_top = 483.0
-offset_right = 227.0
-offset_bottom = 515.0
+offset_left = 292.0
+offset_top = 418.0
+offset_right = 483.0
+offset_bottom = 448.0
 theme = ExtResource("2_5bhpe")
-theme_override_font_sizes/font_size = 24
+
+[node name="WindowSizeControls" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("10_4e6rj")
+
+[node name="MinimiseButton" type="Button" parent="WindowSizeControls"]
+offset_left = 262.0
+offset_top = 594.0
+offset_right = 371.0
+offset_bottom = 644.0
+theme = ExtResource("8_lqg4h")
+theme_override_fonts/font = ExtResource("9_y33yi")
+theme_override_font_sizes/font_size = 18
+text = "Minimise"
+
+[node name="MaximiseButton" type="Button" parent="WindowSizeControls"]
+offset_left = 398.0
+offset_top = 594.0
+offset_right = 507.0
+offset_bottom = 644.0
+theme = ExtResource("8_lqg4h")
+theme_override_fonts/font = ExtResource("9_y33yi")
+theme_override_font_sizes/font_size = 18
+text = "Maximise"
 
 [connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="item_selected" from="AnimSelect" to="." method="_on_anim_select_item_selected"]
+[connection signal="button_down" from="WindowSizeControls/MinimiseButton" to="WindowSizeControls" method="_on_min_down"]
+[connection signal="button_down" from="WindowSizeControls/MaximiseButton" to="WindowSizeControls" method="_on_max_down"]
