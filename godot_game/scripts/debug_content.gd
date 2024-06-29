@@ -23,6 +23,7 @@ func _ready():
 
 func _process(_delta):
 	$Label3.text = og_text % [str(Engine.get_frames_per_second())]
+	#$Label3.set("theme_override_colors/font_color", Color.CORAL)
 	
 func _on_anim_select_item_selected(index):
 	creature.find_child('AnimatedSprite2D').animation =$AnimSelect.get_item_text(index)
