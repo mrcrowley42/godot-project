@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://scripts/theme_label.gd" id="4_pa4py"]
 [ext_resource type="Theme" uid="uid://4sicn8kqyed4" path="res://themes/menu_btn.tres" id="8_lqg4h"]
 [ext_resource type="FontFile" uid="uid://cukp5skadwgit" path="res://fonts/JetBrainsMono-VariableFont_wght.ttf" id="9_y33yi"]
-[ext_resource type="Script" path="res://scenes/minimax.gd" id="10_4e6rj"]
+[ext_resource type="Script" path="res://scripts/minimax.gd" id="10_4e6rj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fjahq"]
 bg_color = Color(0, 0, 0, 0.290196)
@@ -300,22 +300,11 @@ offset_right = 42.0
 offset_bottom = 43.0
 script = ExtResource("10_4e6rj")
 
-[node name="NormalButton" type="Button" parent="WindowSizeControls"]
+[node name="MinimiseButton" type="Button" parent="WindowSizeControls"]
 layout_mode = 0
-offset_left = 266.0
+offset_left = 262.0
 offset_top = 594.0
-offset_right = 375.0
-offset_bottom = 644.0
-theme = ExtResource("8_lqg4h")
-theme_override_fonts/font = ExtResource("9_y33yi")
-theme_override_font_sizes/font_size = 18
-text = "Normal"
-
-[node name="MinimiseButton2" type="Button" parent="WindowSizeControls"]
-layout_mode = 0
-offset_left = 134.0
-offset_top = 594.0
-offset_right = 243.0
+offset_right = 371.0
 offset_bottom = 644.0
 theme = ExtResource("8_lqg4h")
 theme_override_fonts/font = ExtResource("9_y33yi")
@@ -344,7 +333,6 @@ offset_bottom = 436.0
 [connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="item_selected" from="AnimSelect" to="." method="_on_anim_select_item_selected"]
-[connection signal="button_down" from="WindowSizeControls/NormalButton" to="WindowSizeControls" method="_on_normal_button_button_down"]
-[connection signal="button_down" from="WindowSizeControls/MinimiseButton2" to="WindowSizeControls" method="_on_min_down"]
+[connection signal="button_down" from="WindowSizeControls/MinimiseButton" to="WindowSizeControls" method="_on_min_down"]
 [connection signal="button_down" from="WindowSizeControls/MaximiseButton" to="WindowSizeControls" method="_on_max_down"]
 [connection signal="popup_closed" from="ColorPickerButton" to="." method="_on_color_picker_button_popup_closed"]

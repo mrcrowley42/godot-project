@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bgly0bep64kkp" path="res://scenes/creature.tscn" id="4_iwgh8"]
 [ext_resource type="Script" path="res://scripts/ui_overlay.gd" id="6_tise3"]
 [ext_resource type="Texture2D" uid="uid://cawudmxbjamv0" path="res://UI stuff/Green Palette/ui_green.png" id="6_vadio"]
-[ext_resource type="Script" path="res://scenes/Confetti.gd" id="6_xwf4r"]
+[ext_resource type="Script" path="res://scripts/Confetti.gd" id="6_xwf4r"]
 [ext_resource type="Texture2D" uid="uid://c3835drqnfvy" path="res://UI stuff/Orange Palette/ui_orange.png" id="7_ebtg7"]
 [ext_resource type="Script" path="res://scripts/heal_button.gd" id="8_0ys56"]
 [ext_resource type="Texture2D" uid="uid://dm0iwje4s7uu8" path="res://UI stuff/Pink Palette/ui_pink.png" id="8_djtbd"]
@@ -31,7 +31,7 @@
 [ext_resource type="Script" path="res://scripts/ap_bar.gd" id="25_6xclj"]
 [ext_resource type="Texture2D" uid="uid://pfr6wdx80m45" path="res://icons/volume-fill.svg" id="25_nudlo"]
 [ext_resource type="Texture2D" uid="uid://dckcusgfn24wj" path="res://icons/arrow.svg" id="26_fi2mk"]
-[ext_resource type="Script" path="res://scenes/mute_button.gd" id="26_whkxh"]
+[ext_resource type="Script" path="res://scripts/mute_button.gd" id="26_whkxh"]
 [ext_resource type="Script" path="res://scripts/arrowscale.gd" id="27_kx1gg"]
 [ext_resource type="Script" path="res://scripts/mp_bar.gd" id="28_sltmf"]
 [ext_resource type="PackedScene" uid="uid://b6wocr0vo5s4v" path="res://scenes/debug_content.tscn" id="29_le63d"]
@@ -545,6 +545,7 @@ offset_bottom = 40.0
 [node name="OptionsMenu" type="PanelContainer" parent="UI/OptionsContainer"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
