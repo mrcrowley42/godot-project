@@ -19,5 +19,8 @@ func minimise():
 	#get_tree().change_scene_to_file("res://scenes/vol_slider.tscn")
 	
 func maximise():
-	window.size.x = start_size.x
-	window.size.y = start_size.y
+	window.size.x = start_size.x * 1.25
+	window.size.y = start_size.y * 1.25
+
+func _on_normal_button_button_down():
+	window.size = start_size
