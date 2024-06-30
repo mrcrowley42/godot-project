@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 @onready var creature: Creature = %Creature
 @onready var UI = %UI_Overlay

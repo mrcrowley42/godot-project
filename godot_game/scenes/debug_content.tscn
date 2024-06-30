@@ -51,8 +51,13 @@ func _process(_delta):
 		value = 1.0
 "
 
-[node name="DebugContent" type="Node2D"]
-position = Vector2(8, 8)
+[node name="DebugContent" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_jlyus")
 
 [node name="HPLabel" type="Label" parent="."]
@@ -201,6 +206,7 @@ offset_bottom = 40.0
 script = ExtResource("10_4e6rj")
 
 [node name="MinimiseButton" type="Button" parent="WindowSizeControls"]
+layout_mode = 0
 offset_left = 262.0
 offset_top = 594.0
 offset_right = 371.0
@@ -211,6 +217,7 @@ theme_override_font_sizes/font_size = 18
 text = "Minimise"
 
 [node name="MaximiseButton" type="Button" parent="WindowSizeControls"]
+layout_mode = 0
 offset_left = 398.0
 offset_top = 594.0
 offset_right = 507.0

@@ -1,4 +1,4 @@
-#@icon("res://icons/gear.svg")
+@icon("res://icons/ClassList.svg")
 extends Node2D
 
 class_name StatusManager
