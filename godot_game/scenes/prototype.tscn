@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://c282rwt57fvoc"]
+[gd_scene load_steps=87 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://images/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
 [ext_resource type="Script" path="res://scripts/prototype.gd" id="1_of2kb"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bgly0bep64kkp" path="res://scenes/creature.tscn" id="4_iwgh8"]
 [ext_resource type="Script" path="res://scripts/ui_overlay.gd" id="6_tise3"]
 [ext_resource type="Texture2D" uid="uid://cawudmxbjamv0" path="res://UI stuff/Green Palette/ui_green.png" id="6_vadio"]
+[ext_resource type="Script" path="res://scenes/Confetti.gd" id="6_xwf4r"]
 [ext_resource type="Texture2D" uid="uid://c3835drqnfvy" path="res://UI stuff/Orange Palette/ui_orange.png" id="7_ebtg7"]
 [ext_resource type="Script" path="res://scripts/heal_button.gd" id="8_0ys56"]
 [ext_resource type="Texture2D" uid="uid://dm0iwje4s7uu8" path="res://UI stuff/Pink Palette/ui_pink.png" id="8_djtbd"]
@@ -15,7 +16,7 @@
 [ext_resource type="Script" path="res://scripts/control_panel.gd" id="14_dx6xt"]
 [ext_resource type="PackedScene" uid="uid://cbn0dv1k0onpb" path="res://scenes/vol_slider.tscn" id="15_lmno7"]
 [ext_resource type="Texture2D" uid="uid://dckd2hhimpp2x" path="res://icons/cup-straw.svg" id="16_we3t2"]
-[ext_resource type="Theme" uid="uid://b4an46b1e5m7s" path="res://themes/action_btn.tres" id="16_ye11j"]
+[ext_resource type="Theme" uid="uid://bxbvdws31do2g" path="res://themes/action_btn.tres" id="16_ye11j"]
 [ext_resource type="AudioStream" uid="uid://dcet1hpt70t42" path="res://music/perfection.mp3" id="17_oqlhs"]
 [ext_resource type="AudioStream" uid="uid://8ifwm2tjitur" path="res://sound_effects/yippee.mp3" id="18_6dihm"]
 [ext_resource type="Texture2D" uid="uid://b4pvkkppy44n0" path="res://icons/icecream_48dp_FILL0_wght400_GRAD0_opsz48.svg" id="18_lv553"]
@@ -36,7 +37,7 @@
 [ext_resource type="PackedScene" uid="uid://b6wocr0vo5s4v" path="res://scenes/debug_content.tscn" id="29_le63d"]
 [ext_resource type="Texture2D" uid="uid://c702pbhxasm52" path="res://icons/heart-fill.svg" id="30_8mosm"]
 [ext_resource type="Texture2D" uid="uid://d4c1k5m8u1jc0" path="res://UI stuff/Green Palette/green_food_button.png" id="30_h36mb"]
-[ext_resource type="Theme" uid="uid://dfygv0ddoeco2" path="res://themes/menu_btn.tres" id="31_4jpkq"]
+[ext_resource type="Theme" uid="uid://4sicn8kqyed4" path="res://themes/menu_btn.tres" id="31_4jpkq"]
 [ext_resource type="Script" path="res://scripts/theme_controls.gd" id="32_iab5t"]
 [ext_resource type="Texture2D" uid="uid://cbro8i4w61mun" path="res://UI stuff/Orange Palette/orange_food_button.png" id="32_mhymf"]
 [ext_resource type="Texture2D" uid="uid://cuaa2uyffvita" path="res://icons/droplet-fill.svg" id="32_nq2dk"]
@@ -62,11 +63,6 @@
 [ext_resource type="AudioStream" uid="uid://b1b1fwlrdpmcp" path="res://music/Heaven Pierce Her - ULTRAKILL- INFINITE HYPERDEATH - 01 The Fire Is Gone (for Piano, Saxophone and Trumpet).mp3" id="49_fomax"]
 [ext_resource type="AudioStream" uid="uid://8ctfl381pnja" path="res://music/15 Seto's Memory.mp3" id="52_30ho7"]
 [ext_resource type="AudioStream" uid="uid://ct8aoiuvdre5f" path="res://music/Aquatic Ambience [Restored].mp3" id="53_ghi24"]
-
-[sub_resource type="Gradient" id="Gradient_asbj7"]
-interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.12381, 0.290476, 0.452381, 0.652381, 0.819048, 1)
-colors = PackedColorArray(1, 0, 0, 1, 1, 0.482353, 0.321569, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0.509804, 1, 0.529412, 0, 0.745098, 1, 1, 1, 1, 1)
 
 [sub_resource type="GDScript" id="GDScript_7ecg8"]
 script/source = "extends ColorRect
@@ -94,6 +90,11 @@ func _process(_delta):
 	color = %ScreenColours.color
 	material.set(\"shader_parameter/strength\", strength)
 "
+
+[sub_resource type="Gradient" id="Gradient_asbj7"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.12381, 0.290476, 0.452381, 0.652381, 0.819048, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.482353, 0.321569, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0.509804, 1, 0.529412, 0, 0.745098, 1, 1, 1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k7dc5"]
 bg_color = Color(0, 0, 0, 0.384314)
@@ -278,48 +279,6 @@ metadata/_edit_lock_ = true
 unique_name_in_owner = true
 position = Vector2(270, 393.5)
 
-[node name="ConfettiParticleL" type="CPUParticles2D" parent="Gameplay"]
-unique_name_in_owner = true
-position = Vector2(92, 555)
-emitting = false
-amount = 15
-lifetime = 2.0
-one_shot = true
-explosiveness = 1.0
-randomness = 1.0
-direction = Vector2(0.1, -1)
-spread = 6.0
-initial_velocity_min = 500.0
-initial_velocity_max = 900.0
-angular_velocity_min = -100.0
-angular_velocity_max = 100.0
-scale_amount_min = 10.0
-scale_amount_max = 15.0
-color_initial_ramp = SubResource("Gradient_asbj7")
-hue_variation_min = 1.0
-hue_variation_max = 1.0
-
-[node name="ConfettiParticleR" type="CPUParticles2D" parent="Gameplay"]
-unique_name_in_owner = true
-position = Vector2(446, 553)
-emitting = false
-amount = 15
-lifetime = 2.0
-one_shot = true
-explosiveness = 1.0
-randomness = 1.0
-direction = Vector2(-0.1, -1)
-spread = 6.0
-initial_velocity_min = 500.0
-initial_velocity_max = 900.0
-angular_velocity_min = -100.0
-angular_velocity_max = 100.0
-scale_amount_min = 10.0
-scale_amount_max = 15.0
-color_initial_ramp = SubResource("Gradient_asbj7")
-hue_variation_min = 1.0
-hue_variation_max = 1.0
-
 [node name="ScreenShaders" type="CanvasLayer" parent="Gameplay"]
 
 [node name="ScreenColours" type="ColorRect" parent="Gameplay/ScreenShaders"]
@@ -357,6 +316,51 @@ grow_horizontal = 2
 grow_vertical = 2
 script = SubResource("GDScript_j4fl7")
 metadata/_edit_lock_ = true
+
+[node name="Confetti" type="Node2D" parent="Gameplay"]
+script = ExtResource("6_xwf4r")
+
+[node name="ConfettiParticleL" type="CPUParticles2D" parent="Gameplay/Confetti"]
+unique_name_in_owner = true
+position = Vector2(92, 555)
+emitting = false
+amount = 15
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+direction = Vector2(0.1, -1)
+spread = 6.0
+initial_velocity_min = 500.0
+initial_velocity_max = 900.0
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+scale_amount_min = 10.0
+scale_amount_max = 15.0
+color_initial_ramp = SubResource("Gradient_asbj7")
+hue_variation_min = 1.0
+hue_variation_max = 1.0
+
+[node name="ConfettiParticleR" type="CPUParticles2D" parent="Gameplay/Confetti"]
+unique_name_in_owner = true
+position = Vector2(446, 553)
+emitting = false
+amount = 15
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+direction = Vector2(-0.1, -1)
+spread = 6.0
+initial_velocity_min = 500.0
+initial_velocity_max = 900.0
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+scale_amount_min = 10.0
+scale_amount_max = 15.0
+color_initial_ramp = SubResource("Gradient_asbj7")
+hue_variation_min = 1.0
+hue_variation_max = 1.0
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 2
