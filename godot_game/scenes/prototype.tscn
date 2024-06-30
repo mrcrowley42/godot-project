@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=3 uid="uid://c282rwt57fvoc"]
+[gd_scene load_steps=86 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://images/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
 [ext_resource type="Script" path="res://scripts/prototype.gd" id="1_of2kb"]
@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://scripts/heal_button.gd" id="8_0ys56"]
 [ext_resource type="Texture2D" uid="uid://dm0iwje4s7uu8" path="res://UI stuff/Pink Palette/ui_pink.png" id="8_djtbd"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="9_wn204"]
-[ext_resource type="Shader" path="res://shaders/new_shader.gdshader" id="11_1vr7d"]
+[ext_resource type="Shader" path="res://shaders/screen_tint.gdshader" id="11_1vr7d"]
 [ext_resource type="Script" path="res://scripts/kill_button.gd" id="11_nbfug"]
 [ext_resource type="Script" path="res://scripts/control_panel.gd" id="14_dx6xt"]
 [ext_resource type="PackedScene" uid="uid://cbn0dv1k0onpb" path="res://scenes/vol_slider.tscn" id="15_lmno7"]
@@ -28,7 +28,9 @@
 [ext_resource type="Texture2D" uid="uid://douy7lywu41bc" path="res://icons/playing_cards_48dp_FILL0_wght400_GRAD0_opsz48.svg" id="23_m81o6"]
 [ext_resource type="Script" path="res://scripts/sp_bar.gd" id="24_bbo8y"]
 [ext_resource type="Script" path="res://scripts/ap_bar.gd" id="25_6xclj"]
+[ext_resource type="Texture2D" uid="uid://pfr6wdx80m45" path="res://icons/volume-fill.svg" id="25_nudlo"]
 [ext_resource type="Texture2D" uid="uid://dckcusgfn24wj" path="res://icons/arrow.svg" id="26_fi2mk"]
+[ext_resource type="Script" path="res://scenes/mute_button.gd" id="26_whkxh"]
 [ext_resource type="Script" path="res://scripts/arrowscale.gd" id="27_kx1gg"]
 [ext_resource type="Script" path="res://scripts/mp_bar.gd" id="28_sltmf"]
 [ext_resource type="PackedScene" uid="uid://b6wocr0vo5s4v" path="res://scenes/debug_content.tscn" id="29_le63d"]
@@ -150,6 +152,8 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 corner_detail = 20
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wd2mi"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_0f7jw"]
 color = Color(0.34688, 0.524621, 0.762641, 1)
@@ -537,7 +541,6 @@ offset_bottom = 40.0
 [node name="OptionsMenu" type="PanelContainer" parent="UI/OptionsContainer"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -552,15 +555,16 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_kxv3i")
 script = ExtResource("35_lpgka")
+metadata/_edit_lock_ = true
 
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsContainer/OptionsMenu"]
 position = Vector2(-50, -130)
 
 [node name="Save" type="Button" parent="UI/OptionsContainer/OptionsMenu/SaveButtons"]
 offset_left = 90.0
-offset_top = 482.0
+offset_top = 484.0
 offset_right = 234.0
-offset_bottom = 530.0
+offset_bottom = 532.0
 theme = ExtResource("31_4jpkq")
 theme_override_colors/font_hover_color = Color(0.4947, 0.97, 0.4947, 1)
 theme_override_font_sizes/font_size = 18
@@ -569,9 +573,9 @@ text = "Save Settings"
 [node name="Cancel" type="Button" parent="UI/OptionsContainer/OptionsMenu/SaveButtons"]
 texture_filter = 5
 offset_left = 317.0
-offset_top = 482.0
+offset_top = 484.0
 offset_right = 450.0
-offset_bottom = 530.0
+offset_bottom = 532.0
 theme = ExtResource("31_4jpkq")
 theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
 theme_override_font_sizes/font_size = 18
@@ -585,9 +589,9 @@ script = ExtResource("32_iab5t")
 
 [node name="Label" type="Label" parent="UI/OptionsContainer/OptionsMenu/ThemeControls"]
 offset_left = 210.0
-offset_top = 240.0
+offset_top = 250.667
 offset_right = 400.0
-offset_bottom = 297.0
+offset_bottom = 307.667
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 48
@@ -597,9 +601,9 @@ vertical_alignment = 1
 
 [node name="vHBoxContainer" type="HBoxContainer" parent="UI/OptionsContainer/OptionsMenu/ThemeControls"]
 offset_left = 225.0
-offset_top = 317.0
+offset_top = 327.0
 offset_right = 375.0
-offset_bottom = 378.0
+offset_bottom = 388.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 20
@@ -610,8 +614,6 @@ custom_minimum_size = Vector2(65, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/font_outline_color = Color(0.835294, 0.517647, 0, 0.619608)
-theme_override_constants/outline_size = 3
 theme_override_font_sizes/font_size = 44
 theme_override_styles/normal = SubResource("StyleBoxFlat_3535b")
 text = "<"
@@ -634,9 +636,9 @@ script = ExtResource("34_jfyk1")
 
 [node name="Label" type="Label" parent="UI/OptionsContainer/OptionsMenu/MusicControls"]
 offset_left = 210.0
-offset_top = 240.0
+offset_top = 250.667
 offset_right = 400.0
-offset_bottom = 297.0
+offset_bottom = 307.667
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 48
@@ -646,9 +648,9 @@ vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/OptionsContainer/OptionsMenu/MusicControls"]
 offset_left = 225.0
-offset_top = 315.0
+offset_top = 325.0
 offset_right = 375.0
-offset_bottom = 376.0
+offset_bottom = 386.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 20
@@ -680,33 +682,60 @@ text = ">"
 position = Vector2(-63, -88)
 
 [node name="GridContainer2" type="GridContainer" parent="UI/OptionsContainer/OptionsMenu/VolumeControls"]
-offset_left = 80.0
-offset_top = 140.0
-offset_right = 494.0
-offset_bottom = 280.0
+offset_left = 79.0
+offset_top = 148.0
+offset_right = 482.0
+offset_bottom = 288.0
 size_flags_vertical = 0
-theme_override_constants/h_separation = 20
+theme_override_constants/h_separation = 5
 theme_override_constants/v_separation = 10
-columns = 2
+columns = 3
 
 [node name="Label" type="Label" parent="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2"]
 layout_mode = 2
+size_flags_vertical = 1
 theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 24
 text = "Master"
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wd2mi")
+text = "          "
+icon = ExtResource("25_nudlo")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("26_whkxh")
+bus_name = "Master"
 
 [node name="VolumeMaster" parent="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2" groups=["settings_data"] instance=ExtResource("15_lmno7")]
-custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
 theme_override_styles/slider = SubResource("StyleBoxLine_0f7jw")
 tick_count = 1
 bus_name = "Master"
 
 [node name="Label2" type="Label" parent="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2"]
 layout_mode = 2
+size_flags_vertical = 1
 theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 24
 text = "SFX"
+vertical_alignment = 1
+
+[node name="Button2" type="Button" parent="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wd2mi")
+text = "          "
+icon = ExtResource("25_nudlo")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("26_whkxh")
+bus_name = "SFX"
 
 [node name="VolumeSfx" parent="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2" groups=["settings_data"] instance=ExtResource("15_lmno7")]
 layout_mode = 2
@@ -716,10 +745,24 @@ bus_name = "SFX"
 
 [node name="Label3" type="Label" parent="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2"]
 layout_mode = 2
+size_flags_vertical = 1
+theme_override_constants/shadow_outline_size = 5
 theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 24
 text = "Music
 "
+vertical_alignment = 1
+
+[node name="Button3" type="Button" parent="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wd2mi")
+text = "          "
+icon = ExtResource("25_nudlo")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("26_whkxh")
+bus_name = "Music"
 
 [node name="VolumeMusic" parent="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2" groups=["settings_data"] instance=ExtResource("15_lmno7")]
 layout_mode = 2
@@ -734,9 +777,9 @@ scale = Vector2(0.75, 0.75)
 
 [node name="Button" type="Button" parent="UI/OptionsContainer/OptionsMenu/Credits"]
 offset_left = -40.0
-offset_top = -305.333
+offset_top = -294.666
 offset_right = 136.0
-offset_bottom = -275.333
+offset_bottom = -264.666
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("31_4jpkq")
@@ -1029,6 +1072,9 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/OptionsContainer/OptionsMenu/ThemeControls/vHBoxContainer/Button" to="UI/OptionsContainer/OptionsMenu/ThemeControls" method="_on_forward_button_down"]
 [connection signal="button_down" from="UI/OptionsContainer/OptionsMenu/MusicControls/HBoxContainer/Button2" to="UI/OptionsContainer/OptionsMenu/MusicControls" method="_on_back_button_down"]
 [connection signal="button_down" from="UI/OptionsContainer/OptionsMenu/MusicControls/HBoxContainer/Button" to="UI/OptionsContainer/OptionsMenu/MusicControls" method="_on_forward_button_down"]
+[connection signal="button_down" from="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2/Button" to="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2/Button" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2/Button2" to="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2/Button2" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2/Button3" to="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2/Button3" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsContainer/OptionsMenu/Credits/Button" to="UI/OptionsContainer/OptionsMenu/Credits/Button" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsContainer/CreditsContainer/Node2D/Button2" to="UI/OptionsContainer/CreditsContainer/Node2D/Button2" method="_on_button_down"]
 [connection signal="button_down" from="UI/NavigationControls/FoodButton" to="UI/NavigationControls/FoodButton" method="_on_button_down"]
