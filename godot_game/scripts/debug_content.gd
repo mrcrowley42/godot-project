@@ -4,6 +4,7 @@ extends Control
 @onready var UI = %UI_Overlay
 @onready var stat_man = %StatusManager
 @onready var music_track = %MainMusic
+@onready var screen_tint = %ScreenTint
 
 
 func _on_h_slider_value_changed(value):
@@ -27,3 +28,11 @@ func _process(_delta):
 	
 func _on_anim_select_item_selected(index):
 	creature.find_child('AnimatedSprite2D').animation =$AnimSelect.get_item_text(index)
+
+
+func _on_overlay_strength_value_changed(value):
+	screen_tint.strength = value
+	
+
+func _on_color_picker_button_popup_closed():
+	creature.dying_colour = $ColorPickerButton.color

@@ -76,11 +76,12 @@ func _ready():
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_igbp3"]
 shader = ExtResource("11_1vr7d")
+shader_parameter/strength = 1.0
 
 [sub_resource type="GDScript" id="GDScript_j4fl7"]
 script/source = "extends ColorRect
 
-
+@export_range(0,2) var strength: float = 1.0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -89,6 +90,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	color = %ScreenColours.color
+	material.set(\"shader_parameter/strength\", strength)
 "
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k7dc5"]
@@ -337,6 +339,7 @@ colours = Array[Color]([Color(0.870588, 0.984314, 0.87451, 1), Color(0.835294, 0
 metadata/_edit_lock_ = true
 
 [node name="ScreenTint" type="ColorRect" parent="Gameplay/ScreenShaders"]
+unique_name_in_owner = true
 material = SubResource("ShaderMaterial_igbp3")
 anchors_preset = 13
 anchor_left = 0.5
