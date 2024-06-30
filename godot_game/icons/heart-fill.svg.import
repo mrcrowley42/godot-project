@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cuaa2uyffvita"
-path="res://.godot/imported/droplet-fill.svg-c4aa21a2917f57ee48a9e0bae75b3a68.ctex"
+uid="uid://c702pbhxasm52"
+path="res://.godot/imported/heart-fill.svg-eeef06e2552db115010e23464aacc4c3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icons/droplet-fill.svg"
-dest_files=["res://.godot/imported/droplet-fill.svg-c4aa21a2917f57ee48a9e0bae75b3a68.ctex"]
+source_file="res://icons/heart-fill.svg"
+dest_files=["res://.godot/imported/heart-fill.svg-eeef06e2552db115010e23464aacc4c3.ctex"]
 
 [params]
 

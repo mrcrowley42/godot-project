@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cuaa2uyffvita"
-path="res://.godot/imported/droplet-fill.svg-c4aa21a2917f57ee48a9e0bae75b3a68.ctex"
+uid="uid://ddjkyk4qsihrv"
+path="res://.godot/imported/bolt_24dp_FILL1_wght400_GRAD0_opsz24.svg-558eab0cfd1002332da2f65f1e610aca.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icons/droplet-fill.svg"
-dest_files=["res://.godot/imported/droplet-fill.svg-c4aa21a2917f57ee48a9e0bae75b3a68.ctex"]
+source_file="res://icons/bolt_24dp_FILL1_wght400_GRAD0_opsz24.svg"
+dest_files=["res://.godot/imported/bolt_24dp_FILL1_wght400_GRAD0_opsz24.svg-558eab0cfd1002332da2f65f1e610aca.ctex"]
 
 [params]
 
@@ -32,6 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=2.0
+svg/scale=1.8
 editor/scale_with_editor_scale=false
 editor/convert_colors_with_editor_theme=false

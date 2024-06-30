@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=3 uid="uid://c282rwt57fvoc"]
+[gd_scene load_steps=83 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://images/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
 [ext_resource type="Script" path="res://scripts/prototype.gd" id="1_of2kb"]
@@ -32,12 +32,15 @@
 [ext_resource type="Script" path="res://scripts/arrowscale.gd" id="27_kx1gg"]
 [ext_resource type="Script" path="res://scripts/mp_bar.gd" id="28_sltmf"]
 [ext_resource type="PackedScene" uid="uid://b6wocr0vo5s4v" path="res://scenes/debug_content.tscn" id="29_le63d"]
+[ext_resource type="Texture2D" uid="uid://c702pbhxasm52" path="res://icons/heart-fill.svg" id="30_8mosm"]
 [ext_resource type="Texture2D" uid="uid://d4c1k5m8u1jc0" path="res://UI stuff/Green Palette/green_food_button.png" id="30_h36mb"]
 [ext_resource type="Theme" uid="uid://dfygv0ddoeco2" path="res://themes/menu_btn.tres" id="31_4jpkq"]
 [ext_resource type="Script" path="res://scripts/theme_controls.gd" id="32_iab5t"]
 [ext_resource type="Texture2D" uid="uid://cbro8i4w61mun" path="res://UI stuff/Orange Palette/orange_food_button.png" id="32_mhymf"]
+[ext_resource type="Texture2D" uid="uid://cuaa2uyffvita" path="res://icons/droplet-fill.svg" id="32_nq2dk"]
 [ext_resource type="Texture2D" uid="uid://jj1g1lm51rt4" path="res://UI stuff/Pink Palette/pink_food_button.png" id="33_d34tv"]
 [ext_resource type="AudioStream" uid="uid://dat0sfue6jjr5" path="res://sound_effects/metal-pipe-falling-sound-effect-made-with-Voicemod.mp3" id="33_ipuqk"]
+[ext_resource type="Texture2D" uid="uid://ddjkyk4qsihrv" path="res://icons/bolt_24dp_FILL1_wght400_GRAD0_opsz24.svg" id="34_7iqgq"]
 [ext_resource type="Texture2D" uid="uid://drv50ynifh37j" path="res://UI stuff/Green Palette/green_activities_button.png" id="34_45f7i"]
 [ext_resource type="Script" path="res://scripts/music_controls.gd" id="34_jfyk1"]
 [ext_resource type="Texture2D" uid="uid://cnoe7iliwc4o4" path="res://UI stuff/Orange Palette/orange_activity_button.png" id="35_dpmji"]
@@ -45,6 +48,7 @@
 [ext_resource type="Script" path="res://scripts/hidden_menu_panel.gd" id="35_lpgka"]
 [ext_resource type="Script" path="res://scripts/foodbutton.gd" id="35_x2dv4"]
 [ext_resource type="Texture2D" uid="uid://b8y8c6h2qmqds" path="res://UI stuff/Pink Palette/pink_activities_button.png" id="36_2kh6x"]
+[ext_resource type="Texture2D" uid="uid://d84hj0mtn2hw" path="res://icons/mood_24dp_FILL1_wght300_GRAD0_opsz24.svg" id="36_p02iy"]
 [ext_resource type="Texture2D" uid="uid://b5uf4jcvme855" path="res://UI stuff/Green Palette/green_settings_button.png" id="37_gtlc6"]
 [ext_resource type="Script" path="res://scripts/setting_button.gd" id="37_xw5yl"]
 [ext_resource type="Texture2D" uid="uid://b23jrnmqkd3hb" path="res://UI stuff/Orange Palette/orange_settings_button.png" id="38_xyjpo"]
@@ -818,7 +822,20 @@ theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 columns = 4
 
+[node name="Heart" type="Control" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Heart-fill" type="Sprite2D" parent="UI/StatsContainer/MarginContainer/StatusContainer/Heart"]
+modulate = Color(0.96, 0.96, 0.96, 1)
+position = Vector2(14, 0)
+scale = Vector2(0.688, 0.688)
+texture = ExtResource("30_8mosm")
+
 [node name="Label" type="Label" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 24
@@ -839,10 +856,22 @@ show_percentage = false
 script = ExtResource("22_688js")
 
 [node name="Label2" type="Label" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 24
 text = "MP"
+
+[node name="Droplet" type="Control" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Heart-fill" type="Sprite2D" parent="UI/StatsContainer/MarginContainer/StatusContainer/Droplet"]
+position = Vector2(14, 0)
+scale = Vector2(0.688, 0.688)
+texture = ExtResource("32_nq2dk")
 
 [node name="MP_Bar" type="ProgressBar" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
 custom_minimum_size = Vector2(160, 23)
@@ -857,7 +886,19 @@ value = 700.0
 show_percentage = false
 script = ExtResource("28_sltmf")
 
+[node name="Energy" type="Control" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Heart-fill" type="Sprite2D" parent="UI/StatsContainer/MarginContainer/StatusContainer/Energy"]
+position = Vector2(14, 0)
+scale = Vector2(0.688, 0.688)
+texture = ExtResource("34_7iqgq")
+
 [node name="Label3" type="Label" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 24
@@ -877,7 +918,19 @@ value = 700.0
 show_percentage = false
 script = ExtResource("24_bbo8y")
 
+[node name="Happiness" type="Control" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Heart-fill" type="Sprite2D" parent="UI/StatsContainer/MarginContainer/StatusContainer/Happiness"]
+position = Vector2(14, 0)
+scale = Vector2(0.688, 0.688)
+texture = ExtResource("36_p02iy")
+
 [node name="Label4" type="Label" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 24
