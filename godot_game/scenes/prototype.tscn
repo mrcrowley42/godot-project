@@ -704,7 +704,7 @@ theme_override_font_sizes/font_size = 24
 text = "Master"
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2"]
+[node name="MasterMuted" type="Button" parent="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2" groups=["settings_data"]]
 layout_mode = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_wd2mi")
 text = "          "
@@ -731,7 +731,7 @@ theme_override_font_sizes/font_size = 24
 text = "SFX"
 vertical_alignment = 1
 
-[node name="Button2" type="Button" parent="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2"]
+[node name="SFXMuted" type="Button" parent="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2" groups=["settings_data"]]
 layout_mode = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_wd2mi")
 text = "          "
@@ -758,7 +758,7 @@ text = "Music
 "
 vertical_alignment = 1
 
-[node name="Button3" type="Button" parent="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2"]
+[node name="MusicMuted" type="Button" parent="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2" groups=["settings_data"]]
 layout_mode = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_wd2mi")
 text = "          "
@@ -1077,9 +1077,9 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/OptionsContainer/OptionsMenu/ThemeControls/vHBoxContainer/Button" to="UI/OptionsContainer/OptionsMenu/ThemeControls" method="_on_forward_button_down"]
 [connection signal="button_down" from="UI/OptionsContainer/OptionsMenu/MusicControls/HBoxContainer/Button2" to="UI/OptionsContainer/OptionsMenu/MusicControls" method="_on_back_button_down"]
 [connection signal="button_down" from="UI/OptionsContainer/OptionsMenu/MusicControls/HBoxContainer/Button" to="UI/OptionsContainer/OptionsMenu/MusicControls" method="_on_forward_button_down"]
-[connection signal="button_down" from="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2/Button" to="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2/Button" method="_on_button_down"]
-[connection signal="button_down" from="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2/Button2" to="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2/Button2" method="_on_button_down"]
-[connection signal="button_down" from="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2/Button3" to="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2/Button3" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2/MasterMuted" to="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2/MasterMuted" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2/SFXMuted" to="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2/SFXMuted" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2/MusicMuted" to="UI/OptionsContainer/OptionsMenu/VolumeControls/GridContainer2/MusicMuted" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsContainer/OptionsMenu/Credits/Button" to="UI/OptionsContainer/OptionsMenu/Credits/Button" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsContainer/CreditsContainer/Node2D/Button2" to="UI/OptionsContainer/CreditsContainer/Node2D/Button2" method="_on_button_down"]
 [connection signal="button_down" from="UI/NavigationControls/FoodButton" to="UI/NavigationControls/FoodButton" method="_on_button_down"]
