@@ -6,6 +6,7 @@
 script/source = "extends Button
 
 func _on_button_down():
+	get_tree().root.propagate_notification(Globals.NOTIFICATION_MINIGAME_CLOSED)
 	find_parent(\"MiniGame\").queue_free()
 "
 

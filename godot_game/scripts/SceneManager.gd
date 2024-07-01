@@ -11,20 +11,20 @@ func loadMinigame(minigame):
 		find_parent("Game").find_child("UI").add_child(game)
 		currentMinigame = minigame.resource_name
 
-# todo: call this somewhere
 func unLoadMinigame():
 	currentMinigame = null;
 
+func _notification(noti):
+	if noti == Globals.NOTIFICATION_MINIGAME_CLOSED:
+		unLoadMinigame()
+
 
 ## Tetris
-func _on_tetris_btn_button_down():
+func _on_tetris_button_down():
 	loadMinigame(tetrisScene)
 
 
-
-func _on_tetris_button_down():
-	pass # Replace with function body.
-
-
-func _on_memory_game_btn_button_down():
+## Memory game
+func _on_memory_game_button_down():
 	loadMinigame(memoryGameScene)
+

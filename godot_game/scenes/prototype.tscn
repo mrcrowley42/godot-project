@@ -496,7 +496,7 @@ icon = ExtResource("20_xnus2")
 icon_alignment = 1
 expand_icon = true
 
-[node name="TetrisBtn" type="Button" parent="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer"]
+[node name="Tetris" type="Button" parent="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -516,7 +516,7 @@ icon = ExtResource("22_ktcf4")
 icon_alignment = 1
 expand_icon = true
 
-[node name="MemoryGameBtn" type="Button" parent="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer"]
+[node name="MemoryGame" type="Button" parent="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1071,9 +1071,9 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 4" to="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 4" method="_on_button_down"]
 [connection signal="visibility_changed" from="UI/ScreenControls/ActivityControls" to="UI/ScreenControls/ActivityControls" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/Button 1" to="UI/ScreenControls/ActivityControls" method="_on_button_1_button_down"]
-[connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/TetrisBtn" to="MinigameManager" method="_on_tetris_btn_button_down"]
+[connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/Tetris" to="MinigameManager" method="_on_tetris_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/Button 3" to="UI/ScreenControls/ActivityControls" method="_on_button_3_button_down"]
-[connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/MemoryGameBtn" to="MinigameManager" method="_on_memory_game_btn_button_down"]
+[connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
 [connection signal="pressed" from="UI/OptionsContainer/OptionsMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
 [connection signal="button_up" from="UI/OptionsContainer/OptionsMenu/SaveButtons/Cancel" to="UI/OptionsContainer/OptionsMenu/SaveButtons/Cancel" method="_on_button_up"]
 [connection signal="button_down" from="UI/OptionsContainer/OptionsMenu/ThemeControls/vHBoxContainer/Button2" to="UI/OptionsContainer/OptionsMenu/ThemeControls" method="_on_back_button_down"]
