@@ -1,8 +1,9 @@
-[gd_scene load_steps=87 format=3 uid="uid://c282rwt57fvoc"]
+[gd_scene load_steps=88 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://images/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
 [ext_resource type="Script" path="res://scripts/prototype.gd" id="1_of2kb"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_a8vep"]
+[ext_resource type="Script" path="res://scripts/SceneManager.gd" id="3_b8dff"]
 [ext_resource type="PackedScene" uid="uid://bgly0bep64kkp" path="res://scenes/creature.tscn" id="4_iwgh8"]
 [ext_resource type="Script" path="res://scripts/ui_overlay.gd" id="6_tise3"]
 [ext_resource type="Texture2D" uid="uid://cawudmxbjamv0" path="res://UI stuff/Green Palette/ui_green.png" id="6_vadio"]
@@ -267,6 +268,9 @@ sp_amount = 4.0
 ap_rate = 1.0
 ap_amount = 12.0
 
+[node name="MinigameManager" type="Node2D" parent="."]
+script = ExtResource("3_b8dff")
+
 [node name="Gameplay" type="Node2D" parent="."]
 
 [node name="BG" type="Sprite2D" parent="Gameplay"]
@@ -492,7 +496,7 @@ icon = ExtResource("20_xnus2")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Button 2" type="Button" parent="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer"]
+[node name="TetrisBtn" type="Button" parent="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -512,7 +516,7 @@ icon = ExtResource("22_ktcf4")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Button 4" type="Button" parent="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer"]
+[node name="MemoryGameBtn" type="Button" parent="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1067,9 +1071,9 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 4" to="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 4" method="_on_button_down"]
 [connection signal="visibility_changed" from="UI/ScreenControls/ActivityControls" to="UI/ScreenControls/ActivityControls" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/Button 1" to="UI/ScreenControls/ActivityControls" method="_on_button_1_button_down"]
-[connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/Button 2" to="UI/ScreenControls/ActivityControls" method="_on_button_2_button_down"]
+[connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/TetrisBtn" to="MinigameManager" method="_on_tetris_btn_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/Button 3" to="UI/ScreenControls/ActivityControls" method="_on_button_3_button_down"]
-[connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/Button 4" to="UI/ScreenControls/ActivityControls" method="_on_button_4_button_down"]
+[connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/MemoryGameBtn" to="MinigameManager" method="_on_memory_game_btn_button_down"]
 [connection signal="pressed" from="UI/OptionsContainer/OptionsMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
 [connection signal="button_up" from="UI/OptionsContainer/OptionsMenu/SaveButtons/Cancel" to="UI/OptionsContainer/OptionsMenu/SaveButtons/Cancel" method="_on_button_up"]
 [connection signal="button_down" from="UI/OptionsContainer/OptionsMenu/ThemeControls/vHBoxContainer/Button2" to="UI/OptionsContainer/OptionsMenu/ThemeControls" method="_on_back_button_down"]
