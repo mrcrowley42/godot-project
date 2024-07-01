@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cuwedaf85au8o"
-path="res://.godot/imported/orange_activities_button_pressed.png-c0b14eeeed80a4add78ef44f29654520.ctex"
+path="res://.godot/imported/orange_activity_button_pressed.png-10c34bc449230144f44b470555bdb698.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI stuff/Orange Palette/orange_activities_button_pressed.png"
-dest_files=["res://.godot/imported/orange_activities_button_pressed.png-c0b14eeeed80a4add78ef44f29654520.ctex"]
+source_file="res://UI stuff/Orange Palette/orange_activity_button_pressed.png"
+dest_files=["res://.godot/imported/orange_activity_button_pressed.png-10c34bc449230144f44b470555bdb698.ctex"]
 
 [params]
 
