@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://04kj5y6r82xs"
-path="res://.godot/imported/pink_activities_button_pressed.png-55a5264e533f400ad0b897084a9a2fc2.ctex"
+uid="uid://cuwedaf85au8o"
+path="res://.godot/imported/orange_activity_button_pressed.png-10c34bc449230144f44b470555bdb698.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI stuff/Pink Palette/pink_activities_button_pressed.png"
-dest_files=["res://.godot/imported/pink_activities_button_pressed.png-55a5264e533f400ad0b897084a9a2fc2.ctex"]
+source_file="res://UI stuff/Orange Palette/orange_activity_button_pressed.png"
+dest_files=["res://.godot/imported/orange_activity_button_pressed.png-10c34bc449230144f44b470555bdb698.ctex"]
 
 [params]
 
