@@ -1,17 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5dr54dk0502t"]
+[gd_scene load_steps=7 format=3 uid="uid://c5dr54dk0502t"]
 
-[ext_resource type="Texture2D" uid="uid://cawudmxbjamv0" path="res://UI stuff/Green Palette/ui_green.png" id="1_6dftn"]
+[ext_resource type="Texture2D" uid="uid://cgfufcnmd24wf" path="res://UI stuff/Green Palette/ui_green_tetris.png" id="1_ad86f"]
 [ext_resource type="Shader" path="res://shaders/grid.gdshader" id="2_0hqmj"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="2_t4frc"]
+[ext_resource type="Script" path="res://scripts/tetrisGridBG.gd" id="3_r7ui3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_adq1g"]
 shader = ExtResource("2_0hqmj")
-shader_parameter/rows = 10.0
+shader_parameter/rows = 20.0
 shader_parameter/columns = 10.0
-shader_parameter/lineSize = 0.3
-shader_parameter/color = Color(0.262933, 0.262932, 0.262932, 1)
+shader_parameter/lineSize = 0.15
+shader_parameter/color = Color(0.0235294, 0.0392157, 0.0431373, 1)
 shader_parameter/bevel = true
-shader_parameter/bevelColor = Color(0.140447, 0.140447, 0.140447, 1)
+shader_parameter/bevelColor = Color(0.00784314, 0.0156863, 0.0235294, 1)
+shader_parameter/outline = true
+shader_parameter/outlineColor = Color(0.215686, 0.282353, 0.305882, 1)
 
 [sub_resource type="GDScript" id="GDScript_v26rg"]
 script/source = "extends Button
@@ -33,23 +36,26 @@ layer = 10
 [node name="UI_Overlay" type="Sprite2D" parent="UI"]
 position = Vector2(270, 337.5)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_6dftn")
+texture = ExtResource("1_ad86f")
 
-[node name="ColorRect" type="ColorRect" parent="UI"]
+[node name="GridBG" type="ColorRect" parent="UI"]
+editor_description = "x = (1080 * 0.5) / 2 - (size.w / 2) = 120
+y = (1350 * 0.5) / 2 - (size.h / 2) = 37"
 material = SubResource("ShaderMaterial_adq1g")
-offset_left = 53.0
-offset_top = 120.0
-offset_right = 487.0
-offset_bottom = 554.0
+offset_left = 120.0
+offset_top = 37.0
+offset_right = 420.0
+offset_bottom = 637.0
 color = Color(0, 0, 0, 1)
+script = ExtResource("3_r7ui3")
 
 [node name="CloseBtn" type="Button" parent="UI"]
-offset_left = 28.0
-offset_top = 28.0
-offset_right = 95.0
-offset_bottom = 71.0
+offset_left = 506.0
+offset_top = 17.0
+offset_right = 522.0
+offset_bottom = 38.0
 theme = ExtResource("2_t4frc")
-text = "Close"
+text = "X"
 script = SubResource("GDScript_v26rg")
 
 [connection signal="button_down" from="UI/CloseBtn" to="UI/CloseBtn" method="_on_button_down"]
