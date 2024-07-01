@@ -1072,7 +1072,6 @@ bus = &"SFX"
 [connection signal="visibility_changed" from="UI/ScreenControls/ActivityControls" to="UI/ScreenControls/ActivityControls" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/Button 1" to="UI/ScreenControls/ActivityControls" method="_on_button_1_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/TetrisBtn" to="MinigameManager" method="_on_tetris_btn_button_down"]
-[connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/TetrisBtn" to="UI/ScreenControls/ActivityControls" method="_on_button_2_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/Button 3" to="UI/ScreenControls/ActivityControls" method="_on_button_3_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/MemoryGameBtn" to="MinigameManager" method="_on_memory_game_btn_button_down"]
 [connection signal="pressed" from="UI/OptionsContainer/OptionsMenu/SaveButtons/Save" to="." method="_on_save_pressed"]

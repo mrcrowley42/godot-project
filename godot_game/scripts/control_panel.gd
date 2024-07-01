@@ -22,10 +22,6 @@ func _on_button_1_button_down():
 	creature.dmg(-200, 'sp')
 
 
-func _on_button_2_button_down():
-	creature.dmg(-200, 'ap')
-
-
 func _on_button_3_button_down():
 	creature.dmg(-200, 'hp')
 
