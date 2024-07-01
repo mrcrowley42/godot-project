@@ -12,7 +12,13 @@ func _on_button_down():
 
 [node name="MiniGame" type="Node2D"]
 
-[node name="ScreenColours" type="ColorRect" parent="."]
+[node name="GameContainer" type="PanelContainer" parent="."]
+offset_left = 53.0
+offset_top = 120.0
+offset_right = 487.0
+offset_bottom = 554.0
+
+[node name="BG" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(434, 434)
 anchors_preset = 8
 anchor_left = 0.5
@@ -27,14 +33,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.428784, 0.701359, 0.667563, 1)
 
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-offset_left = 132.0
-offset_top = 155.0
-offset_right = 380.0
-offset_bottom = 382.0
-
-[node name="Button" type="Button" parent="."]
+[node name="CloseBtn" type="Button" parent="."]
 offset_left = 78.0
 offset_top = 144.0
 offset_right = 179.0
@@ -43,4 +42,4 @@ theme = ExtResource("1_3y1y3")
 text = "Close"
 script = SubResource("GDScript_oqggf")
 
-[connection signal="button_down" from="Button" to="Button" method="_on_button_down"]
+[connection signal="button_down" from="CloseBtn" to="CloseBtn" method="_on_button_down"]
