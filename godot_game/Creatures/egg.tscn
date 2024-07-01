@@ -1,10 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://jo0k1rqis071"]
+[gd_scene load_steps=2 format=3 uid="uid://bl22rtkqnj1s7"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_k8mmb"]
+[ext_resource type="Script" path="res://Creatures/egg.gd" id="1_a30c6"]
 
-[node name="Egg" type="CharacterBody2D"]
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_k8mmb")
+[node name="Egg" type="Node2D"]
+script = ExtResource("1_a30c6")
