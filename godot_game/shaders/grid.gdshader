@@ -21,10 +21,10 @@ void fragment() {
 	remainder /= vec2(columnWidth, rowHeight);
 	remainder -= floor(remainder);  // actually get the remainder
 	
-	float remComparison = max(remainder.x, remainder.y);
-	if (remComparison > 1.0 - lSize) {
-		if (bevel && remComparison > 1.0 - lSize / 2.0) {
-			COLOR = bevelColor;
+	float maxRem = max(remainder.x, remainder.y);  // btw will never be > 1
+	if (maxRem > 1.0 - lSize) {
+		if (bevel && maxRem > 1.0 - lSize / 2.0) {
+			COLOR = bevelColor;  // add bevel
 		} else {
 			COLOR = color;
 		}
