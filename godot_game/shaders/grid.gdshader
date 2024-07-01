@@ -5,6 +5,9 @@ uniform float columns = 10;
 uniform float lineSize = .1;
 uniform vec4 color : source_color = vec4(1.0);
 
+uniform bool offsetCentered = true;
+uniform vec2 offsetOverride = vec2(0.0);
+
 uniform bool bevel = true;
 uniform vec4 bevelColor : source_color = vec4(1.0);
 
@@ -40,7 +43,7 @@ void fragment() {
 	
 	float columnWidth = screenDim.x / columns;
 	float rowHeight = screenDim.y / rows;
-	vec2 offset = vec2((lineSize * columnWidth) * 0.5, (lineSize * rowHeight) * 0.5);
+	vec2 offset = offsetCentered ? vec2((lineSize * columnWidth) * 0.5, (lineSize * rowHeight) * 0.5) : offsetOverride;
 	
 	// perform 'modulus' operation
 	vec2 remainder = vec2(scaledUV.x - offset.x, scaledUV.y - offset.y);
