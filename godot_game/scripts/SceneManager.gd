@@ -21,10 +21,10 @@ func _on_tetris_btn_button_down():
 	loadMinigame(tetrisScene)
 
 
-## Memory game
-func _on_memory_game_button_down():
-	loadMinigame(memoryGameScene)
-
 
 func _on_tetris_button_down():
 	pass # Replace with function body.
+
+
+func _on_memory_game_btn_button_down():
+	loadMinigame(memoryGameScene)
