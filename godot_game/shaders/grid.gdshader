@@ -34,7 +34,7 @@ void fragment() {
 	remainder /= vec2(columnWidth, rowHeight);
 	remainder -= floor(remainder);  // actually get the remainder
 	
-	float maxRem = max(remainder.x, remainder.y);  // will never be > 1
+	float maxRem = max(remainder.x, remainder.y);  // will be =< 0 and > 1 for each grid square
 	float full = 1.0 - lSize;
 	
 	if (maxRem > full) {
