@@ -270,6 +270,7 @@ ap_rate = 1.0
 ap_amount = 12.0
 
 [node name="MinigameManager" type="Node2D" parent="."]
+unique_name_in_owner = true
 script = ExtResource("3_b8dff")
 
 [node name="Gameplay" type="Node2D" parent="."]

@@ -5,6 +5,7 @@ extends Control
 @onready var stat_man = %StatusManager
 @onready var music_track = %MainMusic
 @onready var screen_tint = %ScreenTint
+@onready var minigame_man = %MinigameManager
 
 
 func _on_h_slider_value_changed(value):

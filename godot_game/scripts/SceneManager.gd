@@ -10,7 +10,7 @@ func loadMinigame(minigame):
 	if currentMinigame == null:
 		var game = minigame.instantiate()
 		find_parent("Game").find_child("UI").add_child(game)
-		currentMinigame = minigame.resource_name
+		currentMinigame = minigame.resource_path
 
 func unLoadMinigame():
 	currentMinigame = null;
