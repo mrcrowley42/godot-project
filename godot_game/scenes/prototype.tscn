@@ -1,8 +1,9 @@
-[gd_scene load_steps=87 format=3 uid="uid://c282rwt57fvoc"]
+[gd_scene load_steps=88 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://images/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
 [ext_resource type="Script" path="res://scripts/prototype.gd" id="1_of2kb"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_a8vep"]
+[ext_resource type="Script" path="res://scripts/SceneManager.gd" id="3_b8dff"]
 [ext_resource type="PackedScene" uid="uid://bgly0bep64kkp" path="res://scenes/creature.tscn" id="4_iwgh8"]
 [ext_resource type="Script" path="res://scripts/ui_overlay.gd" id="6_tise3"]
 [ext_resource type="Texture2D" uid="uid://cawudmxbjamv0" path="res://UI stuff/Green Palette/ui_green.png" id="6_vadio"]
@@ -266,6 +267,9 @@ script = ExtResource("2_a8vep")
 sp_amount = 4.0
 ap_rate = 1.0
 ap_amount = 12.0
+
+[node name="SceneManager" type="Node2D" parent="."]
+script = ExtResource("3_b8dff")
 
 [node name="Gameplay" type="Node2D" parent="."]
 
@@ -1069,6 +1073,7 @@ bus = &"SFX"
 [connection signal="visibility_changed" from="UI/ScreenControls/ActivityControls" to="UI/ScreenControls/ActivityControls" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/Button 1" to="UI/ScreenControls/ActivityControls" method="_on_button_1_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/Button 2" to="UI/ScreenControls/ActivityControls" method="_on_button_2_button_down"]
+[connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/Button 2" to="SceneManager" method="_on_button_2_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/Button 3" to="UI/ScreenControls/ActivityControls" method="_on_button_3_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/Button 4" to="UI/ScreenControls/ActivityControls" method="_on_button_4_button_down"]
 [connection signal="pressed" from="UI/OptionsContainer/OptionsMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
