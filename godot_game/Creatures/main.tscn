@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://jxw6bw10plec"]
-
-[ext_resource type="Script" path="res://creatures/Stats.gd" id="1_cdimk"]
-
-[node name="Node2D" type="Node2D"]
-script = ExtResource("1_cdimk")
