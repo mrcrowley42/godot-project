@@ -38,3 +38,11 @@ func _on_overlay_strength_value_changed(value):
 
 func _on_color_picker_button_popup_closed():
 	creature.dying_colour = $ColorPickerButton.color
+
+
+func _on_hat_btn_button_down():
+	creature.find_child('Hat').visible = !creature.find_child('Hat').visible
+
+
+func _on_glasses_btn_button_down():
+	creature.find_child('Glasses').visible = !creature.find_child('Glasses').visible

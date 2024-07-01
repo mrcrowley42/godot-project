@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bebjn5n2kjwgb"]
+[gd_scene load_steps=28 format=3 uid="uid://bebjn5n2kjwgb"]
 
 [ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://images/creature_sprites/little-guy.png" id="1_obpq1"]
 [ext_resource type="Script" path="res://scripts/creature.gd" id="2_klgk6"]
@@ -13,11 +13,17 @@
 [ext_resource type="Texture2D" uid="uid://bcsj0ibb8s3y0" path="res://images/creature_sprites/confused-2.png" id="8_gbg03"]
 [ext_resource type="Texture2D" uid="uid://dxc4uprrmyny8" path="res://images/creature_sprites/sadge-0.png" id="13_d84xb"]
 [ext_resource type="Texture2D" uid="uid://dxipq42e3qg72" path="res://images/creature_sprites/sadge-1.png" id="14_r6peb"]
+[ext_resource type="Texture2D" uid="uid://dean3vpwpml33" path="res://images/creature_sprites/hat-0.png" id="15_eqb0u"]
 [ext_resource type="Texture2D" uid="uid://c8vn6brl68787" path="res://images/creature_sprites/sadge-2.png" id="15_xvmeh"]
 [ext_resource type="AudioStream" uid="uid://pgmpt3uti87" path="res://sound_effects/pain3.wav" id="16_2mdbn"]
 [ext_resource type="Script" path="res://scenes/pain.gd" id="16_epyie"]
+[ext_resource type="Texture2D" uid="uid://ds1kv27x8e4hy" path="res://images/creature_sprites/hat-1.png" id="16_iky04"]
 [ext_resource type="AudioStream" uid="uid://it0l1d864tp5" path="res://sound_effects/pain4.wav" id="17_addty"]
+[ext_resource type="Texture2D" uid="uid://brslt7dhl7lmc" path="res://images/creature_sprites/hat-2.png" id="17_s111j"]
+[ext_resource type="Texture2D" uid="uid://jwn24lgspht2" path="res://images/creature_sprites/glasses-0.png" id="18_52sxs"]
 [ext_resource type="AudioStream" uid="uid://bux02e7112jdt" path="res://sound_effects/pain5.wav" id="18_qdg0m"]
+[ext_resource type="Texture2D" uid="uid://diuhoh5vf8a6t" path="res://images/creature_sprites/glasses-1.png" id="19_a2k16"]
+[ext_resource type="Texture2D" uid="uid://ch6mgp1qpwwjh" path="res://images/creature_sprites/glasses-2.png" id="20_ehttl"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3cwqc"]
 animations = [{
@@ -78,6 +84,40 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_3t6pq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_eqb0u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_iky04")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_s111j")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xmjbo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_52sxs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_a2k16")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_ehttl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource("2_klgk6")
 dying_colour = Color(1, 0, 0, 1)
@@ -89,6 +129,22 @@ sprite_frames = SubResource("SpriteFrames_3cwqc")
 animation = &"idle"
 autoplay = "idle"
 script = ExtResource("5_oh7gr")
+
+[node name="Hat" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(-19, -127)
+scale = Vector2(0.225, 0.225)
+sprite_frames = SubResource("SpriteFrames_3t6pq")
+autoplay = "default"
+frame_progress = 0.770958
+
+[node name="Glasses" type="AnimatedSprite2D" parent="."]
+visible = false
+modulate = Color(1, 0.807843, 0.592157, 1)
+position = Vector2(-7, -33)
+scale = Vector2(0.225, 0.225)
+sprite_frames = SubResource("SpriteFrames_xmjbo")
+autoplay = "default"
 
 [node name="STAHP" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true

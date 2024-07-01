@@ -98,9 +98,9 @@ metadata/_edit_lock_ = true
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0
 offset_left = 28.0
-offset_top = 406.0
+offset_top = 390.0
 offset_right = 511.0
-offset_bottom = 557.0
+offset_bottom = 541.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_fjahq")
 
 [node name="HPLabel" type="Label" parent="."]
@@ -180,9 +180,9 @@ script = SubResource("GDScript_v57jq")
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
 offset_left = 265.0
-offset_top = 406.0
+offset_top = 390.0
 offset_right = 505.0
-offset_bottom = 433.0
+offset_bottom = 417.0
 theme = ExtResource("2_5bhpe")
 text = "Drain Strength"
 horizontal_alignment = 1
@@ -190,9 +190,9 @@ horizontal_alignment = 1
 [node name="Label6" type="Label" parent="."]
 layout_mode = 0
 offset_left = 25.0
-offset_top = 406.0
+offset_top = 390.0
 offset_right = 265.0
-offset_bottom = 433.0
+offset_bottom = 417.0
 theme = ExtResource("2_5bhpe")
 text = "Damage Tint"
 horizontal_alignment = 1
@@ -200,9 +200,9 @@ horizontal_alignment = 1
 [node name="Label2" type="Label" parent="."]
 layout_mode = 0
 offset_left = 265.0
-offset_top = 486.0
+offset_top = 470.0
 offset_right = 505.0
-offset_bottom = 513.0
+offset_bottom = 497.0
 theme = ExtResource("2_5bhpe")
 text = "Screen Tint Strength"
 
@@ -218,9 +218,9 @@ text = "Current Track:"
 [node name="Strength" type="Label" parent="."]
 layout_mode = 0
 offset_left = 445.0
-offset_top = 441.0
+offset_top = 425.0
 offset_right = 485.0
-offset_bottom = 468.0
+offset_bottom = 452.0
 theme = ExtResource("2_5bhpe")
 text = "1.0"
 script = SubResource("GDScript_1tr3v")
@@ -228,9 +228,9 @@ script = SubResource("GDScript_1tr3v")
 [node name="Strength2" type="Label" parent="."]
 layout_mode = 0
 offset_left = 445.0
-offset_top = 521.0
+offset_top = 505.0
 offset_right = 485.0
-offset_bottom = 548.0
+offset_bottom = 532.0
 theme = ExtResource("2_5bhpe")
 text = "1.0"
 script = SubResource("GDScript_oisou")
@@ -238,9 +238,9 @@ script = SubResource("GDScript_oisou")
 [node name="OverlayStrength" type="HSlider" parent="."]
 layout_mode = 0
 offset_left = 280.0
-offset_top = 526.0
+offset_top = 510.0
 offset_right = 430.0
-offset_bottom = 542.0
+offset_bottom = 526.0
 max_value = 2.0
 step = 0.01
 value = 1.0
@@ -248,14 +248,38 @@ value = 1.0
 [node name="HSlider" type="HSlider" parent="."]
 layout_mode = 0
 offset_left = 280.0
-offset_top = 446.0
+offset_top = 430.0
 offset_right = 430.0
-offset_bottom = 462.0
+offset_bottom = 446.0
 theme = ExtResource("2_5bhpe")
 max_value = 4.0
 step = 0.01
 value = 1.0
 script = SubResource("GDScript_n68jj")
+
+[node name="GlassesBtn" type="Button" parent="."]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 572.0
+offset_right = 318.0
+offset_bottom = 605.0
+theme = ExtResource("8_lqg4h")
+theme_override_colors/font_color = Color(1, 1, 0.905882, 1)
+theme_override_fonts/font = ExtResource("9_y33yi")
+theme_override_font_sizes/font_size = 20
+text = "Toggle Glasses"
+
+[node name="HatBtn" type="Button" parent="."]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 625.0
+offset_right = 318.0
+offset_bottom = 658.0
+theme = ExtResource("8_lqg4h")
+theme_override_colors/font_color = Color(1, 1, 0.905882, 1)
+theme_override_fonts/font = ExtResource("9_y33yi")
+theme_override_font_sizes/font_size = 20
+text = "Toggle Hat"
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
@@ -270,10 +294,10 @@ text = "FULL RESTORE"
 
 [node name="Label3" type="Label" parent="."]
 layout_mode = 0
-offset_left = 26.0
-offset_top = 609.0
-offset_right = 133.0
-offset_bottom = 638.0
+offset_left = 22.0
+offset_top = 601.0
+offset_right = 129.0
+offset_bottom = 630.0
 theme = ExtResource("2_5bhpe")
 text = "FPS: %s"
 
@@ -303,61 +327,60 @@ offset_right = 42.0
 offset_bottom = 43.0
 script = ExtResource("10_4e6rj")
 
-[node name="MinimiseButton" type="Button" parent="WindowSizeControls"]
+[node name="HBoxContainer" type="HBoxContainer" parent="WindowSizeControls"]
 layout_mode = 0
-offset_left = 232.0
-offset_top = 594.0
-offset_right = 341.0
-offset_bottom = 644.0
-theme = ExtResource("8_lqg4h")
-theme_override_fonts/font = ExtResource("9_y33yi")
-theme_override_font_sizes/font_size = 18
-text = "Minimise"
+offset_left = 334.0
+offset_top = 588.0
+offset_right = 515.0
+offset_bottom = 643.0
+theme_override_constants/separation = 20
 
-[node name="MaximiseButton" type="Button" parent="WindowSizeControls"]
-layout_mode = 0
-offset_left = 398.0
-offset_top = 594.0
-offset_right = 507.0
-offset_bottom = 644.0
+[node name="MinimiseButton" type="Button" parent="WindowSizeControls/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme = ExtResource("8_lqg4h")
 theme_override_fonts/font = ExtResource("9_y33yi")
 theme_override_font_sizes/font_size = 18
-text = "Maximise"
+text = "-"
 
-[node name="NormaliseButton" type="Button" parent="WindowSizeControls"]
-layout_mode = 0
-offset_left = 355.0
-offset_top = 594.0
-offset_right = 384.0
-offset_bottom = 644.0
+[node name="MaximiseButton" type="Button" parent="WindowSizeControls/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme = ExtResource("8_lqg4h")
 theme_override_fonts/font = ExtResource("9_y33yi")
 theme_override_font_sizes/font_size = 18
-text = "=="
+text = "Normal"
+
+[node name="NormaliseButton" type="Button" parent="WindowSizeControls/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("8_lqg4h")
+theme_override_fonts/font = ExtResource("9_y33yi")
+theme_override_font_sizes/font_size = 18
+text = "+"
 
 [node name="ColorPickerButton" type="ColorPickerButton" parent="."]
 layout_mode = 0
 offset_left = 29.0
-offset_top = 404.0
+offset_top = 388.0
 offset_right = 61.0
-offset_bottom = 436.0
+offset_bottom = 420.0
 
 [node name="MinigameLabel" type="Label" parent="."]
 layout_mode = 0
 offset_left = 29.0
-offset_top = 486.0
+offset_top = 470.0
 offset_right = 186.0
-offset_bottom = 516.0
+offset_bottom = 500.0
 theme = ExtResource("2_5bhpe")
 text = "Minigame:"
 
 [node name="Minigame" type="Label" parent="."]
 layout_mode = 0
 offset_left = 29.0
-offset_top = 521.0
+offset_top = 505.0
 offset_right = 186.0
-offset_bottom = 551.0
+offset_bottom = 535.0
 theme = ExtResource("2_5bhpe")
 text = "%s"
 label_settings = SubResource("LabelSettings_na8du")
@@ -365,9 +388,11 @@ script = ExtResource("11_y5yt0")
 
 [connection signal="value_changed" from="OverlayStrength" to="." method="_on_overlay_strength_value_changed"]
 [connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="button_down" from="GlassesBtn" to="." method="_on_glasses_btn_button_down"]
+[connection signal="button_down" from="HatBtn" to="." method="_on_hat_btn_button_down"]
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="item_selected" from="AnimSelect" to="." method="_on_anim_select_item_selected"]
-[connection signal="button_down" from="WindowSizeControls/MinimiseButton" to="WindowSizeControls" method="_on_min_down"]
-[connection signal="button_down" from="WindowSizeControls/MaximiseButton" to="WindowSizeControls" method="_on_max_down"]
-[connection signal="button_down" from="WindowSizeControls/NormaliseButton" to="WindowSizeControls" method="_on_normalise_down"]
+[connection signal="button_down" from="WindowSizeControls/HBoxContainer/MinimiseButton" to="WindowSizeControls" method="_on_min_down"]
+[connection signal="button_down" from="WindowSizeControls/HBoxContainer/MaximiseButton" to="WindowSizeControls" method="_on_max_down"]
+[connection signal="button_down" from="WindowSizeControls/HBoxContainer/NormaliseButton" to="WindowSizeControls" method="_on_normalise_down"]
 [connection signal="popup_closed" from="ColorPickerButton" to="." method="_on_color_picker_button_popup_closed"]
