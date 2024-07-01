@@ -1,7 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://c5dr54dk0502t"]
+[gd_scene load_steps=6 format=3 uid="uid://c5dr54dk0502t"]
 
 [ext_resource type="Texture2D" uid="uid://cawudmxbjamv0" path="res://UI stuff/Green Palette/ui_green.png" id="1_6dftn"]
+[ext_resource type="Shader" path="res://shaders/grid.gdshader" id="2_0hqmj"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="2_t4frc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_adq1g"]
+shader = ExtResource("2_0hqmj")
+shader_parameter/rows = 20.0
+shader_parameter/columns = 10.0
+shader_parameter/lineSize = 0.1
+shader_parameter/color = Color(0.0605303, 0.0605303, 0.0605303, 1)
 
 [sub_resource type="GDScript" id="GDScript_v26rg"]
 script/source = "extends Button
@@ -27,6 +35,7 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_6dftn")
 
 [node name="ColorRect" type="ColorRect" parent="UI"]
+material = SubResource("ShaderMaterial_adq1g")
 offset_left = 53.0
 offset_top = 120.0
 offset_right = 487.0
