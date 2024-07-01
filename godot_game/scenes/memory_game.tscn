@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://d3e1mocbpq7hp"]
 
-[ext_resource type="Theme" uid="uid://4sicn8kqyed4" path="res://themes/menu_btn.tres" id="1_3y1y3"]
+[ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="1_3y1y3"]
 
 [sub_resource type="GDScript" id="GDScript_oqggf"]
 script/source = "extends Button
