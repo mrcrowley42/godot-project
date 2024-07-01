@@ -8,8 +8,10 @@
 shader = ExtResource("2_0hqmj")
 shader_parameter/rows = 10.0
 shader_parameter/columns = 10.0
-shader_parameter/lineSize = 0.1
+shader_parameter/lineSize = 0.32
 shader_parameter/color = Color(0.262933, 0.262932, 0.262932, 1)
+shader_parameter/bevel = true
+shader_parameter/bevelColor = Color(0.140447, 0.140447, 0.140447, 1)
 
 [sub_resource type="GDScript" id="GDScript_v26rg"]
 script/source = "extends Button
