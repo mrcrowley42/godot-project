@@ -1,3 +1,4 @@
+@icon("res://icons/controller-icon.svg")
 extends Node2D
 
 @onready var tetrisScene = preload("res://scenes/tetris.tscn")
