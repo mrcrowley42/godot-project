@@ -3,6 +3,7 @@ shader_type canvas_item;
 uniform float rows = 10;
 uniform float columns = 10;
 uniform float lineSize = .1;
+uniform float brightnessAddition = 0.0;
 uniform vec4 color : source_color = vec4(1.0);
 
 uniform bool offsetCentered = true;
@@ -62,5 +63,6 @@ void fragment() {
 		} else if (shouldBevel(remainder)) {
 			COLOR = bevelColor;
 		}
+		COLOR += brightnessAddition;
 	}
 }

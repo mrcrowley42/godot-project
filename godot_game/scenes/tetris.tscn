@@ -9,12 +9,13 @@
 shader = ExtResource("2_0hqmj")
 shader_parameter/rows = 20.0
 shader_parameter/columns = 10.0
-shader_parameter/lineSize = 0.15
-shader_parameter/color = Color(0.0235294, 0.0392157, 0.0431373, 1)
+shader_parameter/lineSize = 0.2
+shader_parameter/brightnessAddition = 0.0
+shader_parameter/color = Color(0.0818887, 0.114171, 0.121163, 1)
 shader_parameter/offsetCentered = true
 shader_parameter/offsetOverride = Vector2(0, 0)
 shader_parameter/bevel = true
-shader_parameter/bevelColor = Color(0.00784314, 0.0156863, 0.0235294, 1)
+shader_parameter/bevelColor = Color(0.037969, 0.069001, 0.0917762, 1)
 shader_parameter/outline = true
 shader_parameter/outlineColor = Color(0.215686, 0.282353, 0.305882, 1)
 
