@@ -14,4 +14,4 @@ func angry():
 
 func stop_it():
 	if creature.hp < 300:
-		%STAHP.play()
+		%STAHP.play_random()

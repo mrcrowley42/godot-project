@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bebjn5n2kjwgb"]
+[gd_scene load_steps=20 format=3 uid="uid://bebjn5n2kjwgb"]
 
 [ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://images/creature_sprites/little-guy.png" id="1_obpq1"]
 [ext_resource type="Script" path="res://scripts/creature.gd" id="2_klgk6"]
@@ -14,7 +14,10 @@
 [ext_resource type="Texture2D" uid="uid://dxc4uprrmyny8" path="res://images/creature_sprites/sadge-0.png" id="13_d84xb"]
 [ext_resource type="Texture2D" uid="uid://dxipq42e3qg72" path="res://images/creature_sprites/sadge-1.png" id="14_r6peb"]
 [ext_resource type="Texture2D" uid="uid://c8vn6brl68787" path="res://images/creature_sprites/sadge-2.png" id="15_xvmeh"]
-[ext_resource type="AudioStream" uid="uid://icnqnrm74sjc" path="res://sound_effects/half-life-scientist-stahp.mp3" id="17_f4vdv"]
+[ext_resource type="AudioStream" uid="uid://pgmpt3uti87" path="res://sound_effects/pain3.wav" id="16_2mdbn"]
+[ext_resource type="Script" path="res://scenes/pain.gd" id="16_epyie"]
+[ext_resource type="AudioStream" uid="uid://it0l1d864tp5" path="res://sound_effects/pain4.wav" id="17_addty"]
+[ext_resource type="AudioStream" uid="uid://bux02e7112jdt" path="res://sound_effects/pain5.wav" id="18_qdg0m"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3cwqc"]
 animations = [{
@@ -89,5 +92,6 @@ script = ExtResource("5_oh7gr")
 
 [node name="STAHP" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("17_f4vdv")
 bus = &"SFX"
+script = ExtResource("16_epyie")
+sounds = Array[AudioStream]([ExtResource("16_2mdbn"), ExtResource("17_addty"), ExtResource("18_qdg0m")])
