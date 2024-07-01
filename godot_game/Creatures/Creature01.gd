@@ -13,7 +13,7 @@ func dmg(amount:float, stat:String):
 		self.Health -= amount
 	elif stat == "Hunger":
 		self.Hunger -= amount
-	elif stat == "Sleep":
+	elif stat == "Sleep": 
 		self.Sleep -= amount
 	elif stat == "Joy":
 		self.Joy -= amount

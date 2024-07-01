@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://dlqoafrdmgrtl"]
+[gd_scene load_steps=4 format=3 uid="uid://c5dr54dk0502t"]
 
 [ext_resource type="Texture2D" uid="uid://cawudmxbjamv0" path="res://UI stuff/Green Palette/ui_green.png" id="1_6dftn"]
+[ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="2_t4frc"]
+
+[sub_resource type="GDScript" id="GDScript_v26rg"]
+script/source = "extends Button
+
+func _on_button_down():
+	get_tree().root.propagate_notification(Globals.NOTIFICATION_MINIGAME_CLOSED)
+	find_parent(\"Tetris\").queue_free()
+"
 
 [node name="Tetris" type="Node2D"]
 
@@ -9,6 +18,7 @@
 [node name="GravityTicker" type="Timer" parent="Gameplay"]
 
 [node name="UI" type="CanvasLayer" parent="."]
+layer = 10
 
 [node name="UI_Overlay" type="Sprite2D" parent="UI"]
 position = Vector2(270, 337.5)
@@ -22,3 +32,14 @@ offset_top = 120.0
 offset_right = 487.0
 offset_bottom = 554.0
 color = Color(0, 0, 0, 1)
+
+[node name="CloseBtn" type="Button" parent="UI"]
+offset_left = 28.0
+offset_top = 28.0
+offset_right = 95.0
+offset_bottom = 71.0
+theme = ExtResource("2_t4frc")
+text = "Close"
+script = SubResource("GDScript_v26rg")
+
+[connection signal="button_down" from="UI/CloseBtn" to="UI/CloseBtn" method="_on_button_down"]

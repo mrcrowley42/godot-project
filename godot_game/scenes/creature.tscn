@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bgly0bep64kkp"]
+[gd_scene load_steps=17 format=3 uid="uid://bebjn5n2kjwgb"]
 
 [ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://images/creature_sprites/little-guy.png" id="1_obpq1"]
 [ext_resource type="Script" path="res://scripts/creature.gd" id="2_klgk6"]
