@@ -105,7 +105,7 @@ func load_settings_data():
 		var section = data[SECTION] if data.has(SECTION) else Globals.DEFAULT_SECTION
 		
 		for key in data.keys():
-			if key != SECTION:
+			if key != SECTION and config.has_section(section) and config.has_section_key(section, key):
 				data_to_send[key] = config.get_value(section, key)
 		node.call(LOAD, data_to_send)
 
