@@ -6,10 +6,10 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_adq1g"]
 shader = ExtResource("2_0hqmj")
-shader_parameter/rows = 20.0
+shader_parameter/rows = 10.0
 shader_parameter/columns = 10.0
 shader_parameter/lineSize = 0.1
-shader_parameter/color = Color(0.0605303, 0.0605303, 0.0605303, 1)
+shader_parameter/color = Color(0.262933, 0.262932, 0.262932, 1)
 
 [sub_resource type="GDScript" id="GDScript_v26rg"]
 script/source = "extends Button
@@ -30,6 +30,7 @@ layer = 10
 
 [node name="UI_Overlay" type="Sprite2D" parent="UI"]
 position = Vector2(270, 337.5)
+rotation = 3.14159
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_6dftn")
 

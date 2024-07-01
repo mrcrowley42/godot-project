@@ -10,11 +10,16 @@ void fragment() {
 	vec2 grid_uv = UV * sdim;
 	float lSize = (lineSize / 1.0);
 	
-	float columnWidth = (sdim.x / columns);
-	float xMod = (grid_uv.x - (lSize * columnWidth) * 0.5) / columnWidth;
-	xMod -= floor(xMod);
-	if (xMod > 1.0 - lSize && xMod < 1.0) {
+	float columnWidth = sdim.x / columns;
+	float rowHeight = sdim.y / rows;
+	vec2 offset = vec2((lSize * columnWidth) * 0.5, (lSize * rowHeight) * 0.5);
+	
+	vec2 modu = vec2(grid_uv.x - offset.x, grid_uv.y - offset.y);
+	modu /= vec2(columnWidth, rowHeight);
+	modu -= floor(modu);
+	
+	// idk why i dont need to max the rhs of the && lmao perplexing
+	if (max(modu.x, modu.y) > 1.0 - lSize && modu.x < 1.0) {
 		COLOR = color;
 	}
-	
 }
