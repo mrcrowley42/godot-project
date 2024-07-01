@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=3 uid="uid://c282rwt57fvoc"]
+[gd_scene load_steps=90 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://images/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
 [ext_resource type="Script" path="res://scripts/prototype.gd" id="1_of2kb"]
@@ -64,6 +64,7 @@
 [ext_resource type="AudioStream" uid="uid://b1b1fwlrdpmcp" path="res://music/Heaven Pierce Her - ULTRAKILL- INFINITE HYPERDEATH - 01 The Fire Is Gone (for Piano, Saxophone and Trumpet).mp3" id="49_fomax"]
 [ext_resource type="AudioStream" uid="uid://8ctfl381pnja" path="res://music/15 Seto's Memory.mp3" id="52_30ho7"]
 [ext_resource type="AudioStream" uid="uid://ct8aoiuvdre5f" path="res://music/Aquatic Ambience [Restored].mp3" id="53_ghi24"]
+[ext_resource type="AudioStream" uid="uid://f6qpehtbujr7" path="res://music/11 Fruit On Grass - Garden.mp3" id="63_xbn5u"]
 [ext_resource type="AudioStream" uid="uid://d2453i7cwylo5" path="res://sound_effects/button_click.mp3" id="64_wswee"]
 
 [sub_resource type="GDScript" id="GDScript_7ecg8"]
@@ -1052,7 +1053,7 @@ stream = ExtResource("17_oqlhs")
 autoplay = true
 bus = &"Music"
 script = ExtResource("45_f51w5")
-music_selection = Array[AudioStreamMP3]([ExtResource("46_2tpny"), ExtResource("47_22k00"), ExtResource("48_3k68e"), ExtResource("49_fomax"), ExtResource("17_oqlhs"), ExtResource("52_30ho7"), ExtResource("53_ghi24")])
+music_selection = Array[AudioStreamMP3]([ExtResource("46_2tpny"), ExtResource("47_22k00"), ExtResource("48_3k68e"), ExtResource("49_fomax"), ExtResource("17_oqlhs"), ExtResource("52_30ho7"), ExtResource("53_ghi24"), ExtResource("63_xbn5u")])
 
 [node name="Yip" type="AudioStreamPlayer" parent="Audio"]
 unique_name_in_owner = true
@@ -1062,6 +1063,7 @@ bus = &"SFX"
 [node name="BtnClick" type="AudioStreamPlayer" parent="Audio"]
 unique_name_in_owner = true
 stream = ExtResource("64_wswee")
+volume_db = -1.0
 bus = &"SFX"
 
 [node name="PIPE" type="AudioStreamPlayer" parent="Audio"]

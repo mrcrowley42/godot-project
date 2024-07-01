@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://duucock0yfeav"]
+[gd_scene load_steps=3 format=3 uid="uid://duucock0yfeav"]
 
-[ext_resource type="Theme" uid="uid://4sicn8kqyed4" path="res://themes/menu_btn.tres" id="1_8aans"]
+[ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="1_8aans"]
+[ext_resource type="Script" path="res://scripts/restart_btn.gd" id="2_kmklq"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -20,3 +21,6 @@ offset_bottom = 604.0
 theme = ExtResource("1_8aans")
 theme_override_font_sizes/font_size = 24
 text = "RESTART"
+script = ExtResource("2_kmklq")
+
+[connection signal="pressed" from="Restart" to="Restart" method="_on_pressed"]
