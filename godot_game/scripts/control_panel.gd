@@ -1,15 +1,11 @@
 
 extends PanelContainer
 @onready var creature = %Creature
-@onready var minigame = preload("res://scenes/memory_game.tscn")
+
 var just_closed = false
 
 func _ready():
 	visible = false
-	
-func load_minigame():
-	var game = minigame.instantiate()
-	find_parent("UI").add_child(game)
 
 func _process(_delta):
 	just_closed = false
@@ -32,11 +28,6 @@ func _on_button_2_button_down():
 
 func _on_button_3_button_down():
 	creature.dmg(-200, 'hp')
-
-
-func _on_button_4_button_down():
-	load_minigame()
-	#creature.dmg(-200, 'mp')
 
 
 func _on_visibility_changed():
