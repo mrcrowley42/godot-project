@@ -18,7 +18,7 @@ func check_map_integrity():
 
 
 func place_tet():
-	pos = Vector2(5 - floor(width / 2), 0)
+	pos = Vector2(5 - floor(width / 2.0), 0)
 
 
 func _ready():
