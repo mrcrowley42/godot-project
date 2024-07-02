@@ -30,4 +30,4 @@ func load(data):
 
 func _on_finished():
 	stream=music_selection.pick_random()
-	stream.play()
+	play()
