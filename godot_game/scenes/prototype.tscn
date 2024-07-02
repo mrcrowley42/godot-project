@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=3 uid="uid://c282rwt57fvoc"]
+[gd_scene load_steps=91 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://images/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
 [ext_resource type="Script" path="res://scripts/prototype.gd" id="1_of2kb"]
@@ -36,6 +36,7 @@
 [ext_resource type="Script" path="res://scripts/arrowscale.gd" id="27_kx1gg"]
 [ext_resource type="Script" path="res://scripts/mp_bar.gd" id="28_sltmf"]
 [ext_resource type="PackedScene" uid="uid://b6wocr0vo5s4v" path="res://scenes/debug_content.tscn" id="29_le63d"]
+[ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="30_5w1bx"]
 [ext_resource type="Texture2D" uid="uid://c702pbhxasm52" path="res://icons/heart-fill.svg" id="30_8mosm"]
 [ext_resource type="Texture2D" uid="uid://d4c1k5m8u1jc0" path="res://UI stuff/Green Palette/green_food_button.png" id="30_h36mb"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="31_4jpkq"]
@@ -489,7 +490,7 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 2
 
-[node name="Button 1" type="Button" parent="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer"]
+[node name="ScissorsPaperRock" type="Button" parent="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -837,16 +838,50 @@ theme_override_font_sizes/font_size = 24
 text = "Close"
 script = SubResource("GDScript_ao166")
 
-[node name="Label" type="Label" parent="UI/OptionsContainer/CreditsContainer/Node2D"]
-offset_right = 433.0
-offset_bottom = 370.0
-theme_override_colors/font_color = Color(0.913725, 0.933333, 0.94902, 1)
-theme_override_constants/line_spacing = 12
-theme_override_fonts/font = ExtResource("9_wn204")
-theme_override_font_sizes/font_size = 24
-text = ":)"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="HScrollBar" type="ScrollContainer" parent="UI/OptionsContainer/CreditsContainer/Node2D"]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 424.0
+offset_bottom = 343.0
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsContainer/CreditsContainer/Node2D/HScrollBar"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="CreditsContent" type="RichTextLabel" parent="UI/OptionsContainer/CreditsContainer/Node2D/HScrollBar/MarginContainer"]
+custom_minimum_size = Vector2(384, 0)
+layout_mode = 2
+theme = ExtResource("30_5w1bx")
+bbcode_enabled = true
+text = "[center]Created by Team Yippee[/center]
+[indent]
+[ul]Lachlan Cameron
+Matthew Crowley
+Ryan Gasnier
+Marcus Gellel
+Maggie O'Connell
+Bryce van Ewyk
+[/ul][/indent]
+[b]Tbh/autism creature originally by @acmeiku on Twitter[/b]
+
+VCR Font by Riciery Leal on dafont
+
+Yippee! by unknown german kid
+
+Placeholder audio:
+Scientist Voicelines by Valve Software
+Hollywood Theme by Rik Schaffer
+Alone In The Town by Akira Yamaoka
+memory=entryrrrr- by Esselfortium
+The Fire is Gone by Heaven Pierce Her
+The Atrocity That Is The Dualshock Basement Theme by Some Fraud
+Fruit on Grass - Garden by Arvi Teikari
+Seto's Memory by Shinkichi Mitsumune
+Aquatic Ambience by David Wise"
+fit_content = true
 
 [node name="UI_Overlay" type="Sprite2D" parent="UI" groups=["settings_data"]]
 unique_name_in_owner = true
@@ -1058,6 +1093,7 @@ music_selection = Array[AudioStreamMP3]([ExtResource("46_2tpny"), ExtResource("4
 [node name="Yip" type="AudioStreamPlayer" parent="Audio"]
 unique_name_in_owner = true
 stream = ExtResource("18_6dihm")
+max_polyphony = 50
 bus = &"SFX"
 
 [node name="BtnClick" type="AudioStreamPlayer" parent="Audio"]
@@ -1077,7 +1113,7 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 3" to="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 3" method="_on_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 4" to="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 4" method="_on_button_down"]
 [connection signal="visibility_changed" from="UI/ScreenControls/ActivityControls" to="UI/ScreenControls/ActivityControls" method="_on_visibility_changed"]
-[connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/Button 1" to="UI/ScreenControls/ActivityControls" method="_on_button_1_button_down"]
+[connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/ScissorsPaperRock" to="MinigameManager" method="_on_scissors_paper_rock_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/Tetris" to="MinigameManager" method="_on_tetris_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/Button 3" to="UI/ScreenControls/ActivityControls" method="_on_button_3_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
@@ -1095,3 +1131,4 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/NavigationControls/FoodButton" to="UI/NavigationControls/FoodButton" method="_on_button_down"]
 [connection signal="button_down" from="UI/NavigationControls/ActButton" to="UI/NavigationControls/ActButton" method="_on_button_down"]
 [connection signal="button_down" from="UI/NavigationControls/SettingButton" to="UI/NavigationControls/SettingButton" method="_on_button_down"]
+[connection signal="finished" from="Audio/MainMusic" to="Audio/MainMusic" method="_on_finished"]

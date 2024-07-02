@@ -24,5 +24,10 @@ func save():
 
 func load(data):
 	self.i = int(data[self.name])
-	change_texture()
+	change_texture()	
 
+
+
+func _on_finished():
+	stream=music_selection.pick_random()
+	play()

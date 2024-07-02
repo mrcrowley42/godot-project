@@ -26,8 +26,9 @@ func normalise():
 	window.size.y = start_size.y * 1
 
 func maximise():
-	window.size.x = start_size.x * 1.25
-	window.size.y = start_size.y * 1.25
+	window.size.x = start_size.x * 1.33
+	window.size.y = start_size.y * 1.33
+	
 
 func _on_normal_button_button_down():
 	window.size = start_size

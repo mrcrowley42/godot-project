@@ -55,6 +55,7 @@ texture = ExtResource("1_ad86f")
 editor_description = "x = (1080 * 0.5) / 2 - (size.w / 2) = 120
 y = (1350 * 0.5) / 2 - (size.h / 2) = 37"
 material = SubResource("ShaderMaterial_adq1g")
+layout_mode = 0
 offset_left = 120.0
 offset_top = 37.0
 offset_right = 420.0
@@ -63,6 +64,7 @@ color = Color(0, 0, 0, 1)
 script = ExtResource("3_r7ui3")
 
 [node name="CloseBtn" type="Button" parent="UI/Control"]
+layout_mode = 0
 offset_left = 506.0
 offset_top = 17.0
 offset_right = 522.0
