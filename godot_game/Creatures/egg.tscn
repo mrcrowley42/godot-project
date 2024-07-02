@@ -1,7 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://bl22rtkqnj1s7"]
+[gd_scene load_steps=10 format=3 uid="uid://bl22rtkqnj1s7"]
 
 [ext_resource type="Script" path="res://Creatures/egg.gd" id="1_a30c6"]
 [ext_resource type="Texture2D" uid="uid://u0ju4yx6fdmf" path="res://Creatures/egg_sprites/egg.png" id="2_ji1eo"]
+[ext_resource type="AudioStream" uid="uid://8ifwm2tjitur" path="res://sound_effects/yippee.mp3" id="3_02c0x"]
+[ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://images/creature_sprites/little-guy.png" id="4_3q5va"]
+[ext_resource type="Texture2D" uid="uid://4cfpam3be0g" path="res://images/creature_sprites/little-guy_2.png" id="5_j7pas"]
+[ext_resource type="Texture2D" uid="uid://diwxdoruu1sob" path="res://images/creature_sprites/little-guy_3.png" id="6_8miqa"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2yjhf"]
 atlas = ExtResource("2_ji1eo")
@@ -18,16 +22,50 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_lmfc6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_3q5va")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_j7pas")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_8miqa")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Egg" type="Node2D"]
 script = ExtResource("1_a30c6")
+set_wait = 30.0
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="eggSprite" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(274, 340)
 scale = Vector2(3.39, 3.39)
 sprite_frames = SubResource("SpriteFrames_scja0")
 
 [node name="eggTimer" type="Timer" parent="."]
 unique_name_in_owner = true
-wait_time = 10.0
+process_callback = 0
+wait_time = 2.0
 one_shot = true
 autostart = true
+
+[node name="Yip" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_02c0x")
+
+[node name="lilGuy" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(293, 331)
+scale = Vector2(0.29, 0.29)
+sprite_frames = SubResource("SpriteFrames_lmfc6")
+autoplay = "default"
+frame_progress = 0.352862
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
