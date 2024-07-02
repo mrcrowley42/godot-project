@@ -844,9 +844,24 @@ theme_override_colors/font_color = Color(0.913725, 0.933333, 0.94902, 1)
 theme_override_constants/line_spacing = 12
 theme_override_fonts/font = ExtResource("9_wn204")
 theme_override_font_sizes/font_size = 24
-text = ":)"
+text = "Created by Team Yippee (Lachlan Cameron, Matthew Crowley, Ryan Gasnier, Marcus Gellel, Maggie O'Connell, & Bryce van Ewyk)
+
+Tbh/autism creature originally by @acmeiku on Twitter
+
+VCR Font by Riciery Leal on dafont
+
+Placeholder music:
+Hollywood Theme by RIk Schaffer
+Alone In The Town by Akira Yamaoka
+memory=entryrrrr- by Esselfortium
+The Fire is Gone by Heaven Pierce Her
+The Atrocity That Is The Dualshock Basement Theme by Some Fraud
+Fruit on Grass - Garden by Arvi Teikari
+Seto's Memory by Shinkichi Mitsumune
+Aquatic Ambience by David Wise"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="UI_Overlay" type="Sprite2D" parent="UI" groups=["settings_data"]]
 unique_name_in_owner = true
