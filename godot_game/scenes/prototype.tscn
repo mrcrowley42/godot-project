@@ -1,7 +1,6 @@
 [gd_scene load_steps=91 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://images/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
-[ext_resource type="Script" path="res://scripts/prototype.gd" id="1_of2kb"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_a8vep"]
 [ext_resource type="Script" path="res://scripts/SceneManager.gd" id="3_b8dff"]
 [ext_resource type="PackedScene" uid="uid://bebjn5n2kjwgb" path="res://scenes/creature.tscn" id="4_iwgh8"]
@@ -67,6 +66,20 @@
 [ext_resource type="AudioStream" uid="uid://ct8aoiuvdre5f" path="res://music/Aquatic Ambience [Restored].mp3" id="53_ghi24"]
 [ext_resource type="AudioStream" uid="uid://f6qpehtbujr7" path="res://music/11 Fruit On Grass - Garden.mp3" id="63_xbn5u"]
 [ext_resource type="AudioStream" uid="uid://d2453i7cwylo5" path="res://sound_effects/button_click.mp3" id="64_wswee"]
+
+[sub_resource type="GDScript" id="GDScript_3b4oq"]
+script/source = "extends \"res://scripts/prototype.gd\"
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
 
 [sub_resource type="GDScript" id="GDScript_7ecg8"]
 script/source = "extends ColorRect
@@ -260,7 +273,7 @@ func _ready():
 "
 
 [node name="Game" type="Node"]
-script = ExtResource("1_of2kb")
+script = SubResource("GDScript_3b4oq")
 metadata/_edit_vertical_guides_ = [532.0, 8.0, 45.0, 53.0, 487.0, 495.0]
 metadata/_edit_horizontal_guides_ = [8.0, 667.0, 112.0, 120.0, 554.0, 562.0]
 
