@@ -1058,6 +1058,7 @@ music_selection = Array[AudioStreamMP3]([ExtResource("46_2tpny"), ExtResource("4
 [node name="Yip" type="AudioStreamPlayer" parent="Audio"]
 unique_name_in_owner = true
 stream = ExtResource("18_6dihm")
+max_polyphony = 50
 bus = &"SFX"
 
 [node name="BtnClick" type="AudioStreamPlayer" parent="Audio"]
