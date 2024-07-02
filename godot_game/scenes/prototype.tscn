@@ -65,7 +65,7 @@
 [ext_resource type="AudioStream" uid="uid://8ctfl381pnja" path="res://music/15 Seto's Memory.mp3" id="52_30ho7"]
 [ext_resource type="AudioStream" uid="uid://ct8aoiuvdre5f" path="res://music/Aquatic Ambience [Restored].mp3" id="53_ghi24"]
 [ext_resource type="AudioStream" uid="uid://f6qpehtbujr7" path="res://music/11 Fruit On Grass - Garden.mp3" id="63_xbn5u"]
-[ext_resource type="AudioStream" uid="uid://dd8y3dr1nnr7o" path="res://sound_effects/button_click.mp3" id="64_wswee"]
+[ext_resource type="AudioStream" uid="uid://d2453i7cwylo5" path="res://sound_effects/button_click.mp3" id="64_wswee"]
 
 [sub_resource type="GDScript" id="GDScript_7ecg8"]
 script/source = "extends ColorRect

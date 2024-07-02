@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/debug_content.gd" id="1_jlyus"]
 [ext_resource type="Script" path="res://scripts/mp_label.gd" id="2_3h2jk"]
-[ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="2_5bhpe"]
+[ext_resource type="Theme" path="res://themes/monospace_font.tres" id="2_5bhpe"]
 [ext_resource type="Script" path="res://scripts/hp_label.gd" id="3_jj2ny"]
 [ext_resource type="Script" path="res://scripts/sp_label.gd" id="3_kowqt"]
 [ext_resource type="Script" path="res://scripts/ap_label.gd" id="3_qpwvx"]
