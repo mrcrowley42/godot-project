@@ -121,8 +121,6 @@ script = ExtResource("1_3m1l3")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 11
-offset = Vector2(120, 37)
-transform = Transform2D(1, 0, 0, 1, 120, 37)
 
 [node name="Texture" type="AnimatedSprite2D" parent="CanvasLayer"]
 sprite_frames = SubResource("SpriteFrames_ino4n")
