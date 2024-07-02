@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://d3cjkbqq7q1sx"
-path="res://.godot/imported/pain4.wav-02887c25fb94b0dd105377477e625d58.sample"
+uid="uid://sf20qavy3mx3"
+path="res://.godot/imported/thirst_low.wav-d681833e217cfa3ae0e43997c5211f82.sample"
 
 [deps]
 
-source_file="res://scenes/pain4.wav"
-dest_files=["res://.godot/imported/pain4.wav-02887c25fb94b0dd105377477e625d58.sample"]
+source_file="res://sound_effects/thirst_low.wav"
+dest_files=["res://.godot/imported/thirst_low.wav-d681833e217cfa3ae0e43997c5211f82.sample"]
 
 [params]
 

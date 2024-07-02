@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://cbn0dv1k0onpb" path="res://scenes/vol_slider.tscn" id="15_lmno7"]
 [ext_resource type="Texture2D" uid="uid://dckd2hhimpp2x" path="res://icons/cup-straw.svg" id="16_we3t2"]
 [ext_resource type="Theme" uid="uid://1dv11a5ar0hg" path="res://themes/action_btn.tres" id="16_ye11j"]
-[ext_resource type="Texture2D" uid="uid://cx2q4cedbcgn" path="res://scenes/rock-paper-scissors.png" id="17_n1tf7"]
+[ext_resource type="Texture2D" uid="uid://cx2q4cedbcgn" path="res://rock-paper-scissors.png" id="17_n1tf7"]
 [ext_resource type="AudioStream" uid="uid://dcet1hpt70t42" path="res://music/perfection.mp3" id="17_oqlhs"]
 [ext_resource type="AudioStream" uid="uid://8ifwm2tjitur" path="res://sound_effects/yippee.mp3" id="18_6dihm"]
 [ext_resource type="Texture2D" uid="uid://b4pvkkppy44n0" path="res://icons/icecream_48dp_FILL0_wght400_GRAD0_opsz48.svg" id="18_lv553"]
