@@ -1,10 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://bl22rtkqnj1s7"]
+[gd_scene load_steps=5 format=3 uid="uid://bl22rtkqnj1s7"]
 
 [ext_resource type="Script" path="res://Creatures/egg.gd" id="1_a30c6"]
+[ext_resource type="Texture2D" uid="uid://u0ju4yx6fdmf" path="res://Creatures/egg_sprites/egg.png" id="2_ji1eo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2yjhf"]
+atlas = ExtResource("2_ji1eo")
+region = Rect2(154, 0, 77, 84)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_scja0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2yjhf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Egg" type="Node2D"]
 script = ExtResource("1_a30c6")
-wait_time = 30.0
 
-[node name="Timer" type="Timer" parent="."]
-unique_name_in_owner = true
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(274, 340)
+scale = Vector2(3.39, 3.39)
+sprite_frames = SubResource("SpriteFrames_scja0")

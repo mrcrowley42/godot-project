@@ -1,22 +1,11 @@
 extends Node2D
+var eggtime = load("res://Creatures/eggTimer.gd")
 
-#var to set wait time until egg hatches 
-@export var wait_time: float 
-
-
-	
-func egg_timer():
-	var hatching = Timer.new()
-	hatching.wait_time = wait_time
-	hatching.autostart = true
-	hatching.one_shot = true
-	add_child(%Timer)
-
-	
+# Called when the node enters the scene tree for the first time.
 func _ready():
-	egg_timer()
-	
+	eggtime
+
+
+
 func _process(delta):
 	pass
-
-
