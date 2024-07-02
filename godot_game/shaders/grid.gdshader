@@ -39,7 +39,7 @@ bool shouldOutline(vec2 screenDim, vec2 scaledUV, vec2 offset) {
 }
 
 void fragment() {
-	vec2 screenDim = vec2(1, 1) / SCREEN_PIXEL_SIZE;  // inverted to get dimensions
+	vec2 screenDim = 1.0 / SCREEN_PIXEL_SIZE;  // inverted to get dimensions
 	vec2 scaledUV = UV * screenDim;
 	
 	float columnWidth = screenDim.x / columns;

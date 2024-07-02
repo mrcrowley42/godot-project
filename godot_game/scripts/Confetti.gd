@@ -8,6 +8,7 @@ func _input(event):
 			var confetti_r = get_child(1);
 			
 			if !confetti_l.emitting and !confetti_r.emitting:
+				%Yip.play()
 				confetti_l.restart();
 				confetti_r.restart();
 				confetti_l.emitting = true;
