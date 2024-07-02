@@ -26,8 +26,8 @@ func _process(_delta) -> void:
 		low_stats.append(low_regulation)
 	if creature.ap < 200:
 		low_stats.append(low_fun)
-		
-	queue_warning(low_stats.pick_random())
+	if not low_stats.is_empty():
+		queue_warning(low_stats.pick_random())
 
 func _ready():
 	var timer = Timer.new()

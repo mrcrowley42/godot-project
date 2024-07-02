@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bl22rtkqnj1s7"]
 
 [ext_resource type="Script" path="res://Creatures/egg.gd" id="1_a30c6"]
-[ext_resource type="Texture2D" uid="uid://u0ju4yx6fdmf" path="res://Creatures/egg_sprites/egg.png" id="2_ji1eo"]
+[ext_resource type="Texture2D" uid="uid://u0ju4yx6fdmf" path="res://creatures/egg_sprites/egg.png" id="2_ji1eo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2yjhf"]
 atlas = ExtResource("2_ji1eo")
