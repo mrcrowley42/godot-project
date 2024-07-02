@@ -1,9 +1,17 @@
 extends Node2D
-var eggtime = load("res://Creatures/eggTimer.gd")
+@onready var cracker = %eggTimer
 
-# Called when the node enters the scene tree for the first time.
+func timerset():
+	%eggTimer.wait_time = 2
+	%eggTimer.one_shot = true
+	%eggTimer.autostart = true
+
+
+
 func _ready():
-	eggtime
+	timerset()
+	cracker.timeout.connect(func():
+		print("done"))
 
 
 

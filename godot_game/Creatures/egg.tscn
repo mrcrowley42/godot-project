@@ -25,3 +25,9 @@ script = ExtResource("1_a30c6")
 position = Vector2(274, 340)
 scale = Vector2(3.39, 3.39)
 sprite_frames = SubResource("SpriteFrames_scja0")
+
+[node name="eggTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 10.0
+one_shot = true
+autostart = true
