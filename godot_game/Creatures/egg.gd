@@ -5,22 +5,30 @@ extends Node2D
 func party_time():
 	pass
 
-func scene_set():
+
+func load_timer():
+	var time = Timer.new()
+	time.autostart = false
+	time.one_shot = true
+	time.wait_time = 2
+	time.timeout.connect(func():
+		get_tree().change_scene("res://scenes/prototype.tscn"))
+	
+
+
+
+func _enter_tree():
 	%lilGuy.visible = false
 	%eggSprite.visible = true
-	cracker.wait_time = set_wait
+	%eggTimer.wait_time = set_wait
 
 func _ready():
-	scene_set()
-	
 	cracker.timeout.connect(func():
 		print("done")
 		%Yip.play()
 		%eggSprite.visible = false
 		%lilGuy.visible = true
+		load_timer()
 		)
 
 
-
-func _process(delta):
-	pass
