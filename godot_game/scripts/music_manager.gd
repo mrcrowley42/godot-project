@@ -24,7 +24,7 @@ func save():
 
 func load(data):
 	self.i = int(data[self.name])
-	change_texture()
+	change_texture()	
 
 
 

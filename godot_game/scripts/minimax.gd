@@ -28,6 +28,7 @@ func normalise():
 func maximise():
 	window.size.x = start_size.x * 1.25
 	window.size.y = start_size.y * 1.25
+	#print(str(OS.get_screen_size()))
 
 func _on_normal_button_button_down():
 	window.size = start_size

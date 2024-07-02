@@ -343,7 +343,7 @@ theme_override_fonts/font = ExtResource("9_y33yi")
 theme_override_font_sizes/font_size = 18
 text = "-"
 
-[node name="MaximiseButton" type="Button" parent="WindowSizeControls/HBoxContainer"]
+[node name="NormaliseButton" type="Button" parent="WindowSizeControls/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("8_lqg4h")
@@ -351,7 +351,7 @@ theme_override_fonts/font = ExtResource("9_y33yi")
 theme_override_font_sizes/font_size = 18
 text = "Normal"
 
-[node name="NormaliseButton" type="Button" parent="WindowSizeControls/HBoxContainer"]
+[node name="MaximiseButton" type="Button" parent="WindowSizeControls/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("8_lqg4h")
@@ -393,6 +393,6 @@ script = ExtResource("11_y5yt0")
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="item_selected" from="AnimSelect" to="." method="_on_anim_select_item_selected"]
 [connection signal="button_down" from="WindowSizeControls/HBoxContainer/MinimiseButton" to="WindowSizeControls" method="_on_min_down"]
-[connection signal="button_down" from="WindowSizeControls/HBoxContainer/MaximiseButton" to="WindowSizeControls" method="_on_max_down"]
 [connection signal="button_down" from="WindowSizeControls/HBoxContainer/NormaliseButton" to="WindowSizeControls" method="_on_normalise_down"]
+[connection signal="button_down" from="WindowSizeControls/HBoxContainer/MaximiseButton" to="WindowSizeControls" method="_on_max_down"]
 [connection signal="popup_closed" from="ColorPickerButton" to="." method="_on_color_picker_button_popup_closed"]
