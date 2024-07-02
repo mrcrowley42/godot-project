@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=3 uid="uid://c282rwt57fvoc"]
+[gd_scene load_steps=91 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://images/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="1_7g4je"]
 [ext_resource type="Script" path="res://scripts/prototype.gd" id="1_of2kb"]
@@ -36,6 +36,7 @@
 [ext_resource type="Script" path="res://scripts/arrowscale.gd" id="27_kx1gg"]
 [ext_resource type="Script" path="res://scripts/mp_bar.gd" id="28_sltmf"]
 [ext_resource type="PackedScene" uid="uid://b6wocr0vo5s4v" path="res://scenes/debug_content.tscn" id="29_le63d"]
+[ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="30_5w1bx"]
 [ext_resource type="Texture2D" uid="uid://c702pbhxasm52" path="res://icons/heart-fill.svg" id="30_8mosm"]
 [ext_resource type="Texture2D" uid="uid://d4c1k5m8u1jc0" path="res://UI stuff/Green Palette/green_food_button.png" id="30_h36mb"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="31_4jpkq"]
@@ -849,16 +850,21 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Label" type="Label" parent="UI/OptionsContainer/CreditsContainer/Node2D/HScrollBar/MarginContainer"]
+[node name="CreditsContent" type="RichTextLabel" parent="UI/OptionsContainer/CreditsContainer/Node2D/HScrollBar/MarginContainer"]
 custom_minimum_size = Vector2(384, 0)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.913725, 0.933333, 0.94902, 1)
-theme_override_constants/line_spacing = 12
-theme_override_fonts/font = ExtResource("9_wn204")
-theme_override_font_sizes/font_size = 20
-text = "Created by Team Yippee (Lachlan Cameron, Matthew Crowley, Ryan Gasnier, Marcus Gellel, Maggie O'Connell, & Bryce van Ewyk)
-
-Tbh/autism creature originally by @acmeiku on Twitter
+theme = ExtResource("30_5w1bx")
+bbcode_enabled = true
+text = "[center]Created by Team Yippee[/center]
+[indent]
+[ul]Lachlan Cameron
+Matthew Crowley
+Ryan Gasnier
+Marcus Gellel
+Maggie O'Connell
+Bryce van Ewyk
+[/ul][/indent]
+[b]Tbh/autism creature originally by @acmeiku on Twitter[/b]
 
 VCR Font by Riciery Leal on dafont
 
@@ -871,9 +877,7 @@ The Atrocity That Is The Dualshock Basement Theme by Some Fraud
 Fruit on Grass - Garden by Arvi Teikari
 Seto's Memory by Shinkichi Mitsumune
 Aquatic Ambience by David Wise"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
+fit_content = true
 
 [node name="UI_Overlay" type="Sprite2D" parent="UI" groups=["settings_data"]]
 unique_name_in_owner = true
