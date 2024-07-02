@@ -460,6 +460,7 @@ script = ExtResource("11_nbfug")
 
 [node name="ActivityControls" type="PanelContainer" parent="UI/ScreenControls"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(400, 400)
 layout_mode = 1
 anchors_preset = 8
@@ -550,7 +551,6 @@ offset_bottom = 40.0
 [node name="OptionsMenu" type="PanelContainer" parent="UI/OptionsContainer"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -800,7 +800,6 @@ script = SubResource("GDScript_ao166")
 [node name="CreditsContainer" type="PanelContainer" parent="UI/OptionsContainer"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -837,13 +836,26 @@ theme_override_font_sizes/font_size = 24
 text = "Close"
 script = SubResource("GDScript_ao166")
 
-[node name="Label" type="Label" parent="UI/OptionsContainer/CreditsContainer/Node2D"]
-offset_right = 433.0
-offset_bottom = 370.0
+[node name="HScrollBar" type="ScrollContainer" parent="UI/OptionsContainer/CreditsContainer/Node2D"]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 424.0
+offset_bottom = 343.0
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsContainer/CreditsContainer/Node2D/HScrollBar"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="UI/OptionsContainer/CreditsContainer/Node2D/HScrollBar/MarginContainer"]
+custom_minimum_size = Vector2(384, 0)
+layout_mode = 2
 theme_override_colors/font_color = Color(0.913725, 0.933333, 0.94902, 1)
 theme_override_constants/line_spacing = 12
 theme_override_fonts/font = ExtResource("9_wn204")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 20
 text = "Created by Team Yippee (Lachlan Cameron, Matthew Crowley, Ryan Gasnier, Marcus Gellel, Maggie O'Connell, & Bryce van Ewyk)
 
 Tbh/autism creature originally by @acmeiku on Twitter
