@@ -1,27 +1,22 @@
 extends Node2D
 
-@export var width: int
-@export var height: int
-@export var map: String;
+@onready var canvas = find_child("CanvasLayer")
+@onready var texture = find_child("Texture")
+var boardSize: Vector2
 
-var resting = false;
-var pos: Vector2;
+func round_down_to_grid(vec: Vector2):
+	vec = floor(vec)  # no decimals allowed >:)
+	return vec - Vector2(int(vec.x) % 30, int(vec.y) % 30)
 
-
-func check_map_integrity():
-	var map_split = map.split(",")
-	var map_length = map.replace(",", "").length()
+func init(piece: String, bPos: Vector2, bSize: Vector2):
+	boardSize = bSize
+	canvas.offset = bPos
+	texture.animation = piece
 	
-	for ih in height:
-		assert(map_split[ih].length() == width)
-	assert(width * height == map_length)
+	place_tet()
 
-func place_tet(boardWidth):
-	pos = Vector2((boardWidth / 2.0) - floor(width / 2.0), 0)
-
-func init(boardWidth, _boardHeight):
-	check_map_integrity()
-	place_tet(boardWidth)
+func place_tet():
+	pass
 
 func gravity_tick():
 	print("fall")
