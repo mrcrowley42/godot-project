@@ -16,15 +16,12 @@ func check_map_integrity():
 		assert(map_split[ih].length() == width)
 	assert(width * height == map_length)
 
+func place_tet(boardWidth):
+	pos = Vector2((boardWidth / 2.0) - floor(width / 2.0), 0)
 
-func place_tet():
-	pos = Vector2(5 - floor(width / 2.0), 0)
-
-
-func _ready():
+func init(boardWidth, _boardHeight):
 	check_map_integrity()
-	place_tet()
-
+	place_tet(boardWidth)
 
 func gravity_tick():
 	print("fall")

@@ -1,6 +1,8 @@
 @icon("res://icons/controller-icon.svg")
 extends Node2D
 
+@onready var act_menu = %ActivityControls
+
 @onready var tetrisScene = preload("res://scenes/tetris.tscn")
 @onready var memoryGameScene = preload("res://scenes/memory_game.tscn")
 
@@ -8,6 +10,7 @@ var currentMinigame = null;
 
 func loadMinigame(minigame):
 	if currentMinigame == null:
+		act_menu.hide()
 		var game = minigame.instantiate()
 		find_parent("Game").find_child("UI").add_child(game)
 		currentMinigame = minigame.resource_path
