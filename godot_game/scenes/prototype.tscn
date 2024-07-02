@@ -18,12 +18,12 @@
 [ext_resource type="PackedScene" uid="uid://cbn0dv1k0onpb" path="res://scenes/vol_slider.tscn" id="15_lmno7"]
 [ext_resource type="Texture2D" uid="uid://dckd2hhimpp2x" path="res://icons/cup-straw.svg" id="16_we3t2"]
 [ext_resource type="Theme" uid="uid://1dv11a5ar0hg" path="res://themes/action_btn.tres" id="16_ye11j"]
+[ext_resource type="Texture2D" uid="uid://cx2q4cedbcgn" path="res://scenes/rock-paper-scissors.png" id="17_n1tf7"]
 [ext_resource type="AudioStream" uid="uid://dcet1hpt70t42" path="res://music/perfection.mp3" id="17_oqlhs"]
 [ext_resource type="AudioStream" uid="uid://8ifwm2tjitur" path="res://sound_effects/yippee.mp3" id="18_6dihm"]
 [ext_resource type="Texture2D" uid="uid://b4pvkkppy44n0" path="res://icons/icecream_48dp_FILL0_wght400_GRAD0_opsz48.svg" id="18_lv553"]
 [ext_resource type="Texture2D" uid="uid://cb64elolo0rtd" path="res://icons/coffee_48dp_FILL0_wght400_GRAD0_opsz48.svg" id="20_40f8v"]
 [ext_resource type="Texture2D" uid="uid://pbxnymt0cqn7" path="res://images/c345a48674507fd3f61aad362db1b21b.jpg" id="20_dkmvt"]
-[ext_resource type="Texture2D" uid="uid://tdk02lxiky1m" path="res://icons/controller.svg" id="20_xnus2"]
 [ext_resource type="Texture2D" uid="uid://d3f8r28w20i4e" path="res://icons/crossword_48dp_FILL0_wght400_GRAD0_opsz48.svg" id="21_faowa"]
 [ext_resource type="Script" path="res://scripts/hp_bar.gd" id="22_688js"]
 [ext_resource type="Texture2D" uid="uid://kstkvtalfvn4" path="res://icons/piano_48dp_FILL0_wght400_GRAD0_opsz48.svg" id="22_ktcf4"]
@@ -495,7 +495,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("16_ye11j")
-icon = ExtResource("20_xnus2")
+icon = ExtResource("17_n1tf7")
 icon_alignment = 1
 expand_icon = true
 

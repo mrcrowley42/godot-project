@@ -41,25 +41,18 @@ offset_bottom = 554.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_3wt50")
 metadata/_edit_lock_ = true
 
-[node name="GameStatus" type="Label" parent="GameContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_egqjh")
-theme_override_font_sizes/font_size = 32
-text = "YOU LOSE!"
-metadata/_edit_use_anchors_ = true
-
 [node name="Node2D" type="Node2D" parent="GameContainer"]
 
-[node name="GameStatus2" type="Label" parent="GameContainer/Node2D"]
-offset_left = 97.0
+[node name="CreatureChoice" type="Label" parent="GameContainer/Node2D"]
+unique_name_in_owner = true
 offset_top = 139.0
-offset_right = 335.0
+offset_right = 434.0
 offset_bottom = 161.0
-size_flags_horizontal = 4
+size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("2_egqjh")
 theme_override_font_sizes/font_size = 24
-text = "Creature chose %s"
+horizontal_alignment = 1
+vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Buttons" type="HBoxContainer" parent="GameContainer/Node2D"]
@@ -97,10 +90,26 @@ size_flags_horizontal = 3
 theme = ExtResource("1_sqv3p")
 text = "Rock"
 
+[node name="Node2D2" type="Node2D" parent="GameContainer"]
+
+[node name="GameStatus" type="Label" parent="GameContainer/Node2D2"]
+unique_name_in_owner = true
+offset_top = 202.0
+offset_right = 434.0
+offset_bottom = 272.0
+theme_override_constants/line_spacing = 12
+theme_override_fonts/font = ExtResource("2_egqjh")
+theme_override_font_sizes/font_size = 32
+text = "Make your choice
+ "
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
 [node name="GameLogic" type="Node" parent="."]
 script = ExtResource("2_41t5m")
 
 [node name="ScoreLabel" type="Label" parent="."]
+unique_name_in_owner = true
 offset_left = 318.0
 offset_top = 148.0
 offset_right = 462.0
@@ -119,4 +128,7 @@ theme = ExtResource("1_sqv3p")
 text = "Close"
 script = SubResource("GDScript_oqggf")
 
+[connection signal="button_down" from="GameContainer/Node2D/Buttons/ScissorsBtn" to="GameLogic" method="_on_scissors_btn_button_down"]
+[connection signal="button_down" from="GameContainer/Node2D/Buttons/PaperBtn" to="GameLogic" method="_on_paper_btn_button_down"]
+[connection signal="button_down" from="GameContainer/Node2D/Buttons/RockBtn" to="GameLogic" method="_on_rock_btn_button_down"]
 [connection signal="button_down" from="CloseBtn" to="CloseBtn" method="_on_button_down"]
