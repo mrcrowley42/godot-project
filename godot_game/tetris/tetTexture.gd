@@ -11,10 +11,10 @@ var allowedTets = ['l_a', 'l_b', 'long', 'skew_a', 'skew_b', 'square', 't']
 var tetNormals = {
 	allowedTets[0]: {0: "0100", 1: "0010", 2: "1000", 3: "0001"},
 	allowedTets[1]: {0: "1000", 1: "0001", 2: "0100", 3: "0010"},
-	allowedTets[2]: {0: "1200", 1: "0021", 2: "1100", 3: "0011"},
-	allowedTets[3]: {},
-	allowedTets[4]: {},
-	allowedTets[5]: {},
+	allowedTets[2]: {0: "1200", 1: "0021"},
+	allowedTets[3]: {0: "1000", 1: "0010"},
+	allowedTets[4]: {0: "1000", 1: "0010"},
+	allowedTets[5]: {0: "0000"},
 	allowedTets[6]: {0: "1000", 1: "0001", 2: "0100", 3: "0010"}
 }
 
