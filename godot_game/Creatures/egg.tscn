@@ -1,11 +1,17 @@
-[gd_scene load_steps=10 format=3 uid="uid://bl22rtkqnj1s7"]
+[gd_scene load_steps=14 format=3 uid="uid://bl22rtkqnj1s7"]
 
 [ext_resource type="Script" path="res://Creatures/egg.gd" id="1_a30c6"]
-[ext_resource type="Texture2D" uid="uid://u0ju4yx6fdmf" path="res://creatures/egg_sprites/egg.png" id="2_ji1eo"]
+[ext_resource type="Texture2D" uid="uid://u0ju4yx6fdmf" path="res://Creatures/egg_sprites/egg.png" id="2_ji1eo"]
 [ext_resource type="AudioStream" uid="uid://8ifwm2tjitur" path="res://sound_effects/yippee.mp3" id="3_02c0x"]
 [ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://images/creature_sprites/little-guy.png" id="4_3q5va"]
 [ext_resource type="Texture2D" uid="uid://4cfpam3be0g" path="res://images/creature_sprites/little-guy_2.png" id="5_j7pas"]
 [ext_resource type="Texture2D" uid="uid://diwxdoruu1sob" path="res://images/creature_sprites/little-guy_3.png" id="6_8miqa"]
+[ext_resource type="Texture2D" uid="uid://cawudmxbjamv0" path="res://UI stuff/Green Palette/ui_green.png" id="7_f40bd"]
+[ext_resource type="Script" path="res://Creatures/party.gd" id="8_f4asa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c01kk"]
+atlas = ExtResource("2_ji1eo")
+region = Rect2(77, 0, 77, 84)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2yjhf"]
 atlas = ExtResource("2_ji1eo")
@@ -15,11 +21,14 @@ region = Rect2(154, 0, 77, 84)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_c01kk")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_2yjhf")
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 2.0
 }]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lmfc6"]
@@ -39,15 +48,39 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_4r4vg"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.12381, 0.290476, 0.452381, 0.652381, 0.819048, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.482353, 0.321569, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0.509804, 1, 0.529412, 0, 0.745098, 1, 1, 1, 1, 1)
+
 [node name="Egg" type="Node2D"]
 script = ExtResource("1_a30c6")
-set_wait = 1.0
+set_wait = 3.0
+
+[node name="Yip" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_02c0x")
 
 [node name="eggSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(274, 340)
-scale = Vector2(3.39, 3.39)
+visible = false
+position = Vector2(284, 386)
+scale = Vector2(5.135, 5.135)
 sprite_frames = SubResource("SpriteFrames_scja0")
+frame_progress = 0.788336
+
+[node name="lilGuy" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(266, 343)
+scale = Vector2(0.215, 0.215)
+sprite_frames = SubResource("SpriteFrames_lmfc6")
+autoplay = "default"
+frame_progress = 0.215938
+
+[node name="startGame" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
 
 [node name="eggTimer" type="Timer" parent="."]
 unique_name_in_owner = true
@@ -56,16 +89,51 @@ wait_time = 2.0
 one_shot = true
 autostart = true
 
-[node name="Yip" type="AudioStreamPlayer" parent="."]
-unique_name_in_owner = true
-stream = ExtResource("3_02c0x")
+[node name="UiGreen" type="Sprite2D" parent="."]
+position = Vector2(271.5, 339.5)
+scale = Vector2(0.499074, 0.502963)
+texture = ExtResource("7_f40bd")
 
-[node name="lilGuy" type="AnimatedSprite2D" parent="."]
+[node name="Confetti" type="Node2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(293, 331)
-scale = Vector2(0.29, 0.29)
-sprite_frames = SubResource("SpriteFrames_lmfc6")
-autoplay = "default"
-frame_progress = 0.215938
+script = ExtResource("8_f4asa")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="ConfetL" type="CPUParticles2D" parent="Confetti"]
+position = Vector2(92, 555)
+emitting = false
+amount = 15
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+direction = Vector2(0.1, -1)
+spread = 6.0
+initial_velocity_min = 500.0
+initial_velocity_max = 900.0
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+scale_amount_min = 10.0
+scale_amount_max = 15.0
+color_initial_ramp = SubResource("Gradient_4r4vg")
+hue_variation_min = 1.0
+hue_variation_max = 1.0
+
+[node name="ConfetR" type="CPUParticles2D" parent="Confetti"]
+position = Vector2(446, 553)
+emitting = false
+amount = 15
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+direction = Vector2(-0.1, -1)
+spread = 6.0
+initial_velocity_min = 500.0
+initial_velocity_max = 900.0
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+scale_amount_min = 10.0
+scale_amount_max = 15.0
+color_initial_ramp = SubResource("Gradient_4r4vg")
+hue_variation_min = 1.0
+hue_variation_max = 1.0
