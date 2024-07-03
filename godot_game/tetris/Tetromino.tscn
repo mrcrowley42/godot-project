@@ -127,3 +127,10 @@ layer = 11
 sprite_frames = SubResource("SpriteFrames_udxdd")
 animation = &"l_a"
 script = ExtResource("21_uh3hb")
+
+[node name="l_a" type="Area2D" parent="."]
+monitoring = false
+monitorable = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="l_a"]
+polygon = PackedVector2Array(-45, -30, -15, -30, -15, 0, 45, 0, 45, 30, -45, 30)
