@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://f7hd20elu48g"]
+[gd_scene load_steps=23 format=3 uid="uid://f7hd20elu48g"]
 
 [ext_resource type="Script" path="res://tetris/Tetromino.gd" id="1_qheu4"]
 [ext_resource type="Texture2D" uid="uid://3d40sc2w7vyq" path="res://tetris/tetrominos/l_a_1.png" id="2_lviqe"]
@@ -11,10 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://vsvg8cwwisdi" path="res://tetris/tetrominos/l_b_4.png" id="9_r01vb"]
 [ext_resource type="Texture2D" uid="uid://bkaq7s017gaek" path="res://tetris/tetrominos/long_1.png" id="10_2goxp"]
 [ext_resource type="Texture2D" uid="uid://ds1nxdocf8rot" path="res://tetris/tetrominos/long_2.png" id="11_exrip"]
-[ext_resource type="Texture2D" uid="uid://hdvu6qcltlsq" path="res://tetris/tetrominos/long_3.png" id="12_d7x7o"]
 [ext_resource type="Texture2D" uid="uid://do8rp1ndk03bk" path="res://tetris/tetrominos/skew_a_1.png" id="12_n1rjv"]
 [ext_resource type="Texture2D" uid="uid://dklraax1ho5bu" path="res://tetris/tetrominos/skew_a_2.png" id="13_4bh4m"]
-[ext_resource type="Texture2D" uid="uid://wp5l2xsq3dv1" path="res://tetris/tetrominos/long_4.png" id="13_bjv2q"]
 [ext_resource type="Texture2D" uid="uid://c8ckscou43468" path="res://tetris/tetrominos/skew_b_1.png" id="14_7cl8y"]
 [ext_resource type="Texture2D" uid="uid://beiqsda8hk7kg" path="res://tetris/tetrominos/skew_b_2.png" id="15_v88il"]
 [ext_resource type="Texture2D" uid="uid://dbrqsjw2yc40l" path="res://tetris/tetrominos/square_1.png" id="16_rusjo"]
@@ -66,12 +64,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("11_exrip")
-}, {
-"duration": 1.0,
-"texture": ExtResource("12_d7x7o")
-}, {
-"duration": 1.0,
-"texture": ExtResource("13_bjv2q")
 }],
 "loop": true,
 "name": &"long",
@@ -133,7 +125,7 @@ layer = 11
 
 [node name="Texture" type="AnimatedSprite2D" parent="CanvasLayer"]
 sprite_frames = SubResource("SpriteFrames_udxdd")
-animation = &"long"
+animation = &"l_a"
 script = ExtResource("21_uh3hb")
 
 [node name="l_a" type="Area2D" parent="."]
@@ -141,4 +133,4 @@ monitoring = false
 monitorable = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="l_a"]
-polygon = PackedVector2Array(-40, -25, -20, -25, -20, 5, 40, 5, 40, 25, -40, 25)
+polygon = PackedVector2Array(-45, -30, -15, -30, -15, 0, 45, 0, 45, 30, -45, 30)

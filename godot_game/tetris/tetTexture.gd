@@ -25,7 +25,7 @@ func get_size() -> Vector2:
 	return sprite_frames.get_frame_texture(animation, frame).get_size()
 
 func get_clipped_size() -> Vector2:
-	return get_size() - Vector2(
+	return get_size() - Vector2(30, 30) * Vector2(
 		get_normal(LEFT) + get_normal(RIGHT),
 		get_normal(TOP) + get_normal(BOTTOM)
 	)
