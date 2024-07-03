@@ -23,8 +23,6 @@ class MemCard extends Button:
 			text = hidden_value
 		elif text != "@":
 			text = "?"
-		
-
 
 var creature_score: int = 0
 var player_score: int = 0
