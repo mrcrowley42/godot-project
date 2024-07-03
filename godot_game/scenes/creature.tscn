@@ -126,7 +126,6 @@ animations = [{
 [node name="Node2D" type="Node2D"]
 script = ExtResource("2_klgk6")
 dying_colour = Color(1, 0, 0, 1)
-creature_list = Array[Resource]([null, null])
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.225, 0.225)

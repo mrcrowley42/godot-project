@@ -1,7 +1,5 @@
 @icon("res://icons/ClassList.svg")
-extends Node2D
-
-class_name StatusManager
+class_name StatusManager extends Node2D
 ## Script responsible for passive drain of Creature stats
 
 @export_category("Status Controls")
@@ -15,9 +13,10 @@ class_name StatusManager
 @export var ap_rate: float = 30
 @export var ap_amount: float = 1
 
+## Property that scales the damage values of all passive drain timers. 
 @export var time_multiplier: float = 1.0
-
-@onready var creature: Node2D = %Creature
+## Stores a reference to the scenes Creature.
+@onready var creature: Creature = %Creature
 
 ## Creates a new timer that loops [param rate] times per second,
 ## and executes the [param timeout_func] at the end of each loop.
@@ -34,6 +33,7 @@ func _ready():
 	new_timer(mp_rate, mp_timeout)
 	new_timer(sp_rate, sp_timeout)
 	new_timer(ap_rate, ap_timeout)
+
 
 func hp_timeout():
 	creature.dmg(hp_amount * time_multiplier, 'hp')

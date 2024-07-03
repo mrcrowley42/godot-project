@@ -6,9 +6,12 @@ extends Node2D
 @onready var tetrisScene = preload("res://scenes/tetris.tscn")
 @onready var memoryGameScene = preload("res://scenes/memory_game.tscn")
 @onready var sprock_scene = preload("res://scenes/scissors_paper_rock.tscn")
+@onready var zen_mode_scene = preload("res://scenes/zen_mode.tscn")
 
 var currentMinigame = null;
-var current_time_scale
+var current_time_scale: float
+
+
 func loadMinigame(minigame):
 	if currentMinigame == null:
 		current_time_scale = %StatusManager.time_multiplier
@@ -27,16 +30,20 @@ func _notification(noti):
 		unLoadMinigame()
 
 
-## Tetris
+## Loads Tetris.
 func _on_tetris_button_down():
 	loadMinigame(tetrisScene)
 
 
-## Memory game
+## Loads Memory.
 func _on_memory_game_button_down():
 	loadMinigame(memoryGameScene)
 
 
-
+## Loads scissors-paper-rock.
 func _on_scissors_paper_rock_button_down():
 	loadMinigame(sprock_scene)
+
+## Loads zen mode.
+func _on_zen_mode_button_down():
+	loadMinigame(zen_mode_scene)

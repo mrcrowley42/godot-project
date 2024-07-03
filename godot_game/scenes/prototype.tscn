@@ -509,7 +509,7 @@ icon = ExtResource("21_faowa")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Button 3" type="Button" parent="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer"]
+[node name="ZenMode" type="Button" parent="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -551,6 +551,7 @@ offset_bottom = 40.0
 [node name="OptionsMenu" type="PanelContainer" parent="UI/OptionsContainer"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1115,7 +1116,7 @@ bus = &"SFX"
 [connection signal="visibility_changed" from="UI/ScreenControls/ActivityControls" to="UI/ScreenControls/ActivityControls" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/ScissorsPaperRock" to="MinigameManager" method="_on_scissors_paper_rock_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/Tetris" to="MinigameManager" method="_on_tetris_button_down"]
-[connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/Button 3" to="UI/ScreenControls/ActivityControls" method="_on_button_3_button_down"]
+[connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/ZenMode" to="MinigameManager" method="_on_zen_mode_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
 [connection signal="pressed" from="UI/OptionsContainer/OptionsMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
 [connection signal="button_up" from="UI/OptionsContainer/OptionsMenu/SaveButtons/Cancel" to="UI/OptionsContainer/OptionsMenu/SaveButtons/Cancel" method="_on_button_up"]
