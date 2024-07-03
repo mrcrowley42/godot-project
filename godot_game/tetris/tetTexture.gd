@@ -23,6 +23,12 @@ func get_normal(direction: int) -> int:
 func get_size() -> Vector2:
 	return sprite_frames.get_frame_texture(animation, frame).get_size()
 
+func get_clipped_size() -> Vector2:
+	return get_size() - Vector2(
+		get_normal(LEFT) + get_normal(RIGHT),
+		get_normal(TOP) + get_normal(BOTTOM)
+	)
+
 func set_anim(anim):
 	assert(anim in allowedTets)
 	set_animation(anim)
