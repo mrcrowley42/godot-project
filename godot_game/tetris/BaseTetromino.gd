@@ -4,7 +4,7 @@ extends Node2D
 @onready var texture = find_child("Texture")
 var boardSize: Vector2
 
-func round_down_to_grid(vec: Vector2):
+func snap_to_grid(vec: Vector2):
 	vec = floor(vec)  # no decimals allowed >:)
 	return vec - Vector2(int(vec.x) % 30, int(vec.y) % 30)
 
