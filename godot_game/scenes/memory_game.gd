@@ -59,9 +59,14 @@ func choose_card(card):
 			for item in selected_cards:
 				item.text = "@"
 				item.disabled = true
-		else:	
+		else:
+			await get_tree().create_timer(.66).timeout
 			for item in selected_cards:
 				item.flip_card()
 				item.disabled = false
+
+			
+			
 			
 		selected_cards.clear()
+
