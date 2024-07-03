@@ -58,11 +58,13 @@ func choose_card(card):
 			for item in selected_cards:
 				item.text = "X"
 				item.disabled = true
+			%SFX.play_sound("correct")
 		else:
-			await get_tree().create_timer(.66).timeout
+			await get_tree().create_timer(.45).timeout
 			for item in selected_cards:
 				item.flip_card()
 				item.disabled = false
+			%SFX.play_sound("wrong")
 
 			
 			

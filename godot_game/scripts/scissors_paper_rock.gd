@@ -12,10 +12,12 @@ func _process(_delta):
 func win():
 	player_score += 1
 	%GameStatus.text = 'Victory\nYou win'
+	%SFX.play_sound("correct")
 	
 func lose():
 	creature_score += 1
 	%GameStatus.text = 'Defeat\nCreature wins'
+	%SFX.play_sound("wrong")
 	
 func play(user_choice):
 	var creature_choice = choices.pick_random()

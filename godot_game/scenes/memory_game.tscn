@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://d3e1mocbpq7hp"]
+[gd_scene load_steps=9 format=3 uid="uid://d3e1mocbpq7hp"]
 
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="1_3y1y3"]
 [ext_resource type="Script" path="res://scenes/memory_game.gd" id="1_y2saq"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="2_4ls5g"]
+[ext_resource type="Script" path="res://scenes/memory_sfx_man.gd" id="4_mndmj"]
 
 [sub_resource type="Gradient" id="Gradient_5hppj"]
 interpolation_mode = 2
@@ -95,5 +96,9 @@ offset_bottom = 184.0
 theme = ExtResource("1_3y1y3")
 text = "Close"
 script = SubResource("GDScript_a14sq")
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_mndmj")
 
 [connection signal="button_down" from="CloseBtn" to="CloseBtn" method="_on_button_down"]
