@@ -5,6 +5,9 @@ extends Node
 @onready var game = self
 
 var selected_cards: Array[MemCard] = []
+var creature_score: int = 0
+var player_score: int = 0
+var possible = Array(range(20))
 
 ## Class that describes the cards (buttons) for memory.
 class MemCard extends Button:
@@ -12,7 +15,7 @@ class MemCard extends Button:
 	func _init(value):
 		text = "?"
 		hidden_value = value
-		theme = load("res://themes/monospace_font.tres")
+		theme = load("res://themes/action_btn.tres")
 		size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		size_flags_vertical = Control.SIZE_EXPAND_FILL
 	func _pressed():
@@ -21,14 +24,10 @@ class MemCard extends Button:
 	func flip_card():
 		if text == "?":
 			text = hidden_value
-		elif text != "@":
+		elif text != "X":
 			text = "?"
 		
 
-
-var creature_score: int = 0
-var player_score: int = 0
-var possible = Array(range(20))
 
 func _process(_delta):
 	%ScoreLabel.text = og_text % [player_score, creature_score]
@@ -57,7 +56,7 @@ func choose_card(card):
 		if selected_cards[0].hidden_value == selected_cards[1].hidden_value:
 			player_score += 1
 			for item in selected_cards:
-				item.text = "@"
+				item.text = "X"
 				item.disabled = true
 		else:
 			await get_tree().create_timer(.66).timeout

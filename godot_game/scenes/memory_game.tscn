@@ -1,8 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://d3e1mocbpq7hp"]
+[gd_scene load_steps=8 format=3 uid="uid://d3e1mocbpq7hp"]
 
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="1_3y1y3"]
 [ext_resource type="Script" path="res://scenes/memory_game.gd" id="1_y2saq"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="2_4ls5g"]
+
+[sub_resource type="Gradient" id="Gradient_5hppj"]
+interpolation_mode = 2
+colors = PackedColorArray(0, 0.576471, 0, 1, 0.0369, 0.329162, 0.41, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dq5kv"]
+gradient = SubResource("Gradient_5hppj")
+width = 432
+height = 432
+fill_from = Vector2(0.538462, 0)
+fill_to = Vector2(0, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y1l3x"]
 
@@ -29,8 +40,16 @@ offset_right = 487.0
 offset_bottom = 554.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.135133, 0.381789, 0.586896, 1)
+color = Color(0.168943, 0.379533, 0.446845, 1)
 metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.439216)
+offset_left = 53.0
+offset_top = 120.0
+offset_right = 485.0
+offset_bottom = 552.0
+texture = SubResource("GradientTexture2D_dq5kv")
 
 [node name="GameLogic" type="Node" parent="."]
 unique_name_in_owner = true
