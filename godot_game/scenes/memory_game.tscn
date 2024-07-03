@@ -1,12 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://d3e1mocbpq7hp"]
+[gd_scene load_steps=3 format=3 uid="uid://d3e1mocbpq7hp"]
 
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="1_3y1y3"]
-[ext_resource type="Script" path="res://scenes/memory_game.gd" id="1_y2saq"]
-[ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="2_4ls5g"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y1l3x"]
-
-[sub_resource type="GDScript" id="GDScript_a14sq"]
+[sub_resource type="GDScript" id="GDScript_oqggf"]
 script/source = "extends Button
 
 func _on_button_down():
@@ -15,6 +11,12 @@ func _on_button_down():
 "
 
 [node name="MiniGame" type="Node2D"]
+
+[node name="GameContainer" type="PanelContainer" parent="."]
+offset_left = 53.0
+offset_top = 120.0
+offset_right = 487.0
+offset_bottom = 554.0
 
 [node name="BG" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(434, 434)
@@ -29,51 +31,15 @@ offset_right = 487.0
 offset_bottom = 554.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.135133, 0.381789, 0.586896, 1)
-metadata/_edit_lock_ = true
-
-[node name="GameContainer" type="PanelContainer" parent="."]
-offset_left = 53.0
-offset_top = 120.0
-offset_right = 487.0
-offset_bottom = 554.0
-theme_override_styles/panel = SubResource("StyleBoxEmpty_y1l3x")
-metadata/_edit_lock_ = true
-
-[node name="MarginContainer" type="MarginContainer" parent="GameContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 90
-theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 25
-
-[node name="CardGrid" type="GridContainer" parent="GameContainer/MarginContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_constants/h_separation = 15
-theme_override_constants/v_separation = 15
-columns = 5
-
-[node name="GameLogic" type="Node" parent="."]
-script = ExtResource("1_y2saq")
-
-[node name="ScoreLabel" type="Label" parent="."]
-unique_name_in_owner = true
-offset_left = 262.0
-offset_top = 138.0
-offset_right = 473.0
-offset_bottom = 197.0
-theme = ExtResource("2_4ls5g")
-text = "Player: %s
-Creature: %s"
+color = Color(0.428784, 0.701359, 0.667563, 1)
 
 [node name="CloseBtn" type="Button" parent="."]
 offset_left = 78.0
-offset_top = 141.0
+offset_top = 144.0
 offset_right = 179.0
-offset_bottom = 184.0
+offset_bottom = 187.0
 theme = ExtResource("1_3y1y3")
 text = "Close"
-script = SubResource("GDScript_a14sq")
+script = SubResource("GDScript_oqggf")
 
 [connection signal="button_down" from="CloseBtn" to="CloseBtn" method="_on_button_down"]
