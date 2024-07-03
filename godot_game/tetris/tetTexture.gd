@@ -33,11 +33,13 @@ func get_clipped_size() -> Vector2:
 
 ## clip position to centre of tet normals (centre of clipped size)
 func get_clipped_pos():
-	var offset = Vector2(15, 15) * Vector2(
+	return position + get_clipped_pos_offset()
+
+func get_clipped_pos_offset():
+	return Vector2(15, 15) * Vector2(
 		get_normal(LEFT) + -get_normal(RIGHT),
 		get_normal(TOP) + -get_normal(BOTTOM)
 	)
-	return position + offset
 
 func set_anim(anim):
 	assert(anim in allowedTets)
