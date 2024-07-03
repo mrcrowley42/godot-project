@@ -11,7 +11,7 @@ class_name SfxManager
 
 @export_category("Settings")
 ## How long (in seconds) after a sound effect has finished playing can another one begin.
-@export var cooldown_period: float = 20.0
+@export var cooldown_period: float = 10.0
 
 @onready var creature: Creature = $".."
 
