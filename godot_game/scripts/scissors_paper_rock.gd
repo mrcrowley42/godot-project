@@ -4,6 +4,7 @@ extends Node
 
 var creature_score: int = 0
 var player_score: int = 0
+var choices = ['rock', 'paper', 'scissors']
 
 func _process(_delta):
 	%ScoreLabel.text = og_text % [player_score, creature_score]
@@ -17,7 +18,7 @@ func lose():
 	%GameStatus.text = 'Defeat\nCreature wins'
 	
 func play(user_choice):
-	var creature_choice = ['rock', 'paper', 'scissors'].pick_random()
+	var creature_choice = choices.pick_random()
 	%CreatureChoice.text = str('Creature chose ' + creature_choice)
 #
 	if creature_choice == user_choice:

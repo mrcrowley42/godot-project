@@ -40,25 +40,38 @@ offset_bottom = 554.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_y1l3x")
 metadata/_edit_lock_ = true
 
+[node name="MarginContainer" type="MarginContainer" parent="GameContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 90
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="CardGrid" type="GridContainer" parent="GameContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 15
+columns = 5
+
 [node name="GameLogic" type="Node" parent="."]
 script = ExtResource("1_y2saq")
 
 [node name="ScoreLabel" type="Label" parent="."]
 unique_name_in_owner = true
-offset_left = 318.0
-offset_top = 148.0
-offset_right = 462.0
-offset_bottom = 235.0
+offset_left = 262.0
+offset_top = 138.0
+offset_right = 473.0
+offset_bottom = 197.0
 theme = ExtResource("2_4ls5g")
-text = "Score:
-Player:   %s
+text = "Player: %s
 Creature: %s"
 
 [node name="CloseBtn" type="Button" parent="."]
 offset_left = 78.0
-offset_top = 144.0
+offset_top = 141.0
 offset_right = 179.0
-offset_bottom = 187.0
+offset_bottom = 184.0
 theme = ExtResource("1_3y1y3")
 text = "Close"
 script = SubResource("GDScript_a14sq")
