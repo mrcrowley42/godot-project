@@ -147,7 +147,7 @@ dying_colour = Color(1, 0, 0, 1)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.225, 0.225)
 sprite_frames = SubResource("SpriteFrames_3cwqc")
-animation = &"chill"
+animation = &"idle"
 autoplay = "idle"
 script = ExtResource("5_oh7gr")
 

@@ -270,9 +270,15 @@ metadata/_edit_horizontal_guides_ = [8.0, 667.0, 112.0, 120.0, 554.0, 562.0]
 [node name="StatusManager" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("2_a8vep")
+hp_rate = null
+hp_amount = null
+mp_rate = null
+mp_amount = null
+sp_rate = null
 sp_amount = 4.0
 ap_rate = 1.0
 ap_amount = 12.0
+time_multiplier = null
 
 [node name="MinigameManager" type="Node2D" parent="."]
 unique_name_in_owner = true
