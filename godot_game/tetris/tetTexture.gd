@@ -8,3 +8,9 @@ func get_size() -> Vector2:
 func set_anim(anim):
 	assert(anim in allowedAnimations)
 	set_animation(anim)
+
+func advance_frame():
+	self.frame = (self.frame + 1) % self.sprite_frames.get_frame_count(animation)
+
+func rewind_frame():
+	pass

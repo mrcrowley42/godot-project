@@ -66,7 +66,7 @@
 [ext_resource type="AudioStream" uid="uid://8ctfl381pnja" path="res://music/15 Seto's Memory.mp3" id="52_30ho7"]
 [ext_resource type="AudioStream" uid="uid://ct8aoiuvdre5f" path="res://music/Aquatic Ambience [Restored].mp3" id="53_ghi24"]
 [ext_resource type="AudioStream" uid="uid://f6qpehtbujr7" path="res://music/11 Fruit On Grass - Garden.mp3" id="63_xbn5u"]
-[ext_resource type="AudioStream" uid="uid://dd8y3dr1nnr7o" path="res://sound_effects/button_click.mp3" id="64_wswee"]
+[ext_resource type="AudioStream" uid="uid://cx28efsxtr7c" path="res://sound_effects/button_click_fast.mp3" id="66_1e4wf"]
 
 [sub_resource type="GDScript" id="GDScript_7ecg8"]
 script/source = "extends ColorRect
@@ -113,7 +113,7 @@ script/source = "extends Button
 @onready var creature = %Creature
 
 func _on_button_down():
-	#%Yip.play()
+	%BtnClick.play()
 	creature.dmg(300, 'mp')
 "
 
@@ -134,6 +134,7 @@ script/source = "extends Button
 @onready var creature = %Creature
 
 func _on_button_down():
+	%BtnClick.play()
 	%PIPE.play()
 	creature.dmg(300, 'hp')
 "
@@ -147,6 +148,7 @@ script/source = "extends Button
 
 
 func _on_button_up():
+	%BtnClick.play()
 	%OptionsMenu.visible = !%OptionsMenu.visible
 "
 
@@ -177,6 +179,7 @@ script/source = "extends Button
 
 
 func _on_button_down():
+	%BtnClick.play()
 	%CreditsContainer.visible = !%CreditsContainer.visible
 "
 
@@ -461,6 +464,7 @@ script = ExtResource("11_nbfug")
 
 [node name="ActivityControls" type="PanelContainer" parent="UI/ScreenControls"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(400, 400)
 layout_mode = 1
 anchors_preset = 8
@@ -551,7 +555,6 @@ offset_bottom = 40.0
 [node name="OptionsMenu" type="PanelContainer" parent="UI/OptionsContainer"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1099,7 +1102,7 @@ bus = &"SFX"
 
 [node name="BtnClick" type="AudioStreamPlayer" parent="Audio"]
 unique_name_in_owner = true
-stream = ExtResource("64_wswee")
+stream = ExtResource("66_1e4wf")
 volume_db = -1.0
 bus = &"SFX"
 

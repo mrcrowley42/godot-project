@@ -12,6 +12,7 @@ func _ready():
 	load_settings_data()
 
 func _on_save_pressed():
+	%BtnClick.play()
 	save_settings_data()
 
 func _notification(noti):

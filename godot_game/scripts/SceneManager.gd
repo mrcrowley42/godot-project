@@ -14,6 +14,7 @@ var current_time_scale: float
 
 func loadMinigame(minigame):
 	if currentMinigame == null:
+		%BtnClick.play()
 		current_time_scale = %StatusManager.time_multiplier
 		%StatusManager.time_multiplier = 0
 		act_menu.hide()
@@ -22,6 +23,7 @@ func loadMinigame(minigame):
 		currentMinigame = minigame.resource_path
 
 func unLoadMinigame():
+	%BtnClick.play()
 	currentMinigame = null;
 	%StatusManager.time_multiplier = current_time_scale
 
