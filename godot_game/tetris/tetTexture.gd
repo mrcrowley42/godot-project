@@ -11,7 +11,7 @@ var allowedTets = ['l_a', 'l_b', 'long', 'skew_a', 'skew_b', 'square', 't']
 var tetNormals = {
 	allowedTets[0]: {0: "0100", 1: "0010", 2: "1000", 3: "0001"},
 	allowedTets[1]: {0: "1000", 1: "0001", 2: "0100", 3: "0010"},
-	allowedTets[2]: {0: "1100", 1: "0011", 2: "1100", 3: "0011"},
+	allowedTets[2]: {0: "1200", 1: "0021", 2: "1100", 3: "0011"},
 	allowedTets[3]: {},
 	allowedTets[4]: {},
 	allowedTets[5]: {},
@@ -24,11 +24,20 @@ func get_normal(direction: int) -> int:
 func get_size() -> Vector2:
 	return sprite_frames.get_frame_texture(animation, frame).get_size()
 
+## clips size based on tet normals
 func get_clipped_size() -> Vector2:
 	return get_size() - Vector2(30, 30) * Vector2(
 		get_normal(LEFT) + get_normal(RIGHT),
 		get_normal(TOP) + get_normal(BOTTOM)
 	)
+
+## clip position to centre of tet normals (centre of clipped size)
+func get_clipped_pos():
+	var offset = Vector2(15, 15) * Vector2(
+		get_normal(LEFT) + -get_normal(RIGHT),
+		get_normal(TOP) + -get_normal(BOTTOM)
+	)
+	return position + offset
 
 func set_anim(anim):
 	assert(anim in allowedTets)

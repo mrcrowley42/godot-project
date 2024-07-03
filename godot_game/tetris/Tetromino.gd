@@ -23,15 +23,15 @@ func init(piece: String, bPos: Vector2, bSize: Vector2):
 
 ## performs wall-kick based on normal given for tetmomino
 func x_correction(direction=0):
-	var normL = squareSize.x * texture.get_normal(texture.LEFT) if direction < 0 else 0
-	var normR = squareSize.x * texture.get_normal(texture.RIGHT) if direction > 0 else 0
-	var x_w = texture.get_size().x / 2
-	var bx_w = boardSize.x - x_w
+	var offset_pos = texture.get_clipped_pos()
+	var cSize_x = texture.get_clipped_size().x / 2
+	var cSize_x_r = boardSize.x - cSize_x
+	var isClipped = texture.get_size().x / 2 != cSize_x
 	
-	if x_w > texture.position.x:
-		texture.position.x = x_w - normL
-	elif bx_w < texture.position.x:
-		texture.position.x = bx_w + normR
+	if cSize_x > offset_pos.x:
+		texture.position.x = texture.position.x + squareSize.x if isClipped else cSize_x
+	elif cSize_x_r < offset_pos.x:
+		texture.position.x = texture.position.x - squareSize.x if isClipped else cSize_x_r
 
 func gravity_tick():
 	return
