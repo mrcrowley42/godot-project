@@ -12,7 +12,6 @@ func init(piece: String, bPos: Vector2, bSize: Vector2):
 	boardSize = bSize
 	canvas.offset = bPos
 	
-	assert(piece in texture.animations)
 	texture.animation = piece
 	
 	place_tet()
