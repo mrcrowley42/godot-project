@@ -11,7 +11,7 @@ class Card extends Button:
 		theme = load("res://themes/monospace_font.tres")
 		size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		size_flags_vertical = Control.SIZE_EXPAND_FILL
-	func _button_down():
+	func _pressed():
 		text = hidden_value
 
 
