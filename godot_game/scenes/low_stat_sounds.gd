@@ -22,6 +22,8 @@ func _process(_delta) -> void:
 	var low_stats: Array[AudioStream] = []
 	if creature.mp < 200:
 		low_stats.append(low_hydrate)
+		# adding hunger here as well to not conflict with pain sounds lol
+		low_stats.append(low_hunger)
 	if creature.sp < 200:
 		low_stats.append(low_regulation)
 	if creature.ap < 200:
