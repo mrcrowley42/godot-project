@@ -31,12 +31,10 @@ func _notification(noti):
 func _on_tetris_button_down():
 	loadMinigame(tetrisScene)
 
-
 ## Memory game
 func _on_memory_game_button_down():
 	loadMinigame(memoryGameScene)
 
-
-
+## Scissors paper rock
 func _on_scissors_paper_rock_button_down():
 	loadMinigame(sprock_scene)

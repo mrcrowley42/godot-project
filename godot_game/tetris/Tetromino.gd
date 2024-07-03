@@ -20,10 +20,16 @@ func snap_to_grid(vec: Vector2, size: Vector2) -> Vector2:
 func init(piece: String, bPos: Vector2, bSize: Vector2):
 	boardSize = bSize
 	canvas.offset = bPos
-	texture.animation = piece
+	texture.set_anim(piece)
 
 func place_tet(pos: Vector2):
 	texture.position = snap_to_grid(pos, texture.get_size())
 
 func gravity_tick():
-	print("fall")
+	texture.position.y += 0
+
+func move_left():
+	texture.position.x -= squareSize.x
+
+func move_right():
+	texture.position.x += squareSize.x

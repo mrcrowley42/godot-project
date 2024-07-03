@@ -125,5 +125,5 @@ layer = 11
 
 [node name="Texture" type="AnimatedSprite2D" parent="CanvasLayer"]
 sprite_frames = SubResource("SpriteFrames_udxdd")
-animation = &"long"
+animation = &"l_a"
 script = ExtResource("21_uh3hb")
