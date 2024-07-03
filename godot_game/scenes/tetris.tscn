@@ -17,7 +17,7 @@ shader_parameter/offsetCentered = true
 shader_parameter/offsetOverride = Vector2(0, 0)
 shader_parameter/bevel = true
 shader_parameter/bevelColor = Color(0.037969, 0.069001, 0.0917762, 1)
-shader_parameter/outline = true
+shader_parameter/outline = false
 shader_parameter/outlineColor = Color(0.215686, 0.282353, 0.305882, 1)
 
 [sub_resource type="GDScript" id="GDScript_v26rg"]
@@ -71,4 +71,5 @@ theme = ExtResource("2_t4frc")
 text = "X"
 script = SubResource("GDScript_v26rg")
 
+[connection signal="timeout" from="GravityTicker" to="." method="_on_gravity_ticker_timeout"]
 [connection signal="button_down" from="UI/Control/CloseBtn" to="UI/Control/CloseBtn" method="_on_button_down"]
