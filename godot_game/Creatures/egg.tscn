@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bl22rtkqnj1s7"]
+[gd_scene load_steps=15 format=3 uid="uid://bl22rtkqnj1s7"]
 
 [ext_resource type="Script" path="res://Creatures/egg.gd" id="1_a30c6"]
 [ext_resource type="Texture2D" uid="uid://u0ju4yx6fdmf" path="res://Creatures/egg_sprites/egg.png" id="2_ji1eo"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://diwxdoruu1sob" path="res://images/creature_sprites/little-guy_3.png" id="6_8miqa"]
 [ext_resource type="Texture2D" uid="uid://cawudmxbjamv0" path="res://UI stuff/Green Palette/ui_green.png" id="7_f40bd"]
 [ext_resource type="Script" path="res://Creatures/party.gd" id="8_f4asa"]
+[ext_resource type="AudioStream" uid="uid://dnau787og6qky" path="res://Creatures/egg_sound/241136-egg_break-05.wav" id="9_yf6ba"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c01kk"]
 atlas = ExtResource("2_ji1eo")
@@ -67,7 +68,7 @@ visible = false
 position = Vector2(284, 386)
 scale = Vector2(5.135, 5.135)
 sprite_frames = SubResource("SpriteFrames_scja0")
-frame_progress = 0.788336
+frame_progress = 0.637645
 
 [node name="lilGuy" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
@@ -137,3 +138,7 @@ scale_amount_max = 15.0
 color_initial_ramp = SubResource("Gradient_4r4vg")
 hue_variation_min = 1.0
 hue_variation_max = 1.0
+
+[node name="crack" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("9_yf6ba")
