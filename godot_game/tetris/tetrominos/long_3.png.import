@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://u0ju4yx6fdmf"
-path="res://.godot/imported/egg.png-4039bbfbde60973c3a6d6e15dbbb2632.ctex"
+uid="uid://hdvu6qcltlsq"
+path="res://.godot/imported/long_3.png-beafd3b3a710e7446bf0fd1176775738.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Creatures/egg_sprites/egg.png"
-dest_files=["res://.godot/imported/egg.png-4039bbfbde60973c3a6d6e15dbbb2632.ctex"]
+source_file="res://tetris/tetrominos/long_3.png"
+dest_files=["res://.godot/imported/long_3.png-beafd3b3a710e7446bf0fd1176775738.ctex"]
 
 [params]
 

@@ -21,7 +21,7 @@ func _ready():
 
 	for anim in anims:
 		$AnimSelect.add_item(anim)
-	$AnimSelect.selected = 2
+	$AnimSelect.selected = 3
 	$ColorPickerButton.color = creature.dying_colour
 
 func _process(_delta):
