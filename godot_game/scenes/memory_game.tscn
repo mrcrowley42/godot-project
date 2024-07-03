@@ -1,8 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3e1mocbpq7hp"]
+[gd_scene load_steps=6 format=3 uid="uid://d3e1mocbpq7hp"]
 
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="1_3y1y3"]
+[ext_resource type="Script" path="res://scenes/memory_game.gd" id="1_y2saq"]
+[ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="2_4ls5g"]
 
-[sub_resource type="GDScript" id="GDScript_oqggf"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y1l3x"]
+
+[sub_resource type="GDScript" id="GDScript_a14sq"]
 script/source = "extends Button
 
 func _on_button_down():
@@ -11,12 +15,6 @@ func _on_button_down():
 "
 
 [node name="MiniGame" type="Node2D"]
-
-[node name="GameContainer" type="PanelContainer" parent="."]
-offset_left = 53.0
-offset_top = 120.0
-offset_right = 487.0
-offset_bottom = 554.0
 
 [node name="BG" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(434, 434)
@@ -72,11 +70,11 @@ Creature: %s"
 
 [node name="CloseBtn" type="Button" parent="."]
 offset_left = 78.0
-offset_top = 144.0
+offset_top = 141.0
 offset_right = 179.0
-offset_bottom = 187.0
+offset_bottom = 184.0
 theme = ExtResource("1_3y1y3")
 text = "Close"
-script = SubResource("GDScript_oqggf")
+script = SubResource("GDScript_a14sq")
 
 [connection signal="button_down" from="CloseBtn" to="CloseBtn" method="_on_button_down"]
