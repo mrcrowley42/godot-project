@@ -2,4 +2,4 @@ extends Button
 @onready var creature = %Creature
 
 func _on_button_down():
-	creature.dmg(-100, 'sp')
+	creature.dmg(300, 'sp')

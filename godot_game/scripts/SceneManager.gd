@@ -8,9 +8,11 @@ extends Node2D
 @onready var sprock_scene = preload("res://scenes/scissors_paper_rock.tscn")
 
 var currentMinigame = null;
-
+var current_time_scale
 func loadMinigame(minigame):
 	if currentMinigame == null:
+		current_time_scale = %StatusManager.time_multiplier
+		%StatusManager.time_multiplier = 0
 		act_menu.hide()
 		var game = minigame.instantiate()
 		find_parent("Game").find_child("UI").add_child(game)
@@ -18,6 +20,7 @@ func loadMinigame(minigame):
 
 func unLoadMinigame():
 	currentMinigame = null;
+	%StatusManager.time_multiplier = current_time_scale
 
 func _notification(noti):
 	if noti == Globals.NOTIFICATION_MINIGAME_CLOSED:
