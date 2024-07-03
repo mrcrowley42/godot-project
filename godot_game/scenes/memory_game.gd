@@ -2,6 +2,19 @@
 extends Node
 @onready var og_text = %ScoreLabel.text
 
+## Class that describes the cards (buttons) for memory.
+class Card extends Button:
+	var hidden_value
+	func _init(value):
+		text = "?"
+		hidden_value = value
+		theme = load("res://themes/monospace_font.tres")
+		size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		size_flags_vertical = Control.SIZE_EXPAND_FILL
+	func _button_down():
+		text = hidden_value
+
+
 var creature_score: int = 0
 var player_score: int = 0
 var possible = Array(range(20))
