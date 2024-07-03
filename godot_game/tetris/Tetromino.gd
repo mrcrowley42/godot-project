@@ -24,6 +24,7 @@ func init(piece: String, bPos: Vector2, bSize: Vector2):
 func place_tet(pos: Vector2):
 	texture.position = snap_to_grid(pos, texture.get_size())
 
+## performs wall-kick based on normals given for tetmomino
 func x_correction(direction=0):
 	var normL = squareSize.x * texture.get_normal(texture.LEFT) if direction < 0 else 0
 	var normR = squareSize.x * texture.get_normal(texture.RIGHT) if direction > 0 else 0

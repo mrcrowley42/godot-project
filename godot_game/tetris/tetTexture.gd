@@ -5,9 +5,16 @@ const BOTTOM = 1
 const LEFT = 2
 const RIGHT = 3
 
-var allowedAnimations = ['l_a', 'l_b', 'long', 'skew_a', 'skew_b', 'square', 't']
+var allowedTets = ['l_a', 'l_b', 'long', 'skew_a', 'skew_b', 'square', 't']
+## tet normals define square allowance on sides for each frame of each tetromino (needed since every texture is a square)
 var tetNormals = {
-	"t": {0: "1000", 1: "0001", 2: "0100", 3: "0010"}
+	allowedTets[0]: {0: "0100", 1: "0010", 2: "1000", 3: "0001"},
+	allowedTets[1]: {0: "1000", 1: "0001", 2: "0100", 3: "0010"},
+	allowedTets[2]: {},
+	allowedTets[3]: {},
+	allowedTets[4]: {},
+	allowedTets[5]: {},
+	allowedTets[6]: {0: "1000", 1: "0001", 2: "0100", 3: "0010"}
 }
 
 func get_normal(direction: int) -> int:
@@ -17,7 +24,7 @@ func get_size() -> Vector2:
 	return sprite_frames.get_frame_texture(animation, frame).get_size()
 
 func set_anim(anim):
-	assert(anim in allowedAnimations)
+	assert(anim in allowedTets)
 	set_animation(anim)
 
 func advance_frame():
