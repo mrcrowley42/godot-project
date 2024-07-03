@@ -1,6 +1,6 @@
 @icon("res://icons/ClassList.svg")
-extends Node2D
-class_name status_manager
+
+class_name StatusManager extends Node2D
 ## Script responsible for passive drain of Creature stats
 
 @export_category("Status Controls")
