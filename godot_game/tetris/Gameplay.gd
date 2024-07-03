@@ -4,18 +4,29 @@ extends Node2D
 @onready var gravityTicker = find_child("GravityTicker")
 @onready var gridBG = find_child("GridBG")
 
+var controllsLeft = [KEY_A, KEY_LEFT]
+var controllsRight = [KEY_D, KEY_RIGHT]
+
 var boardSize: Vector2 = Vector2(300, 600)
-var currentTet = null
+var activeTet = null
 
 func add_tet(piece):
-	currentTet = baseTet.instantiate()
-	add_child(currentTet)
-	currentTet.init(piece, gridBG.position, boardSize)
-	currentTet.place_tet(Vector2(boardSize.x / 2, -15))
+	activeTet = baseTet.instantiate()
+	add_child(activeTet)
+	activeTet.init(piece, gridBG.position, boardSize)
+	activeTet.place_tet(Vector2(boardSize.x / 2, -activeTet.texture.get_size().y / 2))  # middle top, just off screen
 
 func _ready():
-	add_tet("long")
+	add_tet("skew_b")
 	gravityTicker.start()
 
 func _on_gravity_ticker_timeout():
-	currentTet.gravity_tick()
+	activeTet.gravity_tick()
+
+# capture input
+func _input(event):
+	if (event is InputEventKey) and event.pressed:
+		if event.keycode in controllsLeft:
+			activeTet.move_left()
+		if event.keycode in controllsRight:
+			activeTet.move_right()
