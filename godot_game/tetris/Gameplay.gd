@@ -11,10 +11,10 @@ func add_tet(piece):
 	currentTet = baseTet.instantiate()
 	add_child(currentTet)
 	currentTet.init(piece, gridBG.position, boardSize)
-	currentTet.place_tet(Vector2(boardSize.x / 2, 0))
+	currentTet.place_tet(Vector2(boardSize.x / 2, -15))
 
 func _ready():
-	add_tet("l_a")
+	add_tet("long")
 	gravityTicker.start()
 
 func _on_gravity_ticker_timeout():
