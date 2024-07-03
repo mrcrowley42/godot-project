@@ -49,12 +49,16 @@ func choose_card(card):
 	if selected_cards.size() < 3:
 		selected_cards.append(card)
 		card.flip_card()
+		card.disabled = true
+		
 	if selected_cards.size() == 2:
 		if selected_cards[0].hidden_value == selected_cards[1].hidden_value:
 			player_score += 1
 			for item in selected_cards:
 				item.text = "@"
+				item.disabled = true
 			
 		for item in selected_cards:
 			item.flip_card()
+			
 		selected_cards.clear()
