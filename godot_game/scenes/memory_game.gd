@@ -59,8 +59,9 @@ func choose_card(card):
 			for item in selected_cards:
 				item.text = "@"
 				item.disabled = true
-			
-		for item in selected_cards:
-			item.flip_card()
+		else:	
+			for item in selected_cards:
+				item.flip_card()
+				item.disabled = false
 			
 		selected_cards.clear()
