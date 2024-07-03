@@ -1,0 +1,129 @@
+[gd_scene load_steps=23 format=3 uid="uid://f7hd20elu48g"]
+
+[ext_resource type="Script" path="res://tetris/Tetromino.gd" id="1_qheu4"]
+[ext_resource type="Texture2D" uid="uid://bkfv2k2vo8c1o" path="res://tetris/tetrominos/l_a_1.png" id="2_lviqe"]
+[ext_resource type="Texture2D" uid="uid://doue2lmjfn36a" path="res://tetris/tetrominos/l_a_2.png" id="3_7sdnd"]
+[ext_resource type="Texture2D" uid="uid://dvlne4em2dlrt" path="res://tetris/tetrominos/l_a_3.png" id="4_qcl2f"]
+[ext_resource type="Texture2D" uid="uid://uyejaok2y67y" path="res://tetris/tetrominos/l_a_4.png" id="5_myg1b"]
+[ext_resource type="Texture2D" uid="uid://co3mmni18deep" path="res://tetris/tetrominos/l_b_1.png" id="6_7cbjm"]
+[ext_resource type="Texture2D" uid="uid://dnl0qi81vdkix" path="res://tetris/tetrominos/l_b_2.png" id="7_dnj10"]
+[ext_resource type="Texture2D" uid="uid://rnn23pi4unkd" path="res://tetris/tetrominos/l_b_3.png" id="8_2qgun"]
+[ext_resource type="Texture2D" uid="uid://b11qs06pmlk7w" path="res://tetris/tetrominos/l_b_4.png" id="9_r01vb"]
+[ext_resource type="Texture2D" uid="uid://bkaq7s017gaek" path="res://tetris/tetrominos/long_1.png" id="10_2goxp"]
+[ext_resource type="Texture2D" uid="uid://ds1nxdocf8rot" path="res://tetris/tetrominos/long_2.png" id="11_exrip"]
+[ext_resource type="Texture2D" uid="uid://do8rp1ndk03bk" path="res://tetris/tetrominos/skew_a_1.png" id="12_n1rjv"]
+[ext_resource type="Texture2D" uid="uid://dklraax1ho5bu" path="res://tetris/tetrominos/skew_a_2.png" id="13_4bh4m"]
+[ext_resource type="Texture2D" uid="uid://c8ckscou43468" path="res://tetris/tetrominos/skew_b_1.png" id="14_7cl8y"]
+[ext_resource type="Texture2D" uid="uid://beiqsda8hk7kg" path="res://tetris/tetrominos/skew_b_2.png" id="15_v88il"]
+[ext_resource type="Texture2D" uid="uid://dbrqsjw2yc40l" path="res://tetris/tetrominos/square_1.png" id="16_rusjo"]
+[ext_resource type="Texture2D" uid="uid://dl36ifb6a1nk7" path="res://tetris/tetrominos/t_1.png" id="17_1wier"]
+[ext_resource type="Texture2D" uid="uid://bf25dekyl4qti" path="res://tetris/tetrominos/t_2.png" id="18_4h3q8"]
+[ext_resource type="Texture2D" uid="uid://chqj82rvfw6bd" path="res://tetris/tetrominos/t_3.png" id="19_c15io"]
+[ext_resource type="Texture2D" uid="uid://cxlmmjyqk7gfh" path="res://tetris/tetrominos/t_4.png" id="20_nbx4w"]
+[ext_resource type="Script" path="res://tetris/tetTexture.gd" id="21_uh3hb"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_udxdd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_lviqe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_7sdnd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qcl2f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_myg1b")
+}],
+"loop": true,
+"name": &"l_a",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_7cbjm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_dnj10")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_2qgun")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_r01vb")
+}],
+"loop": true,
+"name": &"l_b",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_2goxp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_exrip")
+}],
+"loop": true,
+"name": &"long",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_n1rjv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_4bh4m")
+}],
+"loop": true,
+"name": &"skew_a",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_7cl8y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_v88il")
+}],
+"loop": true,
+"name": &"skew_b",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_rusjo")
+}],
+"loop": true,
+"name": &"square",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_1wier")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_4h3q8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_c15io")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_nbx4w")
+}],
+"loop": true,
+"name": &"t",
+"speed": 5.0
+}]
+
+[node name="Tetromino" type="Node2D"]
+script = ExtResource("1_qheu4")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 11
+
+[node name="Texture" type="AnimatedSprite2D" parent="CanvasLayer"]
+sprite_frames = SubResource("SpriteFrames_udxdd")
+animation = &"l_b"
+script = ExtResource("21_uh3hb")

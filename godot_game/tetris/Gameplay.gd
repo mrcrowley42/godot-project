@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var baseTet = preload("res://tetris/BaseTetromino.tscn")
+@onready var baseTet = preload("res://tetris/Tetromino.tscn")
 @onready var gravityTicker = find_child("GravityTicker")
 @onready var gridBG = find_child("GridBG")
 
@@ -13,7 +13,7 @@ func add_tet(piece):
 	currentTet.init(piece, gridBG.position, boardSize)
 
 func _ready():
-	add_tet("long")
+	add_tet("t")
 	gravityTicker.start()
 
 func _on_gravity_ticker_timeout():
