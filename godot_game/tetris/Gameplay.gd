@@ -6,8 +6,6 @@ extends Node2D
 
 var inputsLeft = [KEY_A, KEY_LEFT]
 var inputsRight = [KEY_D, KEY_RIGHT]
-var inputsClockwise = [KEY_E]
-var inputsCClockwise = [KEY_Q]
 
 var boardSize: Vector2 = Vector2(300, 600)
 var activeTet = null
@@ -26,14 +24,15 @@ func _ready():
 func _on_gravity_ticker_timeout():
 	activeTet.gravity_tick()
 
-# capture input
 func _input(event):
+	# press once
+	if event.is_action_pressed("rotate_clockwise"):
+		activeTet.rotate_clockwise()
+	if event.is_action_pressed("rotate_counter_clockwise"):
+		activeTet.rotate_counter_clockwise()
+	# hold-able
 	if (event is InputEventKey) and event.pressed:
 		if event.keycode in inputsLeft:
 			activeTet.move_left()
 		if event.keycode in inputsRight:
 			activeTet.move_right()
-		if event.keycode in inputsClockwise:
-			activeTet.rotate_clockwise()
-		if event.keycode in inputsCClockwise:
-			activeTet.rotate_counter_clockwise()
