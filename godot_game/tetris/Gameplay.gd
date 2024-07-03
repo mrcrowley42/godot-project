@@ -14,11 +14,11 @@ func add_tet(piece):
 	activeTet = baseTet.instantiate()
 	add_child(activeTet)
 	activeTet.init(piece, gridBG.position, boardSize)
-	activeTet.place_tet(Vector2(boardSize.x / 2, boardSize.y / 2))
+	activeTet.snap_to_grid(Vector2(boardSize.x / 2, boardSize.y / 2))
 #	activeTet.place_tet(Vector2(boardSize.x / 2, -activeTet.texture.get_size().y / 2))  # middle top, just off screen
 
 func _ready():
-	add_tet("l_a")
+	add_tet("long")
 	gravityTicker.start()
 
 func _on_gravity_ticker_timeout():

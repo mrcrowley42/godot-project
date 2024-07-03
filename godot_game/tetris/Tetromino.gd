@@ -8,23 +8,20 @@ var squareSize: Vector2 = Vector2(30, 30)
 var resting = false
 
 ## snap given vec to grid of squareSize
-func snap_to_grid(vec: Vector2, size: Vector2) -> Vector2:
-	var topLeft = vec - size / 2
+func snap_to_grid(vec: Vector2):
+	var topLeft = vec - texture.get_size() / 2
 	var amount = Vector2(
 			int(topLeft.x) % int(squareSize.x), 
 			int(topLeft.y) % int(squareSize.y)
 		)
-	return vec - amount
+	texture.position = vec - amount
 
 func init(piece: String, bPos: Vector2, bSize: Vector2):
 	boardSize = bSize
 	canvas.offset = bPos
 	texture.set_anim(piece)
 
-func place_tet(pos: Vector2):
-	texture.position = snap_to_grid(pos, texture.get_size())
-
-## performs wall-kick based on normals given for tetmomino
+## performs wall-kick based on normal given for tetmomino
 func x_correction(direction=0):
 	var normL = squareSize.x * texture.get_normal(texture.LEFT) if direction < 0 else 0
 	var normR = squareSize.x * texture.get_normal(texture.RIGHT) if direction > 0 else 0
