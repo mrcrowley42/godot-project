@@ -14,7 +14,7 @@ class_name StatusManager extends Node2D
 @export var ap_amount: float = 1
 
 ## Property that scales the damage values of all passive drain timers. 
-@export var time_multiplier: float = 1.0
+@export var time_multiplier: float = 0.5
 ## Stores a reference to the scenes Creature.
 @onready var creature: Creature = %Creature
 

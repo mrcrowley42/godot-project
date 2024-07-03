@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bebjn5n2kjwgb"]
+[gd_scene load_steps=36 format=3 uid="uid://bebjn5n2kjwgb"]
 
 [ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://images/creature_sprites/little-guy.png" id="1_obpq1"]
 [ext_resource type="Script" path="res://scripts/creature.gd" id="2_klgk6"]
@@ -6,9 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://4cfpam3be0g" path="res://images/creature_sprites/little-guy_2.png" id="3_xm5kq"]
 [ext_resource type="Texture2D" uid="uid://diwxdoruu1sob" path="res://images/creature_sprites/little-guy_3.png" id="4_1nivj"]
 [ext_resource type="Texture2D" uid="uid://cq86852isqqkq" path="res://images/creature_sprites/angry-1.png" id="4_i6glr"]
+[ext_resource type="Texture2D" uid="uid://b3q3krfrwwvff" path="res://images/creature_sprites/chill-0.png" id="5_gnqtd"]
 [ext_resource type="Texture2D" uid="uid://dd12vpparynjh" path="res://images/creature_sprites/angry-2.png" id="5_htkse"]
 [ext_resource type="Script" path="res://scripts/creature_anim.gd" id="5_oh7gr"]
+[ext_resource type="Texture2D" uid="uid://k3q3fb85fm3h" path="res://images/creature_sprites/chill-1.png" id="6_t62e5"]
 [ext_resource type="Texture2D" uid="uid://c44b8y8u8ne7w" path="res://images/creature_sprites/confused-0.png" id="6_tpv3k"]
+[ext_resource type="Texture2D" uid="uid://dck4q0ce0c4mm" path="res://images/creature_sprites/chill-2.png" id="7_6xa3v"]
 [ext_resource type="Texture2D" uid="uid://cqyltj7p4b1l7" path="res://images/creature_sprites/confused-1.png" id="7_j2qgy"]
 [ext_resource type="Texture2D" uid="uid://bcsj0ibb8s3y0" path="res://images/creature_sprites/confused-2.png" id="8_gbg03"]
 [ext_resource type="Texture2D" uid="uid://dxc4uprrmyny8" path="res://images/creature_sprites/sadge-0.png" id="13_d84xb"]
@@ -48,6 +51,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("5_gnqtd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_t62e5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_6xa3v")
+}],
+"loop": true,
+"name": &"chill",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("6_tpv3k")
 }, {
 "duration": 1.0,
@@ -58,7 +75,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"confused",
-"speed": 5.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -86,7 +103,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"sad",
-"speed": 5.0
+"speed": 4.0
 }]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3t6pq"]
@@ -130,7 +147,7 @@ dying_colour = Color(1, 0, 0, 1)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.225, 0.225)
 sprite_frames = SubResource("SpriteFrames_3cwqc")
-animation = &"idle"
+animation = &"chill"
 autoplay = "idle"
 script = ExtResource("5_oh7gr")
 

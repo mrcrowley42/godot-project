@@ -11,7 +11,7 @@ class_name SfxManager
 
 @export_category("Settings")
 ## How long (in seconds) after a sound effect has finished playing can another one begin.
-@export var cooldown_period: float = 20.0
+@export var cooldown_period: float = 10.0
 
 @onready var creature: Creature = $".."
 
@@ -22,6 +22,8 @@ func _process(_delta) -> void:
 	var low_stats: Array[AudioStream] = []
 	if creature.mp < 200:
 		low_stats.append(low_hydrate)
+		# adding hunger here as well to not conflict with pain sounds lol
+		low_stats.append(low_hunger)
 	if creature.sp < 200:
 		low_stats.append(low_regulation)
 	if creature.ap < 200:
