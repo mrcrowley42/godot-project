@@ -2,16 +2,16 @@
 extends Node2D
 
 class_name Creature
-## Creature base class
+## Creature base class.
 
 ## Colour to tint creature as HP approaches 0.
-@export_color_no_alpha var dying_colour;
-@export var max_hp: float = 1000.0
-@export var max_mp: float = 1000.0
+@export_color_no_alpha var dying_colour: Color;
+@export var max_hp: float = 1000
+@export var max_mp: float = 1000
 @export var max_sp: float = 1000
 @export var max_ap: float = 1000
 
-@export var creature_list: Array[Resource]
+#@export var creature_list: Array[Resource]
 
 var hp:float
 var mp:float
@@ -23,7 +23,7 @@ signal sp_changed()
 signal mp_changed()
 signal ap_changed()
 
-var stats = {
+var stats: Dictionary = {
 	'hp': damage_hp,
 	'ap': damage_ap,
 	'mp': damage_mp,
@@ -32,10 +32,9 @@ var stats = {
 
 func _ready() -> void:
 	#var sprite = preload(creature_list[0])
-
 	reset_stats()
 
-
+## Sets the Creatures current stats to their maximum value.
 func reset_stats() -> void:
 	self.hp = max_hp
 	self.mp = max_mp
@@ -50,11 +49,10 @@ func reset_stats() -> void:
 ## function to damage/heal the Creature (use a negative value to heal)
 func dmg(amount:float, stat:String) -> void:
 	stats[stat].call(amount)
-
 	
+## Change to game over scene.
 func dead():
 	get_tree().change_scene_to_file("res://scenes/dead.tscn")
-
 
 ## Tint the Create using the dying_colour set in inspector scaling the tint based on how low HP is.
 func apply_dmg_tint() -> void:
@@ -93,15 +91,9 @@ func save():
 	return {"mp": mp, "sp": sp, "ap": ap, "hp": hp}
 	
 func load(data):
-	# this is a bit cursed an requires names to match up
-	# maybe this is a better way to do this but this at least
-	# prevents the app from breaking when an old save file is present.
 	for setting in ["mp", "ap", "sp"]:
 		if data.has(setting):
 			self[setting] = data[setting]
 			var signal_name = setting + "_changed"
 			self[signal_name].emit()
-	# like having to call this here, this is kinda a mess
-	# maybe it would be easier to just call everything like this every frame ?
-	# 
 	apply_dmg_tint()
