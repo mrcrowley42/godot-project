@@ -874,8 +874,16 @@ VCR Font by Riciery Leal on dafont
 
 Yippee! by unknown german kid
 
+Various Sound Effects:
+[indent]
+[ul]jhyland (Freesound.org)
+beetlemuse (Freesound.org)
+Pixabay (Pixabay)
+[/ul][/indent]
+
 Placeholder audio:
-Scientist Voicelines by Valve Software
+[indent]
+[ul]Scientist Voicelines by Valve Software
 Hollywood Theme by Rik Schaffer
 Alone In The Town by Akira Yamaoka
 memory=entryrrrr- by Esselfortium
@@ -883,7 +891,8 @@ The Fire is Gone by Heaven Pierce Her
 The Atrocity That Is The Dualshock Basement Theme by Some Fraud
 Fruit on Grass - Garden by Arvi Teikari
 Seto's Memory by Shinkichi Mitsumune
-Aquatic Ambience by David Wise"
+Aquatic Ambience by David Wise
+[/ul][/indent]"
 fit_content = true
 
 [node name="UI_Overlay" type="Sprite2D" parent="UI" groups=["settings_data"]]
