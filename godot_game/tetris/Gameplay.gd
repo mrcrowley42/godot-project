@@ -14,10 +14,10 @@ func add_tet(piece):
 	activeTet = baseTet.instantiate()
 	add_child(activeTet)
 	activeTet.init(piece, gridBG.position, boardSize)
-	activeTet.snap_to_grid(Vector2(boardSize.x / 2, -activeTet.texture.get_size().y / 2))  # middle top, just off screen
+	activeTet.snap_to_grid(Vector2(boardSize.x / 2, -activeTet.body.get_size().y / 2))  # middle top, just off screen
 
 func _ready():
-	add_tet("skew_a")
+	add_tet("t")
 	gravityTicker.start()
 
 func _on_gravity_ticker_timeout():
