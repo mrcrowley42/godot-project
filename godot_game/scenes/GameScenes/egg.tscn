@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bl22rtkqnj1s7"]
+[gd_scene load_steps=15 format=3 uid="uid://bl22rtkqnj1s7"]
 
 [ext_resource type="Script" path="res://scripts/MainGameScripts/EggScene/egg.gd" id="1_3gale"]
 [ext_resource type="AudioStream" uid="uid://8ifwm2tjitur" path="res://sound_effects/yippee.mp3" id="2_rsge0"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://do7dbsspir5oc" path="res://images/egg/egg03.PNG" id="5_vfgrm"]
 [ext_resource type="Texture2D" uid="uid://6cg5s6yf1jrl" path="res://images/egg/egg04.PNG" id="6_eimtr"]
 [ext_resource type="Texture2D" uid="uid://diwxdoruu1sob" path="res://images/creature_sprites/little-guy_3.png" id="6_ii2p7"]
-[ext_resource type="Texture2D" uid="uid://cawudmxbjamv0" path="res://UI stuff/Green Palette/ui_green.png" id="7_umgic"]
 [ext_resource type="Script" path="res://scripts/MainGameScripts/EggScene/party.gd" id="8_psxin"]
 [ext_resource type="AudioStream" uid="uid://dnau787og6qky" path="res://sound_effects/EggCrack.wav" id="9_iuv6s"]
 
@@ -28,7 +27,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("6_eimtr")
 }],
-"loop": true,
+"loop": false,
 "name": &"EggTime",
 "speed": 2.0
 }]
@@ -69,7 +68,9 @@ position = Vector2(274, 356)
 scale = Vector2(1.52, 1.52)
 sprite_frames = SubResource("SpriteFrames_scja0")
 animation = &"EggTime"
-frame_progress = 0.647515
+autoplay = "EggTime"
+frame = 3
+frame_progress = 1.0
 
 [node name="lilGuy" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
@@ -91,11 +92,6 @@ process_callback = 0
 wait_time = 2.0
 one_shot = true
 autostart = true
-
-[node name="UiGreen" type="Sprite2D" parent="."]
-position = Vector2(271.5, 339.5)
-scale = Vector2(0.499074, 0.502963)
-texture = ExtResource("7_umgic")
 
 [node name="Confetti" type="Node2D" parent="."]
 unique_name_in_owner = true
