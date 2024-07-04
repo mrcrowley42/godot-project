@@ -21,10 +21,17 @@ theme_override_font_sizes/font_size = 200
 text = ":("
 
 [node name="Restart" type="Button" parent="."]
-offset_left = 161.0
-offset_top = 152.0
-offset_right = 326.0
-offset_bottom = 236.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 177.5
+offset_top = 86.0
+offset_right = 342.5
+offset_bottom = 170.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("1_8aans")
 theme_override_font_sizes/font_size = 24
 text = "RESTART"
