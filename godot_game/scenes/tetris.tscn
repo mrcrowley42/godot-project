@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dvm4e3hdsnjy1"]
+[gd_scene load_steps=8 format=3 uid="uid://dvm4e3hdsnjy1"]
 
 [ext_resource type="Texture2D" uid="uid://cgfufcnmd24wf" path="res://UI stuff/Green Palette/ui_green_tetris.png" id="1_ad86f"]
 [ext_resource type="Script" path="res://tetris/Gameplay.gd" id="1_o7o8x"]
@@ -27,9 +27,6 @@ func _on_button_down():
 	get_tree().root.propagate_notification(Globals.NOTIFICATION_MINIGAME_CLOSED)
 	find_parent(\"Tetris\").queue_free()
 "
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_64ooc"]
-size = Vector2(525, 40)
 
 [node name="Tetris" type="Node2D"]
 script = ExtResource("1_o7o8x")
@@ -84,9 +81,8 @@ scale = Vector2(179.5, 342)
 
 [node name="Area2D" type="Area2D" parent="."]
 
-[node name="Ground" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(270, 657)
-shape = SubResource("RectangleShape2D_64ooc")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(100, 640, 100, 650, 450, 650, 450, 640)
 
 [connection signal="timeout" from="GravityTicker" to="." method="_on_gravity_ticker_timeout"]
 [connection signal="button_down" from="UI/Control/CloseBtn" to="UI/Control/CloseBtn" method="_on_button_down"]

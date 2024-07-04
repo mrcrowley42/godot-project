@@ -11,7 +11,7 @@ var resting = false
 
 const LERP_TIME = 0.05;  # 0.05
 const L_LERP_START = 5
-const A_LERP_START = .1  # radians
+const A_LERP_START = 0.1  # radians
 var l_direction = 0
 var a_direction = 0
 var l_start_time = null
@@ -45,6 +45,7 @@ func x_correction():
 		body.set_x(body.position.x + squareSize.x if is_clipped else c_size_x)
 	elif c_size_x_r < offset_pos.x:
 		body.set_x(body.position.x - squareSize.x if is_clipped else c_size_x_r)
+	# push away from a collision
 
 ## avoid clipping into other resting tetrominoes
 func y_correction():

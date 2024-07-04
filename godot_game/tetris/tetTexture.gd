@@ -26,7 +26,7 @@ var collision_area: Area2D;
 func get_normal(direction: int) -> int:
 	return int(TET_NORMALS[animation][frame][direction])
 
-func get_rot() -> int:
+func get_rot_addition() -> int:
 	return int(TET_NORMALS[animation][ROT])
 
 func get_size() -> Vector2:
@@ -52,6 +52,9 @@ func set_anim(anim):
 	collision_area = find_child(anim)
 	collision_area.monitoring = true
 	collision_area.monitorable = true
+	
+	for c in get_children():
+		c.visible = c.name == anim
 
 func set_x(val):
 	position.x = val
@@ -66,11 +69,11 @@ func is_colliding() -> bool:
 	return collision_area.has_overlapping_areas()
 
 func update_collision():
-	if get_rot() == SWITCH:  # special case for long
+	if get_rot_addition() == SWITCH:  # special case for long
 		for ch in collision_area.get_children():
 			ch.disabled = !ch.disabled
 	else:  # rotate normally
-		collision_area.rotation = get_rot() * frame
+		collision_area.rotation_degrees = get_rot_addition() * frame
 
 func get_frame_count() -> int:
 	return int(sprite_frames.get_frame_count(animation))

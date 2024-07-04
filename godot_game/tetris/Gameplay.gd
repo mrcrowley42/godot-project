@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var baseTet = preload("res://tetris/Tetromino.tscn")
-@onready var gravityTicker = find_child("GravityTicker")
+@onready var gravityTicker: Timer = find_child("GravityTicker")
 @onready var gridBG = find_child("GridBG")
 
 var inputsLeft = [KEY_A, KEY_LEFT]
@@ -9,6 +9,9 @@ var inputsRight = [KEY_D, KEY_RIGHT]
 
 var boardSize: Vector2 = Vector2(300, 600)
 var activeTet = null
+
+func get_rand_tet() -> String:
+	return ['l_a', 'l_b', 'long', 'skew_a', 'skew_b', 'square', 't'].pick_random()
 
 func add_tet(piece):
 	activeTet = baseTet.instantiate()
@@ -18,7 +21,8 @@ func add_tet(piece):
 	activeTet.connect("placed", active_tet_placed)
 
 func _ready():
-	add_tet("t")
+	add_tet("l_a")
+	gravityTicker.wait_time = 0.2
 	gravityTicker.start()
 
 func _on_gravity_ticker_timeout():
@@ -38,8 +42,4 @@ func _input(event):
 			activeTet.move_right()
 
 func active_tet_placed():
-	add_tet(['l_a', 'l_b', 'long', 'skew_a', 'skew_b', 'square', 't'].pick_random())
-	#
-#func _process(_delta):
-	#print(%GravityTicker.time_left)
-	#
+	add_tet(get_rand_tet())
