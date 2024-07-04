@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/prototype.gd" id="1_u8fgs"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_w1hur"]
 [ext_resource type="Script" path="res://scripts/SceneManager.gd" id="3_usdrn"]
-[ext_resource type="Texture2D" uid="uid://b1gd0xwopljsy" path="res://images/1000_F_485076456_5lstQO9J5DamMa3cFSOiuCSJ1eSPC888.jpg" id="4_dmeg1"]
+[ext_resource type="Texture2D" uid="uid://cdbor7hjfbusn" path="res://UI stuff/Universal/background.png" id="4_pmdaq"]
 [ext_resource type="PackedScene" uid="uid://bebjn5n2kjwgb" path="res://scenes/Creatures/creature.tscn" id="5_khxd0"]
 [ext_resource type="Shader" path="res://shaders/screen_tint.gdshader" id="6_yhapg"]
 [ext_resource type="Script" path="res://scripts/Confetti.gd" id="7_rqbrx"]
@@ -283,8 +283,8 @@ script = ExtResource("3_usdrn")
 
 [node name="BG" type="Sprite2D" parent="Gameplay"]
 position = Vector2(273, 337)
-scale = Vector2(1.2, 1.2)
-texture = ExtResource("4_dmeg1")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_pmdaq")
 metadata/_edit_lock_ = true
 
 [node name="Creature" parent="Gameplay" groups=["save_data"] instance=ExtResource("5_khxd0")]
