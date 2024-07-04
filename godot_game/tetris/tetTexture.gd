@@ -45,6 +45,9 @@ func set_anim(anim):
 func set_x_offset(val):
 	offset.x = val
 
+func set_angle(val):
+	rotation = val
+
 func advance_frame():
 	frame = (frame + 1) % sprite_frames.get_frame_count(animation)
 

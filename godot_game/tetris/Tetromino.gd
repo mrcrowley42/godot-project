@@ -7,10 +7,11 @@ var boardSize: Vector2
 var squareSize: Vector2 = Vector2(30, 30)
 var resting = false
 
-const LERP_TIME = 0.05;
+const LERP_TIME = 0.05;  # 0.05
 const L_LERP_START = 5
-const A_LERP_START = 5  # rotation
+const A_LERP_START = .1  # radians
 var l_direction = 0
+var a_direction = 0
 var l_start_time = null
 var a_start_time = null
 var l_end_time = null
@@ -65,39 +66,52 @@ func rotate_clockwise():
 	texture.advance_frame()
 	x_correction()
 	y_correction()
-	perform_angular_lerp(1)
+	perform_angular_lerp(-1)
 
 func rotate_counter_clockwise():
 	texture.rewind_frame()
 	x_correction()
 	y_correction()
-	perform_angular_lerp(-1)
+	perform_angular_lerp(1)
 
 func perform_linear_lerp(direction):
 	l_direction = direction
-	texture.set_offset(Vector2(L_LERP_START * direction, 0))
+	texture.set_x_offset(L_LERP_START * direction)
 	l_start_time = Time.get_unix_time_from_system()
 	l_end_time = l_start_time + LERP_TIME
 
 func perform_angular_lerp(direction):
-	pass
+	a_direction = direction
+	texture.set_angle(A_LERP_START * direction)
+	a_start_time = Time.get_unix_time_from_system()
+	a_end_time = a_start_time + LERP_TIME
 
 ## returns whether lerp progressed
-func advance_lerp(s_time, e_time, direction) -> bool:
+func advance_lerp(s_time, e_time, direction, start, offset=false) -> bool:
 	var t = Time.get_unix_time_from_system()
 	if s_time != null:
 		var perc = (t - s_time) / (e_time - s_time)
 		if perc >= 1:
 			return false
-		var sub = L_LERP_START * perc
-		texture.set_x_offset((L_LERP_START * direction) - (sub if direction > 0 else -sub))
+		var sub = start * perc
+		sub = sub if direction > 0 else -sub
+		if offset:
+			texture.set_x_offset((start * direction) - sub)
+		else:
+			texture.set_angle((start * direction) - sub)
 		return true
 	return false
 
 ## progress various lerps
 func _process(_delta):
-	var advanced_l = advance_lerp(l_start_time, l_end_time, l_direction)
+	var advance_l = advance_lerp(l_start_time, l_end_time, l_direction, L_LERP_START, true)
+	var advance_a = advance_lerp(a_start_time, a_end_time, a_direction, A_LERP_START)
 	
-	if !advanced_l:
+	if !advance_l:
+		texture.set_x_offset(0)
 		l_start_time = null
 		l_end_time = null
+	if !advance_a:
+		texture.set_angle(0)
+		a_start_time = null
+		a_end_time = null
