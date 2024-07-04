@@ -7,8 +7,10 @@ var boardSize: Vector2
 var squareSize: Vector2 = Vector2(30, 30)
 var resting = false
 
-var lLerpStart = 15  # starting lerp offset
-var rLerpStart = 5  # starting lerp rotation
+const L_LERP_START = 5
+const A_LERP_START = 5  # rotation
+var l_start_time = null
+var a_start_time = null
 
 ## snap given vec to grid of squareSize
 func snap_to_grid(vec: Vector2):
@@ -48,12 +50,12 @@ func gravity_tick():
 func move_left():
 	texture.position.x -= squareSize.x
 	x_correction()
-	perform_linear_lerp(-1)
+	perform_linear_lerp(1)
 
 func move_right():
 	texture.position.x += squareSize.x
 	x_correction()
-	perform_linear_lerp(1)
+	perform_linear_lerp(-1)
 
 func rotate_clockwise():
 	texture.advance_frame()
@@ -67,8 +69,13 @@ func rotate_counter_clockwise():
 	y_correction()
 	perform_angular_lerp(-1)
 
-func perform_linear_lerp(direction=0):
+func perform_linear_lerp(direction):
+	texture.set_offset(Vector2(L_LERP_START * direction, 0))
+	l_start_time = Time.get_unix_time_from_system()
+
+func perform_angular_lerp(direction):
 	pass
 
-func perform_angular_lerp(direction=0):
+## progress various lerps
+func _process(_delta):
 	pass
