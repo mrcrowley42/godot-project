@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/prototype.gd" id="1_u8fgs"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_w1hur"]
 [ext_resource type="Script" path="res://scripts/SceneManager.gd" id="3_usdrn"]
-[ext_resource type="Texture2D" uid="uid://d1x5uum1om5wr" path="res://UI stuff/Universal/background.png" id="4_pmdaq"]
+[ext_resource type="Texture2D" uid="uid://cdbor7hjfbusn" path="res://UI stuff/Universal/background.png" id="4_pmdaq"]
 [ext_resource type="PackedScene" uid="uid://bebjn5n2kjwgb" path="res://scenes/Creatures/creature.tscn" id="5_khxd0"]
 [ext_resource type="Shader" path="res://shaders/screen_tint.gdshader" id="6_yhapg"]
 [ext_resource type="Script" path="res://scripts/Confetti.gd" id="7_rqbrx"]
@@ -29,7 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://pfr6wdx80m45" path="res://icons/volume-fill.svg" id="27_5q6ds"]
 [ext_resource type="Script" path="res://scripts/mute_button.gd" id="28_wya5n"]
 [ext_resource type="PackedScene" uid="uid://cbn0dv1k0onpb" path="res://scenes/UiScenes/vol_slider.tscn" id="29_rruaw"]
-[ext_resource type="Theme" path="res://themes/monospace_font.tres" id="30_244nl"]
+[ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="30_244nl"]
 [ext_resource type="Texture2D" uid="uid://cawudmxbjamv0" path="res://UI stuff/Green Palette/ui_green.png" id="31_astnl"]
 [ext_resource type="Script" path="res://scripts/ui_overlay.gd" id="32_2c0y7"]
 [ext_resource type="Texture2D" uid="uid://c3835drqnfvy" path="res://UI stuff/Orange Palette/ui_orange.png" id="33_dyvwk"]
@@ -879,6 +879,7 @@ Various Sound Effects:
 [indent]
 [ul]jhyland (Freesound.org)
 beetlemuse (Freesound.org)
+kagateni (Freesound.org)
 Pixabay (Pixabay)
 [/ul][/indent]
 
