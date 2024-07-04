@@ -21,6 +21,6 @@ func _ready():
 	
 	%startGame.timeout.connect(func():
 		print("done")
-		#get_tree().change_scene_to_file("res://scenes/prototype.tscn")
+		get_tree().change_scene_to_file("res://scenes/GameScenes/prototype.tscn")
 		)
 

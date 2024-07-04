@@ -3,10 +3,10 @@ extends Node2D
 
 @onready var act_menu = %ActivityControls
 
-@onready var tetrisScene = preload("res://scenes/tetris.tscn")
-@onready var memoryGameScene = preload("res://scenes/memory_game.tscn")
-@onready var sprock_scene = preload("res://scenes/scissors_paper_rock.tscn")
-@onready var zen_mode_scene = preload("res://scenes/zen_mode.tscn")
+@onready var tetrisScene = preload("res://scenes/MiniGames/tetris.tscn")
+@onready var memoryGameScene = preload("res://scenes/MiniGames/memory_game.tscn")
+@onready var sprock_scene = preload("res://scenes/MiniGames/scissors_paper_rock.tscn")
+@onready var zen_mode_scene = preload("res://scenes/MiniGames/zen_mode.tscn")
 
 var currentMinigame = null;
 var current_time_scale: float
@@ -21,11 +21,15 @@ func loadMinigame(minigame):
 		var game = minigame.instantiate()
 		find_parent("Game").find_child("UI").add_child(game)
 		currentMinigame = minigame.resource_path
+		%ActButton.disabled = true
+		%FoodButton.disabled = true
 
 func unLoadMinigame():
 	%BtnClick.play()
 	currentMinigame = null;
 	%StatusManager.time_multiplier = current_time_scale
+	%ActButton.disabled = false
+	%FoodButton.disabled = false
 
 func _notification(noti):
 	if noti == Globals.NOTIFICATION_MINIGAME_CLOSED:
