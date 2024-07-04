@@ -20,6 +20,7 @@ func loadMinigame(minigame):
 		act_menu.hide()
 		var game = minigame.instantiate()
 		find_parent("Game").find_child("UI").add_child(game)
+		find_parent("Game").find_child("UI").move_child(game, 0)
 		currentMinigame = minigame.resource_path
 		%ActButton.disabled = true
 		%FoodButton.disabled = true
