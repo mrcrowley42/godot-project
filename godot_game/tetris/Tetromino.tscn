@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://f7hd20elu48g"]
+[gd_scene load_steps=55 format=3 uid="uid://3cn1hflukqt1"]
 
 [ext_resource type="Script" path="res://tetris/Tetromino.gd" id="1_qheu4"]
 [ext_resource type="Texture2D" uid="uid://3d40sc2w7vyq" path="res://tetris/tetrominos/l_a_1.png" id="2_lviqe"]
@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://bf25dekyl4qti" path="res://tetris/tetrominos/t_2.png" id="18_4h3q8"]
 [ext_resource type="Texture2D" uid="uid://chqj82rvfw6bd" path="res://tetris/tetrominos/t_3.png" id="19_c15io"]
 [ext_resource type="Texture2D" uid="uid://cxlmmjyqk7gfh" path="res://tetris/tetrominos/t_4.png" id="20_nbx4w"]
-[ext_resource type="Script" path="res://tetris/tetTexture.gd" id="21_uh3hb"]
+[ext_resource type="Script" path="res://tetris/tetBody.gd" id="21_uh3hb"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_udxdd"]
 animations = [{
