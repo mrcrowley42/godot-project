@@ -1,0 +1,176 @@
+[gd_scene load_steps=32 format=3 uid="uid://b64n66ydbb7s5"]
+
+[ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://images/creature_sprites/little-guy.png" id="1_obpq1"]
+[ext_resource type="Script" path="res://scripts/creature.gd" id="2_klgk6"]
+[ext_resource type="Texture2D" uid="uid://dqtjsny24a3p1" path="res://images/creature_sprites/angry-0.png" id="3_b4v78"]
+[ext_resource type="Texture2D" uid="uid://4cfpam3be0g" path="res://images/creature_sprites/little-guy_2.png" id="3_xm5kq"]
+[ext_resource type="Texture2D" uid="uid://diwxdoruu1sob" path="res://images/creature_sprites/little-guy_3.png" id="4_1nivj"]
+[ext_resource type="Texture2D" uid="uid://cq86852isqqkq" path="res://images/creature_sprites/angry-1.png" id="4_i6glr"]
+[ext_resource type="Texture2D" uid="uid://b3q3krfrwwvff" path="res://images/creature_sprites/chill-0.png" id="5_gnqtd"]
+[ext_resource type="Texture2D" uid="uid://dd12vpparynjh" path="res://images/creature_sprites/angry-2.png" id="5_htkse"]
+[ext_resource type="Script" path="res://scripts/creature_anim.gd" id="5_oh7gr"]
+[ext_resource type="Texture2D" uid="uid://k3q3fb85fm3h" path="res://images/creature_sprites/chill-1.png" id="6_t62e5"]
+[ext_resource type="Texture2D" uid="uid://c44b8y8u8ne7w" path="res://images/creature_sprites/confused-0.png" id="6_tpv3k"]
+[ext_resource type="Texture2D" uid="uid://dck4q0ce0c4mm" path="res://images/creature_sprites/chill-2.png" id="7_6xa3v"]
+[ext_resource type="Texture2D" uid="uid://cqyltj7p4b1l7" path="res://images/creature_sprites/confused-1.png" id="7_j2qgy"]
+[ext_resource type="Texture2D" uid="uid://bcsj0ibb8s3y0" path="res://images/creature_sprites/confused-2.png" id="8_gbg03"]
+[ext_resource type="Texture2D" uid="uid://dxc4uprrmyny8" path="res://images/creature_sprites/sadge-0.png" id="13_d84xb"]
+[ext_resource type="Texture2D" uid="uid://dxipq42e3qg72" path="res://images/creature_sprites/sadge-1.png" id="14_r6peb"]
+[ext_resource type="Texture2D" uid="uid://dean3vpwpml33" path="res://images/creature_sprites/hat-0.png" id="15_eqb0u"]
+[ext_resource type="Texture2D" uid="uid://c8vn6brl68787" path="res://images/creature_sprites/sadge-2.png" id="15_xvmeh"]
+[ext_resource type="AudioStream" uid="uid://pgmpt3uti87" path="res://sound_effects/pain3.wav" id="16_2mdbn"]
+[ext_resource type="Script" path="res://scripts/pain.gd" id="16_epyie"]
+[ext_resource type="Texture2D" uid="uid://ds1kv27x8e4hy" path="res://images/creature_sprites/hat-1.png" id="16_iky04"]
+[ext_resource type="AudioStream" uid="uid://it0l1d864tp5" path="res://sound_effects/pain4.wav" id="17_addty"]
+[ext_resource type="Texture2D" uid="uid://brslt7dhl7lmc" path="res://images/creature_sprites/hat-2.png" id="17_s111j"]
+[ext_resource type="Texture2D" uid="uid://jwn24lgspht2" path="res://images/creature_sprites/glasses-0.png" id="18_52sxs"]
+[ext_resource type="AudioStream" uid="uid://bux02e7112jdt" path="res://sound_effects/pain5.wav" id="18_qdg0m"]
+[ext_resource type="Texture2D" uid="uid://diuhoh5vf8a6t" path="res://images/creature_sprites/glasses-1.png" id="19_a2k16"]
+[ext_resource type="Texture2D" uid="uid://ch6mgp1qpwwjh" path="res://images/creature_sprites/glasses-2.png" id="20_ehttl"]
+[ext_resource type="Script" path="res://scripts/low_stat_sounds.gd" id="28_2v4ap"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3cwqc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_b4v78")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_i6glr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_htkse")
+}],
+"loop": true,
+"name": &"angry",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_gnqtd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_t62e5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_6xa3v")
+}],
+"loop": true,
+"name": &"chill",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_tpv3k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_j2qgy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_gbg03")
+}],
+"loop": true,
+"name": &"confused",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_obpq1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xm5kq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_1nivj")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_d84xb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_r6peb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_xvmeh")
+}],
+"loop": true,
+"name": &"sad",
+"speed": 4.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3t6pq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_eqb0u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_iky04")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_s111j")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xmjbo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_52sxs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_a2k16")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_ehttl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("2_klgk6")
+dying_colour = Color(1, 0, 0, 1)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.225, 0.225)
+sprite_frames = SubResource("SpriteFrames_3cwqc")
+animation = &"idle"
+autoplay = "idle"
+script = ExtResource("5_oh7gr")
+
+[node name="Hat" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(-19, -127)
+scale = Vector2(0.225, 0.225)
+sprite_frames = SubResource("SpriteFrames_3t6pq")
+autoplay = "default"
+frame_progress = 0.770958
+
+[node name="Glasses" type="AnimatedSprite2D" parent="."]
+visible = false
+modulate = Color(1, 0.807843, 0.592157, 1)
+position = Vector2(-7, -33)
+scale = Vector2(0.225, 0.225)
+sprite_frames = SubResource("SpriteFrames_xmjbo")
+autoplay = "default"
+
+[node name="STAHP" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+bus = &"SFX"
+script = ExtResource("16_epyie")
+sounds = Array[AudioStream]([ExtResource("16_2mdbn"), ExtResource("17_addty"), ExtResource("18_qdg0m")])
+
+[node name="LowStatSounds" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+script = ExtResource("28_2v4ap")
+
+[connection signal="finished" from="LowStatSounds" to="LowStatSounds" method="_on_finished"]

@@ -42,7 +42,7 @@ func _ready():
 func done() -> void:
 	on_cooldown = false
 
-func queue_warning(sound_file: AudioStream) -> void:	
+func queue_warning(sound_file: AudioStream) -> void:
 	if not playing and not on_cooldown:
 		stream = sound_file
 		play()
