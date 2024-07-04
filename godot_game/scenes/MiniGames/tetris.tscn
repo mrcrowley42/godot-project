@@ -38,7 +38,8 @@ size = Vector2(525, 40)
 script = ExtResource("1_o7o8x")
 
 [node name="GravityTicker" type="Timer" parent="."]
-wait_time = 0.6
+unique_name_in_owner = true
+wait_time = 0.05
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 10

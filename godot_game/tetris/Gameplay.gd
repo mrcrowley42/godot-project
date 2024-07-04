@@ -39,3 +39,7 @@ func _input(event):
 
 func active_tet_placed():
 	add_tet(['l_a', 'l_b', 'long', 'skew_a', 'skew_b', 'square', 't'].pick_random())
+	#
+#func _process(_delta):
+	#print(%GravityTicker.time_left)
+	#
