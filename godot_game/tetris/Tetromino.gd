@@ -1,5 +1,7 @@
 extends Node2D
 
+signal placed
+
 @onready var canvas = find_child("CanvasLayer")
 @onready var body = find_child("Body")
 
@@ -53,6 +55,7 @@ func y_correction():
 func place_tet():
 	body.position.y -= squareSize.y  # revert gravity
 	resting = true
+	placed.emit()
 
 func gravity_tick():
 	body.position.y += squareSize.y

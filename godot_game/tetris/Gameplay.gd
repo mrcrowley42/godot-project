@@ -15,6 +15,7 @@ func add_tet(piece):
 	add_child(activeTet)
 	activeTet.init(piece, gridBG.position, boardSize)
 	activeTet.snap_to_grid(Vector2(boardSize.x / 2, -activeTet.body.get_size().y / 2))  # middle top, just off screen
+	activeTet.connect("placed", active_tet_placed)
 
 func _ready():
 	add_tet("t")
@@ -35,3 +36,6 @@ func _input(event):
 			activeTet.move_left()
 		if event.keycode in inputsRight:
 			activeTet.move_right()
+
+func active_tet_placed():
+	add_tet(['l_a', 'l_b', 'long', 'skew_a', 'skew_b', 'square', 't'].pick_random())
