@@ -60,6 +60,7 @@ frame_progress = 0.215938
 
 [node name="startGame" type="Timer" parent="."]
 unique_name_in_owner = true
+wait_time = 2.0
 one_shot = true
 
 [node name="eggTimer" type="Timer" parent="."]
