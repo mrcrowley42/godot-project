@@ -465,6 +465,7 @@ script = ExtResource("16_3rmyt")
 
 [node name="ActivityControls" type="PanelContainer" parent="UI/ScreenControls"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(400, 400)
 layout_mode = 1
 anchors_preset = 8
@@ -805,7 +806,6 @@ script = SubResource("GDScript_ao166")
 [node name="CreditsContainer" type="PanelContainer" parent="UI/OptionsContainer"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -860,7 +860,8 @@ custom_minimum_size = Vector2(384, 0)
 layout_mode = 2
 theme = ExtResource("30_244nl")
 bbcode_enabled = true
-text = "[center]Created by Team Yippee[/center]
+text = "
+[center]Created by [wave amp=50.0 freq=5.0 connected=1][rainbow freq=1.0 sat=0.8 val=0.9]Team Yippee[/rainbow][/wave][/center]
 [indent]
 [ul]Lachlan Cameron
 Matthew Crowley
