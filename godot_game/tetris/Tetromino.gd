@@ -37,7 +37,7 @@ func init(piece: String, b_pos: Vector2, b_size: Vector2, previous_pieces):
 	all_pieces = previous_pieces
 
 ## performs wall-kick based on clipped size & pos of tetmomino
-func x_correction():
+func x_wall_correction():
 	var offset_pos = body.get_clipped_pos()
 	var c_size_x = body.get_clipped_size().x / 2
 	var c_size_x_r = boardSize.x - c_size_x
@@ -47,7 +47,6 @@ func x_correction():
 		body.set_x(body.relative_pos.x + squareSize.x if is_clipped else c_size_x)
 	elif c_size_x_r < offset_pos.x:
 		body.set_x(body.relative_pos.x - squareSize.x if is_clipped else c_size_x_r)
-	# push away from a collision
 
 ## avoid clipping into other resting tetrominoes
 func y_correction():
@@ -61,29 +60,36 @@ func place_tet():
 
 func gravity_tick():
 	body.add_y(squareSize.y)
+	
 	if check_for_collision():
 		body.add_y(-squareSize.y)  # revert gravity
 		place_tet()
 
 func move_left():
 	body.add_x(-squareSize.x)
-	x_correction()
+	if check_for_collision():
+		body.add_x(squareSize.x)
+	
+	x_wall_correction()
 	perform_linear_lerp(1)
 
 func move_right():
 	body.add_x(squareSize.x)
-	x_correction()
+	if check_for_collision():
+		body.add_x(-squareSize.x)
+	
+	x_wall_correction()
 	perform_linear_lerp(-1)
 
 func rotate_clockwise():
 	body.advance_frame()
-	x_correction()
+	x_wall_correction()
 	y_correction()
 	perform_angular_lerp(-1)
 
 func rotate_counter_clockwise():
 	body.rewind_frame()
-	x_correction()
+	x_wall_correction()
 	y_correction()
 	perform_angular_lerp(1)
 
@@ -129,32 +135,15 @@ func _process(_delta):
 		a_start_time = null
 		a_end_time = null
 
-## loop through all previous peices and check for a collision
+## loop through all previous peices and check for an overlap
 func check_for_collision() -> bool:
 	# godot's collision detection is stupid and allows a few frames to slip past before triggering a collision signal
 	# meaning the collision is out-of-date and draws the tet in the wrong position for a few microseconds
 	# so i've resorted to making my own manual checks :pensive:
-	var check_rects = func(r1: Rect2, r2: Rect2):
-		var r1_size_h = r1.size / 2
-		var r2_size_h = r2.size / 2
-		var normal = (r2.position - r1_size_h) - (r1.position - r2_size_h)  # allows for different size boxes
-		var x_overlap = r1_size_h.x + r2_size_h.x - abs(normal.x)
-		if x_overlap >= 0:
-			var y_overlap = r1_size_h.y + r2_size_h.y - abs(normal.y)
-			return y_overlap >= 0
-		return false
-	
-	for rect in body.get_all_rect_bounds():
+	for pos in body.get_all_pos_bounds():
 		for piece in all_pieces:
-			var coll = false
-			
-			if piece.name == "Ground":  # special case
-				var c = piece.get_child(0)
-				coll = check_rects.call(rect, Rect2(c.position - c.shape.size / 2, c.shape.size))
-			else:  # normal tet
-				for other_rect in piece.body.get_all_rect_bounds():
-					coll = check_rects.call(rect, other_rect)
-			
-			if coll:
-				return true
+			var points = piece.get_all_positions() if piece.name == "Ground" else piece.body.get_all_pos_bounds()
+			for other_pos in points:
+				if pos == other_pos:
+					return true
 	return false

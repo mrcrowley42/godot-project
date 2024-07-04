@@ -50,11 +50,13 @@ func get_clipped_pos() -> Vector2:
 		get_normal(TOP) - get_normal(BOTTOM)
 	))
 
-func get_all_rect_bounds():
-	var bounds = []
-	for rect_shape: CollisionShape2D in collision_area.get_children():
-		bounds.append(Rect2((base_pos + relative_pos + rect_shape.position) - rect_shape.shape.size / 2, rect_shape.shape.size))
-	return bounds
+func get_all_pos_bounds():
+	# rotate each point by rotation_degrees around 0, 0 to correct rotated positions >:)
+	var p = []
+	for shape: CollisionShape2D in collision_area.get_children():
+		if !shape.disabled:
+			p.append(Vector2(base_pos + relative_pos + shape.position))
+	return p
 
 func set_anim(anim):
 	assert(anim in ALLOWED_TETS)
@@ -89,8 +91,8 @@ func set_angle(rad):
 
 func update_collision():
 	if get_rot_addition() == SWITCH:  # special case for long
-		for ch in collision_area.get_children():
-			ch.disabled = !ch.disabled
+		for c in collision_area.get_children():
+			c.disabled = !c.disabled
 	else:  # rotate normally
 		collision_area.rotation_degrees = get_rot_addition() * frame
 

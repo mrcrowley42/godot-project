@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://c5dr54dk0502t"]
+[gd_scene load_steps=13 format=3 uid="uid://c5dr54dk0502t"]
 
 [ext_resource type="Texture2D" uid="uid://cgfufcnmd24wf" path="res://UI stuff/Green Palette/ui_green_tetris.png" id="1_ad86f"]
 [ext_resource type="Script" path="res://tetris/Gameplay.gd" id="1_o7o8x"]
 [ext_resource type="Shader" path="res://shaders/grid.gdshader" id="2_0hqmj"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="2_t4frc"]
 [ext_resource type="Script" path="res://scripts/tetrisGridBG.gd" id="3_r7ui3"]
+[ext_resource type="Script" path="res://tetris/tetrisGround.gd" id="6_43m2v"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_adq1g"]
 shader = ExtResource("2_0hqmj")
@@ -54,14 +55,14 @@ func _on_value_changed(_value):
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wbp70"]
-size = Vector2(350, 10)
+size = Vector2(30, 30)
 
 [node name="Tetris" type="Node2D"]
 script = ExtResource("1_o7o8x")
 
 [node name="GravityTicker" type="Timer" parent="."]
 unique_name_in_owner = true
-wait_time = 0.8
+wait_time = 0.1
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 10
@@ -123,9 +124,46 @@ script = SubResource("GDScript_hefku")
 
 [node name="Ground" type="Area2D" parent="UI"]
 disable_mode = 2
+script = ExtResource("6_43m2v")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Ground"]
-position = Vector2(270, 203)
+position = Vector2(135, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="UI/Ground"]
+position = Vector2(315, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="UI/Ground"]
+position = Vector2(285, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="UI/Ground"]
+position = Vector2(225, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="UI/Ground"]
+position = Vector2(255, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="UI/Ground"]
+position = Vector2(195, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="UI/Ground"]
+position = Vector2(165, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="UI/Ground"]
+position = Vector2(345, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="UI/Ground"]
+position = Vector2(405, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="UI/Ground"]
+position = Vector2(375, 652)
 shape = SubResource("RectangleShape2D_wbp70")
 
 [connection signal="timeout" from="GravityTicker" to="." method="_on_gravity_ticker_timeout"]
