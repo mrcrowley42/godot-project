@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c5dr54dk0502t"]
+[gd_scene load_steps=12 format=3 uid="uid://c5dr54dk0502t"]
 
 [ext_resource type="Texture2D" uid="uid://cgfufcnmd24wf" path="res://UI stuff/Green Palette/ui_green_tetris.png" id="1_ad86f"]
 [ext_resource type="Script" path="res://tetris/Gameplay.gd" id="1_o7o8x"]
@@ -31,6 +31,28 @@ func _on_button_down():
 [sub_resource type="MeshTexture" id="MeshTexture_s1ek3"]
 base_texture = ExtResource("1_ad86f")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iw3vv"]
+bg_color = Color(0.108549, 0.267518, 0.246449, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="GDScript" id="GDScript_hefku"]
+script/source = "extends VSlider
+
+
+func _on_value_changed(_value):
+	%GravityTicker.stop()
+	%GravityTicker.wait_time = 1/_value
+	%GravityTicker.start()
+	
+"
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_64ooc"]
 size = Vector2(525, 40)
 
@@ -39,7 +61,7 @@ script = ExtResource("1_o7o8x")
 
 [node name="GravityTicker" type="Timer" parent="."]
 unique_name_in_owner = true
-wait_time = 0.05
+wait_time = 0.1
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 10
@@ -87,6 +109,18 @@ position = Vector2(91, -4)
 scale = Vector2(179.5, 342)
 texture = SubResource("MeshTexture_s1ek3")
 
+[node name="VSlider" type="VSlider" parent="UI/Control/TopOverlay"]
+offset_left = 472.0
+offset_top = 377.0
+offset_right = 488.0
+offset_bottom = 515.0
+theme_override_styles/slider = SubResource("StyleBoxFlat_iw3vv")
+min_value = 0.5
+max_value = 40.0
+step = 0.1
+value = 1.0
+script = SubResource("GDScript_hefku")
+
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="Ground" type="CollisionShape2D" parent="Area2D"]
@@ -95,3 +129,4 @@ shape = SubResource("RectangleShape2D_64ooc")
 
 [connection signal="timeout" from="GravityTicker" to="." method="_on_gravity_ticker_timeout"]
 [connection signal="button_down" from="UI/Control/CloseBtn" to="UI/Control/CloseBtn" method="_on_button_down"]
+[connection signal="value_changed" from="UI/Control/TopOverlay/VSlider" to="UI/Control/TopOverlay/VSlider" method="_on_value_changed"]
