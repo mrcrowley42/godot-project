@@ -17,7 +17,7 @@ func add_tet(piece):
 	activeTet.snap_to_grid(Vector2(boardSize.x / 2, -activeTet.texture.get_size().y / 2))  # middle top, just off screen
 
 func _ready():
-	add_tet("l_a")
+	add_tet("long")
 	gravityTicker.start()
 
 func _on_gravity_ticker_timeout():

@@ -46,7 +46,7 @@ void fragment() {
 	float rowHeight = screenDim.y / rows;
 	vec2 offset = offsetCentered ? vec2((lineSize * columnWidth) * 0.5, (lineSize * rowHeight) * 0.5) : offsetOverride;
 	
-	// perform 'modulus' operation
+	// perform 'modulus' operation with floats
 	vec2 remainder = vec2(scaledUV.x - offset.x, scaledUV.y - offset.y);
 	remainder /= vec2(columnWidth, rowHeight);
 	remainder -= floor(remainder);  // actually get the remainder (will be =< 0 and > 1 whithin each grid square)

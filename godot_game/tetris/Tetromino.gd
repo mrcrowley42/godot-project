@@ -7,6 +7,9 @@ var boardSize: Vector2
 var squareSize: Vector2 = Vector2(30, 30)
 var resting = false
 
+var lLerpStart = 15  # starting lerp offset
+var rLerpStart = 5  # starting lerp rotation
+
 ## snap given vec to grid of squareSize
 func snap_to_grid(vec: Vector2):
 	var topLeft = vec - texture.get_size() / 2
@@ -22,7 +25,7 @@ func init(piece: String, bPos: Vector2, bSize: Vector2):
 	canvas.offset = bPos
 	texture.set_anim(piece)
 
-## performs wall-kick based on normal given for tetmomino
+## performs wall-kick based on clipped size & pos of tetmomino
 func x_correction():
 	var offset_pos = texture.get_clipped_pos()
 	var cSize_x = texture.get_clipped_size().x / 2
@@ -45,17 +48,27 @@ func gravity_tick():
 func move_left():
 	texture.position.x -= squareSize.x
 	x_correction()
+	perform_linear_lerp(-1)
 
 func move_right():
 	texture.position.x += squareSize.x
 	x_correction()
+	perform_linear_lerp(1)
 
 func rotate_clockwise():
 	texture.advance_frame()
 	x_correction()
 	y_correction()
+	perform_angular_lerp(1)
 
 func rotate_counter_clockwise():
 	texture.rewind_frame()
 	x_correction()
 	y_correction()
+	perform_angular_lerp(-1)
+
+func perform_linear_lerp(direction=0):
+	pass
+
+func perform_angular_lerp(direction=0):
+	pass
