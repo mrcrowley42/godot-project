@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://d3e1mocbpq7hp"]
+[gd_scene load_steps=11 format=3 uid="uid://d3e1mocbpq7hp"]
 
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="1_3y1y3"]
 [ext_resource type="Script" path="res://scripts/memory_game.gd" id="1_y2saq"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="2_4ls5g"]
 [ext_resource type="Script" path="res://scripts/memory_sfx_man.gd" id="4_mndmj"]
+[ext_resource type="Script" path="res://scripts/MainGameScripts/EggScene/party.gd" id="5_4pw2p"]
 
 [sub_resource type="Gradient" id="Gradient_5hppj"]
 interpolation_mode = 2
@@ -25,6 +26,11 @@ func _on_button_down():
 	get_tree().root.propagate_notification(Globals.NOTIFICATION_MINIGAME_CLOSED)
 	find_parent(\"MiniGame\").queue_free()
 "
+
+[sub_resource type="Gradient" id="Gradient_k8u3n"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.12381, 0.290476, 0.452381, 0.652381, 0.819048, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.482353, 0.321569, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0.509804, 1, 0.529412, 0, 0.745098, 1, 1, 1, 1, 1)
 
 [node name="MiniGame" type="Node2D"]
 
@@ -100,5 +106,49 @@ script = SubResource("GDScript_a14sq")
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 script = ExtResource("4_mndmj")
+
+[node name="Confetti" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("5_4pw2p")
+
+[node name="ConfetL" type="CPUParticles2D" parent="Confetti"]
+position = Vector2(92, 555)
+emitting = false
+amount = 15
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+direction = Vector2(0.1, -1)
+spread = 6.0
+initial_velocity_min = 500.0
+initial_velocity_max = 900.0
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+scale_amount_min = 10.0
+scale_amount_max = 15.0
+color_initial_ramp = SubResource("Gradient_k8u3n")
+hue_variation_min = 1.0
+hue_variation_max = 1.0
+
+[node name="ConfetR" type="CPUParticles2D" parent="Confetti"]
+position = Vector2(446, 553)
+emitting = false
+amount = 15
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+direction = Vector2(-0.1, -1)
+spread = 6.0
+initial_velocity_min = 500.0
+initial_velocity_max = 900.0
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+scale_amount_min = 10.0
+scale_amount_max = 15.0
+color_initial_ramp = SubResource("Gradient_k8u3n")
+hue_variation_min = 1.0
+hue_variation_max = 1.0
 
 [connection signal="button_down" from="CloseBtn" to="CloseBtn" method="_on_button_down"]

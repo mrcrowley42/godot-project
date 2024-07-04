@@ -8,6 +8,7 @@ var selected_cards: Array[MemCard] = []
 var creature_score: int = 0
 var player_score: int = 0
 var possible = Array(range(20))
+var complete: bool = false
 
 ## Class that describes the cards (buttons) for memory.
 class MemCard extends Button:
@@ -31,6 +32,12 @@ class MemCard extends Button:
 
 func _process(_delta):
 	%ScoreLabel.text = og_text % [player_score, creature_score]
+	
+	if player_score == 10:
+		if not complete:
+			%Confetti.confet()
+			complete = true
+
 
 func create_deck():
 	var deck: Array = []
