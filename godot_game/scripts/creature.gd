@@ -52,7 +52,7 @@ func dmg(amount:float, stat:String) -> void:
 	
 ## Change to game over scene.
 func dead():
-	get_tree().change_scene_to_file("res://scenes/dead.tscn")
+	get_tree().change_scene_to_file("res://scenes/GameScenes/dead.tscn")
 
 ## Tint the Create using the dying_colour set in inspector scaling the tint based on how low HP is.
 func apply_dmg_tint() -> void:
