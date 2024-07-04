@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/prototype.gd" id="1_u8fgs"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_w1hur"]
 [ext_resource type="Script" path="res://scripts/SceneManager.gd" id="3_usdrn"]
-[ext_resource type="Texture2D" uid="uid://cdbor7hjfbusn" path="res://UI stuff/Universal/background.png" id="4_pmdaq"]
+[ext_resource type="Texture2D" uid="uid://n0wpmfj7w8w6" path="res://UI stuff/Universal/background.png" id="4_pmdaq"]
 [ext_resource type="PackedScene" uid="uid://bebjn5n2kjwgb" path="res://scenes/Creatures/creature.tscn" id="5_khxd0"]
 [ext_resource type="Shader" path="res://shaders/screen_tint.gdshader" id="6_yhapg"]
 [ext_resource type="Script" path="res://scripts/Confetti.gd" id="7_rqbrx"]
