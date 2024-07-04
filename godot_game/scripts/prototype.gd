@@ -13,6 +13,7 @@ func _ready():
 
 func _on_save_pressed():
 	%BtnClick.play()
+	%SFX.play_sound("correct")
 	save_settings_data()
 
 func _notification(noti):

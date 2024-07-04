@@ -1,4 +1,4 @@
-[gd_scene load_steps=91 format=3 uid="uid://c282rwt57fvoc"]
+[gd_scene load_steps=92 format=3 uid="uid://c282rwt57fvoc"]
 
 [ext_resource type="Script" path="res://scripts/prototype.gd" id="1_u8fgs"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_w1hur"]
@@ -29,7 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://pfr6wdx80m45" path="res://icons/volume-fill.svg" id="27_5q6ds"]
 [ext_resource type="Script" path="res://scripts/mute_button.gd" id="28_wya5n"]
 [ext_resource type="PackedScene" uid="uid://cbn0dv1k0onpb" path="res://scenes/UiScenes/vol_slider.tscn" id="29_rruaw"]
-[ext_resource type="Theme" path="res://themes/monospace_font.tres" id="30_244nl"]
+[ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="30_244nl"]
 [ext_resource type="Texture2D" uid="uid://cawudmxbjamv0" path="res://UI stuff/Green Palette/ui_green.png" id="31_astnl"]
 [ext_resource type="Script" path="res://scripts/ui_overlay.gd" id="32_2c0y7"]
 [ext_resource type="Texture2D" uid="uid://c3835drqnfvy" path="res://UI stuff/Orange Palette/ui_orange.png" id="33_dyvwk"]
@@ -67,6 +67,7 @@
 [ext_resource type="AudioStream" uid="uid://8ifwm2tjitur" path="res://sound_effects/yippee.mp3" id="65_mrlpr"]
 [ext_resource type="AudioStream" uid="uid://cx28efsxtr7c" path="res://sound_effects/button_click_fast.mp3" id="66_b3v7n"]
 [ext_resource type="AudioStream" uid="uid://dat0sfue6jjr5" path="res://sound_effects/metal-pipe-falling-sound-effect-made-with-Voicemod.mp3" id="67_p6vc6"]
+[ext_resource type="Script" path="res://scripts/memory_sfx_man.gd" id="68_sw7tx"]
 
 [sub_resource type="GDScript" id="GDScript_7ecg8"]
 script/source = "extends ColorRect
@@ -1119,6 +1120,10 @@ bus = &"SFX"
 unique_name_in_owner = true
 stream = ExtResource("67_p6vc6")
 bus = &"SFX"
+
+[node name="SFX" type="AudioStreamPlayer" parent="Audio"]
+unique_name_in_owner = true
+script = ExtResource("68_sw7tx")
 
 [connection signal="visibility_changed" from="UI/ScreenControls/FoodControls" to="UI/ScreenControls/FoodControls" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 1" to="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 1" method="_on_button_down"]
