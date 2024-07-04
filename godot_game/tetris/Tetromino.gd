@@ -6,6 +6,7 @@ signal placed
 @onready var body = find_child("Body")
 
 var boardSize: Vector2
+var all_pieces = []
 var squareSize: Vector2 = Vector2(30, 30)
 var resting: bool = false
 
@@ -29,10 +30,11 @@ func snap_to_grid(vec: Vector2):
 	body.set_pos(vec - amount)
 	body.add_y(squareSize.y * body.get_normal(body.BOTTOM))
 
-func init(piece: String, b_pos: Vector2, b_size: Vector2):
+func init(piece: String, b_pos: Vector2, b_size: Vector2, previous_pieces):
 	boardSize = b_size
 	body.base_pos = b_pos
 	body.set_anim(piece)
+	all_pieces = previous_pieces
 
 ## performs wall-kick based on clipped size & pos of tetmomino
 func x_correction():
@@ -54,12 +56,14 @@ func y_correction():
 	pass
 
 func place_tet():
-	body.add_y(-squareSize.y)  # revert gravity
 	resting = true
 	placed.emit()
 
 func gravity_tick():
 	body.add_y(squareSize.y)
+	if check_for_collision():
+		body.add_y(-squareSize.y)  # revert gravity
+		place_tet()
 
 func move_left():
 	body.add_x(-squareSize.x)
@@ -124,3 +128,33 @@ func _process(_delta):
 		body.set_angle(0)
 		a_start_time = null
 		a_end_time = null
+
+## loop through all previous peices and check for a collision
+func check_for_collision() -> bool:
+	# godot's collision detection is stupid and allows a few frames to slip past before triggering a collision signal
+	# meaning the collision is out-of-date and draws the tet in the wrong position for a few microseconds
+	# so i've resorted to making my own manual checks :pensive:
+	var check_rects = func(r1: Rect2, r2: Rect2):
+		var r1_size_h = r1.size / 2
+		var r2_size_h = r2.size / 2
+		var normal = (r2.position - r1_size_h) - (r1.position - r2_size_h)  # allows for different size boxes
+		var x_overlap = r1_size_h.x + r2_size_h.x - abs(normal.x)
+		if x_overlap >= 0:
+			var y_overlap = r1_size_h.y + r2_size_h.y - abs(normal.y)
+			return y_overlap >= 0
+		return false
+	
+	for rect in body.get_all_rect_bounds():
+		for piece in all_pieces:
+			var coll = false
+			
+			if piece.name == "Ground":  # special case
+				var c = piece.get_child(0)
+				coll = check_rects.call(rect, Rect2(c.position - c.shape.size / 2, c.shape.size))
+			else:  # normal tet
+				for other_rect in piece.body.get_all_rect_bounds():
+					coll = check_rects.call(rect, other_rect)
+			
+			if coll:
+				return true
+	return false

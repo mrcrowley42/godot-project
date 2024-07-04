@@ -50,6 +50,12 @@ func get_clipped_pos() -> Vector2:
 		get_normal(TOP) - get_normal(BOTTOM)
 	))
 
+func get_all_rect_bounds():
+	var bounds = []
+	for rect_shape: CollisionShape2D in collision_area.get_children():
+		bounds.append(Rect2((base_pos + relative_pos + rect_shape.position) - rect_shape.shape.size / 2, rect_shape.shape.size))
+	return bounds
+
 func set_anim(anim):
 	assert(anim in ALLOWED_TETS)
 	set_animation(anim)

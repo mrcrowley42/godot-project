@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c5dr54dk0502t"]
+[gd_scene load_steps=12 format=3 uid="uid://c5dr54dk0502t"]
 
 [ext_resource type="Texture2D" uid="uid://cgfufcnmd24wf" path="res://UI stuff/Green Palette/ui_green_tetris.png" id="1_ad86f"]
 [ext_resource type="Script" path="res://tetris/Gameplay.gd" id="1_o7o8x"]
@@ -52,6 +52,9 @@ func _on_value_changed(_value):
 	%GravityTicker.start()
 	
 "
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wbp70"]
+size = Vector2(350, 10)
 
 [node name="Tetris" type="Node2D"]
 script = ExtResource("1_o7o8x")
@@ -121,9 +124,9 @@ script = SubResource("GDScript_hefku")
 [node name="Ground" type="Area2D" parent="UI"]
 disable_mode = 2
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="UI/Ground"]
-position = Vector2(-5, -442)
-polygon = PackedVector2Array(100, 640, 450, 640, 450, 650, 100, 650)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Ground"]
+position = Vector2(270, 203)
+shape = SubResource("RectangleShape2D_wbp70")
 
 [connection signal="timeout" from="GravityTicker" to="." method="_on_gravity_ticker_timeout"]
 [connection signal="button_down" from="UI/Control/CloseBtn" to="UI/Control/CloseBtn" method="_on_button_down"]
