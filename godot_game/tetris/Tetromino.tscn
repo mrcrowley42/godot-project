@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://f7hd20elu48g"]
+[gd_scene load_steps=25 format=3 uid="uid://f7hd20elu48g"]
 
 [ext_resource type="Script" path="res://tetris/Tetromino.gd" id="1_qheu4"]
 [ext_resource type="Texture2D" uid="uid://3d40sc2w7vyq" path="res://tetris/tetrominos/l_a_1.png" id="2_lviqe"]
@@ -117,6 +117,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cm127"]
+size = Vector2(20, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gad0o"]
+size = Vector2(80, 20)
+
 [node name="Tetromino" type="Node2D"]
 script = ExtResource("1_qheu4")
 
@@ -129,12 +135,16 @@ animation = &"l_a"
 script = ExtResource("21_uh3hb")
 
 [node name="l_a" type="Area2D" parent="CanvasLayer/Body"]
-visible = false
+disable_mode = 2
 monitoring = false
 monitorable = false
 
-[node name="Collision" type="CollisionPolygon2D" parent="CanvasLayer/Body/l_a"]
-polygon = PackedVector2Array(-40, -40, -20, -40, -20, -10, 40, -10, 40, 10, -40, 10)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Body/l_a"]
+position = Vector2(-30, -25)
+shape = SubResource("RectangleShape2D_cm127")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="CanvasLayer/Body/l_a"]
+shape = SubResource("RectangleShape2D_gad0o")
 
 [node name="l_b" type="Area2D" parent="CanvasLayer/Body"]
 visible = false
@@ -187,3 +197,5 @@ monitorable = false
 
 [node name="Collision" type="CollisionPolygon2D" parent="CanvasLayer/Body/t"]
 polygon = PackedVector2Array(-40, -10, 40, -10, 40, 10, 10, 10, 10, 40, -10, 40, -10, 10, -40, 10)
+
+[connection signal="collided" from="CanvasLayer/Body" to="." method="_on_body_collided"]

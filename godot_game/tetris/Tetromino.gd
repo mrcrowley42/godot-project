@@ -7,7 +7,7 @@ signal placed
 
 var boardSize: Vector2
 var squareSize: Vector2 = Vector2(30, 30)
-var resting = false
+var resting: bool = false
 
 const LERP_TIME = 0.05;  # 0.05
 const L_LERP_START = 5
@@ -26,12 +26,12 @@ func snap_to_grid(vec: Vector2):
 			int(topLeft.x) % int(squareSize.x), 
 			int(topLeft.y) % int(squareSize.y)
 		)
-	body.position = vec - amount
-	body.position.y += squareSize.y * body.get_normal(body.BOTTOM)
+	body.set_pos(vec - amount)
+	body.add_y(squareSize.y * body.get_normal(body.BOTTOM))
 
 func init(piece: String, b_pos: Vector2, b_size: Vector2):
 	boardSize = b_size
-	canvas.offset = b_pos
+	body.base_pos = b_pos
 	body.set_anim(piece)
 
 ## performs wall-kick based on clipped size & pos of tetmomino
@@ -42,9 +42,9 @@ func x_correction():
 	var is_clipped = body.get_size().x / 2 != c_size_x
 	
 	if c_size_x > offset_pos.x:
-		body.set_x(body.position.x + squareSize.x if is_clipped else c_size_x)
+		body.set_x(body.relative_pos.x + squareSize.x if is_clipped else c_size_x)
 	elif c_size_x_r < offset_pos.x:
-		body.set_x(body.position.x - squareSize.x if is_clipped else c_size_x_r)
+		body.set_x(body.relative_pos.x - squareSize.x if is_clipped else c_size_x_r)
 	# push away from a collision
 
 ## avoid clipping into other resting tetrominoes
@@ -54,22 +54,20 @@ func y_correction():
 	pass
 
 func place_tet():
-	body.position.y -= squareSize.y  # revert gravity
+	body.add_y(-squareSize.y)  # revert gravity
 	resting = true
 	placed.emit()
 
 func gravity_tick():
-	body.position.y += squareSize.y
-	if body.is_colliding():
-		place_tet()
+	body.add_y(squareSize.y)
 
 func move_left():
-	body.position.x -= squareSize.x
+	body.add_x(-squareSize.x)
 	x_correction()
 	perform_linear_lerp(1)
 
 func move_right():
-	body.position.x += squareSize.x
+	body.add_x(squareSize.x)
 	x_correction()
 	perform_linear_lerp(-1)
 

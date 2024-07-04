@@ -1,5 +1,7 @@
 extends AnimatedSprite2D
 
+signal collided
+
 const TOP = 0
 const BOTTOM = 1
 const LEFT = 2
@@ -21,6 +23,8 @@ const TET_NORMALS = {
 	ALLOWED_TETS[6]: {0: "1000", 1: "0001", 2: "0100", 3: "0010", ROT: 90}
 }
 
+var base_pos: Vector2
+var relative_pos: Vector2 = Vector2(0, 0)
 var collision_area: Area2D;
 
 func get_normal(direction: int) -> int:
@@ -41,7 +45,7 @@ func get_clipped_size() -> Vector2:
 
 ## clip position to centre of tet normals (centre of clipped size)
 func get_clipped_pos() -> Vector2:
-	return position + (Vector2(15, 15) * Vector2(
+	return relative_pos + (Vector2(15, 15) * Vector2(
 		get_normal(LEFT) - get_normal(RIGHT),
 		get_normal(TOP) - get_normal(BOTTOM)
 	))
@@ -50,23 +54,32 @@ func set_anim(anim):
 	assert(anim in ALLOWED_TETS)
 	set_animation(anim)
 	collision_area = find_child(anim)
-	collision_area.monitoring = true
-	collision_area.monitorable = true
-	
-	for c in get_children():
-		c.visible = c.name == anim
+	collision_area.visible = true
 
-func set_x(val):
-	position.x = val
+func set_x(x):
+	set_pos(Vector2(x, relative_pos.y))
+
+func set_y(y):
+	set_pos(Vector2(relative_pos.x, y))
+
+func add_x(x):
+	set_pos(Vector2(relative_pos.x + x, relative_pos.y))
+
+func add_y(y):
+	set_pos(Vector2(relative_pos.x, relative_pos.y + y))
+
+func set_pos(vec: Vector2):
+	relative_pos = vec
+	correct_pos()
+
+func correct_pos():
+	position = base_pos + relative_pos
 
 func set_x_offset(val):
 	offset.x = val
 
 func set_angle(rad):
 	rotation = rad
-
-func is_colliding() -> bool:
-	return collision_area.has_overlapping_areas()
 
 func update_collision():
 	if get_rot_addition() == SWITCH:  # special case for long
@@ -85,3 +98,6 @@ func advance_frame():
 func rewind_frame():
 	frame -= 1 if frame > 0 else -get_frame_count()
 	update_collision()
+
+func is_colliding():
+	return collision_area.has_overlapping_areas()

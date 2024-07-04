@@ -22,7 +22,6 @@ func add_tet(piece):
 
 func _ready():
 	add_tet("l_a")
-	gravityTicker.wait_time = 0.2
 	gravityTicker.start()
 
 func _on_gravity_ticker_timeout():

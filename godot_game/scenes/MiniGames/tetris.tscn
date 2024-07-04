@@ -58,7 +58,7 @@ script = ExtResource("1_o7o8x")
 
 [node name="GravityTicker" type="Timer" parent="."]
 unique_name_in_owner = true
-wait_time = 0.1
+wait_time = 0.8
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 10
@@ -119,8 +119,10 @@ value = 1.0
 script = SubResource("GDScript_hefku")
 
 [node name="Ground" type="Area2D" parent="UI"]
+disable_mode = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="UI/Ground"]
+position = Vector2(-5, -442)
 polygon = PackedVector2Array(100, 640, 450, 640, 450, 650, 100, 650)
 
 [connection signal="timeout" from="GravityTicker" to="." method="_on_gravity_ticker_timeout"]
