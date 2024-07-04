@@ -1,25 +1,25 @@
 extends Node2D
-@onready var cracker = %eggTimer
-@export var set_wait: float
+@onready var cracker = %EggTimer
+
 
 
 func _enter_tree():
-	%lilGuy.visible = false
-	%eggSprite.visible = true
-	%eggTimer.wait_time = set_wait
+	%LilGuy.visible = false
+	%EggSprite.visible = true
+	
 
 func _ready():
 	cracker.timeout.connect(func():
 		print("done")
-		%crack.play()
+		%Crack.play()
 		%Yip.play()
-		%eggSprite.visible = false
-		%lilGuy.visible = true
+		%EggSprite.visible = false
+		%LilGuy.visible = true
 		%Confetti.confet()
-		%startGame.start()
+		%StartGame.start()
 		)
 	
-	%startGame.timeout.connect(func():
+	%StartGame.timeout.connect(func():
 		print("done")
 		get_tree().change_scene_to_file("res://scenes/GameScenes/prototype.tscn")
 		)
