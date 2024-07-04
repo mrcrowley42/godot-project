@@ -21,11 +21,15 @@ func loadMinigame(minigame):
 		var game = minigame.instantiate()
 		find_parent("Game").find_child("UI").add_child(game)
 		currentMinigame = minigame.resource_path
+		%ActButton.disabled = true
+		%FoodButton.disabled = true
 
 func unLoadMinigame():
 	%BtnClick.play()
 	currentMinigame = null;
 	%StatusManager.time_multiplier = current_time_scale
+	%ActButton.disabled = false
+	%FoodButton.disabled = false
 
 func _notification(noti):
 	if noti == Globals.NOTIFICATION_MINIGAME_CLOSED:
