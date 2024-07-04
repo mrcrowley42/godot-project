@@ -75,14 +75,10 @@ script = SubResource("GDScript_v26rg")
 [node name="TopOverlay" type="CanvasLayer" parent="UI/Control"]
 layer = 12
 
-[node name="Sprite2D" type="Sprite2D" parent="UI/Control/TopOverlay"]
-position = Vector2(91, -4)
-scale = Vector2(179.5, 342)
+[node name="Ground" type="Area2D" parent="."]
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PackedVector2Array(100, 640, 100, 650, 450, 650, 450, 640)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ground"]
+polygon = PackedVector2Array(100, 640, 100, 700, 450, 700, 450, 640)
 
 [connection signal="timeout" from="GravityTicker" to="." method="_on_gravity_ticker_timeout"]
 [connection signal="button_down" from="UI/Control/CloseBtn" to="UI/Control/CloseBtn" method="_on_button_down"]
