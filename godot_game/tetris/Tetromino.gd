@@ -40,9 +40,9 @@ func x_correction():
 	var isClipped = texture.get_size().x / 2 != cSize_x
 	
 	if cSize_x > offset_pos.x:
-		texture.position.x = texture.position.x + squareSize.x if isClipped else cSize_x
+		texture.set_x(texture.position.x + squareSize.x if isClipped else cSize_x)
 	elif cSize_x_r < offset_pos.x:
-		texture.position.x = texture.position.x - squareSize.x if isClipped else cSize_x_r
+		texture.set_x(texture.position.x - squareSize.x if isClipped else cSize_x_r)
 
 ## avoid clipping into other resting tetrominoes
 func y_correction():
@@ -88,8 +88,8 @@ func perform_angular_lerp(direction):
 
 ## returns whether lerp progressed
 func advance_lerp(s_time, e_time, direction, start, offset=false) -> bool:
-	var t = Time.get_unix_time_from_system()
 	if s_time != null:
+		var t = Time.get_unix_time_from_system()
 		var perc = (t - s_time) / (e_time - s_time)
 		if perc >= 1:
 			return false

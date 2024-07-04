@@ -85,7 +85,7 @@ func load_data():
 			var data = parsed_line[DATA]
 			node.call(LOAD, data)
 		else:
-			print("ERROR: Node '%s' is null or doesnt have a %s() function" % [node.name, LOAD])
+			print("ERROR: Node '%s' is null or doesnt have a %s() function" % [parsed_line[PATH], LOAD])
 
 
 func load_settings_data():
