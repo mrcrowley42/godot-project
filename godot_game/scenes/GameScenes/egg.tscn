@@ -59,7 +59,7 @@ colors = PackedColorArray(1, 0, 0, 1, 1, 0.482353, 0.321569, 1, 1, 1, 0, 1, 1, 0
 script/source = "extends Button
 
 func _on_button_down():
-	get_tree().change_scene_to_file(\"res://scenes/prototype.tscn\")
+	get_tree().change_scene_to_file(\"res://scenes/GameScenes/prototype.tscn\")
 "
 
 [node name="Egg" type="Node2D"]
@@ -71,8 +71,9 @@ stream = ExtResource("2_rsge0")
 
 [node name="EggSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
+texture_filter = 1
 position = Vector2(274, 356)
-scale = Vector2(1.52, 1.52)
+scale = Vector2(3, 2)
 sprite_frames = SubResource("SpriteFrames_scja0")
 animation = &"EggTime"
 autoplay = "EggTime"
