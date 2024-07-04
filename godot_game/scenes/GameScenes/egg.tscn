@@ -1,48 +1,28 @@
-[gd_scene load_steps=15 format=3 uid="uid://bl22rtkqnj1s7"]
+[gd_scene load_steps=12 format=3 uid="uid://bl22rtkqnj1s7"]
 
-[ext_resource type="Script" path="res://Creatures/egg.gd" id="1_a30c6"]
-[ext_resource type="Texture2D" uid="uid://u0ju4yx6fdmf" path="res://Creatures/egg_sprites/egg.png" id="2_ji1eo"]
-[ext_resource type="AudioStream" uid="uid://8ifwm2tjitur" path="res://sound_effects/yippee.mp3" id="3_02c0x"]
-[ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://images/creature_sprites/little-guy.png" id="4_3q5va"]
-[ext_resource type="Texture2D" uid="uid://4cfpam3be0g" path="res://images/creature_sprites/little-guy_2.png" id="5_j7pas"]
-[ext_resource type="Texture2D" uid="uid://diwxdoruu1sob" path="res://images/creature_sprites/little-guy_3.png" id="6_8miqa"]
-[ext_resource type="Texture2D" uid="uid://cawudmxbjamv0" path="res://UI stuff/Green Palette/ui_green.png" id="7_f40bd"]
-[ext_resource type="Script" path="res://Creatures/party.gd" id="8_f4asa"]
-[ext_resource type="AudioStream" uid="uid://dnau787og6qky" path="res://Creatures/egg_sound/241136-egg_break-05.wav" id="9_yf6ba"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_c01kk"]
-atlas = ExtResource("2_ji1eo")
-region = Rect2(77, 0, 77, 84)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2yjhf"]
-atlas = ExtResource("2_ji1eo")
-region = Rect2(154, 0, 77, 84)
+[ext_resource type="Script" path="res://scripts/MainGameScripts/EggScene/egg.gd" id="1_3gale"]
+[ext_resource type="AudioStream" uid="uid://8ifwm2tjitur" path="res://sound_effects/yippee.mp3" id="2_rsge0"]
+[ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://images/creature_sprites/little-guy.png" id="4_5b41r"]
+[ext_resource type="Texture2D" uid="uid://4cfpam3be0g" path="res://images/creature_sprites/little-guy_2.png" id="5_6fl3y"]
+[ext_resource type="Texture2D" uid="uid://diwxdoruu1sob" path="res://images/creature_sprites/little-guy_3.png" id="6_ii2p7"]
+[ext_resource type="Texture2D" uid="uid://cawudmxbjamv0" path="res://UI stuff/Green Palette/ui_green.png" id="7_umgic"]
+[ext_resource type="Script" path="res://scripts/MainGameScripts/EggScene/party.gd" id="8_psxin"]
+[ext_resource type="AudioStream" uid="uid://dnau787og6qky" path="res://sound_effects/EggCrack.wav" id="9_iuv6s"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_scja0"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_c01kk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2yjhf")
-}],
-"loop": true,
-"name": &"default",
-"speed": 2.0
-}]
+animations = []
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lmfc6"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_3q5va")
+"texture": ExtResource("4_5b41r")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_j7pas")
+"texture": ExtResource("5_6fl3y")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_8miqa")
+"texture": ExtResource("6_ii2p7")
 }],
 "loop": true,
 "name": &"default",
@@ -55,20 +35,19 @@ offsets = PackedFloat32Array(0, 0.12381, 0.290476, 0.452381, 0.652381, 0.819048,
 colors = PackedColorArray(1, 0, 0, 1, 1, 0.482353, 0.321569, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0.509804, 1, 0.529412, 0, 0.745098, 1, 1, 1, 1, 1)
 
 [node name="Egg" type="Node2D"]
-script = ExtResource("1_a30c6")
+script = ExtResource("1_3gale")
 set_wait = 3.0
 
 [node name="Yip" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("3_02c0x")
+stream = ExtResource("2_rsge0")
 
 [node name="eggSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
-visible = false
 position = Vector2(284, 386)
 scale = Vector2(5.135, 5.135)
 sprite_frames = SubResource("SpriteFrames_scja0")
-frame_progress = 0.637645
+animation = &""
 
 [node name="lilGuy" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
@@ -81,6 +60,7 @@ frame_progress = 0.215938
 
 [node name="startGame" type="Timer" parent="."]
 unique_name_in_owner = true
+wait_time = 2.0
 one_shot = true
 
 [node name="eggTimer" type="Timer" parent="."]
@@ -93,11 +73,11 @@ autostart = true
 [node name="UiGreen" type="Sprite2D" parent="."]
 position = Vector2(271.5, 339.5)
 scale = Vector2(0.499074, 0.502963)
-texture = ExtResource("7_f40bd")
+texture = ExtResource("7_umgic")
 
 [node name="Confetti" type="Node2D" parent="."]
 unique_name_in_owner = true
-script = ExtResource("8_f4asa")
+script = ExtResource("8_psxin")
 
 [node name="ConfetL" type="CPUParticles2D" parent="Confetti"]
 position = Vector2(92, 555)
@@ -141,4 +121,4 @@ hue_variation_max = 1.0
 
 [node name="crack" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("9_yf6ba")
+stream = ExtResource("9_iuv6s")
