@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bqvsm2yjsujh6"]
 
-[ext_resource type="Script" path="res://scenes/zen_mode.gd" id="1_rdemh"]
-[ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="3_j8eii"]
+[ext_resource type="Script" path="res://scripts/zen_mode.gd" id="1_kb7c0"]
+[ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="2_s7g67"]
 
 [sub_resource type="Gradient" id="Gradient_5hppj"]
 offsets = PackedFloat32Array(0, 0.91623)
@@ -34,14 +34,14 @@ texture = SubResource("GradientTexture2D_dq5kv")
 
 [node name="GameLogic" type="Node" parent="."]
 unique_name_in_owner = true
-script = ExtResource("1_rdemh")
+script = ExtResource("1_kb7c0")
 
 [node name="CloseBtn" type="Button" parent="."]
 offset_left = 78.0
 offset_top = 141.0
 offset_right = 179.0
 offset_bottom = 184.0
-theme = ExtResource("3_j8eii")
+theme = ExtResource("2_s7g67")
 text = "Stop"
 script = SubResource("GDScript_a14sq")
 
