@@ -18,7 +18,7 @@ const TET_NORMALS = {
 	ALLOWED_TETS[1]: {0: "1000", 1: "0001", 2: "0100", 3: "0010", ROT: 90},
 	ALLOWED_TETS[2]: {0: "1200", 1: "0021", ROT: SWITCH},
 	ALLOWED_TETS[3]: {0: "1000", 1: "0010", ROT: -90},
-	ALLOWED_TETS[4]: {0: "1000", 1: "0010", ROT: 90},
+	ALLOWED_TETS[4]: {0: "1000", 1: "0010", ROT: -90},
 	ALLOWED_TETS[5]: {0: "0000", ROT: 0},
 	ALLOWED_TETS[6]: {0: "1000", 1: "0001", 2: "0100", 3: "0010", ROT: 90}
 }
@@ -51,11 +51,18 @@ func get_clipped_pos() -> Vector2:
 	))
 
 func get_all_pos_bounds():
-	# rotate each point by rotation_degrees around 0, 0 to correct rotated positions >:)
+	# rotate each shapes position by rotation_degrees around 0, 0 to get correct position
+	var rotate = func(point: Vector2, degrees) -> Vector2:
+		var radians = degrees * (PI / 180)
+		var out = Vector2(point)
+		out.x = cos(radians) * point.x - sin(radians) * point.y
+		out.y = sin(radians) * point.x + cos(radians) * point.y
+		return out
+	
 	var p = []
 	for shape: CollisionShape2D in collision_area.get_children():
 		if !shape.disabled:
-			p.append(Vector2(base_pos + relative_pos + shape.position))
+			p.append(Vector2(base_pos + relative_pos + rotate.call(shape.position, collision_area.rotation_degrees)))
 	return p
 
 func set_anim(anim):

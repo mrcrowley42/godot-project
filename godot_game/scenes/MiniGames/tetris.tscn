@@ -62,7 +62,7 @@ script = ExtResource("1_o7o8x")
 
 [node name="GravityTicker" type="Timer" parent="."]
 unique_name_in_owner = true
-wait_time = 0.1
+wait_time = 0.5
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 10
@@ -127,43 +127,43 @@ disable_mode = 2
 script = ExtResource("6_43m2v")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Ground"]
-position = Vector2(135, 652)
+position = Vector2(135, 382)
 shape = SubResource("RectangleShape2D_wbp70")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="UI/Ground"]
-position = Vector2(315, 652)
+position = Vector2(315, 382)
 shape = SubResource("RectangleShape2D_wbp70")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="UI/Ground"]
-position = Vector2(285, 652)
+position = Vector2(285, 382)
 shape = SubResource("RectangleShape2D_wbp70")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="UI/Ground"]
-position = Vector2(225, 652)
+position = Vector2(225, 382)
 shape = SubResource("RectangleShape2D_wbp70")
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="UI/Ground"]
-position = Vector2(255, 652)
+position = Vector2(255, 382)
 shape = SubResource("RectangleShape2D_wbp70")
 
 [node name="CollisionShape2D6" type="CollisionShape2D" parent="UI/Ground"]
-position = Vector2(195, 652)
+position = Vector2(195, 382)
 shape = SubResource("RectangleShape2D_wbp70")
 
 [node name="CollisionShape2D7" type="CollisionShape2D" parent="UI/Ground"]
-position = Vector2(165, 652)
+position = Vector2(165, 382)
 shape = SubResource("RectangleShape2D_wbp70")
 
 [node name="CollisionShape2D8" type="CollisionShape2D" parent="UI/Ground"]
-position = Vector2(345, 652)
+position = Vector2(345, 382)
 shape = SubResource("RectangleShape2D_wbp70")
 
 [node name="CollisionShape2D9" type="CollisionShape2D" parent="UI/Ground"]
-position = Vector2(405, 652)
+position = Vector2(405, 382)
 shape = SubResource("RectangleShape2D_wbp70")
 
 [node name="CollisionShape2D10" type="CollisionShape2D" parent="UI/Ground"]
-position = Vector2(375, 652)
+position = Vector2(375, 382)
 shape = SubResource("RectangleShape2D_wbp70")
 
 [connection signal="timeout" from="GravityTicker" to="." method="_on_gravity_ticker_timeout"]

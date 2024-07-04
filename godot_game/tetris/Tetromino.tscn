@@ -221,7 +221,7 @@ layer = 11
 
 [node name="Body" type="AnimatedSprite2D" parent="CanvasLayer"]
 sprite_frames = SubResource("SpriteFrames_udxdd")
-animation = &"l_a"
+animation = &"skew_b"
 script = ExtResource("21_uh3hb")
 
 [node name="l_a" type="Area2D" parent="CanvasLayer/Body"]
@@ -266,6 +266,7 @@ position = Vector2(30, 0)
 shape = SubResource("RectangleShape2D_de3ou")
 
 [node name="long" type="Area2D" parent="CanvasLayer/Body"]
+visible = false
 monitoring = false
 monitorable = false
 
