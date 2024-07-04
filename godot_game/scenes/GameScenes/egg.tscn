@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bl22rtkqnj1s7"]
+[gd_scene load_steps=17 format=3 uid="uid://bl22rtkqnj1s7"]
 
 [ext_resource type="Script" path="res://scripts/MainGameScripts/EggScene/egg.gd" id="1_3gale"]
 [ext_resource type="AudioStream" uid="uid://8ifwm2tjitur" path="res://sound_effects/yippee.mp3" id="2_rsge0"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://diwxdoruu1sob" path="res://images/creature_sprites/little-guy_3.png" id="6_ii2p7"]
 [ext_resource type="Script" path="res://scripts/MainGameScripts/EggScene/party.gd" id="8_psxin"]
 [ext_resource type="AudioStream" uid="uid://dnau787og6qky" path="res://sound_effects/EggCrack.wav" id="9_iuv6s"]
+[ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="12_w52uh"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_scja0"]
 animations = [{
@@ -53,6 +54,13 @@ animations = [{
 interpolation_mode = 1
 offsets = PackedFloat32Array(0, 0.12381, 0.290476, 0.452381, 0.652381, 0.819048, 1)
 colors = PackedColorArray(1, 0, 0, 1, 1, 0.482353, 0.321569, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0.509804, 1, 0.529412, 0, 0.745098, 1, 1, 1, 1, 1)
+
+[sub_resource type="GDScript" id="GDScript_bccnn"]
+script/source = "extends Button
+
+func _on_button_down():
+	get_tree().change_scene_to_file(\"res://scenes/GameScenes/prototype.tscn\")
+"
 
 [node name="Egg" type="Node2D"]
 script = ExtResource("1_3gale")
@@ -139,3 +147,15 @@ hue_variation_max = 1.0
 [node name="Crack" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("9_iuv6s")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 181.0
+offset_top = 528.0
+offset_right = 359.0
+offset_bottom = 621.0
+theme = ExtResource("12_w52uh")
+theme_override_font_sizes/font_size = 32
+text = "SKIP"
+script = SubResource("GDScript_bccnn")
+
+[connection signal="button_down" from="Button" to="Button" method="_on_button_down"]
