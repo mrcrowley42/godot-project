@@ -23,7 +23,7 @@ func add_tet(piece):
 
 func _ready():
 	all_pieces.append(find_child("Ground"))
-	add_tet("l_a")
+	add_tet("long")
 	gravityTicker.start()
 
 func _on_gravity_ticker_timeout():
@@ -44,4 +44,4 @@ func _input(event):
 
 func active_tet_placed():
 	all_pieces.append(active_tet)
-	add_tet(get_rand_tet())
+	add_tet("long")

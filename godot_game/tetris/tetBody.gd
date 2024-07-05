@@ -50,7 +50,7 @@ func get_clipped_pos() -> Vector2:
 		get_normal(TOP) - get_normal(BOTTOM)
 	))
 
-func get_all_pos_bounds():
+func get_all_collision_pos():
 	# rotate each shapes position by rotation_degrees around 0, 0 to get correct position
 	var rotate = func(point: Vector2, degrees) -> Vector2:
 		var radians = degrees * (PI / 180)
@@ -113,6 +113,3 @@ func advance_frame():
 func rewind_frame():
 	frame -= 1 if frame > 0 else -get_frame_count()
 	update_collision()
-
-func is_colliding():
-	return collision_area.has_overlapping_areas()
