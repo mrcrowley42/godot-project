@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var base_tet = preload("res://tetris/Tetromino.tscn")
-@onready var gravity_ticker = %gravity_ticker
+@onready var gravity_ticker = %GravityTicker
 @onready var grid_bg = find_child("GridBG")
 
 var inputs_left = [KEY_A, KEY_LEFT]
