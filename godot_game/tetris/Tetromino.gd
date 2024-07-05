@@ -38,7 +38,7 @@ func init(piece: String, b_pos: Vector2, b_size: Vector2, previous_pieces):
 	body.set_anim(piece)
 	all_pieces = previous_pieces
 
-## performs wall-kick based on clipped size & clipped pos of tetmomino
+## performs wall-kick based on clipped size & clipped pos of tetmomino (returns whether a correction occurred)
 func x_wall_correction():
 	var clipped_pos = body.get_clipped_pos()
 	var left_limit = body.get_clipped_size().x / 2
@@ -47,8 +47,11 @@ func x_wall_correction():
 	
 	if left_limit > clipped_pos.x:
 		body.set_x(body.relative_pos.x + square_size.x if has_been_clipped else left_limit)
+		return true
 	elif right_limit < clipped_pos.x:
 		body.set_x(body.relative_pos.x - square_size.x if has_been_clipped else right_limit)
+		return true
+	return false
 
 ## avoid clipping other tetrominoes or the walls
 func general_correction():
@@ -61,21 +64,22 @@ func general_correction():
 			var other_coll = check_for_collision()
 			if other_coll and other_coll.x_direction == collision.x_direction:
 				body.add_x(square_size.x * collision.x_direction)
-		
-		x_wall_correction()  # tolerate tetromino clipping over wall clipping
-		if check_for_collision():  # if colliding again, block is being squashed horizontally, change y instead of x
-			y_correction(true)
-	else:
-		x_wall_correction()
+	
+	x_wall_correction()  # tolerate tetromino clipping over wall clipping
+	# if colliding again, block is being squashed horizontally, fix y instead of x
+	if check_for_collision():
+		y_correction(true)
+		y_corrections_left -= 1
+		skip_next_gravity = true
 
 ## avoid clipping into other resting tetrominoes (limits to 5 corrections / tet)
 ## WARNING: recursive function
 func y_correction(already_colliding=false):
-	if y_corrections_left > 0 and (already_colliding or check_for_collision()):
+	if already_colliding or check_for_collision():
 		body.add_y(-square_size.y)  # move up until no longer colliding
-		y_corrections_left -= 1
-		skip_next_gravity = true;
 		y_correction()
+	elif !already_colliding and y_corrections_left <= 0:
+		place_tet()  # too many y corrections, the player is abusing the system
 
 func place_tet():
 	resting = true
@@ -161,8 +165,8 @@ func _process(_delta):
 
 ## loop through all previous peices and check for an overlap. returns collision info or null
 func check_for_collision():
-	# godot's collision detection is stupid and allows a few frames to slip past before triggering a collision signal
-	# meaning the collision is out-of-date and draws the tet in the wrong position for a few microseconds
+	# godot's collision detection is stupid and allows a 1 frame to slip past before triggering a collision signal
+	# meaning the collision is 1) out-of-date and 2) draws the piece in the wrong position for 1 frame
 	# so i've resorted to making my own manual checks :pensive:
 	for pos in body.get_all_collision_points():
 		for other in all_pieces:

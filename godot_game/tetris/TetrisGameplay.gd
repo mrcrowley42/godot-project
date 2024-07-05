@@ -23,7 +23,7 @@ func activate_new_tet(piece):
 
 func _ready():
 	all_pieces.append(find_child("Ground"))
-	activate_new_tet("long")
+	activate_new_tet(get_random_tet())
 	gravity_ticker.start()
 
 func _input(event):
@@ -45,4 +45,4 @@ func _on_gravity_ticker_timeout():
 ## triggered when the active tetromino is placed
 func active_tet_placed():
 	all_pieces.append(active_tet)
-	activate_new_tet("long")
+	activate_new_tet(get_random_tet())

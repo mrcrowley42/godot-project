@@ -53,7 +53,7 @@ func get_clipped_pos() -> Vector2:
 ## returns with a list of (rotated) collision points for this tet
 func get_all_collision_points():
 	# rotate each shapes position by rotation_degrees around 0, 0 to get correct position
-	var rotate = func(point: Vector2, degrees) -> Vector2:
+	var rotate_point = func(point: Vector2, degrees) -> Vector2:
 		var radians = degrees * (PI / 180)
 		var out = Vector2(point)
 		out.x = cos(radians) * point.x - sin(radians) * point.y
@@ -63,7 +63,7 @@ func get_all_collision_points():
 	var points = []
 	for shape: CollisionShape2D in collision_area.get_children():
 		if !shape.disabled:
-			points.append(Vector2(base_pos + relative_pos + rotate.call(shape.position, collision_area.rotation_degrees)))
+			points.append(Vector2(base_pos + relative_pos + rotate_point.call(shape.position, collision_area.rotation_degrees)))
 	return points
 
 func set_anim(anim):
