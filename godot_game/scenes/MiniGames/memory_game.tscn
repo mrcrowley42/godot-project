@@ -105,6 +105,7 @@ script = SubResource("GDScript_a14sq")
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+bus = &"SFX"
 script = ExtResource("4_mndmj")
 
 [node name="Confetti" type="Node2D" parent="."]

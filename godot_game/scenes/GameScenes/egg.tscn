@@ -68,6 +68,7 @@ script = ExtResource("1_3gale")
 [node name="Yip" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("2_rsge0")
+bus = &"SFX"
 
 [node name="EggSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
@@ -148,6 +149,7 @@ hue_variation_max = 1.0
 [node name="Crack" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("9_iuv6s")
+bus = &"SFX"
 
 [node name="Button" type="Button" parent="."]
 offset_left = 181.0

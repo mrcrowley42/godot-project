@@ -1125,6 +1125,7 @@ bus = &"SFX"
 
 [node name="SFX" type="AudioStreamPlayer" parent="Audio"]
 unique_name_in_owner = true
+bus = &"SFX"
 script = ExtResource("68_sw7tx")
 
 [connection signal="visibility_changed" from="UI/ScreenControls/FoodControls" to="UI/ScreenControls/FoodControls" method="_on_visibility_changed"]
