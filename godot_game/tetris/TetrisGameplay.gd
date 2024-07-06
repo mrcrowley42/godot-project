@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var base_tet = preload("res://tetris/Tetromino.tscn")
 @onready var gravity_ticker = %GravityTicker
+@onready var quick_drop_ticker = find_child("QuickDropTicker")
 @onready var grid_bg = find_child("GridBG")
 
 var inputs_left = [KEY_A, KEY_LEFT]
@@ -67,6 +68,7 @@ func _ready():
 	activate_new_tet(allowed_pieces.pick_random())
 	generate_tet_queue()
 	gravity_ticker.start()
+	quick_drop_ticker.start()
 
 func _input(event):
 	# press once
@@ -75,9 +77,9 @@ func _input(event):
 	if event.is_action_pressed("tetris_rotate_counter_clockwise"):
 		active_tet.rotate_counter_clockwise()
 	if event.is_action_pressed("tetris_quick_drop"):
-		pass
+		is_quick_dropping = true
 	if event.is_action_released("tetris_quick_drop"):
-		pass
+		is_quick_dropping = false
 	if event.is_action_pressed("tetris_instant_drop"):
 		pass
 	if event.is_action_pressed("tetris_hold"):
@@ -91,7 +93,12 @@ func _input(event):
 			active_tet.move_right()
 
 func _on_gravity_ticker_timeout():
-	active_tet.gravity_tick()
+	if !is_quick_dropping:
+		active_tet.gravity_tick()
+
+func _on_quick_drop_timer_timeout():
+	if is_quick_dropping:
+		active_tet.gravity_tick()
 
 ## triggered when the active tetromino is placed
 func active_tet_placed():

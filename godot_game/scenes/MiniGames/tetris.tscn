@@ -40,7 +40,10 @@ script = ExtResource("1_urvp2")
 
 [node name="GravityTicker" type="Timer" parent="."]
 unique_name_in_owner = true
-wait_time = 0.2
+wait_time = 0.4
+
+[node name="QuickDropTicker" type="Timer" parent="."]
+wait_time = 0.05
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 10
@@ -133,4 +136,5 @@ position = Vector2(375, 652)
 shape = SubResource("RectangleShape2D_wbp70")
 
 [connection signal="timeout" from="GravityTicker" to="." method="_on_gravity_ticker_timeout"]
+[connection signal="timeout" from="QuickDropTicker" to="." method="_on_quick_drop_timer_timeout"]
 [connection signal="button_down" from="UI/Control/CloseBtn" to="UI/Control/CloseBtn" method="_on_button_down"]
