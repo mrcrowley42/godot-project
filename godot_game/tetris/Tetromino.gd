@@ -2,6 +2,8 @@ extends Node2D
 
 signal placed
 
+const HOLDING_SCALE = Vector2(0.5, 0.5)
+
 @onready var body = find_child("Body")
 
 var board_size: Vector2
@@ -37,6 +39,13 @@ func init(piece: String, b_pos: Vector2, b_size: Vector2, previous_pieces):
 	body.base_pos = b_pos
 	body.set_anim(piece)
 	all_pieces = previous_pieces
+
+func holding_tet(hold_pos: Vector2):
+	body.position = hold_pos
+	body.scale = HOLDING_SCALE
+
+func stop_holding_tet():
+	body.scale = Vector2(1, 1)
 
 ## performs wall-kick based on clipped size & clipped pos of tetmomino (returns whether a correction occurred)
 func x_wall_correction():
