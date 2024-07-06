@@ -4,7 +4,7 @@ extends Control
 @onready var UI = %UI_Overlay
 @onready var stat_man = %StatusManager
 @onready var music_track = %MainMusic
-@onready var screen_tint = %ScreenTint
+@onready var screen_tint = %BG
 @onready var minigame_man = %MinigameManager
 
 
@@ -33,7 +33,8 @@ func _on_anim_select_item_selected(index):
 
 
 func _on_overlay_strength_value_changed(value):
-	screen_tint.strength = value
+	screen_tint.material.set("shader_parameter/tint_strength", value)
+
 	
 
 func _on_color_picker_button_popup_closed():

@@ -1,10 +1,11 @@
-[gd_scene load_steps=92 format=3 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=95 format=3 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/prototype.gd" id="1_u8fgs"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_w1hur"]
 [ext_resource type="Script" path="res://scripts/SceneManager.gd" id="3_usdrn"]
+[ext_resource type="Shader" path="res://scenes/GameScenes/bg_tint.gdshader" id="4_8sx1k"]
 [ext_resource type="Texture2D" uid="uid://cdbor7hjfbusn" path="res://UI stuff/Universal/background.png" id="4_pmdaq"]
-[ext_resource type="PackedScene" uid="uid://bebjn5n2kjwgb" path="res://scenes/Creatures/creature.tscn" id="5_khxd0"]
+[ext_resource type="PackedScene" uid="uid://bebjn5n2kjwgb" path="res://scenes/creatures/creature.tscn" id="5_khxd0"]
 [ext_resource type="Shader" path="res://shaders/screen_tint.gdshader" id="6_yhapg"]
 [ext_resource type="Script" path="res://scripts/Confetti.gd" id="7_rqbrx"]
 [ext_resource type="Script" path="res://scripts/control_panel.gd" id="8_bgltf"]
@@ -68,6 +69,19 @@
 [ext_resource type="AudioStream" uid="uid://cx28efsxtr7c" path="res://sound_effects/button_click_fast.mp3" id="66_b3v7n"]
 [ext_resource type="AudioStream" uid="uid://dat0sfue6jjr5" path="res://sound_effects/metal-pipe-falling-sound-effect-made-with-Voicemod.mp3" id="67_p6vc6"]
 [ext_resource type="Script" path="res://scripts/memory_sfx_man.gd" id="68_sw7tx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_045wl"]
+shader = ExtResource("4_8sx1k")
+shader_parameter/tint_colour = Color(0.819608, 0.372549, 0.784314, 1)
+shader_parameter/tint_strength = 1.0
+
+[sub_resource type="GDScript" id="GDScript_axjpn"]
+script/source = "extends Sprite2D
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta):
+	material.set(\"shader_parameter/tint_colour\", %ScreenColours.color)
+"
 
 [sub_resource type="GDScript" id="GDScript_7ecg8"]
 script/source = "extends ColorRect
@@ -282,9 +296,12 @@ script = ExtResource("3_usdrn")
 [node name="Gameplay" type="Node2D" parent="."]
 
 [node name="BG" type="Sprite2D" parent="Gameplay"]
-position = Vector2(273, 337)
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_045wl")
+position = Vector2(270, 337)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_pmdaq")
+script = SubResource("GDScript_axjpn")
 metadata/_edit_lock_ = true
 
 [node name="Creature" parent="Gameplay" groups=["save_data"] instance=ExtResource("5_khxd0")]
@@ -315,6 +332,7 @@ metadata/_edit_lock_ = true
 
 [node name="ScreenTint" type="ColorRect" parent="Gameplay/ScreenShaders"]
 unique_name_in_owner = true
+visible = false
 material = SubResource("ShaderMaterial_igbp3")
 anchors_preset = 13
 anchor_left = 0.5
@@ -806,6 +824,7 @@ script = SubResource("GDScript_ao166")
 [node name="CreditsContainer" type="PanelContainer" parent="UI/OptionsContainer"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
