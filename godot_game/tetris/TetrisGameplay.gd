@@ -82,7 +82,7 @@ func _input(event):
 	if event.is_action_released("tetris_quick_drop"):
 		is_quick_dropping = false
 	if event.is_action_pressed("tetris_instant_drop"):
-		pass
+		active_tet.drop_to_ghost()
 	if event.is_action_pressed("tetris_hold"):
 		hold_active_tet()
 	

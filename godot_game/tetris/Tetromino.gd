@@ -54,7 +54,6 @@ func gravity_tick():
 		return
 	
 	body.add_y(SQUARE_SIZE.y)
-	update_ghost()
 	if check_for_collision():
 		body.add_y(-SQUARE_SIZE.y)  # revert gravity
 		place_tet()
@@ -150,6 +149,12 @@ func update_ghost():
 	while check_for_collision(ghost.offset.y) == null:
 		ghost.offset.y += SQUARE_SIZE.y
 	ghost.offset.y -= SQUARE_SIZE.y  # revert back up
+
+## instantly teleport tet to ghost's y position & place
+func drop_to_ghost():
+	update_ghost()  # sanity check the ghost
+	body.add_y(ghost.offset.y)
+	place_tet()
 
 func perform_linear_lerp(direction):
 	l_direction = direction
