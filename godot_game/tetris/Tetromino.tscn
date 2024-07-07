@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://3cn1hflukqt1"]
+[gd_scene load_steps=60 format=3 uid="uid://3cn1hflukqt1"]
 
 [ext_resource type="Script" path="res://tetris/Tetromino.gd" id="1_qheu4"]
 [ext_resource type="Texture2D" uid="uid://3d40sc2w7vyq" path="res://tetris/tetrominos/l_a_1.png" id="2_lviqe"]
@@ -21,6 +21,10 @@
 [ext_resource type="Texture2D" uid="uid://chqj82rvfw6bd" path="res://tetris/tetrominos/t_3.png" id="19_c15io"]
 [ext_resource type="Texture2D" uid="uid://cxlmmjyqk7gfh" path="res://tetris/tetrominos/t_4.png" id="20_nbx4w"]
 [ext_resource type="Script" path="res://tetris/tetBody.gd" id="21_uh3hb"]
+[ext_resource type="Texture2D" uid="uid://lff2bkyw17oq" path="res://tetris/tetrominos/ghost_l_a_1.png" id="22_8opdo"]
+[ext_resource type="Texture2D" uid="uid://cgmhrgpgo0v8o" path="res://tetris/tetrominos/ghost_l_a_2.png" id="23_8cjdh"]
+[ext_resource type="Texture2D" uid="uid://dvyrmbdcilc71" path="res://tetris/tetrominos/ghost_l_a_3.png" id="24_a8fg0"]
+[ext_resource type="Texture2D" uid="uid://bv2i6fcpa431m" path="res://tetris/tetrominos/ghost_l_a_4.png" id="25_8gk6f"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_udxdd"]
 animations = [{
@@ -213,6 +217,26 @@ size = Vector2(0, 0)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_awh6e"]
 size = Vector2(0, 0)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_3jfmm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("22_8opdo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_8cjdh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_a8fg0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_8gk6f")
+}],
+"loop": true,
+"name": &"l_a",
+"speed": 5.0
+}]
+
 [node name="Tetromino" type="Node2D"]
 script = ExtResource("1_qheu4")
 
@@ -221,7 +245,7 @@ layer = 11
 
 [node name="Body" type="AnimatedSprite2D" parent="CanvasLayer"]
 sprite_frames = SubResource("SpriteFrames_udxdd")
-animation = &"skew_b"
+animation = &"l_a"
 script = ExtResource("21_uh3hb")
 
 [node name="l_a" type="Area2D" parent="CanvasLayer/Body"]
@@ -386,5 +410,9 @@ shape = SubResource("RectangleShape2D_2wfxs")
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="CanvasLayer/Body/t"]
 position = Vector2(30, 0)
 shape = SubResource("RectangleShape2D_awh6e")
+
+[node name="Ghost" type="AnimatedSprite2D" parent="CanvasLayer"]
+sprite_frames = SubResource("SpriteFrames_3jfmm")
+animation = &"l_a"
 
 [connection signal="collided" from="CanvasLayer/Body" to="." method="_on_body_collided"]
