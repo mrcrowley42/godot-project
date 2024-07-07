@@ -39,20 +39,30 @@ script/source = "extends AnimatedSprite2D
 @export var enable_shake: bool
 @export var shake_amount: int
 @export var shake_rate: int
+@onready var shake_timer: Timer = Timer.new()
+
+var shake_count: int = 0
 func _ready():
 	if enable_shake:
-		var shake_timer = Timer.new()
-		shake_timer.autostart = true
+		shake_timer.autostart = false
 		shake_timer.wait_time = 1.0/shake_rate
 		add_child(shake_timer)
 		shake_timer.connect(\"timeout\", _on_shake_timer_timeout)
 	
 func shake():
 	position.x = init_pos.x + randi_range(-shake_amount,shake_amount)
-	position.y = init_pos.x + randi_range(-shake_amount,shake_amount)
+	position.y = init_pos.y + randi_range(-shake_amount/2,shake_amount/2)
 
 func _on_shake_timer_timeout():
 	shake()
+	
+func _on_frame_changed():
+	shake_count += 1
+	shake_amount += shake_amount/4
+	shake_timer.start()
+	await get_tree().create_timer(.3).timeout
+	shake_timer.stop()
+	position = init_pos
 "
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lmfc6"]
@@ -104,7 +114,7 @@ frame = 3
 frame_progress = 1.0
 script = SubResource("GDScript_31uq6")
 enable_shake = true
-shake_amount = 20
+shake_amount = 10
 shake_rate = 20
 
 [node name="LilGuy" type="AnimatedSprite2D" parent="."]
@@ -187,4 +197,5 @@ theme_override_font_sizes/font_size = 32
 text = "SKIP"
 script = SubResource("GDScript_bccnn")
 
+[connection signal="frame_changed" from="EggSprite" to="EggSprite" method="_on_frame_changed"]
 [connection signal="button_down" from="Button" to="Button" method="_on_button_down"]
