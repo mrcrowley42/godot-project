@@ -483,6 +483,7 @@ position = Vector2(30, 0)
 shape = SubResource("RectangleShape2D_awh6e")
 
 [node name="Ghost" type="AnimatedSprite2D" parent="CanvasLayer"]
+visible = false
 modulate = Color(1, 1, 1, 0.117647)
 sprite_frames = SubResource("SpriteFrames_3jfmm")
 animation = &"t"

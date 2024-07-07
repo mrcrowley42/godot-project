@@ -75,6 +75,7 @@ func set_anim(anim):
 
 func setup_ghost(ghost_node: AnimatedSprite2D):
 	ghost = ghost_node
+	ghost.visible = true
 	ghost.set_animation(animation)
 
 func set_x(x):

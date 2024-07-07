@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var base_tet = preload("res://tetris/Tetromino.tscn")
-@onready var gravity_ticker = %GravityTicker
+@onready var gravity_ticker = find_child("GravityTicker")
 @onready var quick_drop_ticker = find_child("QuickDropTicker")
 @onready var grid_bg = find_child("GridBG")
 @onready var hold_box = find_child("HoldBox")
@@ -21,10 +21,16 @@ var held_tet = null
 var can_hold = true
 var is_quick_dropping = false
 
+# UI QUEUE (non initialised pieces)
+var queued_1;  # save to free them later 
+var queued_2;
+
 func get_next_tet() -> String:
 	if len(tet_queue) < 4:
 		generate_tet_queue()
-	return tet_queue.pop_front()
+	var tet = tet_queue.pop_front()
+	update_ui_queue()
+	return tet
 
 ## add 2 * each piece to the end of the queue shuffled randomly (fisher-yates shuffle)
 func generate_tet_queue():
@@ -70,6 +76,7 @@ func _ready():
 	all_pieces.append(find_child("Ground"))
 	activate_new_tet(get_next_tet())
 	generate_tet_queue()
+	update_ui_queue()
 	gravity_ticker.start()
 	quick_drop_ticker.start()
 
@@ -108,3 +115,23 @@ func active_tet_placed():
 	all_pieces.append(active_tet)
 	activate_new_tet(get_next_tet())
 	can_hold = true
+
+func update_ui_queue():
+	if queued_1 != null and queued_2 != null:
+		queued_1.queue_free()
+		queued_2.queue_free()
+	
+	queued_1 = base_tet.instantiate()
+	queued_2 = base_tet.instantiate()
+	add_child(queued_1)
+	add_child(queued_2)
+	
+	queued_1.body.set_anim(tet_queue[0])
+	queued_2.body.set_anim(tet_queue[1])
+	var next_box_size = next_box.size * next_box.scale
+	var quater_size = Vector2(0, next_box_size.y / 4)
+	var next_box_middle = next_box.position - next_box_size / 2
+	queued_1.set_raw_position(next_box_middle - quater_size)
+	queued_2.set_raw_position(next_box_middle + quater_size)
+	queued_1.body.scale = queued_1.SMALL_SCALE
+	queued_2.body.scale = queued_2.SMALL_SCALE

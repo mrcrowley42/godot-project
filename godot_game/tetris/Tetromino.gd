@@ -2,13 +2,13 @@ extends Node2D
 
 signal placed
 
-const HOLDING_SCALE = Vector2(0.5, 0.5)
+const SMALL_SCALE = Vector2(0.5, 0.5)
 const SQUARE_SIZE: Vector2 = Vector2(30, 30)
 
 @onready var body = find_child("Body")
 @onready var ghost = find_child("Ghost")
 
-## PIECE STATES
+## TETROMINO STATES
 var board_size: Vector2
 var all_pieces = []
 var y_corrections_left: int = 5
@@ -86,14 +86,21 @@ func rotate_counter_clockwise():
 	update_ghost()
 	perform_angular_lerp(1)
 
+## alters the given position so the tet appears centered on it
+func centre_tet_on_position(pos: Vector2) -> Vector2:
+	return pos - (body.get_clipped_pos() - body.relative_pos) / 2
+
 func holding_tet(hold_pos: Vector2):
-	body.position = hold_pos - (body.get_clipped_pos() - body.relative_pos) / 2  # center the block based
-	body.scale = HOLDING_SCALE
+	body.position = centre_tet_on_position(hold_pos)
+	body.scale = SMALL_SCALE
 	ghost.visible = false
 
 func stop_holding_tet():
 	body.scale = Vector2(1, 1)
 	ghost.visible = true
+
+func set_raw_position(pos: Vector2):
+	body.position = centre_tet_on_position(pos)
 
 ## performs wall-kick based on clipped size & clipped pos of tetmomino (returns whether a correction occurred)
 func x_wall_correction():
@@ -132,8 +139,8 @@ func general_correction():
 ## avoid clipping into other resting tetrominoes (limits to 5 corrections / tet)
 ## WARNING: recursive function
 func y_correction(already_colliding=false):
-	# check only once if there is space below, and allow piece to slide in if there is
-	if already_colliding and check_for_collision(SQUARE_SIZE.y) == null:
+	# check only once if there is space below, and allow piece to slide in if there is space
+	if already_colliding and check_for_collision(int(SQUARE_SIZE.y)) == null:
 		body.add_y(SQUARE_SIZE.y)
 		return
 	

@@ -37,7 +37,6 @@ size = Vector2(30, 30)
 script = ExtResource("1_urvp2")
 
 [node name="GravityTicker" type="Timer" parent="."]
-unique_name_in_owner = true
 wait_time = 0.4
 
 [node name="QuickDropTicker" type="Timer" parent="."]
@@ -99,10 +98,11 @@ patch_margin_right = 16
 patch_margin_bottom = 16
 
 [node name="NextBox" type="NinePatchRect" parent="UI/Control"]
+layout_mode = 0
 offset_left = 525.0
-offset_top = 344.0
+offset_top = 314.0
 offset_right = 706.0
-offset_bottom = 706.0
+offset_bottom = 615.0
 rotation = 3.14159
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_t0r2e")
