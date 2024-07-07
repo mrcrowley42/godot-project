@@ -87,7 +87,7 @@ func rotate_counter_clockwise():
 	perform_angular_lerp(1)
 
 func holding_tet(hold_pos: Vector2):
-	body.position = hold_pos
+	body.position = hold_pos - (body.get_clipped_pos() - body.relative_pos) / 2  # center the block based
 	body.scale = HOLDING_SCALE
 	ghost.visible = false
 
@@ -133,7 +133,7 @@ func general_correction():
 ## WARNING: recursive function
 func y_correction(already_colliding=false):
 	# check only once if there is space below, and allow piece to slide in if there is
-	if already_colliding and !check_for_collision(SQUARE_SIZE.y):
+	if already_colliding and check_for_collision(SQUARE_SIZE.y) == null:
 		body.add_y(SQUARE_SIZE.y)
 		return
 	
@@ -146,7 +146,7 @@ func y_correction(already_colliding=false):
 func update_ghost():
 	ghost.position = body.position
 	ghost.offset.y = 0
-	while check_for_collision(ghost.offset.y) == null:
+	while !check_for_collision(ghost.offset.y):
 		ghost.offset.y += SQUARE_SIZE.y
 	ghost.offset.y -= SQUARE_SIZE.y  # revert back up
 
@@ -214,7 +214,7 @@ func check_for_collision(y_offset=0):
 					if !is_ground:  # generate collision info
 						c_info.incident_body = other
 						c_info.x_direction = int((body.relative_pos.x - other.body.relative_pos.x) > 0)
-						c_info.x_direction = (c_info.x_direction - 1) + c_info.x_direction
+						c_info.x_direction += c_info.x_direction - 1
 					return c_info
 	return null
 

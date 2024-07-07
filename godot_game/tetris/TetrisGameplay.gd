@@ -4,12 +4,13 @@ extends Node2D
 @onready var gravity_ticker = %GravityTicker
 @onready var quick_drop_ticker = find_child("QuickDropTicker")
 @onready var grid_bg = find_child("GridBG")
+@onready var hold_box = find_child("HoldBox")
+@onready var next_box = find_child("NextBox")
 
 const INPUTS_LEFT = [KEY_A, KEY_LEFT]
 const INPUTS_RIGHT = [KEY_D, KEY_RIGHT]
 
 const BOARD_SIZE: Vector2 = Vector2(300, 600)
-const HELD_TET_POSITION: Vector2 = Vector2(50, 50)
 const ALLOWED_PIECES = ['l_a', 'l_b', 'long', 'skew_a', 'skew_b', 'square', 't']
 
 # GAME STATES
@@ -61,7 +62,8 @@ func hold_active_tet():
 		else:
 			swapped_tet.stop_holding_tet()
 			activate_tet(swapped_tet)
-		held_tet.holding_tet(HELD_TET_POSITION)
+		var pos = hold_box.position - (hold_box.size * hold_box.scale) / 2
+		held_tet.holding_tet(pos)
 		can_hold = false
 
 func _ready():
