@@ -552,18 +552,45 @@ icon = ExtResource("20_feyvh")
 icon_alignment = 1
 expand_icon = true
 
-[node name="RightArrow" type="Sprite2D" parent="UI/ScreenControls/ActivityControls"]
-position = Vector2(400, 209.5)
-rotation = 3.14159
-scale = Vector2(1, 0.8)
-texture = ExtResource("21_b7eji")
-script = ExtResource("22_giyiw")
+[node name="NavigationArrows" type="Node2D" parent="UI/ScreenControls/ActivityControls"]
 
-[node name="LeftArrow" type="Sprite2D" parent="UI/ScreenControls/ActivityControls"]
-position = Vector2(0, 206.5)
-scale = Vector2(1, 0.8)
-texture = ExtResource("21_b7eji")
+[node name="LeftArrow" type="TextureButton" parent="UI/ScreenControls/ActivityControls/NavigationArrows"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 145.0
+offset_right = 28.0
+offset_bottom = 253.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(14, 54)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("21_b7eji")
 script = ExtResource("22_giyiw")
+metadata/_edit_use_anchors_ = true
+
+[node name="LeftArrow2" type="TextureButton" parent="UI/ScreenControls/ActivityControls/NavigationArrows"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 372.0
+offset_top = 145.0
+offset_right = 400.0
+offset_bottom = 253.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.14159
+pivot_offset = Vector2(14, 54)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("21_b7eji")
+script = ExtResource("22_giyiw")
+metadata/_edit_use_anchors_ = true
 
 [node name="OptionsContainer" type="Control" parent="UI"]
 layout_mode = 3
@@ -1158,6 +1185,8 @@ script = ExtResource("68_sw7tx")
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/Tetris" to="MinigameManager" method="_on_tetris_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/ZenMode" to="MinigameManager" method="_on_zen_mode_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
+[connection signal="button_down" from="UI/ScreenControls/ActivityControls/NavigationArrows/LeftArrow" to="UI/ScreenControls/ActivityControls/NavigationArrows/LeftArrow" method="_on_button_down"]
+[connection signal="button_down" from="UI/ScreenControls/ActivityControls/NavigationArrows/LeftArrow2" to="UI/ScreenControls/ActivityControls/NavigationArrows/LeftArrow2" method="_on_button_down"]
 [connection signal="pressed" from="UI/OptionsContainer/OptionsMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
 [connection signal="button_up" from="UI/OptionsContainer/OptionsMenu/SaveButtons/Cancel" to="UI/OptionsContainer/OptionsMenu/SaveButtons/Cancel" method="_on_button_up"]
 [connection signal="button_down" from="UI/OptionsContainer/OptionsMenu/ThemeControls/vHBoxContainer/Button2" to="UI/OptionsContainer/OptionsMenu/ThemeControls" method="_on_back_button_down"]
