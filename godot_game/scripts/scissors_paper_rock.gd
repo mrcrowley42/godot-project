@@ -25,7 +25,7 @@ func play(user_choice):
 #
 	if creature_choice == user_choice:
 		%GameStatus.text = 'Draw\nNeither wins'
-#
+		%SFX.play_sound("draw")
 	elif user_choice == 'rock' and creature_choice == 'scissors':
 		win()
 

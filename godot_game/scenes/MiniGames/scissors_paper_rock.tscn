@@ -131,6 +131,7 @@ script = SubResource("GDScript_oqggf")
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+bus = &"SFX"
 script = ExtResource("5_2p5xq")
 
 [connection signal="button_down" from="GameContainer/Node2D/Buttons/ScissorsBtn" to="GameLogic" method="_on_scissors_btn_button_down"]

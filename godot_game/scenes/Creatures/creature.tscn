@@ -175,6 +175,8 @@ sounds = Array[AudioStream]([ExtResource("16_2mdbn"), ExtResource("17_addty"), E
 
 [node name="LowStatSounds" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+volume_db = -2.0
+bus = &"SFX"
 script = ExtResource("25_1luyq")
 low_hunger = ExtResource("26_b0wvq")
 low_fun = ExtResource("27_uvaw6")

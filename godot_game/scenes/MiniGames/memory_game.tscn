@@ -103,10 +103,6 @@ theme = ExtResource("1_3y1y3")
 text = "Close"
 script = SubResource("GDScript_a14sq")
 
-[node name="SFX" type="AudioStreamPlayer" parent="."]
-unique_name_in_owner = true
-script = ExtResource("4_mndmj")
-
 [node name="Confetti" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("5_4pw2p")
@@ -150,5 +146,10 @@ scale_amount_max = 15.0
 color_initial_ramp = SubResource("Gradient_k8u3n")
 hue_variation_min = 1.0
 hue_variation_max = 1.0
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+bus = &"SFX"
+script = ExtResource("4_mndmj")
 
 [connection signal="button_down" from="CloseBtn" to="CloseBtn" method="_on_button_down"]
