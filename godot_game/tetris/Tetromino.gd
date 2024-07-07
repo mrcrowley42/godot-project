@@ -3,12 +3,14 @@ extends Node2D
 signal placed
 
 const HOLDING_SCALE = Vector2(0.5, 0.5)
+const SQUARE_SIZE: Vector2 = Vector2(30, 30)
 
 @onready var body = find_child("Body")
+@onready var ghost = find_child("Ghost")
 
+## PIECE STATES
 var board_size: Vector2
 var all_pieces = []
-var square_size: Vector2 = Vector2(30, 30)
 var y_corrections_left: int = 5
 var skip_next_gravity: bool = false
 var resting: bool = false
@@ -28,24 +30,71 @@ var a_end_time = null
 func snap_to_grid(vec: Vector2):
 	var top_left = vec - body.get_size() / 2
 	var remainder = Vector2(
-			int(top_left.x) % int(square_size.x), 
-			int(top_left.y) % int(square_size.y)
+			int(top_left.x) % int(SQUARE_SIZE.x), 
+			int(top_left.y) % int(SQUARE_SIZE.y)
 		)
 	body.set_pos(vec - remainder)
-	body.add_y(square_size.y * body.get_normal(body.BOTTOM))  # squash white space at bottom of image
+	body.add_y(SQUARE_SIZE.y * body.get_normal(body.BOTTOM))  # squash white space at bottom of image
 
 func init(piece: String, b_pos: Vector2, b_size: Vector2, previous_pieces):
 	board_size = b_size
 	body.base_pos = b_pos
 	body.set_anim(piece)
+	body.setup_ghost(ghost)
 	all_pieces = previous_pieces
+
+func place_tet():
+	resting = true
+	ghost.visible = false
+	placed.emit()
+
+func gravity_tick():
+	if skip_next_gravity:
+		skip_next_gravity = false
+		return
+	
+	body.add_y(SQUARE_SIZE.y)
+	update_ghost()
+	if check_for_collision():
+		body.add_y(-SQUARE_SIZE.y)  # revert gravity
+		place_tet()
+
+func move_left():
+	body.add_x(-SQUARE_SIZE.x)
+	if check_for_collision():
+		body.add_x(SQUARE_SIZE.x)
+	x_wall_correction()
+	update_ghost()
+	perform_linear_lerp(1)
+
+func move_right():
+	body.add_x(SQUARE_SIZE.x)
+	if check_for_collision():
+		body.add_x(-SQUARE_SIZE.x)
+	x_wall_correction()
+	update_ghost()
+	perform_linear_lerp(-1)
+
+func rotate_clockwise():
+	body.advance_frame()
+	general_correction()
+	update_ghost()
+	perform_angular_lerp(-1)
+
+func rotate_counter_clockwise():
+	body.rewind_frame()
+	general_correction()
+	update_ghost()
+	perform_angular_lerp(1)
 
 func holding_tet(hold_pos: Vector2):
 	body.position = hold_pos
 	body.scale = HOLDING_SCALE
+	ghost.visible = false
 
 func stop_holding_tet():
 	body.scale = Vector2(1, 1)
+	ghost.visible = true
 
 ## performs wall-kick based on clipped size & clipped pos of tetmomino (returns whether a correction occurred)
 func x_wall_correction():
@@ -55,10 +104,10 @@ func x_wall_correction():
 	var has_been_clipped = body.get_size().x / 2 != left_limit
 	
 	if left_limit > clipped_pos.x:
-		body.set_x(body.relative_pos.x + square_size.x if has_been_clipped else left_limit)
+		body.set_x(body.relative_pos.x + SQUARE_SIZE.x if has_been_clipped else left_limit)
 		return true
 	elif right_limit < clipped_pos.x:
-		body.set_x(body.relative_pos.x - square_size.x if has_been_clipped else right_limit)
+		body.set_x(body.relative_pos.x - SQUARE_SIZE.x if has_been_clipped else right_limit)
 		return true
 	return false
 
@@ -66,13 +115,13 @@ func x_wall_correction():
 func general_correction():
 	var collision: CollisionInfo = check_for_collision()
 	if collision:
-		body.add_x(square_size.x * collision.x_direction)
+		body.add_x(SQUARE_SIZE.x * collision.x_direction)
 		
 		# special case for left side of long block: move again if still colliding in the same direction
 		if collision.x_direction > 0 and collision.incident_body.body.animation == "long":
 			var other_coll = check_for_collision()
 			if other_coll and other_coll.x_direction == collision.x_direction:
-				body.add_x(square_size.x * collision.x_direction)
+				body.add_x(SQUARE_SIZE.x * collision.x_direction)
 	
 	x_wall_correction()  # tolerate tetromino clipping over wall clipping
 	# if colliding again, block is being squashed horizontally, fix y instead of x
@@ -84,51 +133,23 @@ func general_correction():
 ## avoid clipping into other resting tetrominoes (limits to 5 corrections / tet)
 ## WARNING: recursive function
 func y_correction(already_colliding=false):
+	# check only once if there is space below, and allow piece to slide in if there is
+	if already_colliding and !check_for_collision(SQUARE_SIZE.y):
+		body.add_y(SQUARE_SIZE.y)
+		return
+	
 	if already_colliding or check_for_collision():
-		body.add_y(-square_size.y)  # move up until no longer colliding
+		body.add_y(-SQUARE_SIZE.y)  # move up until no longer colliding
 		y_correction()
 	elif !already_colliding and y_corrections_left <= 0:
 		place_tet()  # too many y corrections, the player is abusing the system
 
-func place_tet():
-	resting = true
-	placed.emit()
-
-func gravity_tick():
-	if skip_next_gravity:
-		skip_next_gravity = false
-		return
-	
-	body.add_y(square_size.y)
-	if check_for_collision():
-		body.add_y(-square_size.y)  # revert gravity
-		place_tet()
-
-func move_left():
-	body.add_x(-square_size.x)
-	if check_for_collision():
-		body.add_x(square_size.x)
-	
-	x_wall_correction()
-	perform_linear_lerp(1)
-
-func move_right():
-	body.add_x(square_size.x)
-	if check_for_collision():
-		body.add_x(-square_size.x)
-	
-	x_wall_correction()
-	perform_linear_lerp(-1)
-
-func rotate_clockwise():
-	body.advance_frame()
-	general_correction()
-	perform_angular_lerp(-1)
-
-func rotate_counter_clockwise():
-	body.rewind_frame()
-	general_correction()
-	perform_angular_lerp(1)
+func update_ghost():
+	ghost.position = body.position
+	ghost.offset.y = 0
+	while check_for_collision(ghost.offset.y) == null:
+		ghost.offset.y += SQUARE_SIZE.y
+	ghost.offset.y -= SQUARE_SIZE.y  # revert back up
 
 func perform_linear_lerp(direction):
 	l_direction = direction
@@ -173,11 +194,12 @@ func _process(_delta):
 		a_end_time = null
 
 ## loop through all previous peices and check for an overlap. returns collision info or null
-func check_for_collision():
+func check_for_collision(y_offset=0):
 	# godot's collision detection is stupid and allows a 1 frame to slip past before triggering a collision signal
 	# meaning the collision is 1) out-of-date and 2) draws the piece in the wrong position for 1 frame
 	# so i've resorted to making my own manual checks :pensive:
 	for pos in body.get_all_collision_points():
+		pos.y += y_offset
 		for other in all_pieces:
 			var is_ground = other.name == "Ground"
 			var points = other.get_all_positions() if is_ground else other.body.get_all_collision_points()

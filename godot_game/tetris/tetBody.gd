@@ -23,6 +23,7 @@ const TET_NORMALS = {
 	ALLOWED_TETS[6]: {0: "1000", 1: "0001", 2: "0100", 3: "0010", ROTATION: 90}
 }
 
+var ghost: AnimatedSprite2D;
 var base_pos: Vector2
 var relative_pos: Vector2 = Vector2(0, 0)
 var collision_area: Area2D;
@@ -72,6 +73,10 @@ func set_anim(anim):
 	collision_area = find_child(anim)
 	collision_area.visible = true
 
+func setup_ghost(ghost_node: AnimatedSprite2D):
+	ghost = ghost_node
+	ghost.set_animation(animation)
+
 func set_x(x):
 	set_pos(Vector2(x, relative_pos.y))
 
@@ -112,9 +117,11 @@ func get_frame_count() -> int:
 ## rotates body clockwise
 func advance_frame():
 	frame = (frame + 1) % get_frame_count()
+	ghost.frame = frame
 	update_collision()
 
 ## rotates body counter clockwise
 func rewind_frame():
 	frame -= 1 if frame > 0 else -get_frame_count()
+	ghost.frame = frame
 	update_collision()

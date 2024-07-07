@@ -5,15 +5,15 @@ extends Node2D
 @onready var quick_drop_ticker = find_child("QuickDropTicker")
 @onready var grid_bg = find_child("GridBG")
 
-var inputs_left = [KEY_A, KEY_LEFT]
-var inputs_right = [KEY_D, KEY_RIGHT]
+const INPUTS_LEFT = [KEY_A, KEY_LEFT]
+const INPUTS_RIGHT = [KEY_D, KEY_RIGHT]
 
-var board_size: Vector2 = Vector2(300, 600)
-var held_tet_position: Vector2 = Vector2(50, 50)
-var allowed_pieces = ['l_a', 'l_b', 'long', 'skew_a', 'skew_b', 'square', 't']
-var all_pieces = []
+const BOARD_SIZE: Vector2 = Vector2(300, 600)
+const HELD_TET_POSITION: Vector2 = Vector2(50, 50)
+const ALLOWED_PIECES = ['l_a', 'l_b', 'long', 'skew_a', 'skew_b', 'square', 't']
 
 # GAME STATES
+var all_pieces = []
 var tet_queue = []
 var active_tet = null
 var held_tet = null
@@ -29,7 +29,7 @@ func get_next_tet() -> String:
 func generate_tet_queue():
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
-	var pieces = allowed_pieces + allowed_pieces
+	var pieces = ALLOWED_PIECES + ALLOWED_PIECES
 	pieces.sort()
 	for i in len(pieces):
 		var j = rng.randi_range(i, len(pieces) - 1)
@@ -40,13 +40,14 @@ func generate_tet_queue():
 
 func activate_tet(tetromino):
 	active_tet = tetromino
-	active_tet.snap_to_grid(Vector2(board_size.x / 2, -active_tet.body.get_size().y / 2))  # middle top, just off screen
+	active_tet.snap_to_grid(Vector2(BOARD_SIZE.x / 2, -active_tet.body.get_size().y / 2))  # middle top, just off screen
+	active_tet.update_ghost()
 	active_tet.connect("placed", active_tet_placed)
 
 func activate_new_tet(piece):
 	var new_tet = base_tet.instantiate()
 	add_child(new_tet)
-	new_tet.init(piece, grid_bg.position, board_size, all_pieces)
+	new_tet.init(piece, grid_bg.position, BOARD_SIZE, all_pieces)
 	activate_tet(new_tet)
 
 ## hold active tet and spawn currently held piece or new piece
@@ -60,12 +61,12 @@ func hold_active_tet():
 		else:
 			swapped_tet.stop_holding_tet()
 			activate_tet(swapped_tet)
-		held_tet.holding_tet(held_tet_position)
+		held_tet.holding_tet(HELD_TET_POSITION)
 		can_hold = false
 
 func _ready():
 	all_pieces.append(find_child("Ground"))
-	activate_new_tet(allowed_pieces.pick_random())
+	activate_new_tet(get_next_tet())
 	generate_tet_queue()
 	gravity_ticker.start()
 	quick_drop_ticker.start()
@@ -87,9 +88,9 @@ func _input(event):
 	
 	# hold-able
 	if (event is InputEventKey) and event.pressed:
-		if event.keycode in inputs_left:
+		if event.keycode in INPUTS_LEFT:
 			active_tet.move_left()
-		if event.keycode in inputs_right:
+		if event.keycode in INPUTS_RIGHT:
 			active_tet.move_right()
 
 func _on_gravity_ticker_timeout():
@@ -103,5 +104,5 @@ func _on_quick_drop_timer_timeout():
 ## triggered when the active tetromino is placed
 func active_tet_placed():
 	all_pieces.append(active_tet)
-	activate_new_tet(allowed_pieces.pick_random())
+	activate_new_tet(get_next_tet())
 	can_hold = true
