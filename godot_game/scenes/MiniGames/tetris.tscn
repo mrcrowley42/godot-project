@@ -5,7 +5,7 @@
 [ext_resource type="Shader" path="res://shaders/grid.gdshader" id="2_0hqmj"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="2_t4frc"]
 [ext_resource type="Script" path="res://scripts/tetrisGridBG.gd" id="3_r7ui3"]
-[ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="6_t0r2e"]
+[ext_resource type="Texture2D" path="res://UI stuff/Green Palette/ui_green_box.png" id="6_t0r2e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_adq1g"]
 shader = ExtResource("2_0hqmj")
@@ -69,8 +69,17 @@ offset_bottom = 637.0
 color = Color(0, 0, 0, 1)
 script = ExtResource("3_r7ui3")
 
-[node name="CloseBtn" type="Button" parent="UI/Control"]
-layout_mode = 0
+[node name="TopOverlay" type="CanvasLayer" parent="UI/Control"]
+layer = 12
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/Control/TopOverlay"]
+position = Vector2(270, 18)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_ad86f")
+region_enabled = true
+region_rect = Rect2(0, 0, 1080, 75)
+
+[node name="CloseBtn" type="Button" parent="UI/Control/TopOverlay"]
 offset_left = 506.0
 offset_top = 17.0
 offset_right = 522.0
@@ -78,9 +87,6 @@ offset_bottom = 38.0
 theme = ExtResource("2_t4frc")
 text = "X"
 script = SubResource("GDScript_v26rg")
-
-[node name="TopOverlay" type="CanvasLayer" parent="UI/Control"]
-layer = 12
 
 [node name="HoldBox" type="NinePatchRect" parent="UI/Control"]
 layout_mode = 0
@@ -96,6 +102,14 @@ patch_margin_top = 16
 patch_margin_right = 16
 patch_margin_bottom = 16
 
+[node name="ColorRect" type="ColorRect" parent="UI/Control/HoldBox"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 165.0
+offset_bottom = 165.0
+color = Color(0, 0, 0, 0.313726)
+
 [node name="NextBox" type="NinePatchRect" parent="UI/Control"]
 layout_mode = 0
 offset_left = 525.0
@@ -109,6 +123,14 @@ patch_margin_left = 16
 patch_margin_top = 16
 patch_margin_right = 16
 patch_margin_bottom = 16
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/NextBox"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 165.0
+offset_bottom = 285.0
+color = Color(0, 0, 0, 0.313726)
 
 [node name="Ground" type="Area2D" parent="UI"]
 disable_mode = 2
@@ -155,4 +177,4 @@ shape = SubResource("RectangleShape2D_wbp70")
 
 [connection signal="timeout" from="GravityTicker" to="." method="_on_gravity_ticker_timeout"]
 [connection signal="timeout" from="QuickDropTicker" to="." method="_on_quick_drop_timer_timeout"]
-[connection signal="button_down" from="UI/Control/CloseBtn" to="UI/Control/CloseBtn" method="_on_button_down"]
+[connection signal="button_down" from="UI/Control/TopOverlay/CloseBtn" to="UI/Control/TopOverlay/CloseBtn" method="_on_button_down"]
