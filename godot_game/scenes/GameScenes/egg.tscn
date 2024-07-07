@@ -54,11 +54,10 @@ script/source = "extends AnimatedSprite2D
 
 var shake_count: int = 0
 func _ready():
-	if enable_shake:
-		shake_timer.autostart = false
-		shake_timer.wait_time = 1.0/shake_rate
-		add_child(shake_timer)
-		shake_timer.connect(\"timeout\", _on_shake_timer_timeout)
+	shake_timer.autostart = false
+	shake_timer.wait_time = 1.0/shake_rate
+	add_child(shake_timer)
+	shake_timer.connect(\"timeout\", _on_shake_timer_timeout)
 	
 func shake():
 	position.x = init_pos.x + randi_range(-shake_amount,shake_amount)
@@ -66,9 +65,12 @@ func shake():
 	position.y = init_pos.y + randi_range(-roundi(shake_amount/2.0),roundi(shake_amount/2.0))
 
 func _on_shake_timer_timeout():
-	shake()
+	if enable_shake:
+		shake()
 	
 func _on_frame_changed():
+	if shake_count == 1:
+		%Crack.play()
 	shake_count += 1
 	shake_amount += roundi(shake_amount/4.0)
 	shake_timer.start()
@@ -147,6 +149,7 @@ shake_rate = 20
 
 [node name="LilGuy" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
+visible = false
 position = Vector2(266, 319)
 scale = Vector2(0.215, 0.215)
 sprite_frames = SubResource("SpriteFrames_lmfc6")

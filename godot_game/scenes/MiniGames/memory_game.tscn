@@ -6,12 +6,12 @@
 [ext_resource type="Script" path="res://scripts/memory_sfx_man.gd" id="4_mndmj"]
 [ext_resource type="Script" path="res://scripts/MainGameScripts/EggScene/party.gd" id="5_4pw2p"]
 
-[sub_resource type="Gradient" id="Gradient_5hppj"]
+[sub_resource type="Gradient" id="Gradient_ai7nj"]
 interpolation_mode = 2
 colors = PackedColorArray(0, 0.576471, 0, 1, 0.0369, 0.329162, 0.41, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_dq5kv"]
-gradient = SubResource("Gradient_5hppj")
+gradient = SubResource("Gradient_ai7nj")
 width = 432
 height = 432
 fill_from = Vector2(0.538462, 0)
