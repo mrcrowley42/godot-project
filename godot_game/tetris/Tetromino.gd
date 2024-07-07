@@ -99,10 +99,11 @@ func stop_holding_tet():
 	body.scale = Vector2(1, 1)
 	ghost.visible = true
 
+## used for only UI elements
 func set_raw_position(pos: Vector2):
 	body.position = centre_tet_on_position(pos)
 
-## performs wall-kick based on clipped size & clipped pos of tetmomino (returns whether a correction occurred)
+## performs wall-kick based on clipped size & clipped pos of tetmomino
 func x_wall_correction():
 	var clipped_pos = body.get_clipped_pos()
 	var left_limit = body.get_clipped_size().x / 2
@@ -111,11 +112,8 @@ func x_wall_correction():
 	
 	if left_limit > clipped_pos.x:
 		body.set_x(body.relative_pos.x + SQUARE_SIZE.x if has_been_clipped else left_limit)
-		return true
 	elif right_limit < clipped_pos.x:
 		body.set_x(body.relative_pos.x - SQUARE_SIZE.x if has_been_clipped else right_limit)
-		return true
-	return false
 
 ## avoid clipping other tetrominoes or the walls
 func general_correction():
@@ -139,7 +137,7 @@ func general_correction():
 ## avoid clipping into other resting tetrominoes (limits to 5 corrections / tet)
 ## WARNING: recursive function
 func y_correction(already_colliding=false):
-	# check only once if there is space below, and allow piece to slide in if there is space
+	# check ONLY once if there is space below, and allow piece to slide in if there is space
 	if already_colliding and check_for_collision(int(SQUARE_SIZE.y)) == null:
 		body.add_y(SQUARE_SIZE.y)
 		return
@@ -176,7 +174,7 @@ func perform_angular_lerp(direction):
 	a_end_time = a_start_time + LERP_TIME
 
 ## returns whether lerp progressed
-func advance_lerp(s_time, e_time, direction, start, on_offset=false) -> bool:
+func advance_lerp(s_time, e_time, direction, start, lerp_offset=false) -> bool:
 	if s_time != null:
 		var t = Time.get_unix_time_from_system()
 		var perc = (t - s_time) / (e_time - s_time)
@@ -184,7 +182,7 @@ func advance_lerp(s_time, e_time, direction, start, on_offset=false) -> bool:
 			return false
 		var sub = start * perc
 		sub = sub if direction > 0 else -sub
-		if on_offset:
+		if lerp_offset:
 			body.set_x_offset((start * direction) - sub)
 		else:
 			body.set_angle((start * direction) - sub)
@@ -205,23 +203,30 @@ func _process(_delta):
 		a_start_time = null
 		a_end_time = null
 
+func get_all_ground_positions(ground):
+	var points = []
+	for shape: CollisionShape2D in ground.get_children():
+		points.append(shape.position)
+	return points
+
 ## loop through all previous peices and check for an overlap. returns collision info or null
 func check_for_collision(y_offset=0):
 	# godot's collision detection is stupid and allows a 1 frame to slip past before triggering a collision signal
 	# meaning the collision is 1) out-of-date and 2) draws the piece in the wrong position for 1 frame
-	# so i've resorted to making my own manual checks :pensive:
+	# so collision checks need to be made manually
 	for pos in body.get_all_collision_points():
 		pos.y += y_offset
 		for other in all_pieces:
 			var is_ground = other.name == "Ground"
-			var points = other.get_all_positions() if is_ground else other.body.get_all_collision_points()
+			var points = get_all_ground_positions(other) if is_ground else other.body.get_all_collision_points()
+			
 			for other_pos in points:
 				if pos == other_pos:  # a collision hath occurred!
 					var c_info: CollisionInfo = CollisionInfo.new()
 					if !is_ground:  # generate collision info
 						c_info.incident_body = other
 						c_info.x_direction = int((body.relative_pos.x - other.body.relative_pos.x) > 0)
-						c_info.x_direction += c_info.x_direction - 1
+						c_info.x_direction += c_info.x_direction - 1  # converts to -1 or 1
 					return c_info
 	return null
 

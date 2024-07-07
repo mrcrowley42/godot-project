@@ -16,7 +16,7 @@ const ALLOWED_PIECES = ['l_a', 'l_b', 'long', 'skew_a', 'skew_b', 'square', 't']
 # GAME STATES
 var all_pieces = []
 var tet_queue = []
-var active_tet = null
+var active_tet = null  # Tetromino
 var held_tet = null
 var can_hold = true
 var is_quick_dropping = false

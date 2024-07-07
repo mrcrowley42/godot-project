@@ -1,11 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://c5dr54dk0502t"]
+[gd_scene load_steps=10 format=3 uid="uid://c5dr54dk0502t"]
 
 [ext_resource type="Texture2D" uid="uid://cgfufcnmd24wf" path="res://UI stuff/Green Palette/ui_green_tetris.png" id="1_ad86f"]
 [ext_resource type="Script" path="res://tetris/TetrisGameplay.gd" id="1_urvp2"]
 [ext_resource type="Shader" path="res://shaders/grid.gdshader" id="2_0hqmj"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="2_t4frc"]
 [ext_resource type="Script" path="res://scripts/tetrisGridBG.gd" id="3_r7ui3"]
-[ext_resource type="Script" path="res://tetris/tetrisGround.gd" id="6_43m2v"]
 [ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="6_t0r2e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_adq1g"]
@@ -113,7 +112,6 @@ patch_margin_bottom = 16
 
 [node name="Ground" type="Area2D" parent="UI"]
 disable_mode = 2
-script = ExtResource("6_43m2v")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Ground"]
 position = Vector2(135, 652)
