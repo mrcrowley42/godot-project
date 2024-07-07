@@ -11,7 +11,6 @@ func _enter_tree():
 func _ready():
 	cracker.timeout.connect(func():
 		print("done")
-		%Crack.play()
 		%Yip.play()
 		%EggSprite.visible = false
 		%LilGuy.visible = true

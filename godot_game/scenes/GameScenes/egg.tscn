@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bl22rtkqnj1s7"]
+[gd_scene load_steps=20 format=3 uid="uid://bl22rtkqnj1s7"]
 
 [ext_resource type="Script" path="res://scripts/MainGameScripts/EggScene/egg.gd" id="1_3gale"]
 [ext_resource type="AudioStream" uid="uid://8ifwm2tjitur" path="res://sound_effects/yippee.mp3" id="2_rsge0"]
@@ -12,6 +12,17 @@
 [ext_resource type="Script" path="res://scripts/MainGameScripts/EggScene/party.gd" id="8_psxin"]
 [ext_resource type="AudioStream" uid="uid://dnau787og6qky" path="res://sound_effects/EggCrack.wav" id="9_iuv6s"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="12_w52uh"]
+
+[sub_resource type="Gradient" id="Gradient_5hppj"]
+interpolation_mode = 2
+colors = PackedColorArray(0.658824, 0.435294, 0.423529, 1, 0.72, 0.72, 0.2088, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xu33w"]
+gradient = SubResource("Gradient_5hppj")
+width = 432
+height = 432
+fill_from = Vector2(0.0457317, 0.0670732)
+fill_to = Vector2(0, 1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_scja0"]
 animations = [{
@@ -39,20 +50,34 @@ script/source = "extends AnimatedSprite2D
 @export var enable_shake: bool
 @export var shake_amount: int
 @export var shake_rate: int
+@onready var shake_timer: Timer = Timer.new()
+
+var shake_count: int = 0
 func _ready():
-	if enable_shake:
-		var shake_timer = Timer.new()
-		shake_timer.autostart = true
-		shake_timer.wait_time = 1.0/shake_rate
-		add_child(shake_timer)
-		shake_timer.connect(\"timeout\", _on_shake_timer_timeout)
+	shake_timer.autostart = false
+	shake_timer.wait_time = 1.0/shake_rate
+	add_child(shake_timer)
+	shake_timer.connect(\"timeout\", _on_shake_timer_timeout)
 	
 func shake():
 	position.x = init_pos.x + randi_range(-shake_amount,shake_amount)
-	position.y = init_pos.x + randi_range(-shake_amount,shake_amount)
+	rotation_degrees +=  randi_range(-roundi(shake_amount/6.0),roundi(shake_amount/6.0))
+	position.y = init_pos.y + randi_range(-roundi(shake_amount/2.0),roundi(shake_amount/2.0))
 
 func _on_shake_timer_timeout():
-	shake()
+	if enable_shake:
+		shake()
+	
+func _on_frame_changed():
+	if shake_count == 1:
+		%Crack.play()
+	shake_count += 1
+	shake_amount += roundi(shake_amount/4.0)
+	shake_timer.start()
+	await get_tree().create_timer(.3).timeout
+	shake_timer.stop()
+	position = init_pos
+	rotation_degrees = 0
 "
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lmfc6"]
@@ -87,6 +112,20 @@ func _on_button_down():
 [node name="Egg" type="Node2D"]
 script = ExtResource("1_3gale")
 
+[node name="BG" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(434, 434)
+offset_right = 540.0
+offset_bottom = 675.0
+size_flags_vertical = 6
+color = Color(0.7, 0.091, 0.2534, 1)
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.439216)
+offset_right = 540.0
+offset_bottom = 675.0
+texture = SubResource("GradientTexture2D_xu33w")
+
 [node name="Yip" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("2_rsge0")
@@ -95,22 +134,23 @@ bus = &"SFX"
 [node name="EggSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 texture_filter = 1
-position = Vector2(274, 356)
+position = Vector2(275, 437)
 scale = Vector2(3, 2)
 sprite_frames = SubResource("SpriteFrames_scja0")
 animation = &"EggTime"
 autoplay = "EggTime"
 frame = 3
 frame_progress = 1.0
+offset = Vector2(-0.333336, -56.5)
 script = SubResource("GDScript_31uq6")
 enable_shake = true
-shake_amount = 20
+shake_amount = 10
 shake_rate = 20
 
 [node name="LilGuy" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 visible = false
-position = Vector2(266, 343)
+position = Vector2(266, 319)
 scale = Vector2(0.215, 0.215)
 sprite_frames = SubResource("SpriteFrames_lmfc6")
 autoplay = "default"
@@ -179,12 +219,13 @@ bus = &"SFX"
 
 [node name="Button" type="Button" parent="."]
 offset_left = 181.0
-offset_top = 528.0
+offset_top = 512.0
 offset_right = 359.0
-offset_bottom = 621.0
+offset_bottom = 605.0
 theme = ExtResource("12_w52uh")
 theme_override_font_sizes/font_size = 32
 text = "SKIP"
 script = SubResource("GDScript_bccnn")
 
+[connection signal="frame_changed" from="EggSprite" to="EggSprite" method="_on_frame_changed"]
 [connection signal="button_down" from="Button" to="Button" method="_on_button_down"]
