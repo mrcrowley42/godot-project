@@ -20,14 +20,14 @@ var active_tet: Tetromino = null  # Tetromino
 var held_tet: Tetromino = null
 var can_hold = true
 var is_quick_dropping = false
-var completing_lines: Array[int] = []  # lines that have been receognised as completed and are currently mid-animation
+var completing_lines: Array[float] = []  # lines that have been receognised as completed and are currently mid-animation
 
 # UI QUEUE (non initialised pieces)
 var queued_1: Tetromino;  # save to free them later 
 var queued_2: Tetromino;
 
 func get_next_piece() -> String:
-	return "l_a"
+	return "square"
 	if len(tet_queue) < 4:
 		generate_tet_queue()
 	var piece = tet_queue.pop_front()
@@ -157,7 +157,6 @@ func check_for_completed_lines():
 	sorted_keys.sort()
 	for y_pos in sorted_keys:  # from bottom up
 		var nodes_array: Array = lines_dict[y_pos]
-		print(y_pos, " ", len(nodes_array))
 		if y_pos not in completing_lines and len(nodes_array) >= 10:  # full line
 			completing_lines.append(y_pos)
 			
@@ -167,36 +166,51 @@ func check_for_completed_lines():
 			for cl: CompletedLine in newly_completed_lines:
 				if y_pos == cl.lowest_line_y + (30 * cl.lines_completed):
 					cl.lines_completed += 1
-					cl.add_nodes(nodes_array)
+					cl.add_nodes(nodes_array, y_pos)
 					added = true
 			if !added:
-				newly_completed_lines.append(CompletedLine.new(self, nodes_array))
-	print(newly_completed_lines)
+				newly_completed_lines.append(CompletedLine.new(self, nodes_array, y_pos))
 
 class CompletedLine:
-	var timer: Timer = Timer.new()
-	var timout_counter: int = 0
-	var nodes: Array = []  # nodes encompassed
+	var parent_node: Node2D
+	var timer: Timer
+	var timeout_counter: int = 0
+	var nodes: Array = []  # nodes encompassed in the line/s
 	var lines_completed: int = 1
+	var all_y_positions = []
 	var lowest_line_y
 	
-	func _init(parent: Node2D, initial_nodes: Array):
-		timer.wait_time = 0.5
-		timer.autostart = true
-		timer.connect("timeout", on_timeout)
-		add_nodes(initial_nodes)
-		parent.add_child(timer)
+	func _init(parent: Node2D, initial_nodes: Array, y_pos):
+		parent_node = parent
+		add_nodes(initial_nodes, y_pos)
+		timer = parent.add_cl_timer(self)
+		lowest_line_y = y_pos  # the one given in constructor will always be the lowest
 	
-	func add_nodes(nodes_list: Array):
+	func add_nodes(nodes_list: Array, y_pos):
+		all_y_positions.append(y_pos)
 		nodes += nodes_list
 	
 	func complete():
-		timer.disconnect("timrout", on_timeout)
-		timer.queue_free()
+		for y_pos in all_y_positions:
+			parent_node.completing_lines.erase(y_pos)
 		for node in nodes:
 			node.queue_free()  # outright deletion >:)
+		timer.queue_free()
 	
 	func on_timeout():
-		timout_counter += 1
-		if timout_counter > 6:
+		timeout_counter += 1
+		print(timeout_counter)
+		if timeout_counter > 6:
 			complete()
+
+## CompletedLine timer
+func add_cl_timer(cl: CompletedLine) -> Timer:
+	var on_timeout = func ():
+		cl.on_timeout()
+	
+	var t: Timer = Timer.new()
+	t.wait_time = 0.5
+	t.autostart = true
+	t.timeout.connect(on_timeout)
+	add_child(t)
+	return t

@@ -55,7 +55,10 @@ func get_clipped_pos() -> Vector2:
 
 ## converts all zeros to positive numbers
 func negative_zero_correction(vec: Vector2) -> Vector2:
-	return Vector2(vec.x if int(vec.x) != 0 else 0, vec.y if int(vec.y) != 0 else 0)
+	return Vector2(
+		vec.x if int(vec.x) != 0 else 0.0,
+		vec.y if int(vec.y) != 0 else 0.0
+	)
 
 ## rotate a position by rotation_degrees around 0, 0
 func rotate_point(point: Vector2) -> Vector2:
