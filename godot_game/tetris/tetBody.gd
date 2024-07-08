@@ -53,13 +53,17 @@ func get_clipped_pos() -> Vector2:
 		get_normal(TOP) - get_normal(BOTTOM)
 	))
 
+## converts all zeros to positive numbers
+func negative_zero_correction(vec: Vector2) -> Vector2:
+	return Vector2(vec.x if int(vec.x) != 0 else 0, vec.y if int(vec.y) != 0 else 0)
+
 ## rotate a position by rotation_degrees around 0, 0
 func rotate_point(point: Vector2) -> Vector2:
 	var radians = collision_area.rotation_degrees * (PI / 180)
 	var out = Vector2(point)
-	out.x = int(cos(radians) * point.x - sin(radians) * point.y)  # convert to int to avoid -0
-	out.y = int(sin(radians) * point.x + cos(radians) * point.y)
-	return out
+	out.x = cos(radians) * point.x - sin(radians) * point.y
+	out.y = sin(radians) * point.x + cos(radians) * point.y
+	return negative_zero_correction(out)
 
 ## returns with a list of (rotated) collision points for this tet
 func get_raw_collision_points():

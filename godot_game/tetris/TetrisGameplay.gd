@@ -156,8 +156,9 @@ func check_for_completed_lines():
 	var sorted_keys = lines_dict.keys()
 	sorted_keys.sort()
 	for y_pos in sorted_keys:  # from bottom up
-		print(y_pos, " ", len(lines_dict[y_pos]))
-		if y_pos not in completing_lines and len(lines_dict[y_pos]) >= 10:  # full line
+		var nodes_array: Array = lines_dict[y_pos]
+		print(y_pos, " ", len(nodes_array))
+		if y_pos not in completing_lines and len(nodes_array) >= 10:  # full line
 			completing_lines.append(y_pos)
 			
 			# if directly above a CompletedLine that has just been created, add a line to it, 
@@ -166,16 +167,16 @@ func check_for_completed_lines():
 			for cl: CompletedLine in newly_completed_lines:
 				if y_pos == cl.lowest_line_y + (30 * cl.lines_completed):
 					cl.lines_completed += 1
-					cl.add_nodes(lines_dict[y_pos])
+					cl.add_nodes(nodes_array)
 					added = true
 			if !added:
-				newly_completed_lines.append(CompletedLine.new(self, lines_dict[y_pos]))
+				newly_completed_lines.append(CompletedLine.new(self, nodes_array))
 	print(newly_completed_lines)
 
 class CompletedLine:
 	var timer: Timer = Timer.new()
 	var timout_counter: int = 0
-	var nodes: Array[CollisionShape2D] = []  # nodes encompassed
+	var nodes: Array = []  # nodes encompassed
 	var lines_completed: int = 1
 	var lowest_line_y
 	
@@ -186,7 +187,7 @@ class CompletedLine:
 		add_nodes(initial_nodes)
 		parent.add_child(timer)
 	
-	func add_nodes(nodes_list: Array[CollisionShape2D]):
+	func add_nodes(nodes_list: Array):
 		nodes += nodes_list
 	
 	func complete():
