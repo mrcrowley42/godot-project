@@ -1,4 +1,5 @@
 extends ProgressBar
+
 @onready var creature = %Creature
 
 func _ready():
@@ -7,4 +8,3 @@ func _ready():
 
 func update_mp_bar():
 	self.value = creature.mp
-

@@ -2,7 +2,6 @@
 
 extends Node
 @onready var og_text = %ScoreLabel.text
-@onready var game = self
 
 var selected_cards: Array[MemCard] = []
 var creature_score: int = 0
@@ -27,8 +26,6 @@ class MemCard extends Button:
 			text = hidden_value
 		elif text != "X":
 			text = "?"
-		
-
 
 func _process(_delta):
 	%ScoreLabel.text = og_text % [player_score, creature_score]
@@ -38,8 +35,7 @@ func _process(_delta):
 			%Confetti.confet()
 			complete = true
 
-
-func create_deck():
+func create_deck() -> Array:
 	var deck: Array = []
 	for i in range(10):
 		for j in range(2):
@@ -72,9 +68,5 @@ func choose_card(card):
 				item.flip_card()
 				item.disabled = false
 			%SFX.play_sound("wrong")
-
-			
-			
 			
 		selected_cards.clear()
-

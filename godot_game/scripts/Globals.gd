@@ -11,6 +11,5 @@ const DEFAULT_SECTION = "general"
 const AUDIO_SECTION = "audio"
 const UI_SECTION = "user interface"
 
-
 # CUSTOM NOTIFICATIONS
 const NOTIFICATION_MINIGAME_CLOSED = 500

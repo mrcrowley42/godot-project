@@ -2,10 +2,11 @@
 extends Node2D
 
 @onready var act_menu = %ActivityControls
-@onready var tetrisScene = preload("res://scenes/MiniGames/tetris.tscn")
-@onready var memoryGameScene = preload("res://scenes/MiniGames/memory_game.tscn")
-@onready var sprock_scene = preload("res://scenes/MiniGames/scissors_paper_rock.tscn")
-@onready var zen_mode_scene = preload("res://scenes/MiniGames/zen_mode.tscn")
+# Preload all the minigames.
+@onready var tetrisScene = preload ("res://scenes/MiniGames/tetris.tscn")
+@onready var memoryGameScene = preload ("res://scenes/MiniGames/memory_game.tscn")
+@onready var sprock_scene = preload ("res://scenes/MiniGames/scissors_paper_rock.tscn")
+@onready var zen_mode_scene = preload ("res://scenes/MiniGames/zen_mode.tscn")
 
 var current_minigame = null;
 var current_time_scale: float

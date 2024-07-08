@@ -35,12 +35,11 @@ func _ready():
 	new_timer(sp_rate, sp_timeout)
 	new_timer(ap_rate, ap_timeout)
 
-
 func hp_timeout():
 	creature.dmg(hp_amount * time_multiplier, 'hp')
 	
 func mp_timeout():
-	creature.dmg(mp_amount * time_multiplier , 'mp')
+	creature.dmg(mp_amount * time_multiplier, 'mp')
 
 func sp_timeout():
 	creature.dmg(sp_amount * time_multiplier, 'sp')

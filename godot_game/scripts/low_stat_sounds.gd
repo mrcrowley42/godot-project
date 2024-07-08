@@ -1,5 +1,4 @@
-extends AudioStreamPlayer
-class_name SfxManager
+class_name SfxManager extends AudioStreamPlayer
 ## A very basic sound effect manager.
 ## Attempts to stop sounds playing constantly and prevent race conditions.
 

@@ -6,7 +6,6 @@ const DATA = "data"
 const SAVE = "save"
 const LOAD = "load"
 
-
 func _ready():
 	load_data()
 	load_settings_data()
@@ -20,7 +19,6 @@ func _notification(noti):
 	if noti == NOTIFICATION_WM_CLOSE_REQUEST:
 		save_data()
 
-
 func save_data():
 	var save_file = FileAccess.open(Globals.SAVE_DATA_FILE, FileAccess.WRITE)
 	var save_nodes = get_tree().get_nodes_in_group(Globals.SAVE_DATA_GROUP)
@@ -31,7 +29,7 @@ func save_data():
 	
 	# save node data
 	for node in save_nodes:
-		if !node.has_method(SAVE):  # object doesnt have save() func
+		if !node.has_method(SAVE): # object doesnt have save() func
 			print("Node '%s' doesnt have a %s() function" % [node.name, SAVE])
 			continue
 		
@@ -44,13 +42,12 @@ func save_data():
 	var bytes_array: PackedByteArray = var_to_bytes(all_data)
 	save_file.store_var(bytes_array)
 
-
 func save_settings_data():
 	var config = ConfigFile.new()
 	var settings_nodes = get_tree().get_nodes_in_group(Globals.SAVE_SETTINGS_GROUP)
 	
 	for node in settings_nodes:
-		if !node.has_method(SAVE):  # object doesnt have save() func
+		if !node.has_method(SAVE): # object doesnt have save() func
 			print("Node '%s' doesnt have a %s() function" % [node.name, SAVE])
 			continue
 		
@@ -62,7 +59,6 @@ func save_settings_data():
 				config.set_value(section, key, data[key])
 		
 		config.save(Globals.SAVE_SETTINGS_FILE)
-
 
 func load_data():
 	if not FileAccess.file_exists(Globals.SAVE_DATA_FILE):
@@ -87,7 +83,6 @@ func load_data():
 		else:
 			print("ERROR: Node '%s' is null or doesnt have a %s() function" % [parsed_line[PATH], LOAD])
 
-
 func load_settings_data():
 	if not FileAccess.file_exists(Globals.SAVE_SETTINGS_FILE):
 		return
@@ -98,7 +93,7 @@ func load_settings_data():
 	var settings_nodes = get_tree().get_nodes_in_group(Globals.SAVE_SETTINGS_GROUP)
 	
 	for node in settings_nodes:
-		if  !node.has_method(SAVE) or !node.has_method(LOAD):  # object doesnt have save() func
+		if !node.has_method(SAVE) or !node.has_method(LOAD): # object doesnt have save() func
 			print("Node '%s' doesnt have a %s() or a %s() function/s" % [node.name, SAVE, LOAD])
 			continue
 		
@@ -111,13 +106,11 @@ func load_settings_data():
 				data_to_send[key] = config.get_value(section, key)
 		node.call(LOAD, data_to_send)
 
-
-func _input(event):
-	# close when `esc` key is pressed
+func _input(event) -> void:
+	# close when [param esc key] is pressed
 	if event.is_action_pressed("ui_cancel"):
 		get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
 		get_tree().quit()
-
 
 func _on_button_down():
 	pass # Replace with function body.

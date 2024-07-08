@@ -37,7 +37,6 @@ func play(user_choice):
 		
 	else: lose()
 
-
 func _on_scissors_btn_button_down():
 	play("scissors")
 

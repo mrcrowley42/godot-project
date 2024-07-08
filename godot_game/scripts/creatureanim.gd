@@ -1,4 +1,5 @@
 extends AnimatedSprite2D
+
 @onready var creature = $".."
 
 func _ready():

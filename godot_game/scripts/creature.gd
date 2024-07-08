@@ -11,6 +11,7 @@ class_name Creature
 @export var max_sp: float = 1000
 @export var max_ap: float = 1000
 
+
 var hp:float
 var mp:float
 var sp:float

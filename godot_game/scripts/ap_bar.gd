@@ -1,4 +1,5 @@
 extends ProgressBar
+
 @onready var creature = %Creature
 
 func _ready():

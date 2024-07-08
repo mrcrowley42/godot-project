@@ -1,8 +1,7 @@
-
 extends PanelContainer
-@onready var creature = %Creature
 
-var just_closed = false
+@onready var creature: Creature = %Creature
+var just_closed: bool = false
 
 func _ready():
 	visible = false
@@ -19,12 +18,10 @@ func _input(event):
 			self.hide()
 
 func _on_button_1_button_down():
-	creature.dmg(-300, 'sp')
-
+	creature.dmg( - 300, 'sp')
 
 func _on_button_3_button_down():
-	creature.dmg(-300, 'hp')
-
+	creature.dmg( - 300, 'hp')
 
 func _on_visibility_changed():
 	if just_closed and visible:

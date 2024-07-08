@@ -1,6 +1,6 @@
 extends Control
 
-var start_size
+var start_size: Vector2
 var window
 
 func _ready():
@@ -28,7 +28,6 @@ func normalise():
 func maximise():
 	window.size.x = start_size.x * 1.33
 	window.size.y = start_size.y * 1.33
-	
 
 func _on_normal_button_button_down():
 	window.size = start_size

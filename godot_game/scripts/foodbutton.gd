@@ -1,4 +1,5 @@
 extends TextureButton
+
 @export var palettes: Array[Texture2D]
 @onready var food_menu = %FoodControls
 @onready var options_menu = %OptionsMenu

@@ -1,7 +1,5 @@
 extends Node2D
 
-
-
 func remove(obj):
 	obj.queue_free()
 
