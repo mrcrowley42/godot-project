@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://3cn1hflukqt1"]
+[gd_scene load_steps=25 format=3 uid="uid://3cn1hflukqt1"]
 
 [ext_resource type="Script" path="res://tetris/Tetromino.gd" id="1_qheu4"]
 [ext_resource type="Texture2D" uid="uid://3d40sc2w7vyq" path="res://tetris/tetrominos/l_a_1.png" id="2_lviqe"]
@@ -118,100 +118,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cm127"]
-size = Vector2(0, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6h2br"]
-size = Vector2(0, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4xf05"]
-size = Vector2(0, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1rm0g"]
-size = Vector2(0, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2o55b"]
-size = Vector2(0, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xue0h"]
-size = Vector2(0, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5dwj4"]
-size = Vector2(0, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_de3ou"]
-size = Vector2(0, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xk8we"]
-size = Vector2(0, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cn6p8"]
-size = Vector2(0, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ghcv8"]
-size = Vector2(0, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_suc87"]
-size = Vector2(0, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1fetn"]
-size = Vector2(0, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mllkx"]
-size = Vector2(0, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uwqwj"]
-size = Vector2(0, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p6np6"]
-size = Vector2(0, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ucjj"]
-size = Vector2(0, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hn4ok"]
-size = Vector2(0, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_76x3j"]
-size = Vector2(0, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jmss2"]
-size = Vector2(0, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tnv31"]
-size = Vector2(0, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_l4vu0"]
-size = Vector2(0, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_d4nov"]
-size = Vector2(0, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_iudhd"]
-size = Vector2(0, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jawqi"]
-size = Vector2(0, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hmels"]
-size = Vector2(0, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cygk0"]
-size = Vector2(0, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_q6k0d"]
-size = Vector2(0, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0saxi"]
-size = Vector2(0, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_m1e18"]
-size = Vector2(0, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2wfxs"]
-size = Vector2(0, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_awh6e"]
-size = Vector2(0, 0)
+size = Vector2(10, 10)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3jfmm"]
 animations = [{
@@ -331,14 +238,14 @@ shape = SubResource("RectangleShape2D_cm127")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="CanvasLayer/Body/l_a"]
 position = Vector2(-30, 0)
-shape = SubResource("RectangleShape2D_6h2br")
+shape = SubResource("RectangleShape2D_cm127")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="CanvasLayer/Body/l_a"]
-shape = SubResource("RectangleShape2D_4xf05")
+shape = SubResource("RectangleShape2D_cm127")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="CanvasLayer/Body/l_a"]
 position = Vector2(30, 0)
-shape = SubResource("RectangleShape2D_1rm0g")
+shape = SubResource("RectangleShape2D_cm127")
 
 [node name="l_b" type="Area2D" parent="CanvasLayer/Body"]
 visible = false
@@ -347,18 +254,18 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Body/l_b"]
 position = Vector2(-30, 30)
-shape = SubResource("RectangleShape2D_2o55b")
+shape = SubResource("RectangleShape2D_cm127")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="CanvasLayer/Body/l_b"]
 position = Vector2(-30, 0)
-shape = SubResource("RectangleShape2D_xue0h")
+shape = SubResource("RectangleShape2D_cm127")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="CanvasLayer/Body/l_b"]
-shape = SubResource("RectangleShape2D_5dwj4")
+shape = SubResource("RectangleShape2D_cm127")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="CanvasLayer/Body/l_b"]
 position = Vector2(30, 0)
-shape = SubResource("RectangleShape2D_de3ou")
+shape = SubResource("RectangleShape2D_cm127")
 
 [node name="long" type="Area2D" parent="CanvasLayer/Body"]
 visible = false
@@ -367,38 +274,38 @@ monitorable = false
 
 [node name="1coll" type="CollisionShape2D" parent="CanvasLayer/Body/long"]
 position = Vector2(-45, -15)
-shape = SubResource("RectangleShape2D_xk8we")
+shape = SubResource("RectangleShape2D_cm127")
 
 [node name="1CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Body/long"]
 position = Vector2(-15, -15)
-shape = SubResource("RectangleShape2D_cn6p8")
+shape = SubResource("RectangleShape2D_cm127")
 
 [node name="1CollisionShape2D2" type="CollisionShape2D" parent="CanvasLayer/Body/long"]
 position = Vector2(15, -15)
-shape = SubResource("RectangleShape2D_ghcv8")
+shape = SubResource("RectangleShape2D_cm127")
 
 [node name="1CollisionShape2D3" type="CollisionShape2D" parent="CanvasLayer/Body/long"]
 position = Vector2(45, -15)
-shape = SubResource("RectangleShape2D_suc87")
+shape = SubResource("RectangleShape2D_cm127")
 
 [node name="2coll" type="CollisionShape2D" parent="CanvasLayer/Body/long"]
 position = Vector2(15, -45)
-shape = SubResource("RectangleShape2D_1fetn")
+shape = SubResource("RectangleShape2D_cm127")
 disabled = true
 
 [node name="2CollisionShape2D4" type="CollisionShape2D" parent="CanvasLayer/Body/long"]
 position = Vector2(15, -15)
-shape = SubResource("RectangleShape2D_mllkx")
+shape = SubResource("RectangleShape2D_cm127")
 disabled = true
 
 [node name="2CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Body/long"]
 position = Vector2(15, 15)
-shape = SubResource("RectangleShape2D_uwqwj")
+shape = SubResource("RectangleShape2D_cm127")
 disabled = true
 
 [node name="2CollisionShape2D2" type="CollisionShape2D" parent="CanvasLayer/Body/long"]
 position = Vector2(15, 45)
-shape = SubResource("RectangleShape2D_p6np6")
+shape = SubResource("RectangleShape2D_cm127")
 disabled = true
 
 [node name="skew_a" type="Area2D" parent="CanvasLayer/Body"]
@@ -408,18 +315,18 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Body/skew_a"]
 position = Vector2(30, 0)
-shape = SubResource("RectangleShape2D_1ucjj")
+shape = SubResource("RectangleShape2D_cm127")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="CanvasLayer/Body/skew_a"]
 position = Vector2(-30, 30)
-shape = SubResource("RectangleShape2D_hn4ok")
+shape = SubResource("RectangleShape2D_cm127")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="CanvasLayer/Body/skew_a"]
-shape = SubResource("RectangleShape2D_76x3j")
+shape = SubResource("RectangleShape2D_cm127")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="CanvasLayer/Body/skew_a"]
 position = Vector2(0, 30)
-shape = SubResource("RectangleShape2D_jmss2")
+shape = SubResource("RectangleShape2D_cm127")
 
 [node name="skew_b" type="Area2D" parent="CanvasLayer/Body"]
 visible = false
@@ -428,18 +335,18 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Body/skew_b"]
 position = Vector2(-30, 0)
-shape = SubResource("RectangleShape2D_tnv31")
+shape = SubResource("RectangleShape2D_cm127")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="CanvasLayer/Body/skew_b"]
 position = Vector2(30, 30)
-shape = SubResource("RectangleShape2D_l4vu0")
+shape = SubResource("RectangleShape2D_cm127")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="CanvasLayer/Body/skew_b"]
-shape = SubResource("RectangleShape2D_d4nov")
+shape = SubResource("RectangleShape2D_cm127")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="CanvasLayer/Body/skew_b"]
 position = Vector2(0, 30)
-shape = SubResource("RectangleShape2D_iudhd")
+shape = SubResource("RectangleShape2D_cm127")
 
 [node name="square" type="Area2D" parent="CanvasLayer/Body"]
 visible = false
@@ -448,19 +355,19 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Body/square"]
 position = Vector2(-15, -15)
-shape = SubResource("RectangleShape2D_jawqi")
+shape = SubResource("RectangleShape2D_cm127")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="CanvasLayer/Body/square"]
 position = Vector2(15, 15)
-shape = SubResource("RectangleShape2D_hmels")
+shape = SubResource("RectangleShape2D_cm127")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="CanvasLayer/Body/square"]
 position = Vector2(-15, 15)
-shape = SubResource("RectangleShape2D_cygk0")
+shape = SubResource("RectangleShape2D_cm127")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="CanvasLayer/Body/square"]
 position = Vector2(15, -15)
-shape = SubResource("RectangleShape2D_q6k0d")
+shape = SubResource("RectangleShape2D_cm127")
 
 [node name="t" type="Area2D" parent="CanvasLayer/Body"]
 visible = false
@@ -469,23 +376,23 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Body/t"]
 position = Vector2(-30, 0)
-shape = SubResource("RectangleShape2D_0saxi")
+shape = SubResource("RectangleShape2D_cm127")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="CanvasLayer/Body/t"]
 position = Vector2(0, 30)
-shape = SubResource("RectangleShape2D_m1e18")
+shape = SubResource("RectangleShape2D_cm127")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="CanvasLayer/Body/t"]
-shape = SubResource("RectangleShape2D_2wfxs")
+shape = SubResource("RectangleShape2D_cm127")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="CanvasLayer/Body/t"]
 position = Vector2(30, 0)
-shape = SubResource("RectangleShape2D_awh6e")
+shape = SubResource("RectangleShape2D_cm127")
 
 [node name="Ghost" type="AnimatedSprite2D" parent="CanvasLayer"]
 visible = false
-modulate = Color(1, 1, 1, 0.117647)
+modulate = Color(1, 1, 1, 0.235294)
 sprite_frames = SubResource("SpriteFrames_3jfmm")
-animation = &"t"
+animation = &"l_a"
 
 [connection signal="collided" from="CanvasLayer/Body" to="." method="_on_body_collided"]

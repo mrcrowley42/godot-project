@@ -16,21 +16,23 @@ const ALLOWED_PIECES = ['l_a', 'l_b', 'long', 'skew_a', 'skew_b', 'square', 't']
 # GAME STATES
 var all_pieces = []
 var tet_queue = []
-var active_tet = null  # Tetromino
-var held_tet = null
+var active_tet: Tetromino = null  # Tetromino
+var held_tet: Tetromino = null
 var can_hold = true
 var is_quick_dropping = false
+var completing_lines: Array[int] = []  # lines that have been receognised as completed and are currently mid-animation
 
 # UI QUEUE (non initialised pieces)
-var queued_1;  # save to free them later 
-var queued_2;
+var queued_1: Tetromino;  # save to free them later 
+var queued_2: Tetromino;
 
-func get_next_tet() -> String:
+func get_next_piece() -> String:
+	return "l_a"
 	if len(tet_queue) < 4:
 		generate_tet_queue()
-	var tet = tet_queue.pop_front()
+	var piece = tet_queue.pop_front()
 	update_ui_queue()
-	return tet
+	return piece
 
 ## add 2 * each piece to the end of the queue shuffled randomly (fisher-yates shuffle)
 func generate_tet_queue():
@@ -64,7 +66,7 @@ func hold_active_tet():
 		held_tet = active_tet
 		active_tet.disconnect("placed", active_tet_placed)
 		if swapped_tet == null:
-			activate_new_tet(get_next_tet())
+			activate_new_tet(get_next_piece())
 		else:
 			swapped_tet.stop_holding_tet()
 			activate_tet(swapped_tet)
@@ -74,7 +76,7 @@ func hold_active_tet():
 
 func _ready():
 	all_pieces.append(find_child("Ground"))
-	activate_new_tet(get_next_tet())
+	activate_new_tet(get_next_piece())
 	generate_tet_queue()
 	update_ui_queue()
 	gravity_ticker.start()
@@ -113,7 +115,10 @@ func _on_quick_drop_timer_timeout():
 ## triggered when the active tetromino is placed
 func active_tet_placed():
 	all_pieces.append(active_tet)
-	activate_new_tet(get_next_tet())
+	
+	var completed_lines = check_for_completed_lines()
+	
+	activate_new_tet(get_next_piece())
 	can_hold = true
 
 func update_ui_queue():
@@ -135,3 +140,62 @@ func update_ui_queue():
 	queued_2.set_raw_position(next_box_middle + quater_size)
 	queued_1.body.scale = queued_1.SMALL_SCALE
 	queued_2.body.scale = queued_2.SMALL_SCALE
+
+## checks through every placed node pos and finds any new completed lines (excludes currently completing lines)
+func check_for_completed_lines():
+	var newly_completed_lines: Array[CompletedLine] = []
+	var lines_dict = {}  # saves the y pos (key) of nodes (Array value)
+	
+	for tet in all_pieces:
+		if is_instance_of(tet, Tetromino):
+			for point: Vector2 in tet.body.get_raw_collision_points():
+				if point.y not in lines_dict:
+					lines_dict[point.y] = []
+				lines_dict[point.y].append(tet.body.get_coll_node_from_raw_position(point))
+	
+	var sorted_keys = lines_dict.keys()
+	sorted_keys.sort()
+	for y_pos in sorted_keys:  # from bottom up
+		print(y_pos, " ", len(lines_dict[y_pos]))
+		if y_pos not in completing_lines and len(lines_dict[y_pos]) >= 10:  # full line
+			completing_lines.append(y_pos)
+			
+			# if directly above a CompletedLine that has just been created, add a line to it, 
+			# otherwise create a new CompletedLine
+			var added = false
+			for cl: CompletedLine in newly_completed_lines:
+				if y_pos == cl.lowest_line_y + (30 * cl.lines_completed):
+					cl.lines_completed += 1
+					cl.add_nodes(lines_dict[y_pos])
+					added = true
+			if !added:
+				newly_completed_lines.append(CompletedLine.new(self, lines_dict[y_pos]))
+	print(newly_completed_lines)
+
+class CompletedLine:
+	var timer: Timer = Timer.new()
+	var timout_counter: int = 0
+	var nodes: Array[CollisionShape2D] = []  # nodes encompassed
+	var lines_completed: int = 1
+	var lowest_line_y
+	
+	func _init(parent: Node2D, initial_nodes: Array):
+		timer.wait_time = 0.5
+		timer.autostart = true
+		timer.connect("timeout", on_timeout)
+		add_nodes(initial_nodes)
+		parent.add_child(timer)
+	
+	func add_nodes(nodes_list: Array[CollisionShape2D]):
+		nodes += nodes_list
+	
+	func complete():
+		timer.disconnect("timrout", on_timeout)
+		timer.queue_free()
+		for node in nodes:
+			node.queue_free()  # outright deletion >:)
+	
+	func on_timeout():
+		timout_counter += 1
+		if timout_counter > 6:
+			complete()

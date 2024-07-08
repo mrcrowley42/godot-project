@@ -1,5 +1,7 @@
 extends AnimatedSprite2D
 
+class_name TetBody
+
 signal collided
 
 const TOP = 0
@@ -51,21 +53,28 @@ func get_clipped_pos() -> Vector2:
 		get_normal(TOP) - get_normal(BOTTOM)
 	))
 
+## rotate a position by rotation_degrees around 0, 0
+func rotate_point(point: Vector2) -> Vector2:
+	var radians = collision_area.rotation_degrees * (PI / 180)
+	var out = Vector2(point)
+	out.x = int(cos(radians) * point.x - sin(radians) * point.y)  # convert to int to avoid -0
+	out.y = int(sin(radians) * point.x + cos(radians) * point.y)
+	return out
+
 ## returns with a list of (rotated) collision points for this tet
-func get_all_collision_points():
-	# rotate each shapes position by rotation_degrees around 0, 0 to get correct position
-	var rotate_point = func(point: Vector2, degrees) -> Vector2:
-		var radians = degrees * (PI / 180)
-		var out = Vector2(point)
-		out.x = cos(radians) * point.x - sin(radians) * point.y
-		out.y = sin(radians) * point.x + cos(radians) * point.y
-		return out
-	
+func get_raw_collision_points():
 	var points = []
-	for shape: CollisionShape2D in collision_area.get_children():
-		if !shape.disabled:
-			points.append(Vector2(base_pos + relative_pos + rotate_point.call(shape.position, collision_area.rotation_degrees)))
+	for point: CollisionShape2D in collision_area.get_children():
+		if !point.disabled:
+			points.append(Vector2(base_pos + relative_pos + rotate_point(point.position)))
 	return points
+
+## returns the collision node of the body at the given screen position
+func get_coll_node_from_raw_position(raw_pos: Vector2):
+	for node: CollisionShape2D in collision_area.get_children():
+		if !node.disabled and raw_pos - (base_pos + relative_pos) == rotate_point(node.position):
+			return node
+	print("FAILED to find child collision point at position %s, %s" % [raw_pos.x, raw_pos.y])
 
 func set_anim(anim):
 	assert(anim in ALLOWED_TETS)

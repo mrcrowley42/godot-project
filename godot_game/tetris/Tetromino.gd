@@ -1,11 +1,13 @@
 extends Node2D
 
+class_name Tetromino
+
 signal placed
 
 const SMALL_SCALE = Vector2(0.5, 0.5)
 const SQUARE_SIZE: Vector2 = Vector2(30, 30)
 
-@onready var body = find_child("Body")
+@onready var body: TetBody = find_child("Body")
 @onready var ghost = find_child("Ghost")
 
 ## TETROMINO STATES
@@ -214,11 +216,11 @@ func check_for_collision(y_offset=0):
 	# godot's collision detection is stupid and allows a 1 frame to slip past before triggering a collision signal
 	# meaning the collision is 1) out-of-date and 2) draws the piece in the wrong position for 1 frame
 	# so collision checks need to be made manually
-	for pos in body.get_all_collision_points():
+	for pos in body.get_raw_collision_points():
 		pos.y += y_offset
 		for other in all_pieces:
 			var is_ground = other.name == "Ground"
-			var points = get_all_ground_positions(other) if is_ground else other.body.get_all_collision_points()
+			var points = get_all_ground_positions(other) if is_ground else other.body.get_raw_collision_points()
 			
 			for other_pos in points:
 				if pos == other_pos:  # a collision hath occurred!
