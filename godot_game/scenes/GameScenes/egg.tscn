@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/MainGameScripts/EggScene/egg.gd" id="1_3gale"]
 [ext_resource type="AudioStream" uid="uid://8ifwm2tjitur" path="res://sound_effects/yippee.mp3" id="2_rsge0"]
-[ext_resource type="Texture2D" uid="uid://cqerxt6jjic0u" path="res://images/egg/egg01.png" id="3_swhes"]
+[ext_resource type="Texture2D" uid="uid://cqerxt6jjic0u" path="res://images/egg/egg01.PNG" id="3_swhes"]
 [ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://images/creature_sprites/little-guy.png" id="4_5b41r"]
 [ext_resource type="Texture2D" uid="uid://ddd55umdtwxcx" path="res://images/egg/egg02.PNG" id="4_cu5wo"]
 [ext_resource type="Texture2D" uid="uid://4cfpam3be0g" path="res://images/creature_sprites/little-guy_2.png" id="5_6fl3y"]
