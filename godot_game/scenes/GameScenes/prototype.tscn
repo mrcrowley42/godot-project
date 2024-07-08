@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=3 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=96 format=3 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/prototype.gd" id="1_u8fgs"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_w1hur"]
@@ -155,8 +155,6 @@ func _on_button_down():
 "
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b3sax"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7ui03"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kxv3i"]
 bg_color = Color(0, 0, 0, 0.737255)
@@ -514,26 +512,21 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="PanelContainer" type="PanelContainer" parent="UI/ScreenControls/ActivityControls/ActivityContent"]
-custom_minimum_size = Vector2(400, 400)
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_styles/panel = SubResource("StyleBoxEmpty_7ui03")
-
-[node name="MarginContainer" type="MarginContainer" parent="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer"]
+[node name="Screen1" type="MarginContainer" parent="UI/ScreenControls/ActivityControls/ActivityContent"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="GridContainer" type="GridContainer" parent="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="UI/ScreenControls/ActivityControls/ActivityContent/Screen1"]
+custom_minimum_size = Vector2(360, 360)
 layout_mode = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 2
 
-[node name="ScissorsPaperRock" type="Button" parent="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer/MarginContainer/GridContainer"]
+[node name="ScissorsPaperRock" type="Button" parent="UI/ScreenControls/ActivityControls/ActivityContent/Screen1/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -542,7 +535,7 @@ icon = ExtResource("17_pukas")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Tetris" type="Button" parent="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer/MarginContainer/GridContainer"]
+[node name="Tetris" type="Button" parent="UI/ScreenControls/ActivityControls/ActivityContent/Screen1/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -552,7 +545,7 @@ icon = ExtResource("18_8vgfd")
 icon_alignment = 1
 expand_icon = true
 
-[node name="ZenMode" type="Button" parent="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer/MarginContainer/GridContainer"]
+[node name="ZenMode" type="Button" parent="UI/ScreenControls/ActivityControls/ActivityContent/Screen1/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -562,7 +555,7 @@ icon = ExtResource("19_d7j7b")
 icon_alignment = 1
 expand_icon = true
 
-[node name="MemoryGame" type="Button" parent="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer/MarginContainer/GridContainer"]
+[node name="MemoryGame" type="Button" parent="UI/ScreenControls/ActivityControls/ActivityContent/Screen1/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -572,26 +565,21 @@ icon = ExtResource("20_feyvh")
 icon_alignment = 1
 expand_icon = true
 
-[node name="PanelContainer2" type="PanelContainer" parent="UI/ScreenControls/ActivityControls/ActivityContent"]
-custom_minimum_size = Vector2(400, 400)
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_styles/panel = SubResource("StyleBoxEmpty_7ui03")
-
-[node name="MarginContainer" type="MarginContainer" parent="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer2"]
+[node name="Screen2" type="MarginContainer" parent="UI/ScreenControls/ActivityControls/ActivityContent"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="GridContainer" type="GridContainer" parent="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer2/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="UI/ScreenControls/ActivityControls/ActivityContent/Screen2"]
+custom_minimum_size = Vector2(360, 360)
 layout_mode = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 2
 
-[node name="ScissorsPaperRock" type="Button" parent="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer2/MarginContainer/GridContainer"]
+[node name="ScissorsPaperRock" type="Button" parent="UI/ScreenControls/ActivityControls/ActivityContent/Screen2/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -601,7 +589,7 @@ icon = ExtResource("17_pukas")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Tetris" type="Button" parent="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer2/MarginContainer/GridContainer"]
+[node name="Tetris" type="Button" parent="UI/ScreenControls/ActivityControls/ActivityContent/Screen2/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -612,7 +600,7 @@ icon = ExtResource("18_8vgfd")
 icon_alignment = 1
 expand_icon = true
 
-[node name="ZenMode" type="Button" parent="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer2/MarginContainer/GridContainer"]
+[node name="ZenMode" type="Button" parent="UI/ScreenControls/ActivityControls/ActivityContent/Screen2/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -623,7 +611,7 @@ icon = ExtResource("19_d7j7b")
 icon_alignment = 1
 expand_icon = true
 
-[node name="MemoryGame" type="Button" parent="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer2/MarginContainer/GridContainer"]
+[node name="MemoryGame" type="Button" parent="UI/ScreenControls/ActivityControls/ActivityContent/Screen2/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -642,8 +630,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_left = -8.0
 offset_top = 145.0
-offset_right = 28.0
+offset_right = 20.0
 offset_bottom = 253.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -660,9 +649,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 372.0
+offset_left = 380.0
 offset_top = 145.0
-offset_right = 400.0
+offset_right = 408.0
 offset_bottom = 253.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -1263,14 +1252,14 @@ script = ExtResource("68_sw7tx")
 [connection signal="button_down" from="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 3" to="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 3" method="_on_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 4" to="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 4" method="_on_button_down"]
 [connection signal="visibility_changed" from="UI/ScreenControls/ActivityControls" to="UI/ScreenControls/ActivityControls" method="_on_visibility_changed"]
-[connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer/MarginContainer/GridContainer/ScissorsPaperRock" to="MinigameManager" method="_on_scissors_paper_rock_button_down"]
-[connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer/MarginContainer/GridContainer/Tetris" to="MinigameManager" method="_on_tetris_button_down"]
-[connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer/MarginContainer/GridContainer/ZenMode" to="MinigameManager" method="_on_zen_mode_button_down"]
-[connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer/MarginContainer/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
-[connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer2/MarginContainer/GridContainer/ScissorsPaperRock" to="MinigameManager" method="_on_scissors_paper_rock_button_down"]
-[connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer2/MarginContainer/GridContainer/Tetris" to="MinigameManager" method="_on_tetris_button_down"]
-[connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer2/MarginContainer/GridContainer/ZenMode" to="MinigameManager" method="_on_zen_mode_button_down"]
-[connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer2/MarginContainer/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
+[connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/Screen1/GridContainer/ScissorsPaperRock" to="MinigameManager" method="_on_scissors_paper_rock_button_down"]
+[connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/Screen1/GridContainer/Tetris" to="MinigameManager" method="_on_tetris_button_down"]
+[connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/Screen1/GridContainer/ZenMode" to="MinigameManager" method="_on_zen_mode_button_down"]
+[connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/Screen1/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
+[connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/Screen2/GridContainer/ScissorsPaperRock" to="MinigameManager" method="_on_scissors_paper_rock_button_down"]
+[connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/Screen2/GridContainer/Tetris" to="MinigameManager" method="_on_tetris_button_down"]
+[connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/Screen2/GridContainer/ZenMode" to="MinigameManager" method="_on_zen_mode_button_down"]
+[connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/Screen2/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/NavigationArrows/LeftArrow" to="UI/ScreenControls/ActivityControls/NavigationArrows/LeftArrow" method="_on_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/NavigationArrows/LeftArrow2" to="UI/ScreenControls/ActivityControls/NavigationArrows/LeftArrow2" method="_on_button_down"]
 [connection signal="pressed" from="UI/OptionsContainer/OptionsMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
