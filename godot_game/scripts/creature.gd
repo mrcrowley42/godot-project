@@ -11,8 +11,6 @@ class_name Creature
 @export var max_sp: float = 1000
 @export var max_ap: float = 1000
 
-#@export var creature_list: Array[Resource]
-
 var hp:float
 var mp:float
 var sp:float
