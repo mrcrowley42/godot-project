@@ -1,4 +1,4 @@
-[gd_scene load_steps=95 format=3 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=97 format=3 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/prototype.gd" id="1_u8fgs"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_w1hur"]
@@ -153,6 +153,10 @@ func _on_button_down():
 	%PIPE.play()
 	creature.dmg(300, 'hp')
 "
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b3sax"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7ui03"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kxv3i"]
 bg_color = Color(0, 0, 0, 0.737255)
@@ -483,7 +487,6 @@ script = ExtResource("16_3rmyt")
 
 [node name="ActivityControls" type="PanelContainer" parent="UI/ScreenControls"]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(400, 400)
 layout_mode = 1
 anchors_preset = 8
@@ -492,28 +495,45 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 50.0
-offset_top = 117.5
-offset_right = 450.0
-offset_bottom = 517.5
+offset_top = 118.0
+offset_right = 850.0
+offset_bottom = 518.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_k7dc5")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_b3sax")
 script = ExtResource("8_bgltf")
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/ScreenControls/ActivityControls"]
+[node name="Background" type="PanelContainer" parent="UI/ScreenControls/ActivityControls"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_k7dc5")
+
+[node name="ActivityContent" type="HBoxContainer" parent="UI/ScreenControls/ActivityControls"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/ScreenControls/ActivityControls/ActivityContent"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_7ui03")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="GridContainer" type="GridContainer" parent="UI/ScreenControls/ActivityControls/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 2
 
-[node name="ScissorsPaperRock" type="Button" parent="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer"]
+[node name="ScissorsPaperRock" type="Button" parent="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -522,7 +542,7 @@ icon = ExtResource("17_pukas")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Tetris" type="Button" parent="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer"]
+[node name="Tetris" type="Button" parent="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -532,7 +552,7 @@ icon = ExtResource("18_8vgfd")
 icon_alignment = 1
 expand_icon = true
 
-[node name="ZenMode" type="Button" parent="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer"]
+[node name="ZenMode" type="Button" parent="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -542,12 +562,74 @@ icon = ExtResource("19_d7j7b")
 icon_alignment = 1
 expand_icon = true
 
-[node name="MemoryGame" type="Button" parent="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer"]
+[node name="MemoryGame" type="Button" parent="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("9_3efis")
 theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
+icon = ExtResource("20_feyvh")
+icon_alignment = 1
+expand_icon = true
+
+[node name="PanelContainer2" type="PanelContainer" parent="UI/ScreenControls/ActivityControls/ActivityContent"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_7ui03")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="GridContainer" type="GridContainer" parent="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer2/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="ScissorsPaperRock" type="Button" parent="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer2/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("9_3efis")
+text = "MENU 2"
+icon = ExtResource("17_pukas")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Tetris" type="Button" parent="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer2/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("9_3efis")
+theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
+text = "MENU 2"
+icon = ExtResource("18_8vgfd")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ZenMode" type="Button" parent="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer2/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("9_3efis")
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+text = "MENU 2"
+icon = ExtResource("19_d7j7b")
+icon_alignment = 1
+expand_icon = true
+
+[node name="MemoryGame" type="Button" parent="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer2/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("9_3efis")
+theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
+text = "MENU 2"
 icon = ExtResource("20_feyvh")
 icon_alignment = 1
 expand_icon = true
@@ -1181,10 +1263,14 @@ script = ExtResource("68_sw7tx")
 [connection signal="button_down" from="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 3" to="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 3" method="_on_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 4" to="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 4" method="_on_button_down"]
 [connection signal="visibility_changed" from="UI/ScreenControls/ActivityControls" to="UI/ScreenControls/ActivityControls" method="_on_visibility_changed"]
-[connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/ScissorsPaperRock" to="MinigameManager" method="_on_scissors_paper_rock_button_down"]
-[connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/Tetris" to="MinigameManager" method="_on_tetris_button_down"]
-[connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/ZenMode" to="MinigameManager" method="_on_zen_mode_button_down"]
-[connection signal="button_down" from="UI/ScreenControls/ActivityControls/MarginContainer/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
+[connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer/MarginContainer/GridContainer/ScissorsPaperRock" to="MinigameManager" method="_on_scissors_paper_rock_button_down"]
+[connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer/MarginContainer/GridContainer/Tetris" to="MinigameManager" method="_on_tetris_button_down"]
+[connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer/MarginContainer/GridContainer/ZenMode" to="MinigameManager" method="_on_zen_mode_button_down"]
+[connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer/MarginContainer/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
+[connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer2/MarginContainer/GridContainer/ScissorsPaperRock" to="MinigameManager" method="_on_scissors_paper_rock_button_down"]
+[connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer2/MarginContainer/GridContainer/Tetris" to="MinigameManager" method="_on_tetris_button_down"]
+[connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer2/MarginContainer/GridContainer/ZenMode" to="MinigameManager" method="_on_zen_mode_button_down"]
+[connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/PanelContainer2/MarginContainer/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/NavigationArrows/LeftArrow" to="UI/ScreenControls/ActivityControls/NavigationArrows/LeftArrow" method="_on_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/NavigationArrows/LeftArrow2" to="UI/ScreenControls/ActivityControls/NavigationArrows/LeftArrow2" method="_on_button_down"]
 [connection signal="pressed" from="UI/OptionsContainer/OptionsMenu/SaveButtons/Save" to="." method="_on_save_pressed"]

@@ -5,7 +5,7 @@
 [ext_resource type="Shader" path="res://shaders/grid.gdshader" id="2_0hqmj"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="2_t4frc"]
 [ext_resource type="Script" path="res://scripts/tetrisGridBG.gd" id="3_r7ui3"]
-[ext_resource type="Texture2D" path="res://UI stuff/Green Palette/ui_green_box.png" id="6_t0r2e"]
+[ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="6_t0r2e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_adq1g"]
 shader = ExtResource("2_0hqmj")
