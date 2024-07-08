@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=3 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=93 format=3 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/prototype.gd" id="1_u8fgs"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_w1hur"]
@@ -6,7 +6,6 @@
 [ext_resource type="Shader" path="res://shaders/multiply_colour.gdshader" id="4_8sx1k"]
 [ext_resource type="Texture2D" uid="uid://cdbor7hjfbusn" path="res://UI stuff/Universal/background.png" id="4_pmdaq"]
 [ext_resource type="PackedScene" uid="uid://bebjn5n2kjwgb" path="res://scenes/Creatures/creature.tscn" id="5_khxd0"]
-[ext_resource type="Shader" path="res://shaders/screen_tint.gdshader" id="6_yhapg"]
 [ext_resource type="Script" path="res://scripts/Confetti.gd" id="7_rqbrx"]
 [ext_resource type="Script" path="res://scripts/control_panel.gd" id="8_bgltf"]
 [ext_resource type="Theme" uid="uid://1dv11a5ar0hg" path="res://themes/action_btn.tres" id="9_3efis"]
@@ -89,25 +88,6 @@ script/source = "extends ColorRect
 
 func _ready():
 	color = colours[%UI_Overlay.i]
-"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_igbp3"]
-shader = ExtResource("6_yhapg")
-shader_parameter/strength = 1.0
-
-[sub_resource type="GDScript" id="GDScript_j4fl7"]
-script/source = "extends ColorRect
-
-@export_range(0,2) var strength: float = 1.0
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	color = %ScreenColours.color
-	material.set(\"shader_parameter/strength\", strength)
 "
 
 [sub_resource type="Gradient" id="Gradient_asbj7"]
@@ -306,13 +286,7 @@ texture = ExtResource("4_pmdaq")
 script = SubResource("GDScript_axjpn")
 metadata/_edit_lock_ = true
 
-[node name="Creature" parent="Gameplay" groups=["save_data"] instance=ExtResource("5_khxd0")]
-unique_name_in_owner = true
-position = Vector2(270, 393.5)
-
-[node name="ScreenShaders" type="CanvasLayer" parent="Gameplay"]
-
-[node name="ScreenColours" type="ColorRect" parent="Gameplay/ScreenShaders"]
+[node name="ScreenColours" type="ColorRect" parent="Gameplay"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(450, 450)
@@ -321,10 +295,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -225.0
-offset_top = -225.0
-offset_right = 225.0
-offset_bottom = 225.0
+offset_left = 45.0
+offset_top = 112.5
+offset_right = 495.0
+offset_bottom = 562.5
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.655034, 0.247851, 0.431647, 1)
@@ -332,22 +306,9 @@ script = SubResource("GDScript_7ecg8")
 colours = Array[Color]([Color(0.870588, 0.984314, 0.87451, 1), Color(0.835294, 0.576471, 0.439216, 1), Color(0.901961, 0.67451, 0.768627, 1)])
 metadata/_edit_lock_ = true
 
-[node name="ScreenTint" type="ColorRect" parent="Gameplay/ScreenShaders"]
+[node name="Creature" parent="Gameplay" groups=["save_data"] instance=ExtResource("5_khxd0")]
 unique_name_in_owner = true
-visible = false
-material = SubResource("ShaderMaterial_igbp3")
-anchors_preset = 13
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -217.0
-offset_top = 121.0
-offset_right = 217.0
-offset_bottom = -120.0
-grow_horizontal = 2
-grow_vertical = 2
-script = SubResource("GDScript_j4fl7")
-metadata/_edit_lock_ = true
+position = Vector2(270, 393.5)
 
 [node name="Confetti" type="Node2D" parent="Gameplay"]
 script = ExtResource("7_rqbrx")
@@ -1056,13 +1017,6 @@ position = Vector2(14, 0)
 scale = Vector2(0.688, 0.688)
 texture = ExtResource("35_byupt")
 
-[node name="Label" type="Label" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
-visible = false
-layout_mode = 2
-theme_override_fonts/font = ExtResource("10_pai17")
-theme_override_font_sizes/font_size = 24
-text = "HP"
-
 [node name="HP_Bar" type="ProgressBar" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
 clip_contents = true
 custom_minimum_size = Vector2(160, 23)
@@ -1076,13 +1030,6 @@ step = 1.0
 value = 700.0
 show_percentage = false
 script = ExtResource("36_2kbr2")
-
-[node name="Label2" type="Label" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
-visible = false
-layout_mode = 2
-theme_override_fonts/font = ExtResource("10_pai17")
-theme_override_font_sizes/font_size = 24
-text = "MP"
 
 [node name="Droplet" type="Control" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
 custom_minimum_size = Vector2(28, 0)
@@ -1119,13 +1066,6 @@ position = Vector2(14, 0)
 scale = Vector2(0.688, 0.688)
 texture = ExtResource("39_tkaxu")
 
-[node name="Label3" type="Label" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
-visible = false
-layout_mode = 2
-theme_override_fonts/font = ExtResource("10_pai17")
-theme_override_font_sizes/font_size = 24
-text = "SP"
-
 [node name="SP_Bar" type="ProgressBar" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
 clip_contents = true
 custom_minimum_size = Vector2(160, 23)
@@ -1150,13 +1090,6 @@ size_flags_vertical = 4
 position = Vector2(14, 0)
 scale = Vector2(0.688, 0.688)
 texture = ExtResource("41_dcsa1")
-
-[node name="Label4" type="Label" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
-visible = false
-layout_mode = 2
-theme_override_fonts/font = ExtResource("10_pai17")
-theme_override_font_sizes/font_size = 24
-text = "AP"
 
 [node name="AP_Bar" type="ProgressBar" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
 custom_minimum_size = Vector2(160, 23)
