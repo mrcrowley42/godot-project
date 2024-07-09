@@ -6,6 +6,7 @@ extends Control
 @onready var music_track = %MainMusic
 @onready var screen_tint = %BG
 @onready var minigame_man = %MinigameManager
+
 var clippy: bool = false
 
 func _on_h_slider_value_changed(value):
@@ -18,12 +19,17 @@ func _on_button_button_down():
 	
 func _ready():
 	var anims = creature.find_child('AnimatedSprite2D').sprite_frames.get_animation_names()
-
 	for anim in anims:
 		$AnimSelect.add_item(anim)
 	$AnimSelect.selected = 3
 	$ColorPickerButton.color = creature.dying_colour
-
+	stat_man.finished_loading.connect(update_holiday)
+	
+	
+func update_holiday():
+	if stat_man.holiday_mode:
+		$HolidayBtn.set_pressed_no_signal(true)
+		
 func _process(_delta):
 	$Label3.text = og_text % [str(Engine.get_frames_per_second())]
 	#$Label3.set("theme_override_colors/font_color", Color.CORAL)
@@ -53,3 +59,8 @@ func _on_button_2_pressed():
 	window.always_on_top = clippy
 	%UI.visible = !clippy
 	%BG.visible = !clippy
+
+
+func _on_button_3_toggled(toggled_on):
+	stat_man.holiday_mode = toggled_on
+	print(stat_man.holiday_mode)

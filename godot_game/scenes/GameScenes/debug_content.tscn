@@ -394,19 +394,14 @@ offset_bottom = 157.0
 theme = ExtResource("8_lqg4h")
 text = "Clippy Mode"
 
-[node name="MenuBar" type="MenuBar" parent="."]
-layout_mode = 0
-offset_right = 543.0
-offset_bottom = 62.0
-
-[node name="PopupMenu" type="PopupMenu" parent="MenuBar"]
-title = "sdfsf"
-item_count = 2
-item_0/text = "um why"
-item_0/id = 0
-item_0/separator = true
-item_1/text = "why not"
-item_1/id = 1
+[node name="HolidayBtn" type="Button" parent="."]
+offset_left = 215.0
+offset_top = 123.0
+offset_right = 348.0
+offset_bottom = 157.0
+theme = ExtResource("8_lqg4h")
+toggle_mode = true
+text = "Holiday Mode"
 
 [connection signal="value_changed" from="OverlayStrength" to="." method="_on_overlay_strength_value_changed"]
 [connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
@@ -419,3 +414,4 @@ item_1/id = 1
 [connection signal="button_down" from="WindowSizeControls/HBoxContainer/MaximiseButton" to="WindowSizeControls" method="_on_max_down"]
 [connection signal="popup_closed" from="ColorPickerButton" to="." method="_on_color_picker_button_popup_closed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
+[connection signal="toggled" from="HolidayBtn" to="." method="_on_button_3_toggled"]

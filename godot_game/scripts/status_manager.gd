@@ -13,7 +13,7 @@ class_name StatusManager extends Node2D
 @export var sp_amount: float = 2
 @export var ap_rate: float = 30
 @export var ap_amount: float = 1
-
+signal finished_loading()
 ## Property that scales the damage values of all passive drain timers. 
 @export var time_multiplier: float = 0.5
 ## Stores a reference to the scenes Creature.
@@ -48,3 +48,12 @@ func sp_timeout():
 
 func ap_timeout():
 	creature.dmg(ap_amount * time_multiplier, 'ap')
+
+func save():
+	return {"holiday_mode": holiday_mode}
+	
+func load(data):
+	if data.has("holiday_mode"):
+		holiday_mode = data["holiday_mode"]
+	finished_loading.emit()
+		
