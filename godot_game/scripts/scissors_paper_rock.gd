@@ -1,5 +1,4 @@
-@icon("res://icons/controller-icon.svg")
-extends Node
+extends MiniGameLogic
 @onready var og_text = %ScoreLabel.text
 
 var creature_score: int = 0

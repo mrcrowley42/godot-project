@@ -1,4 +1,4 @@
-extends Node
+extends MiniGameLogic
 
 # there has to be a better way to do this...
 @onready var stat_man: StatusManager = $"..".get_parent().get_parent().find_child("StatusManager")
