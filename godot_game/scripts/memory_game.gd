@@ -1,6 +1,5 @@
-@icon("res://icons/controller-icon.svg")
+extends MiniGameLogic
 
-extends Node
 @onready var og_text = %ScoreLabel.text
 
 var selected_cards: Array[MemCard] = []
