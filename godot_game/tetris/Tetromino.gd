@@ -122,8 +122,8 @@ func x_wall_correction():
 
 ## avoid clipping other tetrominoes or the walls
 func general_correction():
-	var collision: CollisionInfo = check_for_collision()
-	if collision:
+	var collision = check_for_collision()
+	if is_instance_of(collision, CollisionInfo):
 		body.add_x(SQUARE_SIZE.x * collision.x_direction)
 		
 		# special case for left side of long block: move again if still colliding in the same direction
@@ -218,7 +218,7 @@ func get_all_ground_positions(ground):
 func check_for_collision(y_offset=0):
 	# godot's collision detection is stupid and allows a 1 frame to slip past before triggering a collision signal
 	# meaning the collision is 1) out-of-date and 2) draws the piece in the wrong position for 1 frame
-	# so collision checks need to be made manually
+	# SO I MADE MY OWN RAAA
 	for pos in body.get_raw_collision_points():
 		pos.y += y_offset
 		for other in all_pieces:

@@ -30,6 +30,7 @@ var ghost: AnimatedSprite2D;
 var base_pos: Vector2
 var relative_pos: Vector2 = Vector2(0, 0)
 var collision_area: Area2D;
+var current_rotation = 0
 
 func get_normal(direction: int) -> int:
 	return int(TET_NORMALS[animation][frame][direction])
@@ -61,9 +62,9 @@ func negative_zero_correction(vec: Vector2) -> Vector2:
 		vec.y if int(vec.y) != 0 else 0.0
 	)
 
-## rotate a position by rotation_degrees around 0, 0
+## rotate a position by current_rotation around 0, 0
 func rotate_point(point: Vector2) -> Vector2:
-	var radians = collision_area.rotation_degrees * (PI / 180)
+	var radians = get_rotation_addition() * (PI / 180)
 	var out = Vector2(point)
 	out.x = cos(radians) * point.x - sin(radians) * point.y
 	out.y = sin(radians) * point.x + cos(radians) * point.y
@@ -74,7 +75,7 @@ func get_raw_collision_points():
 	var points = []
 	for point: CollisionShape2D in collision_area.get_children():
 		if !point.disabled:
-			points.append(Vector2(base_pos + relative_pos + rotate_point(point.position)))
+			points.append(Vector2(base_pos + relative_pos + point.position))
 	
 	# has no more collision points, delete
 	if len(points) == 0:
@@ -84,7 +85,7 @@ func get_raw_collision_points():
 ## returns the collision node of the body at the given screen position
 func get_coll_node_from_raw_position(raw_pos: Vector2):
 	for node: CollisionShape2D in collision_area.get_children():
-		if !node.disabled and raw_pos - (base_pos + relative_pos) == rotate_point(node.position):
+		if !node.disabled and raw_pos - (base_pos + relative_pos) == node.position:
 			return node
 	print("FAILED to find child collision point at position %s, %s" % [raw_pos.x, raw_pos.y])
 
@@ -131,7 +132,10 @@ func update_collision():
 		for c in collision_area.get_children():
 			c.disabled = !c.disabled
 	else:  # rotate normally
-		collision_area.rotation_degrees = addition * frame
+		current_rotation = addition * frame
+		print(current_rotation)
+		for node: CollisionShape2D in collision_area.get_children():
+			node.position = rotate_point(node.position)
 
 func get_frame_count() -> int:
 	return int(sprite_frames.get_frame_count(animation))
@@ -152,10 +156,9 @@ func spawn_singular_squares():
 	collision_area.visible = true
 	var sprite: Sprite2D = Sprite2D.new()
 	sprite.texture = load(TEXTURE_PATH + animation + '_single.png')
-	sprite.rotation_degrees -= get_rotation_addition() * frame  # un-rotate
 	sprite.z_index = -1  # so i can still see collisions
-	set_animation("empty")
 	
 	for coll: CollisionShape2D in collision_area.get_children():
 		if !coll.disabled:
 			coll.add_child(sprite.duplicate())
+	set_animation("empty")

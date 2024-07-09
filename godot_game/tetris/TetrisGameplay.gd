@@ -141,6 +141,16 @@ func update_ui_queue():
 	queued_1.body.scale = queued_1.SMALL_SCALE
 	queued_2.body.scale = queued_2.SMALL_SCALE
 
+func move_all_pieces_down(from_y, places: int):
+	for tet in all_pieces:
+		if is_instance_of(tet, Tetromino):
+			for point: Vector2 in tet.body.get_raw_collision_points():
+				if point.y < from_y:
+					var node: CollisionShape2D = tet.body.get_coll_node_from_raw_position(point)
+					print('--', node.position.y)
+					node.position.y += 30 * places
+					print(node.position.y)
+
 ## checks through every placed node pos and finds any new completed lines (excludes currently completing lines)
 func check_for_completed_lines():
 	var newly_completed_lines: Array[CompletedLine] = []
@@ -183,7 +193,7 @@ class CompletedLine:
 		parent_node = parent
 		add_nodes(initial_nodes)
 		timer = parent.add_cl_timer(self)
-		lowest_line_y = y_pos  # the one given in constructor will always be the lowest
+		lowest_line_y = y_pos  # the pos given in constructor will always be the lowest
 	
 	func add_nodes(nodes_list: Array):
 		nodes += nodes_list
@@ -193,8 +203,10 @@ class CompletedLine:
 			parent_node.completing_lines.erase(lowest_line_y - (30 * (line_num - 1)))
 		for node: CollisionShape2D in nodes:
 			node.disabled = true
+			node.visible = false
 			node.queue_free()  # outright deletion >:)
 		timer.queue_free()
+		parent_node.move_all_pieces_down(lowest_line_y, lines_completed)
 		parent_node.active_tet.update_ghost()
 	
 	func on_timeout():
