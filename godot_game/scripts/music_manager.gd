@@ -5,7 +5,6 @@ extends AudioStreamPlayer
 
 ## Index of the current track in the [param music_selection]
 var i:int = 0
-var blah = [2,4,7,5]
 func _ready():
 	# Play the track at loaded index.
 	self.stream = music_selection[self.i]
