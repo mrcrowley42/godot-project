@@ -5,7 +5,7 @@ extends AudioStreamPlayer
 
 ## Index of the current track in the [param music_selection]
 var i:int = 0
-
+var blah = [2,4,7,5]
 func _ready():
 	# Play the track at loaded index.
 	self.stream = music_selection[self.i]
@@ -13,12 +13,18 @@ func _ready():
 	
 func move_track(offset=0):
 	# Wrap index around 
-	var new_index = (i + offset) %music_selection.size()
-	if new_index < 0:
-		new_index = music_selection.size() + new_index
-	self.i = new_index
+	self.i = wrap_index(music_selection, i, offset)
+	print(i)
 	stream = music_selection[self.i]
 	self.play()
+	
+## Returns the new index of an Array that should wrap around, when shifted by [param offset] places.
+func wrap_index(list: Array, current_index: int, offset: int) -> int:
+	var new_index = (current_index + offset) % list.size()
+	if new_index < 0:
+		new_index = list.size() + new_index
+	return new_index
+	
 
 func cycle_forward():
 	move_track(1)
