@@ -12,7 +12,11 @@ func _ready():
 	self.play()
 	
 func move_track(offset=0):
-	self.i = (self.i + offset) % music_selection.size()
+	# Wrap index around 
+	var new_index = (i + offset) %music_selection.size()
+	if new_index < 0:
+		new_index = music_selection.size() + new_index
+	self.i = new_index
 	stream = music_selection[self.i]
 	self.play()
 
