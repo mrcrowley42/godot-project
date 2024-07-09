@@ -19,6 +19,8 @@ class_name StatusManager extends Node2D
 ## Stores a reference to the scenes Creature.
 @onready var creature: Creature = %Creature
 
+var holiday_mode: bool = false
+
 ## Creates a new timer that loops [param rate] times per second,
 ## and executes the [param timeout_func] at the end of each loop.
 func new_timer(rate: float, timeout_func: Callable) -> void:

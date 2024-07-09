@@ -6,10 +6,17 @@ const DATA = "data"
 const SAVE = "save"
 const LOAD = "load"
 
+var last_opened: float
+@onready var stat_man: StatusManager = %StatusManager
+
 func _ready():
 	load_data()
 	load_settings_data()
-
+	
+	print("%.2f seconds since last played." %[Time.get_unix_time_from_system() - last_opened])
+	var holiday_status = "were" if stat_man.holiday_mode else "were not"
+	print("And you %s on holiday." % [holiday_status])
+	
 func _on_save_pressed():
 	%BtnClick.play()
 	%SFX.play_sound("correct")
@@ -66,7 +73,7 @@ func load_data():
 	
 	var save_file = FileAccess.open(Globals.SAVE_DATA_FILE, FileAccess.READ)
 	var file_lines: Array = bytes_to_var(save_file.get_var())
-	var _metadata = file_lines.pop_at(0)
+	last_opened = file_lines.pop_at(0)['time_saved']
 	
 	for line in file_lines:
 		var parsed_line = JSON.parse_string(line)
@@ -111,6 +118,3 @@ func _input(event) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
 		get_tree().quit()
-
-func _on_button_down():
-	pass # Replace with function body.
