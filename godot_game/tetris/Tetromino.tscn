@@ -24,6 +24,11 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_udxdd"]
 animations = [{
+"frames": [],
+"loop": true,
+"name": &"empty",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_lviqe")
@@ -223,7 +228,7 @@ layer = 11
 
 [node name="Body" type="AnimatedSprite2D" parent="CanvasLayer"]
 sprite_frames = SubResource("SpriteFrames_udxdd")
-animation = &"skew_a"
+animation = &"empty"
 script = ExtResource("21_uh3hb")
 
 [node name="l_a" type="Area2D" parent="CanvasLayer/Body"]
@@ -394,5 +399,3 @@ visible = false
 modulate = Color(1, 1, 1, 0.235294)
 sprite_frames = SubResource("SpriteFrames_3jfmm")
 animation = &"l_a"
-
-[connection signal="collided" from="CanvasLayer/Body" to="." method="_on_body_collided"]

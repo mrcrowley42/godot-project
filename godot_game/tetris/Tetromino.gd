@@ -3,6 +3,7 @@ extends Node2D
 class_name Tetromino
 
 signal placed
+signal remove_piece
 
 const SMALL_SCALE = Vector2(0.5, 0.5)
 const SQUARE_SIZE: Vector2 = Vector2(30, 30)
@@ -44,10 +45,12 @@ func init(piece: String, b_pos: Vector2, b_size: Vector2, previous_pieces):
 	body.set_anim(piece)
 	body.setup_ghost(ghost)
 	all_pieces = previous_pieces
+	body.no_collisions.connect(no_more_collisions)
 
 func place_tet():
 	resting = true
 	ghost.visible = false
+	body.spawn_singular_squares()
 	placed.emit()
 
 func gravity_tick():
@@ -235,3 +238,8 @@ func check_for_collision(y_offset=0):
 class CollisionInfo:
 	var incident_body;  # Tetromino
 	var x_direction;  # < -1 or 1 >
+
+## called when the body finds it has no more collision points enabled
+func no_more_collisions():
+	all_pieces.erase(self)
+	remove_piece.emit(self)

@@ -27,7 +27,7 @@ var queued_1: Tetromino;  # save to free them later
 var queued_2: Tetromino;
 
 func get_next_piece() -> String:
-	return "square"
+	return "l_a"
 	if len(tet_queue) < 4:
 		generate_tet_queue()
 	var piece = tet_queue.pop_front()
@@ -54,10 +54,11 @@ func activate_tet(tetromino):
 	active_tet.connect("placed", active_tet_placed)
 
 func activate_new_tet(piece):
-	var new_tet = base_tet.instantiate()
+	var new_tet: Tetromino = base_tet.instantiate()
 	add_child(new_tet)
 	new_tet.init(piece, grid_bg.position, BOARD_SIZE, all_pieces)
 	activate_tet(new_tet)
+	new_tet.remove_piece.connect(remove_tet)
 
 ## hold active tet and spawn currently held piece or new piece
 func hold_active_tet():
@@ -116,8 +117,7 @@ func _on_quick_drop_timer_timeout():
 func active_tet_placed():
 	all_pieces.append(active_tet)
 	
-	var completed_lines = check_for_completed_lines()
-	
+	check_for_completed_lines()
 	activate_new_tet(get_next_piece())
 	can_hold = true
 
@@ -166,7 +166,7 @@ func check_for_completed_lines():
 			for cl: CompletedLine in newly_completed_lines:
 				if y_pos == cl.lowest_line_y + (30 * cl.lines_completed):
 					cl.lines_completed += 1
-					cl.add_nodes(nodes_array, y_pos)
+					cl.add_nodes(nodes_array)
 					added = true
 			if !added:
 				newly_completed_lines.append(CompletedLine.new(self, nodes_array, y_pos))
@@ -177,25 +177,25 @@ class CompletedLine:
 	var timeout_counter: int = 0
 	var nodes: Array = []  # nodes encompassed in the line/s
 	var lines_completed: int = 1
-	var all_y_positions = []
 	var lowest_line_y
 	
 	func _init(parent: Node2D, initial_nodes: Array, y_pos):
 		parent_node = parent
-		add_nodes(initial_nodes, y_pos)
+		add_nodes(initial_nodes)
 		timer = parent.add_cl_timer(self)
 		lowest_line_y = y_pos  # the one given in constructor will always be the lowest
 	
-	func add_nodes(nodes_list: Array, y_pos):
-		all_y_positions.append(y_pos)
+	func add_nodes(nodes_list: Array):
 		nodes += nodes_list
 	
 	func complete():
-		for y_pos in all_y_positions:
-			parent_node.completing_lines.erase(y_pos)
-		for node in nodes:
+		for line_num in lines_completed:  # remove y position from completing lines
+			parent_node.completing_lines.erase(lowest_line_y - (30 * (line_num - 1)))
+		for node: CollisionShape2D in nodes:
+			node.disabled = true
 			node.queue_free()  # outright deletion >:)
 		timer.queue_free()
+		parent_node.active_tet.update_ghost()
 	
 	func on_timeout():
 		timeout_counter += 1
@@ -214,3 +214,8 @@ func add_cl_timer(cl: CompletedLine) -> Timer:
 	t.timeout.connect(on_timeout)
 	add_child(t)
 	return t
+
+## called when a placed tet body finds it has no more collision points enabled
+func remove_tet(tet: Tetromino):
+	all_pieces.erase(tet)
+	tet.queue_free()

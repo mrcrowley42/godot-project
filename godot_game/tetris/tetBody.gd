@@ -2,8 +2,9 @@ extends AnimatedSprite2D
 
 class_name TetBody
 
-signal collided
+signal no_collisions
 
+const TEXTURE_PATH = 'res://tetris/tetrominos/'
 const TOP = 0
 const BOTTOM = 1
 const LEFT = 2
@@ -74,6 +75,10 @@ func get_raw_collision_points():
 	for point: CollisionShape2D in collision_area.get_children():
 		if !point.disabled:
 			points.append(Vector2(base_pos + relative_pos + rotate_point(point.position)))
+	
+	# has no more collision points, delete
+	if len(points) == 0:
+		no_collisions.emit()
 	return points
 
 ## returns the collision node of the body at the given screen position
@@ -142,3 +147,15 @@ func rewind_frame():
 	frame -= 1 if frame > 0 else -get_frame_count()
 	ghost.frame = frame
 	update_collision()
+
+func spawn_singular_squares():
+	collision_area.visible = true
+	var sprite: Sprite2D = Sprite2D.new()
+	sprite.texture = load(TEXTURE_PATH + animation + '_single.png')
+	sprite.rotation_degrees -= get_rotation_addition() * frame  # un-rotate
+	sprite.z_index = -1  # so i can still see collisions
+	set_animation("empty")
+	
+	for coll: CollisionShape2D in collision_area.get_children():
+		if !coll.disabled:
+			coll.add_child(sprite.duplicate())
