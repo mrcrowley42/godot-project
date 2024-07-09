@@ -7,6 +7,7 @@ const SAVE = "save"
 const LOAD = "load"
 
 var last_opened: float
+
 @onready var stat_man: StatusManager = %StatusManager
 
 func _ready():

@@ -254,9 +254,9 @@ corner_radius_bottom_left = 10
 script/source = "extends Window
 
 @export var enabled:bool
-
 func _ready():
 	visible = enabled
+	
 "
 
 [node name="Game" type="Node"]
@@ -356,6 +356,7 @@ hue_variation_min = 1.0
 hue_variation_max = 1.0
 
 [node name="UI" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
 layer = 2
 
 [node name="ScreenControls" type="Control" parent="UI"]

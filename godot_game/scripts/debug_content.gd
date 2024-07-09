@@ -6,6 +6,7 @@ extends Control
 @onready var music_track = %MainMusic
 @onready var screen_tint = %BG
 @onready var minigame_man = %MinigameManager
+var clippy: bool = false
 
 func _on_h_slider_value_changed(value):
 	stat_man.time_multiplier = value
@@ -41,3 +42,14 @@ func _on_hat_btn_button_down():
 
 func _on_glasses_btn_button_down():
 	creature.find_child('Glasses').visible = !creature.find_child('Glasses').visible
+
+
+func _on_button_2_pressed():
+	clippy = !clippy
+	var window = creature.get_window()
+	creature.get_viewport().transparent_bg = clippy
+	window.borderless = clippy
+	window.transparent = clippy
+	window.always_on_top = clippy
+	%UI.visible = !clippy
+	%BG.visible = !clippy

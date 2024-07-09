@@ -386,6 +386,28 @@ text = "%s"
 label_settings = SubResource("LabelSettings_na8du")
 script = ExtResource("11_y5yt0")
 
+[node name="Button2" type="Button" parent="."]
+offset_left = 375.0
+offset_top = 123.0
+offset_right = 508.0
+offset_bottom = 157.0
+theme = ExtResource("8_lqg4h")
+text = "Clippy Mode"
+
+[node name="MenuBar" type="MenuBar" parent="."]
+layout_mode = 0
+offset_right = 543.0
+offset_bottom = 62.0
+
+[node name="PopupMenu" type="PopupMenu" parent="MenuBar"]
+title = "sdfsf"
+item_count = 2
+item_0/text = "um why"
+item_0/id = 0
+item_0/separator = true
+item_1/text = "why not"
+item_1/id = 1
+
 [connection signal="value_changed" from="OverlayStrength" to="." method="_on_overlay_strength_value_changed"]
 [connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="button_down" from="GlassesBtn" to="." method="_on_glasses_btn_button_down"]
@@ -396,3 +418,4 @@ script = ExtResource("11_y5yt0")
 [connection signal="button_down" from="WindowSizeControls/HBoxContainer/NormaliseButton" to="WindowSizeControls" method="_on_normalise_down"]
 [connection signal="button_down" from="WindowSizeControls/HBoxContainer/MaximiseButton" to="WindowSizeControls" method="_on_max_down"]
 [connection signal="popup_closed" from="ColorPickerButton" to="." method="_on_color_picker_button_popup_closed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
