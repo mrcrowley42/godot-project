@@ -15,3 +15,4 @@ data_*/
 # Mac-OS-specific ignores
 
 .DS_Store
+.~lock.creechur_ideas.odt\#
