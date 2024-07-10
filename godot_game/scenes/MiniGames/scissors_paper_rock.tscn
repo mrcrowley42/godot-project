@@ -1,0 +1,140 @@
+[gd_scene load_steps=8 format=3 uid="uid://dnfq7jawtfv5q"]
+
+[ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="1_sqv3p"]
+[ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="2_egqjh"]
+[ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="3_2jjfn"]
+[ext_resource type="Script" path="res://scripts/scissors_paper_rock.gd" id="3_7jb5j"]
+[ext_resource type="Script" path="res://scripts/memory_sfx_man.gd" id="5_2p5xq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3wt50"]
+
+[sub_resource type="GDScript" id="GDScript_oqggf"]
+script/source = "extends Button
+
+func _on_button_down():
+	get_tree().root.propagate_notification(Globals.NOTIFICATION_MINIGAME_CLOSED)
+	find_parent(\"MiniGame\").queue_free()
+"
+
+[node name="MiniGame" type="Node2D"]
+
+[node name="BG" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(434, 434)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 53.0
+offset_top = 120.0
+offset_right = 487.0
+offset_bottom = 554.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.504611, 0.314187, 0.196612, 1)
+metadata/_edit_lock_ = true
+
+[node name="GameContainer" type="PanelContainer" parent="."]
+offset_left = 53.0
+offset_top = 120.0
+offset_right = 487.0
+offset_bottom = 554.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_3wt50")
+metadata/_edit_lock_ = true
+
+[node name="Node2D" type="Node2D" parent="GameContainer"]
+
+[node name="CreatureChoice" type="Label" parent="GameContainer/Node2D"]
+unique_name_in_owner = true
+offset_top = 139.0
+offset_right = 434.0
+offset_bottom = 161.0
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_egqjh")
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Buttons" type="HBoxContainer" parent="GameContainer/Node2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 36.0
+offset_top = 318.0
+offset_right = 396.0
+offset_bottom = 394.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="ScissorsBtn" type="Button" parent="GameContainer/Node2D/Buttons"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_sqv3p")
+text = "Scissors"
+
+[node name="PaperBtn" type="Button" parent="GameContainer/Node2D/Buttons"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_sqv3p")
+text = "Paper"
+
+[node name="RockBtn" type="Button" parent="GameContainer/Node2D/Buttons"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_sqv3p")
+text = "Rock"
+
+[node name="Node2D2" type="Node2D" parent="GameContainer"]
+
+[node name="GameStatus" type="Label" parent="GameContainer/Node2D2"]
+unique_name_in_owner = true
+offset_top = 202.0
+offset_right = 434.0
+offset_bottom = 272.0
+theme_override_constants/line_spacing = 12
+theme_override_fonts/font = ExtResource("2_egqjh")
+theme_override_font_sizes/font_size = 32
+text = "Make your choice
+ "
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="GameLogic" type="Node" parent="."]
+script = ExtResource("3_7jb5j")
+
+[node name="ScoreLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 318.0
+offset_top = 148.0
+offset_right = 462.0
+offset_bottom = 235.0
+theme = ExtResource("3_2jjfn")
+text = "Score:
+Player:   %s
+Creature: %s"
+
+[node name="CloseBtn" type="Button" parent="."]
+offset_left = 78.0
+offset_top = 144.0
+offset_right = 179.0
+offset_bottom = 187.0
+theme = ExtResource("1_sqv3p")
+text = "Close"
+script = SubResource("GDScript_oqggf")
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+bus = &"SFX"
+script = ExtResource("5_2p5xq")
+
+[connection signal="button_down" from="GameContainer/Node2D/Buttons/ScissorsBtn" to="GameLogic" method="_on_scissors_btn_button_down"]
+[connection signal="button_down" from="GameContainer/Node2D/Buttons/PaperBtn" to="GameLogic" method="_on_paper_btn_button_down"]
+[connection signal="button_down" from="GameContainer/Node2D/Buttons/RockBtn" to="GameLogic" method="_on_rock_btn_button_down"]
+[connection signal="button_down" from="CloseBtn" to="CloseBtn" method="_on_button_down"]

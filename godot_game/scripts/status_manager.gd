@@ -1,0 +1,59 @@
+@icon("res://icons/ClassList.svg")
+
+class_name StatusManager extends Node2D
+## Script responsible for passive drain of Creature stats
+
+@export_category("Status Controls")
+@export_group("Passive drain controls")
+@export var hp_rate: float = 1
+@export var hp_amount: float = 5
+@export var mp_rate: float = 4
+@export var mp_amount: float = 8
+@export var sp_rate: float = 10
+@export var sp_amount: float = 2
+@export var ap_rate: float = 30
+@export var ap_amount: float = 1
+signal finished_loading()
+## Property that scales the damage values of all passive drain timers. 
+@export var time_multiplier: float = 0.5
+## Stores a reference to the scenes Creature.
+@onready var creature: Creature = %Creature
+
+var holiday_mode: bool = false
+
+## Creates a new timer that loops [param rate] times per second,
+## and executes the [param timeout_func] at the end of each loop.
+func new_timer(rate: float, timeout_func: Callable) -> void:
+	var timer = Timer.new()
+	timer.wait_time = 1 / rate
+	timer.autostart = true
+	timer.timeout.connect(timeout_func)
+	add_child(timer)
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	new_timer(hp_rate, hp_timeout)
+	new_timer(mp_rate, mp_timeout)
+	new_timer(sp_rate, sp_timeout)
+	new_timer(ap_rate, ap_timeout)
+
+func hp_timeout():
+	creature.dmg(hp_amount * time_multiplier, 'hp')
+	
+func mp_timeout():
+	creature.dmg(mp_amount * time_multiplier, 'mp')
+
+func sp_timeout():
+	creature.dmg(sp_amount * time_multiplier, 'sp')
+
+func ap_timeout():
+	creature.dmg(ap_amount * time_multiplier, 'ap')
+
+func save():
+	return {"holiday_mode": holiday_mode}
+	
+func load(data):
+	if data.has("holiday_mode"):
+		holiday_mode = data["holiday_mode"]
+	finished_loading.emit()
+		

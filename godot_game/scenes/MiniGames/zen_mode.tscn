@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://drotl04h8ywfe"]
+
+[ext_resource type="Script" path="res://scripts/zen_mode.gd" id="1_kb7c0"]
+[ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="2_s7g67"]
+
+[sub_resource type="Gradient" id="Gradient_5hppj"]
+offsets = PackedFloat32Array(0, 0.91623)
+colors = PackedColorArray(0.529412, 0.576471, 1, 1, 0.0352941, 0.329412, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dq5kv"]
+gradient = SubResource("Gradient_5hppj")
+width = 432
+height = 432
+fill_from = Vector2(0, 0.166667)
+fill_to = Vector2(0, 1)
+
+[sub_resource type="GDScript" id="GDScript_a14sq"]
+script/source = "extends Button
+
+func _on_button_down():
+	get_tree().root.propagate_notification(Globals.NOTIFICATION_MINIGAME_CLOSED)
+	find_parent(\"MiniGame\").queue_free()
+"
+
+[node name="MiniGame" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.388235)
+offset_left = 53.0
+offset_top = 120.0
+offset_right = 485.0
+offset_bottom = 552.0
+texture = SubResource("GradientTexture2D_dq5kv")
+
+[node name="GameLogic" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_kb7c0")
+
+[node name="CloseBtn" type="Button" parent="."]
+offset_left = 78.0
+offset_top = 141.0
+offset_right = 179.0
+offset_bottom = 184.0
+theme = ExtResource("2_s7g67")
+text = "Stop"
+script = SubResource("GDScript_a14sq")
+
+[connection signal="button_down" from="CloseBtn" to="CloseBtn" method="_on_button_down"]

@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://duucock0yfeav"]
+
+[ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="1_8aans"]
+[ext_resource type="Texture2D" uid="uid://b5wm1uu7kfopt" path="res://images/imgonnafreakinloseit.png" id="1_p13tq"]
+[ext_resource type="Script" path="res://scripts/restart_btn.gd" id="2_kmklq"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Imgonnafreakinloseit" type="Sprite2D" parent="."]
+position = Vector2(324, 337)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_p13tq")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = 207.0
+offset_top = 179.0
+offset_right = 325.0
+offset_bottom = 452.0
+theme_override_font_sizes/font_size = 200
+text = ":("
+
+[node name="Restart" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 177.5
+offset_top = 86.0
+offset_right = 342.5
+offset_bottom = 170.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_8aans")
+theme_override_font_sizes/font_size = 24
+text = "RESTART"
+script = ExtResource("2_kmklq")
+
+[connection signal="pressed" from="Restart" to="Restart" method="_on_pressed"]

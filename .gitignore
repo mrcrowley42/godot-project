@@ -3,6 +3,7 @@
 export.cfg
 export_presets.cfg
 *.save
+*.cfg
 
 # Imported translations (automatically generated from CSV files)
 *.translation
@@ -14,3 +15,4 @@ data_*/
 # Mac-OS-specific ignores
 
 .DS_Store
+.~lock.creechur_ideas.odt\#
