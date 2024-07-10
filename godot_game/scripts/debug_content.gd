@@ -6,6 +6,7 @@ extends Control
 @onready var music_track = %MainMusic
 @onready var screen_tint = %BG
 @onready var minigame_man = %MinigameManager
+@onready var drag_area = %DragArea
 
 var clippy: bool = false
 
@@ -49,18 +50,17 @@ func _on_hat_btn_button_down():
 func _on_glasses_btn_button_down():
 	creature.find_child('Glasses').visible = !creature.find_child('Glasses').visible
 
+func _on_button_3_toggled(toggled_on):
+	stat_man.holiday_mode = toggled_on
+	print(stat_man.holiday_mode)
 
-func _on_button_2_pressed():
+func _on_clippy_btn_pressed():
 	clippy = !clippy
 	var window = creature.get_window()
+	drag_area.visible = clippy
 	creature.get_viewport().transparent_bg = clippy
 	window.borderless = clippy
 	window.transparent = clippy
 	window.always_on_top = clippy
 	%UI.visible = !clippy
 	%BG.visible = !clippy
-
-
-func _on_button_3_toggled(toggled_on):
-	stat_man.holiday_mode = toggled_on
-	print(stat_man.holiday_mode)

@@ -8,7 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://bebjn5n2kjwgb" path="res://scenes/Creatures/creature.tscn" id="5_khxd0"]
 [ext_resource type="Script" path="res://scripts/Confetti.gd" id="7_rqbrx"]
 [ext_resource type="Script" path="res://scripts/control_panel.gd" id="8_bgltf"]
+[ext_resource type="Theme" uid="uid://dl1wes8p6lqlb" path="res://themes/invisible.tres" id="8_hlnwn"]
 [ext_resource type="Theme" uid="uid://1dv11a5ar0hg" path="res://themes/action_btn.tres" id="9_3efis"]
+[ext_resource type="Script" path="res://scripts/drag_window.gd" id="9_13uut"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="10_pai17"]
 [ext_resource type="Texture2D" uid="uid://dckd2hhimpp2x" path="res://icons/cup-straw.svg" id="11_vrg61"]
 [ext_resource type="Script" path="res://scripts/heal_button.gd" id="12_4afpd"]
@@ -354,6 +356,22 @@ scale_amount_max = 15.0
 color_initial_ramp = SubResource("Gradient_asbj7")
 hue_variation_min = 1.0
 hue_variation_max = 1.0
+
+[node name="DragArea" type="Button" parent="Gameplay"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 135.0
+offset_top = 270.0
+offset_right = 391.0
+offset_bottom = 526.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("8_hlnwn")
+script = ExtResource("9_13uut")
 
 [node name="UI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
@@ -1146,6 +1164,7 @@ script = SubResource("GDScript_o2bb2")
 enabled = true
 
 [node name="DebugContent" parent="DebugWindow" instance=ExtResource("55_xngmg")]
+unique_name_in_owner = true
 
 [node name="Audio" type="Node" parent="."]
 
@@ -1181,6 +1200,10 @@ unique_name_in_owner = true
 bus = &"SFX"
 script = ExtResource("68_sw7tx")
 
+[connection signal="button_down" from="Gameplay/DragArea" to="Gameplay/DragArea" method="_on_button_down"]
+[connection signal="button_up" from="Gameplay/DragArea" to="Gameplay/DragArea" method="_on_button_up"]
+[connection signal="mouse_entered" from="Gameplay/DragArea" to="Gameplay/DragArea" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Gameplay/DragArea" to="Gameplay/DragArea" method="_on_mouse_exited"]
 [connection signal="visibility_changed" from="UI/ScreenControls/FoodControls" to="UI/ScreenControls/FoodControls" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 1" to="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 1" method="_on_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 2" to="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 2" method="_on_button_down"]
