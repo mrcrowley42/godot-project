@@ -359,19 +359,25 @@ hue_variation_max = 1.0
 
 [node name="DragArea" type="Button" parent="Gameplay"]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 141.0
-offset_top = 264.0
-offset_right = 389.0
-offset_bottom = 529.0
+offset_left = 135.0
+offset_top = 270.0
+offset_right = 391.0
+offset_bottom = 526.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("8_hlnwn")
 script = ExtResource("9_13uut")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Gameplay/DragArea"]
+offset_right = 256.0
+offset_bottom = 256.0
+border_width = 2.1
 
 [node name="UI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
