@@ -6,6 +6,7 @@ extends Control
 @onready var music_track = %MainMusic
 @onready var screen_tint = %BG
 @onready var minigame_man = %MinigameManager
+@onready var drag_area = %DragArea
 
 var clippy: bool = false
 
@@ -53,6 +54,7 @@ func _on_glasses_btn_button_down():
 func _on_button_2_pressed():
 	clippy = !clippy
 	var window = creature.get_window()
+	drag_area.visible = clippy
 	creature.get_viewport().transparent_bg = clippy
 	window.borderless = clippy
 	window.transparent = clippy

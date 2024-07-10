@@ -387,6 +387,7 @@ label_settings = SubResource("LabelSettings_na8du")
 script = ExtResource("11_y5yt0")
 
 [node name="Button2" type="Button" parent="."]
+layout_mode = 0
 offset_left = 375.0
 offset_top = 123.0
 offset_right = 508.0
@@ -395,6 +396,7 @@ theme = ExtResource("8_lqg4h")
 text = "Clippy Mode"
 
 [node name="HolidayBtn" type="Button" parent="."]
+layout_mode = 0
 offset_left = 215.0
 offset_top = 123.0
 offset_right = 348.0
