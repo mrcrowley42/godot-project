@@ -236,8 +236,8 @@ func check_for_collision(y_offset=0):
 	return null
 
 class CollisionInfo:
-	var incident_body;  # Tetromino
-	var x_direction;  # < -1 or 1 >
+	var incident_body = null;  # Tetromino
+	var x_direction = 0;  # < -1 or 1 >
 
 ## called when the body finds it has no more collision points enabled
 func no_more_collisions():

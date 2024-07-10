@@ -27,7 +27,7 @@ var queued_1: Tetromino;  # save to free them later
 var queued_2: Tetromino;
 
 func get_next_piece() -> String:
-	return "l_a"
+	return "square"
 	if len(tet_queue) < 4:
 		generate_tet_queue()
 	var piece = tet_queue.pop_front()
@@ -141,15 +141,13 @@ func update_ui_queue():
 	queued_1.body.scale = queued_1.SMALL_SCALE
 	queued_2.body.scale = queued_2.SMALL_SCALE
 
+## accesses the raw coll2d children of each tet body's collision area (to avoid )
 func move_all_pieces_down(from_y, places: int):
 	for tet in all_pieces:
 		if is_instance_of(tet, Tetromino):
-			for point: Vector2 in tet.body.get_raw_collision_points():
-				if point.y < from_y:
-					var node: CollisionShape2D = tet.body.get_coll_node_from_raw_position(point)
-					print('--', node.position.y)
-					node.position.y += 30 * places
-					print(node.position.y)
+			for node: CollisionShape2D in tet.body.collision_area.get_children():
+				if !node.disabled and Vector2(tet.body.base_pos + tet.body.relative_pos + node.position).y < from_y:
+						node.position.y += 30 * places
 
 ## checks through every placed node pos and finds any new completed lines (excludes currently completing lines)
 func check_for_completed_lines():
@@ -165,6 +163,7 @@ func check_for_completed_lines():
 	
 	var sorted_keys = lines_dict.keys()
 	sorted_keys.sort()
+	sorted_keys.reverse()
 	for y_pos in sorted_keys:  # from bottom up
 		var nodes_array: Array = lines_dict[y_pos]
 		if y_pos not in completing_lines and len(nodes_array) >= 10:  # full line
@@ -174,7 +173,7 @@ func check_for_completed_lines():
 			# otherwise create a new CompletedLine
 			var added = false
 			for cl: CompletedLine in newly_completed_lines:
-				if y_pos == cl.lowest_line_y + (30 * cl.lines_completed):
+				if y_pos == cl.lowest_line_y - (30 * cl.lines_completed):
 					cl.lines_completed += 1
 					cl.add_nodes(nodes_array)
 					added = true
@@ -200,7 +199,7 @@ class CompletedLine:
 	
 	func complete():
 		for line_num in lines_completed:  # remove y position from completing lines
-			parent_node.completing_lines.erase(lowest_line_y - (30 * (line_num - 1)))
+			parent_node.completing_lines.erase(lowest_line_y - (30 * line_num))
 		for node: CollisionShape2D in nodes:
 			node.disabled = true
 			node.visible = false

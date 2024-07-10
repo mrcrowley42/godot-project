@@ -29,7 +29,8 @@ const TET_NORMALS = {
 var ghost: AnimatedSprite2D;
 var base_pos: Vector2
 var relative_pos: Vector2 = Vector2(0, 0)
-var collision_area: Area2D;
+var collision_area: Area2D
+var og_coll_positions = {}  # key: node name, value: pos
 var current_rotation = 0
 
 func get_normal(direction: int) -> int:
@@ -64,7 +65,7 @@ func negative_zero_correction(vec: Vector2) -> Vector2:
 
 ## rotate a position by current_rotation around 0, 0
 func rotate_point(point: Vector2) -> Vector2:
-	var radians = get_rotation_addition() * (PI / 180)
+	var radians = current_rotation * (PI / 180)
 	var out = Vector2(point)
 	out.x = cos(radians) * point.x - sin(radians) * point.y
 	out.y = sin(radians) * point.x + cos(radians) * point.y
@@ -83,6 +84,7 @@ func get_raw_collision_points():
 	return points
 
 ## returns the collision node of the body at the given screen position
+## only ever called on already placed pieces so rotation wont change
 func get_coll_node_from_raw_position(raw_pos: Vector2):
 	for node: CollisionShape2D in collision_area.get_children():
 		if !node.disabled and raw_pos - (base_pos + relative_pos) == node.position:
@@ -94,6 +96,9 @@ func set_anim(anim):
 	set_animation(anim)
 	collision_area = find_child(anim)
 	collision_area.visible = true
+	
+	for node: CollisionShape2D in collision_area.get_children():
+		og_coll_positions[node.name] = node.position
 
 func setup_ghost(ghost_node: AnimatedSprite2D):
 	ghost = ghost_node
@@ -133,9 +138,8 @@ func update_collision():
 			c.disabled = !c.disabled
 	else:  # rotate normally
 		current_rotation = addition * frame
-		print(current_rotation)
 		for node: CollisionShape2D in collision_area.get_children():
-			node.position = rotate_point(node.position)
+			node.position = rotate_point(og_coll_positions[node.name])
 
 func get_frame_count() -> int:
 	return int(sprite_frames.get_frame_count(animation))
