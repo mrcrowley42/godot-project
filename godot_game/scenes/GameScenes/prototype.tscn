@@ -1,4 +1,4 @@
-[gd_scene load_steps=93 format=3 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=95 format=3 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/prototype.gd" id="1_u8fgs"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_w1hur"]
@@ -6,9 +6,11 @@
 [ext_resource type="Shader" path="res://shaders/multiply_colour.gdshader" id="4_8sx1k"]
 [ext_resource type="Texture2D" uid="uid://cdbor7hjfbusn" path="res://UI stuff/Universal/background.png" id="4_pmdaq"]
 [ext_resource type="PackedScene" uid="uid://bebjn5n2kjwgb" path="res://scenes/Creatures/creature.tscn" id="5_khxd0"]
+[ext_resource type="Texture2D" uid="uid://e4fa5a836ri0" path="res://icons/icon.svg" id="7_icv7c"]
 [ext_resource type="Script" path="res://scripts/Confetti.gd" id="7_rqbrx"]
 [ext_resource type="Script" path="res://scripts/control_panel.gd" id="8_bgltf"]
 [ext_resource type="Theme" uid="uid://1dv11a5ar0hg" path="res://themes/action_btn.tres" id="9_3efis"]
+[ext_resource type="Script" path="res://scenes/GameScenes/drag_window.gd" id="9_13uut"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="10_pai17"]
 [ext_resource type="Texture2D" uid="uid://dckd2hhimpp2x" path="res://icons/cup-straw.svg" id="11_vrg61"]
 [ext_resource type="Script" path="res://scripts/heal_button.gd" id="12_4afpd"]
@@ -354,6 +356,14 @@ scale_amount_max = 15.0
 color_initial_ramp = SubResource("Gradient_asbj7")
 hue_variation_min = 1.0
 hue_variation_max = 1.0
+
+[node name="TextureRect" type="TextureRect" parent="Gameplay"]
+offset_left = 190.0
+offset_top = 480.0
+offset_right = 318.0
+offset_bottom = 608.0
+texture = ExtResource("7_icv7c")
+script = ExtResource("9_13uut")
 
 [node name="UI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
