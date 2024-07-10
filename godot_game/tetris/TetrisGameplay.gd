@@ -141,10 +141,11 @@ func update_ui_queue():
 	queued_1.body.scale = queued_1.SMALL_SCALE
 	queued_2.body.scale = queued_2.SMALL_SCALE
 
-## accesses the raw coll2d children of each tet body's collision area (to avoid )
+## accesses the raw coll2d children of each tet body's collision area
 func move_all_pieces_down(from_y, places: int):
 	for tet in all_pieces:
 		if is_instance_of(tet, Tetromino):
+			# i gave up and just retrieved the children, too many small differences otherwise
 			for node: CollisionShape2D in tet.body.collision_area.get_children():
 				if !node.disabled and Vector2(tet.body.base_pos + tet.body.relative_pos + node.position).y < from_y:
 						node.position.y += 30 * places
