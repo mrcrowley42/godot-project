@@ -6,7 +6,6 @@ extends Node2D
 @onready var grid_bg = find_child("GridBG")
 @onready var hold_box = find_child("HoldBox")
 @onready var next_box = find_child("NextBox")
-@onready var ground = find_child("Ground")
 
 const INPUTS_LEFT = [KEY_A, KEY_LEFT]
 const INPUTS_RIGHT = [KEY_D, KEY_RIGHT]
@@ -16,7 +15,7 @@ const ALLOWED_PIECES = ['l_a', 'l_b', 'long', 'skew_a', 'skew_b', 'square', 't']
 
 # GAME STATES
 var running = true
-var all_pieces = []  # list if Tetrominoes
+var all_pieces = []
 var tet_queue = []
 var active_tet: Tetromino = null  # Tetromino
 var held_tet: Tetromino = null
@@ -56,9 +55,7 @@ func activate_tet(tetromino):
 func activate_new_tet(piece):
 	var new_tet: Tetromino = base_tet.instantiate()
 	add_child(new_tet)
-	var all_pieces_with_ground = all_pieces.duplicate()
-	all_pieces_with_ground.append(ground)
-	new_tet.init(piece, grid_bg.position, BOARD_SIZE, all_pieces_with_ground)
+	new_tet.init(piece, grid_bg.position, BOARD_SIZE, all_pieces)
 	activate_tet(new_tet)
 	new_tet.remove_piece.connect(remove_tet)
 
@@ -78,6 +75,7 @@ func hold_active_tet():
 		can_hold = false
 
 func _ready():
+	all_pieces.append(find_child("Ground"))
 	activate_new_tet(get_next_piece())
 	generate_tet_queue()
 	update_ui_queue()
@@ -144,31 +142,34 @@ func update_ui_queue():
 	queued_2.body.scale = queued_2.SMALL_SCALE
 
 func check_for_game_over():
-	for tet: Tetromino in all_pieces:
-		for point: Vector2 in tet.body.get_raw_collision_points():
-			if point.y - 30 <= grid_bg.position.y:
-				running = false
-				print("FAILURE")
-				return
+	for tet in all_pieces:
+		if is_instance_of(tet, Tetromino):
+			for point: Vector2 in tet.body.get_raw_collision_points():
+				if point.y - 30 <= grid_bg.position.y:
+					running = false
+					print("FAILURE")
+					return
 
 ## accesses the raw coll2d children of each tet body's collision area
 func move_all_pieces_down(above_y, places: int):
-	for tet: Tetromino in all_pieces:
-		# i gave up and just retrieved the children, too many small differences otherwise
-		for node: CollisionShape2D in tet.body.collision_area.get_children():
-			if !node.disabled and Vector2(tet.body.base_pos + tet.body.relative_pos + node.position).y < above_y:
-				node.position.y += 30 * places
+	for tet in all_pieces:
+		if is_instance_of(tet, Tetromino):
+			# i gave up and just retrieved the children, too many small differences otherwise
+			for node: CollisionShape2D in tet.body.collision_area.get_children():
+				if !node.disabled and Vector2(tet.body.base_pos + tet.body.relative_pos + node.position).y < above_y:
+					node.position.y += 30 * places
 
 ## checks through every placed node pos and finds any new completed lines (excludes currently completing lines)
 func check_for_completed_lines():
 	var completed_lines: Array[CompletedLine] = []
 	var lines_dict = {}  # saves the y pos (key) of nodes (Array value)
 	
-	for tet: Tetromino in all_pieces:
-		for point: Vector2 in tet.body.get_raw_collision_points():
-			if point.y not in lines_dict:
-				lines_dict[point.y] = []
-			lines_dict[point.y].append(tet.body.get_coll_node_from_raw_position(point))
+	for tet in all_pieces:
+		if is_instance_of(tet, Tetromino):
+			for point: Vector2 in tet.body.get_raw_collision_points():
+				if point.y not in lines_dict:
+					lines_dict[point.y] = []
+				lines_dict[point.y].append(tet.body.get_coll_node_from_raw_position(point))
 	
 	var sorted_keys = lines_dict.keys()
 	sorted_keys.sort()  # from top (lowest y pos) down
