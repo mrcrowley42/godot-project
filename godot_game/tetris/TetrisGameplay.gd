@@ -20,14 +20,12 @@ var active_tet: Tetromino = null  # Tetromino
 var held_tet: Tetromino = null
 var can_hold = true
 var is_quick_dropping = false
-var completing_lines: Array[float] = []  # lines that have been receognised as completed and are currently mid-animation
 
 # UI QUEUE (non initialised pieces)
 var queued_1: Tetromino;  # save to free them later 
 var queued_2: Tetromino;
 
 func get_next_piece() -> String:
-	return "square"
 	if len(tet_queue) < 4:
 		generate_tet_queue()
 	var piece = tet_queue.pop_front()
@@ -116,9 +114,8 @@ func _on_quick_drop_timer_timeout():
 ## triggered when the active tetromino is placed
 func active_tet_placed():
 	all_pieces.append(active_tet)
-	
-	check_for_completed_lines()
 	activate_new_tet(get_next_piece())
+	check_for_completed_lines()
 	can_hold = true
 
 func update_ui_queue():
@@ -142,17 +139,17 @@ func update_ui_queue():
 	queued_2.body.scale = queued_2.SMALL_SCALE
 
 ## accesses the raw coll2d children of each tet body's collision area
-func move_all_pieces_down(from_y, places: int):
+func move_all_pieces_down(above_y, places: int):
 	for tet in all_pieces:
 		if is_instance_of(tet, Tetromino):
 			# i gave up and just retrieved the children, too many small differences otherwise
 			for node: CollisionShape2D in tet.body.collision_area.get_children():
-				if !node.disabled and Vector2(tet.body.base_pos + tet.body.relative_pos + node.position).y < from_y:
-						node.position.y += 30 * places
+				if !node.disabled and Vector2(tet.body.base_pos + tet.body.relative_pos + node.position).y < above_y:
+					node.position.y += 30 * places
 
 ## checks through every placed node pos and finds any new completed lines (excludes currently completing lines)
 func check_for_completed_lines():
-	var newly_completed_lines: Array[CompletedLine] = []
+	var completed_lines: Array[CompletedLine] = []
 	var lines_dict = {}  # saves the y pos (key) of nodes (Array value)
 	
 	for tet in all_pieces:
@@ -163,69 +160,45 @@ func check_for_completed_lines():
 				lines_dict[point.y].append(tet.body.get_coll_node_from_raw_position(point))
 	
 	var sorted_keys = lines_dict.keys()
-	sorted_keys.sort()
-	sorted_keys.reverse()
-	for y_pos in sorted_keys:  # from bottom up
+	sorted_keys.sort()  # from top (lowest y pos) down
+	for y_pos in sorted_keys:
 		var nodes_array: Array = lines_dict[y_pos]
-		if y_pos not in completing_lines and len(nodes_array) >= 10:  # full line
-			completing_lines.append(y_pos)
-			
+		if len(nodes_array) >= 10:  # full line
 			# if directly above a CompletedLine that has just been created, add a line to it, 
 			# otherwise create a new CompletedLine
 			var added = false
-			for cl: CompletedLine in newly_completed_lines:
-				if y_pos == cl.lowest_line_y - (30 * cl.lines_completed):
+			for cl: CompletedLine in completed_lines:
+				if y_pos == cl.highest_y + (30 * cl.lines_completed):
 					cl.lines_completed += 1
 					cl.add_nodes(nodes_array)
 					added = true
 			if !added:
-				newly_completed_lines.append(CompletedLine.new(self, nodes_array, y_pos))
+				completed_lines.append(CompletedLine.new(self, nodes_array, y_pos))
+	
+	for line: CompletedLine in completed_lines:
+		line.complete()
 
 class CompletedLine:
 	var parent_node: Node2D
-	var timer: Timer
-	var timeout_counter: int = 0
 	var nodes: Array = []  # nodes encompassed in the line/s
 	var lines_completed: int = 1
-	var lowest_line_y
+	var highest_y
 	
 	func _init(parent: Node2D, initial_nodes: Array, y_pos):
 		parent_node = parent
 		add_nodes(initial_nodes)
-		timer = parent.add_cl_timer(self)
-		lowest_line_y = y_pos  # the pos given in constructor will always be the lowest
+		highest_y = y_pos  # the pos given in constructor will always be the highest
 	
 	func add_nodes(nodes_list: Array):
 		nodes += nodes_list
 	
 	func complete():
-		for line_num in lines_completed:  # remove y position from completing lines
-			parent_node.completing_lines.erase(lowest_line_y - (30 * line_num))
 		for node: CollisionShape2D in nodes:
 			node.disabled = true
 			node.visible = false
 			node.queue_free()  # outright deletion >:)
-		timer.queue_free()
-		parent_node.move_all_pieces_down(lowest_line_y, lines_completed)
+		parent_node.move_all_pieces_down(highest_y, lines_completed)
 		parent_node.active_tet.update_ghost()
-	
-	func on_timeout():
-		timeout_counter += 1
-		print(timeout_counter)
-		if timeout_counter > 6:
-			complete()
-
-## CompletedLine timer
-func add_cl_timer(cl: CompletedLine) -> Timer:
-	var on_timeout = func ():
-		cl.on_timeout()
-	
-	var t: Timer = Timer.new()
-	t.wait_time = 0.5
-	t.autostart = true
-	t.timeout.connect(on_timeout)
-	add_child(t)
-	return t
 
 ## called when a placed tet body finds it has no more collision points enabled
 func remove_tet(tet: Tetromino):
