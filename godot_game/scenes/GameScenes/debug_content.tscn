@@ -386,7 +386,7 @@ text = "%s"
 label_settings = SubResource("LabelSettings_na8du")
 script = ExtResource("11_y5yt0")
 
-[node name="Button2" type="Button" parent="."]
+[node name="ClippyBtn" type="Button" parent="."]
 layout_mode = 0
 offset_left = 375.0
 offset_top = 123.0
@@ -415,5 +415,5 @@ text = "Holiday Mode"
 [connection signal="button_down" from="WindowSizeControls/HBoxContainer/NormaliseButton" to="WindowSizeControls" method="_on_normalise_down"]
 [connection signal="button_down" from="WindowSizeControls/HBoxContainer/MaximiseButton" to="WindowSizeControls" method="_on_max_down"]
 [connection signal="popup_closed" from="ColorPickerButton" to="." method="_on_color_picker_button_popup_closed"]
-[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="ClippyBtn" to="." method="_on_clippy_btn_pressed"]
 [connection signal="toggled" from="HolidayBtn" to="." method="_on_button_3_toggled"]

@@ -1164,6 +1164,7 @@ script = SubResource("GDScript_o2bb2")
 enabled = true
 
 [node name="DebugContent" parent="DebugWindow" instance=ExtResource("55_xngmg")]
+unique_name_in_owner = true
 
 [node name="Audio" type="Node" parent="."]
 
@@ -1201,6 +1202,8 @@ script = ExtResource("68_sw7tx")
 
 [connection signal="button_down" from="Gameplay/DragArea" to="Gameplay/DragArea" method="_on_button_down"]
 [connection signal="button_up" from="Gameplay/DragArea" to="Gameplay/DragArea" method="_on_button_up"]
+[connection signal="mouse_entered" from="Gameplay/DragArea" to="Gameplay/DragArea" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Gameplay/DragArea" to="Gameplay/DragArea" method="_on_mouse_exited"]
 [connection signal="visibility_changed" from="UI/ScreenControls/FoodControls" to="UI/ScreenControls/FoodControls" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 1" to="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 1" method="_on_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 2" to="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 2" method="_on_button_down"]
