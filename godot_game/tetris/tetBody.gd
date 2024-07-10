@@ -12,18 +12,19 @@ const RIGHT = 3
 
 const SWITCH = -1  # special case for rotation
 const ROTATION = 9
+const COLOUR = 10
 
 const ALLOWED_TETS = ['l_a', 'l_b', 'long', 'skew_a', 'skew_b', 'square', 't']
 ## tet normals define square allowance on sides for each frame of each tetromino (needed since every texture is a square)
 ## based on: https://strategywiki.org/wiki/Tetris/Rotation_systems
-const TET_NORMALS = {
-	ALLOWED_TETS[0]: {0: "0100", 1: "0010", 2: "1000", 3: "0001", ROTATION: 90},
-	ALLOWED_TETS[1]: {0: "1000", 1: "0001", 2: "0100", 3: "0010", ROTATION: 90},
-	ALLOWED_TETS[2]: {0: "1200", 1: "0021", ROTATION: SWITCH},
-	ALLOWED_TETS[3]: {0: "1000", 1: "0010", ROTATION: -90},
-	ALLOWED_TETS[4]: {0: "1000", 1: "0010", ROTATION: -90},
-	ALLOWED_TETS[5]: {0: "0000", ROTATION: 0},
-	ALLOWED_TETS[6]: {0: "1000", 1: "0001", 2: "0100", 3: "0010", ROTATION: 90}
+const TET_VALUES = {
+	ALLOWED_TETS[0]: {0: "0100", 1: "0010", 2: "1000", 3: "0001", ROTATION: 90, COLOUR: Color(30, 90, 255)},
+	ALLOWED_TETS[1]: {0: "1000", 1: "0001", 2: "0100", 3: "0010", ROTATION: 90, COLOUR: Color(255, 200, 120)},
+	ALLOWED_TETS[2]: {0: "1200", 1: "0021", ROTATION: SWITCH, COLOUR: Color(150, 255, 255)},
+	ALLOWED_TETS[3]: {0: "1000", 1: "0010", ROTATION: -90, COLOUR: Color(150, 255, 140)},
+	ALLOWED_TETS[4]: {0: "1000", 1: "0010", ROTATION: -90, COLOUR: Color(255, 110, 90)},
+	ALLOWED_TETS[5]: {0: "0000", ROTATION: 0, COLOUR: Color(253, 255, 127)},
+	ALLOWED_TETS[6]: {0: "1000", 1: "0001", 2: "0100", 3: "0010", ROTATION: 90, COLOUR: Color(190, 115, 255)}
 }
 
 var ghost: AnimatedSprite2D;
@@ -34,10 +35,10 @@ var og_coll_positions = {}  # key: node name, value: pos
 var current_rotation = 0
 
 func get_normal(direction: int) -> int:
-	return int(TET_NORMALS[animation][frame][direction])
+	return int(TET_VALUES[animation][frame][direction])
 
 func get_rotation_addition() -> int:
-	return int(TET_NORMALS[animation][ROTATION])
+	return int(TET_VALUES[animation][ROTATION])
 
 func get_size() -> Vector2:
 	return sprite_frames.get_frame_texture(animation, frame).get_size()
