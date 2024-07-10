@@ -14,6 +14,7 @@ const BOARD_SIZE: Vector2 = Vector2(300, 600)
 const ALLOWED_PIECES = ['l_a', 'l_b', 'long', 'skew_a', 'skew_b', 'square', 't']
 
 # GAME STATES
+var running = true
 var all_pieces = []
 var tet_queue = []
 var active_tet: Tetromino = null  # Tetromino
@@ -82,40 +83,42 @@ func _ready():
 	quick_drop_ticker.start()
 
 func _input(event):
-	# press once
-	if event.is_action_pressed("tetris_rotate_clockwise"):
-		active_tet.rotate_clockwise()
-	if event.is_action_pressed("tetris_rotate_counter_clockwise"):
-		active_tet.rotate_counter_clockwise()
-	if event.is_action_pressed("tetris_quick_drop"):
-		is_quick_dropping = true
-	if event.is_action_released("tetris_quick_drop"):
-		is_quick_dropping = false
-	if event.is_action_pressed("tetris_instant_drop"):
-		active_tet.drop_to_ghost()
-	if event.is_action_pressed("tetris_hold"):
-		hold_active_tet()
-	
-	# hold-able
-	if (event is InputEventKey) and event.pressed:
-		if event.keycode in INPUTS_LEFT:
-			active_tet.move_left()
-		if event.keycode in INPUTS_RIGHT:
-			active_tet.move_right()
+	if running:
+		# press once
+		if event.is_action_pressed("tetris_rotate_clockwise"):
+			active_tet.rotate_clockwise()
+		if event.is_action_pressed("tetris_rotate_counter_clockwise"):
+			active_tet.rotate_counter_clockwise()
+		if event.is_action_pressed("tetris_quick_drop"):
+			is_quick_dropping = true
+		if event.is_action_released("tetris_quick_drop"):
+			is_quick_dropping = false
+		if event.is_action_pressed("tetris_instant_drop"):
+			active_tet.drop_to_ghost()
+		if event.is_action_pressed("tetris_hold"):
+			hold_active_tet()
+		
+		# hold-able
+		if (event is InputEventKey) and event.pressed:
+			if event.keycode in INPUTS_LEFT:
+				active_tet.move_left()
+			if event.keycode in INPUTS_RIGHT:
+				active_tet.move_right()
 
 func _on_gravity_ticker_timeout():
-	if !is_quick_dropping:
+	if running and !is_quick_dropping:
 		active_tet.gravity_tick()
 
 func _on_quick_drop_timer_timeout():
-	if is_quick_dropping:
+	if running and is_quick_dropping:
 		active_tet.gravity_tick()
 
 ## triggered when the active tetromino is placed
 func active_tet_placed():
 	all_pieces.append(active_tet)
 	activate_new_tet(get_next_piece())
-	check_for_completed_lines()
+	check_for_completed_lines()  # after activating a new tet
+	check_for_game_over()  # after completing lines
 	can_hold = true
 
 func update_ui_queue():
@@ -137,6 +140,15 @@ func update_ui_queue():
 	queued_2.set_raw_position(next_box_middle + quater_size)
 	queued_1.body.scale = queued_1.SMALL_SCALE
 	queued_2.body.scale = queued_2.SMALL_SCALE
+
+func check_for_game_over():
+	for tet in all_pieces:
+		if is_instance_of(tet, Tetromino):
+			for point: Vector2 in tet.body.get_raw_collision_points():
+				if point.y - 30 <= grid_bg.position.y:
+					running = false
+					print("FAILURE")
+					return
 
 ## accesses the raw coll2d children of each tet body's collision area
 func move_all_pieces_down(above_y, places: int):
@@ -164,7 +176,7 @@ func check_for_completed_lines():
 	for y_pos in sorted_keys:
 		var nodes_array: Array = lines_dict[y_pos]
 		if len(nodes_array) >= 10:  # full line
-			# if directly above a CompletedLine that has just been created, add a line to it, 
+			# if directly below a CompletedLine that has just been created, add a line to it, 
 			# otherwise create a new CompletedLine
 			var added = false
 			for cl: CompletedLine in completed_lines:
