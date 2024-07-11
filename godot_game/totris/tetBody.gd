@@ -4,7 +4,7 @@ class_name TetBody
 
 signal no_collisions
 
-const TEXTURE_PATH = 'res://tetris/tetrominos/'
+const TEXTURE_PATH = 'res://totris/tetrominos/'
 const TOP = 0
 const BOTTOM = 1
 const LEFT = 2
@@ -16,7 +16,6 @@ const COLOUR = 10
 
 const ALLOWED_TETS = ['l_a', 'l_b', 'long', 'skew_a', 'skew_b', 'square', 't']
 ## tet normals define square allowance on sides for each frame of each tetromino (needed since every texture is a square)
-## based on: https://strategywiki.org/wiki/Tetris/Rotation_systems
 const TET_VALUES = {
 	ALLOWED_TETS[0]: {0: "0100", 1: "0010", 2: "1000", 3: "0001", ROTATION: 90, COLOUR: Color(30, 90, 255)},
 	ALLOWED_TETS[1]: {0: "1000", 1: "0001", 2: "0100", 3: "0010", ROTATION: 90, COLOUR: Color(255, 200, 120)},

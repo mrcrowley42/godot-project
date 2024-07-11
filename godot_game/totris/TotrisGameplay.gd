@@ -120,17 +120,17 @@ func _ready():
 func _input(event):
 	if running:
 		# press once
-		if event.is_action_pressed("tetris_rotate_clockwise"):
+		if event.is_action_pressed("totris_rotate_clockwise"):
 			active_tet.rotate_clockwise()
-		if event.is_action_pressed("tetris_rotate_counter_clockwise"):
+		if event.is_action_pressed("totris_rotate_counter_clockwise"):
 			active_tet.rotate_counter_clockwise()
-		if event.is_action_pressed("tetris_quick_drop"):
+		if event.is_action_pressed("totris_quick_drop"):
 			is_quick_dropping = true
-		if event.is_action_released("tetris_quick_drop"):
+		if event.is_action_released("totris_quick_drop"):
 			is_quick_dropping = false
-		if event.is_action_pressed("tetris_instant_drop"):
+		if event.is_action_pressed("totris_instant_drop"):
 			instant_drop()
-		if event.is_action_pressed("tetris_hold"):
+		if event.is_action_pressed("totris_hold"):
 			hold_active_tet()
 		
 		# hold-able
