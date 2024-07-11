@@ -64,7 +64,7 @@ func toggle_clippy_mode():
 	var window = creature.get_window()
 	drag_area.visible = clippy
 	creature.get_viewport().transparent_bg = clippy
-	window.borderless = clippy
+	#window.borderless = clippy
 	window.transparent = clippy
 	window.always_on_top = clippy
 	
@@ -76,6 +76,7 @@ func toggle_clippy_mode():
 	
 func set_passthrough():
 	pass
+	#DisplayServer.window_set_mouse_passthrough()
 	#var area = drag_area.find_child("Polygon2D").polygon
 	#get_window().mouse_passthrough_polygon = area
 	#DisplayServer.window_set_mouse_passthrough(area)
