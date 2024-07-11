@@ -20,7 +20,7 @@ const INPUTS_RIGHT = [KEY_D, KEY_RIGHT]
 const BOARD_SIZE: Vector2 = Vector2(300, 600)
 const ALLOWED_PIECES = ['l_a', 'l_b', 'long', 'skew_a', 'skew_b', 'square', 't']
 
-## SCORES
+# SCORE VALUES
 var score = 0
 var level = 0
 var total_lines_completed = 0
@@ -30,6 +30,8 @@ const S_GRAVITY = 1
 const S_PLACE = 10
 const S_LINE = 100
 const S_TOTRIS = (S_LINE * 4) * 2
+const SPEED_SUB = 0.01  # time taken from gravity ticker every level up
+const MIN_SPEED = 0.08
 
 # GAME STATES
 var running = true
@@ -236,6 +238,7 @@ func add_line_score(lines_completed):
 	while total_lines_completed >= levelup_threshold:
 		levelup_threshold += min(floor(levelup_threshold * 0.5), MAX_THRESHOLD_ADDITION)
 		level += 1
+		gravity_ticker.wait_time -= SPEED_SUB if gravity_ticker.wait_time > MIN_SPEED else 0
 	score += (lines_completed * S_LINE) if lines_completed < 4 else S_TOTRIS
 
 class CompletedLine:

@@ -50,7 +50,7 @@ script = ExtResource("1_urvp2")
 wait_time = 0.4
 
 [node name="QuickDropTicker" type="Timer" parent="."]
-wait_time = 0.03
+wait_time = 0.05
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 10
