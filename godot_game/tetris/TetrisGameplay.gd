@@ -1,8 +1,13 @@
 extends Node2D
 
+class_name TetrisGameplay
+
 @onready var base_tet = preload("res://tetris/Tetromino.tscn")
-@onready var gravity_ticker = find_child("GravityTicker")
-@onready var quick_drop_ticker = find_child("QuickDropTicker")
+@onready var top_overlay: CanvasLayer = find_child("TopOverlay")
+@onready var gravity_ticker: Timer = find_child("GravityTicker")
+@onready var quick_drop_ticker: Timer = find_child("QuickDropTicker")
+@onready var drop_particle: CPUParticles2D = find_child("DropParticle")
+@onready var break_particle: CPUParticles2D = find_child("BreakParticle")
 @onready var grid_bg = find_child("GridBG")
 @onready var hold_box = find_child("HoldBox")
 @onready var next_box = find_child("NextBox")
@@ -191,7 +196,7 @@ func check_for_completed_lines():
 		line.complete()
 
 class CompletedLine:
-	var parent_node: Node2D
+	var parent_node: TetrisGameplay
 	var nodes: Array = []  # nodes encompassed in the line/s
 	var lines_completed: int = 1
 	var highest_y
@@ -206,13 +211,29 @@ class CompletedLine:
 	
 	func complete():
 		for node: CollisionShape2D in nodes:
+			var body: TetBody = node.get_parent().get_parent()
+			parent_node.spawn_particle(body.position + node.position, body.get_colour())
 			node.disabled = true
 			node.visible = false
 			node.queue_free()  # outright deletion >:)
 		parent_node.move_all_pieces_down(highest_y, lines_completed)
 		parent_node.active_tet.update_ghost()
 
+func spawn_particle(pos: Vector2, colour: Color, drop_p=false):
+	var part: CPUParticles2D = break_particle.duplicate()
+	top_overlay.add_child(part)
+	part.connect("finished", remove_node.bind(part))
+	part.modulate.r = colour.r / 255
+	part.modulate.g = colour.g / 255
+	part.modulate.b = colour.b / 255
+	part.position = pos
+	part.emitting = true
+
 ## called when a placed tet body finds it has no more collision points enabled
 func remove_tet(tet: Tetromino):
 	all_pieces.erase(tet)
-	tet.queue_free()
+	remove_node(tet)
+
+## general function to delete a node
+func remove_node(node):
+	node.queue_free()

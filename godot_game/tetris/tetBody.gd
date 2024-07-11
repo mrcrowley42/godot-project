@@ -33,12 +33,16 @@ var relative_pos: Vector2 = Vector2(0, 0)
 var collision_area: Area2D
 var og_coll_positions = {}  # key: node name, value: pos
 var current_rotation = 0
+var current_animation: String
 
 func get_normal(direction: int) -> int:
 	return int(TET_VALUES[animation][frame][direction])
 
 func get_rotation_addition() -> int:
 	return int(TET_VALUES[animation][ROTATION])
+
+func get_colour() -> Color:
+	return TET_VALUES[current_animation][COLOUR]
 
 func get_size() -> Vector2:
 	return sprite_frames.get_frame_texture(animation, frame).get_size()
@@ -97,6 +101,7 @@ func set_anim(anim):
 	set_animation(anim)
 	collision_area = find_child(anim)
 	collision_area.visible = true
+	current_animation = animation
 	
 	for node: CollisionShape2D in collision_area.get_children():
 		og_coll_positions[node.name] = node.position
