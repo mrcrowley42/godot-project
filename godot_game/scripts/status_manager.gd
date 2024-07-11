@@ -56,4 +56,3 @@ func load(data):
 	if data.has("holiday_mode"):
 		holiday_mode = data["holiday_mode"]
 	finished_loading.emit()
-		

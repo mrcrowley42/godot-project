@@ -6,7 +6,7 @@ extends Control
 @onready var music_track = %MainMusic
 @onready var screen_tint = %BG
 @onready var minigame_man = %MinigameManager
-@onready var drag_area = %DragArea
+@onready var drag_area: Button  = %DragArea
 
 var clippy: bool = false
 
@@ -33,6 +33,8 @@ func update_holiday():
 		
 func _process(_delta):
 	$Label3.text = og_text % [str(Engine.get_frames_per_second())]
+	if clippy:
+		set_passthrough()
 	#$Label3.set("theme_override_colors/font_color", Color.CORAL)
 	
 func _on_anim_select_item_selected(index):
@@ -55,6 +57,9 @@ func _on_button_3_toggled(toggled_on):
 	print(stat_man.holiday_mode)
 
 func _on_clippy_btn_pressed():
+	toggle_clippy_mode()
+	
+func toggle_clippy_mode():
 	clippy = !clippy
 	var window = creature.get_window()
 	drag_area.visible = clippy
@@ -62,5 +67,15 @@ func _on_clippy_btn_pressed():
 	window.borderless = clippy
 	window.transparent = clippy
 	window.always_on_top = clippy
+	
+
+	
+	
 	%UI.visible = !clippy
 	%BG.visible = !clippy
+	
+func set_passthrough():
+	pass
+	#var area = drag_area.find_child("Polygon2D").polygon
+	#get_window().mouse_passthrough_polygon = area
+	#DisplayServer.window_set_mouse_passthrough(area)

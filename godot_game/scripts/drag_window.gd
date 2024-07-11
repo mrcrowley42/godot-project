@@ -19,14 +19,8 @@ func _on_button_down():
 
 func _on_button_up():
 	dragging = false
-
-func _on_mouse_entered():
-	mouse_default_cursor_shape = Control.CURSOR_MOVE
-
-func _on_mouse_exited():
-	mouse_default_cursor_shape = normal_cursor
 	
 func _input(event):
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton and visible:
 		if event.double_click:
 			%DebugContent._on_clippy_btn_pressed()
