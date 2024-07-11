@@ -1,0 +1,290 @@
+[gd_scene load_steps=13 format=3 uid="uid://c5dr54dk0502t"]
+
+[ext_resource type="Script" path="res://totris/TotrisGameplay.gd" id="1_nk2jg"]
+[ext_resource type="Texture2D" uid="uid://cgfufcnmd24wf" path="res://UI stuff/Green Palette/ui_green_tetris.png" id="2_de7pv"]
+[ext_resource type="Shader" path="res://shaders/grid.gdshader" id="3_udord"]
+[ext_resource type="Script" path="res://scripts/tetrisGridBG.gd" id="4_2wjys"]
+[ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="5_d7726"]
+[ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="6_fphhh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_adq1g"]
+shader = ExtResource("3_udord")
+shader_parameter/rows = 20.0
+shader_parameter/columns = 10.0
+shader_parameter/lineSize = 0.2
+shader_parameter/brightnessAddition = 0.0
+shader_parameter/color = Color(0.0818887, 0.114171, 0.121163, 1)
+shader_parameter/offsetCentered = true
+shader_parameter/offsetOverride = Vector2(0, 0)
+shader_parameter/bevel = true
+shader_parameter/bevelColor = Color(0.037969, 0.069001, 0.0917762, 1)
+shader_parameter/outline = true
+shader_parameter/outlineColor = Color(0.215686, 0.282353, 0.305882, 1)
+
+[sub_resource type="GDScript" id="GDScript_v26rg"]
+script/source = "extends Button
+
+func _on_button_down():
+	get_tree().root.propagate_notification(Globals.NOTIFICATION_MINIGAME_CLOSED)
+	find_parent(\"Tetris\").queue_free()
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_h7scr"]
+line_spacing = 4.0
+font_size = 40
+font_color = Color(0.271203, 0.341779, 0.377135, 1)
+
+[sub_resource type="Gradient" id="Gradient_7unwp"]
+colors = PackedColorArray(1, 1, 1, 0.196078, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_nmt2n"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wbp70"]
+size = Vector2(10, 10)
+
+[node name="Tetris" type="Node2D"]
+script = ExtResource("1_nk2jg")
+
+[node name="GravityTicker" type="Timer" parent="."]
+wait_time = 0.4
+
+[node name="QuickDropTicker" type="Timer" parent="."]
+wait_time = 0.05
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UI_Overlay" type="Sprite2D" parent="UI/Control"]
+position = Vector2(270, 337.5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_de7pv")
+
+[node name="GridBG" type="ColorRect" parent="UI/Control"]
+editor_description = "x = (1080 * 0.5) / 2 - (size.w / 2) = 120
+y = (1350 * 0.5) / 2 - (size.h / 2) = 37"
+material = SubResource("ShaderMaterial_adq1g")
+layout_mode = 0
+offset_left = 120.0
+offset_top = 37.0
+offset_right = 420.0
+offset_bottom = 637.0
+color = Color(0, 0, 0, 1)
+script = ExtResource("4_2wjys")
+
+[node name="TopOverlay" type="CanvasLayer" parent="UI/Control"]
+layer = 12
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/Control/TopOverlay"]
+position = Vector2(270, 18)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_de7pv")
+region_enabled = true
+region_rect = Rect2(0, 0, 1080, 75)
+
+[node name="CloseBtn" type="Button" parent="UI/Control/TopOverlay"]
+offset_left = 506.0
+offset_top = 17.0
+offset_right = 522.0
+offset_bottom = 38.0
+theme = ExtResource("5_d7726")
+text = "X"
+script = SubResource("GDScript_v26rg")
+
+[node name="HoldBox" type="NinePatchRect" parent="UI/Control"]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 252.5
+offset_right = 286.0
+offset_bottom = 433.5
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_fphhh")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/HoldBox"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 165.0
+offset_bottom = 165.0
+color = Color(0, 0, 0, 0.313726)
+
+[node name="NextBox" type="NinePatchRect" parent="UI/Control"]
+layout_mode = 0
+offset_left = 525.0
+offset_top = 314.0
+offset_right = 706.0
+offset_bottom = 615.0
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_fphhh")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/NextBox"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 165.0
+offset_bottom = 285.0
+color = Color(0, 0, 0, 0.313726)
+
+[node name="ScoreBox" type="NinePatchRect" parent="UI/Control"]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 400.0
+offset_right = 286.0
+offset_bottom = 500.0
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_fphhh")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/ScoreBox"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 165.0
+offset_bottom = 84.0
+color = Color(0, 0, 0, 0.313726)
+
+[node name="Label" type="Label" parent="UI/Control/ScoreBox"]
+layout_mode = 0
+offset_left = 165.0
+offset_top = 84.0
+offset_right = 314.0
+offset_bottom = 152.0
+rotation = 3.14159
+text = "0"
+label_settings = SubResource("LabelSettings_h7scr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LevelBox" type="NinePatchRect" parent="UI/Control"]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 470.0
+offset_right = 286.0
+offset_bottom = 570.0
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_fphhh")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/LevelBox"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 165.0
+offset_bottom = 84.0
+color = Color(0, 0, 0, 0.313726)
+
+[node name="Label" type="Label" parent="UI/Control/LevelBox"]
+layout_mode = 0
+offset_left = 165.0
+offset_top = 84.0
+offset_right = 314.0
+offset_bottom = 152.0
+rotation = 3.14159
+text = "0"
+label_settings = SubResource("LabelSettings_h7scr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DropParticle" type="CPUParticles2D" parent="UI"]
+position = Vector2(-119, 69)
+emitting = false
+amount = 1
+one_shot = true
+gravity = Vector2(0, 10)
+angular_velocity_min = -150.0
+angular_velocity_max = 150.0
+scale_amount_min = 6.0
+scale_amount_max = 8.0
+color_ramp = SubResource("Gradient_7unwp")
+
+[node name="BreakParticle" type="CPUParticles2D" parent="UI"]
+position = Vector2(-57, 71)
+emitting = false
+amount = 5
+one_shot = true
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 10.0
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 400)
+initial_velocity_min = 60.0
+initial_velocity_max = 100.0
+angular_velocity_min = -150.0
+angular_velocity_max = 150.0
+scale_amount_min = 10.0
+scale_amount_max = 12.0
+color_ramp = SubResource("Gradient_nmt2n")
+
+[node name="Ground" type="Area2D" parent="UI"]
+disable_mode = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Ground"]
+position = Vector2(135, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="UI/Ground"]
+position = Vector2(315, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="UI/Ground"]
+position = Vector2(285, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="UI/Ground"]
+position = Vector2(225, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="UI/Ground"]
+position = Vector2(255, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="UI/Ground"]
+position = Vector2(195, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="UI/Ground"]
+position = Vector2(165, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="UI/Ground"]
+position = Vector2(345, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="UI/Ground"]
+position = Vector2(405, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="UI/Ground"]
+position = Vector2(375, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[connection signal="timeout" from="GravityTicker" to="." method="_on_gravity_ticker_timeout"]
+[connection signal="timeout" from="QuickDropTicker" to="." method="_on_quick_drop_timer_timeout"]
+[connection signal="button_down" from="UI/Control/TopOverlay/CloseBtn" to="UI/Control/TopOverlay/CloseBtn" method="_on_button_down"]
