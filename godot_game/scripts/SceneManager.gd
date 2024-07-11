@@ -3,7 +3,7 @@ extends Node2D
 
 @onready var act_menu = %ActivityControls
 # Preload all the minigames.
-@onready var tetrisScene = preload ("res://scenes/MiniGames/tetris.tscn")
+@onready var totrisScene = preload ("res://scenes/MiniGames/totris.tscn")
 @onready var memoryGameScene = preload ("res://scenes/MiniGames/memory_game.tscn")
 @onready var sprock_scene = preload ("res://scenes/MiniGames/scissors_paper_rock.tscn")
 @onready var zen_mode_scene = preload ("res://scenes/MiniGames/zen_mode.tscn")
@@ -39,9 +39,9 @@ func _notification(noti):
 	if noti == Globals.NOTIFICATION_MINIGAME_CLOSED:
 		unload_minigame()
 
-## Loads Tetris scene.
-func _on_tetris_button_down():
-	load_minigame(tetrisScene)
+## Loads Totris scene.
+func _on_totris_button_down():
+	load_minigame(totrisScene)
 
 ## Loads Memory scene.
 func _on_memory_game_button_down():
