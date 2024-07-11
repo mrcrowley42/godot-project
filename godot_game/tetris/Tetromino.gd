@@ -58,10 +58,15 @@ func gravity_tick():
 		skip_next_gravity = false
 		return
 	
+	var on_ghost_before = is_body_on_ghost()
 	body.add_y(SQUARE_SIZE.y)
 	if check_for_collision():
 		body.add_y(-SQUARE_SIZE.y)  # revert gravity
 		place_tet()
+	
+	# allow more time to move last second
+	if !on_ghost_before and is_body_on_ghost():
+		skip_next_gravity = true
 
 func move_left():
 	body.add_x(-SQUARE_SIZE.x)
@@ -160,11 +165,16 @@ func update_ghost():
 		ghost.offset.y += SQUARE_SIZE.y
 	ghost.offset.y -= SQUARE_SIZE.y  # revert back up
 
-## instantly teleport tet to ghost's y position & place
-func drop_to_ghost():
+func is_body_on_ghost() -> bool:
+	return ghost.position + ghost.offset == body.position
+
+## instantly teleport tet to ghost's y position & placem returns final, clipped position (not relative)
+func drop_to_ghost() -> Vector2:
 	update_ghost()  # sanity check the ghost
 	body.add_y(ghost.offset.y)
+	var pos = body.get_clipped_pos(false)
 	place_tet()
+	return pos
 
 func perform_linear_lerp(direction):
 	l_direction = direction

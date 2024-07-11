@@ -55,8 +55,8 @@ func get_clipped_size() -> Vector2:
 	)
 
 ## clip position to centre of tet normals (centre of clipped size)
-func get_clipped_pos() -> Vector2:
-	return relative_pos + (Vector2(15, 15) * Vector2(
+func get_clipped_pos(relative=true) -> Vector2:
+	return (relative_pos if relative else position) + (Vector2(15, 15) * Vector2(
 		get_normal(LEFT) - get_normal(RIGHT),
 		get_normal(TOP) - get_normal(BOTTOM)
 	))

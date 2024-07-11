@@ -20,6 +20,7 @@ const ALLOWED_PIECES = ['l_a', 'l_b', 'long', 'skew_a', 'skew_b', 'square', 't']
 
 # GAME STATES
 var running = true
+var score = 0
 var all_pieces = []
 var tet_queue = []
 var active_tet: Tetromino = null  # Tetromino
@@ -79,6 +80,21 @@ func hold_active_tet():
 		held_tet.holding_tet(pos)
 		can_hold = false
 
+## instant drop & spawns particles
+func instant_drop():
+	var colour = active_tet.body.get_colour()
+	var size: Vector2 = active_tet.body.get_clipped_size()
+	var pos_before: Vector2 = active_tet.body.get_clipped_pos(false)
+	var pos_after: Vector2 = active_tet.drop_to_ghost()
+	
+	var addition = 0
+	while pos_after.y > pos_before.y + addition:
+		var perc = (pos_before.y + addition) / pos_after.y
+		var lifetime = 0.3 + perc
+		spawn_particle(pos_before + Vector2(-size.x / 2, addition), colour, true, lifetime)
+		spawn_particle(pos_before + Vector2(size.x / 2, addition), colour, true, lifetime)
+		addition += 15
+
 func _ready():
 	all_pieces.append(find_child("Ground"))
 	activate_new_tet(get_next_piece())
@@ -99,7 +115,7 @@ func _input(event):
 		if event.is_action_released("tetris_quick_drop"):
 			is_quick_dropping = false
 		if event.is_action_pressed("tetris_instant_drop"):
-			active_tet.drop_to_ghost()
+			instant_drop()
 		if event.is_action_pressed("tetris_hold"):
 			hold_active_tet()
 		
