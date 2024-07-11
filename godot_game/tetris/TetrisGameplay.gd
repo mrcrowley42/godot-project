@@ -8,6 +8,8 @@ class_name TetrisGameplay
 @onready var quick_drop_ticker: Timer = find_child("QuickDropTicker")
 @onready var drop_particle: CPUParticles2D = find_child("DropParticle")
 @onready var break_particle: CPUParticles2D = find_child("BreakParticle")
+@onready var score_box = find_child("ScoreBox")
+@onready var level_box = find_child("LevelBox")
 @onready var grid_bg = find_child("GridBG")
 @onready var hold_box = find_child("HoldBox")
 @onready var next_box = find_child("NextBox")
@@ -18,9 +20,19 @@ const INPUTS_RIGHT = [KEY_D, KEY_RIGHT]
 const BOARD_SIZE: Vector2 = Vector2(300, 600)
 const ALLOWED_PIECES = ['l_a', 'l_b', 'long', 'skew_a', 'skew_b', 'square', 't']
 
+## SCORES
+var score = 0
+var level = 0
+var total_lines_completed = 0
+var levelup_threshold = 2
+const MAX_THRESHOLD_ADDITION = 10
+const S_GRAVITY = 1
+const S_PLACE = 10
+const S_LINE = 100
+const S_TOTRIS = (S_LINE * 4) * 2
+
 # GAME STATES
 var running = true
-var score = 0
 var all_pieces = []
 var tet_queue = []
 var active_tet: Tetromino = null  # Tetromino
@@ -126,16 +138,23 @@ func _input(event):
 			if event.keycode in INPUTS_RIGHT:
 				active_tet.move_right()
 
+func _process(_delta):
+	score_box.find_child("Label").text = str(score)
+	level_box.find_child("Label").text = str(level)
+
 func _on_gravity_ticker_timeout():
 	if running and !is_quick_dropping:
+		score += S_GRAVITY
 		active_tet.gravity_tick()
 
 func _on_quick_drop_timer_timeout():
 	if running and is_quick_dropping:
+		score += S_GRAVITY
 		active_tet.gravity_tick()
 
 ## triggered when the active tetromino is placed
 func active_tet_placed():
+	score += S_PLACE
 	all_pieces.append(active_tet)
 	activate_new_tet(get_next_piece())
 	check_for_completed_lines()  # after activating a new tet
@@ -162,6 +181,7 @@ func update_ui_queue():
 	queued_1.body.scale = queued_1.SMALL_SCALE
 	queued_2.body.scale = queued_2.SMALL_SCALE
 
+## if any PLACED collision point is touching the top of the grid, game over
 func check_for_game_over():
 	for tet in all_pieces:
 		if is_instance_of(tet, Tetromino):
@@ -211,6 +231,13 @@ func check_for_completed_lines():
 	for line: CompletedLine in completed_lines:
 		line.complete()
 
+func add_line_score(lines_completed):
+	total_lines_completed += lines_completed
+	while total_lines_completed >= levelup_threshold:
+		levelup_threshold += min(floor(levelup_threshold * 0.5), MAX_THRESHOLD_ADDITION)
+		level += 1
+	score += (lines_completed * S_LINE) if lines_completed < 4 else S_TOTRIS
+
 class CompletedLine:
 	var parent_node: TetrisGameplay
 	var nodes: Array = []  # nodes encompassed in the line/s
@@ -234,6 +261,7 @@ class CompletedLine:
 			node.queue_free()  # outright deletion >:)
 		parent_node.move_all_pieces_down(highest_y, lines_completed)
 		parent_node.active_tet.update_ghost()
+		parent_node.add_line_score(lines_completed)
 
 func spawn_particle(pos: Vector2, colour: Color, drop=false, lifetime=null):
 	var part: CPUParticles2D = drop_particle.duplicate() if drop else break_particle.duplicate()
