@@ -211,7 +211,7 @@ class CompletedLine:
 	
 	func complete():
 		for node: CollisionShape2D in nodes:
-			var body: TetBody = node.get_parent().get_parent()
+			var body: TetBody = node.get_parent().get_parent()  # ew but whatever
 			parent_node.spawn_particle(body.position + node.position, body.get_colour())
 			node.disabled = true
 			node.visible = false
@@ -219,13 +219,15 @@ class CompletedLine:
 		parent_node.move_all_pieces_down(highest_y, lines_completed)
 		parent_node.active_tet.update_ghost()
 
-func spawn_particle(pos: Vector2, colour: Color, drop_p=false):
-	var part: CPUParticles2D = break_particle.duplicate()
+func spawn_particle(pos: Vector2, colour: Color, drop=false, lifetime=null):
+	var part: CPUParticles2D = drop_particle.duplicate() if drop else break_particle.duplicate()
 	top_overlay.add_child(part)
 	part.connect("finished", remove_node.bind(part))
-	part.modulate.r = colour.r / 255
-	part.modulate.g = colour.g / 255
-	part.modulate.b = colour.b / 255
+	
+	if lifetime != null:
+		part.lifetime = lifetime
+	part.modulate = colour / 255
+	part.modulate.a = 1  # reset the alpha
 	part.position = pos
 	part.emitting = true
 
