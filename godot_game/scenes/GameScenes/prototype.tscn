@@ -521,7 +521,7 @@ icon = ExtResource("17_pukas")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Tetris" type="Button" parent="UI/ScreenControls/ActivityControls/ActivityContent/Screen1/GridContainer"]
+[node name="Totris" type="Button" parent="UI/ScreenControls/ActivityControls/ActivityContent/Screen1/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1215,7 +1215,7 @@ script = ExtResource("68_sw7tx")
 [connection signal="button_down" from="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 4" to="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 4" method="_on_button_down"]
 [connection signal="visibility_changed" from="UI/ScreenControls/ActivityControls" to="UI/ScreenControls/ActivityControls" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/Screen1/GridContainer/ScissorsPaperRock" to="MinigameManager" method="_on_scissors_paper_rock_button_down"]
-[connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/Screen1/GridContainer/Tetris" to="MinigameManager" method="_on_tetris_button_down"]
+[connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/Screen1/GridContainer/Totris" to="MinigameManager" method="_on_totris_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/Screen1/GridContainer/ZenMode" to="MinigameManager" method="_on_zen_mode_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/Screen1/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/Screen2/GridContainer/ScissorsPaperRock" to="MinigameManager" method="_on_scissors_paper_rock_button_down"]
