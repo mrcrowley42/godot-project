@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="2_egqjh"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="3_2jjfn"]
 [ext_resource type="Script" path="res://scripts/scissors_paper_rock.gd" id="3_7jb5j"]
-[ext_resource type="Script" path="res://scripts/memory_sfx_man.gd" id="5_2p5xq"]
+[ext_resource type="Script" path="res://scripts/sfx_man.gd" id="5_2p5xq"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3wt50"]
 

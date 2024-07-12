@@ -3,8 +3,8 @@
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="1_3y1y3"]
 [ext_resource type="Script" path="res://scripts/memory_game.gd" id="1_y2saq"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="2_4ls5g"]
-[ext_resource type="Script" path="res://scripts/memory_sfx_man.gd" id="4_mndmj"]
 [ext_resource type="Script" path="res://scripts/MainGameScripts/EggScene/party.gd" id="5_4pw2p"]
+[ext_resource type="Script" path="res://scripts/sfx_man.gd" id="5_nj7bn"]
 
 [sub_resource type="Gradient" id="Gradient_ai7nj"]
 interpolation_mode = 2
@@ -141,6 +141,6 @@ hue_variation_max = 1.0
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 bus = &"SFX"
-script = ExtResource("4_mndmj")
+script = ExtResource("5_nj7bn")
 
 [connection signal="button_down" from="CloseBtn" to="GameLogic" method="_on_close_btn_button_down"]

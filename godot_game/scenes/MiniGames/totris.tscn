@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c5dr54dk0502t"]
+[gd_scene load_steps=14 format=3 uid="uid://c5dr54dk0502t"]
 
 [ext_resource type="Script" path="res://totris/TotrisGameplay.gd" id="1_nk2jg"]
 [ext_resource type="Texture2D" uid="uid://cgfufcnmd24wf" path="res://UI stuff/Green Palette/ui_green_tetris.png" id="2_de7pv"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/tetrisGridBG.gd" id="4_2wjys"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="5_d7726"]
 [ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="6_fphhh"]
+[ext_resource type="Script" path="res://scripts/sfx_man.gd" id="7_6nelh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_adq1g"]
 shader = ExtResource("3_udord")
@@ -21,13 +22,8 @@ shader_parameter/bevelColor = Color(0.037969, 0.069001, 0.0917762, 1)
 shader_parameter/outline = true
 shader_parameter/outlineColor = Color(0.215686, 0.282353, 0.305882, 1)
 
-[sub_resource type="GDScript" id="GDScript_v26rg"]
-script/source = "extends Button
-
-func _on_button_down():
-	get_tree().root.propagate_notification(Globals.NOTIFICATION_MINIGAME_CLOSED)
-	find_parent(\"Tetris\").queue_free()
-"
+[sub_resource type="LabelSettings" id="LabelSettings_w4uk7"]
+font_size = 24
 
 [sub_resource type="LabelSettings" id="LabelSettings_h7scr"]
 line_spacing = 4.0
@@ -35,7 +31,7 @@ font_size = 40
 font_color = Color(0.271203, 0.341779, 0.377135, 1)
 
 [sub_resource type="Gradient" id="Gradient_7unwp"]
-colors = PackedColorArray(1, 1, 1, 0.196078, 1, 1, 1, 0)
+colors = PackedColorArray(1, 1, 1, 0.392157, 1, 1, 1, 0)
 
 [sub_resource type="Gradient" id="Gradient_nmt2n"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -90,14 +86,182 @@ texture = ExtResource("2_de7pv")
 region_enabled = true
 region_rect = Rect2(0, 0, 1080, 75)
 
+[node name="StartMenu" type="Control" parent="UI/Control/TopOverlay"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 540.0
+offset_bottom = 675.0
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/TopOverlay/StartMenu"]
+layout_mode = 0
+offset_right = 540.0
+offset_bottom = 675.0
+color = Color(0.00784314, 0.0156863, 0.0196078, 0.588235)
+
+[node name="Label" type="Label" parent="UI/Control/TopOverlay/StartMenu"]
+layout_mode = 2
+offset_left = 228.0
+offset_top = 187.0
+offset_right = 312.0
+offset_bottom = 217.0
+theme = ExtResource("5_d7726")
+text = "Totris"
+label_settings = SubResource("LabelSettings_w4uk7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/Control/TopOverlay/StartMenu"]
+offset_left = 180.0
+offset_top = 256.0
+offset_right = 516.0
+offset_bottom = 278.0
+scale = Vector2(0.535, 0.535)
+theme = ExtResource("5_d7726")
+text = "Best Score: %s"
+label_settings = SubResource("LabelSettings_w4uk7")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Label3" type="Label" parent="UI/Control/TopOverlay/StartMenu"]
+offset_left = 180.0
+offset_top = 286.0
+offset_right = 516.0
+offset_bottom = 308.0
+scale = Vector2(0.535, 0.535)
+theme = ExtResource("5_d7726")
+text = "Best level: %s"
+label_settings = SubResource("LabelSettings_w4uk7")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Play" type="Button" parent="UI/Control/TopOverlay/StartMenu"]
+layout_mode = 2
+offset_left = 228.0
+offset_top = 401.0
+offset_right = 312.0
+offset_bottom = 422.0
+focus_mode = 0
+theme = ExtResource("5_d7726")
+text = "Play
+"
+
+[node name="KillMenu" type="Control" parent="UI/Control/TopOverlay"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 540.0
+offset_bottom = 675.0
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/TopOverlay/KillMenu"]
+offset_right = 540.0
+offset_bottom = 675.0
+color = Color(0.00784314, 0.0156863, 0.0196078, 0.588235)
+
+[node name="Label" type="Label" parent="UI/Control/TopOverlay/KillMenu"]
+offset_left = 180.0
+offset_top = 187.0
+offset_right = 360.0
+offset_bottom = 217.0
+theme = ExtResource("5_d7726")
+text = "Game Over"
+label_settings = SubResource("LabelSettings_w4uk7")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Label2" type="Label" parent="UI/Control/TopOverlay/KillMenu"]
+offset_left = 180.0
+offset_top = 256.0
+offset_right = 516.0
+offset_bottom = 278.0
+scale = Vector2(0.535, 0.535)
+theme = ExtResource("5_d7726")
+text = "Final Score: %s"
+label_settings = SubResource("LabelSettings_w4uk7")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Label3" type="Label" parent="UI/Control/TopOverlay/KillMenu"]
+offset_left = 180.0
+offset_top = 286.0
+offset_right = 516.0
+offset_bottom = 308.0
+scale = Vector2(0.535, 0.535)
+theme = ExtResource("5_d7726")
+text = "Final level: %s"
+label_settings = SubResource("LabelSettings_w4uk7")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Retry" type="Button" parent="UI/Control/TopOverlay/KillMenu"]
+offset_left = 228.0
+offset_top = 401.0
+offset_right = 312.0
+offset_bottom = 422.0
+focus_mode = 0
+theme = ExtResource("5_d7726")
+text = "Retry"
+
+[node name="Menu" type="Button" parent="UI/Control/TopOverlay/KillMenu"]
+offset_left = 228.0
+offset_top = 462.0
+offset_right = 312.0
+offset_bottom = 483.0
+focus_mode = 0
+theme = ExtResource("5_d7726")
+text = "Menu"
+
+[node name="HelpMenu" type="Control" parent="UI/Control/TopOverlay"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 540.0
+offset_bottom = 675.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/Control/TopOverlay/HelpMenu"]
+layout_mode = 0
+offset_right = 1080.0
+offset_bottom = 1350.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_fphhh")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="Label" type="Label" parent="UI/Control/TopOverlay/HelpMenu"]
+offset_left = 77.0
+offset_top = 412.0
+offset_right = 190.0
+offset_bottom = 434.0
+theme = ExtResource("5_d7726")
+text = "HELP"
+label_settings = SubResource("LabelSettings_w4uk7")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
 [node name="CloseBtn" type="Button" parent="UI/Control/TopOverlay"]
 offset_left = 506.0
 offset_top = 17.0
 offset_right = 522.0
 offset_bottom = 38.0
+focus_mode = 0
 theme = ExtResource("5_d7726")
 text = "X"
-script = SubResource("GDScript_v26rg")
+
+[node name="HelpBtn" type="Button" parent="UI/Control/TopOverlay"]
+offset_left = 18.0
+offset_top = 17.0
+offset_right = 34.0
+offset_bottom = 38.0
+focus_mode = 0
+theme = ExtResource("5_d7726")
+text = "?"
 
 [node name="HoldBox" type="NinePatchRect" parent="UI/Control"]
 layout_mode = 0
@@ -172,10 +336,12 @@ offset_top = 84.0
 offset_right = 314.0
 offset_bottom = 152.0
 rotation = 3.14159
+theme = ExtResource("5_d7726")
 text = "0"
 label_settings = SubResource("LabelSettings_h7scr")
 horizontal_alignment = 1
 vertical_alignment = 1
+clip_text = true
 
 [node name="LevelBox" type="NinePatchRect" parent="UI/Control"]
 layout_mode = 0
@@ -206,10 +372,22 @@ offset_top = 84.0
 offset_right = 314.0
 offset_bottom = 152.0
 rotation = 3.14159
-text = "0"
+theme = ExtResource("5_d7726")
+text = "0
+"
 label_settings = SubResource("LabelSettings_h7scr")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="expBar" type="ColorRect" parent="UI/Control/LevelBox"]
+layout_mode = 0
+offset_left = 155.0
+offset_top = 25.0
+offset_right = 284.0
+offset_bottom = 28.0
+rotation = 3.14159
+scale = Vector2(1e-05, 1)
+color = Color(0.133995, 0.176871, 0.198271, 1)
 
 [node name="DropParticle" type="CPUParticles2D" parent="UI"]
 position = Vector2(-119, 69)
@@ -285,6 +463,15 @@ shape = SubResource("RectangleShape2D_wbp70")
 position = Vector2(375, 652)
 shape = SubResource("RectangleShape2D_wbp70")
 
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+max_polyphony = 5
+script = ExtResource("7_6nelh")
+
 [connection signal="timeout" from="GravityTicker" to="." method="_on_gravity_ticker_timeout"]
 [connection signal="timeout" from="QuickDropTicker" to="." method="_on_quick_drop_timer_timeout"]
-[connection signal="button_down" from="UI/Control/TopOverlay/CloseBtn" to="UI/Control/TopOverlay/CloseBtn" method="_on_button_down"]
+[connection signal="button_down" from="UI/Control/TopOverlay/StartMenu/Play" to="." method="_on_play_button_down"]
+[connection signal="button_down" from="UI/Control/TopOverlay/KillMenu/Retry" to="." method="_on_play_button_down"]
+[connection signal="button_down" from="UI/Control/TopOverlay/KillMenu/Menu" to="." method="_on_menu_button_down"]
+[connection signal="button_down" from="UI/Control/TopOverlay/CloseBtn" to="." method="_on_close_btn_button_down"]
+[connection signal="button_down" from="UI/Control/TopOverlay/HelpBtn" to="." method="_on_help_btn_button_down"]

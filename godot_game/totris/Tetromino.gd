@@ -47,54 +47,43 @@ func init(piece: String, b_pos: Vector2, b_size: Vector2, previous_pieces):
 	all_pieces = previous_pieces
 	body.no_collisions.connect(no_more_collisions)
 
-func place_tet():
+func place_tet(from_instant=false):
 	resting = true
 	ghost.visible = false
 	body.spawn_singular_squares()
-	placed.emit()
+	placed.emit(from_instant)
+
+## Wrapper function to be used to call any movement function. Allows more time to move last second if about to place
+func perform_movement(movement_func):
+	var on_ghost_before = is_body_on_ghost()
+	movement_func.call()
+	if !on_ghost_before and is_body_on_ghost():
+		skip_next_gravity = true
 
 func gravity_tick():
 	if skip_next_gravity:
 		skip_next_gravity = false
 		return
 	
-	var on_ghost_before = is_body_on_ghost()
 	body.add_y(SQUARE_SIZE.y)
 	if check_for_collision():
 		body.add_y(-SQUARE_SIZE.y)  # revert gravity
 		place_tet()
-	
-	# allow more time to move last second
-	if !on_ghost_before and is_body_on_ghost():
-		skip_next_gravity = true
 
-func move_left():
-	body.add_x(-SQUARE_SIZE.x)
+func move_sideways(direction):
+	var opposite_dir = {-1: 1, 1: -1}[direction]  # im lazy and dont feel like doing more maths here
+	body.add_x(SQUARE_SIZE.x * direction)
 	if check_for_collision():
-		body.add_x(SQUARE_SIZE.x)
+		body.add_x(SQUARE_SIZE.x * opposite_dir)
 	x_wall_correction()
 	update_ghost()
-	perform_linear_lerp(1)
+	perform_linear_lerp(opposite_dir)
 
-func move_right():
-	body.add_x(SQUARE_SIZE.x)
-	if check_for_collision():
-		body.add_x(-SQUARE_SIZE.x)
-	x_wall_correction()
-	update_ghost()
-	perform_linear_lerp(-1)
-
-func rotate_clockwise():
-	body.advance_frame()
+func rotate_piece(direction):
+	(body.advance_frame if direction < 1 else body.rewind_frame).call()
 	general_correction()
 	update_ghost()
-	perform_angular_lerp(-1)
-
-func rotate_counter_clockwise():
-	body.rewind_frame()
-	general_correction()
-	update_ghost()
-	perform_angular_lerp(1)
+	perform_angular_lerp(direction)
 
 ## alters the given position so the tet appears centered on it
 func centre_tet_on_position(pos: Vector2) -> Vector2:
@@ -173,7 +162,7 @@ func drop_to_ghost() -> Vector2:
 	update_ghost()  # sanity check the ghost
 	body.add_y(ghost.offset.y)
 	var pos = body.get_clipped_pos(false)
-	place_tet()
+	place_tet(true)
 	return pos
 
 func perform_linear_lerp(direction):

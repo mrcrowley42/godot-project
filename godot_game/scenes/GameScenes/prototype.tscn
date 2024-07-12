@@ -69,7 +69,7 @@
 [ext_resource type="AudioStream" uid="uid://8ifwm2tjitur" path="res://sound_effects/yippee.mp3" id="65_mrlpr"]
 [ext_resource type="AudioStream" uid="uid://cx28efsxtr7c" path="res://sound_effects/button_click_fast.mp3" id="66_b3v7n"]
 [ext_resource type="AudioStream" uid="uid://dat0sfue6jjr5" path="res://sound_effects/metal-pipe-falling-sound-effect-made-with-Voicemod.mp3" id="67_p6vc6"]
-[ext_resource type="Script" path="res://scripts/memory_sfx_man.gd" id="68_sw7tx"]
+[ext_resource type="Script" path="res://scripts/sfx_man.gd" id="68_sw7tx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_045wl"]
 shader = ExtResource("4_8sx1k")
@@ -908,7 +908,6 @@ script = SubResource("GDScript_ao166")
 [node name="CreditsContainer" type="PanelContainer" parent="UI/OptionsContainer"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
