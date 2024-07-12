@@ -294,12 +294,21 @@ text = "FULL RESTORE"
 
 [node name="Label3" type="Label" parent="."]
 layout_mode = 0
-offset_left = 22.0
+offset_left = 74.0
 offset_top = 601.0
-offset_right = 129.0
+offset_right = 131.0
 offset_bottom = 630.0
 theme = ExtResource("2_5bhpe")
-text = "FPS: %s"
+text = "%s"
+
+[node name="Label7" type="Label" parent="."]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 601.0
+offset_right = 72.0
+offset_bottom = 630.0
+theme = ExtResource("2_5bhpe")
+text = "FPS:"
 
 [node name="Label4" type="Label" parent="."]
 layout_mode = 0

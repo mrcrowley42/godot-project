@@ -13,8 +13,6 @@ var clippy: bool = false
 func _on_h_slider_value_changed(value):
 	stat_man.time_multiplier = value
 
-@onready var og_text = $Label3.text
-
 func _on_button_button_down():
 	creature.reset_stats()
 	
@@ -32,10 +30,12 @@ func update_holiday():
 		$HolidayBtn.set_pressed_no_signal(true)
 		
 func _process(_delta):
-	$Label3.text = og_text % [str(Engine.get_frames_per_second())]
-	if clippy:
-		set_passthrough()
-	#$Label3.set("theme_override_colors/font_color", Color.CORAL)
+	var fps = Engine.get_frames_per_second()
+	$Label3.text = str(fps)
+	if fps < 59.0:
+		$Label3.set("theme_override_colors/font_color", Color.LIGHT_CORAL)
+	else:
+		$Label3.set("theme_override_colors/font_color", Color.LIGHT_GREEN)
 	
 func _on_anim_select_item_selected(index):
 	creature.find_child('AnimatedSprite2D').animation = $AnimSelect.get_item_text(index)
@@ -64,19 +64,8 @@ func toggle_clippy_mode():
 	var window = creature.get_window()
 	drag_area.visible = clippy
 	creature.get_viewport().transparent_bg = clippy
-	#window.borderless = clippy
+	window.borderless = clippy
 	window.transparent = clippy
 	window.always_on_top = clippy
-	
-
-	
-	
 	%UI.visible = !clippy
 	%BG.visible = !clippy
-	
-func set_passthrough():
-	pass
-	#DisplayServer.window_set_mouse_passthrough()
-	#var area = drag_area.find_child("Polygon2D").polygon
-	#get_window().mouse_passthrough_polygon = area
-	#DisplayServer.window_set_mouse_passthrough(area)
