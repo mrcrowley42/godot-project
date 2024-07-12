@@ -14,3 +14,6 @@ func _ready():
 func _exit_tree():
 	# Return animation state to what is was before entering the scene.
 	creature.find_child('AnimatedSprite2D').animation = og_state
+
+func _on_close_btn_button_down():
+	close_game()
