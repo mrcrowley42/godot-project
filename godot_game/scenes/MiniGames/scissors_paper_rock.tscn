@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dnfq7jawtfv5q"]
+[gd_scene load_steps=7 format=3 uid="uid://dnfq7jawtfv5q"]
 
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="1_sqv3p"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="2_egqjh"]
@@ -7,14 +7,6 @@
 [ext_resource type="Script" path="res://scripts/memory_sfx_man.gd" id="5_2p5xq"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3wt50"]
-
-[sub_resource type="GDScript" id="GDScript_oqggf"]
-script/source = "extends Button
-
-func _on_button_down():
-	get_tree().root.propagate_notification(Globals.NOTIFICATION_MINIGAME_CLOSED)
-	find_parent(\"MiniGame\").queue_free()
-"
 
 [node name="MiniGame" type="Node2D"]
 
@@ -127,7 +119,6 @@ offset_right = 179.0
 offset_bottom = 187.0
 theme = ExtResource("1_sqv3p")
 text = "Close"
-script = SubResource("GDScript_oqggf")
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
@@ -137,4 +128,4 @@ script = ExtResource("5_2p5xq")
 [connection signal="button_down" from="GameContainer/Node2D/Buttons/ScissorsBtn" to="GameLogic" method="_on_scissors_btn_button_down"]
 [connection signal="button_down" from="GameContainer/Node2D/Buttons/PaperBtn" to="GameLogic" method="_on_paper_btn_button_down"]
 [connection signal="button_down" from="GameContainer/Node2D/Buttons/RockBtn" to="GameLogic" method="_on_rock_btn_button_down"]
-[connection signal="button_down" from="CloseBtn" to="CloseBtn" method="_on_button_down"]
+[connection signal="button_down" from="CloseBtn" to="GameLogic" method="_on_close_btn_button_down"]
