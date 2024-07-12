@@ -3,16 +3,21 @@ extends Node2D
 class_name TotrisGameplay
 
 @onready var base_tet = preload("res://totris/Tetromino.tscn")
+
 @onready var top_overlay: CanvasLayer = find_child("TopOverlay")
-@onready var gravity_ticker: Timer = find_child("GravityTicker")
-@onready var quick_drop_ticker: Timer = find_child("QuickDropTicker")
-@onready var drop_particle: CPUParticles2D = find_child("DropParticle")
-@onready var break_particle: CPUParticles2D = find_child("BreakParticle")
+@onready var start_menu = find_child("StartMenu")
+@onready var kill_menu = find_child("KillMenu")
+@onready var help_menu = find_child("HelpMenu")
 @onready var score_box = find_child("ScoreBox")
 @onready var level_box = find_child("LevelBox")
 @onready var grid_bg = find_child("GridBG")
 @onready var hold_box = find_child("HoldBox")
 @onready var next_box = find_child("NextBox")
+
+@onready var gravity_ticker: Timer = find_child("GravityTicker")
+@onready var quick_drop_ticker: Timer = find_child("QuickDropTicker")
+@onready var drop_particle: CPUParticles2D = find_child("DropParticle")
+@onready var break_particle: CPUParticles2D = find_child("BreakParticle")
 
 const INPUTS_LEFT = [KEY_A, KEY_LEFT]
 const INPUTS_RIGHT = [KEY_D, KEY_RIGHT]
@@ -21,20 +26,23 @@ const BOARD_SIZE: Vector2 = Vector2(300, 600)
 const ALLOWED_PIECES = ['l_a', 'l_b', 'long', 'skew_a', 'skew_b', 'square', 't']
 
 # SCORE VALUES
-var score = 0
+var score: int = 0
 var level = 0
 var total_lines_completed = 0
-var levelup_threshold = 2
-const MAX_THRESHOLD_ADDITION = 10
+var prev_levelup_threshold = 0
+var levelup_threshold = STARTING_THRESHOLD
+const STARTING_THRESHOLD = 2
+const MAX_THRESHOLD_ADDITION = 6
 const S_GRAVITY = 1
 const S_PLACE = 10
 const S_LINE = 100
 const S_TOTRIS = (S_LINE * 4) * 2
-const SPEED_SUB = 0.01  # time taken from gravity ticker every level up
+const SPEED_SUB = 0.02  # time taken from gravity ticker every level up
 const MIN_SPEED = 0.08
 
 # GAME STATES
-var running = true
+var running = false
+var paused = false  # only pauses in the help menu so player cant see the grid
 var all_pieces = []
 var tet_queue = []
 var active_tet: Tetromino = null  # Tetromino
@@ -93,13 +101,15 @@ func hold_active_tet():
 		var pos = hold_box.position - (hold_box.size * hold_box.scale) / 2
 		held_tet.holding_tet(pos)
 		can_hold = false
+	else:
+		%SFX.play_sound("t_no")
 
 ## instant drop & spawns particles
 func instant_drop():
 	var colour = active_tet.body.get_colour()
 	var size: Vector2 = active_tet.body.get_clipped_size()
-	var pos_before: Vector2 = active_tet.body.get_clipped_pos(false)
-	var pos_after: Vector2 = active_tet.drop_to_ghost()
+	var pos_before: Vector2 = active_tet.body.get_clipped_pos(false) - Vector2(0, size.y / 2)  # top middle
+	var pos_after: Vector2 = active_tet.drop_to_ghost()  # middle middle ;)
 	
 	var addition = 0
 	while pos_after.y > pos_before.y + addition:
@@ -109,7 +119,8 @@ func instant_drop():
 		spawn_particle(pos_before + Vector2(size.x / 2, addition), colour, true, lifetime)
 		addition += 15
 
-func _ready():
+func start():
+	running = true
 	all_pieces.append(find_child("Ground"))
 	activate_new_tet(get_next_piece())
 	generate_tet_queue()
@@ -117,13 +128,37 @@ func _ready():
 	gravity_ticker.start()
 	quick_drop_ticker.start()
 
+## reset all game values & clear the board
+func reset_game():
+	# stats
+	score = 0
+	level = 0
+	total_lines_completed = 0
+	levelup_threshold = STARTING_THRESHOLD
+	prev_levelup_threshold = 0
+	# game values
+	running = false
+	paused = false
+	for list in [all_pieces, [queued_1, queued_2]]:
+		for piece in list:
+			if is_instance_of(piece, Tetromino):
+				piece.queue_free()
+	all_pieces.clear()
+	tet_queue.clear()
+	queued_1 = null
+	queued_2 = null
+	active_tet = null
+	held_tet = null
+	can_hold = true
+	is_quick_dropping = false
+
 func _input(event):
-	if running:
+	if running and !paused:
 		# press once
 		if event.is_action_pressed("totris_rotate_clockwise"):
-			active_tet.rotate_clockwise()
+			active_tet.perform_movement(active_tet.rotate_piece.bind(-1))
 		if event.is_action_pressed("totris_rotate_counter_clockwise"):
-			active_tet.rotate_counter_clockwise()
+			active_tet.perform_movement(active_tet.rotate_piece.bind(1))
 		if event.is_action_pressed("totris_quick_drop"):
 			is_quick_dropping = true
 		if event.is_action_released("totris_quick_drop"):
@@ -136,26 +171,27 @@ func _input(event):
 		# hold-able
 		if (event is InputEventKey) and event.pressed:
 			if event.keycode in INPUTS_LEFT:
-				active_tet.move_left()
+				active_tet.perform_movement(active_tet.move_sideways.bind(-1))
 			if event.keycode in INPUTS_RIGHT:
-				active_tet.move_right()
+				active_tet.perform_movement(active_tet.move_sideways.bind(1))
 
 func _process(_delta):
 	score_box.find_child("Label").text = str(score)
 	level_box.find_child("Label").text = str(level)
 
 func _on_gravity_ticker_timeout():
-	if running and !is_quick_dropping:
+	if running and !is_quick_dropping and !paused:
 		score += S_GRAVITY
-		active_tet.gravity_tick()
+		active_tet.perform_movement(active_tet.gravity_tick)
 
 func _on_quick_drop_timer_timeout():
-	if running and is_quick_dropping:
+	if running and is_quick_dropping and !paused:
 		score += S_GRAVITY
-		active_tet.gravity_tick()
+		active_tet.perform_movement(active_tet.gravity_tick)
 
 ## triggered when the active tetromino is placed
-func active_tet_placed():
+func active_tet_placed(from_instant):
+	%SFX.play_sound("t_place_inst" if from_instant else "t_place")
 	score += S_PLACE
 	all_pieces.append(active_tet)
 	activate_new_tet(get_next_piece())
@@ -183,14 +219,15 @@ func update_ui_queue():
 	queued_1.body.scale = queued_1.SMALL_SCALE
 	queued_2.body.scale = queued_2.SMALL_SCALE
 
-## if any PLACED collision point is touching the top of the grid, game over
+## if any PLACED collision point is above the top of the grid, game over
 func check_for_game_over():
 	for tet in all_pieces:
 		if is_instance_of(tet, Tetromino):
 			for point: Vector2 in tet.body.get_raw_collision_points():
-				if point.y - 30 <= grid_bg.position.y:
+				if point.y - 15 <= grid_bg.position.y:
+					active_tet.ghost.visible = false
 					running = false
-					print("FAILURE")
+					kill_menu.show()
 					return
 
 ## accesses the raw coll2d children of each tet body's collision area
@@ -234,12 +271,21 @@ func check_for_completed_lines():
 		line.complete()
 
 func add_line_score(lines_completed):
+	var is_totris = lines_completed == 4
+	
+	# levelup & score increase
 	total_lines_completed += lines_completed
 	while total_lines_completed >= levelup_threshold:
+		prev_levelup_threshold = levelup_threshold
 		levelup_threshold += min(floor(levelup_threshold * 0.5), MAX_THRESHOLD_ADDITION)
 		gravity_ticker.wait_time -= SPEED_SUB if gravity_ticker.wait_time > MIN_SPEED else 0.0
 		level += 1
-	score += (lines_completed * S_LINE) if lines_completed < 4 else S_TOTRIS
+	score += S_TOTRIS if is_totris else (lines_completed * S_LINE)
+	
+	 # resize exp bar
+	var exp_bar = level_box.find_child("expBar")
+	exp_bar.scale.x = float(total_lines_completed - prev_levelup_threshold) / float(levelup_threshold - prev_levelup_threshold)
+	%SFX.play_sound("t_biglinebreak" if is_totris else "t_linebreak")
 
 class CompletedLine:
 	var parent_node: TotrisGameplay
@@ -286,3 +332,25 @@ func remove_tet(tet: Tetromino):
 ## general function to delete a node
 func remove_node(node):
 	node.queue_free()
+
+func _on_play_button_down():
+	start_menu.hide()
+	kill_menu.hide()
+	reset_game()
+	start()
+
+func _on_help_btn_button_down():
+	help_menu.visible = !help_menu.visible
+	if running:
+		paused = help_menu.visible
+
+func _on_close_btn_button_down():
+	if help_menu.visible:  # close help menu if its open
+		_on_help_btn_button_down()
+		return
+	get_tree().root.propagate_notification(Globals.NOTIFICATION_MINIGAME_CLOSED)
+	queue_free()
+
+func _on_menu_button_down():
+	kill_menu.hide()
+	start_menu.show()
