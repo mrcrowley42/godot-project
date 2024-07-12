@@ -33,6 +33,7 @@ var collision_area: Area2D
 var og_coll_positions = {}  # key: node name, value: pos
 var current_rotation = 0
 var current_animation: String
+var tween = null
 
 func get_normal(direction: int) -> int:
 	return int(TET_VALUES[animation][frame][direction])
@@ -171,3 +172,10 @@ func spawn_singular_squares():
 		if !coll.disabled:
 			coll.add_child(sprite.duplicate())
 	set_animation("empty")
+
+## create a new 1 sec tween for the modulate overriding existing one
+func tween_modulate(goal: Color):
+	if tween != null:
+		tween.kill()
+	tween = get_tree().create_tween()
+	tween.tween_property(self, "modulate", goal, 1)

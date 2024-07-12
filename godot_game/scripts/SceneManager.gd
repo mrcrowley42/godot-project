@@ -2,6 +2,7 @@
 extends Node2D
 
 @onready var act_menu = %ActivityControls
+
 # Preload all the minigames.
 @onready var totrisScene = preload ("res://scenes/MiniGames/totris.tscn")
 @onready var memoryGameScene = preload ("res://scenes/MiniGames/memory_game.tscn")

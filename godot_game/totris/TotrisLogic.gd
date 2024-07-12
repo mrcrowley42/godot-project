@@ -63,15 +63,16 @@ func reset_game():
 	total_lines_completed = 0
 	levelup_threshold = STARTING_THRESHOLD
 	prev_levelup_threshold = 0
-	# game values
-	running = false
-	paused = false
+	
+	# game
 	for list in [all_pieces, [queued_1, queued_2, held_tet]]:
 		for piece in list:
 			if is_instance_of(piece, Tetromino):
-				piece.queue_free()
+				piece.queue_free()  # clear entire board
 	all_pieces.clear()
 	tet_queue.clear()
+	running = false
+	paused = false
 	queued_1 = null
 	queued_2 = null
 	active_tet = null
@@ -105,10 +106,12 @@ func _input(event):
 func add_to_score(amount: int):
 	if running and !paused:
 		score += amount
+		t_manager.update_score()
 
 func add_to_level(amount: int):
 	if running and !paused:
 		level += amount
+		t_manager.update_score()
 
 func get_next_piece() -> String:
 	if len(tet_queue) < 4:
@@ -158,6 +161,8 @@ func hold_active_tet():
 		held_tet.holding_tet(pos)
 		can_hold = false
 	else:
+		held_tet.body.modulate.s = 1
+		held_tet.body.tween_modulate(Color(1, 1, 1))
 		%SFX.play_sound("t_no")
 
 ## instant drop & spawns particles

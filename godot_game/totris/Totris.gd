@@ -27,6 +27,7 @@ func _ready():
 	kill_menu.hide()
 	help_menu.hide()
 
+## sawn a particle in the UI (particle kills itself on completion)
 func spawn_particle(particle: CPUParticles2D, pos: Vector2, colour: Color, lifetime=null):
 	var part: CPUParticles2D = particle.duplicate()
 	top_overlay.add_child(part)
@@ -39,7 +40,8 @@ func spawn_particle(particle: CPUParticles2D, pos: Vector2, colour: Color, lifet
 	part.position = pos
 	part.emitting = true
 
-func _process(_delta):
+## call this so it doesnt have to update every single frame in _process()
+func update_score():
 	score_box.find_child("Label").text = str(t_logic.score)
 	level_box.find_child("Label").text = str(t_logic.level)
 
@@ -65,6 +67,7 @@ func _on_close_btn_button_down():
 	if help_menu.visible:  # close help menu if its open
 		_on_help_btn_button_down()
 		return
+	# close totris
 	get_tree().root.propagate_notification(Globals.NOTIFICATION_MINIGAME_CLOSED)
 	queue_free()
 
