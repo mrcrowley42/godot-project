@@ -50,7 +50,6 @@ func init(piece: String, b_pos: Vector2, b_size: Vector2, previous_pieces):
 func place_tet(from_instant=false):
 	resting = true
 	ghost.visible = false
-	body.spawn_singular_squares()
 	placed.emit(from_instant)
 
 ## Wrapper function to be used to call any movement function. Allows more time to move last second if about to place
@@ -121,7 +120,7 @@ func general_correction():
 		body.add_x(SQUARE_SIZE.x * collision.x_direction)
 		
 		# special case for left side of long block: move again if still colliding in the same direction
-		if collision.x_direction > 0 and collision.incident_body.body.animation == "long":
+		if collision.x_direction > 0 and collision.incident_body.body.current_animation == "long":
 			var other_coll = check_for_collision()
 			if other_coll and other_coll.x_direction == collision.x_direction:
 				body.add_x(SQUARE_SIZE.x * collision.x_direction)

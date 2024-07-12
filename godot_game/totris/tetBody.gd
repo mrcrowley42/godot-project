@@ -1,4 +1,4 @@
-extends AnimatedSprite2D
+extends Sprite2D
 
 class_name TetBody
 
@@ -11,18 +11,20 @@ const LEFT = 2
 const RIGHT = 3
 
 const SWITCH = -1  # special case for rotation
-const ROTATION = 9
-const COLOUR = 10
+const ROTATION = 10
+const SIZE = 11
+const COLOUR = 12
+const FRAMES = 13
 
 ## tet normals define square allowance on sides for each frame of each tetromino (needed since every texture is a square)
 const TET_VALUES = {
-	"l_a": {0: "0100", 1: "0010", 2: "1000", 3: "0001", ROTATION: 90, COLOUR: Color(30, 90, 255)},
-	"l_b": {0: "1000", 1: "0001", 2: "0100", 3: "0010", ROTATION: 90, COLOUR: Color(255, 200, 120)},
-	"long": {0: "1200", 1: "0021", ROTATION: SWITCH, COLOUR: Color(150, 255, 255)},
-	"skew_a": {0: "1000", 1: "0010", ROTATION: -90, COLOUR: Color(150, 255, 140)},
-	"skew_b": {0: "1000", 1: "0010", ROTATION: -90, COLOUR: Color(255, 110, 90)},
-	"square": {0: "0000", ROTATION: 0, COLOUR: Color(253, 255, 127)},
-	"t": {0: "1000", 1: "0001", 2: "0100", 3: "0010", ROTATION: 90, COLOUR: Color(190, 115, 255)}
+	"l_a": {SIZE: Vector2(90, 90), FRAMES: {0: "0100", 1: "0010", 2: "1000", 3: "0001"}, ROTATION: 90, COLOUR: Color(30, 90, 255)},
+	"l_b": {SIZE: Vector2(90, 90), FRAMES: {0: "1000", 1: "0001", 2: "0100", 3: "0010"}, ROTATION: 90, COLOUR: Color(255, 200, 120)},
+	"long": {SIZE: Vector2(120, 120), FRAMES: {0: "1200", 1: "0021"}, ROTATION: SWITCH, COLOUR: Color(150, 255, 255)},
+	"skew_a": {SIZE: Vector2(90, 90), FRAMES: {0: "1000", 1: "0010"}, ROTATION: -90, COLOUR: Color(150, 255, 140)},
+	"skew_b": {SIZE: Vector2(90, 90), FRAMES: {0: "1000", 1: "0010"}, ROTATION: -90, COLOUR: Color(255, 110, 90)},
+	"square": {SIZE: Vector2(60, 60), FRAMES: {0: "0000"}, ROTATION: 0, COLOUR: Color(253, 255, 127)},
+	"t": {SIZE: Vector2(90, 90), FRAMES: {0: "1000", 1: "0001", 2: "0100", 3: "0010"}, ROTATION: 90, COLOUR: Color(190, 115, 255)}
 }
 var ALLOWED_TETS = TET_VALUES.keys()  # so no const godot?? fine
 
@@ -33,19 +35,24 @@ var collision_area: Area2D
 var og_coll_positions = {}  # key: node name, value: pos
 var current_rotation = 0
 var current_animation: String
+var current_frame: int
 var tween = null
 
+
 func get_normal(direction: int) -> int:
-	return int(TET_VALUES[animation][frame][direction])
+	return int(TET_VALUES[current_animation][FRAMES][current_frame][direction])
 
 func get_rotation_addition() -> int:
-	return int(TET_VALUES[animation][ROTATION])
+	return int(TET_VALUES[current_animation][ROTATION])
 
 func get_colour() -> Color:
-	return TET_VALUES[current_animation][COLOUR]
+	return Color(TET_VALUES[current_animation][COLOUR])
+
+func get_frame_count() -> int:
+	return int(len(TET_VALUES[current_animation][FRAMES].keys()))
 
 func get_size() -> Vector2:
-	return sprite_frames.get_frame_texture(animation, frame).get_size()
+	return TET_VALUES[current_animation][SIZE]
 
 ## clips size based on tet normals
 func get_clipped_size() -> Vector2:
@@ -98,18 +105,23 @@ func get_coll_node_from_raw_position(raw_pos: Vector2):
 
 func set_anim(anim):
 	assert(anim in ALLOWED_TETS)
-	set_animation(anim)
 	collision_area = find_child(anim)
 	collision_area.visible = true
-	current_animation = animation
+	current_animation = anim
 	
-	for node: CollisionShape2D in collision_area.get_children():
-		og_coll_positions[node.name] = node.position
+	var sprite: Sprite2D = Sprite2D.new()
+	sprite.texture = load(TEXTURE_PATH + current_animation + '_single.png')
+	sprite.z_index = -1  # below so i can still see collisions
+	
+	for coll: CollisionShape2D in collision_area.get_children():
+		coll.visible = !coll.disabled
+		og_coll_positions[coll.name] = coll.position
+		coll.add_child(sprite.duplicate())
 
 func setup_ghost(ghost_node: AnimatedSprite2D):
 	ghost = ghost_node
 	ghost.visible = true
-	ghost.set_animation(animation)
+	ghost.set_animation(current_animation)
 
 func set_x(x):
 	set_pos(Vector2(x, relative_pos.y))
@@ -142,36 +154,25 @@ func update_collision():
 	if addition == SWITCH:  # special case for long
 		for c in collision_area.get_children():
 			c.disabled = !c.disabled
+			c.visible = !c.disabled
 	else:  # rotate normally
-		current_rotation = addition * frame
+		current_rotation = addition * current_frame
 		for node: CollisionShape2D in collision_area.get_children():
 			node.position = rotate_point(og_coll_positions[node.name])
 
-func get_frame_count() -> int:
-	return int(sprite_frames.get_frame_count(animation))
-
 ## rotates body clockwise
 func advance_frame():
-	frame = (frame + 1) % get_frame_count()
-	ghost.frame = frame
-	update_collision()
+	var frame_count = get_frame_count()
+	if frame_count > 0:
+		current_frame = (current_frame + 1) % frame_count
+		ghost.frame = current_frame
+		update_collision()
 
 ## rotates body counter clockwise
 func rewind_frame():
-	frame -= 1 if frame > 0 else -get_frame_count()
-	ghost.frame = frame
+	current_frame -= 1 if current_frame > 0 else -(get_frame_count() - 1)
+	ghost.frame = current_frame
 	update_collision()
-
-func spawn_singular_squares():
-	collision_area.visible = true
-	var sprite: Sprite2D = Sprite2D.new()
-	sprite.texture = load(TEXTURE_PATH + animation + '_single.png')
-	sprite.z_index = -1  # so i can still see collisions
-	
-	for coll: CollisionShape2D in collision_area.get_children():
-		if !coll.disabled:
-			coll.add_child(sprite.duplicate())
-	set_animation("empty")
 
 ## create a new 1 sec tween for the modulate overriding existing one
 func tween_modulate(goal: Color):
