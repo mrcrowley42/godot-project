@@ -22,12 +22,6 @@ var resting: bool = false
 const LERP_TIME = 0.05;
 const L_LERP_START = 5  # linear
 const A_LERP_START = 0.1  # angular
-var l_direction = 0  # -1 or 1
-var a_direction = 0  # -1 or 1
-var l_start_time = null
-var a_start_time = null
-var l_end_time = null
-var a_end_time = null
 
 ## snap given vec to grid of square_size
 func snap_to_grid(vec: Vector2):
@@ -42,15 +36,13 @@ func snap_to_grid(vec: Vector2):
 func init(piece: String, b_pos: Vector2, b_size: Vector2, previous_pieces):
 	board_size = b_size
 	body.base_pos = b_pos
-	body.set_anim(piece)
-	body.setup_ghost(ghost)
+	body.setup_body(piece, ghost)
 	all_pieces = previous_pieces
 	body.no_collisions.connect(no_more_collisions)
 
 func place_tet(from_instant=false):
+	body.place_body()
 	resting = true
-	ghost.visible = false
-	body.spawn_singular_squares()
 	placed.emit(from_instant)
 
 ## Wrapper function to be used to call any movement function. Allows more time to move last second if about to place
@@ -121,7 +113,7 @@ func general_correction():
 		body.add_x(SQUARE_SIZE.x * collision.x_direction)
 		
 		# special case for left side of long block: move again if still colliding in the same direction
-		if collision.x_direction > 0 and collision.incident_body.body.animation == "long":
+		if collision.x_direction > 0 and collision.incident_body.body.current_animation == "long":
 			var other_coll = check_for_collision()
 			if other_coll and other_coll.x_direction == collision.x_direction:
 				body.add_x(SQUARE_SIZE.x * collision.x_direction)
@@ -149,63 +141,28 @@ func y_correction(already_colliding=false):
 
 func update_ghost():
 	ghost.position = body.position
-	ghost.offset.y = 0
-	while !check_for_collision(ghost.offset.y):
-		ghost.offset.y += SQUARE_SIZE.y
-	ghost.offset.y -= SQUARE_SIZE.y  # revert back up
+	while !check_for_collision(ghost.position.y - body.position.y):
+		ghost.position.y += SQUARE_SIZE.y
+	ghost.position.y -= SQUARE_SIZE.y  # revert back up
 
 func is_body_on_ghost() -> bool:
-	return ghost.position + ghost.offset == body.position
+	return ghost.position == body.position
 
 ## instantly teleport tet to ghost's y position & placem returns final, clipped position (not relative)
 func drop_to_ghost() -> Vector2:
 	update_ghost()  # sanity check the ghost
-	body.add_y(ghost.offset.y)
+	body.add_y(ghost.position.y - body.position.y)
 	var pos = body.get_clipped_pos(false)
 	place_tet(true)
 	return pos
 
 func perform_linear_lerp(direction):
-	l_direction = direction
 	body.set_x_offset(L_LERP_START * direction)
-	l_start_time = Time.get_unix_time_from_system()
-	l_end_time = l_start_time + LERP_TIME
+	body.perform_tween(body.TWEEN_OFFSET, Vector2(0, 0), LERP_TIME)
 
 func perform_angular_lerp(direction):
-	a_direction = direction
 	body.set_angle(A_LERP_START * direction)
-	a_start_time = Time.get_unix_time_from_system()
-	a_end_time = a_start_time + LERP_TIME
-
-## returns whether lerp progressed
-func advance_lerp(s_time, e_time, direction, start, lerp_offset=false) -> bool:
-	if s_time != null:
-		var t = Time.get_unix_time_from_system()
-		var perc = (t - s_time) / (e_time - s_time)
-		if perc >= 1:
-			return false
-		var sub = start * perc
-		sub = sub if direction > 0 else -sub
-		if lerp_offset:
-			body.set_x_offset((start * direction) - sub)
-		else:
-			body.set_angle((start * direction) - sub)
-		return true
-	return false
-
-## progress various lerps
-func _process(_delta):
-	var advance_l = advance_lerp(l_start_time, l_end_time, l_direction, L_LERP_START, true)
-	var advance_a = advance_lerp(a_start_time, a_end_time, a_direction, A_LERP_START)
-	
-	if !advance_l:
-		body.set_x_offset(0)
-		l_start_time = null
-		l_end_time = null
-	if !advance_a:
-		body.set_angle(0)
-		a_start_time = null
-		a_end_time = null
+	body.perform_tween(body.TWEEN_ROTATION, 0, LERP_TIME)
 
 func get_all_ground_positions(ground):
 	var points = []

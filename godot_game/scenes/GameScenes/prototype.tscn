@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/prototype.gd" id="1_u8fgs"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_w1hur"]
-[ext_resource type="Script" path="res://scripts/SceneManager.gd" id="3_usdrn"]
+[ext_resource type="Script" path="res://scripts/MinigameManager.gd" id="3_usdrn"]
 [ext_resource type="Shader" path="res://shaders/multiply_colour.gdshader" id="4_8sx1k"]
 [ext_resource type="Texture2D" uid="uid://cdbor7hjfbusn" path="res://UI stuff/Universal/background.png" id="4_pmdaq"]
 [ext_resource type="PackedScene" uid="uid://bebjn5n2kjwgb" path="res://scenes/Creatures/creature.tscn" id="5_khxd0"]
@@ -273,7 +273,7 @@ sp_amount = 4.0
 ap_rate = 1.0
 ap_amount = 12.0
 
-[node name="MinigameManager" type="Node2D" parent="."]
+[node name="MinigameManager" type="Node2D" parent="." groups=["save_data"]]
 unique_name_in_owner = true
 script = ExtResource("3_usdrn")
 

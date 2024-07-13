@@ -1,18 +1,9 @@
-extends Node2D
+extends MiniGameLogic
 
-class_name TotrisGameplay
+class_name TotrisLogic
 
 @onready var base_tet = preload("res://totris/Tetromino.tscn")
-
-@onready var top_overlay: CanvasLayer = find_child("TopOverlay")
-@onready var start_menu = find_child("StartMenu")
-@onready var kill_menu = find_child("KillMenu")
-@onready var help_menu = find_child("HelpMenu")
-@onready var score_box = find_child("ScoreBox")
-@onready var level_box = find_child("LevelBox")
-@onready var grid_bg = find_child("GridBG")
-@onready var hold_box = find_child("HoldBox")
-@onready var next_box = find_child("NextBox")
+@onready var t_manager: TotrisManager = get_parent()
 
 @onready var gravity_ticker: Timer = find_child("GravityTicker")
 @onready var quick_drop_ticker: Timer = find_child("QuickDropTicker")
@@ -34,7 +25,7 @@ var levelup_threshold = STARTING_THRESHOLD
 const STARTING_THRESHOLD = 2
 const MAX_THRESHOLD_ADDITION = 6
 const S_GRAVITY = 1
-const S_PLACE = 10
+const S_PLACE = 5
 const S_LINE = 100
 const S_TOTRIS = (S_LINE * 4) * 2
 const SPEED_SUB = 0.02  # time taken from gravity ticker every level up
@@ -53,6 +44,75 @@ var is_quick_dropping = false
 # UI QUEUE (non initialised pieces)
 var queued_1: Tetromino;  # save to free them later 
 var queued_2: Tetromino;
+
+
+func start():
+	running = true
+	all_pieces.append(find_child("Ground"))
+	activate_new_tet(get_next_piece())
+	generate_tet_queue()
+	update_ui_queue()
+	gravity_ticker.start()
+	quick_drop_ticker.start()
+
+## reset all game values & clear the board
+func reset_game():
+	# stats
+	score = 0
+	level = 0
+	total_lines_completed = 0
+	levelup_threshold = STARTING_THRESHOLD
+	prev_levelup_threshold = 0
+	
+	# game
+	for list in [all_pieces, [queued_1, queued_2, held_tet]]:
+		for piece in list:
+			if is_instance_of(piece, Tetromino):
+				piece.queue_free()  # clear entire board
+	all_pieces.clear()
+	tet_queue.clear()
+	running = false
+	paused = false
+	queued_1 = null
+	queued_2 = null
+	active_tet = null
+	held_tet = null
+	can_hold = true
+	is_quick_dropping = false
+	t_manager.update_score()
+
+func _input(event):
+	if running and !paused:
+		# press once
+		if event.is_action_pressed("totris_rotate_clockwise"):
+			active_tet.perform_movement(active_tet.rotate_piece.bind(-1))
+		if event.is_action_pressed("totris_rotate_counter_clockwise"):
+			active_tet.perform_movement(active_tet.rotate_piece.bind(1))
+		if event.is_action_pressed("totris_quick_drop"):
+			is_quick_dropping = true
+		if event.is_action_released("totris_quick_drop"):
+			is_quick_dropping = false
+		if event.is_action_pressed("totris_instant_drop"):
+			instant_drop()
+		if event.is_action_pressed("totris_hold"):
+			hold_active_tet()
+		
+		# hold-able
+		if (event is InputEventKey) and event.pressed:
+			if event.keycode in INPUTS_LEFT:
+				active_tet.perform_movement(active_tet.move_sideways.bind(-1))
+			if event.keycode in INPUTS_RIGHT:
+				active_tet.perform_movement(active_tet.move_sideways.bind(1))
+
+func add_to_score(amount: int):
+	if running and !paused:
+		score += amount
+		t_manager.update_score()
+
+func add_to_level(amount: int):
+	if running and !paused:
+		level += amount
+		t_manager.update_score()
 
 func get_next_piece() -> String:
 	if len(tet_queue) < 4:
@@ -83,7 +143,7 @@ func activate_tet(tetromino):
 func activate_new_tet(piece):
 	var new_tet: Tetromino = base_tet.instantiate()
 	add_child(new_tet)
-	new_tet.init(piece, grid_bg.position, BOARD_SIZE, all_pieces)
+	new_tet.init(piece, t_manager.grid_bg.position, BOARD_SIZE, all_pieces)
 	activate_tet(new_tet)
 	new_tet.remove_piece.connect(remove_tet)
 
@@ -98,10 +158,12 @@ func hold_active_tet():
 		else:
 			swapped_tet.stop_holding_tet()
 			activate_tet(swapped_tet)
-		var pos = hold_box.position - (hold_box.size * hold_box.scale) / 2
+		var pos = t_manager.hold_box.position - (t_manager.hold_box.size * t_manager.hold_box.scale) / 2
 		held_tet.holding_tet(pos)
 		can_hold = false
 	else:
+		held_tet.body.set_modulate_col(Color(1, 0, 0))
+		held_tet.body.perform_tween(held_tet.body.TWEEN_MODULATE, Color(1, 1, 1), 1)
 		%SFX.play_sound("t_no")
 
 ## instant drop & spawns particles
@@ -113,86 +175,19 @@ func instant_drop():
 	
 	var addition = 0
 	while pos_after.y > pos_before.y + addition:
+		if addition % 30 == 0:
+			add_to_score(S_GRAVITY)  # gravity points still recieved
+		
 		var perc = (pos_before.y + addition) / pos_after.y
 		var lifetime = 0.3 + perc
-		spawn_particle(pos_before + Vector2(-size.x / 2, addition), colour, true, lifetime)
-		spawn_particle(pos_before + Vector2(size.x / 2, addition), colour, true, lifetime)
+		t_manager.spawn_particle(drop_particle, pos_before + Vector2(-size.x / 2, addition), colour, lifetime)
+		t_manager.spawn_particle(drop_particle, pos_before + Vector2(size.x / 2, addition), colour, lifetime)
 		addition += 15
-
-func start():
-	running = true
-	all_pieces.append(find_child("Ground"))
-	activate_new_tet(get_next_piece())
-	generate_tet_queue()
-	update_ui_queue()
-	gravity_ticker.start()
-	quick_drop_ticker.start()
-
-## reset all game values & clear the board
-func reset_game():
-	# stats
-	score = 0
-	level = 0
-	total_lines_completed = 0
-	levelup_threshold = STARTING_THRESHOLD
-	prev_levelup_threshold = 0
-	# game values
-	running = false
-	paused = false
-	for list in [all_pieces, [queued_1, queued_2]]:
-		for piece in list:
-			if is_instance_of(piece, Tetromino):
-				piece.queue_free()
-	all_pieces.clear()
-	tet_queue.clear()
-	queued_1 = null
-	queued_2 = null
-	active_tet = null
-	held_tet = null
-	can_hold = true
-	is_quick_dropping = false
-
-func _input(event):
-	if running and !paused:
-		# press once
-		if event.is_action_pressed("totris_rotate_clockwise"):
-			active_tet.perform_movement(active_tet.rotate_piece.bind(-1))
-		if event.is_action_pressed("totris_rotate_counter_clockwise"):
-			active_tet.perform_movement(active_tet.rotate_piece.bind(1))
-		if event.is_action_pressed("totris_quick_drop"):
-			is_quick_dropping = true
-		if event.is_action_released("totris_quick_drop"):
-			is_quick_dropping = false
-		if event.is_action_pressed("totris_instant_drop"):
-			instant_drop()
-		if event.is_action_pressed("totris_hold"):
-			hold_active_tet()
-		
-		# hold-able
-		if (event is InputEventKey) and event.pressed:
-			if event.keycode in INPUTS_LEFT:
-				active_tet.perform_movement(active_tet.move_sideways.bind(-1))
-			if event.keycode in INPUTS_RIGHT:
-				active_tet.perform_movement(active_tet.move_sideways.bind(1))
-
-func _process(_delta):
-	score_box.find_child("Label").text = str(score)
-	level_box.find_child("Label").text = str(level)
-
-func _on_gravity_ticker_timeout():
-	if running and !is_quick_dropping and !paused:
-		score += S_GRAVITY
-		active_tet.perform_movement(active_tet.gravity_tick)
-
-func _on_quick_drop_timer_timeout():
-	if running and is_quick_dropping and !paused:
-		score += S_GRAVITY
-		active_tet.perform_movement(active_tet.gravity_tick)
 
 ## triggered when the active tetromino is placed
 func active_tet_placed(from_instant):
 	%SFX.play_sound("t_place_inst" if from_instant else "t_place")
-	score += S_PLACE
+	add_to_score(S_PLACE)
 	all_pieces.append(active_tet)
 	activate_new_tet(get_next_piece())
 	check_for_completed_lines()  # after activating a new tet
@@ -209,11 +204,11 @@ func update_ui_queue():
 	add_child(queued_1)
 	add_child(queued_2)
 	
-	queued_1.body.set_anim(tet_queue[0])
-	queued_2.body.set_anim(tet_queue[1])
-	var next_box_size = next_box.size * next_box.scale
+	queued_1.body.setup_body(tet_queue[0])
+	queued_2.body.setup_body(tet_queue[1])
+	var next_box_size = t_manager.next_box.size * t_manager.next_box.scale
 	var quater_size = Vector2(0, next_box_size.y / 4)
-	var next_box_middle = next_box.position - next_box_size / 2
+	var next_box_middle = t_manager.next_box.position - next_box_size / 2
 	queued_1.set_raw_position(next_box_middle - quater_size)
 	queued_2.set_raw_position(next_box_middle + quater_size)
 	queued_1.body.scale = queued_1.SMALL_SCALE
@@ -224,10 +219,10 @@ func check_for_game_over():
 	for tet in all_pieces:
 		if is_instance_of(tet, Tetromino):
 			for point: Vector2 in tet.body.get_raw_collision_points():
-				if point.y - 15 <= grid_bg.position.y:
+				if point.y - 15 <= t_manager.grid_bg.position.y:
 					active_tet.ghost.visible = false
 					running = false
-					kill_menu.show()
+					t_manager.on_game_over()
 					return
 
 ## accesses the raw coll2d children of each tet body's collision area
@@ -279,22 +274,22 @@ func add_line_score(lines_completed):
 		prev_levelup_threshold = levelup_threshold
 		levelup_threshold += min(floor(levelup_threshold * 0.5), MAX_THRESHOLD_ADDITION)
 		gravity_ticker.wait_time -= SPEED_SUB if gravity_ticker.wait_time > MIN_SPEED else 0.0
-		level += 1
-	score += S_TOTRIS if is_totris else (lines_completed * S_LINE)
+		add_to_level(1)
+	add_to_score(S_TOTRIS if is_totris else (lines_completed * S_LINE))
 	
 	 # resize exp bar
-	var exp_bar = level_box.find_child("expBar")
+	var exp_bar = t_manager.level_box.find_child("expBar")
 	exp_bar.scale.x = float(total_lines_completed - prev_levelup_threshold) / float(levelup_threshold - prev_levelup_threshold)
 	%SFX.play_sound("t_biglinebreak" if is_totris else "t_linebreak")
 
 class CompletedLine:
-	var parent_node: TotrisGameplay
+	var t_logic: TotrisLogic
 	var nodes: Array = []  # nodes encompassed in the line/s
 	var lines_completed: int = 1
 	var highest_y
 	
-	func _init(parent: Node2D, initial_nodes: Array, y_pos):
-		parent_node = parent
+	func _init(parent: TotrisLogic, initial_nodes: Array, y_pos):
+		t_logic = parent
 		add_nodes(initial_nodes)
 		highest_y = y_pos  # the pos given in constructor will always be the highest
 	
@@ -304,25 +299,13 @@ class CompletedLine:
 	func complete():
 		for node: CollisionShape2D in nodes:
 			var body: TetBody = node.get_parent().get_parent()  # ew but whatever
-			parent_node.spawn_particle(body.position + node.position, body.get_colour())
+			t_logic.t_manager.spawn_particle(t_logic.break_particle, body.position + node.position, body.get_colour())
 			node.disabled = true
 			node.visible = false
-			node.queue_free()  # outright deletion >:)
-		parent_node.move_all_pieces_down(highest_y, lines_completed)
-		parent_node.active_tet.update_ghost()
-		parent_node.add_line_score(lines_completed)
-
-func spawn_particle(pos: Vector2, colour: Color, drop=false, lifetime=null):
-	var part: CPUParticles2D = drop_particle.duplicate() if drop else break_particle.duplicate()
-	top_overlay.add_child(part)
-	part.connect("finished", remove_node.bind(part))
-	
-	if lifetime != null:
-		part.lifetime = lifetime
-	part.modulate = colour / 255
-	part.modulate.a = 1  # reset the alpha
-	part.position = pos
-	part.emitting = true
+			t_logic.remove_node(node)  # outright deletion >:)
+		t_logic.move_all_pieces_down(highest_y, lines_completed)
+		t_logic.active_tet.update_ghost()
+		t_logic.add_line_score(lines_completed)
 
 ## called when a placed tet body finds it has no more collision points enabled
 func remove_tet(tet: Tetromino):
@@ -333,24 +316,12 @@ func remove_tet(tet: Tetromino):
 func remove_node(node):
 	node.queue_free()
 
-func _on_play_button_down():
-	start_menu.hide()
-	kill_menu.hide()
-	reset_game()
-	start()
+func _on_gravity_ticker_timeout():
+	if running and !is_quick_dropping and !paused:
+		add_to_score(S_GRAVITY)
+		active_tet.perform_movement(active_tet.gravity_tick)
 
-func _on_help_btn_button_down():
-	help_menu.visible = !help_menu.visible
-	if running:
-		paused = help_menu.visible
-
-func _on_close_btn_button_down():
-	if help_menu.visible:  # close help menu if its open
-		_on_help_btn_button_down()
-		return
-	get_tree().root.propagate_notification(Globals.NOTIFICATION_MINIGAME_CLOSED)
-	queue_free()
-
-func _on_menu_button_down():
-	kill_menu.hide()
-	start_menu.show()
+func _on_quick_drop_ticker_timeout():
+	if running and is_quick_dropping and !paused:
+		add_to_score(S_GRAVITY)
+		active_tet.perform_movement(active_tet.gravity_tick)

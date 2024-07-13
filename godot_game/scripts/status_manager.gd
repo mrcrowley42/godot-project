@@ -1,5 +1,4 @@
 @icon("res://icons/ClassList.svg")
-
 class_name StatusManager extends Node2D
 ## Script responsible for passive drain of Creature stats
 

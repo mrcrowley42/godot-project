@@ -10,6 +10,7 @@ var last_opened: float
 @onready var launch_time: float = Time.get_unix_time_from_system()
 @onready var stat_man: StatusManager = %StatusManager
 #@onready var launch_date = Time.get_datetime_dict_from_system().day
+@onready var minigame_man: MinigameManager = %MinigameManager
 
 func _ready():
 	load_data()
@@ -29,6 +30,7 @@ func _on_save_pressed():
 
 func _notification(noti):
 	if noti == NOTIFICATION_WM_CLOSE_REQUEST:
+		minigame_man.finalise_save_data()  # call before saving
 		save_data()
 
 func save_data():

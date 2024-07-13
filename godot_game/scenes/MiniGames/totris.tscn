@@ -1,12 +1,22 @@
-[gd_scene load_steps=14 format=3 uid="uid://c5dr54dk0502t"]
+[gd_scene load_steps=15 format=3 uid="uid://c5dr54dk0502t"]
 
-[ext_resource type="Script" path="res://totris/TotrisGameplay.gd" id="1_nk2jg"]
+[ext_resource type="Script" path="res://totris/Totris.gd" id="1_82aiy"]
+[ext_resource type="Script" path="res://totris/TotrisLogic.gd" id="2_7s788"]
 [ext_resource type="Texture2D" uid="uid://cgfufcnmd24wf" path="res://UI stuff/Green Palette/ui_green_tetris.png" id="2_de7pv"]
 [ext_resource type="Shader" path="res://shaders/grid.gdshader" id="3_udord"]
 [ext_resource type="Script" path="res://scripts/tetrisGridBG.gd" id="4_2wjys"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="5_d7726"]
 [ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="6_fphhh"]
 [ext_resource type="Script" path="res://scripts/sfx_man.gd" id="7_6nelh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wbp70"]
+size = Vector2(10, 10)
+
+[sub_resource type="Gradient" id="Gradient_7unwp"]
+colors = PackedColorArray(1, 1, 1, 0.392157, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_nmt2n"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_adq1g"]
 shader = ExtResource("3_udord")
@@ -30,23 +40,96 @@ line_spacing = 4.0
 font_size = 40
 font_color = Color(0.271203, 0.341779, 0.377135, 1)
 
-[sub_resource type="Gradient" id="Gradient_7unwp"]
-colors = PackedColorArray(1, 1, 1, 0.392157, 1, 1, 1, 0)
+[node name="Totris" type="Node2D"]
+script = ExtResource("1_82aiy")
 
-[sub_resource type="Gradient" id="Gradient_nmt2n"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+[node name="TotrisLogic" type="Node" parent="."]
+script = ExtResource("2_7s788")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wbp70"]
-size = Vector2(10, 10)
-
-[node name="Tetris" type="Node2D"]
-script = ExtResource("1_nk2jg")
-
-[node name="GravityTicker" type="Timer" parent="."]
+[node name="GravityTicker" type="Timer" parent="TotrisLogic"]
 wait_time = 0.4
 
-[node name="QuickDropTicker" type="Timer" parent="."]
+[node name="QuickDropTicker" type="Timer" parent="TotrisLogic"]
 wait_time = 0.05
+
+[node name="Ground" type="Area2D" parent="TotrisLogic"]
+disable_mode = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TotrisLogic/Ground"]
+position = Vector2(135, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="TotrisLogic/Ground"]
+position = Vector2(315, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="TotrisLogic/Ground"]
+position = Vector2(285, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="TotrisLogic/Ground"]
+position = Vector2(225, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="TotrisLogic/Ground"]
+position = Vector2(255, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="TotrisLogic/Ground"]
+position = Vector2(195, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="TotrisLogic/Ground"]
+position = Vector2(165, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="TotrisLogic/Ground"]
+position = Vector2(345, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="TotrisLogic/Ground"]
+position = Vector2(405, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="TotrisLogic/Ground"]
+position = Vector2(375, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="DropParticle" type="CPUParticles2D" parent="TotrisLogic"]
+position = Vector2(-119, 69)
+emitting = false
+amount = 1
+one_shot = true
+gravity = Vector2(0, 10)
+angular_velocity_min = -150.0
+angular_velocity_max = 150.0
+scale_amount_min = 6.0
+scale_amount_max = 8.0
+color_ramp = SubResource("Gradient_7unwp")
+
+[node name="BreakParticle" type="CPUParticles2D" parent="TotrisLogic"]
+position = Vector2(-57, 71)
+emitting = false
+amount = 5
+one_shot = true
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 10.0
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 400)
+initial_velocity_min = 60.0
+initial_velocity_max = 100.0
+angular_velocity_min = -150.0
+angular_velocity_max = 150.0
+scale_amount_min = 10.0
+scale_amount_max = 12.0
+color_ramp = SubResource("Gradient_nmt2n")
+
+[node name="SFX" type="AudioStreamPlayer" parent="TotrisLogic"]
+unique_name_in_owner = true
+max_polyphony = 5
+script = ExtResource("7_6nelh")
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 10
@@ -110,7 +193,8 @@ label_settings = SubResource("LabelSettings_w4uk7")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="UI/Control/TopOverlay/StartMenu"]
+[node name="ScoreL" type="Label" parent="UI/Control/TopOverlay/StartMenu"]
+layout_mode = 0
 offset_left = 180.0
 offset_top = 256.0
 offset_right = 516.0
@@ -123,7 +207,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
 
-[node name="Label3" type="Label" parent="UI/Control/TopOverlay/StartMenu"]
+[node name="LevelL" type="Label" parent="UI/Control/TopOverlay/StartMenu"]
+layout_mode = 0
 offset_left = 180.0
 offset_top = 286.0
 offset_right = 516.0
@@ -155,11 +240,13 @@ offset_right = 540.0
 offset_bottom = 675.0
 
 [node name="ColorRect" type="ColorRect" parent="UI/Control/TopOverlay/KillMenu"]
+layout_mode = 0
 offset_right = 540.0
 offset_bottom = 675.0
 color = Color(0.00784314, 0.0156863, 0.0196078, 0.588235)
 
 [node name="Label" type="Label" parent="UI/Control/TopOverlay/KillMenu"]
+layout_mode = 0
 offset_left = 180.0
 offset_top = 187.0
 offset_right = 360.0
@@ -171,7 +258,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
 
-[node name="Label2" type="Label" parent="UI/Control/TopOverlay/KillMenu"]
+[node name="ScoreL" type="Label" parent="UI/Control/TopOverlay/KillMenu"]
+layout_mode = 0
 offset_left = 180.0
 offset_top = 256.0
 offset_right = 516.0
@@ -184,7 +272,27 @@ horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
 
-[node name="Label3" type="Label" parent="UI/Control/TopOverlay/KillMenu"]
+[node name="BestScore" type="RichTextLabel" parent="UI/Control/TopOverlay/KillMenu"]
+modulate = Color(1, 0.752941, 0.196078, 1)
+layout_mode = 0
+offset_left = 341.0
+offset_top = 247.0
+offset_right = 431.0
+offset_bottom = 288.0
+scale = Vector2(0.7, 0.7)
+pivot_offset = Vector2(0.238159, 1.19049)
+theme = ExtResource("5_d7726")
+bbcode_enabled = true
+text = "[center][dropcap]
+[wave amp=30.0 freq=5.0 connected=1]
+New best!
+[/wave]
+[/dropcap][/center]"
+scroll_active = false
+tab_size = 0
+
+[node name="LevelL" type="Label" parent="UI/Control/TopOverlay/KillMenu"]
+layout_mode = 0
 offset_left = 180.0
 offset_top = 286.0
 offset_right = 516.0
@@ -197,7 +305,26 @@ horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
 
+[node name="BestLevel" type="RichTextLabel" parent="UI/Control/TopOverlay/KillMenu"]
+modulate = Color(1, 0.752941, 0.196078, 1)
+offset_left = 341.0
+offset_top = 277.0
+offset_right = 431.0
+offset_bottom = 318.0
+scale = Vector2(0.7, 0.7)
+pivot_offset = Vector2(0.238159, 1.19049)
+theme = ExtResource("5_d7726")
+bbcode_enabled = true
+text = "[center][dropcap]
+[wave amp=40.0 freq=5.0 connected=1]
+New best!
+[/wave]
+[/dropcap][/center]"
+scroll_active = false
+tab_size = 0
+
 [node name="Retry" type="Button" parent="UI/Control/TopOverlay/KillMenu"]
+layout_mode = 0
 offset_left = 228.0
 offset_top = 401.0
 offset_right = 312.0
@@ -207,6 +334,7 @@ theme = ExtResource("5_d7726")
 text = "Retry"
 
 [node name="Menu" type="Button" parent="UI/Control/TopOverlay/KillMenu"]
+layout_mode = 0
 offset_left = 228.0
 offset_top = 462.0
 offset_right = 312.0
@@ -234,6 +362,7 @@ patch_margin_right = 16
 patch_margin_bottom = 16
 
 [node name="Label" type="Label" parent="UI/Control/TopOverlay/HelpMenu"]
+layout_mode = 0
 offset_left = 77.0
 offset_top = 412.0
 offset_right = 190.0
@@ -389,87 +518,8 @@ rotation = 3.14159
 scale = Vector2(1e-05, 1)
 color = Color(0.133995, 0.176871, 0.198271, 1)
 
-[node name="DropParticle" type="CPUParticles2D" parent="UI"]
-position = Vector2(-119, 69)
-emitting = false
-amount = 1
-one_shot = true
-gravity = Vector2(0, 10)
-angular_velocity_min = -150.0
-angular_velocity_max = 150.0
-scale_amount_min = 6.0
-scale_amount_max = 8.0
-color_ramp = SubResource("Gradient_7unwp")
-
-[node name="BreakParticle" type="CPUParticles2D" parent="UI"]
-position = Vector2(-57, 71)
-emitting = false
-amount = 5
-one_shot = true
-explosiveness = 1.0
-emission_shape = 1
-emission_sphere_radius = 10.0
-direction = Vector2(0, -1)
-spread = 30.0
-gravity = Vector2(0, 400)
-initial_velocity_min = 60.0
-initial_velocity_max = 100.0
-angular_velocity_min = -150.0
-angular_velocity_max = 150.0
-scale_amount_min = 10.0
-scale_amount_max = 12.0
-color_ramp = SubResource("Gradient_nmt2n")
-
-[node name="Ground" type="Area2D" parent="UI"]
-disable_mode = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Ground"]
-position = Vector2(135, 652)
-shape = SubResource("RectangleShape2D_wbp70")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="UI/Ground"]
-position = Vector2(315, 652)
-shape = SubResource("RectangleShape2D_wbp70")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="UI/Ground"]
-position = Vector2(285, 652)
-shape = SubResource("RectangleShape2D_wbp70")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="UI/Ground"]
-position = Vector2(225, 652)
-shape = SubResource("RectangleShape2D_wbp70")
-
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="UI/Ground"]
-position = Vector2(255, 652)
-shape = SubResource("RectangleShape2D_wbp70")
-
-[node name="CollisionShape2D6" type="CollisionShape2D" parent="UI/Ground"]
-position = Vector2(195, 652)
-shape = SubResource("RectangleShape2D_wbp70")
-
-[node name="CollisionShape2D7" type="CollisionShape2D" parent="UI/Ground"]
-position = Vector2(165, 652)
-shape = SubResource("RectangleShape2D_wbp70")
-
-[node name="CollisionShape2D8" type="CollisionShape2D" parent="UI/Ground"]
-position = Vector2(345, 652)
-shape = SubResource("RectangleShape2D_wbp70")
-
-[node name="CollisionShape2D9" type="CollisionShape2D" parent="UI/Ground"]
-position = Vector2(405, 652)
-shape = SubResource("RectangleShape2D_wbp70")
-
-[node name="CollisionShape2D10" type="CollisionShape2D" parent="UI/Ground"]
-position = Vector2(375, 652)
-shape = SubResource("RectangleShape2D_wbp70")
-
-[node name="SFX" type="AudioStreamPlayer" parent="."]
-unique_name_in_owner = true
-max_polyphony = 5
-script = ExtResource("7_6nelh")
-
-[connection signal="timeout" from="GravityTicker" to="." method="_on_gravity_ticker_timeout"]
-[connection signal="timeout" from="QuickDropTicker" to="." method="_on_quick_drop_timer_timeout"]
+[connection signal="timeout" from="TotrisLogic/GravityTicker" to="TotrisLogic" method="_on_gravity_ticker_timeout"]
+[connection signal="timeout" from="TotrisLogic/QuickDropTicker" to="TotrisLogic" method="_on_quick_drop_ticker_timeout"]
 [connection signal="button_down" from="UI/Control/TopOverlay/StartMenu/Play" to="." method="_on_play_button_down"]
 [connection signal="button_down" from="UI/Control/TopOverlay/KillMenu/Retry" to="." method="_on_play_button_down"]
 [connection signal="button_down" from="UI/Control/TopOverlay/KillMenu/Menu" to="." method="_on_menu_button_down"]
