@@ -26,7 +26,7 @@ func load_minigame(pre_loaded=null, instance=null):
 		var game = pre_loaded.instantiate() if pre_loaded != null else instance
 		find_parent("Game").find_child("UI").add_child(game)
 		find_parent("Game").find_child("UI").move_child(game, 0)
-		current_minigame = game.resource_path if pre_loaded != null else game.name
+		current_minigame = pre_loaded.resource_path if pre_loaded != null else game.name
 		%ActButton.disabled = true
 		%FoodButton.disabled = true
 
@@ -67,15 +67,15 @@ func _on_totris_button_down():
 
 ## Loads Memory scene.
 func _on_memory_game_button_down():
-	load_minigame(memory_game_scene)
+	load_minigame(memory_game_scene, null)
 
 ## Loads scissors-paper-rock scene.
 func _on_scissors_paper_rock_button_down():
-	load_minigame(sprock_scene)
+	load_minigame(sprock_scene, null)
 
 ## Loads Relaxation scene.
 func _on_zen_mode_button_down():
-	load_minigame(zen_mode_scene)
+	load_minigame(zen_mode_scene, null)
 
 
 ## save data
