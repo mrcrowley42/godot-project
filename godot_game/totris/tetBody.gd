@@ -28,7 +28,7 @@ const TET_VALUES = {
 }
 var ALLOWED_TETS = TET_VALUES.keys()  # so no const godot?? fine
 
-var ghost: AnimatedSprite2D;
+var ghost: Sprite2D;
 var base_pos: Vector2
 var relative_pos: Vector2 = Vector2(0, 0)
 var collision_area: Area2D
@@ -38,6 +38,7 @@ var current_animation: String
 var current_frame: int
 
 # tweens
+var should_tween = true
 const TWEEN_OFFSET = 1
 const TWEEN_ROTATION = 2
 const TWEEN_MODULATE = 3
@@ -110,25 +111,31 @@ func get_coll_node_from_raw_position(raw_pos: Vector2):
 			return node
 	print("FAILED to find child collision point at position %s, %s" % [raw_pos.x, raw_pos.y])
 
-func set_anim(anim):
+func setup_body(anim, ghost_node: Sprite2D = null):
 	assert(anim in ALLOWED_TETS)
-	collision_area = find_child(anim)
-	collision_area.visible = true
 	current_animation = anim
+	collision_area = find_child(current_animation)
+	collision_area.visible = true
 	
+	# ghost
+	if ghost_node:
+		ghost = ghost_node
+		ghost.visible = true
+	
+	# sprites
 	var sprite: Sprite2D = Sprite2D.new()
 	sprite.texture = load(TEXTURE_PATH + current_animation + '_single.png')
 	sprite.z_index = -1  # below so i can still see collisions
-	
 	for coll: CollisionShape2D in collision_area.get_children():
 		coll.visible = !coll.disabled
 		og_coll_positions[coll.name] = coll.position
 		coll.add_child(sprite.duplicate())
-
-func setup_ghost(ghost_node: AnimatedSprite2D):
-	ghost = ghost_node
-	ghost.visible = true
-	ghost.set_animation(current_animation)
+		
+		if ghost_node:
+			var ghost_sprite = sprite.duplicate()
+			ghost_sprite.position = coll.position
+			ghost_sprite.visible = coll.visible
+			ghost.add_child(ghost_sprite)
 
 func set_x(x):
 	set_pos(Vector2(x, relative_pos.y))
@@ -158,6 +165,11 @@ func set_angle(rad):
 func set_modulate_col(col: Color):
 	t_modulate = col
 
+## NOTE: call AFTER updating collision points
+func update_ghost_rotation():
+	for i in ghost.get_child_count():
+		ghost.get_child(i).position = collision_area.get_child(i).position
+
 ## rotates (or switches) the collision area based on its rotation addition
 func update_collision():
 	var addition = get_rotation_addition()
@@ -165,6 +177,8 @@ func update_collision():
 		for c in collision_area.get_children():
 			c.disabled = !c.disabled
 			c.visible = !c.disabled
+		for sp: Sprite2D in ghost.get_children():
+			sp.visible = !sp.visible
 	else:  # rotate normally
 		current_rotation = addition * current_frame
 		for node: CollisionShape2D in collision_area.get_children():
@@ -175,31 +189,32 @@ func advance_frame():
 	var frame_count = get_frame_count()
 	if frame_count > 0:
 		current_frame = (current_frame + 1) % frame_count
-		ghost.frame = current_frame
 		update_collision()
+		update_ghost_rotation()
 
 ## rotates body counter clockwise
 func rewind_frame():
 	current_frame -= 1 if current_frame > 0 else -(get_frame_count() - 1)
-	ghost.frame = current_frame
 	update_collision()
+	update_ghost_rotation()
 
 ## update the things that need tweening
 func _process(_delta):
-	var props_to_update = []
-	if t_offset != Vector2(0, 0):
-		props_to_update.append("offset")
-	if t_rotation != 0:
-		props_to_update.append("rotation")
-	if t_modulate != Color(1, 1, 1):
-		props_to_update.append("modulate")
-	
-	for prop in props_to_update:
-		for coll: CollisionShape2D in collision_area.get_children():
-			var sprite: Sprite2D = coll.get_child(0)
-			if prop == "rotation":  # extra case for rotation so each sprite rotates around centre of the body (rather than just rotating around itself)
-				sprite.offset = rotate_point(t_rotation, coll.position) - coll.position
-			sprite[prop] = self["t_" + prop]
+	if should_tween:
+		var props_to_update = []
+		if t_offset != Vector2(0, 0):
+			props_to_update.append("offset")
+		if t_rotation != 0:
+			props_to_update.append("rotation")
+		if t_modulate != Color(1, 1, 1):
+			props_to_update.append("modulate")
+		
+		for prop in props_to_update:
+			for coll: CollisionShape2D in collision_area.get_children():
+				var sprite: Sprite2D = coll.get_child(0)
+				if prop == "rotation":  # extra case for rotation so each sprite rotates around centre of the body (rather than just rotating around itself)
+					sprite.offset = rotate_point(t_rotation, coll.position) - coll.position
+				sprite[prop] = self["t_" + prop]
 
 ## creates a tween & performs it on the nessecary values
 func perform_tween(tween_type: int, goal, time: float):
@@ -208,3 +223,11 @@ func perform_tween(tween_type: int, goal, time: float):
 	tweeners[tween_type] = get_tree().create_tween()
 	var property = "t_offset" if tween_type == TWEEN_OFFSET else ("t_modulate" if tween_type == TWEEN_MODULATE else "t_rotation")
 	tweeners[tween_type].tween_property(self, property, goal, time)
+
+func place_body():
+	ghost.visible = false
+	for coll: CollisionShape2D in collision_area.get_children():
+		var sp: Sprite2D = coll.get_child(0)
+		sp.offset = Vector2(0, 0)
+		sp.rotation = 0
+		sp.modulate = Color(1, 1, 1)

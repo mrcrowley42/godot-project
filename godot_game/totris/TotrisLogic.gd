@@ -203,8 +203,8 @@ func update_ui_queue():
 	add_child(queued_1)
 	add_child(queued_2)
 	
-	queued_1.body.set_anim(tet_queue[0])
-	queued_2.body.set_anim(tet_queue[1])
+	queued_1.body.setup_body(tet_queue[0])
+	queued_2.body.setup_body(tet_queue[1])
 	var next_box_size = t_manager.next_box.size * t_manager.next_box.scale
 	var quater_size = Vector2(0, next_box_size.y / 4)
 	var next_box_middle = t_manager.next_box.position - next_box_size / 2

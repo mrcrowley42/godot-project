@@ -1,124 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://3cn1hflukqt1"]
+[gd_scene load_steps=4 format=3 uid="uid://3cn1hflukqt1"]
 
 [ext_resource type="Script" path="res://totris/Tetromino.gd" id="1_qheu4"]
-[ext_resource type="Texture2D" uid="uid://3d40sc2w7vyq" path="res://totris/tetrominos/l_a_1.png" id="2_lviqe"]
-[ext_resource type="Texture2D" uid="uid://dgpxkvyes4anx" path="res://totris/tetrominos/l_a_2.png" id="3_7sdnd"]
-[ext_resource type="Texture2D" uid="uid://b6uqio65ycb6c" path="res://totris/tetrominos/l_a_3.png" id="4_qcl2f"]
-[ext_resource type="Texture2D" uid="uid://bhjd80dlij35l" path="res://totris/tetrominos/l_a_4.png" id="5_myg1b"]
-[ext_resource type="Texture2D" uid="uid://cadq27ucaftqq" path="res://totris/tetrominos/l_b_1.png" id="6_7cbjm"]
-[ext_resource type="Texture2D" uid="uid://dnhds60g8w0y" path="res://totris/tetrominos/l_b_2.png" id="7_dnj10"]
-[ext_resource type="Texture2D" uid="uid://vkak3mlfmmil" path="res://totris/tetrominos/l_b_3.png" id="8_2qgun"]
-[ext_resource type="Texture2D" uid="uid://vsvg8cwwisdi" path="res://totris/tetrominos/l_b_4.png" id="9_r01vb"]
-[ext_resource type="Texture2D" uid="uid://bkaq7s017gaek" path="res://totris/tetrominos/long_1.png" id="10_2goxp"]
-[ext_resource type="Texture2D" uid="uid://ds1nxdocf8rot" path="res://totris/tetrominos/long_2.png" id="11_exrip"]
-[ext_resource type="Texture2D" uid="uid://do8rp1ndk03bk" path="res://totris/tetrominos/skew_a_1.png" id="12_n1rjv"]
-[ext_resource type="Texture2D" uid="uid://dklraax1ho5bu" path="res://totris/tetrominos/skew_a_2.png" id="13_4bh4m"]
-[ext_resource type="Texture2D" uid="uid://c8ckscou43468" path="res://totris/tetrominos/skew_b_1.png" id="14_7cl8y"]
-[ext_resource type="Texture2D" uid="uid://beiqsda8hk7kg" path="res://totris/tetrominos/skew_b_2.png" id="15_v88il"]
-[ext_resource type="Texture2D" uid="uid://dbrqsjw2yc40l" path="res://totris/tetrominos/square_1.png" id="16_rusjo"]
-[ext_resource type="Texture2D" uid="uid://dl36ifb6a1nk7" path="res://totris/tetrominos/t_1.png" id="17_1wier"]
-[ext_resource type="Texture2D" uid="uid://bf25dekyl4qti" path="res://totris/tetrominos/t_2.png" id="18_4h3q8"]
-[ext_resource type="Texture2D" uid="uid://chqj82rvfw6bd" path="res://totris/tetrominos/t_3.png" id="19_c15io"]
-[ext_resource type="Texture2D" uid="uid://cxlmmjyqk7gfh" path="res://totris/tetrominos/t_4.png" id="20_nbx4w"]
 [ext_resource type="Script" path="res://totris/tetBody.gd" id="21_uh3hb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cm127"]
 size = Vector2(10, 10)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_3jfmm"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_lviqe")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_7sdnd")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_qcl2f")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_myg1b")
-}],
-"loop": true,
-"name": &"l_a",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("6_7cbjm")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_dnj10")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_2qgun")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_r01vb")
-}],
-"loop": true,
-"name": &"l_b",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("10_2goxp")
-}, {
-"duration": 1.0,
-"texture": ExtResource("11_exrip")
-}],
-"loop": true,
-"name": &"long",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("12_n1rjv")
-}, {
-"duration": 1.0,
-"texture": ExtResource("13_4bh4m")
-}],
-"loop": true,
-"name": &"skew_a",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("14_7cl8y")
-}, {
-"duration": 1.0,
-"texture": ExtResource("15_v88il")
-}],
-"loop": true,
-"name": &"skew_b",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("16_rusjo")
-}],
-"loop": true,
-"name": &"square",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("17_1wier")
-}, {
-"duration": 1.0,
-"texture": ExtResource("18_4h3q8")
-}, {
-"duration": 1.0,
-"texture": ExtResource("19_c15io")
-}, {
-"duration": 1.0,
-"texture": ExtResource("20_nbx4w")
-}],
-"loop": true,
-"name": &"t",
-"speed": 5.0
-}]
 
 [node name="Tetromino" type="Node2D"]
 script = ExtResource("1_qheu4")
@@ -292,8 +178,6 @@ shape = SubResource("RectangleShape2D_cm127")
 position = Vector2(30, 0)
 shape = SubResource("RectangleShape2D_cm127")
 
-[node name="Ghost" type="AnimatedSprite2D" parent="CanvasLayer"]
+[node name="Ghost" type="Sprite2D" parent="CanvasLayer"]
 visible = false
 modulate = Color(1, 1, 1, 0.235294)
-sprite_frames = SubResource("SpriteFrames_3jfmm")
-animation = &"l_a"

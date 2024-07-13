@@ -36,14 +36,13 @@ func snap_to_grid(vec: Vector2):
 func init(piece: String, b_pos: Vector2, b_size: Vector2, previous_pieces):
 	board_size = b_size
 	body.base_pos = b_pos
-	body.set_anim(piece)
-	body.setup_ghost(ghost)
+	body.setup_body(piece, ghost)
 	all_pieces = previous_pieces
 	body.no_collisions.connect(no_more_collisions)
 
 func place_tet(from_instant=false):
+	body.place_body()
 	resting = true
-	ghost.visible = false
 	placed.emit(from_instant)
 
 ## Wrapper function to be used to call any movement function. Allows more time to move last second if about to place
@@ -142,18 +141,17 @@ func y_correction(already_colliding=false):
 
 func update_ghost():
 	ghost.position = body.position
-	ghost.offset.y = 0
-	while !check_for_collision(ghost.offset.y):
-		ghost.offset.y += SQUARE_SIZE.y
-	ghost.offset.y -= SQUARE_SIZE.y  # revert back up
+	while !check_for_collision(ghost.position.y - body.position.y):
+		ghost.position.y += SQUARE_SIZE.y
+	ghost.position.y -= SQUARE_SIZE.y  # revert back up
 
 func is_body_on_ghost() -> bool:
-	return ghost.position + ghost.offset == body.position
+	return ghost.position == body.position
 
 ## instantly teleport tet to ghost's y position & placem returns final, clipped position (not relative)
 func drop_to_ghost() -> Vector2:
 	update_ghost()  # sanity check the ghost
-	body.add_y(ghost.offset.y)
+	body.add_y(ghost.position.y - body.position.y)
 	var pos = body.get_clipped_pos(false)
 	place_tet(true)
 	return pos
