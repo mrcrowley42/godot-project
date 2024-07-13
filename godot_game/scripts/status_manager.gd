@@ -1,5 +1,4 @@
 @icon("res://icons/ClassList.svg")
-
 class_name StatusManager extends Node2D
 ## Script responsible for passive drain of Creature stats
 
@@ -56,4 +55,3 @@ func load(data):
 	if data.has("holiday_mode"):
 		holiday_mode = data["holiday_mode"]
 	finished_loading.emit()
-		
