@@ -63,8 +63,12 @@ func on_game_over():
 	score_label.text = String(og_score_label_kill_text % t_logic.score)
 	level_label.text = String(og_level_label_kill_text % t_logic.level)
 	
-	best_score = t_logic.score if t_logic.score > best_score else best_score
-	best_level = t_logic.level if t_logic.level > best_level else best_level
+	var high_score: bool = t_logic.score > best_score
+	var high_level: bool = t_logic.level > best_level
+	best_score = t_logic.score if high_score else best_score
+	best_level = t_logic.level if high_level else best_level
+	kill_menu.find_child("BestScore").visible = high_score
+	kill_menu.find_child("BestLevel").visible = high_level
 
 ## data is the same thats returned from get_save_data()
 func load_save_data(data):
