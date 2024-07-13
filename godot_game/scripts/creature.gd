@@ -11,11 +11,13 @@ class_name Creature
 @export var max_sp: float = 1000
 @export var max_ap: float = 1000
 
+enum LifeStage {Egg, Child, Adult}
 
 var hp:float
 var mp:float
 var sp:float
 var ap:float
+var life_stage: LifeStage
 
 signal hp_changed()
 signal sp_changed()
