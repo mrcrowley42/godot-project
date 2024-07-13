@@ -307,6 +307,7 @@ clip_text = true
 
 [node name="BestLevel" type="RichTextLabel" parent="UI/Control/TopOverlay/KillMenu"]
 modulate = Color(1, 0.752941, 0.196078, 1)
+layout_mode = 0
 offset_left = 341.0
 offset_top = 277.0
 offset_right = 431.0

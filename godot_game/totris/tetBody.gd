@@ -15,8 +15,9 @@ const ROTATION = 10
 const SIZE = 11
 const COLOUR = 12
 const FRAMES = 13
+const PARTICLE = 14
 
-## tet normals define square allowance on sides for each frame of each tetromino (needed since every texture is a square)
+## tet frames define square allowance on sides for each frame of each tetromino (needed since every texture is a square)
 const TET_VALUES = {
 	"l_a": {SIZE: Vector2(90, 90), FRAMES: {0: "0100", 1: "0010", 2: "1000", 3: "0001"}, ROTATION: 90, COLOUR: Color(30, 90, 255)},
 	"l_b": {SIZE: Vector2(90, 90), FRAMES: {0: "1000", 1: "0001", 2: "0100", 3: "0010"}, ROTATION: 90, COLOUR: Color(255, 200, 120)},
@@ -26,7 +27,10 @@ const TET_VALUES = {
 	"square": {SIZE: Vector2(60, 60), FRAMES: {0: "0000"}, ROTATION: 0, COLOUR: Color(253, 255, 127)},
 	"t": {SIZE: Vector2(90, 90), FRAMES: {0: "1000", 1: "0001", 2: "0100", 3: "0010"}, ROTATION: 90, COLOUR: Color(190, 115, 255)}
 }
-var ALLOWED_TETS = TET_VALUES.keys()  # so no const godot?? fine
+
+@onready var VARIANT_VALUES = {
+	"bonus_points": {PARTICLE: find_child("BonusPointsParticle"), COLOUR: Color(100, 255, 140)}
+}
 
 var ghost: Sprite2D;
 var base_pos: Vector2
@@ -34,6 +38,7 @@ var relative_pos: Vector2 = Vector2(0, 0)
 var collision_area: Area2D
 var og_coll_positions = {}  # key: node name, value: pos
 var current_rotation = 0
+var current_variant = null
 var current_animation: String
 var current_frame: int
 
@@ -55,6 +60,8 @@ func get_rotation_addition() -> int:
 	return int(TET_VALUES[current_animation][ROTATION])
 
 func get_colour() -> Color:
+	if current_variant:
+		return Color(VARIANT_VALUES[current_variant][COLOUR])
 	return Color(TET_VALUES[current_animation][COLOUR])
 
 func get_frame_count() -> int:
@@ -62,6 +69,13 @@ func get_frame_count() -> int:
 
 func get_size() -> Vector2:
 	return TET_VALUES[current_animation][SIZE]
+
+## returns duplicated, emmiting particle
+func get_variant_particle():
+	var p: GPUParticles2D = VARIANT_VALUES[current_variant][PARTICLE].duplicate()
+	p.emitting = true
+	p.visible = true
+	return p
 
 ## clips size based on tet normals
 func get_clipped_size() -> Vector2:
@@ -112,7 +126,7 @@ func get_coll_node_from_raw_position(raw_pos: Vector2):
 	print("FAILED to find child collision point at position %s, %s" % [raw_pos.x, raw_pos.y])
 
 func setup_body(anim, ghost_node: Sprite2D = null):
-	assert(anim in ALLOWED_TETS)
+	assert(anim in TET_VALUES.keys())
 	current_animation = anim
 	collision_area = find_child(current_animation)
 	collision_area.visible = true
@@ -124,7 +138,9 @@ func setup_body(anim, ghost_node: Sprite2D = null):
 	
 	# sprites
 	var sprite: Sprite2D = Sprite2D.new()
-	sprite.texture = load(TEXTURE_PATH + current_animation + '_single.png')
+	sprite.texture = load(TEXTURE_PATH + (current_variant if current_variant else current_animation) + ".png")
+	if current_variant:
+		sprite.add_child(get_variant_particle())
 	sprite.z_index = -1  # below so i can still see collisions
 	for coll: CollisionShape2D in collision_area.get_children():
 		coll.visible = !coll.disabled
@@ -135,6 +151,8 @@ func setup_body(anim, ghost_node: Sprite2D = null):
 			var ghost_sprite = sprite.duplicate()
 			ghost_sprite.position = coll.position
 			ghost_sprite.visible = coll.visible
+			if ghost_sprite.get_child_count() > 0:
+				ghost_sprite.get_child(0).emitting = false  # no particles on the ghost please
 			ghost.add_child(ghost_sprite)
 
 func set_x(x):

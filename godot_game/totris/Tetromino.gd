@@ -40,6 +40,11 @@ func init(piece: String, b_pos: Vector2, b_size: Vector2, previous_pieces):
 	all_pieces = previous_pieces
 	body.no_collisions.connect(no_more_collisions)
 
+## call before initialising tet
+func make_variant(type: String):
+	assert(type in body.VARIANT_VALUES.keys())
+	body.current_variant = type
+
 func place_tet(from_instant=false):
 	body.place_body()
 	resting = true

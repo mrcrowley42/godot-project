@@ -79,6 +79,7 @@ func reset_game():
 	held_tet = null
 	can_hold = true
 	is_quick_dropping = false
+	t_manager.level_box.find_child("expBar").scale.x = 0
 	t_manager.update_score()
 
 func _input(event):
@@ -143,9 +144,14 @@ func activate_tet(tetromino):
 func activate_new_tet(piece):
 	var new_tet: Tetromino = base_tet.instantiate()
 	add_child(new_tet)
+	if should_be_variant():
+		new_tet.make_variant("bonus_points")
 	new_tet.init(piece, t_manager.grid_bg.position, BOARD_SIZE, all_pieces)
 	activate_tet(new_tet)
 	new_tet.remove_piece.connect(remove_tet)
+
+func should_be_variant():
+	return level > 0 and randf() < 0.5
 
 ## hold active tet and spawn currently held piece or new piece
 func hold_active_tet():

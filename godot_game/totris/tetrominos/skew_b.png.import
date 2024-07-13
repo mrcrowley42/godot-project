@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dggjhdn7ipaun"
-path="res://.godot/imported/square_single.png-69818e74a52b44d2411b1a7fa209e8db.ctex"
+uid="uid://d1wa15bcar7tn"
+path="res://.godot/imported/skew_b.png-b4f190f3546fb27c84735817b8a935f6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://totris/tetrominos/square_single.png"
-dest_files=["res://.godot/imported/square_single.png-69818e74a52b44d2411b1a7fa209e8db.ctex"]
+source_file="res://totris/tetrominos/skew_b.png"
+dest_files=["res://.godot/imported/skew_b.png-b4f190f3546fb27c84735817b8a935f6.ctex"]
 
 [params]
 

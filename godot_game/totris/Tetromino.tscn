@@ -1,10 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://3cn1hflukqt1"]
+[gd_scene load_steps=7 format=3 uid="uid://3cn1hflukqt1"]
 
 [ext_resource type="Script" path="res://totris/Tetromino.gd" id="1_qheu4"]
 [ext_resource type="Script" path="res://totris/tetBody.gd" id="21_uh3hb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cm127"]
 size = Vector2(10, 10)
+
+[sub_resource type="Gradient" id="Gradient_uqba8"]
+offsets = PackedFloat32Array(0, 0.127778, 0.483333, 1)
+colors = PackedColorArray(0.317647, 0.976471, 0.513726, 0, 0.388235, 0.988235, 0.541176, 0.588235, 0.415686, 0.988235, 0.560784, 0.588235, 0.794594, 0.997175, 0.825874, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2ouww"]
+gradient = SubResource("Gradient_uqba8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tl1de"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(15, 15, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angular_velocity_min = -50.0
+angular_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+scale_min = 8.0
+scale_max = 10.0
+color_ramp = SubResource("GradientTexture1D_2ouww")
 
 [node name="Tetromino" type="Node2D"]
 script = ExtResource("1_qheu4")
@@ -177,6 +197,14 @@ shape = SubResource("RectangleShape2D_cm127")
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="CanvasLayer/Body/t"]
 position = Vector2(30, 0)
 shape = SubResource("RectangleShape2D_cm127")
+
+[node name="BonusPointsParticle" type="GPUParticles2D" parent="CanvasLayer/Body"]
+visible = false
+emitting = false
+amount_ratio = 0.3
+process_material = SubResource("ParticleProcessMaterial_tl1de")
+lifetime = 5.0
+randomness = 1.0
 
 [node name="Ghost" type="Sprite2D" parent="CanvasLayer"]
 visible = false

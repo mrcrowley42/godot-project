@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfhnyln77rve3"
-path="res://.godot/imported/long_single.png-81d4ccb77b114034aef81187093a395b.ctex"
+uid="uid://j286di1wsde"
+path="res://.godot/imported/bonus_points.png-c0b63f94ccf0f4277f620cf5546303a2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://totris/tetrominos/long_single.png"
-dest_files=["res://.godot/imported/long_single.png-81d4ccb77b114034aef81187093a395b.ctex"]
+source_file="res://totris/tetrominos/bonus_points.png"
+dest_files=["res://.godot/imported/bonus_points.png-c0b63f94ccf0f4277f620cf5546303a2.ctex"]
 
 [params]
 
