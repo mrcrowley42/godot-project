@@ -49,7 +49,7 @@ func _notification(noti):
 ## called when the game is about to close and data hasn't been saved to file yet
 func finalise_save_data():
 	if current_minigame != null:
-		if current_minigame == totris_scene_instance.name:
+		if current_minigame == "Totris":
 			save_totris_data()
 		unload_minigame()
 

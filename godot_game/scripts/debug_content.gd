@@ -31,8 +31,10 @@ func update_holiday():
 func _process(_delta):
 	var fps = Engine.get_frames_per_second()
 	$Label3.text = str(fps)
-	if fps < 59.0:
+	if fps < 49.0:
 		$Label3.set("theme_override_colors/font_color", Color.LIGHT_CORAL)
+	elif fps < 59.0:
+		$Label3.set("theme_override_colors/font_color", Color.LIGHT_GOLDENROD)
 	else:
 		$Label3.set("theme_override_colors/font_color", Color.LIGHT_GREEN)
 	
