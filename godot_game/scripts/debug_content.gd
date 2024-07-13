@@ -60,12 +60,27 @@ func _on_clippy_btn_pressed():
 	toggle_clippy_mode()
 	
 func toggle_clippy_mode():
-	clippy = !clippy
-	var window = creature.get_window()
+	clippy = !clippy # flip bool.
+	# Use clippy bool to drive window settings. 
 	drag_area.visible = clippy
-	creature.get_viewport().transparent_bg = clippy
-	window.borderless = clippy
-	window.transparent = clippy
-	window.always_on_top = clippy
+	drag_area.viewport.transparent_bg = clippy
+	drag_area.window.borderless = clippy
+	drag_area.window.transparent = clippy
+	drag_area.window.always_on_top = clippy
+	
+	if clippy:
+		# Shrink window size and shift canvas to keep focus on creature.
+		drag_area.window.content_scale_mode = 0
+		drag_area.window.size = drag_area.start_size * 0.5
+		drag_area.window.canvas_transform = drag_area.window_offset
+		#drag_area.window.move_to_center()
+	else:
+		# Revert changes
+		drag_area.window.content_scale_mode = drag_area.default_stretch_mode
+		drag_area.window.size = drag_area.start_size
+		drag_area.window.canvas_transform = drag_area.start_transform
+		#var a: Window = drag_area.window
+		
+	# Hide UI and background while in clippy.
 	%UI.visible = !clippy
 	%BG.visible = !clippy
