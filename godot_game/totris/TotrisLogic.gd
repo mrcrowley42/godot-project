@@ -79,6 +79,7 @@ func reset_game():
 	held_tet = null
 	can_hold = true
 	is_quick_dropping = false
+	t_manager.update_score()
 
 func _input(event):
 	if running and !paused:

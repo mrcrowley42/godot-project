@@ -202,11 +202,14 @@ func rewind_frame():
 func _process(_delta):
 	if should_tween:
 		var props_to_update = []
-		if t_offset != Vector2(0, 0):
+		var t_off = tweeners[TWEEN_OFFSET]
+		var t_rot = tweeners[TWEEN_ROTATION]
+		var t_mod = tweeners[TWEEN_MODULATE]
+		if t_off and t_off.is_running():
 			props_to_update.append("offset")
-		if t_rotation != 0:
+		if t_rot and t_rot.is_running():
 			props_to_update.append("rotation")
-		if t_modulate != Color(1, 1, 1):
+		if t_mod and t_mod.is_running():
 			props_to_update.append("modulate")
 		
 		for prop in props_to_update:
