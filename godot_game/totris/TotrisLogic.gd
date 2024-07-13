@@ -161,8 +161,8 @@ func hold_active_tet():
 		held_tet.holding_tet(pos)
 		can_hold = false
 	else:
-		held_tet.body.modulate.s = 1
-		held_tet.body.tween_modulate(Color(1, 1, 1))
+		held_tet.body.set_modulate_col(Color(1, 0, 0))
+		held_tet.body.perform_tween(held_tet.body.TWEEN_MODULATE, Color(1, 1, 1), 1)
 		%SFX.play_sound("t_no")
 
 ## instant drop & spawns particles

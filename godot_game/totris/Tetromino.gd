@@ -22,12 +22,6 @@ var resting: bool = false
 const LERP_TIME = 0.05;
 const L_LERP_START = 5  # linear
 const A_LERP_START = 0.1  # angular
-var l_direction = 0  # -1 or 1
-var a_direction = 0  # -1 or 1
-var l_start_time = null
-var a_start_time = null
-var l_end_time = null
-var a_end_time = null
 
 ## snap given vec to grid of square_size
 func snap_to_grid(vec: Vector2):
@@ -165,46 +159,12 @@ func drop_to_ghost() -> Vector2:
 	return pos
 
 func perform_linear_lerp(direction):
-	l_direction = direction
 	body.set_x_offset(L_LERP_START * direction)
-	l_start_time = Time.get_unix_time_from_system()
-	l_end_time = l_start_time + LERP_TIME
+	body.perform_tween(body.TWEEN_OFFSET, Vector2(0, 0), LERP_TIME)
 
 func perform_angular_lerp(direction):
-	a_direction = direction
 	body.set_angle(A_LERP_START * direction)
-	a_start_time = Time.get_unix_time_from_system()
-	a_end_time = a_start_time + LERP_TIME
-
-## returns whether lerp progressed
-func advance_lerp(s_time, e_time, direction, start, lerp_offset=false) -> bool:
-	if s_time != null:
-		var t = Time.get_unix_time_from_system()
-		var perc = (t - s_time) / (e_time - s_time)
-		if perc >= 1:
-			return false
-		var sub = start * perc
-		sub = sub if direction > 0 else -sub
-		if lerp_offset:
-			body.set_x_offset((start * direction) - sub)
-		else:
-			body.set_angle((start * direction) - sub)
-		return true
-	return false
-
-## progress various lerps
-func _process(_delta):
-	var advance_l = advance_lerp(l_start_time, l_end_time, l_direction, L_LERP_START, true)
-	var advance_a = advance_lerp(a_start_time, a_end_time, a_direction, A_LERP_START)
-	
-	if !advance_l:
-		body.set_x_offset(0)
-		l_start_time = null
-		l_end_time = null
-	if !advance_a:
-		body.set_angle(0)
-		a_start_time = null
-		a_end_time = null
+	body.perform_tween(body.TWEEN_ROTATION, 0, LERP_TIME)
 
 func get_all_ground_positions(ground):
 	var points = []

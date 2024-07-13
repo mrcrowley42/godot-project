@@ -36,7 +36,15 @@ var og_coll_positions = {}  # key: node name, value: pos
 var current_rotation = 0
 var current_animation: String
 var current_frame: int
-var tween = null
+
+# tweens
+const TWEEN_OFFSET = 1
+const TWEEN_ROTATION = 2
+const TWEEN_MODULATE = 3
+var tweeners = {TWEEN_OFFSET: null, TWEEN_ROTATION: null, TWEEN_MODULATE: null}
+var t_offset: Vector2 = Vector2(0, 0)
+var t_rotation: float = 0
+var t_modulate: Color = Color(1, 1, 1)
 
 
 func get_normal(direction: int) -> int:
@@ -76,11 +84,10 @@ func negative_zero_correction(vec: Vector2) -> Vector2:
 	)
 
 ## rotate a position by current_rotation around 0, 0
-func rotate_point(point: Vector2) -> Vector2:
-	var radians = current_rotation * (PI / 180)
+func rotate_point(radians, point: Vector2, centre: Vector2 = Vector2(0, 0)) -> Vector2:
 	var out = Vector2(point)
-	out.x = cos(radians) * point.x - sin(radians) * point.y
-	out.y = sin(radians) * point.x + cos(radians) * point.y
+	out.x = centre.x + cos(radians) * (point.x - centre.x) - sin(radians) * (point.y - centre.y)
+	out.y = centre.y + sin(radians) * (point.x - centre.x) + cos(radians) * (point.y - centre.y)
 	return negative_zero_correction(out)
 
 ## returns with a list of (rotated) collision points for this tet
@@ -143,10 +150,13 @@ func correct_pos():
 	position = base_pos + relative_pos
 
 func set_x_offset(val):
-	offset.x = val
+	t_offset.x = val
 
 func set_angle(rad):
-	rotation = rad
+	t_rotation = rad
+
+func set_modulate_col(col: Color):
+	t_modulate = col
 
 ## rotates (or switches) the collision area based on its rotation addition
 func update_collision():
@@ -158,7 +168,7 @@ func update_collision():
 	else:  # rotate normally
 		current_rotation = addition * current_frame
 		for node: CollisionShape2D in collision_area.get_children():
-			node.position = rotate_point(og_coll_positions[node.name])
+			node.position = rotate_point(current_rotation * (PI / 180), og_coll_positions[node.name])
 
 ## rotates body clockwise
 func advance_frame():
@@ -174,9 +184,27 @@ func rewind_frame():
 	ghost.frame = current_frame
 	update_collision()
 
-## create a new 1 sec tween for the modulate overriding existing one
-func tween_modulate(goal: Color):
-	if tween != null:
-		tween.kill()
-	tween = get_tree().create_tween()
-	tween.tween_property(self, "modulate", goal, 1)
+## update the things that need tweening
+func _process(_delta):
+	var props_to_update = []
+	if t_offset != Vector2(0, 0):
+		props_to_update.append("offset")
+	if t_rotation != 0:
+		props_to_update.append("rotation")
+	if t_modulate != Color(1, 1, 1):
+		props_to_update.append("modulate")
+	
+	for prop in props_to_update:
+		for coll: CollisionShape2D in collision_area.get_children():
+			var sprite: Sprite2D = coll.get_child(0)
+			if prop == "rotation":  # extra case for rotation so each sprite rotates around centre of the body (rather than just rotating around itself)
+				sprite.offset = rotate_point(t_rotation, coll.position) - coll.position
+			sprite[prop] = self["t_" + prop]
+
+## creates a tween & performs it on the nessecary values
+func perform_tween(tween_type: int, goal, time: float):
+	if tweeners[tween_type] != null:
+		tweeners[tween_type].kill()
+	tweeners[tween_type] = get_tree().create_tween()
+	var property = "t_offset" if tween_type == TWEEN_OFFSET else ("t_modulate" if tween_type == TWEEN_MODULATE else "t_rotation")
+	tweeners[tween_type].tween_property(self, property, goal, time)
