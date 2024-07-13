@@ -9,7 +9,6 @@ extends Control
 @onready var drag_area: Button  = %DragArea
 
 var clippy: bool = false
-
 func _on_h_slider_value_changed(value):
 	stat_man.time_multiplier = value
 
@@ -71,11 +70,13 @@ func toggle_clippy_mode():
 	if clippy:
 		# Shrink window size and shift canvas to keep focus on creature.
 		drag_area.window.content_scale_mode = 0
+		drag_area.window.position -= Vector2i(drag_area.clippy_offset)
 		drag_area.window.size = drag_area.start_size * 0.5
 		drag_area.window.canvas_transform = drag_area.window_offset
 		#drag_area.window.move_to_center()
 	else:
 		# Revert changes
+		drag_area.window.position += Vector2i(drag_area.clippy_offset)
 		drag_area.window.content_scale_mode = drag_area.default_stretch_mode
 		drag_area.window.size = drag_area.start_size
 		drag_area.window.canvas_transform = drag_area.start_transform

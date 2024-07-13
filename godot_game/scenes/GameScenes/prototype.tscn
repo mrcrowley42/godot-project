@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bebjn5n2kjwgb" path="res://scenes/Creatures/creature.tscn" id="5_khxd0"]
 [ext_resource type="Script" path="res://scripts/Confetti.gd" id="7_rqbrx"]
 [ext_resource type="Script" path="res://scripts/control_panel.gd" id="8_bgltf"]
-[ext_resource type="Theme" uid="uid://dl1wes8p6lqlb" path="res://themes/invisible.tres" id="8_hlnwn"]
+[ext_resource type="Theme" path="res://themes/invisible.tres" id="8_hlnwn"]
 [ext_resource type="Theme" uid="uid://1dv11a5ar0hg" path="res://themes/action_btn.tres" id="9_3efis"]
 [ext_resource type="Script" path="res://scripts/drag_window.gd" id="9_13uut"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="10_pai17"]
@@ -466,6 +466,7 @@ script = ExtResource("16_3rmyt")
 
 [node name="ActivityControls" type="PanelContainer" parent="UI/ScreenControls"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(400, 400)
 layout_mode = 1
 anchors_preset = 8
