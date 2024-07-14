@@ -7,7 +7,7 @@ func _ready():
 	self.texture = palletes[self.i]
 
 func change_texture(addition=0):
-	self.i = (self.i + addition) % palletes.size()
+	self.i = Helpers.wrap_index(palletes, i, addition)
 	self.texture = palletes[self.i]
 	%ScreenColours.color = %ScreenColours.colours[self.i]
 	%FoodButton.texture_normal = %FoodButton.palettes[self.i]
