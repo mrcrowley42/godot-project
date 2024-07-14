@@ -24,12 +24,13 @@ var prev_levelup_threshold = 0
 var levelup_threshold = STARTING_THRESHOLD
 const STARTING_THRESHOLD = 2
 const MAX_THRESHOLD_ADDITION = 6
+const SPEED_SUB = 0.02  # time taken from gravity ticker every level up
+const MIN_SPEED = 0.08
 const S_GRAVITY = 1
 const S_PLACE = 5
 const S_LINE = 100
 const S_TOTRIS = (S_LINE * 4) * 2
-const SPEED_SUB = 0.02  # time taken from gravity ticker every level up
-const MIN_SPEED = 0.08
+const S_BONUS_POINTS = 200  # bonus points for each of a variant's squares broken
 
 # GAME STATES
 var running = false
@@ -44,6 +45,9 @@ var is_quick_dropping = false
 # UI QUEUE (non initialised pieces)
 var queued_1: Tetromino;  # save to free them later 
 var queued_2: Tetromino;
+
+# VARIANT VALUES
+const BONUS_POINTS_SPAWN_CHANCE = 2.0 / 100.0  # 2%
 
 
 func start():
@@ -144,14 +148,17 @@ func activate_tet(tetromino):
 func activate_new_tet(piece):
 	var new_tet: Tetromino = base_tet.instantiate()
 	add_child(new_tet)
-	if should_be_variant():
-		new_tet.make_variant("bonus_points")
+	var variant = should_be_variant()
+	if len(variant) > 0:
+		new_tet.make_variant(variant)
 	new_tet.init(piece, t_manager.grid_bg.position, BOARD_SIZE, all_pieces)
 	activate_tet(new_tet)
 	new_tet.remove_piece.connect(remove_tet)
 
-func should_be_variant():
-	return level > 0 and randf() < 0.5
+func should_be_variant() -> String:
+	if level > 0 and randf() < BONUS_POINTS_SPAWN_CHANCE:
+		return "bonus_points"
+	return ""
 
 ## hold active tet and spawn currently held piece or new piece
 func hold_active_tet():
@@ -225,7 +232,7 @@ func check_for_game_over():
 	for tet in all_pieces:
 		if is_instance_of(tet, Tetromino):
 			for point: Vector2 in tet.body.get_raw_collision_points():
-				if point.y - 15 <= t_manager.grid_bg.position.y:
+				if point.y <= t_manager.grid_bg.position.y:
 					active_tet.ghost.visible = false
 					running = false
 					t_manager.on_game_over()
@@ -308,6 +315,8 @@ class CompletedLine:
 			t_logic.t_manager.spawn_particle(t_logic.break_particle, body.position + node.position, body.get_colour())
 			node.disabled = true
 			node.visible = false
+			if body.current_variant == "bonus_points":
+				t_logic.add_to_score(S_BONUS_POINTS)
 			t_logic.remove_node(node)  # outright deletion >:)
 		t_logic.move_all_pieces_down(highest_y, lines_completed)
 		t_logic.active_tet.update_ghost()

@@ -29,7 +29,7 @@ const TET_VALUES = {
 }
 
 @onready var VARIANT_VALUES = {
-	"bonus_points": {PARTICLE: find_child("BonusPointsParticle"), COLOUR: Color(100, 255, 140)}
+	"bonus_points": {COLOUR: Color(100, 255, 140)}
 }
 
 var ghost: Sprite2D;
@@ -137,22 +137,28 @@ func setup_body(anim, ghost_node: Sprite2D = null):
 		ghost.visible = true
 	
 	# sprites
-	var sprite: Sprite2D = Sprite2D.new()
-	sprite.texture = load(TEXTURE_PATH + (current_variant if current_variant else current_animation) + ".png")
-	if current_variant:
-		sprite.add_child(get_variant_particle())
-	sprite.z_index = -1  # below so i can still see collisions
+	var base_sprite: Sprite2D = Sprite2D.new()
+	base_sprite.texture = load(TEXTURE_PATH + current_animation + ".png")
+	base_sprite.z_index = -1  # below so i can still see collisions
+	var coll_sprite = base_sprite.duplicate()
+	
+	# setuo variant
+	var variant_handler = null
+	if current_variant == "bonus_points":
+		variant_handler = VariantBonusPoints.new(self)
+	
 	for coll: CollisionShape2D in collision_area.get_children():
 		coll.visible = !coll.disabled
 		og_coll_positions[coll.name] = coll.position
-		coll.add_child(sprite.duplicate())
+		var s = coll_sprite.duplicate()
+		coll.add_child(s)
+		if variant_handler:
+			variant_handler.add(s)
 		
 		if ghost_node:
-			var ghost_sprite = sprite.duplicate()
+			var ghost_sprite = base_sprite.duplicate()
 			ghost_sprite.position = coll.position
 			ghost_sprite.visible = coll.visible
-			if ghost_sprite.get_child_count() > 0:
-				ghost_sprite.get_child(0).emitting = false  # no particles on the ghost please
 			ghost.add_child(ghost_sprite)
 
 func set_x(x):
@@ -252,3 +258,42 @@ func place_body():
 		sp.offset = Vector2(0, 0)
 		sp.rotation = 0
 		sp.modulate = Color(1, 1, 1)
+
+## for the class's shine timer to connect to
+func do_bonus_points_shine(v_b_p: VariantBonusPoints):
+	v_b_p.do_shine()
+
+class VariantBonusPoints:
+	var body: TetBody
+	var all_sprites = []
+	var shader: ShaderMaterial = ShaderMaterial.new()
+	var timer: Timer = Timer.new()
+	
+	func _init(parent: TetBody):
+		body = parent
+		shader.shader = load("res://shaders/shine.gdshader")
+		shader.set_shader_parameter("shine_color", Color(1, 1, 1, 0.5))
+		shader.set_shader_parameter("shine_size", 0.15)
+		
+		timer.wait_time = 2
+		timer.autostart = true
+		body.add_child(timer)
+		timer.timeout.connect(body.do_bonus_points_shine.bind(self))
+	
+	func add(sprite: Sprite2D):
+		sprite.material = shader.duplicate()
+		all_sprites.append(sprite)
+	
+	func do_shine():
+		for sp in all_sprites:
+			if is_instance_valid(sp):  # ignore previously freed
+				sp.material.set_shader_parameter("shine_progress", 0.0)
+				var tween = body.get_tree().create_tween()
+				tween.tween_property(sp.material, "shader_parameter/shine_progress", 1, 0.5)
+			else:
+				all_sprites.erase(sp)
+		
+		# no need to continue
+		if len(all_sprites) == 0:
+			timer.stop()
+			timer.queue_free()
