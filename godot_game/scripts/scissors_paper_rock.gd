@@ -44,3 +44,6 @@ func _on_paper_btn_button_down():
 
 func _on_rock_btn_button_down():
 	play("rock")
+	
+func _on_close_btn_button_down():
+	close_game()

@@ -7,18 +7,22 @@ const SAVE = "save"
 const LOAD = "load"
 
 var last_opened: float
-
+@onready var launch_time: float = Time.get_unix_time_from_system()
 @onready var stat_man: StatusManager = %StatusManager
+#@onready var launch_date = Time.get_datetime_dict_from_system().day
 @onready var minigame_man: MinigameManager = %MinigameManager
 
 func _ready():
 	load_data()
 	load_settings_data()
-	
-	print("%.2f seconds since last played." %[Time.get_unix_time_from_system() - last_opened])
+	calc_elapsed_time()
+
+func calc_elapsed_time():
+	print("%.2f seconds since last played." %[launch_time - last_opened])
 	var holiday_status = "were" if stat_man.holiday_mode else "were not"
 	print("And you %s on holiday." % [holiday_status])
-	
+	#print(launch_date)
+
 func _on_save_pressed():
 	%BtnClick.play()
 	%SFX.play_sound("correct")
@@ -33,10 +37,10 @@ func save_data():
 	var save_file = FileAccess.open(Globals.SAVE_DATA_FILE, FileAccess.WRITE)
 	var save_nodes = get_tree().get_nodes_in_group(Globals.SAVE_DATA_GROUP)
 	var all_data = []
-	
+
 	var metadata = {"time_saved": Time.get_unix_time_from_system()}
 	all_data.append(metadata)
-	
+
 	# save node data
 	for node in save_nodes:
 		if !node.has_method(SAVE): # object doesnt have save() func
@@ -121,3 +125,4 @@ func _input(event) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
 		get_tree().quit()
+

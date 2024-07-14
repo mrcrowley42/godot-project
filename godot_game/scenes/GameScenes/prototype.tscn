@@ -8,7 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://bebjn5n2kjwgb" path="res://scenes/Creatures/creature.tscn" id="5_khxd0"]
 [ext_resource type="Script" path="res://scripts/Confetti.gd" id="7_rqbrx"]
 [ext_resource type="Script" path="res://scripts/control_panel.gd" id="8_bgltf"]
+[ext_resource type="Theme" uid="uid://cakn521lpq6n" path="res://themes/invisible.tres" id="8_hlnwn"]
 [ext_resource type="Theme" uid="uid://1dv11a5ar0hg" path="res://themes/action_btn.tres" id="9_3efis"]
+[ext_resource type="Script" path="res://scripts/drag_window.gd" id="9_13uut"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="10_pai17"]
 [ext_resource type="Texture2D" uid="uid://dckd2hhimpp2x" path="res://icons/cup-straw.svg" id="11_vrg61"]
 [ext_resource type="Script" path="res://scripts/heal_button.gd" id="12_4afpd"]
@@ -308,6 +310,7 @@ metadata/_edit_lock_ = true
 
 [node name="Creature" parent="Gameplay" groups=["save_data"] instance=ExtResource("5_khxd0")]
 unique_name_in_owner = true
+texture_filter = 1
 position = Vector2(270, 393.5)
 
 [node name="Confetti" type="Node2D" parent="Gameplay"]
@@ -354,6 +357,25 @@ scale_amount_max = 15.0
 color_initial_ramp = SubResource("Gradient_asbj7")
 hue_variation_min = 1.0
 hue_variation_max = 1.0
+
+[node name="DragArea" type="Button" parent="Gameplay"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 135.0
+offset_top = 270.0
+offset_right = 391.0
+offset_bottom = 526.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 6
+theme = ExtResource("8_hlnwn")
+script = ExtResource("9_13uut")
+metadata/_edit_lock_ = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
@@ -447,6 +469,7 @@ script = ExtResource("16_3rmyt")
 
 [node name="ActivityControls" type="PanelContainer" parent="UI/ScreenControls"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(400, 400)
 layout_mode = 1
 anchors_preset = 8
@@ -884,6 +907,7 @@ script = SubResource("GDScript_ao166")
 [node name="CreditsContainer" type="PanelContainer" parent="UI/OptionsContainer"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1145,6 +1169,7 @@ script = SubResource("GDScript_o2bb2")
 enabled = true
 
 [node name="DebugContent" parent="DebugWindow" instance=ExtResource("55_xngmg")]
+unique_name_in_owner = true
 
 [node name="Audio" type="Node" parent="."]
 
@@ -1180,6 +1205,8 @@ unique_name_in_owner = true
 bus = &"SFX"
 script = ExtResource("68_sw7tx")
 
+[connection signal="button_down" from="Gameplay/DragArea" to="Gameplay/DragArea" method="_on_button_down"]
+[connection signal="button_up" from="Gameplay/DragArea" to="Gameplay/DragArea" method="_on_button_up"]
 [connection signal="visibility_changed" from="UI/ScreenControls/FoodControls" to="UI/ScreenControls/FoodControls" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 1" to="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 1" method="_on_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 2" to="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 2" method="_on_button_down"]
@@ -1191,7 +1218,6 @@ script = ExtResource("68_sw7tx")
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/Screen1/GridContainer/ZenMode" to="MinigameManager" method="_on_zen_mode_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/Screen1/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/Screen2/GridContainer/ScissorsPaperRock" to="MinigameManager" method="_on_scissors_paper_rock_button_down"]
-[connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/Screen2/GridContainer/Tetris" to="MinigameManager" method="_on_tetris_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/Screen2/GridContainer/ZenMode" to="MinigameManager" method="_on_zen_mode_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/Screen2/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/NavigationArrows/LeftArrow" to="UI/ScreenControls/ActivityControls/NavigationArrows/LeftArrow" method="_on_button_down"]

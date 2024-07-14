@@ -69,3 +69,6 @@ func choose_card(card):
 			%SFX.play_sound("wrong")
 			
 		selected_cards.clear()
+
+func _on_close_btn_button_down():
+	close_game()
