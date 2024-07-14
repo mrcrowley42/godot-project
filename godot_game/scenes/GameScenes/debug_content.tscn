@@ -335,6 +335,7 @@ offset_top = 3.0
 offset_right = 42.0
 offset_bottom = 43.0
 script = ExtResource("10_4e6rj")
+scale_factor = 2.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="WindowSizeControls"]
 layout_mode = 0
