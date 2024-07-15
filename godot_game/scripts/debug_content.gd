@@ -5,7 +5,7 @@ extends Control
 @onready var stat_man = %StatusManager
 @onready var music_track = %MainMusic
 @onready var screen_tint = %BG
-@onready var minigame_man = %MinigameManager
+@onready var minigame_man: MinigameManager = %MinigameManager
 @onready var drag_area: Button  = %DragArea
 
 var clippy: bool = false
@@ -61,29 +61,30 @@ func _on_clippy_btn_pressed():
 	toggle_clippy_mode()
 	
 func toggle_clippy_mode():
-	clippy = !clippy # flip bool.
-	# Use clippy bool to drive window settings. 
-	drag_area.visible = clippy
-	drag_area.viewport.transparent_bg = clippy
-	drag_area.window.borderless = clippy
-	drag_area.window.transparent = clippy
-	drag_area.window.always_on_top = clippy
-	
-	if clippy:
-		# Shrink window size and shift canvas to keep focus on creature.
-		drag_area.window.content_scale_mode = 0
-		drag_area.window.position -= Vector2i(drag_area.clippy_offset)
-		drag_area.window.size = drag_area.start_size * 0.5
-		drag_area.window.canvas_transform = drag_area.window_offset
-		#drag_area.window.move_to_center()
-	else:
-		# Revert changes
-		drag_area.window.position += Vector2i(drag_area.clippy_offset)
-		drag_area.window.content_scale_mode = drag_area.default_stretch_mode
-		drag_area.window.size = drag_area.start_size
-		drag_area.window.canvas_transform = drag_area.start_transform
-		#var a: Window = drag_area.window
+	if minigame_man.current_minigame == null:
+		clippy = !clippy # flip bool.
+		# Use clippy bool to drive window settings. 
+		drag_area.visible = clippy
+		drag_area.viewport.transparent_bg = clippy
+		drag_area.window.borderless = clippy
+		drag_area.window.transparent = clippy
+		drag_area.window.always_on_top = clippy
 		
-	# Hide UI and background while in clippy.
-	%UI.visible = !clippy
-	%BG.visible = !clippy
+		if clippy:
+			# Shrink window size and shift canvas to keep focus on creature.
+			drag_area.window.content_scale_mode = 0
+			drag_area.window.position -= Vector2i(drag_area.clippy_offset)
+			drag_area.window.size = drag_area.start_size * 0.5
+			drag_area.window.canvas_transform = drag_area.window_offset
+			creature.get_window().move_to_center()
+		else:
+			# Revert changes
+			drag_area.window.position += Vector2i(drag_area.clippy_offset)
+			drag_area.window.content_scale_mode = drag_area.default_stretch_mode
+			drag_area.window.size = drag_area.start_size
+			drag_area.window.canvas_transform = drag_area.start_transform
+			#var a: Window = drag_area.window
+			
+		# Hide UI and background while in clippy.
+		%UI.visible = !clippy
+		%BG.visible = !clippy
