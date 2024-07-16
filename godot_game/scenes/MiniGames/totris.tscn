@@ -129,6 +129,7 @@ color_ramp = SubResource("Gradient_nmt2n")
 [node name="SFX" type="AudioStreamPlayer" parent="TotrisLogic"]
 unique_name_in_owner = true
 max_polyphony = 5
+bus = &"SFX"
 script = ExtResource("7_6nelh")
 
 [node name="UI" type="CanvasLayer" parent="."]
