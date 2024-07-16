@@ -37,6 +37,7 @@ func normalise():
 
 func maximise():
 	if debug.drag_area.clippy:
+		debug.creature.react.visible = true
 		debug.creature.scale = start_scale * scale_factor
 	else:
 		window.size = start_size * scale_factor
