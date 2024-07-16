@@ -1205,6 +1205,7 @@ unique_name_in_owner = true
 bus = &"SFX"
 script = ExtResource("68_sw7tx")
 
+[connection signal="tree_exiting" from="MinigameManager" to="MinigameManager" method="_on_tree_exiting"]
 [connection signal="button_down" from="Gameplay/DragArea" to="Gameplay/DragArea" method="_on_button_down"]
 [connection signal="button_up" from="Gameplay/DragArea" to="Gameplay/DragArea" method="_on_button_up"]
 [connection signal="visibility_changed" from="UI/ScreenControls/FoodControls" to="UI/ScreenControls/FoodControls" method="_on_visibility_changed"]
