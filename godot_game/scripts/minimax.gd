@@ -24,7 +24,7 @@ func _on_max_down():
 	
 func minimise():
 	
-	if debug.clippy:
+	if debug.drag_area.clippy:
 		debug.creature.scale = start_scale / scale_factor
 	else:
 		window.size = start_size / scale_factor
@@ -36,7 +36,7 @@ func normalise():
 		window.size = start_size
 
 func maximise():
-	if debug.clippy:
+	if debug.drag_area.clippy:
 		debug.creature.scale = start_scale * scale_factor
 	else:
 		window.size = start_size * scale_factor
