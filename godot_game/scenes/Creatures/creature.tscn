@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bebjn5n2kjwgb"]
+[gd_scene load_steps=45 format=3 uid="uid://bebjn5n2kjwgb"]
 
 [ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://images/creature_sprites/little-guy.png" id="1_obpq1"]
 [ext_resource type="Script" path="res://scripts/creature.gd" id="2_klgk6"]
@@ -33,6 +33,11 @@
 [ext_resource type="AudioStream" uid="uid://bay1xn7u3rdq4" path="res://sound_effects/regulation_low.wav" id="28_qtceu"]
 [ext_resource type="AudioStream" uid="uid://sf20qavy3mx3" path="res://sound_effects/thirst_low.wav" id="29_hivox"]
 [ext_resource type="FontFile" uid="uid://cukp5skadwgit" path="res://fonts/JetBrainsMono-VariableFont_wght.ttf" id="33_k27on"]
+[ext_resource type="Texture2D" uid="uid://bk2tnjee2nsd3" path="res://images/creature_sprites/notif-0.png" id="34_x5sq7"]
+[ext_resource type="Texture2D" uid="uid://dp33npwim2x1c" path="res://images/creature_sprites/notif-1.png" id="35_1xftg"]
+[ext_resource type="Texture2D" uid="uid://diulrde0gmhnl" path="res://images/creature_sprites/notif-2.png" id="36_rk862"]
+[ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="37_pguj7"]
+[ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="38_wb1ql"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3cwqc"]
 animations = [{
@@ -144,6 +149,55 @@ animations = [{
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ieng"]
 bg_color = Color(0.682353, 0, 0, 1)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_o130v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("34_x5sq7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_1xftg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_rk862")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_u352a"]
+script/source = "extends Label
+
+const shake_rate= 4
+const shake_amount = 1
+@onready var shake_timer: Timer = Timer.new()
+var init_pos
+
+func _ready():
+	init_pos = position
+	shake_timer.autostart = true
+	shake_timer.wait_time = 1.0/shake_rate
+	add_child(shake_timer)
+	shake_timer.connect(\"timeout\", _on_shake_timer_timeout)
+	
+func shake():
+	position.x = init_pos.x + randi_range(-shake_amount,shake_amount)
+	scale.x = randf_range(0.99,1.01)
+	scale.y = randf_range(0.99,1.01)
+	position.y = init_pos.y + randi_range(-roundi(shake_amount/2.0),roundi(shake_amount/2.0))
+
+func _on_shake_timer_timeout():
+	shake()
+
+
+func _on_animated_sprite_2d_animation_changed():
+	if $\"../../AnimatedSprite2D\".animation == \"angry\":
+		%Angry.show()
+	else:
+		%Angry.hide()
+"
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource("2_klgk6")
 dying_colour = Color(1, 0, 0, 1)
@@ -201,4 +255,29 @@ theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_8ieng")
 text = "LIVE CREATURE REACTION"
 
+[node name="Angry" type="Node2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(-32, -185)
+
+[node name="NotificationBubble" type="AnimatedSprite2D" parent="Angry"]
+texture_filter = 1
+scale = Vector2(1.8, 1.8)
+sprite_frames = SubResource("SpriteFrames_o130v")
+autoplay = "default"
+
+[node name="Label" type="Label" parent="Angry"]
+texture_filter = 1
+offset_left = -28.5556
+offset_top = -26.4444
+offset_right = 28.4444
+offset_bottom = 16.5556
+theme = ExtResource("37_pguj7")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("38_wb1ql")
+theme_override_font_sizes/font_size = 32
+text = ">:("
+script = SubResource("GDScript_u352a")
+
+[connection signal="animation_changed" from="AnimatedSprite2D" to="Angry/Label" method="_on_animated_sprite_2d_animation_changed"]
 [connection signal="finished" from="LowStatSounds" to="LowStatSounds" method="_on_finished"]
