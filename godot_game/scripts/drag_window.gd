@@ -40,6 +40,7 @@ func _input(event):
 func toggle_clippy_mode():
 	if %MinigameManager.current_minigame == null:
 		clippy = !clippy # flip bool.
+		
 		clippy_closed.emit()
 		# Use clippy bool to drive window settings. 
 		visible = clippy
@@ -65,4 +66,8 @@ func toggle_clippy_mode():
 		# Hide UI and background while in clippy.
 		%UI.visible = !clippy
 		%BG.visible = !clippy
+		# THIS IS SO DUMB!
+		await get_tree().process_frame
+		await get_tree().process_frame
+		window.borderless = clippy
 		
