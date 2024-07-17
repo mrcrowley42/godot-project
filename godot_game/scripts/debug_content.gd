@@ -16,7 +16,7 @@ func _on_button_button_down():
 	creature.reset_stats()
 	
 func _ready():
-	var anims = creature.find_child('AnimatedSprite2D').sprite_frames.get_animation_names()
+	var anims = creature.find_child('Main').sprite_frames.get_animation_names()
 	for anim in anims:
 		$AnimSelect.add_item(anim)
 	$AnimSelect.selected = 3
@@ -39,7 +39,7 @@ func _process(_delta):
 		$Label3.set("theme_override_colors/font_color", Color.LIGHT_GREEN)
 	
 func _on_anim_select_item_selected(index):
-	creature.find_child('AnimatedSprite2D').animation = $AnimSelect.get_item_text(index)
+	creature.find_child('Main').animation = $AnimSelect.get_item_text(index)
 
 func _on_overlay_strength_value_changed(value):
 	screen_tint.material.set("shader_parameter/tint_strength", value)

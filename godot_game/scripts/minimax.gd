@@ -30,7 +30,7 @@ func minimise():
 		window.size = start_size / scale_factor
 
 func normalise():
-	if debug.clippy:
+	if debug.drag_area.clippy:
 		debug.creature.scale = start_scale
 	else:
 		window.size = start_size

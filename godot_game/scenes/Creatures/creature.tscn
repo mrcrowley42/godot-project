@@ -192,7 +192,7 @@ func _on_shake_timer_timeout():
 
 
 func _on_animated_sprite_2d_animation_changed():
-	if $\"../../AnimatedSprite2D\".animation == \"angry\":
+	if $\"../../Main\".animation == \"angry\":
 		%Angry.show()
 	else:
 		%Angry.hide()
@@ -202,7 +202,8 @@ func _on_animated_sprite_2d_animation_changed():
 script = ExtResource("2_klgk6")
 dying_colour = Color(1, 0, 0, 1)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Main" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
 scale = Vector2(0.225, 0.225)
 sprite_frames = SubResource("SpriteFrames_3cwqc")
 animation = &"idle"
@@ -279,5 +280,5 @@ theme_override_font_sizes/font_size = 32
 text = ">:("
 script = SubResource("GDScript_u352a")
 
-[connection signal="animation_changed" from="AnimatedSprite2D" to="Angry/Label" method="_on_animated_sprite_2d_animation_changed"]
+[connection signal="animation_changed" from="Main" to="Angry/Label" method="_on_animated_sprite_2d_animation_changed"]
 [connection signal="finished" from="LowStatSounds" to="LowStatSounds" method="_on_finished"]
