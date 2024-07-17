@@ -11,8 +11,12 @@ func _ready():
 	debug = find_parent('DebugContent')
 	start_size = window.size
 	await get_tree().process_frame
+	debug.drag_area.clippy_closed.connect(reset_scale)
 	start_scale = debug.creature.scale
 	
+func reset_scale():
+	debug.creature.scale = start_scale
+
 func _on_min_down():
 	minimise()
 

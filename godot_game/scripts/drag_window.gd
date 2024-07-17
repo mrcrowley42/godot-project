@@ -10,6 +10,7 @@ var start_size: Vector2
 var start_transform: Transform2D
 var default_stretch_mode: int
 var clippy: bool = false
+signal clippy_closed
 
 func _ready():
 	visible = false
@@ -39,6 +40,7 @@ func _input(event):
 func toggle_clippy_mode():
 	if %MinigameManager.current_minigame == null:
 		clippy = !clippy # flip bool.
+		clippy_closed.emit()
 		# Use clippy bool to drive window settings. 
 		visible = clippy
 		viewport.transparent_bg = clippy
