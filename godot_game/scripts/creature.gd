@@ -3,7 +3,7 @@ extends Node2D
 
 class_name Creature
 ## Creature base class.
-@onready var react = %REACT
+
 ## Colour to tint creature as HP approaches 0.
 @export_color_no_alpha var dying_colour: Color;
 @export var max_hp: float = 1000
