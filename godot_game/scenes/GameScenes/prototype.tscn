@@ -292,6 +292,7 @@ script = ExtResource("3_usdrn")
 [node name="Gameplay" type="Node2D" parent="."]
 
 [node name="TheOutsideWorld" type="TextureRect" parent="Gameplay"]
+visible = false
 offset_left = 74.0
 offset_top = 126.0
 offset_right = 248.0
@@ -300,6 +301,7 @@ texture = SubResource("GradientTexture2D_ebl4q")
 
 [node name="OpenWindowBG" type="Sprite2D" parent="Gameplay"]
 unique_name_in_owner = true
+visible = false
 material = SubResource("ShaderMaterial_045wl")
 position = Vector2(270, 337)
 scale = Vector2(0.5, 0.5)
@@ -309,7 +311,6 @@ metadata/_edit_lock_ = true
 
 [node name="BG" type="Sprite2D" parent="Gameplay"]
 unique_name_in_owner = true
-visible = false
 material = SubResource("ShaderMaterial_045wl")
 position = Vector2(270, 337)
 scale = Vector2(0.5, 0.5)

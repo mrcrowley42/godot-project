@@ -44,7 +44,7 @@ func toggle_clippy_mode():
 		# Use clippy bool to drive window settings. 
 		visible = clippy
 		viewport.transparent_bg = clippy
-		window.borderless = clippy
+		#window.borderless = clippy < --- evil 
 		window.transparent = clippy
 		window.always_on_top = clippy
 		
