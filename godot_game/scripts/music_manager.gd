@@ -10,7 +10,7 @@ func _ready():
 	self.stream = music_selection[self.i]
 	self.play()
 	
-func move_track(offset=0):
+func move_track(offset=0) -> void:
 	# Wrap index around 
 	self.i = Helpers.wrap_index(music_selection, i, offset)
 	stream = music_selection[self.i]
@@ -29,6 +29,6 @@ func load(data):
 	self.i = int(data[self.name])
 	move_track()	
 
-func _on_finished():
+func _on_finished() -> void:
 	stream=music_selection.pick_random()
 	play()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=98 format=3 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=95 format=3 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/prototype.gd" id="1_u8fgs"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_w1hur"]
@@ -6,7 +6,6 @@
 [ext_resource type="Shader" path="res://shaders/multiply_colour.gdshader" id="4_8sx1k"]
 [ext_resource type="Texture2D" uid="uid://cdbor7hjfbusn" path="res://UI stuff/Universal/background.png" id="4_pmdaq"]
 [ext_resource type="PackedScene" uid="uid://bebjn5n2kjwgb" path="res://scenes/Creatures/creature.tscn" id="5_khxd0"]
-[ext_resource type="Texture2D" uid="uid://crca5jl68aqny" path="res://UI stuff/Universal/background_clear_window.png" id="5_ycpyc"]
 [ext_resource type="Script" path="res://scripts/Confetti.gd" id="7_rqbrx"]
 [ext_resource type="Script" path="res://scripts/control_panel.gd" id="8_bgltf"]
 [ext_resource type="Theme" uid="uid://dl1wes8p6lqlb" path="res://themes/invisible.tres" id="8_hlnwn"]
@@ -71,16 +70,6 @@
 [ext_resource type="AudioStream" uid="uid://cx28efsxtr7c" path="res://sound_effects/button_click_fast.mp3" id="66_b3v7n"]
 [ext_resource type="AudioStream" uid="uid://dat0sfue6jjr5" path="res://sound_effects/metal-pipe-falling-sound-effect-made-with-Voicemod.mp3" id="67_p6vc6"]
 [ext_resource type="Script" path="res://scripts/sfx_man.gd" id="68_sw7tx"]
-
-[sub_resource type="Gradient" id="Gradient_o8u0t"]
-offsets = PackedFloat32Array(0.0526316, 0.406699, 1)
-colors = PackedColorArray(0.0627451, 0, 0.360784, 1, 0.615686, 0.101961, 0.364706, 1, 1, 0.466667, 0.0980392, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ebl4q"]
-gradient = SubResource("Gradient_o8u0t")
-width = 1
-height = 22
-fill_to = Vector2(0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_045wl"]
 resource_local_to_scene = true
@@ -290,24 +279,6 @@ unique_name_in_owner = true
 script = ExtResource("3_usdrn")
 
 [node name="Gameplay" type="Node2D" parent="."]
-
-[node name="TheOutsideWorld" type="TextureRect" parent="Gameplay"]
-visible = false
-offset_left = 74.0
-offset_top = 126.0
-offset_right = 248.0
-offset_bottom = 290.0
-texture = SubResource("GradientTexture2D_ebl4q")
-
-[node name="OpenWindowBG" type="Sprite2D" parent="Gameplay"]
-unique_name_in_owner = true
-visible = false
-material = SubResource("ShaderMaterial_045wl")
-position = Vector2(270, 337)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("5_ycpyc")
-script = SubResource("GDScript_axjpn")
-metadata/_edit_lock_ = true
 
 [node name="BG" type="Sprite2D" parent="Gameplay"]
 unique_name_in_owner = true

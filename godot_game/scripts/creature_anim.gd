@@ -16,3 +16,11 @@ func angry():
 func stop_it():
 	if creature.hp < 300:
 		%STAHP.play_random()
+
+
+func _on_animation_changed():
+	if animation == 'angry':
+		%NotificationBubble.show()
+	else:
+		%NotificationBubble.hide()
+	

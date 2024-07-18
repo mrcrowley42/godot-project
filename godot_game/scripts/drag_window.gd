@@ -1,24 +1,30 @@
 extends Button
 
 @onready var window: Window = get_window()
-@onready var viewport = get_viewport()
+@onready var viewport: Viewport = get_viewport()
+@onready var creature: Creature = %Creature
+
+@onready var start_scale := creature.scale
+@onready var start_size := window.size
+@onready var start_transform := viewport.canvas_transform
+@onready var default_stretch_mode := window.content_scale_mode
+
+const scale_factor = 2
 var clippy_offset = Vector2(-128,-226)
 var window_offset = Transform2D(0, clippy_offset) 
 var dragging: bool = false
 var offset = Vector2(0, 0)
-var start_size: Vector2
-var start_transform: Transform2D
-var default_stretch_mode: int
 var clippy: bool = false
+
 signal clippy_closed
 
 func _ready():
 	visible = false
-	start_size = window.size
-	start_transform = viewport.canvas_transform
-	default_stretch_mode = window.content_scale_mode
-	
+	clippy_closed.connect(reset_scale)
 
+func reset_scale():
+	creature.scale = start_scale
+	
 func _process(_delta):
 	# Update window position relative to mouse position when clicking and dragging.
 	if dragging:
@@ -36,15 +42,13 @@ func _input(event):
 		if event.double_click:
 			%DebugContent._on_clippy_btn_pressed()
 
-
 func toggle_clippy_mode():
 	if %MinigameManager.current_minigame == null:
 		clippy = !clippy # flip bool.
-		
 		clippy_closed.emit()
 		# Use clippy bool to drive window settings. 
 		visible = clippy
-		viewport.transparent_bg = clippy
+		#viewport.transparent_bg = clippy
 		#window.borderless = clippy < --- evil 
 		window.transparent = clippy
 		window.always_on_top = clippy
@@ -70,4 +74,25 @@ func toggle_clippy_mode():
 		await get_tree().process_frame
 		await get_tree().process_frame
 		window.borderless = clippy
-		
+	
+
+func minimise():
+	
+	if clippy:
+		#window.size = start_size / scale_factor / 2
+		#window.canvas_transform = Transform2D(0, clippy_offset * 1.5)
+		creature.scale = start_scale / scale_factor
+	else:
+		window.size = start_size / scale_factor
+
+func normalise():
+	if clippy:
+		creature.scale = start_scale
+	else:
+		window.size = start_size
+
+func maximise():
+	if clippy:
+		creature.scale = start_scale * scale_factor
+	else:
+		window.size = start_size * scale_factor
