@@ -11,17 +11,15 @@ extends Button
 
 const scale_factor = 2
 var clippy_offset = Vector2(-128,-226)
-#var clippy_offset = Vector2(-128,-206)
 # TODO will need to adjust this to fit notifications and other creatures etc.
 var window_offset = Transform2D(0, clippy_offset) 
 var dragging: bool = false
 var offset = Vector2(0, 0)
 var clippy: bool = false
-var current_scale 
 
 signal clippy_closed
 
-func _ready():
+func _ready() -> void:
 	visible = false
 	clippy_closed.connect(reset_scale)
 
@@ -76,8 +74,10 @@ func toggle_clippy_mode():
 	# Linux has needs a delay to activate borderless otherwise the window doesn't centre itself
 	# so this is needed.... also windows has a slight shift due to borderless :(
 	if get_tree():
-		await get_tree().process_frame
-		await get_tree().process_frame
+		# Thanks linux
+		if OS.get_name().to_lower() == "linux":
+			await get_tree().process_frame
+			await get_tree().process_frame
 		window.borderless = clippy
 	
 func minimise():
@@ -85,8 +85,6 @@ func minimise():
 		creature.scale = start_scale / scale_factor
 	else:
 		window.size = start_size / scale_factor
-	current_scale = start_size / scale_factor
-	print(current_scale)
 
 func normalise():
 	if clippy:
