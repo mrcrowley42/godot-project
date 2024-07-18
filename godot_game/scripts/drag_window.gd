@@ -17,6 +17,7 @@ var window_offset = Transform2D(0, clippy_offset)
 var dragging: bool = false
 var offset = Vector2(0, 0)
 var clippy: bool = false
+var current_scale 
 
 signal clippy_closed
 
@@ -72,8 +73,8 @@ func toggle_clippy_mode():
 	%UI.visible = !clippy
 	%BG.visible = !clippy
 	# THIS IS SO DUMB!
-	# Linux has needs a delay to activate borderless otherwise the doesn't centre itself
-	# so this is needed.... also windows has a slight shift due to borderless
+	# Linux has needs a delay to activate borderless otherwise the window doesn't centre itself
+	# so this is needed.... also windows has a slight shift due to borderless :(
 	if get_tree():
 		await get_tree().process_frame
 		await get_tree().process_frame
@@ -84,6 +85,8 @@ func minimise():
 		creature.scale = start_scale / scale_factor
 	else:
 		window.size = start_size / scale_factor
+	current_scale = start_size / scale_factor
+	print(current_scale)
 
 func normalise():
 	if clippy:
