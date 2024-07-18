@@ -11,6 +11,8 @@ extends Button
 
 const scale_factor = 2
 var clippy_offset = Vector2(-128,-226)
+#var clippy_offset = Vector2(-128,-206)
+# TODO will need to adjust this to fit notifications and other creatures etc.
 var window_offset = Transform2D(0, clippy_offset) 
 var dragging: bool = false
 var offset = Vector2(0, 0)
@@ -43,44 +45,42 @@ func _input(event):
 			%DebugContent._on_clippy_btn_pressed()
 
 func toggle_clippy_mode():
-	if %MinigameManager.current_minigame == null:
-		clippy = !clippy # flip bool.
-		clippy_closed.emit()
-		# Use clippy bool to drive window settings. 
-		visible = clippy
-		#viewport.transparent_bg = clippy
-		#window.borderless = clippy < --- evil 
-		window.transparent = clippy
-		window.always_on_top = clippy
-		
-		if clippy:
-			# Shrink window size and shift canvas to keep focus on creature.
-			window.content_scale_mode = 0 as Window.ContentScaleMode
-			window.position -= Vector2i(clippy_offset)
-			window.size = start_size * 0.5
-			window.canvas_transform = window_offset
-			
-		else:
-			# Revert changes
-			window.position += Vector2i(clippy_offset)
-			window.content_scale_mode = default_stretch_mode as Window.ContentScaleMode
-			window.size = start_size
-			window.canvas_transform = start_transform
-			
-		# Hide UI and background while in clippy.
-		%UI.visible = !clippy
-		%BG.visible = !clippy
-		# THIS IS SO DUMB!
+	# Don't enter clippy if a minigame is running.
+	if %MinigameManager.current_minigame != null:
+		return 
+	clippy = !clippy # flip bool.
+	clippy_closed.emit()
+	# Use clippy bool to drive window settings. 
+	visible = clippy
+	viewport.transparent_bg = clippy
+	#window.transparent = clippy
+	window.always_on_top = clippy
+	
+	if clippy:
+		# Shrink window size and shift canvas to keep focus on creature.
+		window.content_scale_mode = 0 as Window.ContentScaleMode
+		window.position -= Vector2i(clippy_offset)
+		window.size = start_size * 0.5
+		window.canvas_transform = window_offset
+	else:
+		# Revert changes
+		window.position += Vector2i(clippy_offset)
+		window.content_scale_mode = default_stretch_mode as Window.ContentScaleMode
+		window.size = start_size
+		window.canvas_transform = start_transform
+	# Hide UI and background while in clippy.
+	%UI.visible = !clippy
+	%BG.visible = !clippy
+	# THIS IS SO DUMB!
+	# Linux has needs a delay to activate borderless otherwise the doesn't centre itself
+	# so this is needed.... also windows has a slight shift due to borderless
+	if get_tree():
 		await get_tree().process_frame
 		await get_tree().process_frame
 		window.borderless = clippy
 	
-
 func minimise():
-	
 	if clippy:
-		#window.size = start_size / scale_factor / 2
-		#window.canvas_transform = Transform2D(0, clippy_offset * 1.5)
 		creature.scale = start_scale / scale_factor
 	else:
 		window.size = start_size / scale_factor
