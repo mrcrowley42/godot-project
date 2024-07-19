@@ -1,10 +1,11 @@
 extends Node2D
 
-@onready var cracker = %EggTimer
+
+@onready var cracker: Timer = %EggTimer
+@export var skip_scene: bool
 
 
-func _enter_tree():
-	
+func _enter_tree() -> void:
 	%LilGuy.visible = false
 	%EggSprite.visible = true
 
