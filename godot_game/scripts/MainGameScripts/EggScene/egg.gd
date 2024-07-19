@@ -2,7 +2,9 @@ extends Node2D
 
 @onready var cracker = %EggTimer
 
+
 func _enter_tree():
+	
 	%LilGuy.visible = false
 	%EggSprite.visible = true
 
@@ -20,3 +22,8 @@ func _ready():
 		print("done")
 		get_tree().change_scene_to_file("res://scenes/GameScenes/prototype.tscn")
 		)
+
+func CreatureSelector():
+	pass
+	
+
