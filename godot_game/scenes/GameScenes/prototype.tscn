@@ -279,6 +279,7 @@ unique_name_in_owner = true
 script = ExtResource("3_usdrn")
 
 [node name="Gameplay" type="Node2D" parent="."]
+unique_name_in_owner = true
 
 [node name="BG" type="Sprite2D" parent="Gameplay"]
 unique_name_in_owner = true
