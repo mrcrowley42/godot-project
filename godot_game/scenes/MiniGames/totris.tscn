@@ -1,0 +1,528 @@
+[gd_scene load_steps=15 format=3 uid="uid://c5dr54dk0502t"]
+
+[ext_resource type="Script" path="res://totris/Totris.gd" id="1_82aiy"]
+[ext_resource type="Script" path="res://totris/TotrisLogic.gd" id="2_7s788"]
+[ext_resource type="Texture2D" uid="uid://cgfufcnmd24wf" path="res://UI stuff/Green Palette/ui_green_tetris.png" id="2_de7pv"]
+[ext_resource type="Shader" path="res://shaders/grid.gdshader" id="3_udord"]
+[ext_resource type="Script" path="res://scripts/tetrisGridBG.gd" id="4_2wjys"]
+[ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="5_d7726"]
+[ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="6_fphhh"]
+[ext_resource type="Script" path="res://scripts/sfx_man.gd" id="7_6nelh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wbp70"]
+size = Vector2(10, 10)
+
+[sub_resource type="Gradient" id="Gradient_7unwp"]
+colors = PackedColorArray(1, 1, 1, 0.392157, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_nmt2n"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_adq1g"]
+shader = ExtResource("3_udord")
+shader_parameter/rows = 20.0
+shader_parameter/columns = 10.0
+shader_parameter/lineSize = 0.2
+shader_parameter/brightnessAddition = 0.0
+shader_parameter/color = Color(0.0818887, 0.114171, 0.121163, 1)
+shader_parameter/offsetCentered = true
+shader_parameter/offsetOverride = Vector2(0, 0)
+shader_parameter/bevel = true
+shader_parameter/bevelColor = Color(0.037969, 0.069001, 0.0917762, 1)
+shader_parameter/outline = true
+shader_parameter/outlineColor = Color(0.215686, 0.282353, 0.305882, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_w4uk7"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_h7scr"]
+line_spacing = 4.0
+font_size = 40
+font_color = Color(0.271203, 0.341779, 0.377135, 1)
+
+[node name="Totris" type="Node2D"]
+script = ExtResource("1_82aiy")
+
+[node name="TotrisLogic" type="Node" parent="."]
+script = ExtResource("2_7s788")
+
+[node name="GravityTicker" type="Timer" parent="TotrisLogic"]
+wait_time = 0.4
+
+[node name="QuickDropTicker" type="Timer" parent="TotrisLogic"]
+wait_time = 0.05
+
+[node name="Ground" type="Area2D" parent="TotrisLogic"]
+disable_mode = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TotrisLogic/Ground"]
+position = Vector2(135, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="TotrisLogic/Ground"]
+position = Vector2(315, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="TotrisLogic/Ground"]
+position = Vector2(285, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="TotrisLogic/Ground"]
+position = Vector2(225, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="TotrisLogic/Ground"]
+position = Vector2(255, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="TotrisLogic/Ground"]
+position = Vector2(195, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="TotrisLogic/Ground"]
+position = Vector2(165, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="TotrisLogic/Ground"]
+position = Vector2(345, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="TotrisLogic/Ground"]
+position = Vector2(405, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="TotrisLogic/Ground"]
+position = Vector2(375, 652)
+shape = SubResource("RectangleShape2D_wbp70")
+
+[node name="DropParticle" type="CPUParticles2D" parent="TotrisLogic"]
+position = Vector2(-119, 69)
+emitting = false
+amount = 1
+one_shot = true
+gravity = Vector2(0, 10)
+angular_velocity_min = -150.0
+angular_velocity_max = 150.0
+scale_amount_min = 6.0
+scale_amount_max = 8.0
+color_ramp = SubResource("Gradient_7unwp")
+
+[node name="BreakParticle" type="CPUParticles2D" parent="TotrisLogic"]
+position = Vector2(-57, 71)
+emitting = false
+amount = 5
+one_shot = true
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 10.0
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 400)
+initial_velocity_min = 60.0
+initial_velocity_max = 100.0
+angular_velocity_min = -150.0
+angular_velocity_max = 150.0
+scale_amount_min = 10.0
+scale_amount_max = 12.0
+color_ramp = SubResource("Gradient_nmt2n")
+
+[node name="SFX" type="AudioStreamPlayer" parent="TotrisLogic"]
+unique_name_in_owner = true
+max_polyphony = 5
+script = ExtResource("7_6nelh")
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UI_Overlay" type="Sprite2D" parent="UI/Control"]
+position = Vector2(270, 337.5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_de7pv")
+
+[node name="GridBG" type="ColorRect" parent="UI/Control"]
+editor_description = "x = (1080 * 0.5) / 2 - (size.w / 2) = 120
+y = (1350 * 0.5) / 2 - (size.h / 2) = 37"
+material = SubResource("ShaderMaterial_adq1g")
+layout_mode = 0
+offset_left = 120.0
+offset_top = 37.0
+offset_right = 420.0
+offset_bottom = 637.0
+color = Color(0, 0, 0, 1)
+script = ExtResource("4_2wjys")
+
+[node name="TopOverlay" type="CanvasLayer" parent="UI/Control"]
+layer = 12
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/Control/TopOverlay"]
+position = Vector2(270, 18)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_de7pv")
+region_enabled = true
+region_rect = Rect2(0, 0, 1080, 75)
+
+[node name="StartMenu" type="Control" parent="UI/Control/TopOverlay"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 540.0
+offset_bottom = 675.0
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/TopOverlay/StartMenu"]
+layout_mode = 0
+offset_right = 540.0
+offset_bottom = 675.0
+color = Color(0.00784314, 0.0156863, 0.0196078, 0.588235)
+
+[node name="Label" type="Label" parent="UI/Control/TopOverlay/StartMenu"]
+layout_mode = 2
+offset_left = 228.0
+offset_top = 187.0
+offset_right = 312.0
+offset_bottom = 217.0
+theme = ExtResource("5_d7726")
+text = "Totris"
+label_settings = SubResource("LabelSettings_w4uk7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreL" type="Label" parent="UI/Control/TopOverlay/StartMenu"]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 256.0
+offset_right = 516.0
+offset_bottom = 278.0
+scale = Vector2(0.535, 0.535)
+theme = ExtResource("5_d7726")
+text = "Best Score: %s"
+label_settings = SubResource("LabelSettings_w4uk7")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="LevelL" type="Label" parent="UI/Control/TopOverlay/StartMenu"]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 286.0
+offset_right = 516.0
+offset_bottom = 308.0
+scale = Vector2(0.535, 0.535)
+theme = ExtResource("5_d7726")
+text = "Best level: %s"
+label_settings = SubResource("LabelSettings_w4uk7")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Play" type="Button" parent="UI/Control/TopOverlay/StartMenu"]
+layout_mode = 2
+offset_left = 228.0
+offset_top = 401.0
+offset_right = 312.0
+offset_bottom = 422.0
+focus_mode = 0
+theme = ExtResource("5_d7726")
+text = "Play
+"
+
+[node name="KillMenu" type="Control" parent="UI/Control/TopOverlay"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 540.0
+offset_bottom = 675.0
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/TopOverlay/KillMenu"]
+layout_mode = 0
+offset_right = 540.0
+offset_bottom = 675.0
+color = Color(0.00784314, 0.0156863, 0.0196078, 0.588235)
+
+[node name="Label" type="Label" parent="UI/Control/TopOverlay/KillMenu"]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 187.0
+offset_right = 360.0
+offset_bottom = 217.0
+theme = ExtResource("5_d7726")
+text = "Game Over"
+label_settings = SubResource("LabelSettings_w4uk7")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="ScoreL" type="Label" parent="UI/Control/TopOverlay/KillMenu"]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 256.0
+offset_right = 516.0
+offset_bottom = 278.0
+scale = Vector2(0.535, 0.535)
+theme = ExtResource("5_d7726")
+text = "Final Score: %s"
+label_settings = SubResource("LabelSettings_w4uk7")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="BestScore" type="RichTextLabel" parent="UI/Control/TopOverlay/KillMenu"]
+modulate = Color(1, 0.752941, 0.196078, 1)
+layout_mode = 0
+offset_left = 341.0
+offset_top = 247.0
+offset_right = 431.0
+offset_bottom = 288.0
+scale = Vector2(0.7, 0.7)
+pivot_offset = Vector2(0.238159, 1.19049)
+theme = ExtResource("5_d7726")
+bbcode_enabled = true
+text = "[center][dropcap]
+[wave amp=30.0 freq=5.0 connected=1]
+New best!
+[/wave]
+[/dropcap][/center]"
+scroll_active = false
+tab_size = 0
+
+[node name="LevelL" type="Label" parent="UI/Control/TopOverlay/KillMenu"]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 286.0
+offset_right = 516.0
+offset_bottom = 308.0
+scale = Vector2(0.535, 0.535)
+theme = ExtResource("5_d7726")
+text = "Final level: %s"
+label_settings = SubResource("LabelSettings_w4uk7")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="BestLevel" type="RichTextLabel" parent="UI/Control/TopOverlay/KillMenu"]
+modulate = Color(1, 0.752941, 0.196078, 1)
+layout_mode = 0
+offset_left = 341.0
+offset_top = 277.0
+offset_right = 431.0
+offset_bottom = 318.0
+scale = Vector2(0.7, 0.7)
+pivot_offset = Vector2(0.238159, 1.19049)
+theme = ExtResource("5_d7726")
+bbcode_enabled = true
+text = "[center][dropcap]
+[wave amp=40.0 freq=5.0 connected=1]
+New best!
+[/wave]
+[/dropcap][/center]"
+scroll_active = false
+tab_size = 0
+
+[node name="Retry" type="Button" parent="UI/Control/TopOverlay/KillMenu"]
+layout_mode = 0
+offset_left = 228.0
+offset_top = 401.0
+offset_right = 312.0
+offset_bottom = 422.0
+focus_mode = 0
+theme = ExtResource("5_d7726")
+text = "Retry"
+
+[node name="Menu" type="Button" parent="UI/Control/TopOverlay/KillMenu"]
+layout_mode = 0
+offset_left = 228.0
+offset_top = 462.0
+offset_right = 312.0
+offset_bottom = 483.0
+focus_mode = 0
+theme = ExtResource("5_d7726")
+text = "Menu"
+
+[node name="HelpMenu" type="Control" parent="UI/Control/TopOverlay"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 540.0
+offset_bottom = 675.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/Control/TopOverlay/HelpMenu"]
+layout_mode = 0
+offset_right = 1080.0
+offset_bottom = 1350.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_fphhh")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="Label" type="Label" parent="UI/Control/TopOverlay/HelpMenu"]
+layout_mode = 0
+offset_left = 77.0
+offset_top = 412.0
+offset_right = 190.0
+offset_bottom = 434.0
+theme = ExtResource("5_d7726")
+text = "HELP"
+label_settings = SubResource("LabelSettings_w4uk7")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="CloseBtn" type="Button" parent="UI/Control/TopOverlay"]
+offset_left = 506.0
+offset_top = 17.0
+offset_right = 522.0
+offset_bottom = 38.0
+focus_mode = 0
+theme = ExtResource("5_d7726")
+text = "X"
+
+[node name="HelpBtn" type="Button" parent="UI/Control/TopOverlay"]
+offset_left = 18.0
+offset_top = 17.0
+offset_right = 34.0
+offset_bottom = 38.0
+focus_mode = 0
+theme = ExtResource("5_d7726")
+text = "?"
+
+[node name="HoldBox" type="NinePatchRect" parent="UI/Control"]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 252.5
+offset_right = 286.0
+offset_bottom = 433.5
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_fphhh")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/HoldBox"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 165.0
+offset_bottom = 165.0
+color = Color(0, 0, 0, 0.313726)
+
+[node name="NextBox" type="NinePatchRect" parent="UI/Control"]
+layout_mode = 0
+offset_left = 525.0
+offset_top = 314.0
+offset_right = 706.0
+offset_bottom = 615.0
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_fphhh")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/NextBox"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 165.0
+offset_bottom = 285.0
+color = Color(0, 0, 0, 0.313726)
+
+[node name="ScoreBox" type="NinePatchRect" parent="UI/Control"]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 400.0
+offset_right = 286.0
+offset_bottom = 500.0
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_fphhh")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/ScoreBox"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 165.0
+offset_bottom = 84.0
+color = Color(0, 0, 0, 0.313726)
+
+[node name="Label" type="Label" parent="UI/Control/ScoreBox"]
+layout_mode = 0
+offset_left = 165.0
+offset_top = 84.0
+offset_right = 314.0
+offset_bottom = 152.0
+rotation = 3.14159
+theme = ExtResource("5_d7726")
+text = "0"
+label_settings = SubResource("LabelSettings_h7scr")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="LevelBox" type="NinePatchRect" parent="UI/Control"]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 470.0
+offset_right = 286.0
+offset_bottom = 570.0
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_fphhh")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/LevelBox"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 165.0
+offset_bottom = 84.0
+color = Color(0, 0, 0, 0.313726)
+
+[node name="Label" type="Label" parent="UI/Control/LevelBox"]
+layout_mode = 0
+offset_left = 165.0
+offset_top = 84.0
+offset_right = 314.0
+offset_bottom = 152.0
+rotation = 3.14159
+theme = ExtResource("5_d7726")
+text = "0
+"
+label_settings = SubResource("LabelSettings_h7scr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="expBar" type="ColorRect" parent="UI/Control/LevelBox"]
+layout_mode = 0
+offset_left = 155.0
+offset_top = 25.0
+offset_right = 284.0
+offset_bottom = 28.0
+rotation = 3.14159
+scale = Vector2(1e-05, 1)
+color = Color(0.133995, 0.176871, 0.198271, 1)
+
+[connection signal="timeout" from="TotrisLogic/GravityTicker" to="TotrisLogic" method="_on_gravity_ticker_timeout"]
+[connection signal="timeout" from="TotrisLogic/QuickDropTicker" to="TotrisLogic" method="_on_quick_drop_ticker_timeout"]
+[connection signal="button_down" from="UI/Control/TopOverlay/StartMenu/Play" to="." method="_on_play_button_down"]
+[connection signal="button_down" from="UI/Control/TopOverlay/KillMenu/Retry" to="." method="_on_play_button_down"]
+[connection signal="button_down" from="UI/Control/TopOverlay/KillMenu/Menu" to="." method="_on_menu_button_down"]
+[connection signal="button_down" from="UI/Control/TopOverlay/CloseBtn" to="." method="_on_close_btn_button_down"]
+[connection signal="button_down" from="UI/Control/TopOverlay/HelpBtn" to="." method="_on_help_btn_button_down"]

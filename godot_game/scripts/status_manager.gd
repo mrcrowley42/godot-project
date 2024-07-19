@@ -1,5 +1,4 @@
 @icon("res://icons/ClassList.svg")
-
 class_name StatusManager extends Node2D
 ## Script responsible for passive drain of Creature stats
 
@@ -31,29 +30,28 @@ func new_timer(rate: float, timeout_func: Callable) -> void:
 	add_child(timer)
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	new_timer(hp_rate, hp_timeout)
 	new_timer(mp_rate, mp_timeout)
 	new_timer(sp_rate, sp_timeout)
 	new_timer(ap_rate, ap_timeout)
 
-func hp_timeout():
+func hp_timeout() -> void:
 	creature.dmg(hp_amount * time_multiplier, 'hp')
 	
-func mp_timeout():
+func mp_timeout() -> void:
 	creature.dmg(mp_amount * time_multiplier, 'mp')
 
-func sp_timeout():
+func sp_timeout() -> void:
 	creature.dmg(sp_amount * time_multiplier, 'sp')
 
-func ap_timeout():
+func ap_timeout() -> void:
 	creature.dmg(ap_amount * time_multiplier, 'ap')
 
-func save():
+func save() -> Dictionary:
 	return {"holiday_mode": holiday_mode}
 	
 func load(data):
 	if data.has("holiday_mode"):
 		holiday_mode = data["holiday_mode"]
 	finished_loading.emit()
-		

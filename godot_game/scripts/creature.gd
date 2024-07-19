@@ -11,11 +11,13 @@ class_name Creature
 @export var max_sp: float = 1000
 @export var max_ap: float = 1000
 
+enum LifeStage {Egg, Child, Adult}
 
 var hp:float
 var mp:float
 var sp:float
 var ap:float
+var life_stage: LifeStage
 
 signal hp_changed()
 signal sp_changed()
@@ -54,10 +56,10 @@ func dead():
 	get_tree().change_scene_to_file("res://scenes/GameScenes/dead.tscn")
 
 ## Tint the Create using the dying_colour set in inspector scaling the tint based on how low HP is.
-func apply_dmg_tint() -> void:
-	self.modulate.b = clampf(1 - (1 - self.hp/1000) + dying_colour.b,0,1)
-	self.modulate.g = clampf(1 - (1 - self.hp/1000) + dying_colour.g,0,1)
-	self.modulate.r = clampf(1 - (1 - self.hp/1000) + dying_colour.r,0,1)
+func apply_dmg_tint() -> void:	
+	%Main.modulate.b = clampf(1 - (1 - self.hp/1000) + dying_colour.b,0,1)
+	%Main.modulate.g = clampf(1 - (1 - self.hp/1000) + dying_colour.g,0,1)
+	%Main.modulate.r = clampf(1 - (1 - self.hp/1000) + dying_colour.r,0,1)
 
 
 func damage_hp(amount: float) -> void:

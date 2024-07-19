@@ -6,11 +6,17 @@ extends Node2D
 
 
 func _enter_tree() -> void:
+
 	%LilGuy.visible = false
 	%EggSprite.visible = true
 
-func _ready():
-	cracker.timeout.connect(func():
+func _ready() -> void:
+	# This is not a good way to do this, but I'm sick of clicking skip -_-
+	if skip_scene:
+		await get_tree().process_frame
+		get_tree().change_scene_to_file("res://scenes/GameScenes/prototype.tscn")
+	
+	cracker.timeout.connect(func() -> void:
 		print("done")
 		%Yip.play()
 		%EggSprite.visible=false
@@ -19,7 +25,7 @@ func _ready():
 		%StartGame.start()
 		)
 	
-	%StartGame.timeout.connect(func():
+	%StartGame.timeout.connect(func() -> void:
 		print("done")
 		get_tree().change_scene_to_file("res://scenes/GameScenes/prototype.tscn")
 		)

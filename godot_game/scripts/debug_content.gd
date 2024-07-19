@@ -5,21 +5,18 @@ extends Control
 @onready var stat_man = %StatusManager
 @onready var music_track = %MainMusic
 @onready var screen_tint = %BG
-@onready var minigame_man = %MinigameManager
-@onready var drag_area = %DragArea
+@onready var minigame_man: MinigameManager = %MinigameManager
+@onready var drag_area: Button  = %DragArea
 
-var clippy: bool = false
 
 func _on_h_slider_value_changed(value):
 	stat_man.time_multiplier = value
-
-@onready var og_text = $Label3.text
 
 func _on_button_button_down():
 	creature.reset_stats()
 	
 func _ready():
-	var anims = creature.find_child('AnimatedSprite2D').sprite_frames.get_animation_names()
+	var anims = creature.find_child('Main').sprite_frames.get_animation_names()
 	for anim in anims:
 		$AnimSelect.add_item(anim)
 	$AnimSelect.selected = 3
@@ -32,11 +29,17 @@ func update_holiday():
 		$HolidayBtn.set_pressed_no_signal(true)
 		
 func _process(_delta):
-	$Label3.text = og_text % [str(Engine.get_frames_per_second())]
-	#$Label3.set("theme_override_colors/font_color", Color.CORAL)
+	var fps = Engine.get_frames_per_second()
+	$Label3.text = str(fps)
+	if fps < 49.0:
+		$Label3.set("theme_override_colors/font_color", Color.LIGHT_CORAL)
+	elif fps < 59.0:
+		$Label3.set("theme_override_colors/font_color", Color.LIGHT_GOLDENROD)
+	else:
+		$Label3.set("theme_override_colors/font_color", Color.LIGHT_GREEN)
 	
 func _on_anim_select_item_selected(index):
-	creature.find_child('AnimatedSprite2D').animation = $AnimSelect.get_item_text(index)
+	creature.find_child('Main').animation = $AnimSelect.get_item_text(index)
 
 func _on_overlay_strength_value_changed(value):
 	screen_tint.material.set("shader_parameter/tint_strength", value)
@@ -55,12 +58,5 @@ func _on_button_3_toggled(toggled_on):
 	print(stat_man.holiday_mode)
 
 func _on_clippy_btn_pressed():
-	clippy = !clippy
-	var window = creature.get_window()
-	drag_area.visible = clippy
-	creature.get_viewport().transparent_bg = clippy
-	window.borderless = clippy
-	window.transparent = clippy
-	window.always_on_top = clippy
-	%UI.visible = !clippy
-	%BG.visible = !clippy
+	drag_area.toggle_clippy_mode()
+	

@@ -1,8 +1,8 @@
-[gd_scene load_steps=93 format=3 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=95 format=3 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/prototype.gd" id="1_u8fgs"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_w1hur"]
-[ext_resource type="Script" path="res://scripts/SceneManager.gd" id="3_usdrn"]
+[ext_resource type="Script" path="res://scripts/MinigameManager.gd" id="3_usdrn"]
 [ext_resource type="Shader" path="res://shaders/multiply_colour.gdshader" id="4_8sx1k"]
 [ext_resource type="Texture2D" uid="uid://cdbor7hjfbusn" path="res://UI stuff/Universal/background.png" id="4_pmdaq"]
 [ext_resource type="PackedScene" uid="uid://bebjn5n2kjwgb" path="res://scenes/Creatures/creature.tscn" id="5_khxd0"]
@@ -69,9 +69,10 @@
 [ext_resource type="AudioStream" uid="uid://8ifwm2tjitur" path="res://sound_effects/yippee.mp3" id="65_mrlpr"]
 [ext_resource type="AudioStream" uid="uid://cx28efsxtr7c" path="res://sound_effects/button_click_fast.mp3" id="66_b3v7n"]
 [ext_resource type="AudioStream" uid="uid://dat0sfue6jjr5" path="res://sound_effects/metal-pipe-falling-sound-effect-made-with-Voicemod.mp3" id="67_p6vc6"]
-[ext_resource type="Script" path="res://scripts/memory_sfx_man.gd" id="68_sw7tx"]
+[ext_resource type="Script" path="res://scripts/sfx_man.gd" id="68_sw7tx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_045wl"]
+resource_local_to_scene = true
 shader = ExtResource("4_8sx1k")
 shader_parameter/tint_colour = Color(0.870588, 0.984314, 0.87451, 1)
 shader_parameter/tint_strength = 1.0
@@ -273,7 +274,7 @@ sp_amount = 4.0
 ap_rate = 1.0
 ap_amount = 12.0
 
-[node name="MinigameManager" type="Node2D" parent="."]
+[node name="MinigameManager" type="Node2D" parent="." groups=["save_data"]]
 unique_name_in_owner = true
 script = ExtResource("3_usdrn")
 
@@ -310,6 +311,7 @@ metadata/_edit_lock_ = true
 
 [node name="Creature" parent="Gameplay" groups=["save_data"] instance=ExtResource("5_khxd0")]
 unique_name_in_owner = true
+texture_filter = 1
 position = Vector2(270, 393.5)
 
 [node name="Confetti" type="Node2D" parent="Gameplay"]
@@ -359,6 +361,7 @@ hue_variation_max = 1.0
 
 [node name="DragArea" type="Button" parent="Gameplay"]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -370,8 +373,10 @@ offset_right = 391.0
 offset_bottom = 526.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_default_cursor_shape = 6
 theme = ExtResource("8_hlnwn")
 script = ExtResource("9_13uut")
+metadata/_edit_lock_ = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
@@ -465,6 +470,7 @@ script = ExtResource("16_3rmyt")
 
 [node name="ActivityControls" type="PanelContainer" parent="UI/ScreenControls"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(400, 400)
 layout_mode = 1
 anchors_preset = 8
@@ -515,7 +521,7 @@ icon = ExtResource("17_pukas")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Tetris" type="Button" parent="UI/ScreenControls/ActivityControls/ActivityContent/Screen1/GridContainer"]
+[node name="Totris" type="Button" parent="UI/ScreenControls/ActivityControls/ActivityContent/Screen1/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1200,10 +1206,9 @@ unique_name_in_owner = true
 bus = &"SFX"
 script = ExtResource("68_sw7tx")
 
+[connection signal="tree_exiting" from="MinigameManager" to="MinigameManager" method="_on_tree_exiting"]
 [connection signal="button_down" from="Gameplay/DragArea" to="Gameplay/DragArea" method="_on_button_down"]
 [connection signal="button_up" from="Gameplay/DragArea" to="Gameplay/DragArea" method="_on_button_up"]
-[connection signal="mouse_entered" from="Gameplay/DragArea" to="Gameplay/DragArea" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Gameplay/DragArea" to="Gameplay/DragArea" method="_on_mouse_exited"]
 [connection signal="visibility_changed" from="UI/ScreenControls/FoodControls" to="UI/ScreenControls/FoodControls" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 1" to="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 1" method="_on_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 2" to="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 2" method="_on_button_down"]
@@ -1211,11 +1216,10 @@ script = ExtResource("68_sw7tx")
 [connection signal="button_down" from="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 4" to="UI/ScreenControls/FoodControls/MarginContainer/GridContainer/Button 4" method="_on_button_down"]
 [connection signal="visibility_changed" from="UI/ScreenControls/ActivityControls" to="UI/ScreenControls/ActivityControls" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/Screen1/GridContainer/ScissorsPaperRock" to="MinigameManager" method="_on_scissors_paper_rock_button_down"]
-[connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/Screen1/GridContainer/Tetris" to="MinigameManager" method="_on_tetris_button_down"]
+[connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/Screen1/GridContainer/Totris" to="MinigameManager" method="_on_totris_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/Screen1/GridContainer/ZenMode" to="MinigameManager" method="_on_zen_mode_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/Screen1/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/Screen2/GridContainer/ScissorsPaperRock" to="MinigameManager" method="_on_scissors_paper_rock_button_down"]
-[connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/Screen2/GridContainer/Tetris" to="MinigameManager" method="_on_tetris_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/Screen2/GridContainer/ZenMode" to="MinigameManager" method="_on_zen_mode_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/ActivityContent/Screen2/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
 [connection signal="button_down" from="UI/ScreenControls/ActivityControls/NavigationArrows/LeftArrow" to="UI/ScreenControls/ActivityControls/NavigationArrows/LeftArrow" method="_on_button_down"]
