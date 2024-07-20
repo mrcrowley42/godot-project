@@ -1,6 +1,6 @@
 extends AnimatedSprite2D
 
-@onready var creature = $".."
+@onready var creature = $"../.."
 
 func _ready():
 	#creature.sp_changed.connect(angry)

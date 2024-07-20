@@ -34,7 +34,7 @@
 [ext_resource type="AudioStream" uid="uid://sf20qavy3mx3" path="res://sound_effects/thirst_low.wav" id="29_hivox"]
 [ext_resource type="Texture2D" uid="uid://bk2tnjee2nsd3" path="res://images/creature_sprites/notif-0.png" id="34_x5sq7"]
 [ext_resource type="Texture2D" uid="uid://dp33npwim2x1c" path="res://images/creature_sprites/notif-1.png" id="35_1xftg"]
-[ext_resource type="Script" path="res://scenes/Creatures/wiggle.gd" id="36_p7ixw"]
+[ext_resource type="Script" path="res://scripts/wiggle.gd" id="36_lmtu2"]
 [ext_resource type="Texture2D" uid="uid://diulrde0gmhnl" path="res://images/creature_sprites/notif-2.png" id="36_rk862"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="37_pguj7"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="38_wb1ql"]
@@ -167,30 +167,6 @@ animations = [{
 script = ExtResource("2_klgk6")
 dying_colour = Color(1, 0, 0, 1)
 
-[node name="Main" type="AnimatedSprite2D" parent="."]
-unique_name_in_owner = true
-scale = Vector2(0.225, 0.225)
-sprite_frames = SubResource("SpriteFrames_3cwqc")
-animation = &"idle"
-autoplay = "idle"
-script = ExtResource("5_oh7gr")
-
-[node name="Hat" type="AnimatedSprite2D" parent="."]
-visible = false
-position = Vector2(-19, -127)
-scale = Vector2(0.225, 0.225)
-sprite_frames = SubResource("SpriteFrames_3t6pq")
-autoplay = "default"
-frame_progress = 0.770958
-
-[node name="Glasses" type="AnimatedSprite2D" parent="."]
-visible = false
-modulate = Color(1, 0.807843, 0.592157, 1)
-position = Vector2(-7, -33)
-scale = Vector2(0.225, 0.225)
-sprite_frames = SubResource("SpriteFrames_xmjbo")
-autoplay = "default"
-
 [node name="STAHP" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 bus = &"SFX"
@@ -208,7 +184,33 @@ low_fun = ExtResource("27_uvaw6")
 low_regulation = ExtResource("28_qtceu")
 low_hydrate = ExtResource("29_hivox")
 
-[node name="NotificationBubble" type="AnimatedSprite2D" parent="."]
+[node name="Sprites" type="CanvasGroup" parent="."]
+
+[node name="Main" type="AnimatedSprite2D" parent="Sprites"]
+unique_name_in_owner = true
+scale = Vector2(0.225, 0.225)
+sprite_frames = SubResource("SpriteFrames_3cwqc")
+animation = &"idle"
+autoplay = "idle"
+script = ExtResource("5_oh7gr")
+
+[node name="Hat" type="AnimatedSprite2D" parent="Sprites"]
+visible = false
+position = Vector2(-19, -127)
+scale = Vector2(0.225, 0.225)
+sprite_frames = SubResource("SpriteFrames_3t6pq")
+autoplay = "default"
+frame_progress = 0.770958
+
+[node name="Glasses" type="AnimatedSprite2D" parent="Sprites"]
+visible = false
+modulate = Color(1, 0.807843, 0.592157, 1)
+position = Vector2(-7, -33)
+scale = Vector2(0.225, 0.225)
+sprite_frames = SubResource("SpriteFrames_xmjbo")
+autoplay = "default"
+
+[node name="NotificationBubble" type="AnimatedSprite2D" parent="Sprites"]
 unique_name_in_owner = true
 visible = false
 texture_filter = 1
@@ -217,12 +219,12 @@ scale = Vector2(1.8, 1.8)
 sprite_frames = SubResource("SpriteFrames_o130v")
 autoplay = "default"
 
-[node name="Node2D" type="Node2D" parent="NotificationBubble"]
+[node name="Node2D" type="Node2D" parent="Sprites/NotificationBubble"]
 position = Vector2(17.7778, 102.778)
 scale = Vector2(0.555556, 0.555556)
-script = ExtResource("36_p7ixw")
+script = ExtResource("36_lmtu2")
 
-[node name="Label" type="Label" parent="NotificationBubble/Node2D"]
+[node name="Label" type="Label" parent="Sprites/NotificationBubble/Node2D"]
 texture_filter = 1
 offset_left = -60.5556
 offset_top = -211.444
@@ -234,5 +236,5 @@ theme_override_fonts/font = ExtResource("38_wb1ql")
 theme_override_font_sizes/font_size = 32
 text = ">:("
 
-[connection signal="animation_changed" from="Main" to="Main" method="_on_animation_changed"]
 [connection signal="finished" from="LowStatSounds" to="LowStatSounds" method="_on_finished"]
+[connection signal="animation_changed" from="Sprites/Main" to="Sprites/Main" method="_on_animation_changed"]
