@@ -16,6 +16,7 @@ var window_offset = Transform2D(0, clippy_offset)
 var dragging: bool = false
 var offset = Vector2(0, 0)
 var clippy: bool = false
+var clippy_opacity := 0.5
 
 signal clippy_closed
 
@@ -61,7 +62,7 @@ func toggle_clippy_mode():
 		window.position -= Vector2i(clippy_offset)
 		window.size = start_size * 0.5
 		window.canvas_transform = window_offset
-		creature.find_child("Sprites").self_modulate = Color(1,1,1,0.4)
+		creature.find_child("Sprites").self_modulate = Color(1,1,1,clippy_opacity)
 	else:
 		# Revert changes
 		window.position += Vector2i(clippy_offset)

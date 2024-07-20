@@ -59,4 +59,8 @@ func _on_button_3_toggled(toggled_on):
 
 func _on_clippy_btn_pressed():
 	drag_area.toggle_clippy_mode()
-	
+
+func _on_h_slider_2_value_changed(value):
+	drag_area.clippy_opacity = value
+	if drag_area.clippy:
+		creature.find_child("Sprites").self_modulate = Color(1,1,1,drag_area.clippy_opacity)

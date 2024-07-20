@@ -63,7 +63,7 @@ func _process(_delta):
 script/source = "extends Label
 
 func _process(_delta):
-	text = '%.2f' % find_parent('DebugContent').stat_man.time_multiplier
+	text = '%.2f' % find_parent('DebugContent').drag_area.clippy_opacity
 "
 
 [sub_resource type="GDScript" id="GDScript_oisou"]
@@ -180,9 +180,9 @@ script = SubResource("GDScript_v57jq")
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
 offset_left = 265.0
-offset_top = 386.0
+offset_top = 378.0
 offset_right = 505.0
-offset_bottom = 413.0
+offset_bottom = 405.0
 theme = ExtResource("2_5bhpe")
 text = "Drain Strength"
 horizontal_alignment = 1
@@ -200,9 +200,9 @@ horizontal_alignment = 1
 [node name="Label2" type="Label" parent="."]
 layout_mode = 0
 offset_left = 265.0
-offset_top = 466.0
+offset_top = 490.0
 offset_right = 505.0
-offset_bottom = 493.0
+offset_bottom = 517.0
 theme = ExtResource("2_5bhpe")
 text = "Screen Tint Strength"
 
@@ -218,9 +218,9 @@ text = "Current Track:"
 [node name="Strength" type="Label" parent="."]
 layout_mode = 0
 offset_left = 445.0
-offset_top = 421.0
+offset_top = 405.0
 offset_right = 485.0
-offset_bottom = 448.0
+offset_bottom = 432.0
 theme = ExtResource("2_5bhpe")
 text = "1.0"
 script = SubResource("GDScript_1tr3v")
@@ -228,9 +228,9 @@ script = SubResource("GDScript_1tr3v")
 [node name="Strength2" type="Label" parent="."]
 layout_mode = 0
 offset_left = 445.0
-offset_top = 501.0
+offset_top = 517.0
 offset_right = 485.0
-offset_bottom = 528.0
+offset_bottom = 544.0
 theme = ExtResource("2_5bhpe")
 text = "1.0"
 script = SubResource("GDScript_oisou")
@@ -238,9 +238,9 @@ script = SubResource("GDScript_oisou")
 [node name="OverlayStrength" type="HSlider" parent="."]
 layout_mode = 0
 offset_left = 280.0
-offset_top = 506.0
+offset_top = 522.0
 offset_right = 430.0
-offset_bottom = 522.0
+offset_bottom = 538.0
 max_value = 2.0
 step = 0.01
 value = 1.0
@@ -248,14 +248,45 @@ value = 1.0
 [node name="HSlider" type="HSlider" parent="."]
 layout_mode = 0
 offset_left = 280.0
-offset_top = 426.0
+offset_top = 410.0
 offset_right = 430.0
-offset_bottom = 442.0
+offset_bottom = 426.0
 theme = ExtResource("2_5bhpe")
 max_value = 4.0
 step = 0.01
 value = 1.0
 script = SubResource("GDScript_n68jj")
+
+[node name="Label8" type="Label" parent="."]
+layout_mode = 0
+offset_left = 265.0
+offset_top = 435.0
+offset_right = 505.0
+offset_bottom = 462.0
+theme = ExtResource("2_5bhpe")
+text = "Clippy Opacity"
+horizontal_alignment = 1
+
+[node name="Strength3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 445.0
+offset_top = 462.0
+offset_right = 485.0
+offset_bottom = 489.0
+theme = ExtResource("2_5bhpe")
+text = "1.0"
+script = SubResource("GDScript_1tr3v")
+
+[node name="HSlider2" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 467.0
+offset_right = 430.0
+offset_bottom = 483.0
+theme = ExtResource("2_5bhpe")
+max_value = 1.0
+step = 0.01
+value = 0.5
 
 [node name="GlassesBtn" type="Button" parent="."]
 layout_mode = 0
@@ -417,6 +448,7 @@ text = "Holiday Mode"
 
 [connection signal="value_changed" from="OverlayStrength" to="." method="_on_overlay_strength_value_changed"]
 [connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="HSlider2" to="." method="_on_h_slider_2_value_changed"]
 [connection signal="button_down" from="GlassesBtn" to="." method="_on_glasses_btn_button_down"]
 [connection signal="button_down" from="HatBtn" to="." method="_on_hat_btn_button_down"]
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
