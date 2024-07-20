@@ -52,7 +52,7 @@ func toggle_clippy_mode():
 	# Use clippy bool to drive window settings. 
 	visible = clippy
 	viewport.transparent_bg = clippy
-	#window.transparent = clippy
+	window.transparent = clippy
 	window.always_on_top = clippy
 	
 	if clippy:
@@ -61,14 +61,14 @@ func toggle_clippy_mode():
 		window.position -= Vector2i(clippy_offset)
 		window.size = start_size * 0.5
 		window.canvas_transform = window_offset
-		%Gameplay.modulate = Color(1,1,1,0.4)
+		#%Gameplay.modulate = Color(1,1,1,0.4)
 	else:
 		# Revert changes
 		window.position += Vector2i(clippy_offset)
 		window.content_scale_mode = default_stretch_mode as Window.ContentScaleMode
 		window.size = start_size
 		window.canvas_transform = start_transform
-		%Gameplay.modulate = Color(1,1,1,1)
+		#%Gameplay.modulate = Color(1,1,1,1)
 	# Hide UI and background while in clippy.
 	%UI.visible = !clippy
 	%BG.visible = !clippy
