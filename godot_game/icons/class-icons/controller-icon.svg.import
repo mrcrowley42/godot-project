@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brovv5jk8jxpi"
-path="res://.godot/imported/ClassList.svg-4ff9b16a80fba0197325634d08f8d910.ctex"
+uid="uid://bowf1llh0iexw"
+path="res://.godot/imported/controller-icon.svg-ac3135a76f0bac567d49b3e04f1d879e.ctex"
 metadata={
 "has_editor_variant": true,
 "vram_texture": false
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://icons/class_icons/ClassList.svg"
-dest_files=["res://.godot/imported/ClassList.svg-4ff9b16a80fba0197325634d08f8d910.ctex"]
+source_file="res://icons/class-icons/controller-icon.svg"
+dest_files=["res://.godot/imported/controller-icon.svg-ac3135a76f0bac567d49b3e04f1d879e.ctex"]
 
 [params]
 
@@ -33,6 +33,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=4.0
+svg/scale=2.0
 editor/scale_with_editor_scale=true
 editor/convert_colors_with_editor_theme=false

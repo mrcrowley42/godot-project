@@ -1,4 +1,4 @@
-@icon("res://icons/creature.svg")
+@icon("res://icons/class-icons/creature.svg")
 extends Node2D
 
 class_name Creature

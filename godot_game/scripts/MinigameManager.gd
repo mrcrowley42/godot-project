@@ -1,4 +1,4 @@
-@icon("res://icons/controller-icon.svg")
+@icon("res://icons/class-icons/controller-icon.svg")
 class_name MinigameManager extends Node2D
 
 @onready var act_menu = %ActivityControls
