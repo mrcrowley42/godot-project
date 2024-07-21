@@ -219,12 +219,13 @@ scale = Vector2(1.8, 1.8)
 sprite_frames = SubResource("SpriteFrames_o130v")
 autoplay = "default"
 
-[node name="Node2D" type="Node2D" parent="Sprites/NotificationBubble"]
+[node name="Wiggle" type="Node2D" parent="Sprites/NotificationBubble"]
+editor_description = "Adds wiggle to children nodes."
 position = Vector2(17.7778, 102.778)
 scale = Vector2(0.555556, 0.555556)
 script = ExtResource("36_lmtu2")
 
-[node name="Label" type="Label" parent="Sprites/NotificationBubble/Node2D"]
+[node name="Label" type="Label" parent="Sprites/NotificationBubble/Wiggle"]
 texture_filter = 1
 offset_left = -60.5556
 offset_top = -211.444
