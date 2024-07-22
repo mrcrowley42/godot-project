@@ -1,14 +1,14 @@
 extends Node2D
 
-func remove(obj):
+func remove(obj: Object) -> void:
 	obj.queue_free()
 
-func confet():
-	var confetti_l = find_child("ConfetL");
-	var confetti_r = find_child("ConfetR");
+func confet() -> void:
+	var confetti_l: CPUParticles2D = find_child("ConfetL");
+	var confetti_r: CPUParticles2D = find_child("ConfetR");
 
-	var new_l = confetti_l.duplicate()
-	var new_r = confetti_r.duplicate()
+	var new_l: CPUParticles2D = confetti_l.duplicate()
+	var new_r: CPUParticles2D = confetti_r.duplicate()
 
 	new_l.emitting = true;
 	new_r.emitting = true;

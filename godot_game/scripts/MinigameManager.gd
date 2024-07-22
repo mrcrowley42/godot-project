@@ -77,10 +77,14 @@ func _on_scissors_paper_rock_button_down():
 func _on_zen_mode_button_down():
 	load_minigame(zen_mode_scene, null)
 
-
 ## save data
 func save():
 	return save_data
 
 func load(data):
 	save_data = data
+
+func _on_tree_exiting():
+	# Ensure that before changing scene, if clippy mode is active it is toggled off.
+	if %DragArea.clippy:
+		%DragArea.toggle_clippy_mode()

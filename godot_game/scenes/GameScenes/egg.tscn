@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bl22rtkqnj1s7"]
+[gd_scene load_steps=23 format=3 uid="uid://bl22rtkqnj1s7"]
 
 [ext_resource type="Script" path="res://scripts/MainGameScripts/EggScene/egg.gd" id="1_3gale"]
 [ext_resource type="AudioStream" uid="uid://8ifwm2tjitur" path="res://sound_effects/yippee.mp3" id="2_rsge0"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://do7dbsspir5oc" path="res://images/egg/egg03.PNG" id="5_vfgrm"]
 [ext_resource type="Texture2D" uid="uid://6cg5s6yf1jrl" path="res://images/egg/egg04.PNG" id="6_eimtr"]
 [ext_resource type="Texture2D" uid="uid://diwxdoruu1sob" path="res://images/creature_sprites/little-guy_3.png" id="6_ii2p7"]
+[ext_resource type="Texture2D" uid="uid://cebeodlplwmw8" path="res://images/creature_sprites/Flopps/IMG_0011.PNG" id="7_10a4q"]
 [ext_resource type="Script" path="res://scripts/MainGameScripts/EggScene/party.gd" id="8_psxin"]
 [ext_resource type="AudioStream" uid="uid://dnau787og6qky" path="res://sound_effects/EggCrack.wav" id="9_iuv6s"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="12_w52uh"]
@@ -93,6 +94,21 @@ animations = [{
 "texture": ExtResource("6_ii2p7")
 }],
 "loop": true,
+"name": &"yippie",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ew7y"]
+atlas = ExtResource("7_10a4q")
+region = Rect2(0, 0, 240, 240)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_saxbf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ew7y")
+}],
+"loop": true,
 "name": &"default",
 "speed": 5.0
 }]
@@ -154,8 +170,14 @@ visible = false
 position = Vector2(266, 319)
 scale = Vector2(0.215, 0.215)
 sprite_frames = SubResource("SpriteFrames_lmfc6")
-autoplay = "default"
-frame_progress = 0.215938
+animation = &"yippie"
+autoplay = "yippie"
+
+[node name="Flopps" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(278, 316)
+scale = Vector2(1.8, 1.8)
+sprite_frames = SubResource("SpriteFrames_saxbf")
 
 [node name="StartGame" type="Timer" parent="."]
 unique_name_in_owner = true
