@@ -212,30 +212,33 @@ autoplay = "default"
 
 [node name="NotificationBubble" type="AnimatedSprite2D" parent="Sprites"]
 unique_name_in_owner = true
-visible = false
 texture_filter = 1
 position = Vector2(-32, -185)
 scale = Vector2(1.8, 1.8)
 sprite_frames = SubResource("SpriteFrames_o130v")
 autoplay = "default"
 
-[node name="Wiggle" type="Node2D" parent="Sprites/NotificationBubble"]
+[node name="Icons" type="Node2D" parent="Sprites/NotificationBubble"]
 editor_description = "Adds wiggle to children nodes."
 position = Vector2(17.7778, 102.778)
 scale = Vector2(0.555556, 0.555556)
 script = ExtResource("36_lmtu2")
 
-[node name="Label" type="Label" parent="Sprites/NotificationBubble/Wiggle"]
+[node name="Example" type="Label" parent="Sprites/NotificationBubble/Icons"]
+unique_name_in_owner = true
 texture_filter = 1
-offset_left = -60.5556
-offset_top = -211.444
-offset_right = -3.5556
-offset_bottom = -168.444
+offset_left = -89.0
+offset_top = -223.0
+offset_right = 23.0
+offset_bottom = -174.0
 theme = ExtResource("37_pguj7")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("38_wb1ql")
-theme_override_font_sizes/font_size = 32
-text = ">:("
+theme_override_font_sizes/font_size = 28
+text = "THIRSTY"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
 
 [connection signal="finished" from="LowStatSounds" to="LowStatSounds" method="_on_finished"]
 [connection signal="animation_changed" from="Sprites/Main" to="Sprites/Main" method="_on_animation_changed"]
