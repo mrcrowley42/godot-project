@@ -253,6 +253,7 @@ func perform_tween(tween_type: int, goal, time: float):
 
 func place_body():
 	ghost.visible = false
+	should_tween = false
 	for coll: CollisionShape2D in collision_area.get_children():
 		var sp: Sprite2D = coll.get_child(0)
 		sp.offset = Vector2(0, 0)
