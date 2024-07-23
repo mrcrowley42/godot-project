@@ -231,10 +231,16 @@ func _process(_delta):
 		var t_mod = tweeners[TWEEN_MODULATE]
 		if t_off and t_off.is_running():
 			props_to_update.append("offset")
+		else:
+			reset_tweened_values(true)
 		if t_rot and t_rot.is_running():
 			props_to_update.append("rotation")
+		else:
+			reset_tweened_values(false, true)
 		if t_mod and t_mod.is_running():
 			props_to_update.append("modulate")
+		else:
+			reset_tweened_values(false, false, true)
 		
 		for prop in props_to_update:
 			for coll: CollisionShape2D in collision_area.get_children():
@@ -255,11 +261,19 @@ func perform_tween(tween_type: int, goal, time: float):
 func place_body():
 	ghost.visible = false
 	should_tween = false
+	reset_tweened_values(true, true, true)
+
+## reset the filtered tweened values to their original
+func reset_tweened_values(off=false, rot=false, mod=false):
+	assert(off or rot or mod)  # at least one should be true
 	for coll: CollisionShape2D in collision_area.get_children():
 		var sp: Sprite2D = coll.get_child(0)
-		sp.offset = Vector2(0, 0)
-		sp.rotation = 0
-		sp.modulate = Color(1, 1, 1)
+		if off:
+			sp.offset = Vector2(0, 0)
+		if rot:
+			sp.rotation = 0
+		if mod:
+			sp.modulate = Color(1, 1, 1)
 
 ## for the class's shine timer to connect to
 func do_bonus_points_shine(v_b_p: VariantBonusPoints):
