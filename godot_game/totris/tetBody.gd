@@ -245,11 +245,12 @@ func _process(_delta):
 
 ## creates a tween & performs it on the nessecary values
 func perform_tween(tween_type: int, goal, time: float):
-	if tweeners[tween_type] != null:
-		tweeners[tween_type].kill()
-	tweeners[tween_type] = get_tree().create_tween()
-	var property = "t_offset" if tween_type == TWEEN_OFFSET else ("t_modulate" if tween_type == TWEEN_MODULATE else "t_rotation")
-	tweeners[tween_type].tween_property(self, property, goal, time)
+	if should_tween:
+		if tweeners[tween_type] != null:
+			tweeners[tween_type].kill()
+		tweeners[tween_type] = get_tree().create_tween()
+		var property = "t_offset" if tween_type == TWEEN_OFFSET else ("t_modulate" if tween_type == TWEEN_MODULATE else "t_rotation")
+		tweeners[tween_type].tween_property(self, property, goal, time)
 
 func place_body():
 	ghost.visible = false
