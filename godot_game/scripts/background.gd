@@ -1,4 +1,4 @@
-extends Node2D
+class_name Background extends ScriptNode
 
 @onready var bg_sprite: Sprite2D = find_child("BG")
 @onready var bg_tint: ColorRect = find_child("Tint")
