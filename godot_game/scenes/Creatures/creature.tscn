@@ -212,6 +212,7 @@ autoplay = "default"
 
 [node name="NotificationBubble" type="AnimatedSprite2D" parent="Sprites"]
 unique_name_in_owner = true
+visible = false
 texture_filter = 1
 position = Vector2(-32, -185)
 scale = Vector2(1.8, 1.8)
