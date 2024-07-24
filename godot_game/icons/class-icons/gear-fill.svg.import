@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bowf1llh0iexw"
-path="res://.godot/imported/controller-icon.svg-ac3135a76f0bac567d49b3e04f1d879e.ctex"
+uid="uid://brypq6cac45np"
+path="res://.godot/imported/gear-fill.svg-0616f05ba69717819cdecf8cfa000b08.ctex"
 metadata={
 "has_editor_variant": true,
 "vram_texture": false
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://icons/class-icons/controller-icon.svg"
-dest_files=["res://.godot/imported/controller-icon.svg-ac3135a76f0bac567d49b3e04f1d879e.ctex"]
+source_file="res://icons/class-icons/gear-fill.svg"
+dest_files=["res://.godot/imported/gear-fill.svg-0616f05ba69717819cdecf8cfa000b08.ctex"]
 
 [params]
 
