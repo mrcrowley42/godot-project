@@ -46,7 +46,7 @@ float ray_cast_clears(vec2 uv, vec2 pixel_size) {
 	float offset = .0;
 	while (true) {
 		vec2 ray_cast = rotate_offset(uv, offset);
-		bool out_of_bounds = min(ray_cast.x, ray_cast.y) < .0 || max(ray_cast.x, ray_cast.y) > 1.;
+		bool out_of_bounds = min(ray_cast.x, ray_cast.y) < EPSILON || max(ray_cast.x, ray_cast.y) > 1.;
 		if (offset > ray_length || out_of_bounds) {  // outside of bounds or too long, stop casting
 			return 0.;
 		}
@@ -62,7 +62,7 @@ void fragment() {
 	float light_map_r = texture(LIGHT_MAP, UV).r;
 	bool is_red = light_map_r > EPSILON;
 	if (is_red) {
-		float bg_rays = 1.0 * smoothstep(0.0, bg_falloff, (bg_length - UV.y));  // fade bottom
+		float bg_rays = smoothstep(0.0, bg_falloff, (bg_length - UV.y));  // fade bottom
 		float final_strength = bg_strength * light_map_r;
 		vec3 bg_col = vec3(bg_rays) * colour.rgb;
 		COLOR = vec4(bg_col * final_strength, bg_rays * final_strength);
@@ -76,7 +76,7 @@ void fragment() {
 		offset = ray_cast_clears(UV, SCREEN_PIXEL_SIZE);
 	}
 	
-	if (offset > 0.) {
+	if (offset > EPSILON) {
 		COLOR = vec4(colour.rgb, (ray_length - offset) * ray_strength);
 	}
 }
