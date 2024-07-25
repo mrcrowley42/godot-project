@@ -4,6 +4,11 @@ HYPER UNOPTIMISED RAY CASTING (BEWARE: SHITTY CODE AHEAD)
 im actually not kidding this thing is slow as hell.
 like from 700 fps to 330
 i'll optimise later... when i feel like it
+
+anti-aliasing:
+https://gist.github.com/cart/7d2da58eb28c75c0952787f29f3e562f
+https://developer.download.nvidia.com/assets/gamedev/files/sdk/11/FXAA_WhitePaper.pdf
+only need a low pass through, im sure...
 */
 
 shader_type canvas_item;
