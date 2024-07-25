@@ -1,7 +1,8 @@
 class_name Background extends ScriptNode
 
 @onready var bg_sprite: Sprite2D = find_child("BG")
-@onready var bg_tint: ColorRect = find_child("Tint")
+@onready var bg_light_shader: ColorRect = find_child("LightShader")
+@onready var bg_tint: ColorRect = find_child("ThemeTint")
 
 var tint_opacity: float = 30.0
 
