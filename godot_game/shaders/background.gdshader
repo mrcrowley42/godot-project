@@ -18,12 +18,13 @@ const float EPSILON = .0001;
 // depending upon the light map this could optimise ray casting
 // if there is less red than black, toggle this on
 uniform bool flip_ray_cast_strategy = false;
-uniform bool anti_alias_ray = false;
+uniform bool fade_ray_edge = false;
+uniform float ray_fade_margin: hint_range(.1, .5) = .3;
 
 uniform float ray_length : hint_range(0.0, 1.0) = .15;
 uniform float ray_rotation : hint_range(0.0, 360.0) = 155.;
 uniform float ray_strength : hint_range(0.0, 2.0) = 2.;
-uniform int ray_quality : hint_range(0, 20) = 5;  // do not mess too much with this
+uniform int ray_quality : hint_range(0, 20) = 5;  // INT ONLY. do not mess too quickly (the graphics driver hates it)
 
 uniform float bg_length : hint_range(0.0, 1.0) = .7;
 uniform float bg_strength : hint_range(0.0, 2.0) = .8;
@@ -32,33 +33,33 @@ uniform float bg_falloff : hint_range(0.0, 1.0) = .8;
 uniform vec4 colour : source_color = vec4(1.0, 0.9, 0.65, 1);
 uniform sampler2D LIGHT_MAP;
 
-vec2 rotate_offset(vec2 centre, float offset) {
-	vec2 point = centre + offset;
-	vec2 vec_out = vec2(0., 0.);
+vec2 rotate_offset(float point) {
+	vec2 vec_out = vec2(0.);
 	float rad = (ray_rotation + 45.) * (PI / 180.);  // add 45 so it points up at 0 degrees
-	vec_out.x = centre.x + cos(rad) * (point.x - centre.x) - sin(rad) * (point.y - centre.y);
-	vec_out.y = centre.y + sin(rad) * (point.x - centre.x) + cos(rad) * (point.y - centre.y);
+	vec_out.x = point * cos(rad) - point * sin(rad);
+	vec_out.y = point * sin(rad) + point * cos(rad);
 	return vec_out;
 }
 
 // ray cast from red pixels
-float ray_cast_reds(vec2 uv, vec2 pixel_size) {
+float ray_cast_reds(vec2 uv, vec2 ray_step, float ray_len, vec2 offset_storage) {
 	return .0;
 }
 
 // ray cast from clear pixels
-float ray_cast_clears(vec2 uv, vec2 pixel_size) {
-	float offset = .0;
+float ray_cast_clears(vec2 uv, vec2 ray_step, float ray_len, vec2 offset_storage) {
+	float len = 0.;
 	while (true) {
-		vec2 ray_cast = rotate_offset(uv, offset);
+		vec2 ray_cast = uv + offset_storage;
+		if (texture(LIGHT_MAP, ray_cast).r > EPSILON) {   // found red
+			return len;
+		}
 		bool out_of_bounds = min(ray_cast.x, ray_cast.y) < EPSILON || max(ray_cast.x, ray_cast.y) > 1.;
-		if (offset > ray_length || out_of_bounds) {  // outside of bounds or too long, stop casting
+		if (len > ray_length || out_of_bounds) {  // outside of bounds or too long, stop casting
 			return 0.;
 		}
-		if (texture(LIGHT_MAP, ray_cast).r > EPSILON) {   // found red
-			return offset;
-		}
-		offset += pixel_size.y * float(ray_quality);  // x or y it doesnt really matter
+		offset_storage += ray_step;
+		len += ray_len;
 	}
 }
 
@@ -74,14 +75,20 @@ void fragment() {
 	}
 	
 	// RAYS (only ray cast if necessary)
-	float offset = .0;
+	float ray_len = SCREEN_PIXEL_SIZE.y * float(ray_quality);
+	vec2 ray_step = rotate_offset(ray_len);  // 1 step in direction of ray
+	
+	vec2 final_offset = vec2(0.);
+	float final_length = 0.;
 	if (flip_ray_cast_strategy && is_red) {
-		offset = ray_cast_reds(UV, SCREEN_PIXEL_SIZE);
+		final_length = ray_cast_reds(UV, ray_step, ray_len, final_offset);
 	} else if (!flip_ray_cast_strategy && !is_red) {
-		offset = ray_cast_clears(UV, SCREEN_PIXEL_SIZE);
+		final_length = ray_cast_clears(UV, ray_step, ray_len, final_offset);
 	}
 	
-	if (offset > EPSILON) {
-		COLOR = vec4(colour.rgb, (ray_length - offset) * ray_strength);
+	if (final_length > EPSILON) {
+		COLOR = vec4(colour.rgb, (ray_length - final_length) * ray_strength);
+		
+		// fade edge calculations using final offset & remainder of ray length from final_length here
 	}
 }

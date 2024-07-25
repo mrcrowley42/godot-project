@@ -76,7 +76,8 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jao8c"]
 shader = ExtResource("4_8udgl")
 shader_parameter/flip_ray_cast_strategy = false
-shader_parameter/anti_alias_ray = false
+shader_parameter/fade_ray_edge = false
+shader_parameter/ray_fade_margin = 0.3
 shader_parameter/ray_length = 0.15
 shader_parameter/ray_rotation = 155.0
 shader_parameter/ray_strength = 2.0
