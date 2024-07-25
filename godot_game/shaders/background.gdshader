@@ -33,12 +33,12 @@ uniform float bg_falloff : hint_range(0.0, 1.0) = .8;
 uniform vec4 colour : source_color = vec4(1.0, 0.9, 0.65, 1);
 uniform sampler2D LIGHT_MAP;
 
-vec2 rotate_offset(float point) {
-	vec2 vec_out = vec2(0.);
+vec2 rotate_point(float point) {
 	float rad = (ray_rotation + 45.) * (PI / 180.);  // add 45 so it points up at 0 degrees
-	vec_out.x = point * cos(rad) - point * sin(rad);
-	vec_out.y = point * sin(rad) + point * cos(rad);
-	return vec_out;
+	return vec2(
+		point * cos(rad) - point * sin(rad),
+		point * sin(rad) + point * cos(rad)
+	);
 }
 
 // ray cast from red pixels
@@ -75,15 +75,15 @@ void fragment() {
 	}
 	
 	// RAYS (only ray cast if necessary)
-	float ray_len = SCREEN_PIXEL_SIZE.y * float(ray_quality);
-	vec2 ray_step = rotate_offset(ray_len);  // 1 step in direction of ray
+	float step_length = SCREEN_PIXEL_SIZE.y * float(ray_quality);
+	vec2 ray_step = rotate_point(step_length);  // 1 step in direction of ray
 	
 	vec2 final_offset = vec2(0.);
 	float final_length = 0.;
 	if (flip_ray_cast_strategy && is_red) {
-		final_length = ray_cast_reds(UV, ray_step, ray_len, final_offset);
+		final_length = ray_cast_reds(UV, ray_step, step_length, final_offset);
 	} else if (!flip_ray_cast_strategy && !is_red) {
-		final_length = ray_cast_clears(UV, ray_step, ray_len, final_offset);
+		final_length = ray_cast_clears(UV, ray_step, step_length, final_offset);
 	}
 	
 	if (final_length > EPSILON) {
