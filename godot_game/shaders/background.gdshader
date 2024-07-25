@@ -3,15 +3,23 @@ HYPER UNOPTIMISED RAY CASTING (BEWARE: SHITTY CODE AHEAD)
 
 im actually not kidding this thing is slow as hell.
 like from 700 fps to 330
-
 i'll optimise later... when i feel like it
+
+also the ray length is super scuffed
 */
 
 shader_type canvas_item;
 
+// depending upon the light map this could optimise ray casting
+// if there is less red than black toggle this on
+// function: toggle ray cast from red pixels or clear pixels
+uniform bool reverse_ray_cast = false;
+uniform bool anti_alias_ray = false;
+
 uniform float ray_length : hint_range(0.0, 1.0) = .15;
-uniform float ray_rotation : hint_range(0.0, 360.0) = 125.;
+uniform float ray_rotation : hint_range(0.0, 360.0) = 155.;
 uniform float ray_strength : hint_range(0.0, 2.0) = 2.;
+uniform int ray_quality : hint_range(0, 20) = 5;  // do not mess too much with this
 
 uniform float bg_length : hint_range(0.0, 1.0) = .7;
 uniform float bg_strength : hint_range(0.0, 2.0) = .8;
@@ -45,21 +53,23 @@ void fragment() {
 	
 	// RAYS
 	float offset = 0.;
-	vec2 ray_cast = get_ray_cast(UV, offset);
 	while (true) {
+		vec2 ray_cast = get_ray_cast(UV, offset);
+		
 		// outside of bounds, stop casting
 		vec2 leng = ray_cast - UV;
 		if (ray_cast.x < 0. || ray_cast.y < 0. || ray_cast.x > UV.x + ray_length || ray_cast.y > UV.y + ray_length) {
 			offset = 0.;
 			break;
 		}
+		
 		// found red, stop casting
 		if (texture(light_map, ray_cast).r != 0.) {
 			break;
 		}
+		
 		// progress ray
-		offset += SCREEN_PIXEL_SIZE.y;  // x or y it doesnt really matter
-		ray_cast = get_ray_cast(UV, offset);
+		offset += SCREEN_PIXEL_SIZE.y * float(ray_quality);  // x or y it doesnt really matter
 	}
 	
 	// colour ray
