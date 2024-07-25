@@ -71,7 +71,7 @@ script/source = "extends Label
 
 
 func _process(_delta):
-	text = '%.2f' % find_parent('DebugContent').background.tint_opacity
+	text = '%.2f' % find_parent('DebugContent').screen_tint.material.get(\"shader_parameter/tint_strength\")
 "
 
 [sub_resource type="GDScript" id="GDScript_n68jj"]
@@ -204,7 +204,7 @@ offset_top = 490.0
 offset_right = 505.0
 offset_bottom = 517.0
 theme = ExtResource("2_5bhpe")
-text = "Theme Tint Opacity"
+text = "Screen Tint Strength"
 
 [node name="Label5" type="Label" parent="."]
 layout_mode = 0
@@ -241,9 +241,9 @@ offset_left = 280.0
 offset_top = 522.0
 offset_right = 430.0
 offset_bottom = 538.0
-max_value = 255.0
+max_value = 2.0
 step = 0.01
-value = 30.0
+value = 1.0
 
 [node name="HSlider" type="HSlider" parent="."]
 layout_mode = 0

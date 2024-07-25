@@ -32,7 +32,7 @@ bool shouldBevel(vec2 remainder) {
 bool shouldOutline(vec2 screenDim, vec2 scaledUV, vec2 offset) {
 	if (outline) {
 		bool shouldX = offset.x > scaledUV.x || scaledUV.x > screenDim.x - offset.x;
-		if (shouldX) {return true;}  // early out
+		if (shouldX) {return true;}  // cheeky early return
 		return offset.y > scaledUV.y || scaledUV.y > screenDim.y - offset.y;
 	}
 	return false;
@@ -49,7 +49,7 @@ void fragment() {
 	// perform 'modulus' operation with floats
 	vec2 remainder = vec2(scaledUV.x - offset.x, scaledUV.y - offset.y);
 	remainder /= vec2(columnWidth, rowHeight);
-	remainder -= floor(remainder);  // actually get the remainder (will be >= 0 and < 1 whithin each grid square)
+	remainder -= floor(remainder);  // actually get the remainder (will be =< 0 and > 1 whithin each grid square)
 	
 	float maxRem = max(remainder.x, remainder.y);
 	float full = 1.0 - lineSize;

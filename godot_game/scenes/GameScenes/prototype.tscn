@@ -3,13 +3,12 @@
 [ext_resource type="Script" path="res://scripts/prototype.gd" id="1_u8fgs"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_w1hur"]
 [ext_resource type="Script" path="res://scripts/MinigameManager.gd" id="3_usdrn"]
-[ext_resource type="Shader" path="res://shaders/background.gdshader" id="4_8udgl"]
+[ext_resource type="Shader" path="res://shaders/multiply_colour.gdshader" id="4_8sx1k"]
 [ext_resource type="Texture2D" uid="uid://cdbor7hjfbusn" path="res://UI stuff/Universal/background.png" id="4_pmdaq"]
-[ext_resource type="Script" path="res://scripts/background.gd" id="4_whrt7"]
 [ext_resource type="PackedScene" uid="uid://bebjn5n2kjwgb" path="res://scenes/Creatures/creature.tscn" id="5_khxd0"]
 [ext_resource type="Script" path="res://scripts/Confetti.gd" id="7_rqbrx"]
 [ext_resource type="Script" path="res://scripts/control_panel.gd" id="8_bgltf"]
-[ext_resource type="Theme" path="res://themes/invisible.tres" id="8_hlnwn"]
+[ext_resource type="Theme" uid="uid://dl1wes8p6lqlb" path="res://themes/invisible.tres" id="8_hlnwn"]
 [ext_resource type="Theme" uid="uid://1dv11a5ar0hg" path="res://themes/action_btn.tres" id="9_3efis"]
 [ext_resource type="Script" path="res://scripts/drag_window.gd" id="9_13uut"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="10_pai17"]
@@ -72,17 +71,19 @@
 [ext_resource type="AudioStream" uid="uid://dat0sfue6jjr5" path="res://sound_effects/metal-pipe-falling-sound-effect-made-with-Voicemod.mp3" id="67_p6vc6"]
 [ext_resource type="Script" path="res://scripts/sfx_man.gd" id="68_sw7tx"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wq5nt"]
-shader = ExtResource("4_8udgl")
-shader_parameter/angle = -0.1
-shader_parameter/position = Vector2(0.2, 0.2)
-shader_parameter/v_length = 0.5
-shader_parameter/strength = 0.3
-shader_parameter/spread = 0.5
-shader_parameter/girth = 0.1
-shader_parameter/falloff = 0.8
-shader_parameter/edge_fade = 0.1
-shader_parameter/color = Color(1, 0.9, 0.65, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_045wl"]
+resource_local_to_scene = true
+shader = ExtResource("4_8sx1k")
+shader_parameter/tint_colour = Color(0.870588, 0.984314, 0.87451, 1)
+shader_parameter/tint_strength = 1.0
+
+[sub_resource type="GDScript" id="GDScript_axjpn"]
+script/source = "extends Sprite2D
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta):
+	material.set(\"shader_parameter/tint_colour\", %ScreenColours.color)
+"
 
 [sub_resource type="GDScript" id="GDScript_7ecg8"]
 script/source = "extends ColorRect
@@ -280,24 +281,14 @@ script = ExtResource("3_usdrn")
 [node name="Gameplay" type="Node2D" parent="."]
 unique_name_in_owner = true
 
-[node name="Background" type="Node2D" parent="Gameplay"]
+[node name="BG" type="Sprite2D" parent="Gameplay"]
 unique_name_in_owner = true
-script = ExtResource("4_whrt7")
-
-[node name="BGUpdate" type="Timer" parent="Gameplay/Background"]
-wait_time = 5.0
-
-[node name="BG" type="Sprite2D" parent="Gameplay/Background"]
-material = SubResource("ShaderMaterial_wq5nt")
+material = SubResource("ShaderMaterial_045wl")
 position = Vector2(270, 337)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_pmdaq")
+script = SubResource("GDScript_axjpn")
 metadata/_edit_lock_ = true
-
-[node name="Tint" type="ColorRect" parent="Gameplay/Background"]
-offset_right = 540.0
-offset_bottom = 675.0
-color = Color(1, 1, 1, 0.117647)
 
 [node name="ScreenColours" type="ColorRect" parent="Gameplay"]
 unique_name_in_owner = true
@@ -481,7 +472,6 @@ script = ExtResource("16_3rmyt")
 
 [node name="ActivityControls" type="PanelContainer" parent="UI/ScreenControls"]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(400, 400)
 layout_mode = 1
 anchors_preset = 8
@@ -1218,7 +1208,6 @@ bus = &"SFX"
 script = ExtResource("68_sw7tx")
 
 [connection signal="tree_exiting" from="MinigameManager" to="MinigameManager" method="_on_tree_exiting"]
-[connection signal="timeout" from="Gameplay/Background/BGUpdate" to="Gameplay/Background" method="_on_bg_update_timeout"]
 [connection signal="button_down" from="Gameplay/DragArea" to="Gameplay/DragArea" method="_on_button_down"]
 [connection signal="button_up" from="Gameplay/DragArea" to="Gameplay/DragArea" method="_on_button_up"]
 [connection signal="visibility_changed" from="UI/ScreenControls/FoodControls" to="UI/ScreenControls/FoodControls" method="_on_visibility_changed"]
