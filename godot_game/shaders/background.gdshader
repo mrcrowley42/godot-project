@@ -4,15 +4,13 @@ HYPER UNOPTIMISED RAY CASTING (BEWARE: SHITTY CODE AHEAD)
 im actually not kidding this thing is slow as hell.
 like from 700 fps to 330
 i'll optimise later... when i feel like it
-
-also the ray length is super scuffed
 */
 
 shader_type canvas_item;
 
 // depending upon the light map this could optimise ray casting
 // if there is less red than black toggle this on
-// function: toggle ray cast from red pixels or clear pixels
+// function: toggle ray to cast from either red pixels or clear pixels
 uniform bool reverse_ray_cast = false;
 uniform bool anti_alias_ray = false;
 
@@ -57,8 +55,7 @@ void fragment() {
 		vec2 ray_cast = get_ray_cast(UV, offset);
 		
 		// outside of bounds, stop casting
-		vec2 leng = ray_cast - UV;
-		if (ray_cast.x < 0. || ray_cast.y < 0. || ray_cast.x > UV.x + ray_length || ray_cast.y > UV.y + ray_length) {
+		if (offset < 0. || offset > ray_length) {
 			offset = 0.;
 			break;
 		}
