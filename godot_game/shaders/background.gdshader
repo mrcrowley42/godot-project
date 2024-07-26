@@ -97,6 +97,7 @@ void fragment() {
 		float rhs = ray_fade_margin * .5;
 		float remaining_length = ray_length - final_length;
 		float stepin_length = SCREEN_PIXEL_SIZE.y * float(ray_fade_quality);
+		vec2 cast_step = rotate_point(stepin_length);
 		
 		while (lhs_searching || rhs_searching) {
 			// ray cast up
@@ -107,16 +108,16 @@ void fragment() {
 				perp_norm = vec2(-perp_norm.y, perp_norm.x);
 				
 				if (lhs_searching) {
-					vec2 cast_lhs = final_offset + (perp_norm * lhs);
+					vec2 cast_lhs = perp_norm * lhs;
 					cast_lhs += normalize(final_offset) * cast_length;
-					float lhs_red = texture(LIGHT_MAP, UV + cast_lhs).r;
+					float lhs_red = texture(LIGHT_MAP, UV + final_offset + cast_lhs).r;
 					if (lhs_red > EPSILON) {
 						lhs_searching = false;
 					}
 				}
 				
 				if (rhs_searching) {
-					vec2 cast_rhs = final_offset - (perp_norm * lhs);
+					vec2 cast_rhs = -perp_norm * lhs;
 					cast_rhs += normalize(final_offset) * cast_length;
 					float rhs_red = texture(LIGHT_MAP, UV + cast_rhs).r;
 					if (rhs_red > EPSILON) {
@@ -124,7 +125,7 @@ void fragment() {
 					}
 				}
 				
-				cast_length += stepin_length;  // use step_length instead??
+				cast_length += stepin_length;
 			}
 			
 			// move in and/or complete side
@@ -142,7 +143,7 @@ void fragment() {
 		
 		//float side = max(lhs, lhs);
 		float side = lhs;
-		float percent = 1. - side / (ray_fade_margin * .5);
-		//COLOR.a *= percent;
+		float percent = side / (ray_fade_margin * .5);
+		COLOR.a *= percent;
 	}
 }
