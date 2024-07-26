@@ -1,7 +1,7 @@
 extends TextureButton
 
 @export var palettes: Array[Texture2D]
-@onready var act_menu = %ActivityControls
+@onready var act_menu = %ActivityMenu
 @onready var options_menu = %OptionsMenu
 
 func _on_button_down():
