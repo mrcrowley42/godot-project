@@ -1,14 +1,7 @@
 /*
 HYPER UNOPTIMISED RAY CASTING (BEWARE: SHITTY CODE AHEAD)
 
-im actually not kidding this thing is slow as hell.
-like from 700 fps to 330
-i'll optimise later... when i feel like it
-
-anti-aliasing:
-https://gist.github.com/cart/7d2da58eb28c75c0952787f29f3e562f
-https://developer.download.nvidia.com/assets/gamedev/files/sdk/11/FXAA_WhitePaper.pdf
-only need a low pass through, im sure...
+Fade edge if heavy on performance atm, it takes off ~100 fps
 */
 
 shader_type canvas_item;
@@ -17,15 +10,16 @@ const float EPSILON = .0001;
 
 // depending upon the light map this could optimise ray casting
 // if there is less red than black, toggle this on
+// FYI: NOT IMPLEMENTED YET
 uniform bool flip_ray_cast_strategy = false;
 uniform bool fade_ray_edge = true;
-uniform float ray_fade_margin : hint_range(.1, .5) = .25;
-uniform int ray_fade_quality : hint_range(1, 5) = 1;
+uniform float ray_fade_margin : hint_range(.1, .5) = .25;  // .5 meets at middle (i think)
+uniform int ray_fade_quality : hint_range(1, 5) = 5;
 
 uniform float ray_length : hint_range(0.0, 1.0) = .15;
 uniform float ray_direction : hint_range(0.0, 360.0) = 155.;
 uniform float ray_strength : hint_range(0.0, 2.0) = 2.;
-uniform int ray_quality : hint_range(1, 20) = 5;  // INT ONLY. do not mess too quickly (the graphics driver hates it)
+uniform int ray_quality : hint_range(1, 20) = 5;
 
 uniform float bg_length : hint_range(0.0, 1.0) = .7;
 uniform float bg_strength : hint_range(0.0, 2.0) = .8;
@@ -33,6 +27,11 @@ uniform float bg_falloff : hint_range(0.0, 1.0) = .8;
 
 uniform vec4 colour : source_color = vec4(1.0, 0.9, 0.65, 1);
 uniform sampler2D LIGHT_MAP;
+
+// I NEED MORE SPEED!!!
+float less_than(float a, float b) {
+	return max(sign(a - b), 0.0);
+}
 
 vec2 rotate_point(float point, float deg) {
 	float rad = deg * (PI / 180.);
@@ -66,7 +65,6 @@ float ray_cast_to_red(vec2 from_pos, vec2 ray_step, float step_length, float max
 
 void fragment() {
 	float direction = ray_direction + 45.;  // add 45 so it points up a 0 deg
-	int quality = max(1, ray_quality);
 	
 	// BACKGROUND
 	float light_map_r = texture(LIGHT_MAP, UV).r;
@@ -79,7 +77,7 @@ void fragment() {
 	}
 	
 	// RAYS (only ray cast if necessary)
-	float step_length = SCREEN_PIXEL_SIZE.y * float(quality);
+	float step_length = SCREEN_PIXEL_SIZE.y * float(max(1, int(ray_quality)));  // DO NOT ALLOW LESS THAN 1
 	vec2 ray_step = rotate_point(step_length, direction);  // 1 step in direction of ray
 	
 	vec2 final_offset = vec2(0.);
@@ -91,8 +89,8 @@ void fragment() {
 	}
 	
 	if (final_length > EPSILON) {
-		//COLOR = vec4(colour.rgb, (ray_length - final_length) * ray_strength);
-		COLOR = vec4(colour.rgb, .5 * ray_strength);
+		COLOR = vec4(colour.rgb, (ray_length - final_length) * ray_strength);  // normal strength
+		//COLOR = vec4(colour.rgb, .5 * ray_strength);  // full strength (debug)
 		
 		// FADE EDGE
 		if (fade_ray_edge) {
@@ -100,26 +98,26 @@ void fragment() {
 			float max_dist_from_offset = ray_fade_margin * .5;
 			float dist_from_offset = max_dist_from_offset;
 			
-			float fade_step_length = SCREEN_PIXEL_SIZE.y * float(ray_fade_quality);
+			float fade_step_length = SCREEN_PIXEL_SIZE.y * float(max(1, int(ray_fade_quality)));
 			vec2 cast_step = rotate_point(fade_step_length, direction);
 			
-			vec2 perp_norm = vec2(normalize(ray_step) * dist_from_offset);
+			vec2 ray_casted_pos = UV + (ray_step * final_length);  // position to its closest red
+			vec2 perp_norm = vec2(normalize(ray_step) * dist_from_offset);  // sets direction (idk it just works)
 			perp_norm = vec2(-perp_norm.y, perp_norm.x);  // perpendicular to ray step
 			
 			int fail_safe = 0;
 			while (searching) {
-				float lhs_len = ray_cast_to_red((UV + (ray_step * final_length) + (perp_norm * dist_from_offset)), cast_step, fade_step_length, ray_length, vec2(0.));
-				float rhs_len = ray_cast_to_red((UV + (ray_step * final_length) + (-perp_norm * dist_from_offset)), cast_step, fade_step_length, ray_length, vec2(0.));
+				float lhs_len = ray_cast_to_red(ray_casted_pos + (perp_norm * dist_from_offset), cast_step, fade_step_length, ray_length, vec2(0.));
+				float rhs_len = ray_cast_to_red(ray_casted_pos + (-perp_norm * dist_from_offset), cast_step, fade_step_length, ray_length, vec2(0.));
 				float len = min(lhs_len, rhs_len);
 				searching = !(len > EPSILON || len > -EPSILON || dist_from_offset <= EPSILON);
 				dist_from_offset -= step_length * float(searching);
 				
 				// oh god, the amount of times i crashed godot before adding this
-				fail_safe += 1;
-				if (fail_safe > 50) {break;}
+				if (fail_safe++ > 50) break;
 			}
 			
-			COLOR.a *= dist_from_offset / max_dist_from_offset;  // multiply by percent
+			COLOR.a *= dist_from_offset / max_dist_from_offset;  // multiply alpha by percent
 		}
 	}
 }
