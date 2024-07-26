@@ -64,3 +64,11 @@ func _on_h_slider_2_value_changed(value):
 	drag_area.clippy_opacity = value
 	if drag_area.clippy:
 		creature.find_child("Sprites").self_modulate = Color(1,1,1,drag_area.clippy_opacity)
+
+
+func _on_check_box_toggled(toggled_on):
+	if toggled_on:
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+	else:
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+	

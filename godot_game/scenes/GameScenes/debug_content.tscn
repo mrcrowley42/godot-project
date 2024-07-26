@@ -325,19 +325,19 @@ text = "FULL RESTORE"
 
 [node name="Label3" type="Label" parent="."]
 layout_mode = 0
-offset_left = 74.0
-offset_top = 601.0
-offset_right = 131.0
-offset_bottom = 630.0
+offset_left = 68.0
+offset_top = 600.0
+offset_right = 125.0
+offset_bottom = 629.0
 theme = ExtResource("2_5bhpe")
 text = "%s"
 
 [node name="Label7" type="Label" parent="."]
 layout_mode = 0
-offset_left = 22.0
-offset_top = 601.0
-offset_right = 72.0
-offset_bottom = 630.0
+offset_left = 16.0
+offset_top = 600.0
+offset_right = 66.0
+offset_bottom = 629.0
 theme = ExtResource("2_5bhpe")
 text = "FPS:"
 
@@ -410,18 +410,18 @@ offset_bottom = 416.0
 [node name="MinigameLabel" type="Label" parent="."]
 layout_mode = 0
 offset_left = 29.0
-offset_top = 466.0
+offset_top = 473.0
 offset_right = 186.0
-offset_bottom = 496.0
+offset_bottom = 503.0
 theme = ExtResource("2_5bhpe")
 text = "Minigame:"
 
 [node name="Minigame" type="Label" parent="."]
 layout_mode = 0
 offset_left = 29.0
-offset_top = 501.0
+offset_top = 508.0
 offset_right = 186.0
-offset_bottom = 531.0
+offset_bottom = 538.0
 theme = ExtResource("2_5bhpe")
 text = "%s"
 label_settings = SubResource("LabelSettings_na8du")
@@ -446,6 +446,16 @@ theme = ExtResource("8_lqg4h")
 toggle_mode = true
 text = "Holiday Mode"
 
+[node name="CheckBox" type="CheckBox" parent="."]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 428.0
+offset_right = 174.0
+offset_bottom = 463.0
+theme = ExtResource("2_5bhpe")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Unlock FPS"
+
 [connection signal="value_changed" from="OverlayStrength" to="." method="_on_overlay_strength_value_changed"]
 [connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="value_changed" from="HSlider2" to="." method="_on_h_slider_2_value_changed"]
@@ -459,3 +469,4 @@ text = "Holiday Mode"
 [connection signal="popup_closed" from="ColorPickerButton" to="." method="_on_color_picker_button_popup_closed"]
 [connection signal="pressed" from="ClippyBtn" to="." method="_on_clippy_btn_pressed"]
 [connection signal="toggled" from="HolidayBtn" to="." method="_on_button_3_toggled"]
+[connection signal="toggled" from="CheckBox" to="." method="_on_check_box_toggled"]

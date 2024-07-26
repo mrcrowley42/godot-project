@@ -12,12 +12,11 @@
 [resource]
 script = ExtResource("5_38vrr")
 theme_name = "Orange"
-index = 1
 screen_tint = Color(0.835294, 0.576471, 0.439216, 1)
 food_btn = ExtResource("3_jgudd")
 food_btn_pressed = ExtResource("4_qqe1u")
 act_btn = ExtResource("1_yql4l")
 act_btn_pressed = ExtResource("2_gb0vi")
 setting_btn = ExtResource("6_776br")
-setting_pressed = ExtResource("7_l7md0")
+setting_btn_pressed = ExtResource("7_l7md0")
 ui_overlay = ExtResource("8_8h4uc")
