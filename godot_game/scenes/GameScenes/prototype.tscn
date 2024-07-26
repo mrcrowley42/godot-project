@@ -1119,7 +1119,7 @@ value = 700.0
 show_percentage = false
 script = ExtResource("42_jcjk0")
 
-[node name="NavigationControls" type="HBoxContainer" parent="UI"]
+[node name="NavigationButtons" type="HBoxContainer" parent="UI"]
 anchors_preset = 10
 anchor_right = 1.0
 offset_left = 30.0
@@ -1130,21 +1130,21 @@ grow_horizontal = 2
 scale = Vector2(0.5, 0.5)
 theme_override_constants/separation = 0
 
-[node name="FoodButton" type="TextureButton" parent="UI/NavigationControls"]
+[node name="FoodButton" type="TextureButton" parent="UI/NavigationButtons"]
 unique_name_in_owner = true
 layout_mode = 2
 texture_normal = ExtResource("43_52l41")
 script = ExtResource("44_0wqkd")
 palettes = Array[Texture2D]([ExtResource("43_52l41"), ExtResource("45_ien5c"), ExtResource("46_6fge6")])
 
-[node name="ActButton" type="TextureButton" parent="UI/NavigationControls"]
+[node name="ActButton" type="TextureButton" parent="UI/NavigationButtons"]
 unique_name_in_owner = true
 layout_mode = 2
 texture_normal = ExtResource("47_juxi6")
 script = ExtResource("48_b5ici")
 palettes = Array[Texture2D]([ExtResource("47_juxi6"), ExtResource("49_gik4a"), ExtResource("50_lnctf")])
 
-[node name="SettingButton" type="TextureButton" parent="UI/NavigationControls"]
+[node name="SettingButton" type="TextureButton" parent="UI/NavigationButtons"]
 unique_name_in_owner = true
 layout_mode = 2
 texture_normal = ExtResource("51_cd8hh")
@@ -1172,6 +1172,11 @@ bus = &"Music"
 script = ExtResource("57_t10ki")
 music_selection = Array[AudioStreamMP3]([ExtResource("58_4v78i"), ExtResource("59_ax3ia"), ExtResource("60_bt6al"), ExtResource("61_20mrx"), ExtResource("56_5nows"), ExtResource("62_n7vsq"), ExtResource("63_m8c6w"), ExtResource("64_qt6t3")])
 
+[node name="SFX" type="AudioStreamPlayer" parent="Audio"]
+unique_name_in_owner = true
+bus = &"SFX"
+script = ExtResource("68_sw7tx")
+
 [node name="Yip" type="AudioStreamPlayer" parent="Audio"]
 unique_name_in_owner = true
 stream = ExtResource("65_mrlpr")
@@ -1190,11 +1195,6 @@ unique_name_in_owner = true
 stream = ExtResource("67_p6vc6")
 volume_db = 8.0
 bus = &"SFX"
-
-[node name="SFX" type="AudioStreamPlayer" parent="Audio"]
-unique_name_in_owner = true
-bus = &"SFX"
-script = ExtResource("68_sw7tx")
 
 [connection signal="tree_exiting" from="MinigameManager" to="MinigameManager" method="_on_tree_exiting"]
 [connection signal="button_down" from="Gameplay/DragArea" to="Gameplay/DragArea" method="_on_button_down"]
@@ -1225,7 +1225,7 @@ script = ExtResource("68_sw7tx")
 [connection signal="button_down" from="Menus/OptionsMenu/VolumeControls/GridContainer2/MusicMuted" to="Menus/OptionsMenu/VolumeControls/GridContainer2/MusicMuted" method="_on_button_down"]
 [connection signal="button_down" from="Menus/OptionsMenu/Credits/Button" to="Menus/OptionsMenu/Credits/Button" method="_on_button_down"]
 [connection signal="button_down" from="Menus/CreditsMenu/Node2D/CreditsCloseBtn" to="Menus/CreditsMenu/Node2D/CreditsCloseBtn" method="_on_button_down"]
-[connection signal="button_down" from="UI/NavigationControls/FoodButton" to="UI/NavigationControls/FoodButton" method="_on_button_down"]
-[connection signal="button_down" from="UI/NavigationControls/ActButton" to="UI/NavigationControls/ActButton" method="_on_button_down"]
-[connection signal="button_down" from="UI/NavigationControls/SettingButton" to="UI/NavigationControls/SettingButton" method="_on_button_down"]
+[connection signal="button_down" from="UI/NavigationButtons/FoodButton" to="UI/NavigationButtons/FoodButton" method="_on_button_down"]
+[connection signal="button_down" from="UI/NavigationButtons/ActButton" to="UI/NavigationButtons/ActButton" method="_on_button_down"]
+[connection signal="button_down" from="UI/NavigationButtons/SettingButton" to="UI/NavigationButtons/SettingButton" method="_on_button_down"]
 [connection signal="finished" from="Audio/MainMusic" to="Audio/MainMusic" method="_on_finished"]
