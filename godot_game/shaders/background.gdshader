@@ -19,10 +19,11 @@ const float EPSILON = .0001;
 // if there is less red than black, toggle this on
 uniform bool flip_ray_cast_strategy = false;
 uniform bool fade_ray_edge = false;
-uniform float ray_fade_margin: hint_range(.1, .5) = .3;
+uniform float ray_fade_margin : hint_range(.1, .5) = .3;
+uniform int ray_fade_quality : hint_range(1, 5) = 1;
 
 uniform float ray_length : hint_range(0.0, 1.0) = .15;
-uniform float ray_rotation : hint_range(0.0, 360.0) = 155.;
+uniform float ray_direction : hint_range(0.0, 360.0) = 155.;
 uniform float ray_strength : hint_range(0.0, 2.0) = 2.;
 uniform int ray_quality : hint_range(0, 20) = 5;  // INT ONLY. do not mess too quickly (the graphics driver hates it)
 
@@ -34,7 +35,7 @@ uniform vec4 colour : source_color = vec4(1.0, 0.9, 0.65, 1);
 uniform sampler2D LIGHT_MAP;
 
 vec2 rotate_point(float point) {
-	float rad = (ray_rotation + 45.) * (PI / 180.);  // add 45 so it points up at 0 degrees
+	float rad = (ray_direction + 45.) * (PI / 180.);  // add 45 so it points up at 0 degrees
 	return vec2(
 		point * cos(rad) - point * sin(rad),
 		point * sin(rad) + point * cos(rad)
@@ -89,6 +90,59 @@ void fragment() {
 	if (final_length > EPSILON) {
 		COLOR = vec4(colour.rgb, (ray_length - final_length) * ray_strength);
 		
-		// fade edge calculations using final offset & remainder of ray length from final_length here
+		// FADE EDGE
+		bool lhs_searching = true;
+		bool rhs_searching = true;
+		float lhs = ray_fade_margin * .5;
+		float rhs = ray_fade_margin * .5;
+		float remaining_length = ray_length - final_length;
+		float stepin_length = SCREEN_PIXEL_SIZE.y * float(ray_fade_quality);
+		
+		while (lhs_searching || rhs_searching) {
+			// ray cast up
+			float cast_length = 0.;
+			while (cast_length <= remaining_length) {
+				// check
+				vec2 perp_norm = normalize(final_offset);
+				perp_norm = vec2(-perp_norm.y, perp_norm.x);
+				
+				if (lhs_searching) {
+					vec2 cast_lhs = final_offset + (perp_norm * lhs);
+					cast_lhs += normalize(final_offset) * cast_length;
+					float lhs_red = texture(LIGHT_MAP, UV + cast_lhs).r;
+					if (lhs_red > EPSILON) {
+						lhs_searching = false;
+					}
+				}
+				
+				if (rhs_searching) {
+					vec2 cast_rhs = final_offset - (perp_norm * lhs);
+					cast_rhs += normalize(final_offset) * cast_length;
+					float rhs_red = texture(LIGHT_MAP, UV + cast_rhs).r;
+					if (rhs_red > EPSILON) {
+						rhs_searching = false;
+					}
+				}
+				
+				cast_length += stepin_length;  // use step_length instead??
+			}
+			
+			// move in and/or complete side
+			if (lhs_searching) {
+				lhs -= stepin_length;
+			}
+			if (rhs_searching) {
+				rhs -= stepin_length;
+			}
+			//lhs -= stepin_length * float(lhs_searching);
+			//rhs -= stepin_length * float(rhs_searching);
+			lhs_searching = lhs_searching ? lhs <= EPSILON : false;
+			rhs_searching = rhs_searching ? rhs <= EPSILON : false;
+		}
+		
+		//float side = max(lhs, lhs);
+		float side = lhs;
+		float percent = 1. - side / (ray_fade_margin * .5);
+		//COLOR.a *= percent;
 	}
 }
