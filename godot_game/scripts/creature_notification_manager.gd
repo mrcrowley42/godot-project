@@ -25,7 +25,7 @@ var states = {}
 var on_cooldown: bool = false
 
 func _ready() -> void:
-	states = {'angry': low_hunger, 'thirsty': low_hydrate, 'hungry': low_hunger, 'bored': low_fun}
+	states = {'angry': low_regulation, 'thirsty': low_hydrate, 'hungry': low_hunger, 'bored': low_fun}
 	cooldown_timer.wait_time = cooldown_period
 	cooldown_timer.timeout.connect(done)
 	cooldown_timer.autostart = true
@@ -67,5 +67,5 @@ func queue_warning(sound_file: AudioStream) -> void:
 	on_cooldown = true
 
 ## When a sound finishes, puts the notifications on cooldown until the [param cooldown_period] is elapsed.
-func _on_low_stat_sounds_finished():
+func _on_low_stat_sounds_finished() -> void:
 	on_cooldown = true
