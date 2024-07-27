@@ -86,7 +86,7 @@ shader_parameter/ray_strength = 2.0
 shader_parameter/ray_quality = 10
 shader_parameter/bg_length = 0.7
 shader_parameter/bg_strength = 0.8
-shader_parameter/bg_falloff = 0.8
+shader_parameter/bg_fade = 0.8
 shader_parameter/colour = Color(1, 0.9, 0.65, 1)
 shader_parameter/LIGHT_MAP = ExtResource("6_qagbm")
 

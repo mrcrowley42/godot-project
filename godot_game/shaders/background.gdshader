@@ -28,7 +28,7 @@ uniform int ray_quality : hint_range(5, 15) = 10;
 
 uniform float bg_length : hint_range(0.0, 1.0) = .7;
 uniform float bg_strength : hint_range(0.0, 2.0) = .8;
-uniform float bg_falloff : hint_range(0.0, 1.0) = .8;
+uniform float bg_fade : hint_range(0.0, 1.0) = .8;
 
 uniform vec4 colour : source_color = vec4(1.0, 0.9, 0.65, 1);
 uniform sampler2D LIGHT_MAP;
@@ -71,14 +71,14 @@ void fragment() {
 	float light_map_r = texture(LIGHT_MAP, UV).r;
 	bool is_red = light_map_r > EPSILON;
 	if (is_red) {
-		float bg_rays = smoothstep(0.0, bg_falloff, (bg_length - UV.y));  // fade bottom
+		float bg_rays = smoothstep(0.0, bg_fade, (bg_length - UV.y));  // fade bottom
 		float final_strength = bg_strength * light_map_r;
 		vec3 bg_col = vec3(bg_rays) * colour.rgb;
 		COLOR = vec4(bg_col * final_strength, bg_rays * final_strength);
 	}
 	
 	// RAYS
-	float step_length = SCREEN_PIXEL_SIZE.y * float(max(MIN_FADE_QUALITY, int(ray_quality)));  // DO NOT ALLOW LESS THAN 1
+	float step_length = SCREEN_PIXEL_SIZE.y * float(max(MIN_RAY_QUALITY, int(ray_quality)));  // DO NOT ALLOW LESS THAN 1
 	vec2 ray_step = rotate_point(step_length, direction);  // 1 step in direction of ray
 	
 	vec2 final_offset = vec2(0.);
