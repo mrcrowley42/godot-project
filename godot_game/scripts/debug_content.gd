@@ -1,7 +1,7 @@
 extends Control
 
 @onready var creature: Creature = %Creature
-@onready var UI = %UI_Overlay
+@onready var ui = %UI_Theme_Manager
 @onready var stat_man = %StatusManager
 @onready var music_track = %MainMusic
 @onready var screen_tint = %BG

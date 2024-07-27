@@ -37,3 +37,6 @@ func load(data):
 	if "Theme" in data.keys():
 		self.i = int(data["Theme"])
 	change_texture()
+
+func get_current_theme():
+	return themes[i]
