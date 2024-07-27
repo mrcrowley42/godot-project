@@ -29,6 +29,7 @@ func update_holiday():
 		$HolidayBtn.set_pressed_no_signal(true)
 		
 func _process(_delta):
+	$Strength.text =  '%.2f' % [stat_man.time_multiplier]
 	var fps = Engine.get_frames_per_second()
 	$Label3.text = str(fps)
 	if fps < 49.0:
