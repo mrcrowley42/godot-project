@@ -1,4 +1,4 @@
-extends Node2D
+extends ScriptNode
 
 func generate_confetti():
 	var confetti_l = find_child("ConfettiParticleL");

@@ -12,7 +12,7 @@ extends Button
 @onready var default_stretch_mode := window.content_scale_mode
 
 # TODO will need to adjust this to fit notifications and other creatures etc.
-var clippy_offset := Vector2(-128,-226)
+var clippy_offset := Vector2(-128,-216)
 var window_offset := Transform2D(0, clippy_offset)
 var dragging: bool = false
 var offset = Vector2(0, 0)
