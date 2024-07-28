@@ -86,5 +86,5 @@ func load(data):
 
 func _on_tree_exiting():
 	# Ensure that before changing scene, if clippy mode is active it is toggled off.
-	if %DragArea.clippy:
-		%DragArea.toggle_clippy_mode()
+	if %ClippyArea.clippy:
+		%ClippyArea.toggle_clippy_mode()

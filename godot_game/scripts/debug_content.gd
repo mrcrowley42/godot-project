@@ -6,7 +6,7 @@ extends Control
 @onready var music_track = %MainMusic
 @onready var screen_tint = %BG
 @onready var minigame_man: MinigameManager = %MinigameManager
-@onready var drag_area: Button  = %DragArea
+@onready var clippy_area: Button  = %ClippyArea
 
 
 func _on_h_slider_value_changed(value):
@@ -59,12 +59,12 @@ func _on_button_3_toggled(toggled_on):
 	print(stat_man.holiday_mode)
 
 func _on_clippy_btn_pressed():
-	drag_area.toggle_clippy_mode()
+	clippy_area.toggle_clippy_mode()
 
 func _on_h_slider_2_value_changed(value):
-	drag_area.clippy_opacity = value
-	if drag_area.clippy:
-		creature.find_child("Sprites").self_modulate = Color(1,1,1,drag_area.clippy_opacity)
+	clippy_area.clippy_opacity = value
+	if clippy_area.clippy:
+		creature.find_child("Sprites").self_modulate = Color(1,1,1,clippy_area.clippy_opacity)
 
 
 func _on_check_box_toggled(toggled_on):

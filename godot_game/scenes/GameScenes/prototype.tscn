@@ -350,7 +350,7 @@ color_initial_ramp = SubResource("Gradient_asbj7")
 hue_variation_min = 1.0
 hue_variation_max = 1.0
 
-[node name="DragArea" type="Button" parent="Gameplay"]
+[node name="ClippyArea" type="Button" parent="Gameplay"]
 unique_name_in_owner = true
 editor_description = "The control that allows the window to be dragged while in clippy mode."
 anchors_preset = 8
@@ -1184,8 +1184,8 @@ max_polyphony = 2
 bus = &"SFX"
 
 [connection signal="tree_exiting" from="MinigameManager" to="MinigameManager" method="_on_tree_exiting"]
-[connection signal="button_down" from="Gameplay/DragArea" to="Gameplay/DragArea" method="_on_button_down"]
-[connection signal="button_up" from="Gameplay/DragArea" to="Gameplay/DragArea" method="_on_button_up"]
+[connection signal="button_down" from="Gameplay/ClippyArea" to="Gameplay/ClippyArea" method="_on_button_down"]
+[connection signal="button_up" from="Gameplay/ClippyArea" to="Gameplay/ClippyArea" method="_on_button_up"]
 [connection signal="visibility_changed" from="UI/FoodMenu" to="UI/FoodMenu" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/FoodMenu/MarginContainer/GridContainer/Button 1" to="UI/FoodMenu/MarginContainer/GridContainer/Button 1" method="_on_button_down"]
 [connection signal="button_down" from="UI/FoodMenu/MarginContainer/GridContainer/Button 2" to="UI/FoodMenu/MarginContainer/GridContainer/Button 2" method="_on_button_down"]
