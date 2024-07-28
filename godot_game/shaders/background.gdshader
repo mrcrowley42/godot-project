@@ -19,13 +19,13 @@ uniform bool fade_ray_edge = true;
 uniform float ray_fade_margin : hint_range(.1, .5) = .25;
 uniform int ray_fade_quality : hint_range(5, 15) = 6;
 
-uniform float ray_length : hint_range(0.0, 1.0) = .15;
+uniform float ray_length : hint_range(0.0, 1.0) = .12;
 uniform float ray_direction : hint_range(0.0, 360.0) = 155.;
-uniform float ray_strength : hint_range(0.0, 2.0) = 2.;
+uniform float ray_strength : hint_range(0.0, 2.0) = 1.5;
 uniform int ray_quality : hint_range(5, 15) = 10;
 
 uniform float bg_length : hint_range(0.0, 1.0) = .7;
-uniform float bg_strength : hint_range(0.0, 2.0) = .8;
+uniform float bg_strength : hint_range(0.0, 2.0) = .6;
 uniform float bg_fade : hint_range(0.0, 1.0) = .8;
 
 uniform vec4 colour : source_color = vec4(1.0, 0.9, 0.65, 1);

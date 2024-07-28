@@ -5,9 +5,8 @@ class_name Background extends ScriptNode
 @onready var bg_tint: ColorRect = find_child("ThemeTint")
 
 const SECS_PER_DAY = 86400
-var tint_opacity: float = 30.0
 
-# time values
+var tint_opacity: float = 30.0
 var day_percent: float = 0.0
 
 func _ready():
