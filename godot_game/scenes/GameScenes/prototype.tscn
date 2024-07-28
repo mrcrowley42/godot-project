@@ -284,6 +284,7 @@ metadata/_edit_lock_ = true
 
 [node name="ScreenColours" type="ColorRect" parent="Gameplay"]
 unique_name_in_owner = true
+visible = false
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(450, 450)
 anchors_preset = 8
