@@ -79,7 +79,7 @@ func toggle_clippy_mode():
 			await get_tree().process_frame
 			await get_tree().process_frame
 		window.borderless = clippy
-	print(window.position)
+	print(window.position) # TODO REMOVE THIS PRINT AFTER CHECKING THERE IS NO WINDOW DRIFT!
 
 func minimise():
 	if clippy:
