@@ -11,10 +11,10 @@ func _ready():
 	await get_tree().process_frame
 
 func _on_min_down():
-	debug.drag_area.minimise()
+	debug.clippy_area.minimise()
 
 func _on_normalise_down():
-	debug.drag_area.normalise()
+	debug.clippy_area.normalise()
 	
 func _on_max_down():
-	debug.drag_area.maximise()
+	debug.clippy_area.maximise()

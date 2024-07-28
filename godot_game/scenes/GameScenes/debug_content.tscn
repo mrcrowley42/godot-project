@@ -79,7 +79,7 @@ func _process(_delta):
 script/source = "extends Label
 
 func _process(_delta):
-	text = '%.2f' % find_parent('DebugContent').drag_area.clippy_opacity
+	text = '%.2f' % find_parent('DebugContent').clippy_area.clippy_opacity
 "
 
 [sub_resource type="LabelSettings" id="LabelSettings_na8du"]

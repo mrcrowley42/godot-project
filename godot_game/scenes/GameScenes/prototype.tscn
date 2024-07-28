@@ -350,10 +350,9 @@ color_initial_ramp = SubResource("Gradient_asbj7")
 hue_variation_min = 1.0
 hue_variation_max = 1.0
 
-[node name="DragArea" type="Button" parent="Gameplay"]
+[node name="ClippyArea" type="Button" parent="Gameplay"]
 unique_name_in_owner = true
 editor_description = "The control that allows the window to be dragged while in clippy mode."
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -989,39 +988,39 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("31_astnl")
 metadata/_edit_lock_ = true
 
-[node name="StatsContainer" type="PanelContainer" parent="UI"]
+[node name="StatsDisplay" type="PanelContainer" parent="UI"]
 offset_left = 35.0
 offset_top = 570.0
 offset_right = 505.0
 offset_bottom = 658.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_2mbbg")
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/StatsContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/StatsDisplay"]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 18
 theme_override_constants/margin_bottom = 16
 
-[node name="StatusContainer" type="GridContainer" parent="UI/StatsContainer/MarginContainer"]
+[node name="StatusContainer" type="GridContainer" parent="UI/StatsDisplay/MarginContainer"]
 layout_mode = 2
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 columns = 4
 
-[node name="Heart" type="Control" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
+[node name="Heart" type="Control" parent="UI/StatsDisplay/MarginContainer/StatusContainer"]
 custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Heart-fill" type="Sprite2D" parent="UI/StatsContainer/MarginContainer/StatusContainer/Heart"]
+[node name="Heart-fill" type="Sprite2D" parent="UI/StatsDisplay/MarginContainer/StatusContainer/Heart"]
 modulate = Color(0.96, 0.96, 0.96, 1)
 position = Vector2(14, 0)
 scale = Vector2(0.688, 0.688)
 texture = ExtResource("35_byupt")
 
-[node name="HP_Bar" type="ProgressBar" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
+[node name="HP_Bar" type="ProgressBar" parent="UI/StatsDisplay/MarginContainer/StatusContainer"]
 clip_contents = true
 custom_minimum_size = Vector2(160, 23)
 layout_mode = 2
@@ -1035,18 +1034,18 @@ value = 700.0
 show_percentage = false
 script = ExtResource("36_2kbr2")
 
-[node name="Droplet" type="Control" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
+[node name="Droplet" type="Control" parent="UI/StatsDisplay/MarginContainer/StatusContainer"]
 custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Heart-fill" type="Sprite2D" parent="UI/StatsContainer/MarginContainer/StatusContainer/Droplet"]
+[node name="Heart-fill" type="Sprite2D" parent="UI/StatsDisplay/MarginContainer/StatusContainer/Droplet"]
 position = Vector2(14, 0)
 scale = Vector2(0.688, 0.688)
 texture = ExtResource("37_fvagv")
 
-[node name="MP_Bar" type="ProgressBar" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
+[node name="MP_Bar" type="ProgressBar" parent="UI/StatsDisplay/MarginContainer/StatusContainer"]
 custom_minimum_size = Vector2(160, 23)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1059,18 +1058,18 @@ value = 700.0
 show_percentage = false
 script = ExtResource("38_jucy6")
 
-[node name="Energy" type="Control" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
+[node name="Energy" type="Control" parent="UI/StatsDisplay/MarginContainer/StatusContainer"]
 custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Heart-fill" type="Sprite2D" parent="UI/StatsContainer/MarginContainer/StatusContainer/Energy"]
+[node name="Heart-fill" type="Sprite2D" parent="UI/StatsDisplay/MarginContainer/StatusContainer/Energy"]
 position = Vector2(14, 0)
 scale = Vector2(0.688, 0.688)
 texture = ExtResource("39_tkaxu")
 
-[node name="SP_Bar" type="ProgressBar" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
+[node name="SP_Bar" type="ProgressBar" parent="UI/StatsDisplay/MarginContainer/StatusContainer"]
 clip_contents = true
 custom_minimum_size = Vector2(160, 23)
 layout_mode = 2
@@ -1084,18 +1083,18 @@ value = 700.0
 show_percentage = false
 script = ExtResource("40_qayfp")
 
-[node name="Happiness" type="Control" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
+[node name="Happiness" type="Control" parent="UI/StatsDisplay/MarginContainer/StatusContainer"]
 custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Heart-fill" type="Sprite2D" parent="UI/StatsContainer/MarginContainer/StatusContainer/Happiness"]
+[node name="Heart-fill" type="Sprite2D" parent="UI/StatsDisplay/MarginContainer/StatusContainer/Happiness"]
 position = Vector2(14, 0)
 scale = Vector2(0.688, 0.688)
 texture = ExtResource("41_dcsa1")
 
-[node name="AP_Bar" type="ProgressBar" parent="UI/StatsContainer/MarginContainer/StatusContainer"]
+[node name="AP_Bar" type="ProgressBar" parent="UI/StatsDisplay/MarginContainer/StatusContainer"]
 custom_minimum_size = Vector2(160, 23)
 layout_mode = 2
 size_flags_vertical = 1
@@ -1185,8 +1184,8 @@ max_polyphony = 2
 bus = &"SFX"
 
 [connection signal="tree_exiting" from="MinigameManager" to="MinigameManager" method="_on_tree_exiting"]
-[connection signal="button_down" from="Gameplay/DragArea" to="Gameplay/DragArea" method="_on_button_down"]
-[connection signal="button_up" from="Gameplay/DragArea" to="Gameplay/DragArea" method="_on_button_up"]
+[connection signal="button_down" from="Gameplay/ClippyArea" to="Gameplay/ClippyArea" method="_on_button_down"]
+[connection signal="button_up" from="Gameplay/ClippyArea" to="Gameplay/ClippyArea" method="_on_button_up"]
 [connection signal="visibility_changed" from="UI/FoodMenu" to="UI/FoodMenu" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/FoodMenu/MarginContainer/GridContainer/Button 1" to="UI/FoodMenu/MarginContainer/GridContainer/Button 1" method="_on_button_down"]
 [connection signal="button_down" from="UI/FoodMenu/MarginContainer/GridContainer/Button 2" to="UI/FoodMenu/MarginContainer/GridContainer/Button 2" method="_on_button_down"]
