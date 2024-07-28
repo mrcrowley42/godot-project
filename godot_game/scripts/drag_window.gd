@@ -10,10 +10,7 @@ extends Button
 @onready var start_size := window.size
 @onready var start_transform := viewport.canvas_transform
 @onready var default_stretch_mode := window.content_scale_mode
-
-# TODO will need to adjust this to fit notifications and other creatures etc.
-var clippy_offset := Vector2(-128,-216)
-var window_offset := Transform2D(0, clippy_offset)
+@onready var clippy_offset := -self.position
 var dragging: bool = false
 var offset = Vector2(0, 0)
 var clippy: bool = false
@@ -63,8 +60,8 @@ func toggle_clippy_mode():
 		# Shrink window size and shift canvas to keep focus on creature.
 		window.content_scale_mode = 0 as Window.ContentScaleMode
 		window.position -= Vector2i(clippy_offset)
-		window.size = start_size * 0.5 # TODO Subject to change.
-		window.canvas_transform = window_offset
+		window.size = self.size
+		window.canvas_transform = Transform2D(0, -self.position)
 		creature.find_child("Sprites").self_modulate = Color(1,1,1,clippy_opacity)
 	else:
 		# Revert changes

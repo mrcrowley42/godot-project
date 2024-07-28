@@ -353,7 +353,6 @@ hue_variation_max = 1.0
 [node name="DragArea" type="Button" parent="Gameplay"]
 unique_name_in_owner = true
 editor_description = "The control that allows the window to be dragged while in clippy mode."
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
