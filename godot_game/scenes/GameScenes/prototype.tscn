@@ -246,11 +246,12 @@ corner_radius_bottom_left = 10
 script/source = "extends Window
 
 @export var enabled:bool
+
 func _ready():
 	visible = enabled
+	# Disable the script execution when the panel is disabled/hidden.
 	if not enabled:
 		process_mode = Node.PROCESS_MODE_DISABLED
-	
 "
 
 [node name="Game" type="Node"]
@@ -268,6 +269,12 @@ ap_amount = 12.0
 [node name="MinigameManager" type="Node2D" parent="." groups=["save_data"]]
 unique_name_in_owner = true
 script = ExtResource("3_usdrn")
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_right = 540.0
+offset_bottom = 675.0
+mouse_filter = 2
+color = Color(0.680891, 0.243723, 0.426448, 0.423529)
 
 [node name="Gameplay" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -1134,6 +1141,14 @@ unique_name_in_owner = true
 layout_mode = 2
 texture_normal = ExtResource("51_cd8hh")
 script = ExtResource("52_amonh")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 53.0
+offset_top = 120.0
+offset_right = 487.0
+offset_bottom = 554.0
+mouse_filter = 2
+color = Color(0.290196, 1, 1, 0.423529)
 
 [node name="DebugWindow" type="Window" parent="."]
 title = "Debug Window"
