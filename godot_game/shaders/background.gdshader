@@ -13,23 +13,24 @@ const float EPSILON = .0001;
 const int MIN_RAY_QUALITY = 5;
 const int MIN_FADE_QUALITY = 5;
 
-uniform bool debug_mode = false;
+uniform bool bg_debug_mode = false;
+uniform bool ray_debug_mode = false;
+
+uniform vec4 upper_colour : source_color = vec4(1., .5, .4, 1);
+uniform vec4 lower_colour : source_color = vec4(.0, .4, 1., 1);
+uniform sampler2D LIGHT_MAP;
+
+uniform float bg_strength : hint_range(.0, 1.) = .5;
+uniform float bg_fade : hint_range(.0, 1.) = .6;
 
 uniform bool fade_ray_edge = true;
 uniform float ray_fade_margin : hint_range(.1, .5) = .25;
 uniform int ray_fade_quality : hint_range(5, 15) = 6;
 
-uniform float ray_length : hint_range(0.0, 1.0) = .12;
-uniform float ray_direction : hint_range(0.0, 360.0) = 155.;
-uniform float ray_strength : hint_range(0.0, 2.0) = 1.5;
+uniform float ray_length : hint_range(.0, 1.) = .12;
+uniform float ray_direction : hint_range(.0, 360.) = 155.;
+uniform float ray_strength : hint_range(.0, 2.) = 1.5;
 uniform int ray_quality : hint_range(5, 15) = 10;
-
-uniform float bg_length : hint_range(0.0, 1.0) = .7;
-uniform float bg_strength : hint_range(0.0, 2.0) = .6;
-uniform float bg_fade : hint_range(0.0, 1.0) = .8;
-
-uniform vec4 colour : source_color = vec4(1.0, 0.9, 0.65, 1);
-uniform sampler2D LIGHT_MAP;
 
 vec2 rotate_point(float point, float deg) {
 	float rad = deg * (PI / 180.);
@@ -92,11 +93,10 @@ void fragment() {
 	bool is_red = light_map_r > EPSILON;
 	
 	// BACKGROUND
-	if (is_red) {
-		float bg_rays = smoothstep(0.0, bg_fade, (bg_length - UV.y));  // fade bottom
-		float final_strength = bg_strength * light_map_r;
-		vec3 bg_col = vec3(bg_rays) * colour.rgb;
-		COLOR = vec4(bg_col * final_strength, bg_rays * final_strength);
+	if (is_red || bg_debug_mode) {
+		float fade_btm = smoothstep(.0, bg_fade, 1. - UV.y);
+		COLOR = mix(upper_colour, lower_colour, UV.y); 
+		COLOR.a = fade_btm * (bg_strength * .5);  // half the opacity by default
 	} else {
 		// RAYS
 		float direction = ray_direction + 45.;  // add 45 so it points up a 0 deg
@@ -108,8 +108,9 @@ void fragment() {
 		final_length = raycast_to_red(UV, ray_step, step_length, ray_length, final_offset);
 		
 		if (final_length > EPSILON) {  // confirmed a ray
-			float debug_on = 1. * float(debug_mode);
-			COLOR = vec4(colour.rgb, (ray_length - final_length) * ray_strength + debug_on);  // debug sets alpha to 1
+			float ray_debug_on = 1. * float(ray_debug_mode);
+			vec3 mixed_col = mix(upper_colour, lower_colour, .3).rgb;  // biased to upper colour
+			COLOR = vec4(mixed_col, (ray_length - final_length) * ray_strength + ray_debug_on);  // debug sets alpha to 1
 			
 			// FADE EDGE
 			if (fade_ray_edge) {
