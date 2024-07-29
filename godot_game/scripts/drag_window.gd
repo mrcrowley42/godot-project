@@ -10,7 +10,10 @@ extends Button
 @onready var start_size := window.size
 @onready var start_transform := viewport.canvas_transform
 @onready var default_stretch_mode := window.content_scale_mode
-@onready var clippy_offset := -self.position
+
+# TODO will need to adjust this to fit notifications and other creatures etc.
+var clippy_offset := Vector2(-128,-226)
+var window_offset := Transform2D(0, clippy_offset)
 var dragging: bool = false
 var offset = Vector2(0, 0)
 var clippy: bool = false
@@ -60,12 +63,12 @@ func toggle_clippy_mode():
 		# Shrink window size and shift canvas to keep focus on creature.
 		window.content_scale_mode = 0 as Window.ContentScaleMode
 		window.position -= Vector2i(clippy_offset)
-		window.size = self.size
-		window.canvas_transform = Transform2D(0, -self.position)
+		window.size = start_size * 0.5 # TODO Subject to change.
+		window.canvas_transform = window_offset
 		creature.find_child("Sprites").self_modulate = Color(1,1,1,clippy_opacity)
 	else:
 		# Revert changes
-		window.position += Vector2i(clippy_offset) # + Vector2i(2,0) # Why it wants to move 2 pixels I don't know might be mac specific problem?
+		window.position += Vector2i(clippy_offset)
 		window.content_scale_mode = default_stretch_mode as Window.ContentScaleMode
 		window.size = start_size
 		window.canvas_transform = start_transform
@@ -79,7 +82,6 @@ func toggle_clippy_mode():
 			await get_tree().process_frame
 			await get_tree().process_frame
 		window.borderless = clippy
-	#print(window.position) # TODO REMOVE THIS PRINT AFTER CHECKING THERE IS NO WINDOW DRIFT!
 
 func minimise():
 	if clippy:

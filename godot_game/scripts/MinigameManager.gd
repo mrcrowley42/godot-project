@@ -1,7 +1,7 @@
 @icon("res://icons/class-icons/controller-icon.svg")
 class_name MinigameManager extends Node2D
 
-@onready var act_menu = %ActivityMenu
+@onready var act_menu = %ActivityControls
 
 # Preload all the minigames.
 @onready var totris_scene = preload ("res://scenes/MiniGames/totris.tscn")
@@ -86,5 +86,5 @@ func load(data):
 
 func _on_tree_exiting():
 	# Ensure that before changing scene, if clippy mode is active it is toggled off.
-	if %ClippyArea.clippy:
-		%ClippyArea.toggle_clippy_mode()
+	if %DragArea.clippy:
+		%DragArea.toggle_clippy_mode()

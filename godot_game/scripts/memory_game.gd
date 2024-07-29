@@ -3,6 +3,7 @@ extends MiniGameLogic
 @onready var og_text = %ScoreLabel.text
 
 var selected_cards: Array[MemCard] = []
+var creature_score: int = 0
 var player_score: int = 0
 var possible = Array(range(20))
 var complete: bool = false
@@ -26,7 +27,7 @@ class MemCard extends Button:
 			text = "?"
 
 func _process(_delta):
-	%ScoreLabel.text = og_text % [player_score]
+	%ScoreLabel.text = og_text % [player_score, creature_score]
 	
 	if player_score == 10:
 		if not complete:
