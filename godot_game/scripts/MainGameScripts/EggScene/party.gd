@@ -1,4 +1,4 @@
-extends Node2D
+extends ScriptNode
 
 func remove(obj: Object) -> void:
 	obj.queue_free()

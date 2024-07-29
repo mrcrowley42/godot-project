@@ -17,11 +17,6 @@ func _input(event):
 			just_closed = true
 			self.hide()
 
-func _on_button_1_button_down():
-	creature.dmg( - 300, 'sp')
-
-func _on_button_3_button_down():
-	creature.dmg( - 300, 'hp')
 
 func _on_visibility_changed():
 	if just_closed and visible:

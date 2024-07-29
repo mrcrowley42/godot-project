@@ -174,7 +174,7 @@ low_hunger = ExtResource("26_b0wvq")
 low_fun = ExtResource("27_uvaw6")
 low_regulation = ExtResource("28_qtceu")
 low_hydrate = ExtResource("29_hivox")
-cooldown_period = 1.0
+cooldown_period = 30.0
 
 [node name="STAHP" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
@@ -198,7 +198,9 @@ animation = &"idle"
 autoplay = "idle"
 script = ExtResource("5_oh7gr")
 
-[node name="Hat" type="AnimatedSprite2D" parent="Sprites"]
+[node name="Accessories" type="Node2D" parent="Sprites"]
+
+[node name="Hat" type="AnimatedSprite2D" parent="Sprites/Accessories"]
 visible = false
 position = Vector2(-19, -127)
 scale = Vector2(0.225, 0.225)
@@ -206,7 +208,7 @@ sprite_frames = SubResource("SpriteFrames_3t6pq")
 autoplay = "default"
 frame_progress = 0.770958
 
-[node name="Glasses" type="AnimatedSprite2D" parent="Sprites"]
+[node name="Glasses" type="AnimatedSprite2D" parent="Sprites/Accessories"]
 visible = false
 modulate = Color(1, 0.807843, 0.592157, 1)
 position = Vector2(-7, -33)
@@ -216,7 +218,6 @@ autoplay = "default"
 
 [node name="NotificationBubble" type="AnimatedSprite2D" parent="Sprites"]
 unique_name_in_owner = true
-visible = false
 texture_filter = 1
 position = Vector2(-32, -185)
 scale = Vector2(1.8, 1.8)

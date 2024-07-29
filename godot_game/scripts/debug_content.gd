@@ -1,12 +1,12 @@
 extends Control
 
 @onready var creature: Creature = %Creature
-@onready var UI = %UI_Overlay
+@onready var ui = %UI_Theme_Manager
 @onready var stat_man = %StatusManager
 @onready var music_track = %MainMusic
-@onready var background = %Background
+@onready var screen_tint = %BG
 @onready var minigame_man: MinigameManager = %MinigameManager
-@onready var drag_area: Button  = %DragArea
+@onready var clippy_area: Button  = %ClippyArea
 
 
 func _on_h_slider_value_changed(value):
@@ -29,6 +29,7 @@ func update_holiday():
 		$HolidayBtn.set_pressed_no_signal(true)
 		
 func _process(_delta):
+	$Strength.text =  '%.2f' % [stat_man.time_multiplier]
 	var fps = Engine.get_frames_per_second()
 	$Label3.text = str(fps)
 	if fps < 49.0:
@@ -42,7 +43,7 @@ func _on_anim_select_item_selected(index):
 	creature.find_child('Main').animation = $AnimSelect.get_item_text(index)
 
 func _on_overlay_strength_value_changed(value):
-	background.tint_opacity = value
+	screen_tint.material.set("shader_parameter/tint_strength", value)
 
 func _on_color_picker_button_popup_closed():
 	creature.dying_colour = $ColorPickerButton.color
@@ -58,9 +59,17 @@ func _on_button_3_toggled(toggled_on):
 	print(stat_man.holiday_mode)
 
 func _on_clippy_btn_pressed():
-	drag_area.toggle_clippy_mode()
+	clippy_area.toggle_clippy_mode()
 
 func _on_h_slider_2_value_changed(value):
-	drag_area.clippy_opacity = value
-	if drag_area.clippy:
-		creature.find_child("Sprites").self_modulate = Color(1,1,1,drag_area.clippy_opacity)
+	clippy_area.clippy_opacity = value
+	if clippy_area.clippy:
+		creature.find_child("Sprites").self_modulate = Color(1,1,1,clippy_area.clippy_opacity)
+
+
+func _on_check_box_toggled(toggled_on):
+	if toggled_on:
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+	else:
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+	
