@@ -45,6 +45,7 @@ func _process(_delta):
 	var col = %ScreenColours.color
 	col.a = tint_opacity
 	bg_tint.material.set("shader_parameter/tint_colour", col)
+	bg_sprite.material.set("shader_parameter/tint_colour", %ScreenColours.color)
 
 func _on_bg_update_ticker_timeout():
 	update_bg()
