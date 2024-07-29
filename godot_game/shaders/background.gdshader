@@ -13,8 +13,7 @@ const float EPSILON = .0001;
 const int MIN_RAY_QUALITY = 5;
 const int MIN_FADE_QUALITY = 5;
 
-uniform bool bg_debug_mode = false;
-uniform bool ray_debug_mode = false;
+uniform bool debug_mode = false;
 
 uniform vec4 upper_colour : source_color = vec4(1., .5, .4, 1);
 uniform vec4 lower_colour : source_color = vec4(.0, .4, 1., 1);
@@ -94,11 +93,13 @@ void fragment() {
 	bool is_red = light_map_r > EPSILON;
 	
 	// BACKGROUND
-	if (is_red || bg_debug_mode) {
-		float fade_btm = smoothstep(.0, bg_fade, 1. - UV.y * float(!bg_debug_mode));
+	if (is_red || debug_mode) {
+		float fade_btm = smoothstep(.0, bg_fade, 1. - UV.y * float(!debug_mode));
 		COLOR = mix(upper_colour, lower_colour, UV.y); 
-		COLOR.a = fade_btm * (bg_strength * .5 + float(bg_debug_mode));  // half the opacity by default
-	} else {
+		COLOR.a = fade_btm * (bg_strength * .5 + float(debug_mode));  // half the opacity by default
+	} 
+	
+	if (!is_red || debug_mode) {
 		// RAYS
 		float direction = ray_direction + 45.;  // add 45 so it points up a 0 deg
 		float step_length = SCREEN_PIXEL_SIZE.y * float(max(MIN_RAY_QUALITY, int(ray_quality)));  // DO NOT ALLOW LESS THAN 1
@@ -109,7 +110,7 @@ void fragment() {
 		final_length = raycast_to_red(UV, ray_step, step_length, ray_length, final_offset);
 		
 		if (final_length > EPSILON) {  // confirmed a ray
-			float ray_debug_on = 1. * float(ray_debug_mode);
+			float ray_debug_on = 1. * float(debug_mode);
 			COLOR = vec4(ray_colour.rgb, (ray_length - final_length) * ray_strength + ray_debug_on);  // debug sets alpha to 1
 			
 			// FADE EDGE

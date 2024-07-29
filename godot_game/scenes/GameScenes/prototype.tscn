@@ -82,13 +82,12 @@ offsets = PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1)
 colors = PackedColorArray(0.0705882, 0.0196078, 0.00392157, 1, 0.223529, 0.223529, 0.317647, 1, 0.533333, 0.458824, 0.670588, 1, 0.898039, 0.682353, 0.815686, 1, 0.690196, 0.717647, 0.917647, 1, 0.407843, 0.815686, 0.984314, 1, 0.146814, 0.492569, 0.791324, 1, 0.905882, 0.803922, 0.368627, 1, 0.427451, 0.164706, 0.0392157, 1, 0.2, 0.0705882, 0.027451, 1, 0.0705882, 0.0196078, 0.00392157, 1)
 
 [sub_resource type="Gradient" id="Gradient_jl2ct"]
-offsets = PackedFloat32Array(0, 0.2, 0.3, 0.4, 0.5, 0.6, 0.772487, 1)
-colors = PackedColorArray(0.427451, 0.415686, 0.952941, 1, 0.898039, 0.682353, 0.815686, 1, 0.509804, 0.67451, 0.85098, 1, 0.709804, 0.913725, 1, 1, 0.556863, 0.870588, 0.992157, 1, 0.176471, 0.564706, 0.756863, 1, 0.117647, 0.321569, 0.556863, 1, 0.426188, 0.415684, 0.953144, 1)
+offsets = PackedFloat32Array(0, 0.2, 0.391534, 0.560847, 0.746032, 1)
+colors = PackedColorArray(0.427451, 0.415686, 0.952941, 1, 0.898039, 0.682353, 0.815686, 1, 0.709804, 0.913725, 1, 1, 0.556863, 0.870588, 0.992157, 1, 0.176471, 0.564706, 0.756863, 1, 0.426188, 0.415684, 0.953144, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jao8c"]
 shader = ExtResource("4_8udgl")
-shader_parameter/bg_debug_mode = false
-shader_parameter/ray_debug_mode = false
+shader_parameter/debug_mode = false
 shader_parameter/upper_colour = Color(1, 0.5, 0.4, 1)
 shader_parameter/lower_colour = Color(0, 0.4, 1, 1)
 shader_parameter/ray_colour = Color(1, 1, 1, 1)

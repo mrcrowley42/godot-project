@@ -31,11 +31,10 @@ func update_bg():
 		var seconds_today = (time.hour * 3600) + (time.minute * 60) + time.second
 		day_percent = float(seconds_today) / float(SECS_PER_DAY)
 	
-	# ITS NOT SETTING FOR SOME REASOM
+	# update values along curves
 	shader_rect.material.set("shader_parameter/upper_colour", upper_colour_curve.sample(day_percent))
 	shader_rect.material.set("shader_parameter/lower_colour", lower_colour_curve.sample(day_percent))
 	shader_rect.material.set("shader_parameter/ray_colour", ray_colour_curve.sample(day_percent))
-	print(day_percent)
 
 
 func _ready():
