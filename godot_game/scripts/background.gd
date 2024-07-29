@@ -18,7 +18,7 @@ class_name Background extends ScriptNode
 
 const SECS_PER_DAY = 86400
 
-var tint_opacity: float = .3
+var tint_opacity: float = .1
 var is_progressing: bool = true  # for debug window to control
 var day_percent: float = 0.0
 
@@ -42,8 +42,9 @@ func _ready():
 	update_bg()
 
 func _process(_delta):
-	bg_tint.color = %ScreenColours.color
-	bg_tint.color.a = tint_opacity / 255.0
+	var col = %ScreenColours.color
+	col.a = tint_opacity
+	bg_tint.material.set("shader_parameter/tint_colour", col)
 
 func _on_bg_update_ticker_timeout():
 	update_bg()
