@@ -54,7 +54,7 @@ func toggle_clippy_mode():
 	window.transparent = clippy
 	window.always_on_top = clippy
 	%UI.visible = !clippy
-	%BG.visible = !clippy
+	%Background.visible = !clippy
 
 	if clippy:
 		# Shrink window size and shift canvas to keep focus on creature.
