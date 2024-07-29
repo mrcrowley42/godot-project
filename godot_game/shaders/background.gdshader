@@ -18,6 +18,7 @@ uniform bool ray_debug_mode = false;
 
 uniform vec4 upper_colour : source_color = vec4(1., .5, .4, 1);
 uniform vec4 lower_colour : source_color = vec4(.0, .4, 1., 1);
+uniform vec4 ray_colour : source_color = vec4(1, 1, 1, 1);
 uniform sampler2D LIGHT_MAP;
 
 uniform float bg_strength : hint_range(.0, 1.) = .5;
@@ -94,9 +95,9 @@ void fragment() {
 	
 	// BACKGROUND
 	if (is_red || bg_debug_mode) {
-		float fade_btm = smoothstep(.0, bg_fade, 1. - UV.y);
+		float fade_btm = smoothstep(.0, bg_fade, 1. - UV.y * float(!bg_debug_mode));
 		COLOR = mix(upper_colour, lower_colour, UV.y); 
-		COLOR.a = fade_btm * (bg_strength * .5);  // half the opacity by default
+		COLOR.a = fade_btm * (bg_strength * .5 + float(bg_debug_mode));  // half the opacity by default
 	} else {
 		// RAYS
 		float direction = ray_direction + 45.;  // add 45 so it points up a 0 deg
@@ -109,8 +110,7 @@ void fragment() {
 		
 		if (final_length > EPSILON) {  // confirmed a ray
 			float ray_debug_on = 1. * float(ray_debug_mode);
-			vec3 mixed_col = mix(upper_colour, lower_colour, .3).rgb;  // biased to upper colour
-			COLOR = vec4(mixed_col, (ray_length - final_length) * ray_strength + ray_debug_on);  // debug sets alpha to 1
+			COLOR = vec4(ray_colour.rgb, (ray_length - final_length) * ray_strength + ray_debug_on);  // debug sets alpha to 1
 			
 			// FADE EDGE
 			if (fade_ray_edge) {

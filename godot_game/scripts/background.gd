@@ -3,6 +3,7 @@ class_name Background extends ScriptNode
 @export_group("BG Shader")
 @export var upper_colour_curve: Gradient
 @export var lower_colour_curve: Gradient
+@export var ray_colour_curve: Gradient
 @export_subgroup("BG")
 @export var bg_strength_curve: Curve
 @export var bg_fade_curve: Curve
@@ -33,6 +34,7 @@ func update_bg():
 	# ITS NOT SETTING FOR SOME REASOM
 	shader_rect.material.set("shader_parameter/upper_colour", upper_colour_curve.sample(day_percent))
 	shader_rect.material.set("shader_parameter/lower_colour", lower_colour_curve.sample(day_percent))
+	shader_rect.material.set("shader_parameter/ray_colour", ray_colour_curve.sample(day_percent))
 	print(day_percent)
 
 

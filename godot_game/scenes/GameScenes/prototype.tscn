@@ -1,4 +1,4 @@
-[gd_scene load_steps=98 format=3 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=99 format=3 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/prototype.gd" id="1_u8fgs"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_w1hur"]
@@ -73,13 +73,17 @@
 [ext_resource type="AudioStream" uid="uid://dat0sfue6jjr5" path="res://sound_effects/metal-pipe-falling-sound-effect-made-with-Voicemod.mp3" id="67_p6vc6"]
 [ext_resource type="Script" path="res://scripts/sfx_man.gd" id="68_sw7tx"]
 
-[sub_resource type="Gradient" id="Gradient_jl2ct"]
-offsets = PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1)
+[sub_resource type="Gradient" id="Gradient_jl3ct"]
+offsets = PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.793651, 0.878307, 1)
 colors = PackedColorArray(0.00784314, 0.00392157, 0.0666667, 1, 0.109753, 0.109748, 0.156375, 1, 0.294118, 0.290196, 0.423529, 1, 0.509804, 0.67451, 0.85098, 1, 0.709804, 0.913725, 1, 1, 0.556863, 0.870588, 0.992157, 1, 0.176471, 0.564706, 0.756863, 1, 0.117647, 0.321569, 0.556863, 1, 0.101961, 0.239216, 0.317647, 1, 0.027451, 0.105882, 0.14902, 1, 0.00784314, 0.00392157, 0.0666667, 1)
 
 [sub_resource type="Gradient" id="Gradient_ackms"]
 offsets = PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1)
 colors = PackedColorArray(0.0705882, 0.0196078, 0.00392157, 1, 0.223529, 0.223529, 0.317647, 1, 0.533333, 0.458824, 0.670588, 1, 0.898039, 0.682353, 0.815686, 1, 0.690196, 0.717647, 0.917647, 1, 0.407843, 0.815686, 0.984314, 1, 0.146814, 0.492569, 0.791324, 1, 0.905882, 0.803922, 0.368627, 1, 0.427451, 0.164706, 0.0392157, 1, 0.2, 0.0705882, 0.027451, 1, 0.0705882, 0.0196078, 0.00392157, 1)
+
+[sub_resource type="Gradient" id="Gradient_jl2ct"]
+offsets = PackedFloat32Array(0, 0.2, 0.3, 0.4, 0.5, 0.6, 0.772487, 1)
+colors = PackedColorArray(0.427451, 0.415686, 0.952941, 1, 0.898039, 0.682353, 0.815686, 1, 0.509804, 0.67451, 0.85098, 1, 0.709804, 0.913725, 1, 1, 0.556863, 0.870588, 0.992157, 1, 0.176471, 0.564706, 0.756863, 1, 0.117647, 0.321569, 0.556863, 1, 0.426188, 0.415684, 0.953144, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jao8c"]
 shader = ExtResource("4_8udgl")
@@ -87,6 +91,7 @@ shader_parameter/bg_debug_mode = false
 shader_parameter/ray_debug_mode = false
 shader_parameter/upper_colour = Color(1, 0.5, 0.4, 1)
 shader_parameter/lower_colour = Color(0, 0.4, 1, 1)
+shader_parameter/ray_colour = Color(1, 1, 1, 1)
 shader_parameter/bg_strength = 0.5
 shader_parameter/bg_fade = 0.6
 shader_parameter/fade_ray_edge = true
@@ -94,7 +99,7 @@ shader_parameter/ray_fade_margin = 0.25
 shader_parameter/ray_fade_quality = 6
 shader_parameter/ray_length = 0.12
 shader_parameter/ray_direction = 155.0
-shader_parameter/ray_strength = 1.5
+shader_parameter/ray_strength = 2.0
 shader_parameter/ray_quality = 10
 shader_parameter/LIGHT_MAP = ExtResource("6_qagbm")
 
@@ -297,8 +302,9 @@ unique_name_in_owner = true
 [node name="Background" type="Node2D" parent="Gameplay"]
 unique_name_in_owner = true
 script = ExtResource("4_whrt7")
-upper_colour_curve = SubResource("Gradient_jl2ct")
+upper_colour_curve = SubResource("Gradient_jl3ct")
 lower_colour_curve = SubResource("Gradient_ackms")
+ray_colour_curve = SubResource("Gradient_jl2ct")
 
 [node name="BGUpdate" type="Timer" parent="Gameplay/Background"]
 wait_time = 2.0
