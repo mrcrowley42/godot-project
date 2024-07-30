@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bmwpenw32juko" path="res://UI stuff/Universal/background_light_map.png" id="6_qagbm"]
 [ext_resource type="Script" path="res://scripts/Confetti.gd" id="7_rqbrx"]
 [ext_resource type="Script" path="res://scripts/control_panel.gd" id="8_bgltf"]
-[ext_resource type="Theme" uid="uid://dl1wes8p6lqlb" path="res://themes/invisible.tres" id="8_hlnwn"]
+[ext_resource type="Theme" path="res://themes/invisible.tres" id="8_hlnwn"]
 [ext_resource type="Theme" uid="uid://1dv11a5ar0hg" path="res://themes/action_btn.tres" id="9_3efis"]
 [ext_resource type="Script" path="res://scripts/drag_window.gd" id="9_13uut"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="10_pai17"]
@@ -70,7 +70,7 @@
 [ext_resource type="Script" path="res://scripts/sfx_man.gd" id="68_sw7tx"]
 
 [sub_resource type="Gradient" id="Gradient_jl3ct"]
-offsets = PackedFloat32Array(0, 0.175676, 0.3, 0.4, 0.5, 0.6, 0.7, 0.765766, 0.828829, 1)
+offsets = PackedFloat32Array(0, 0.175676, 0.3, 0.4, 0.5, 0.635135, 0.7, 0.765766, 0.828829, 1)
 colors = PackedColorArray(0.00784314, 0.00392157, 0.0666667, 1, 0.0852147, 0.081293, 0.163116, 1, 0.509804, 0.67451, 0.85098, 1, 0.709804, 0.913725, 1, 1, 0.556863, 0.870588, 0.992157, 1, 0.176471, 0.564706, 0.756863, 1, 0.117647, 0.321569, 0.556863, 1, 0.101961, 0.239216, 0.317647, 1, 0.027451, 0.105882, 0.14902, 1, 0.00784314, 0.00392157, 0.0666667, 1)
 
 [sub_resource type="Gradient" id="Gradient_ackms"]
@@ -78,8 +78,8 @@ offsets = PackedFloat32Array(0, 0.193694, 0.247748, 0.3, 0.5, 0.648649, 0.747748
 colors = PackedColorArray(0.0705882, 0.0196078, 0.00392157, 1, 0.131053, 0.100228, 0.127953, 1, 0.533333, 0.458824, 0.670588, 1, 0.898039, 0.682353, 0.815686, 1, 0.407843, 0.815686, 0.984314, 1, 0.146814, 0.492569, 0.791324, 1, 0.905882, 0.803922, 0.368627, 1, 0.427451, 0.164706, 0.0392157, 1, 0.2, 0.0705882, 0.027451, 1, 0.0705882, 0.0196078, 0.00392157, 1)
 
 [sub_resource type="Gradient" id="Gradient_jl2ct"]
-offsets = PackedFloat32Array(0, 0.283784, 0.387387, 0.560847, 0.689189, 0.864865)
-colors = PackedColorArray(0.427451, 0.415686, 0.952941, 1, 0.898039, 0.682353, 0.815686, 1, 0.709804, 0.913725, 1, 1, 0.556863, 0.870588, 0.992157, 1, 0.176471, 0.564706, 0.756863, 1, 0.426188, 0.415684, 0.953144, 1)
+offsets = PackedFloat32Array(0.0720721, 0.283784, 0.387387, 0.560847, 0.702703, 0.842342)
+colors = PackedColorArray(0.427451, 0.415686, 0.952941, 1, 0.898039, 0.682353, 0.815686, 1, 0.709804, 0.913725, 1, 1, 0.556863, 0.870588, 0.992157, 1, 0.336681, 0.693535, 0.855962, 1, 0.426188, 0.415684, 0.953144, 1)
 
 [sub_resource type="Curve" id="Curve_s6pib"]
 _data = [Vector2(0, 0.8), 0.0, -1.0, 0, 0, Vector2(0.5, 0.5), 0.0, 0.0, 0, 0, Vector2(0.8, 0.8), 0.0, 0.0, 0, 0]
