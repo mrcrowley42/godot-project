@@ -223,7 +223,7 @@ offset_top = 504.0
 offset_right = 498.0
 offset_bottom = 531.0
 theme = ExtResource("2_5bhpe")
-text = "Day progress"
+text = "Day progress (hours)"
 horizontal_alignment = 1
 
 [node name="dayprog" type="Label" parent="."]

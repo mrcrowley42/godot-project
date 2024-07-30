@@ -9,17 +9,16 @@ extends Label
 var dragging = false
 
 func _process(_delta):
-	text = str(debug_content.background.day_percent)
 	progressing.button_pressed = debug_content.background.is_progressing
 	if !dragging:
 		slider.value = debug_content.background.day_percent
 	else:
 		manual_progress()
+	text = str(debug_content.background.day_percent * 24)
 
 ## when the slider is being dragged
 func manual_progress():
 	debug_content.background.change_day_progress(slider.value, true)
-	text = str(slider.value)
 
 func _on_day_progress_drag_ended(_value_changed):
 	manual_progress()
