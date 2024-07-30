@@ -7,6 +7,7 @@ extends Control
 @onready var minigame_man: MinigameManager = %MinigameManager
 @onready var clippy_area: Button  = %ClippyArea
 @onready var background = %Background
+@onready var screen_tint = %BG
 
 
 func _on_h_slider_value_changed(value):
@@ -43,7 +44,7 @@ func _on_anim_select_item_selected(index):
 	creature.find_child('Main').animation = $AnimSelect.get_item_text(index)
 
 func _on_overlay_strength_value_changed(value):
-	background.tint_opacity = value
+	screen_tint.material.set("shader_parameter/tint_strength", value)
 
 func _on_color_picker_button_popup_closed():
 	creature.dying_colour = $ColorPickerButton.color

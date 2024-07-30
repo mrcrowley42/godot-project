@@ -13,13 +13,10 @@ class_name Background extends ScriptNode
 
 @onready var bg_sprite: Sprite2D = find_child("BG")
 @onready var shader_rect: ColorRect = find_child("LightShader")
-@onready var bg_tint: ColorRect = find_child("ThemeTint")
+
 
 const SECS_PER_DAY = 86400
 
-var time_div = 1;
-
-var tint_opacity: float = .1
 var is_progressing: bool = true  # for debug window to control
 var day_percent: float = 0.0
 
@@ -57,13 +54,10 @@ func toggle_debug(value: bool):
 
 func _ready():
 	shader_rect.color = Color(.0, .0, .0, .0)
-	update_time()
-
-func _process(_delta):
-	var col = %ScreenColours.color
-	col.a = tint_opacity
-	bg_tint.material.set("shader_parameter/tint_colour", col)
-	bg_sprite.material.set("shader_parameter/tint_colour", %ScreenColours.color)
+	update_time()	
 
 func _on_bg_update_ticker_timeout():
 	update_time()
+
+func _process(_delta):
+	bg_sprite.material.set("shader_parameter/tint_colour", %ScreenColours.color)
