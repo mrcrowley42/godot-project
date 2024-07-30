@@ -14,7 +14,7 @@ func _process(_delta):
 		slider.value = debug_content.background.day_percent
 	else:
 		manual_progress()
-	text = str(debug_content.background.day_percent * 24)
+	text = str('%.2f' % [debug_content.background.day_percent * 24])
 
 ## when the slider is being dragged
 func manual_progress():
