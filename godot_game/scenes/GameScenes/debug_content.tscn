@@ -261,6 +261,7 @@ offset_bottom = 28.0
 tooltip_text = "background debug mode"
 
 [node name="time_div" type="HSlider" parent="dayprog"]
+layout_mode = 0
 offset_left = -141.0
 offset_top = 27.0
 offset_right = 9.0

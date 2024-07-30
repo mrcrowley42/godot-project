@@ -17,6 +17,8 @@ class_name Background extends ScriptNode
 
 const SECS_PER_DAY = 86400
 
+var time_div = 1
+
 var is_progressing: bool = true  # for debug window to control
 var day_percent: float = 0.0
 
