@@ -217,6 +217,7 @@ theme = ExtResource("2_5bhpe")
 text = "Current Track:"
 
 [node name="dayLabel" type="Label" parent="."]
+layout_mode = 0
 offset_left = 258.0
 offset_top = 504.0
 offset_right = 498.0
@@ -226,6 +227,7 @@ text = "Day progress"
 horizontal_alignment = 1
 
 [node name="dayprog" type="Label" parent="."]
+layout_mode = 0
 offset_left = 438.0
 offset_top = 531.0
 offset_right = 478.0
@@ -235,6 +237,7 @@ text = "1.0"
 script = ExtResource("8_0d2ip")
 
 [node name="slider" type="HSlider" parent="dayprog"]
+layout_mode = 0
 offset_left = -165.0
 offset_top = 7.0
 offset_right = -15.0

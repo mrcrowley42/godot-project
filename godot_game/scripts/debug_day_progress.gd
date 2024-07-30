@@ -31,6 +31,7 @@ func _on_day_progress_drag_started():
 
 func _on_progressing_pressed():
 	debug_content.background.is_progressing = progressing.button_pressed
+	debug_content.background.update_time()
 
 
 func _on_debug_pressed():
