@@ -9,8 +9,8 @@ var totris_scene_instance: TotrisManager = null
 @onready var memory_game_scene = preload ("res://scenes/MiniGames/memory_game.tscn")
 @onready var sprock_scene = preload ("res://scenes/MiniGames/scissors_paper_rock.tscn")
 @onready var zen_mode_scene = preload ("res://scenes/MiniGames/zen_mode.tscn")
-
-var save_data = {}
+@onready var clippy_area = %ClippyArea
+var save_data: Dictionary = {}
 var current_minigame = null;
 var current_time_scale: float
 
@@ -61,7 +61,7 @@ func save_totris_data():
 func _on_totris_button_down():
 	if totris_scene_instance == null:
 		totris_scene_instance = totris_scene.instantiate()
-		if "totris" in save_data:
+		if save_data.has("totris"):
 			totris_scene_instance.load_save_data(save_data["totris"])  # load data on creation
 	load_minigame(null, totris_scene_instance)
 
@@ -86,5 +86,5 @@ func load(data):
 
 func _on_tree_exiting():
 	# Ensure that before changing scene, if clippy mode is active it is toggled off.
-	if %ClippyArea.clippy:
-		%ClippyArea.toggle_clippy_mode()
+	if clippy_area.clippy:
+		clippy_area.toggle_clippy_mode()

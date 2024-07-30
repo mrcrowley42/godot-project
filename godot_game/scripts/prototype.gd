@@ -6,16 +6,22 @@ const DATA = "data"
 const SAVE = "save"
 const LOAD = "load"
 
+@export var debug_mode:bool
+
 var last_opened: float
 @onready var launch_time: float = Time.get_unix_time_from_system()
 @onready var stat_man: StatusManager = %StatusManager
 #@onready var launch_date = Time.get_datetime_dict_from_system().day
 @onready var minigame_man: MinigameManager = %MinigameManager
-
+@onready var debug_window = $DebugWindow
 func _ready():
 	load_data()
 	load_settings_data()
 	calc_elapsed_time()
+	debug_window.visible = debug_mode
+	# Disable the script execution when the panel is disabled/hidden.
+	if not debug_mode:
+		debug_window.process_mode = Node.PROCESS_MODE_DISABLED
 
 func calc_elapsed_time():
 	var elapsed_time = launch_time - last_opened
@@ -127,4 +133,3 @@ func _input(event) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
 		get_tree().quit()
-

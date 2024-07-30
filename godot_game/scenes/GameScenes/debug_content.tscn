@@ -65,7 +65,8 @@ script/source = "extends Label
 
 
 func _process(_delta):
-	text = '%.2f' % find_parent('DebugContent').background.tint_opacity
+	pass
+	#text = '%.2f' % find_parent('DebugContent').background.tint_opacity
 "
 
 [sub_resource type="GDScript" id="GDScript_n68jj"]
