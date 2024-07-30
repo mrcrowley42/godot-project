@@ -60,6 +60,3 @@ func _ready():
 
 func _on_bg_update_ticker_timeout():
 	update_time()
-
-func _process(_delta):
-	bg_sprite.material.set("shader_parameter/tint_colour", %ScreenColours.color)

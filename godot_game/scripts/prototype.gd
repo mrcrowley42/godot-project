@@ -6,7 +6,8 @@ const DATA = "data"
 const SAVE = "save"
 const LOAD = "load"
 
-@export var debug_mode:bool
+@export var debug_mode: bool
+@export var unlock_fps: bool
 
 var last_opened: float
 @onready var launch_time: float = Time.get_unix_time_from_system()
@@ -14,7 +15,10 @@ var last_opened: float
 #@onready var launch_date = Time.get_datetime_dict_from_system().day
 @onready var minigame_man: MinigameManager = %MinigameManager
 @onready var debug_window = $DebugWindow
+
 func _ready():
+	if unlock_fps:
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED) # HUH?
 	load_data()
 	load_settings_data()
 	calc_elapsed_time()
