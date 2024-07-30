@@ -25,21 +25,30 @@ var day_percent: float = 0.0
 ## gradient idk:
 ## https://www.figma.com/community/file/967898387862224533/sky-gradient-library
 
-func update_bg():
-	if is_progressing:
-		var time = Time.get_time_dict_from_system()
-		var seconds_today = (time.hour * 3600) + (time.minute * 60) + time.second
-		day_percent = float(seconds_today) / float(SECS_PER_DAY)
-	
-	# update values along curves
+## update values along curves
+func update_light_shader():
 	shader_rect.material.set("shader_parameter/upper_colour", upper_colour_curve.sample(day_percent))
 	shader_rect.material.set("shader_parameter/lower_colour", lower_colour_curve.sample(day_percent))
 	shader_rect.material.set("shader_parameter/ray_colour", ray_colour_curve.sample(day_percent))
 
+## clamped value
+func change_day_progress(value: float, from_debug = false):
+	is_progressing = !from_debug
+	day_percent = min(1., max(0., value))
+	update_light_shader()
+
+func update_time():
+	if is_progressing:
+		var time = Time.get_time_dict_from_system()
+		var seconds_today = (time.hour * 3600) + (time.minute * 60) + time.second
+		change_day_progress(float(seconds_today) / float(SECS_PER_DAY))
+
+func toggle_debug(value: bool):
+	shader_rect.material.set("shader_parameter/debug_mode", value)
 
 func _ready():
 	shader_rect.color = Color(.0, .0, .0, .0)
-	update_bg()
+	update_time()
 
 func _process(_delta):
 	var col = %ScreenColours.color
@@ -48,4 +57,4 @@ func _process(_delta):
 	bg_sprite.material.set("shader_parameter/tint_colour", %ScreenColours.color)
 
 func _on_bg_update_ticker_timeout():
-	update_bg()
+	update_time()
