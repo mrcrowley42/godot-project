@@ -8,6 +8,7 @@ extends Control
 @onready var clippy_area: Button  = %ClippyArea
 @onready var background = %Background
 @onready var screen_tint = %BG
+@onready var game = self.find_parent("Game")
 
 
 func _on_h_slider_value_changed(value):
@@ -23,6 +24,8 @@ func _ready():
 	$AnimSelect.selected = 3
 	$ColorPickerButton.color = creature.dying_colour
 	stat_man.finished_loading.connect(update_holiday)
+	$CheckBox.visible = game.unlock_fps
+	$CheckBox.button_pressed = game.unlock_fps
 	
 	
 func update_holiday():
