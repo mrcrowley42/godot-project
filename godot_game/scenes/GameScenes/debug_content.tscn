@@ -63,10 +63,8 @@ func _process(_delta):
 [sub_resource type="GDScript" id="GDScript_oisou"]
 script/source = "extends Label
 
-
 func _process(_delta):
-	pass
-	#text = '%.2f' % find_parent('DebugContent').background.tint_opacity
+	text = '%.2f' % find_parent('DebugContent').screen_tint.material.get(\"shader_parameter/tint_strength\")
 "
 
 [sub_resource type="GDScript" id="GDScript_n68jj"]
@@ -287,9 +285,9 @@ offset_left = 273.0
 offset_top = 482.0
 offset_right = 423.0
 offset_bottom = 498.0
-max_value = 1.0
+max_value = 2.0
 step = 0.01
-value = 0.1
+value = 1.0
 
 [node name="HSlider" type="HSlider" parent="."]
 layout_mode = 0
