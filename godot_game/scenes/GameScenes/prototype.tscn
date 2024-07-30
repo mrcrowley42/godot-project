@@ -82,7 +82,7 @@ offsets = PackedFloat32Array(0, 0.2, 0.391534, 0.560847, 0.746032, 0.936937)
 colors = PackedColorArray(0.427451, 0.415686, 0.952941, 1, 0.898039, 0.682353, 0.815686, 1, 0.709804, 0.913725, 1, 1, 0.556863, 0.870588, 0.992157, 1, 0.176471, 0.564706, 0.756863, 1, 0.426188, 0.415684, 0.953144, 1)
 
 [sub_resource type="Curve" id="Curve_s6pib"]
-_data = [Vector2(0, 0.8), 0.0, -1.0, 0, 0, Vector2(0.5, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 0.8), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.8), 0.0, -1.0, 0, 0, Vector2(0.5, 0.5), 0.0, 0.0, 0, 0, Vector2(0.8, 0.8), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_6i1ec"]
@@ -333,7 +333,6 @@ ray_length_curve = SubResource("Curve_joyfk")
 ray_direction_curve = SubResource("Curve_p4mvm")
 
 [node name="bg_update_ticker" type="Timer" parent="Gameplay/Background"]
-wait_time = 2.0
 autostart = true
 
 [node name="BG" type="Sprite2D" parent="Gameplay/Background"]

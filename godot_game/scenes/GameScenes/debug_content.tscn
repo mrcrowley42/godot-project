@@ -261,6 +261,24 @@ offset_right = -199.0
 offset_bottom = 28.0
 tooltip_text = "background debug mode"
 
+[node name="time_div" type="HSlider" parent="dayprog"]
+offset_left = -141.0
+offset_top = 27.0
+offset_right = 9.0
+offset_bottom = 43.0
+scale = Vector2(0.7, 0.7)
+max_value = 5000.0
+step = 200.0
+
+[node name="time_div_disp" type="Label" parent="dayprog"]
+layout_mode = 0
+offset_left = -30.0
+offset_top = 23.0
+offset_right = 18.0
+offset_bottom = 50.0
+scale = Vector2(0.6, 0.6)
+text = "x1"
+
 [node name="Strength" type="Label" parent="."]
 layout_mode = 0
 offset_left = 438.0
@@ -507,6 +525,7 @@ text = "Unlock FPS"
 [connection signal="drag_started" from="dayprog/slider" to="dayprog" method="_on_day_progress_drag_started"]
 [connection signal="pressed" from="dayprog/progressing" to="dayprog" method="_on_progressing_pressed"]
 [connection signal="pressed" from="dayprog/debug" to="dayprog" method="_on_debug_pressed"]
+[connection signal="value_changed" from="dayprog/time_div" to="dayprog" method="_on_time_div_value_changed"]
 [connection signal="value_changed" from="OverlayStrength" to="." method="_on_overlay_strength_value_changed"]
 [connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="value_changed" from="HSlider2" to="." method="_on_h_slider_2_value_changed"]

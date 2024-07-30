@@ -4,6 +4,7 @@ extends Label
 @onready var slider = find_child("slider")
 @onready var progressing = find_child("progressing")
 @onready var debug = find_child("debug")
+@onready var t_div_disp = find_child("time_div_disp")
 
 var dragging = false
 
@@ -36,3 +37,10 @@ func _on_progressing_pressed():
 
 func _on_debug_pressed():
 	debug_content.background.toggle_debug(debug.button_pressed)
+
+
+func _on_time_div_value_changed(value):
+	var v = max(1, value)
+	debug_content.background.time_div = v
+	debug_content.background.update_time()
+	t_div_disp.text = 'x' + str(v)

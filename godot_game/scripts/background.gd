@@ -17,6 +17,8 @@ class_name Background extends ScriptNode
 
 const SECS_PER_DAY = 86400
 
+var time_div = 1;
+
 var tint_opacity: float = .1
 var is_progressing: bool = true  # for debug window to control
 var day_percent: float = 0.0
@@ -45,8 +47,10 @@ func change_day_progress(value: float, from_debug = false):
 func update_time():
 	if is_progressing:
 		var time = Time.get_time_dict_from_system()
-		var seconds_today = (time.hour * 3600) + (time.minute * 60) + time.second
-		change_day_progress(float(seconds_today) / float(SECS_PER_DAY))
+		@warning_ignore("integer_division")
+		var seconds_today = ((time.hour * 3600) + (time.minute * 60) + time.second) % (SECS_PER_DAY / int(time_div))
+		@warning_ignore("integer_division")
+		change_day_progress(float(seconds_today) / float(SECS_PER_DAY / time_div))
 
 func toggle_debug(value: bool):
 	shader_rect.material.set("shader_parameter/debug_mode", value)
