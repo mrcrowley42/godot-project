@@ -21,7 +21,7 @@ uniform vec4 ray_colour : source_color = vec4(1, 1, 1, 1);
 uniform sampler2D LIGHT_MAP;
 
 uniform float bg_strength : hint_range(.0, 1.) = .5;
-uniform float bg_fade : hint_range(.0, 1.) = .6;
+uniform float bg_fade : hint_range(.0, 1.) = 0.;
 
 uniform bool fade_ray_edge = true;
 uniform float ray_fade_margin : hint_range(.1, .5) = .25;
@@ -97,7 +97,7 @@ void fragment() {
 		float fade_btm = smoothstep(.0, bg_fade, 1. - UV.y * float(!debug_mode));
 		COLOR = mix(upper_colour, lower_colour, UV.y); 
 		COLOR.a = fade_btm * (bg_strength * .5 + float(debug_mode));  // half the opacity by default
-	} 
+	}
 	
 	if (!is_red || debug_mode) {
 		// RAYS

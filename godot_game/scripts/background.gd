@@ -6,7 +6,6 @@ class_name Background extends ScriptNode
 @export var ray_colour_curve: Gradient
 @export_subgroup("BG")
 @export var bg_strength_curve: Curve
-@export var bg_fade_curve: Curve
 @export_subgroup("Light Rays")
 @export var ray_strength_curve: Curve
 @export var ray_length_curve: Curve
@@ -30,6 +29,12 @@ func update_light_shader():
 	shader_rect.material.set("shader_parameter/upper_colour", upper_colour_curve.sample(day_percent))
 	shader_rect.material.set("shader_parameter/lower_colour", lower_colour_curve.sample(day_percent))
 	shader_rect.material.set("shader_parameter/ray_colour", ray_colour_curve.sample(day_percent))
+	
+	shader_rect.material.set("shader_parameter/bg_strength", bg_strength_curve.sample(day_percent))
+	
+	shader_rect.material.set("shader_parameter/ray_strength", ray_strength_curve.sample(day_percent))
+	shader_rect.material.set("shader_parameter/ray_length", ray_length_curve.sample(day_percent))
+	shader_rect.material.set("shader_parameter/ray_direction", ray_direction_curve.sample(day_percent))
 
 ## clamped value
 func change_day_progress(value: float, from_debug = false):
