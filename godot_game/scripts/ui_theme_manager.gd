@@ -39,6 +39,6 @@ func save() -> Dictionary:
 	return {"section": Globals.UI_SECTION, "Theme": abs(self.i)}
 
 func load(data) -> void:
-	if "Theme" in data.keys():
+	if data.has("Theme"):
 		self.i = int(data["Theme"])
 	update_theme()
