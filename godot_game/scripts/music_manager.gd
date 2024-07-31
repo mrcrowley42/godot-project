@@ -25,8 +25,10 @@ func save():
 	return {"section": Globals.AUDIO_SECTION, self.name: abs(self.i)}
 
 func load(data):
-	self.i = int(data[self.name])
-	move_track()	
+	if data.has(self.name):
+		self.i = int(data[self.name])
+	move_track()
+
 
 func _on_finished() -> void:
 	stream=music_selection.pick_random()

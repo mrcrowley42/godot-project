@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bmwpenw32juko" path="res://UI stuff/Universal/background_light_map.png" id="6_qagbm"]
 [ext_resource type="Script" path="res://scripts/Confetti.gd" id="7_rqbrx"]
 [ext_resource type="Script" path="res://scripts/control_panel.gd" id="8_bgltf"]
-[ext_resource type="Theme" path="res://themes/invisible.tres" id="8_hlnwn"]
+[ext_resource type="Theme" uid="uid://dl1wes8p6lqlb" path="res://themes/invisible.tres" id="8_hlnwn"]
 [ext_resource type="Theme" uid="uid://1dv11a5ar0hg" path="res://themes/action_btn.tres" id="9_3efis"]
 [ext_resource type="Script" path="res://scripts/drag_window.gd" id="9_13uut"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="10_pai17"]
@@ -288,7 +288,6 @@ corner_radius_bottom_left = 10
 [node name="Game" type="Node"]
 script = ExtResource("1_u8fgs")
 debug_mode = true
-unlock_fps = true
 metadata/_edit_vertical_guides_ = [532.0, 8.0, 45.0, 53.0, 487.0, 495.0]
 metadata/_edit_horizontal_guides_ = [8.0, 667.0, 112.0, 120.0, 554.0, 562.0]
 

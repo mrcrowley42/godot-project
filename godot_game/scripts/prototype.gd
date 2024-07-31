@@ -7,7 +7,7 @@ const SAVE = "save"
 const LOAD = "load"
 
 @export var debug_mode: bool
-@export var unlock_fps: bool
+@export var unlock_fps: bool = false
 
 var last_opened: float
 @onready var launch_time: float = Time.get_unix_time_from_system()
