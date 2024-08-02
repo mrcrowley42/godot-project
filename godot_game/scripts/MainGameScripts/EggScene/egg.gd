@@ -14,7 +14,7 @@ func _ready() -> void:
 	# This is not a good way to do this, but I'm sick of clicking skip -_-
 	if skip_scene:
 		await get_tree().process_frame
-		get_tree().change_scene_to_file("res://scenes/GameScenes/prototype.tscn")
+		get_tree().change_scene_to_file("res://scenes/GameScenes/main.tscn")
 	
 	cracker.timeout.connect(func() -> void:
 		print("done")
@@ -27,7 +27,7 @@ func _ready() -> void:
 	
 	%StartGame.timeout.connect(func() -> void:
 		print("done")
-		get_tree().change_scene_to_file("res://scenes/GameScenes/prototype.tscn")
+		get_tree().change_scene_to_file("res://scenes/GameScenes/main.tscn")
 		)
 
 func CreatureSelector():

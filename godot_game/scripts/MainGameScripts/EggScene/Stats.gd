@@ -35,4 +35,4 @@ func apply_dmg_tint():
 	
 	
 func dead():
-	get_tree().change_scene_to_file("res://scenes/dead.tscn")
+	get_tree().change_scene_to_file("res://scenes/game_over.tscn")

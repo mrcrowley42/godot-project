@@ -1,15 +1,15 @@
 [gd_scene load_steps=4 format=3 uid="uid://duucock0yfeav"]
 
-[ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="1_8aans"]
-[ext_resource type="Texture2D" uid="uid://b5wm1uu7kfopt" path="res://images/imgonnafreakinloseit.png" id="1_p13tq"]
-[ext_resource type="Script" path="res://scripts/restart_btn.gd" id="2_kmklq"]
+[ext_resource type="Texture2D" uid="uid://b5wm1uu7kfopt" path="res://images/imgonnafreakinloseit.png" id="1_7vr6t"]
+[ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="2_p3dey"]
+[ext_resource type="Script" path="res://scripts/restart_btn.gd" id="3_8hq71"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Imgonnafreakinloseit" type="Sprite2D" parent="."]
 position = Vector2(324, 337)
 scale = Vector2(1.25, 1.25)
-texture = ExtResource("1_p13tq")
+texture = ExtResource("1_7vr6t")
 
 [node name="Label" type="Label" parent="."]
 visible = false
@@ -32,9 +32,9 @@ offset_right = 342.5
 offset_bottom = 170.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_8aans")
+theme = ExtResource("2_p3dey")
 theme_override_font_sizes/font_size = 24
 text = "RESTART"
-script = ExtResource("2_kmklq")
+script = ExtResource("3_8hq71")
 
 [connection signal="pressed" from="Restart" to="Restart" method="_on_pressed"]
