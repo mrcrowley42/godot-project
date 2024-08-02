@@ -3,3 +3,4 @@
     • What makes disabilities so disabling is the lack of access and acceptance within society. With the right tools, time, and effort, everyone would be able to prosper.
     • There has been a major influx of Autism diagnoses within the past couple decades. This isn’t due to vaccines or fads, but because society has only just realised that those born female can also be autistic.
     • The most common neurodivergence is Dyslexia, affecting approximately 20% of the population.
+    
