@@ -127,7 +127,7 @@ theme = ExtResource("2_5bhpe")
 text = "WTR: %s (%s/sec)"
 script = ExtResource("2_3h2jk")
 
-[node name="APLabel" type="Label" parent="."]
+[node name="FunLabel" type="Label" parent="."]
 layout_mode = 0
 offset_left = 274.0
 offset_top = 52.0
@@ -139,7 +139,7 @@ theme = ExtResource("2_5bhpe")
 text = "FUN: %s (%s/sec)"
 script = ExtResource("3_qpwvx")
 
-[node name="SPLabel" type="Label" parent="."]
+[node name="FoodLabel" type="Label" parent="."]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 52.0
