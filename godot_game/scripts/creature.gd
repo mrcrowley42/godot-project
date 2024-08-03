@@ -53,7 +53,7 @@ func dmg(amount: float, stat: String) -> void:
 	stats[stat].call(amount)
 	
 ## Change to game over scene.
-func dead():
+func game_over():
 	get_tree().change_scene_to_file("res://scenes/GameScenes/game_over.tscn")
 
 ## Tint the Create using the dying_colour set in inspector scaling the tint based on how low HP is.
@@ -65,7 +65,7 @@ func apply_dmg_tint() -> void:
 func damage_hp(amount: float) -> void:
 	self.hp -= amount
 	if hp <= 0:
-		call_deferred("dead")
+		call_deferred("game_over")
 	self.hp = clampf(self.hp, 0, max_hp)
 	apply_dmg_tint()
 	hp_changed.emit()
