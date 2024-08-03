@@ -410,7 +410,7 @@ unique_name_in_owner = true
 [node name="UI_Theme_Manager" type="Node" parent="UI" groups=["settings_data"]]
 unique_name_in_owner = true
 script = ExtResource("13_3i267")
-themes = Array[Resource("res://ui_theme_class.gd")]([ExtResource("14_mb3dl"), ExtResource("15_4uyfd"), ExtResource("16_6dasc")])
+themes = Array[Resource("res://scripts/base_classses/ui_theme_class.gd")]([ExtResource("14_mb3dl"), ExtResource("15_4uyfd"), ExtResource("16_6dasc")])
 
 [node name="FoodMenu" type="PanelContainer" parent="UI"]
 unique_name_in_owner = true
