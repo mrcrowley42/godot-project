@@ -7,30 +7,30 @@ class_name Creature
 ## Colour to tint creature as HP approaches 0.
 @export_color_no_alpha var dying_colour: Color;
 @export var max_hp: float = 1000
-@export var max_mp: float = 1000
-@export var max_sp: float = 1000
-@export var max_ap: float = 1000
+@export var max_water: float = 1000
+@export var max_food: float = 1000
+@export var max_fun: float = 1000
 
 @onready var main_sprite = %Main
 
 enum LifeStage {Egg, Child, Adult}
 
 var hp: float
-var mp: float
-var sp: float
-var ap: float
+var water: float
+var food: float
+var fun: float
 var life_stage: LifeStage
 
 signal hp_changed()
-signal sp_changed()
-signal mp_changed()
-signal ap_changed()
+signal food_changed()
+signal water_changed()
+signal fun_changed()
 
 var stats: Dictionary = {
 	'hp': damage_hp,
-	'ap': damage_ap,
-	'mp': damage_mp,
-	'sp': damage_sp
+	'fun': damage_fun,
+	"water": damage_water,
+	'food': damage_food
 }
 
 func _ready() -> void:
@@ -39,13 +39,13 @@ func _ready() -> void:
 ## Sets the Creatures current stats to their maximum value.
 func reset_stats() -> void:
 	self.hp = max_hp
-	self.mp = max_mp
-	self.sp = max_sp
-	self.ap = max_ap
+	self.water = max_water
+	self.food= max_food
+	self.fun = max_fun
 	hp_changed.emit()
-	sp_changed.emit()
-	ap_changed.emit()
-	mp_changed.emit()
+	food_changed.emit()
+	fun_changed.emit()
+	water_changed.emit()
 	apply_dmg_tint()
 
 ## function to damage/heal the Creature (use a negative value to heal)
@@ -70,26 +70,26 @@ func damage_hp(amount: float) -> void:
 	apply_dmg_tint()
 	hp_changed.emit()
 	
-func damage_sp(amount) -> void:
-	self.sp -= amount
-	self.sp = clampf(self.sp, 0, max_sp)
-	sp_changed.emit()
+func damage_food(amount) -> void:
+	self.food -= amount
+	self.food = clampf(self.food, 0, max_food)
+	food_changed.emit()
 
-func damage_ap(amount) -> void:
-	self.ap -= amount
-	self.ap = clampf(self.ap, 0, max_ap)
-	ap_changed.emit()
+func damage_fun(amount) -> void:
+	self.fun -= amount
+	self.fun = clampf(self.fun, 0, max_fun)
+	fun_changed.emit()
 	
-func damage_mp(amount) -> void:
-	self.mp -= amount
-	self.mp = clampf(self.mp, 0, max_mp)
-	mp_changed.emit()
+func damage_water(amount) -> void:
+	self.water -= amount
+	self.water = clampf(self.water, 0, max_water)
+	water_changed.emit()
 
 func save() -> Dictionary:
-	return {"mp": mp, "sp": sp, "ap": ap, "hp": hp}
+	return {"water": water, "food": food, "fun": fun, "hp": hp}
 	
 func load(data) -> void:
-	for setting in ["mp", "ap", "sp"]:
+	for setting in ["water", "fun", "food"]:
 		if data.has(setting):
 			self[setting] = data[setting]
 			var signal_name = setting + "_changed"

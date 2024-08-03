@@ -115,7 +115,7 @@ theme = ExtResource("2_5bhpe")
 text = "HP: %s (%s/sec)"
 script = ExtResource("3_jj2ny")
 
-[node name="MPLabel" type="Label" parent="."]
+[node name="WaterLabel" type="Label" parent="."]
 layout_mode = 0
 offset_left = 274.0
 offset_top = 12.0
@@ -124,7 +124,7 @@ offset_bottom = 40.0
 size_flags_horizontal = 0
 size_flags_vertical = 6
 theme = ExtResource("2_5bhpe")
-text = "MP: %s (%s/sec)"
+text = "WTR: %s (%s/sec)"
 script = ExtResource("2_3h2jk")
 
 [node name="APLabel" type="Label" parent="."]
@@ -136,19 +136,19 @@ offset_bottom = 80.0
 size_flags_horizontal = 0
 size_flags_vertical = 6
 theme = ExtResource("2_5bhpe")
-text = "AP: %s (%s/sec)"
+text = "FUN: %s (%s/sec)"
 script = ExtResource("3_qpwvx")
 
 [node name="SPLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 44.0
+offset_left = 20.0
 offset_top = 52.0
-offset_right = 225.0
+offset_right = 224.0
 offset_bottom = 80.0
 size_flags_horizontal = 0
 size_flags_vertical = 6
 theme = ExtResource("2_5bhpe")
-text = "SP: %s (%s/sec)"
+text = "FOOD: %s (%s/sec)"
 script = ExtResource("3_kowqt")
 
 [node name="ThemeLabel" type="Label" parent="."]

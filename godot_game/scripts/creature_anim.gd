@@ -3,11 +3,11 @@ extends AnimatedSprite2D
 @onready var creature = $"../.."
 
 func _ready():
-	#creature.sp_changed.connect(angry)
+	#creature.food_changed.connect(angry)
 	creature.hp_changed.connect(stop_it)
 
 func angry():
-	if creature.sp < 600:
+	if creature.food< 600:
 		self.animation = 'confused'
 	else:
 		if self.animation != 'idle':

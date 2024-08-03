@@ -3,8 +3,8 @@ extends ProgressBar
 @onready var creature = %Creature
 
 func _ready():
-	creature.ap_changed.connect(update_ap_bar)
-	update_ap_bar()
+	creature.fun_changed.connect(update_fun_bar)
+	update_fun_bar()
 
-func update_ap_bar():
-	self.value = creature.ap
+func update_fun_bar():
+	self.value = creature.fun

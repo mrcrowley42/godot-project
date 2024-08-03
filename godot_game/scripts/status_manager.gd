@@ -4,12 +4,12 @@ class_name StatusManager extends ScriptNode
 @export_category("Status Controls")
 @export var hp_rate: float = 1
 @export var hp_amount: float = 5
-@export var mp_rate: float = 4
-@export var mp_amount: float = 8
-@export var sp_rate: float = 10
-@export var sp_amount: float = 2
-@export var ap_rate: float = 30
-@export var ap_amount: float = 1
+@export var water_rate: float = 4
+@export var water_amount: float = 8
+@export var food_rate: float = 10
+@export var food_amount: float = 2
+@export var fun_rate: float = 30
+@export var fun_amount: float = 1
 signal finished_loading()
 ## Property that scales the damage values of all passive drain timers. 
 @export var time_multiplier: float = 0.5
@@ -30,21 +30,21 @@ func new_timer(rate: float, timeout_func: Callable) -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	new_timer(hp_rate, hp_timeout)
-	new_timer(mp_rate, mp_timeout)
-	new_timer(sp_rate, sp_timeout)
-	new_timer(ap_rate, ap_timeout)
+	new_timer(water_rate, water_timeout)
+	new_timer(food_rate, food_timeout)
+	new_timer(fun_rate, fun_timeout)
 
 func hp_timeout() -> void:
 	creature.dmg(hp_amount * time_multiplier, 'hp')
 	
-func mp_timeout() -> void:
-	creature.dmg(mp_amount * time_multiplier, 'mp')
+func water_timeout() -> void:
+	creature.dmg(water_amount * time_multiplier, "water")
 
-func sp_timeout() -> void:
-	creature.dmg(sp_amount * time_multiplier, 'sp')
+func food_timeout() -> void:
+	creature.dmg(food_amount * time_multiplier, 'food')
 
-func ap_timeout() -> void:
-	creature.dmg(ap_amount * time_multiplier, 'ap')
+func fun_timeout() -> void:
+	creature.dmg(fun_amount * time_multiplier, 'fun')
 
 func save() -> Dictionary:
 	return {"holiday_mode": holiday_mode}

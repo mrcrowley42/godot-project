@@ -2,8 +2,8 @@ extends ProgressBar
 @onready var creature = %Creature
 
 func _ready():
-	creature.sp_changed.connect(update_sp_bar)
-	update_sp_bar()
+	creature.food_changed.connect(update_food_bar)
+	update_food_bar()
 
-func update_sp_bar():
-	self.value = creature.sp
+func update_food_bar():
+	self.value = creature.food

@@ -142,7 +142,8 @@ script/source = "extends Button
 
 func _on_button_down():
 	%BtnClick.play()
-	creature.dmg(300, 'mp')
+	creature.dmg(300, 'water')
+	
 "
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_golou"]
@@ -294,9 +295,7 @@ metadata/_edit_horizontal_guides_ = [8.0, 667.0, 112.0, 120.0, 554.0, 562.0]
 [node name="StatusManager" type="Node2D" parent="." groups=["save_data"]]
 unique_name_in_owner = true
 script = ExtResource("2_aqytd")
-sp_amount = 4.0
-ap_rate = 1.0
-ap_amount = 12.0
+food_amount = 4.0
 
 [node name="MinigameManager" type="Node2D" parent="." groups=["save_data"]]
 unique_name_in_owner = true
@@ -1075,12 +1074,12 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Heart-fill" type="Sprite2D" parent="UI/StatsDisplay/MarginContainer/StatusContainer/Happiness"]
+[node name="HappinessSprite" type="Sprite2D" parent="UI/StatsDisplay/MarginContainer/StatusContainer/Happiness"]
 position = Vector2(14, 0)
 scale = Vector2(0.688, 0.688)
 texture = ExtResource("43_qa2jm")
 
-[node name="AP_Bar" type="ProgressBar" parent="UI/StatsDisplay/MarginContainer/StatusContainer"]
+[node name="Fun_Bar" type="ProgressBar" parent="UI/StatsDisplay/MarginContainer/StatusContainer"]
 custom_minimum_size = Vector2(160, 23)
 layout_mode = 2
 size_flags_vertical = 1
@@ -1092,18 +1091,18 @@ value = 700.0
 show_percentage = false
 script = ExtResource("44_8jtdq")
 
-[node name="Energy" type="Control" parent="UI/StatsDisplay/MarginContainer/StatusContainer"]
+[node name="Burger" type="Control" parent="UI/StatsDisplay/MarginContainer/StatusContainer"]
 custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Heart-fill" type="Sprite2D" parent="UI/StatsDisplay/MarginContainer/StatusContainer/Energy"]
+[node name="BurgerSprite" type="Sprite2D" parent="UI/StatsDisplay/MarginContainer/StatusContainer/Burger"]
 position = Vector2(14, 0)
 scale = Vector2(0.688, 0.688)
 texture = ExtResource("45_3duvs")
 
-[node name="SP_Bar" type="ProgressBar" parent="UI/StatsDisplay/MarginContainer/StatusContainer"]
+[node name="Food_Bar" type="ProgressBar" parent="UI/StatsDisplay/MarginContainer/StatusContainer"]
 clip_contents = true
 custom_minimum_size = Vector2(160, 23)
 layout_mode = 2
@@ -1123,12 +1122,12 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Heart-fill" type="Sprite2D" parent="UI/StatsDisplay/MarginContainer/StatusContainer/Droplet"]
+[node name="WaterSprite" type="Sprite2D" parent="UI/StatsDisplay/MarginContainer/StatusContainer/Droplet"]
 position = Vector2(14, 0)
 scale = Vector2(0.688, 0.688)
 texture = ExtResource("47_qik1j")
 
-[node name="MP_Bar" type="ProgressBar" parent="UI/StatsDisplay/MarginContainer/StatusContainer"]
+[node name="Water_Bar" type="ProgressBar" parent="UI/StatsDisplay/MarginContainer/StatusContainer"]
 custom_minimum_size = Vector2(160, 23)
 layout_mode = 2
 size_flags_horizontal = 3

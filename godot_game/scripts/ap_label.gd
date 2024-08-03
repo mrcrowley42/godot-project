@@ -4,8 +4,8 @@ var og_text = self.text
 
 func _process(_delta):
 	var stats = get_node("..").stat_man
-	var rate = -(stats.ap_amount * (stats.ap_rate * stats.time_multiplier))
+	var rate = -(stats.fun_amount * (stats.fun_rate * stats.time_multiplier))
 	self.text = og_text % [
-			str(round(find_parent('DebugContent').creature.ap)),
+			str(round(find_parent('DebugContent').creature.fun)),
 			str(rate)
 		]
