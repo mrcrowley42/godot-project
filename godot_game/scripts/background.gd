@@ -45,7 +45,7 @@ func change_day_progress(value: float, from_debug = false):
 func update_time():
 	if is_progressing:
 		var time = Time.get_time_dict_from_system()
-		@warning_ignore("integer_division")
+		@warning_ignore("integer_division")  # fyi, these are intentional int divisions
 		var seconds_today = ((time.hour * 3600) + (time.minute * 60) + time.second) % (SECS_PER_DAY / int(time_div))
 		@warning_ignore("integer_division")
 		change_day_progress(float(seconds_today) / float(SECS_PER_DAY / time_div))
