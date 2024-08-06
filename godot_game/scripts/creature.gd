@@ -89,7 +89,10 @@ func save() -> Dictionary:
 	return {"water": water, "food": food, "fun": fun, "hp": hp}
 	
 func load(data) -> void:
-	for setting in ["water", "fun", "food"]:
+	var stat_list = ["water", "fun", "food"]
+	if not find_parent("Game").debug_mode:
+		stat_list.append("hp")
+	for setting in stat_list:
 		if data.has(setting):
 			self[setting] = data[setting]
 			var signal_name = setting + "_changed"

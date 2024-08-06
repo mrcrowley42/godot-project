@@ -14,13 +14,14 @@ func angry():
 			self.animation = 'idle'
 
 func stop_it():
-	if creature.hp < 300:
+	if creature.hp < 30:
 		%STAHP.play_random()
 
 
 func _on_animation_changed():
-	if animation == 'angry':
-		%NotificationBubble.show()
-	else:
-		%NotificationBubble.hide()
+	pass
+	#if animation == 'angry':
+		#%NotificationBubble.show()
+	#else:
+		#%NotificationBubble.hide()
 	

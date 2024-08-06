@@ -53,6 +53,9 @@ func _process(_delta) -> void:
 	if creature.fun <= fun_threshold:
 		state_message.append("bored")
 		low_stats.append(low_fun)
+	if creature.hp <= hp_threshold:
+		state_message.append("angry")
+		low_stats.append(low_regulation)
 
 	if low_stats.is_empty():
 		return

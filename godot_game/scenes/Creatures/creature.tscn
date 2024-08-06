@@ -167,7 +167,7 @@ animations = [{
 script = ExtResource("2_klgk6")
 dying_colour = Color(1, 0, 0, 1)
 
-[node name="NotifcationManager" type="Node" parent="."]
+[node name="Notifcations" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("2_0vuyd")
 low_hunger = ExtResource("26_b0wvq")
@@ -177,15 +177,14 @@ low_hydrate = ExtResource("29_hivox")
 cooldown_period = 30.0
 warning_threshold = 0.25
 
-[node name="STAHP" type="AudioStreamPlayer" parent="."]
+[node name="STAHP" type="AudioStreamPlayer" parent="Notifcations"]
 unique_name_in_owner = true
 bus = &"SFX"
 script = ExtResource("16_epyie")
 sounds = Array[AudioStream]([ExtResource("16_2mdbn"), ExtResource("17_addty"), ExtResource("18_qdg0m")])
 
-[node name="LowStatSounds" type="AudioStreamPlayer" parent="."]
+[node name="LowStatSounds" type="AudioStreamPlayer" parent="Notifcations"]
 unique_name_in_owner = true
-volume_db = -3.0
 max_polyphony = 2
 bus = &"SFX"
 
@@ -248,5 +247,5 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[connection signal="finished" from="LowStatSounds" to="NotifcationManager" method="_on_low_stat_sounds_finished"]
+[connection signal="finished" from="Notifcations/LowStatSounds" to="Notifcations" method="_on_low_stat_sounds_finished"]
 [connection signal="animation_changed" from="Sprites/Main" to="Sprites/Main" method="_on_animation_changed"]
