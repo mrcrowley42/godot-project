@@ -29,6 +29,7 @@ func _ready():
 
 func calc_elapsed_time():
 	var elapsed_time = launch_time - last_opened
+	# please excuse the bad variable names here, this is only a temp thing anyway.
 	var _a = Color(1,0,0)
 	var _b = Color(0,1,0)
 	var max_time = 600  # in seconds
