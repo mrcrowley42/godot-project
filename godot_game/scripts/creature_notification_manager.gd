@@ -13,13 +13,17 @@ extends Node
 @export var cooldown_period: float = 10.0
 ## How long (in seconds) after a sound effect has finished should the visual prompt linger.
 @export var notifcation_linger: float = 0.0
-
+## How low a stat has to be, relative to its maximum value to trigger a notifcation.
+@export_range(0,1,0.01) var warning_threshold: float = 0.2
 @onready var notfication_bubble = %NotificationBubble
 @onready var notif_sounds = %LowStatSounds
 @onready var notif = %Example
 @onready var creature: Creature = $".."
 @onready var cooldown_timer = Timer.new()
-
+@onready var water_threshold = warning_threshold * creature.max_water
+@onready var food_threshold = warning_threshold * creature.max_food
+@onready var fun_threshold = warning_threshold * creature.max_fun
+@onready var hp_threshold = warning_threshold * creature.max_hp
 var states = {}
 ## Bool to keep track whether notifications should still be on cooldown or not.
 var on_cooldown: bool = false
@@ -34,32 +38,33 @@ func _ready() -> void:
 
 func _process(_delta) -> void:
 	notfication_bubble.visible = notif_sounds.playing
+
 	if on_cooldown:
 		return
-		
+
 	var low_stats: Array[AudioStream] = []
 	var state_message = []
-	if creature.water < 200:
+	if creature.water <= water_threshold:
 		low_stats.append(low_hydrate)
 		state_message.append("thirsty")
-		#state_message.append("hungry")
-		# adding hunger here as well to not conflict with pain sounds lol
-		#low_stats.append(low_hunger)
-	if creature.food< 200:
+	if creature.food <= food_threshold:
 		low_stats.append(low_hunger)
 		state_message.append("hungry")
-	if creature.fun < 200:
+	if creature.fun <= fun_threshold:
 		state_message.append("bored")
 		low_stats.append(low_fun)
-	if not low_stats.is_empty():
-		var blah = state_message.pick_random()
-		var haha = states[blah]
-		notif.text = blah
-		queue_warning(haha)
+
+	if low_stats.is_empty():
+		return
+
+	var message = state_message.pick_random()
+	var sound = states[message]
+	notif.text = message
+	queue_warning(sound)
 
 func done() -> void:
 	on_cooldown = false
-	
+
 func queue_warning(sound_file: AudioStream) -> void:
 	if not notif_sounds.playing and not on_cooldown:
 		notif_sounds.stream = sound_file
