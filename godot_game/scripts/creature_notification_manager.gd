@@ -8,6 +8,11 @@ extends Node
 @export var low_fun: AudioStream
 @export var low_regulation: AudioStream
 @export var low_hydrate: AudioStream
+@export_group("Image Files")
+@export var low_hunger_img: Texture2D
+@export var low_fun_img: Texture2D
+@export var low_regulation_img: Texture2D
+@export var low_hydrate_img: Texture2D
 @export_category("Settings")
 ## How long (in seconds) after a sound effect has finished playing can another one begin.
 @export var cooldown_period: float = 10.0
@@ -24,12 +29,15 @@ extends Node
 @onready var food_threshold = warning_threshold * creature.max_food
 @onready var fun_threshold = warning_threshold * creature.max_fun
 @onready var hp_threshold = warning_threshold * creature.max_hp
+@onready var notif_icon = %Icon
 var states = {}
+var img_states = {}
 ## Bool to keep track whether notifications should still be on cooldown or not.
 var on_cooldown: bool = false
 
 func _ready() -> void:
 	states = {'angry': low_regulation, 'thirsty': low_hydrate, 'hungry': low_hunger, 'bored': low_fun}
+	img_states = {'angry': low_regulation_img, 'thirsty': low_hydrate_img, 'hungry': low_hunger_img, 'bored': low_fun_img}
 	cooldown_timer.wait_time = cooldown_period
 	cooldown_timer.timeout.connect(done)
 	cooldown_timer.autostart = true
@@ -44,16 +52,21 @@ func _process(_delta) -> void:
 
 	var low_stats: Array[AudioStream] = []
 	var state_message = []
+	var notif_icons = []
 	if creature.water <= water_threshold:
+		notif_icons.append(low_hydrate_img)
 		low_stats.append(low_hydrate)
 		state_message.append("thirsty")
 	if creature.food <= food_threshold:
+		notif_icons.append(low_hunger_img)
 		low_stats.append(low_hunger)
 		state_message.append("hungry")
 	if creature.fun <= fun_threshold:
+		notif_icons.append(low_fun_img)
 		state_message.append("bored")
 		low_stats.append(low_fun)
 	if creature.hp <= hp_threshold:
+		notif_icons.append(low_regulation_img)
 		state_message.append("angry")
 		low_stats.append(low_regulation)
 
@@ -62,7 +75,10 @@ func _process(_delta) -> void:
 
 	var message = state_message.pick_random()
 	var sound = states[message]
+	var img = img_states[message]
 	notif.text = message
+	notif_icon.texture = img
+	
 	queue_warning(sound)
 
 func done() -> void:
