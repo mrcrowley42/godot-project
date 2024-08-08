@@ -12,6 +12,7 @@ class_name Creature
 @export var max_fun: float = 1000
 
 @onready var main_sprite = %Main
+@export var clippy_area: Node
 
 enum LifeStage {Egg, Child, Adult}
 

@@ -20,6 +20,8 @@ extends Node
 @export var notifcation_linger: float = 0.0
 ## How low a stat has to be, relative to its maximum value to trigger a notifcation.
 @export_range(0,1,0.01) var warning_threshold: float = 0.2
+## Whether audio notifcations should be disabled in clippy mode.
+@export var mute_in_clippy :bool = true
 @onready var notification_bubble = %NotificationBubble
 @onready var notif_sounds = %LowStatSounds
 @onready var notif = %Example
@@ -30,6 +32,8 @@ extends Node
 @onready var fun_threshold = warning_threshold * creature.max_fun
 @onready var hp_threshold = warning_threshold * creature.max_hp
 @onready var notif_icon = %Icon
+@onready var reg_volume = notif_sounds.volume_db
+
 var states = {}
 var img_states = {}
 ## Bool to keep track whether notifications should still be on cooldown or not.
@@ -43,9 +47,9 @@ func _ready() -> void:
 	cooldown_timer.autostart = false
 	cooldown_timer.name = "CooldownTimer"
 	add_child(cooldown_timer)
+	
 
 func _process(_delta) -> void:
-	print(cooldown_timer.time_left)
 	notification_bubble.visible = notif_sounds.playing
 
 	if on_cooldown:
@@ -86,8 +90,14 @@ func done() -> void:
 	cooldown_timer.stop()
 
 func queue_warning(sound_file: AudioStream) -> void:
+	
 	if not notif_sounds.playing and not on_cooldown:
 		notif_sounds.stream = sound_file
+		# A little scuffed, can probably do this better.
+		if creature.clippy_area.clippy and mute_in_clippy:
+			notif_sounds.volume_db = -100
+		else:
+			notif_sounds.volume_db = reg_volume
 		notif_sounds.play()
 	on_cooldown = true
 
