@@ -258,10 +258,11 @@ uppercase = true
 [node name="Icon" type="TextureRect" parent="Sprites/NotificationBubble/Icons"]
 unique_name_in_owner = true
 self_modulate = Color(0, 0, 0, 1)
-offset_left = -81.0
-offset_top = -233.0
-offset_right = 19.0
-offset_bottom = -169.0
+offset_left = -75.0
+offset_top = -229.0
+offset_right = 25.0
+offset_bottom = -165.0
+scale = Vector2(0.9, 0.9)
 texture = ExtResource("39_5380y")
 expand_mode = 2
 stretch_mode = 5
