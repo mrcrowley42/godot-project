@@ -40,16 +40,17 @@ func _ready() -> void:
 	img_states = {'angry': low_hp_img, 'thirsty': low_water_img, 'hungry': low_food_img, 'bored': low_fun_img}
 	cooldown_timer.wait_time = cooldown_period
 	cooldown_timer.timeout.connect(done)
-	cooldown_timer.autostart = true
+	cooldown_timer.autostart = false
 	cooldown_timer.name = "CooldownTimer"
 	add_child(cooldown_timer)
 
 func _process(_delta) -> void:
+	print(cooldown_timer.time_left)
 	notification_bubble.visible = notif_sounds.playing
 
 	if on_cooldown:
 		return
-
+	
 	var low_stats: Array[AudioStream] = []
 	var state_message = []
 	var notif_icons = []
@@ -82,6 +83,7 @@ func _process(_delta) -> void:
 
 func done() -> void:
 	on_cooldown = false
+	cooldown_timer.stop()
 
 func queue_warning(sound_file: AudioStream) -> void:
 	if not notif_sounds.playing and not on_cooldown:
@@ -92,3 +94,4 @@ func queue_warning(sound_file: AudioStream) -> void:
 ## When a sound finishes, puts the notifications on cooldown until the [param cooldown_period] is elapsed.
 func _on_low_stat_sounds_finished() -> void:
 	on_cooldown = true
+	cooldown_timer.start()

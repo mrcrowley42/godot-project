@@ -182,6 +182,7 @@ low_food_img = ExtResource("39_5380y")
 low_fun_img = ExtResource("8_cooyl")
 low_hp_img = ExtResource("9_xmwbg")
 low_water_img = ExtResource("10_mvvsb")
+cooldown_period = 30.0
 
 [node name="STAHP" type="AudioStreamPlayer" parent="Notifcations"]
 unique_name_in_owner = true
