@@ -174,15 +174,14 @@ dying_colour = Color(1, 0, 0, 1)
 [node name="Notifcations" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("2_0vuyd")
-low_hunger = ExtResource("26_b0wvq")
+low_food = ExtResource("26_b0wvq")
 low_fun = ExtResource("27_uvaw6")
-low_regulation = ExtResource("28_qtceu")
-low_hydrate = ExtResource("29_hivox")
-low_hunger_img = ExtResource("39_5380y")
+low_hp = ExtResource("28_qtceu")
+low_water = ExtResource("29_hivox")
+low_food_img = ExtResource("39_5380y")
 low_fun_img = ExtResource("8_cooyl")
-low_regulation_img = ExtResource("9_xmwbg")
-low_hydrate_img = ExtResource("10_mvvsb")
-cooldown_period = 30.0
+low_hp_img = ExtResource("9_xmwbg")
+low_water_img = ExtResource("10_mvvsb")
 
 [node name="STAHP" type="AudioStreamPlayer" parent="Notifcations"]
 unique_name_in_owner = true
