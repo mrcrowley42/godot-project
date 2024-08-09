@@ -1,4 +1,4 @@
-[gd_scene load_steps=98 format=3 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=99 format=3 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_aqytd"]
@@ -219,6 +219,13 @@ func _on_button_down():
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qyod2"]
 bg_color = Color(0.2, 0.2, 0.2, 1)
 border_color = Color(0.8, 0.8, 0.8, 0.411765)
+
+[sub_resource type="GDScript" id="GDScript_1bafj"]
+script/source = "extends ScrollContainer
+
+func _on_visibility_changed():
+	scroll_vertical = 0
+"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2mbbg"]
 bg_color = Color(0, 0, 0, 0.227451)
@@ -964,6 +971,7 @@ offset_left = 10.0
 offset_top = 10.0
 offset_right = 424.0
 offset_bottom = 343.0
+script = SubResource("GDScript_1bafj")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/CreditsMenu/Node2D/HScrollBar"]
 layout_mode = 2
@@ -1246,6 +1254,7 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/OptionsMenu/VolumeControls/GridContainer2/MusicMuted" to="UI/OptionsMenu/VolumeControls/GridContainer2/MusicMuted" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/Credits/Button" to="UI/OptionsMenu/Credits/Button" method="_on_button_down"]
 [connection signal="button_down" from="UI/CreditsMenu/Node2D/CreditsCloseBtn" to="UI/CreditsMenu/Node2D/CreditsCloseBtn" method="_on_button_down"]
+[connection signal="visibility_changed" from="UI/CreditsMenu/Node2D/HScrollBar" to="UI/CreditsMenu/Node2D/HScrollBar" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/NavigationButtons/FoodButton" to="UI/NavigationButtons/FoodButton" method="_on_button_down"]
 [connection signal="button_down" from="UI/NavigationButtons/ActButton" to="UI/NavigationButtons/ActButton" method="_on_button_down"]
 [connection signal="button_down" from="UI/NavigationButtons/SettingButton" to="UI/NavigationButtons/SettingButton" method="_on_button_down"]
