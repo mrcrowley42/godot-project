@@ -13,15 +13,17 @@ extends Node
 @export var low_fun_img: Texture2D
 @export var low_hp_img: Texture2D
 @export var low_water_img: Texture2D
+
 @export_category("Settings")
 ## How long (in seconds) after a sound effect has finished playing can another one begin.
 @export var cooldown_period: float = 10.0
-## How long (in seconds) after a sound effect has finished should the visual prompt linger.
-@export var notifcation_linger: float = 0.0
+## How long (in seconds) a notification should last.
+@export var notifcation_length: float = 0.0
 ## How low a stat has to be, relative to its maximum value to trigger a notifcation.
 @export_range(0,1,0.01) var warning_threshold: float = 0.2
 ## Whether audio notifcations should be disabled in clippy mode.
 @export var mute_in_clippy :bool = true
+
 @onready var notification_bubble = %NotificationBubble
 @onready var notif_sounds = %LowStatSounds
 @onready var notif = %Example
@@ -47,7 +49,6 @@ func _ready() -> void:
 	cooldown_timer.autostart = false
 	cooldown_timer.name = "CooldownTimer"
 	add_child(cooldown_timer)
-	
 
 func _process(_delta) -> void:
 	notification_bubble.visible = notif_sounds.playing
@@ -90,7 +91,6 @@ func done() -> void:
 	cooldown_timer.stop()
 
 func queue_warning(sound_file: AudioStream) -> void:
-	
 	if not notif_sounds.playing and not on_cooldown:
 		notif_sounds.stream = sound_file
 		# A little scuffed, can probably do this better.
