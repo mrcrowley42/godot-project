@@ -20,7 +20,7 @@ extends Node
 ## How long (in seconds) a notification should last.
 @export var notifcation_length: float = 0.0
 ## How low a stat has to be, relative to its maximum value to trigger a notifcation.
-@export_range(0,1,0.01) var warning_threshold: float = 0.2
+@export_range(0,1, 0.01) var warning_threshold: float = 0.2
 ## Whether audio notifcations should be disabled in clippy mode.
 @export var mute_in_clippy :bool = true
 
@@ -52,10 +52,8 @@ func _ready() -> void:
 
 func _process(_delta) -> void:
 	notification_bubble.visible = notif_sounds.playing
-
 	if on_cooldown:
 		return
-	
 	var low_stats: Array[AudioStream] = []
 	var state_message = []
 	var notif_icons = []

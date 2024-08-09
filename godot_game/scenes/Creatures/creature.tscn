@@ -183,6 +183,7 @@ low_fun_img = ExtResource("8_cooyl")
 low_hp_img = ExtResource("9_xmwbg")
 low_water_img = ExtResource("10_mvvsb")
 cooldown_period = 6.0
+notifcation_length = 10.0
 
 [node name="STAHP" type="AudioStreamPlayer" parent="Notifcations"]
 unique_name_in_owner = true
