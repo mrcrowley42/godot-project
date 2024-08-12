@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvngmgfihp65d"]
+
+[ext_resource type="Script" path="res://scenes/UiScenes/notification.gd" id="1_utqx5"]
+[ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="2_7xpa7"]
+[ext_resource type="FontFile" uid="uid://cukp5skadwgit" path="res://fonts/JetBrainsMono-VariableFont_wght.ttf" id="2_qawbg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t0j48"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.815686, 0.843137, 0.870588, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0.258824, 0.290196, 0.32549, 0.121569)
+shadow_size = 6
+shadow_offset = Vector2(0, 3)
+
+[node name="Notification" type="PanelContainer"]
+offset_right = 300.0
+offset_bottom = 80.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_t0j48")
+script = ExtResource("1_utqx5")
+animation_length = 0.33
+notification_length = 0.75
+y_offset = 60.0
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Message" type="Label" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.121569, 0.137255, 0.156863, 1)
+theme_override_fonts/font = ExtResource("2_qawbg")
+theme_override_font_sizes/font_size = 22
+text = "ACHIEVEMENT UNLOCKED!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="RichTextLabel" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_7xpa7")
+bbcode_enabled = true
+text = "[rainbow freq=4 sat=.66 val=.85][center]ACHIEVEMENT UNLOCKED![/center][/rainbow]"

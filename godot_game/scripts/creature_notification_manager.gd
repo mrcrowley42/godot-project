@@ -35,15 +35,13 @@ extends Node
 @onready var hp_threshold = warning_threshold * creature.max_hp
 @onready var notif_icon = %Icon
 @onready var reg_volume = notif_sounds.volume_db
-
-var states = {}
-var img_states = {}
+enum low_stat {HP, WATER, FUN, FOOD}
+@onready var stat_files = {low_stat.HP: [low_hp, low_hp_img], low_stat.WATER: [low_water, low_water_img],
+	low_stat.FOOD: [low_food, low_food_img], low_stat.FUN: [low_fun, low_fun_img]}
 ## Bool to keep track whether notifications should still be on cooldown or not.
 var on_cooldown: bool = false
 
 func _ready() -> void:
-	states = {'angry': low_hp, 'thirsty': low_water, 'hungry': low_food, 'bored': low_fun}
-	img_states = {'angry': low_hp_img, 'thirsty': low_water_img, 'hungry': low_food_img, 'bored': low_fun_img}
 	cooldown_timer.wait_time = cooldown_period
 	cooldown_timer.timeout.connect(done)
 	cooldown_timer.autostart = false
@@ -54,35 +52,23 @@ func _process(_delta) -> void:
 	notification_bubble.visible = notif_sounds.playing
 	if on_cooldown:
 		return
-	var low_stats: Array[AudioStream] = []
-	var state_message = []
-	var notif_icons = []
+	var low_stats = []
 	if creature.water <= water_threshold:
-		notif_icons.append(low_water_img)
-		low_stats.append(low_water)
-		state_message.append("thirsty")
+		low_stats.append(low_stat.WATER)
 	if creature.food <= food_threshold:
-		notif_icons.append(low_food_img)
-		low_stats.append(low_food)
-		state_message.append("hungry")
+		low_stats.append(low_stat.FOOD)
 	if creature.fun <= fun_threshold:
-		notif_icons.append(low_fun_img)
-		state_message.append("bored")
-		low_stats.append(low_fun)
+		low_stats.append(low_stat.FUN)
 	if creature.hp <= hp_threshold:
-		notif_icons.append(low_hp_img)
-		state_message.append("angry")
-		low_stats.append(low_hp)
+		low_stats.append(low_stat.HP)
 
 	if low_stats.is_empty():
 		return
 
-	var message = state_message.pick_random()
-	var sound = states[message]
-	var img = img_states[message]
-	notif.text = message
-	notif_icon.texture = img
-	queue_warning(sound)
+	var picked_stat = low_stats.pick_random()
+	queue_warning(stat_files[picked_stat][0])
+	notif_icon.texture = stat_files[picked_stat][1]
+
 
 func done() -> void:
 	on_cooldown = false
