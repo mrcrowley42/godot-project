@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bmwpenw32juko" path="res://UI stuff/Universal/background_light_map.png" id="8_aulml"]
 [ext_resource type="PackedScene" uid="uid://bebjn5n2kjwgb" path="res://scenes/Creatures/creature.tscn" id="9_ulkn4"]
 [ext_resource type="Script" path="res://scripts/Confetti.gd" id="10_tn1o6"]
-[ext_resource type="Theme" uid="uid://dl1wes8p6lqlb" path="res://themes/invisible.tres" id="11_lcq7m"]
+[ext_resource type="Theme" path="res://themes/invisible.tres" id="11_lcq7m"]
 [ext_resource type="Script" path="res://scripts/clippy_area.gd" id="12_n00c6"]
 [ext_resource type="Script" path="res://scripts/ui_theme_manager.gd" id="13_3i267"]
 [ext_resource type="Resource" uid="uid://bxhuu3qk52v3w" path="res://resources/ui_themes/green.tres" id="14_mb3dl"]
@@ -103,12 +103,12 @@ point_count = 2
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_045wl"]
 resource_local_to_scene = true
 shader = ExtResource("5_yth5i")
-shader_parameter/tint_colour = Color(0.870588, 0.984314, 0.87451, 1)
+shader_parameter/tint_colour = Color(1, 1, 1, 1)
 shader_parameter/tint_strength = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_arjdf"]
 shader = ExtResource("7_1pcjq")
-shader_parameter/debug_mode = false
+shader_parameter/debug_mode = true
 shader_parameter/upper_colour = Color(1, 0.5, 0.4, 1)
 shader_parameter/lower_colour = Color(0, 0.4, 1, 1)
 shader_parameter/ray_colour = Color(1, 1, 1, 1)
@@ -121,6 +121,12 @@ shader_parameter/ray_length = 0.12
 shader_parameter/ray_direction = 155.0
 shader_parameter/ray_strength = 1.5
 shader_parameter/ray_quality = 10
+shader_parameter/sun_colour = Color(0.3, 0.3, 0.15, 1)
+shader_parameter/sun_pos = Vector2(0.8, 0.3)
+shader_parameter/sun_strength = 1.0
+shader_parameter/sun_radius = 0.1
+shader_parameter/sun_fade = 0.03
+shader_parameter/moon_pos = Vector2(0.5, 0.7)
 shader_parameter/LIGHT_MAP = ExtResource("8_aulml")
 
 [sub_resource type="Gradient" id="Gradient_asbj7"]

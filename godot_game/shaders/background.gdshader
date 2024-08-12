@@ -32,6 +32,14 @@ uniform float ray_direction : hint_range(.0, 360.) = 155.;
 uniform float ray_strength : hint_range(.0, 2.) = 1.5;
 uniform int ray_quality : hint_range(5, 15) = 10;
 
+uniform vec4 sun_colour : source_color = vec4(.3, .3, .15, 1.);
+uniform vec2 sun_pos = vec2(.8, .3);
+uniform float sun_strength = 1.;
+uniform float sun_radius = .1;
+uniform float sun_fade = .03;
+
+uniform vec2 moon_pos = vec2(.5, .7);
+
 vec2 rotate_point(float point, float deg) {
 	float rad = deg * (PI / 180.);
 	return vec2(
@@ -92,15 +100,24 @@ void fragment() {
 	float light_map_r = texture(LIGHT_MAP, UV).r;
 	bool is_red = light_map_r > EPSILON;
 	
-	// BACKGROUND
 	if (is_red || debug_mode) {
+		// BACKGROUND
 		float fade_btm = smoothstep(.0, bg_fade, 1. - UV.y * float(!debug_mode));
 		COLOR = mix(upper_colour, lower_colour, UV.y); 
 		COLOR.a = fade_btm * (bg_strength * .5 + float(debug_mode));  // half the opacity by default
+		
+		float sun_dist = length(UV - sun_pos);
+		if (sun_dist <= sun_radius) {
+			// SUN
+			float fade_amnt = sun_radius - sun_fade;
+			float multiplier = min(1., 1. - ((sun_dist - fade_amnt) / (sun_radius - fade_amnt)));
+			multiplier *= sun_strength;
+			COLOR += sun_colour * multiplier;
+		}
 	}
 	
+	// RAYS
 	if (!is_red || debug_mode) {
-		// RAYS
 		float direction = ray_direction + 45.;  // add 45 so it points up a 0 deg
 		float step_length = SCREEN_PIXEL_SIZE.y * float(max(MIN_RAY_QUALITY, int(ray_quality)));  // DO NOT ALLOW LESS THAN 1
 		vec2 ray_step = rotate_point(step_length, direction);  // 1 step in direction of ray
