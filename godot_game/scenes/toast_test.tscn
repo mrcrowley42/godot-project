@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://vmim6xihyot1"]
+
+[sub_resource type="GDScript" id="GDScript_jejrq"]
+script/source = "extends Node2D
+@onready var toast = preload(\"res://scenes/UiScenes/notification.tscn\")
+@onready var toast2 = toast.instantiate()
+# spawn notification in the horizontal centre and just above the top of screen.
+@onready var start_pos = Vector2((540-toast2.size.x)/2,-toast2.size.y)
+# dunno
+var messages = [\"random\", \"word\", \"banana\", \"mario\", \"bingus\"]
+
+func _on_button_button_down():
+	var notif = toast.instantiate()
+	notif.message = messages.pick_random()
+	notif.position = start_pos
+	add_child(notif)
+"
+
+[node name="Node2D" type="Node2D"]
+script = SubResource("GDScript_jejrq")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 112.0
+offset_top = 504.0
+offset_right = 411.0
+offset_bottom = 586.0
+size_flags_horizontal = 4
+text = "TOAST!"
+
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]

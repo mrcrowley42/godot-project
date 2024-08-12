@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvngmgfihp65d"]
+
+[ext_resource type="Script" path="res://scenes/UiScenes/notification.gd" id="1_utqx5"]
+[ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="2_7xpa7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t0j48"]
+bg_color = Color(0.368521, 0.296847, 0.723096, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.845569, 0.480771, 0.838895, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Notification" type="PanelContainer"]
+offset_right = 300.0
+offset_bottom = 80.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_t0j48")
+script = ExtResource("1_utqx5")
+animation_length = 0.33
+notification_length = 0.75
+y_offset = 60.0
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Message" type="Label" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "ACHIEVEMENT UNLOCKED!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="RichTextLabel" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_7xpa7")
+bbcode_enabled = true
+text = "[rainbow freq=4 sat=.66 val=.85][center]ACHIEVEMENT UNLOCKED![/center][/rainbow]"
