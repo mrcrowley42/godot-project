@@ -102,11 +102,25 @@ float perform_fade(vec2 uv, vec2 scrn_pixel_size, vec2 ray_step, vec2 final_offs
 	return dist_from_offset / max_dist_from_offset;  // return percent
 }
 
-vec4 get_sun_col_addition(float sun_dist) {
+vec4 get_sun_col(float sun_dist) {
 	float fade_amnt = sun_radius - sun_fade;
 	float multiplier = min(1., 1. - ((sun_dist - fade_amnt) / (sun_radius - fade_amnt)));
 	multiplier *= sun_strength;
 	return sun_colour * multiplier;
+}
+
+vec4 get_moon_col(vec2 uv, float moon_dist, vec4 col_addition) {
+	float fade_amnt = moon_radius - moon_fade;
+	float multiplier = min(1., 1. - ((moon_dist - fade_amnt) / (moon_radius - fade_amnt)));
+	col_addition *= 1. - multiplier;
+	
+	// shadow
+	float shadow_dist = length(uv - (moon_pos + rotate_point(m_shadow_dist, m_shadow_rot)));
+	float shadow_fade = min(1., (shadow_dist - fade_amnt) / (moon_radius - fade_amnt));
+	float shadow_multiplier = float(shadow_dist >= moon_radius - moon_fade) * shadow_fade;
+	
+	multiplier *= moon_strength;
+	return col_addition + (moon_colour * multiplier * shadow_multiplier);
 }
 
 void fragment() {
@@ -122,19 +136,9 @@ void fragment() {
 		// SUN & MOON
 		float sun_dist = length(UV - sun_pos);
 		float moon_dist = length(UV - moon_pos);
-		vec4 col_addition = vec4(0, 0, 0, 0);
-		if (sun_dist <= sun_radius) col_addition += get_sun_col_addition(sun_dist);
-		if (moon_dist <= moon_radius) {
-			float fade_amnt = moon_radius - moon_fade;
-			float multiplier = min(1., 1. - ((moon_dist - fade_amnt) / (moon_radius - fade_amnt)));
-			col_addition *= 1. - multiplier;  // before moon strength
-			multiplier *= moon_strength;
-			// shadow
-			float shadow_dist = length(UV - (moon_pos + rotate_point(m_shadow_dist, m_shadow_rot)));
-			float shadow_fade = (shadow_dist - fade_amnt) / (moon_radius - fade_amnt);
-			float shadow_multiplier = float(shadow_dist >= moon_radius);
-			col_addition += moon_colour * (multiplier * shadow_multiplier);
-		}
+		vec4 col_addition = vec4(0.);
+		if (sun_dist <= sun_radius) col_addition = get_sun_col(sun_dist);
+		if (moon_dist <= moon_radius) col_addition = get_moon_col(UV, moon_dist, col_addition);
 		COLOR += col_addition;
 	}
 	
