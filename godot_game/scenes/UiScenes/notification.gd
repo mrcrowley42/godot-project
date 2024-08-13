@@ -17,6 +17,7 @@ class_name Notification extends Control
 
 @onready var message_label = %Message
 @onready var new_position = Vector2(position.x, y_offset)
+signal complete()
 
 func _ready():
 	message_label.text = message
@@ -36,4 +37,5 @@ func _ready():
 
 ## Remove notification after fade out is finished.
 func tween_finished():
+	complete.emit()
 	queue_free()
