@@ -33,12 +33,18 @@ uniform float ray_strength : hint_range(.0, 2.) = 1.5;
 uniform int ray_quality : hint_range(5, 15) = 10;
 
 uniform vec4 sun_colour : source_color = vec4(.3, .3, .15, 1.);
-uniform vec2 sun_pos = vec2(.8, .3);
+uniform vec2 sun_pos = vec2(.9, .3);
 uniform float sun_strength = 1.;
-uniform float sun_radius = .1;
-uniform float sun_fade = .03;
+uniform float sun_radius = .08;
+uniform float sun_fade : hint_range(0.0, .05) = .03;
 
-uniform vec2 moon_pos = vec2(.5, .7);
+const vec4 moon_colour = vec4(1, 1, 1, 1);
+uniform vec2 moon_pos = vec2(.7, .3);
+uniform float moon_strength = .2;
+uniform float moon_radius = .06;
+uniform float moon_fade : hint_range(0.0, 0.05) = .015;
+uniform float m_shadow_dist : hint_range(0.0, 0.1) = .03;
+uniform float m_shadow_rot : hint_range(0.0, 360.0) = 0.;
 
 vec2 rotate_point(float point, float deg) {
 	float rad = deg * (PI / 180.);
@@ -96,6 +102,13 @@ float perform_fade(vec2 uv, vec2 scrn_pixel_size, vec2 ray_step, vec2 final_offs
 	return dist_from_offset / max_dist_from_offset;  // return percent
 }
 
+vec4 get_sun_col_addition(float sun_dist) {
+	float fade_amnt = sun_radius - sun_fade;
+	float multiplier = min(1., 1. - ((sun_dist - fade_amnt) / (sun_radius - fade_amnt)));
+	multiplier *= sun_strength;
+	return sun_colour * multiplier;
+}
+
 void fragment() {
 	float light_map_r = texture(LIGHT_MAP, UV).r;
 	bool is_red = light_map_r > EPSILON;
@@ -106,14 +119,23 @@ void fragment() {
 		COLOR = mix(upper_colour, lower_colour, UV.y); 
 		COLOR.a = fade_btm * (bg_strength * .5 + float(debug_mode));  // half the opacity by default
 		
+		// SUN & MOON
 		float sun_dist = length(UV - sun_pos);
-		if (sun_dist <= sun_radius) {
-			// SUN
-			float fade_amnt = sun_radius - sun_fade;
-			float multiplier = min(1., 1. - ((sun_dist - fade_amnt) / (sun_radius - fade_amnt)));
-			multiplier *= sun_strength;
-			COLOR += sun_colour * multiplier;
+		float moon_dist = length(UV - moon_pos);
+		vec4 col_addition = vec4(0, 0, 0, 0);
+		if (sun_dist <= sun_radius) col_addition += get_sun_col_addition(sun_dist);
+		if (moon_dist <= moon_radius) {
+			float fade_amnt = moon_radius - moon_fade;
+			float multiplier = min(1., 1. - ((moon_dist - fade_amnt) / (moon_radius - fade_amnt)));
+			col_addition *= 1. - multiplier;  // before moon strength
+			multiplier *= moon_strength;
+			// shadow
+			float shadow_dist = length(UV - (moon_pos + rotate_point(m_shadow_dist, m_shadow_rot)));
+			float shadow_fade = (shadow_dist - fade_amnt) / (moon_radius - fade_amnt);
+			float shadow_multiplier = float(shadow_dist >= moon_radius);
+			col_addition += moon_colour * (multiplier * shadow_multiplier);
 		}
+		COLOR += col_addition;
 	}
 	
 	// RAYS
