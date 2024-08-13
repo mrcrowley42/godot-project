@@ -42,7 +42,7 @@ const vec4 moon_colour = vec4(1, 1, 1, 1);
 uniform vec2 moon_pos = vec2(.7, .3);
 uniform float moon_strength = .2;
 uniform float moon_radius = .06;
-uniform float moon_fade : hint_range(0.0, 0.05) = .015;
+uniform float moon_fade : hint_range(0.001, 0.05) = .015;
 uniform float m_shadow_dist : hint_range(0.0, 0.1) = .03;
 uniform float m_shadow_rot : hint_range(0.0, 360.0) = 0.;
 
