@@ -40,7 +40,7 @@ uniform float sun_fade : hint_range(0.0, .05) = .03;
 
 const vec4 moon_colour = vec4(1, 1, 1, 1);
 uniform vec2 moon_pos = vec2(.7, .3);
-uniform float moon_strength = .2;
+uniform float moon_strength = .6;
 uniform float moon_radius = .06;
 uniform float moon_fade : hint_range(0.001, 0.05) = .01;
 uniform float m_shadow_dist : hint_range(0.0, 0.1) = .03;
@@ -102,7 +102,7 @@ float perform_fade(vec2 uv, vec2 scrn_pixel_size, vec2 ray_step, vec2 final_offs
 	return dist_from_offset / max_dist_from_offset;  // return percent
 }
 
-vec4 get_sun_col(float sun_dist) {
+vec4 get_sun_col(vec4 colour, float sun_dist) {
 	float fade_amnt = sun_radius - sun_fade;
 	float multiplier = min(1., 1. - ((sun_dist - fade_amnt) / (sun_radius - fade_amnt)));
 	multiplier *= sun_strength;
@@ -137,7 +137,7 @@ void fragment() {
 		float sun_dist = length(UV - sun_pos);
 		float moon_dist = length(UV - moon_pos);
 		vec4 col_addition = vec4(0.);
-		if (sun_dist <= sun_radius) col_addition = get_sun_col(sun_dist);  // do sun first
+		if (sun_dist <= sun_radius) col_addition = get_sun_col(COLOR, sun_dist);  // do sun first
 		if (moon_dist <= moon_radius) col_addition = get_moon_col(UV, moon_dist, col_addition);
 		COLOR += col_addition;
 	}
