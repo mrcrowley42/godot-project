@@ -34,7 +34,7 @@ uniform int ray_quality : hint_range(5, 15) = 10;
 
 uniform vec4 sun_colour : source_color = vec4(.3, .3, .15, 1.);
 uniform vec2 sun_pos = vec2(.9, .3);
-uniform float sun_strength = 1.;
+uniform float sun_strength = 2.;
 uniform float sun_radius = .08;
 uniform float sun_fade : hint_range(0.0, .05) = .03;
 
@@ -42,7 +42,7 @@ const vec4 moon_colour = vec4(1, 1, 1, 1);
 uniform vec2 moon_pos = vec2(.7, .3);
 uniform float moon_strength = .2;
 uniform float moon_radius = .06;
-uniform float moon_fade : hint_range(0.001, 0.05) = .015;
+uniform float moon_fade : hint_range(0.001, 0.05) = .01;
 uniform float m_shadow_dist : hint_range(0.0, 0.1) = .03;
 uniform float m_shadow_rot : hint_range(0.0, 360.0) = 0.;
 
@@ -137,7 +137,7 @@ void fragment() {
 		float sun_dist = length(UV - sun_pos);
 		float moon_dist = length(UV - moon_pos);
 		vec4 col_addition = vec4(0.);
-		if (sun_dist <= sun_radius) col_addition = get_sun_col(sun_dist);
+		if (sun_dist <= sun_radius) col_addition = get_sun_col(sun_dist);  // do sun first
 		if (moon_dist <= moon_radius) col_addition = get_moon_col(UV, moon_dist, col_addition);
 		COLOR += col_addition;
 	}

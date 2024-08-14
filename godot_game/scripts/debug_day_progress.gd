@@ -5,11 +5,13 @@ extends Label
 @onready var progressing = find_child("progressing")
 @onready var debug = find_child("debug")
 @onready var t_div_disp = find_child("time_div_disp")
+@onready var m_phase_box = find_child("moon_phase_box")
 
 var dragging = false
 
 func _process(_delta):
 	progressing.button_pressed = debug_content.background.is_progressing
+	m_phase_box.value = debug_content.background.moon_phase
 	if !dragging:
 		slider.value = debug_content.background.day_percent
 	else:
@@ -43,3 +45,10 @@ func _on_time_div_value_changed(value):
 	debug_content.background.time_div = v
 	debug_content.background.update_time()
 	t_div_disp.text = 'x' + str(v)
+
+
+func _on_spin_box_value_changed(value):
+	value = int(value)
+	debug_content.background.is_progressing = value == debug_content.background.moon_phase
+	debug_content.background.moon_phase = value
+	debug_content.background.update_light_shader()

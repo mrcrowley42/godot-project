@@ -123,14 +123,14 @@ shader_parameter/ray_strength = 1.5
 shader_parameter/ray_quality = 10
 shader_parameter/sun_colour = Color(0.3, 0.3, 0.15, 1)
 shader_parameter/sun_pos = Vector2(0.9, 0.3)
-shader_parameter/sun_strength = 1.0
+shader_parameter/sun_strength = 2.0
 shader_parameter/sun_radius = 0.08
 shader_parameter/sun_fade = 0.03
 shader_parameter/moon_pos = Vector2(0.7, 0.3)
 shader_parameter/moon_strength = 0.2
 shader_parameter/moon_radius = 0.06
-shader_parameter/moon_fade = 0.015
-shader_parameter/m_shadow_dist = 0.03
+shader_parameter/moon_fade = 0.01
+shader_parameter/m_shadow_dist = 0.09
 shader_parameter/m_shadow_rot = 0.0
 shader_parameter/LIGHT_MAP = ExtResource("8_aulml")
 
