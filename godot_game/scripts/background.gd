@@ -11,10 +11,10 @@ class_name Background extends ScriptNode
 @export var ray_length_curve: Curve
 @export var ray_direction_curve: Curve
 @export_subgroup("Heavenly Bodies")  # >:)
-@export var sun_pos: Curve2D
-@export var sun_strength: Curve
-@export var moon_pos: Curve2D
-@export var moon_strength: Curve
+@export var sun_x: Curve
+@export var sun_y: Curve
+@export var moon_x: Curve
+@export var moon_y: Curve
 
 @onready var bg_sprite: Sprite2D = find_child("BG")
 @onready var shader_rect: ColorRect = find_child("LightShader")
@@ -56,6 +56,9 @@ func update_light_shader():
 	shader_rect.material.set("shader_parameter/ray_strength", ray_strength_curve.sample(day_percent))
 	shader_rect.material.set("shader_parameter/ray_length", ray_length_curve.sample(day_percent))
 	shader_rect.material.set("shader_parameter/ray_direction", ray_direction_curve.sample(day_percent))
+	
+	shader_rect.material.set("shader_parameter/sun_pos", Vector2(1. - sun_x.sample(day_percent), 1. - sun_y.sample(day_percent)))
+	shader_rect.material.set("shader_parameter/moon_pos", Vector2(1. - moon_x.sample(day_percent), 1. - moon_y.sample(day_percent)))
 	
 	shader_rect.material.set("shader_parameter/m_shadow_dist", MOON_PHASE_VALUES[moon_phase][0])
 	shader_rect.material.set("shader_parameter/m_shadow_rot", MOON_PHASE_VALUES[moon_phase][1])
