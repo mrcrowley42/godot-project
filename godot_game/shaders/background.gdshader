@@ -139,7 +139,7 @@ void fragment() {
 		vec4 col_addition = vec4(0.);
 		if (sun_dist <= sun_radius) col_addition = get_sun_col(COLOR, sun_dist);  // do sun first
 		if (moon_dist <= moon_radius) col_addition = get_moon_col(UV, moon_dist, col_addition);
-		COLOR += col_addition;
+		COLOR += col_addition;  // THE SUN IS BLUE
 	}
 	
 	// RAYS
