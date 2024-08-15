@@ -145,8 +145,8 @@ shader_parameter/sun_fade = 0.03
 shader_parameter/moon_pos = Vector2(0.7, 0.3)
 shader_parameter/moon_strength = 0.6
 shader_parameter/moon_radius = 0.06
-shader_parameter/moon_fade = 0.01
-shader_parameter/m_shadow_dist = 0.077
+shader_parameter/moon_fade = 0.007
+shader_parameter/m_shadow_dist = 0.06
 shader_parameter/m_shadow_rot = 0.0
 shader_parameter/LIGHT_MAP = ExtResource("8_aulml")
 

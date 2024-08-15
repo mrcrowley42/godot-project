@@ -44,8 +44,8 @@ const vec4 moon_colour = vec4(1, 1, 1, 1);
 uniform vec2 moon_pos = vec2(.7, .3);
 uniform float moon_strength = .6;
 uniform float moon_radius = .06;
-uniform float moon_fade : hint_range(0.001, 0.05) = .01;
-uniform float m_shadow_dist : hint_range(0.0, 0.1) = .03;
+uniform float moon_fade : hint_range(0.001, 0.05) = .007;
+uniform float m_shadow_dist : hint_range(0.0, 0.1) = .06;
 uniform float m_shadow_rot : hint_range(0.0, 360.0) = 0.;
 
 vec2 rotate_point(float point, float deg) {
@@ -61,6 +61,7 @@ vec2 random(vec2 uv){
     return -1.0 + 2.0 * fract(sin(uv) * 43758.5453123);
 }
 
+// perlin noise
 float noise(vec2 uv) {
     vec2 uv_index = floor(uv);
     vec2 uv_fract = fract(uv);
@@ -71,6 +72,15 @@ float noise(vec2 uv) {
                      dot( random(uv_index + vec2(1.0,0.0) ), uv_fract - vec2(1.0,0.0) ), blur.x),
                 mix( dot( random(uv_index + vec2(0.0,1.0) ), uv_fract - vec2(0.0,1.0) ),
                      dot( random(uv_index + vec2(1.0,1.0) ), uv_fract - vec2(1.0,1.0) ), blur.x), blur.y) + 0.5;
+}
+
+// fisheye
+vec2 distort(vec2 p){
+	float d = length(p);
+	float z = sqrt(.0072 + d * d * -2.);
+	float r = atan(d, z) / 3.1415926535;
+	float phi = atan(p.y, p.x);
+	return vec2(r * cos(phi) + 0.5, r * sin(phi) + 0.5);
 }
 
 // ray cast from from_pos until it hits red and returns length of ray & stores offset in offset_store.
@@ -129,7 +139,8 @@ vec4 get_sun_col(float sun_dist) {
 }
 
 vec4 get_moon_col(vec2 uv, float moon_dist, vec4 col_addition) {
-	vec4 noise_col = moon_colour * noise((uv - moon_pos + TIME * .001) * 25.);
+	vec2 fisheye = distort(uv - moon_pos);
+	vec4 noise_col = moon_colour * noise((fisheye + TIME * .02) * 5.);
 	float fade_amnt = moon_radius - moon_fade;
 	float multiplier = min(1., 1. - ((moon_dist - fade_amnt) / (moon_radius - fade_amnt)));
 	col_addition *= 1. - multiplier;
