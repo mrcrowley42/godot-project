@@ -21,7 +21,7 @@ class_name Background extends ScriptNode
 
 
 const SECS_PER_DAY = 86400
-const MOON_PHASES: int = 11
+const MOON_PHASES: int = 12
 const MOON_PHASE_VALUES = {
 	0: [.09, 0],
 	1: [.07, 0],
