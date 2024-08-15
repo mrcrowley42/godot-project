@@ -71,9 +71,10 @@ func change_day_progress(value: float, from_debug = false):
 
 func set_moon_phase():
 	@warning_ignore("narrowing_conversion")  ## shut up
-	var current: int = Time.get_unix_time_from_system()
+	var today = Time.get_datetime_dict_from_system()
+	var current: int = Time.get_unix_time_from_datetime_dict({"year": today.year, "month": today.month, "day": today.day})
 	@warning_ignore("integer_division")
-	var start: int = Time.get_unix_time_from_datetime_dict({"year": Time.get_datetime_dict_from_system().year, "month": 1, "day": 1})
+	var start: int = Time.get_unix_time_from_datetime_dict({"year": today.year, "month": 1, "day": 1})
 	@warning_ignore("integer_division")
 	var day_of_year: int = floor((current - start) / SECS_PER_DAY)
 	moon_phase = day_of_year % MOON_PHASES
