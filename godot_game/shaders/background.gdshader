@@ -140,7 +140,7 @@ vec4 get_sun_col(float sun_dist) {
 
 vec4 get_moon_col(vec2 uv, float moon_dist, vec4 col_addition) {
 	vec2 fisheye = distort(uv - moon_pos);
-	vec4 noise_col = moon_colour * noise((fisheye + TIME * .02) * 5.);
+	vec4 noise_col = moon_colour * noise((fisheye + TIME * .01) * 5.);
 	float fade_amnt = moon_radius - moon_fade;
 	float multiplier = min(1., 1. - ((moon_dist - fade_amnt) / (moon_radius - fade_amnt)));
 	col_addition *= 1. - multiplier;

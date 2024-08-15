@@ -124,7 +124,7 @@ shader_parameter/tint_strength = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_arjdf"]
 shader = ExtResource("7_1pcjq")
-shader_parameter/debug_mode = true
+shader_parameter/debug_mode = false
 shader_parameter/upper_colour = Color(1, 0.5, 0.4, 1)
 shader_parameter/lower_colour = Color(0, 0.4, 1, 1)
 shader_parameter/ray_colour = Color(1, 1, 1, 1)
