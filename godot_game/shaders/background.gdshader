@@ -5,6 +5,8 @@ RAY & FADE QUALITY IS CAPPED
 (for performance reasons & negligible noticable differences at higher qualities)
 
 Toggling on default fade reduces fps by ~100 atm
+
+for moon noise: https://godotshaders.com/snippet/2d-noise/
 */
 
 shader_type canvas_item;
@@ -52,6 +54,23 @@ vec2 rotate_point(float point, float deg) {
 		point * cos(rad) - point * sin(rad),
 		point * sin(rad) + point * cos(rad)
 	);
+}
+
+vec2 random(vec2 uv){
+    uv = vec2(dot(uv, vec2(127.1,311.7)), dot(uv, vec2(269.5,183.3)));
+    return -1.0 + 2.0 * fract(sin(uv) * 43758.5453123);
+}
+
+float noise(vec2 uv) {
+    vec2 uv_index = floor(uv);
+    vec2 uv_fract = fract(uv);
+
+    vec2 blur = smoothstep(0.0, 1.0, uv_fract);
+
+    return mix( mix( dot( random(uv_index + vec2(0.0,0.0) ), uv_fract - vec2(0.0,0.0) ),
+                     dot( random(uv_index + vec2(1.0,0.0) ), uv_fract - vec2(1.0,0.0) ), blur.x),
+                mix( dot( random(uv_index + vec2(0.0,1.0) ), uv_fract - vec2(0.0,1.0) ),
+                     dot( random(uv_index + vec2(1.0,1.0) ), uv_fract - vec2(1.0,1.0) ), blur.x), blur.y) + 0.5;
 }
 
 // ray cast from from_pos until it hits red and returns length of ray & stores offset in offset_store.
@@ -110,6 +129,7 @@ vec4 get_sun_col(float sun_dist) {
 }
 
 vec4 get_moon_col(vec2 uv, float moon_dist, vec4 col_addition) {
+	vec4 noise_col = moon_colour * noise((uv - moon_pos + TIME * .001) * 25.);
 	float fade_amnt = moon_radius - moon_fade;
 	float multiplier = min(1., 1. - ((moon_dist - fade_amnt) / (moon_radius - fade_amnt)));
 	col_addition *= 1. - multiplier;
@@ -120,7 +140,7 @@ vec4 get_moon_col(vec2 uv, float moon_dist, vec4 col_addition) {
 	float shadow_multiplier = float(shadow_dist >= moon_radius - moon_fade) * shadow_fade;
 	
 	multiplier *= moon_strength;
-	return col_addition + (moon_colour * multiplier * shadow_multiplier);
+	return col_addition + (noise_col * multiplier * shadow_multiplier);
 }
 
 void fragment() {
