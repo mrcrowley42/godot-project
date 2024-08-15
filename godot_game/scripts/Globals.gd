@@ -14,3 +14,8 @@ const UI_SECTION = "user interface"
 # CUSTOM NOTIFICATIONS
 const NOTIFICATION_MINIGAME_CLOSED = 500
 const NOTIFICATION_TOTRIS_CLOSED = 501
+
+#const notif = preload("res://scenes/UiScenes/notification.tscn")
+#
+#func create_notification(message: String):
+	#

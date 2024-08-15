@@ -8,12 +8,41 @@ script/source = "extends Node2D
 @onready var start_pos = Vector2((540-toast2.size.x)/2,-toast2.size.y)
 # dunno
 var messages = [\"random\", \"word\", \"banana\", \"mario\", \"bingus\"]
+var message_queue = []
+var busy = false
 
 func _on_button_button_down():
+	while get_child_count() != 2:
+		await get_tree().create_timer(2).timeout
+		if get_child_count() == 2:
+			continue
+	
 	var notif = toast.instantiate()
 	notif.message = messages.pick_random()
 	notif.position = start_pos
 	add_child(notif)
+
+
+
+func clear_queue():
+	print(\"23\")
+	busy = false
+
+
+#func _on_button_button_down():
+	#if not busy:
+		#busy = true
+		#var notif = toast.instantiate()
+		#notif.connect(\"complete\", clear_queue)
+		#notif.message = messages.pick_random()
+		#notif.position = start_pos
+		#add_child(notif)
+#
+#
+#
+#func clear_queue():
+	#print(\"23\")
+	#busy = false
 "
 
 [node name="Node2D2" type="Node2D"]
