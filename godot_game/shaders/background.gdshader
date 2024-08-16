@@ -45,7 +45,9 @@ uniform vec2 moon_pos = vec2(.7, .3);
 uniform float moon_strength = .6;
 uniform float moon_radius = .06;
 uniform float moon_fade : hint_range(0.001, 0.05) = .007;
-uniform float m_shadow_dist : hint_range(0.0, 0.1) = .06;
+uniform float moon_rotation : hint_range(0.01, 1.0) = 0.01;
+uniform float moon_curve_intensity : hint_range(.001, 10.) = 2.5;
+uniform float m_shadow_dist : hint_range(0.0, 0.1) = .05;
 uniform float m_shadow_rot : hint_range(0.0, 360.0) = 0.;
 
 vec2 rotate_point(float point, float deg) {
@@ -75,12 +77,12 @@ float noise(vec2 uv) {
 }
 
 // fisheye
-vec2 distort(vec2 p){
-	float d = length(p);
-	float z = sqrt(.0072 + d * d * -2.);
-	float r = atan(d, z) / 3.1415926535;
-	float phi = atan(p.y, p.x);
-	return vec2(r * cos(phi) + 0.5, r * sin(phi) + 0.5);
+vec2 distort(vec2 point){
+	float len = length(point);
+	float eye = sqrt((.0036 * moon_curve_intensity) + len * len * -moon_curve_intensity);
+	float r = atan(len, eye) / PI;
+	float theta = atan(point.y, point.x);
+	return r * vec2(cos(theta), sin(theta)) + 0.5;
 }
 
 // ray cast from from_pos until it hits red and returns length of ray & stores offset in offset_store.
@@ -140,7 +142,7 @@ vec4 get_sun_col(float sun_dist) {
 
 vec4 get_moon_col(vec2 uv, float moon_dist, vec4 col_addition) {
 	vec2 fisheye = distort(uv - moon_pos);
-	vec4 noise_col = moon_colour * noise((fisheye + TIME * .01) * 5.);
+	vec4 noise_col = moon_colour * noise((fisheye + TIME * moon_rotation) * 5.);
 	float fade_amnt = moon_radius - moon_fade;
 	float multiplier = min(1., 1. - ((moon_dist - fade_amnt) / (moon_radius - fade_amnt)));
 	col_addition *= 1. - multiplier;

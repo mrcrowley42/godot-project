@@ -124,7 +124,7 @@ shader_parameter/tint_strength = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_arjdf"]
 shader = ExtResource("7_1pcjq")
-shader_parameter/debug_mode = false
+shader_parameter/debug_mode = true
 shader_parameter/upper_colour = Color(1, 0.5, 0.4, 1)
 shader_parameter/lower_colour = Color(0, 0.4, 1, 1)
 shader_parameter/ray_colour = Color(1, 1, 1, 1)
@@ -146,7 +146,9 @@ shader_parameter/moon_pos = Vector2(0.7, 0.3)
 shader_parameter/moon_strength = 0.6
 shader_parameter/moon_radius = 0.06
 shader_parameter/moon_fade = 0.007
-shader_parameter/m_shadow_dist = 0.06
+shader_parameter/moon_rotation = 0.01
+shader_parameter/moon_curve_intensity = 2.5
+shader_parameter/m_shadow_dist = 0.05
 shader_parameter/m_shadow_rot = 0.0
 shader_parameter/LIGHT_MAP = ExtResource("8_aulml")
 
