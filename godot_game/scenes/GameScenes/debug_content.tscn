@@ -246,18 +246,18 @@ step = 0.01
 
 [node name="progressing" type="CheckBox" parent="dayprog"]
 layout_mode = 0
-offset_left = -196.0
-offset_top = 4.0
-offset_right = -172.0
-offset_bottom = 28.0
+offset_left = -210.0
+offset_top = -25.0
+offset_right = -186.0
+offset_bottom = -1.0
 tooltip_text = "day automatically progressing"
 
 [node name="debug" type="CheckBox" parent="dayprog"]
 layout_mode = 0
-offset_left = -223.0
-offset_top = 4.0
-offset_right = -199.0
-offset_bottom = 28.0
+offset_left = -237.0
+offset_top = -25.0
+offset_right = -213.0
+offset_bottom = -1.0
 tooltip_text = "background debug mode"
 
 [node name="time_div" type="HSlider" parent="dayprog"]
@@ -278,6 +278,16 @@ offset_right = 18.0
 offset_bottom = 50.0
 scale = Vector2(0.6, 0.6)
 text = "x1"
+
+[node name="moon_phase_box" type="SpinBox" parent="dayprog"]
+layout_mode = 0
+offset_left = -232.0
+offset_top = 5.0
+offset_right = -160.0
+offset_bottom = 40.0
+scale = Vector2(0.8, 0.8)
+tooltip_text = "moon phase"
+max_value = 11.0
 
 [node name="Strength" type="Label" parent="."]
 layout_mode = 0
@@ -527,6 +537,7 @@ text = "Unlock FPS"
 [connection signal="pressed" from="dayprog/progressing" to="dayprog" method="_on_progressing_pressed"]
 [connection signal="pressed" from="dayprog/debug" to="dayprog" method="_on_debug_pressed"]
 [connection signal="value_changed" from="dayprog/time_div" to="dayprog" method="_on_time_div_value_changed"]
+[connection signal="value_changed" from="dayprog/moon_phase_box" to="dayprog" method="_on_spin_box_value_changed"]
 [connection signal="value_changed" from="OverlayStrength" to="." method="_on_overlay_strength_value_changed"]
 [connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="value_changed" from="HSlider2" to="." method="_on_h_slider_2_value_changed"]
