@@ -368,7 +368,6 @@ texture = ExtResource("6_oihh8")
 metadata/_edit_lock_ = true
 
 [node name="LightShader" type="ColorRect" parent="Gameplay/Background/BG"]
-visible = false
 material = SubResource("ShaderMaterial_arjdf")
 offset_left = -434.0
 offset_top = -434.0
