@@ -8,6 +8,7 @@ extends Control
 @onready var clippy_area: Button  = %ClippyArea
 @onready var background = %Background
 @onready var screen_tint = %BG
+@onready var notif_man = %NotificationManager
 @onready var game = self.find_parent("Game")
 
 
@@ -77,3 +78,7 @@ func _on_check_box_toggled(toggled_on):
 	else:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 	
+
+
+func _on_notif_btn_button_down():
+	notif_man.new_notification()

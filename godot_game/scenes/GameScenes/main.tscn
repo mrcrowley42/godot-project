@@ -1,4 +1,4 @@
-[gd_scene load_steps=103 format=3 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=104 format=3 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_aqytd"]
@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bmwpenw32juko" path="res://UI stuff/Universal/background_light_map.png" id="8_aulml"]
 [ext_resource type="PackedScene" uid="uid://bebjn5n2kjwgb" path="res://scenes/Creatures/creature.tscn" id="9_ulkn4"]
 [ext_resource type="Script" path="res://scripts/Confetti.gd" id="10_tn1o6"]
-[ext_resource type="Theme" path="res://themes/invisible.tres" id="11_lcq7m"]
+[ext_resource type="Theme" uid="uid://dl1wes8p6lqlb" path="res://themes/invisible.tres" id="11_lcq7m"]
 [ext_resource type="Script" path="res://scripts/clippy_area.gd" id="12_n00c6"]
 [ext_resource type="Script" path="res://scripts/ui_theme_manager.gd" id="13_3i267"]
 [ext_resource type="Resource" uid="uid://bxhuu3qk52v3w" path="res://resources/ui_themes/green.tres" id="14_mb3dl"]
@@ -120,12 +120,12 @@ point_count = 4
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_045wl"]
 resource_local_to_scene = true
 shader = ExtResource("5_yth5i")
-shader_parameter/tint_colour = Color(1, 1, 1, 1)
+shader_parameter/tint_colour = Color(0.870588, 0.984314, 0.87451, 1)
 shader_parameter/tint_strength = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_arjdf"]
 shader = ExtResource("7_1pcjq")
-shader_parameter/debug_mode = true
+shader_parameter/debug_mode = false
 shader_parameter/upper_colour = Color(1, 0.5, 0.4, 1)
 shader_parameter/lower_colour = Color(0, 0.4, 1, 1)
 shader_parameter/ray_colour = Color(1, 1, 1, 1)
@@ -368,6 +368,7 @@ texture = ExtResource("6_oihh8")
 metadata/_edit_lock_ = true
 
 [node name="LightShader" type="ColorRect" parent="Gameplay/Background/BG"]
+visible = false
 material = SubResource("ShaderMaterial_arjdf")
 offset_left = -434.0
 offset_top = -434.0
@@ -1258,10 +1259,11 @@ volume_db = 8.0
 max_polyphony = 2
 bus = &"SFX"
 
-[node name="Notification Layer" type="CanvasLayer" parent="."]
+[node name="NotificationLayer" type="CanvasLayer" parent="."]
 layer = 111
 
-[node name="Node2D" type="Node2D" parent="Notification Layer"]
+[node name="NotificationManager" type="Node2D" parent="NotificationLayer"]
+unique_name_in_owner = true
 script = ExtResource("69_rkm2b")
 
 [connection signal="tree_exiting" from="MinigameManager" to="MinigameManager" method="_on_tree_exiting"]

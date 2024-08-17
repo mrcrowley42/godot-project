@@ -387,6 +387,19 @@ theme_override_fonts/font = ExtResource("9_y33yi")
 theme_override_font_sizes/font_size = 20
 text = "Toggle Hat"
 
+[node name="NotifBtn" type="Button" parent="."]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 532.0
+offset_right = 213.0
+offset_bottom = 565.0
+scale = Vector2(0.8, 0.8)
+theme = ExtResource("8_lqg4h")
+theme_override_colors/font_color = Color(1, 1, 0.905882, 1)
+theme_override_fonts/font = ExtResource("9_y33yi")
+theme_override_font_sizes/font_size = 20
+text = "Notification"
+
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
 offset_left = 54.0
@@ -543,6 +556,7 @@ text = "Unlock FPS"
 [connection signal="value_changed" from="HSlider2" to="." method="_on_h_slider_2_value_changed"]
 [connection signal="button_down" from="GlassesBtn" to="." method="_on_glasses_btn_button_down"]
 [connection signal="button_down" from="HatBtn" to="." method="_on_hat_btn_button_down"]
+[connection signal="button_down" from="NotifBtn" to="." method="_on_notif_btn_button_down"]
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="item_selected" from="AnimSelect" to="." method="_on_anim_select_item_selected"]
 [connection signal="button_down" from="WindowSizeControls/HBoxContainer/MinimiseButton" to="WindowSizeControls" method="_on_min_down"]
