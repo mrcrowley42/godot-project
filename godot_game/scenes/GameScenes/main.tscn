@@ -446,6 +446,13 @@ theme = ExtResource("11_lcq7m")
 script = ExtResource("12_n00c6")
 metadata/_edit_lock_ = true
 
+[node name="NotificationLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="NotificationManager" type="Node2D" parent="NotificationLayer"]
+unique_name_in_owner = true
+script = ExtResource("69_rkm2b")
+
 [node name="UI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 
@@ -1258,13 +1265,6 @@ stream = ExtResource("68_dnpii")
 volume_db = 8.0
 max_polyphony = 2
 bus = &"SFX"
-
-[node name="NotificationLayer" type="CanvasLayer" parent="."]
-layer = 111
-
-[node name="NotificationManager" type="Node2D" parent="NotificationLayer"]
-unique_name_in_owner = true
-script = ExtResource("69_rkm2b")
 
 [connection signal="tree_exiting" from="MinigameManager" to="MinigameManager" method="_on_tree_exiting"]
 [connection signal="timeout" from="Gameplay/Background/bg_update_ticker" to="Gameplay/Background" method="_on_bg_update_ticker_timeout"]

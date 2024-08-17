@@ -16,19 +16,19 @@ class_name Notification extends Control
 @export var message: String
 
 @onready var message_label = %Message
-@onready var new_position = Vector2(position.x, y_offset)
+@onready var new_position = Vector2(position.x, position.y + y_offset)
 signal complete()
 
 func _ready():
 	message_label.text = message
-	modulate = Color(1,1,1,0)
+	#modulate = Color(1,1,1,0)
 	
 	var tween = create_tween()
 	tween.set_ease(ease_type)
 	tween.set_trans(transition_type)
-	tween.tween_property(self, "modulate", Color(1,1,1,1), animation_length)
+	#tween.tween_property(self, "modulate", Color(1,1,1,1), animation_length)
 	tween.parallel().tween_property(self, "position", new_position, animation_length)
-	
+	%SFX.play()
 	await get_tree().create_timer(notification_length).timeout
 	
 	var fadeout_tween = create_tween()
