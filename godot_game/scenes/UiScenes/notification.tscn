@@ -6,16 +6,17 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t0j48"]
 bg_color = Color(0.964706, 0.964706, 0.964706, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 border_color = Color(0.815686, 0.843137, 0.870588, 1)
+border_blend = true
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
-shadow_color = Color(0, 0, 0, 0.0980392)
+shadow_color = Color(0, 0, 0, 0.101961)
 shadow_size = 6
 shadow_offset = Vector2(0, 3)
 
@@ -43,7 +44,7 @@ metadata/_edit_lock_ = true
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 1
-theme_override_colors/font_color = Color(0.195, 0.21975, 0.25, 1)
+theme_override_colors/font_color = Color(0.185, 0.21425, 0.25, 1)
 theme_override_fonts/font = ExtResource("2_mjs0b")
 theme_override_font_sizes/font_size = 24
 text = "ACHIEVEMENT UNLOCKED!"
