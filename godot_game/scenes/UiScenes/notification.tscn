@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dvngmgfihp65d"]
 
-[ext_resource type="Script" path="res://scenes/UiScenes/notification.gd" id="1_utqx5"]
+[ext_resource type="Script" path="res://scripts/notification.gd" id="1_utqx5"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="2_7xpa7"]
 [ext_resource type="FontFile" uid="uid://cukp5skadwgit" path="res://fonts/JetBrainsMono-VariableFont_wght.ttf" id="2_qawbg"]
 

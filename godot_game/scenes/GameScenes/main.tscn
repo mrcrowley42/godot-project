@@ -32,12 +32,12 @@
 [ext_resource type="Texture2D" uid="uid://dckcusgfn24wj" path="res://icons/arrow.svg" id="30_kovtb"]
 [ext_resource type="Script" path="res://scripts/arrowscale.gd" id="31_1bhch"]
 [ext_resource type="Script" path="res://scripts/hidden_menu_panel.gd" id="32_jvqx8"]
+[ext_resource type="Script" path="res://scripts/options_menu.gd" id="32_wbwq3"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="33_1qhmu"]
-[ext_resource type="Script" path="res://scenes/GameScenes/options_menu.gd" id="33_idua3"]
 [ext_resource type="Script" path="res://scripts/theme_controls.gd" id="34_654l5"]
+[ext_resource type="Script" path="res://scripts/opt_menu_back_btn.gd" id="35_4io20"]
 [ext_resource type="Script" path="res://scripts/music_controls.gd" id="35_8cohh"]
 [ext_resource type="Texture2D" uid="uid://pfr6wdx80m45" path="res://icons/volume-fill.svg" id="36_g2683"]
-[ext_resource type="Script" path="res://scenes/GameScenes/opt_menu_back_btn.gd" id="37_k141y"]
 [ext_resource type="Script" path="res://scripts/mute_button.gd" id="37_xf1vk"]
 [ext_resource type="PackedScene" uid="uid://cbn0dv1k0onpb" path="res://scenes/UiScenes/vol_slider.tscn" id="38_17bv4"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="39_8ebm3"]
@@ -687,7 +687,7 @@ offset_bottom = 216.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_kxv3i")
-script = ExtResource("33_idua3")
+script = ExtResource("32_wbwq3")
 metadata/_edit_lock_ = true
 
 [node name="MainOptMenu" type="MarginContainer" parent="UI/OptionsMenu"]
@@ -765,7 +765,7 @@ theme = ExtResource("33_1qhmu")
 theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
 theme_override_font_sizes/font_size = 18
 text = "Cancel"
-script = ExtResource("37_k141y")
+script = ExtResource("35_4io20")
 
 [node name="ThemeControls" type="Node2D" parent="UI/OptionsMenu/GameplayOptionsMenu"]
 position = Vector2(-108, 26)
@@ -852,7 +852,7 @@ theme = ExtResource("33_1qhmu")
 theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
 theme_override_font_sizes/font_size = 18
 text = "Cancel"
-script = ExtResource("37_k141y")
+script = ExtResource("35_4io20")
 
 [node name="AppearanceMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
@@ -892,7 +892,7 @@ theme = ExtResource("33_1qhmu")
 theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
 theme_override_font_sizes/font_size = 18
 text = "Cancel"
-script = ExtResource("37_k141y")
+script = ExtResource("35_4io20")
 
 [node name="SoundMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
@@ -926,7 +926,7 @@ theme = ExtResource("33_1qhmu")
 theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
 theme_override_font_sizes/font_size = 18
 text = "Cancel"
-script = ExtResource("37_k141y")
+script = ExtResource("35_4io20")
 
 [node name="MusicControls" type="Node2D" parent="UI/OptionsMenu/SoundMenu"]
 position = Vector2(102, 26)
@@ -1097,7 +1097,7 @@ size_flags_vertical = 4
 theme = ExtResource("33_1qhmu")
 theme_override_font_sizes/font_size = 24
 text = "Close"
-script = ExtResource("37_k141y")
+script = ExtResource("35_4io20")
 
 [node name="HScrollBar" type="ScrollContainer" parent="UI/OptionsMenu/CreditsMenu/Node2D"]
 offset_left = 10.0
