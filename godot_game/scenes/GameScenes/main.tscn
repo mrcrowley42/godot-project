@@ -37,6 +37,7 @@
 [ext_resource type="Script" path="res://scripts/theme_controls.gd" id="34_654l5"]
 [ext_resource type="Script" path="res://scripts/music_controls.gd" id="35_8cohh"]
 [ext_resource type="Texture2D" uid="uid://pfr6wdx80m45" path="res://icons/volume-fill.svg" id="36_g2683"]
+[ext_resource type="Script" path="res://scenes/GameScenes/opt_menu_back_btn.gd" id="37_k141y"]
 [ext_resource type="Script" path="res://scripts/mute_button.gd" id="37_xf1vk"]
 [ext_resource type="PackedScene" uid="uid://cbn0dv1k0onpb" path="res://scenes/UiScenes/vol_slider.tscn" id="38_17bv4"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="39_8ebm3"]
@@ -175,19 +176,17 @@ func _on_button_down():
 bg_color = Color(0, 0, 0, 0.737255)
 border_color = Color(0.8, 0.8, 0.8, 0.411765)
 
+[sub_resource type="GDScript" id="GDScript_3dqpd"]
+script/source = "extends MarginContainer
+
+func _ready():
+	visible = true
+"
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_arbxs"]
 bg_color = Color(0, 0, 0, 0.737255)
 draw_center = false
 border_color = Color(0.8, 0.8, 0.8, 0.411765)
-
-[sub_resource type="GDScript" id="GDScript_xdo0o"]
-script/source = "extends Button
-
-
-func _on_button_up():
-	%BtnClick.play()
-	%SettingsMenu.visible = !%SettingsMenu.visible
-"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3535b"]
 bg_color = Color(0.822295, 0.511699, 0.352571, 1)
@@ -210,17 +209,6 @@ color = Color(0.793417, 0.388279, 0.00261003, 1)
 grow_begin = 0.0
 grow_end = 0.0
 thickness = 40
-
-[sub_resource type="GDScript" id="GDScript_ao166"]
-script/source = "extends Button
-
-@onready var credit_menu = %CreditsMenu
-@onready var btn_sfx = %BtnClick
-
-func _on_button_down():
-	btn_sfx.play()
-	credit_menu.visible = !credit_menu.visible
-"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qyod2"]
 bg_color = Color(0.2, 0.2, 0.2, 1)
@@ -699,52 +687,53 @@ offset_bottom = 216.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_kxv3i")
-script = ExtResource("32_jvqx8")
+script = ExtResource("33_idua3")
 metadata/_edit_lock_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu"]
+[node name="MainOptMenu" type="MarginContainer" parent="UI/OptionsMenu"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 40
+script = SubResource("GDScript_3dqpd")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/MainOptMenu"]
 layout_mode = 2
 theme_override_constants/separation = 14
-script = ExtResource("33_idua3")
 
-[node name="Button4" type="Button" parent="UI/OptionsMenu/MarginContainer/VBoxContainer"]
+[node name="AppearanceBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme = ExtResource("18_v1mb2")
 text = "Appearance"
 
-[node name="Button5" type="Button" parent="UI/OptionsMenu/MarginContainer/VBoxContainer"]
+[node name="FactBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme = ExtResource("18_v1mb2")
 text = "Fact Book"
 
-[node name="Button6" type="Button" parent="UI/OptionsMenu/MarginContainer/VBoxContainer"]
+[node name="GameplaySettingsBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme = ExtResource("18_v1mb2")
 text = "Options"
 
-[node name="Button2" type="Button" parent="UI/OptionsMenu/MarginContainer/VBoxContainer"]
+[node name="SoundBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme = ExtResource("18_v1mb2")
 text = "Sound Settings"
 
-[node name="Button3" type="Button" parent="UI/OptionsMenu/MarginContainer/VBoxContainer"]
+[node name="CreditsBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme = ExtResource("18_v1mb2")
 text = "Credits"
 
-[node name="SettingsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
+[node name="GameplayOptionsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
 visible = false
@@ -753,10 +742,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_arbxs")
 script = ExtResource("32_jvqx8")
 metadata/_edit_lock_ = true
 
-[node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/SettingsMenu"]
+[node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/GameplayOptionsMenu"]
 position = Vector2(-50, -130)
 
-[node name="Save" type="Button" parent="UI/OptionsMenu/SettingsMenu/SaveButtons"]
+[node name="Save" type="Button" parent="UI/OptionsMenu/GameplayOptionsMenu/SaveButtons"]
 offset_left = 90.0
 offset_top = 484.0
 offset_right = 234.0
@@ -766,7 +755,7 @@ theme_override_colors/font_hover_color = Color(0.4947, 0.97, 0.4947, 1)
 theme_override_font_sizes/font_size = 18
 text = "Save Settings"
 
-[node name="Cancel" type="Button" parent="UI/OptionsMenu/SettingsMenu/SaveButtons"]
+[node name="Cancel" type="Button" parent="UI/OptionsMenu/GameplayOptionsMenu/SaveButtons"]
 texture_filter = 5
 offset_left = 317.0
 offset_top = 484.0
@@ -776,14 +765,14 @@ theme = ExtResource("33_1qhmu")
 theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
 theme_override_font_sizes/font_size = 18
 text = "Cancel"
-script = SubResource("GDScript_xdo0o")
+script = ExtResource("37_k141y")
 
-[node name="ThemeControls" type="Node2D" parent="UI/OptionsMenu/SettingsMenu"]
+[node name="ThemeControls" type="Node2D" parent="UI/OptionsMenu/GameplayOptionsMenu"]
 position = Vector2(-108, 26)
 scale = Vector2(0.75, 0.75)
 script = ExtResource("34_654l5")
 
-[node name="Label" type="Label" parent="UI/OptionsMenu/SettingsMenu/ThemeControls"]
+[node name="Label" type="Label" parent="UI/OptionsMenu/GameplayOptionsMenu/ThemeControls"]
 offset_left = 210.0
 offset_top = 250.667
 offset_right = 400.0
@@ -795,7 +784,7 @@ text = "Theme"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="vHBoxContainer" type="HBoxContainer" parent="UI/OptionsMenu/SettingsMenu/ThemeControls"]
+[node name="vHBoxContainer" type="HBoxContainer" parent="UI/OptionsMenu/GameplayOptionsMenu/ThemeControls"]
 offset_left = 225.0
 offset_top = 327.0
 offset_right = 375.0
@@ -805,7 +794,7 @@ size_flags_vertical = 4
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="Button2" type="Button" parent="UI/OptionsMenu/SettingsMenu/ThemeControls/vHBoxContainer"]
+[node name="Button2" type="Button" parent="UI/OptionsMenu/GameplayOptionsMenu/ThemeControls/vHBoxContainer"]
 custom_minimum_size = Vector2(65, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -814,7 +803,7 @@ theme_override_font_sizes/font_size = 44
 theme_override_styles/normal = SubResource("StyleBoxFlat_3535b")
 text = "<"
 
-[node name="Button" type="Button" parent="UI/OptionsMenu/SettingsMenu/ThemeControls/vHBoxContainer"]
+[node name="Button" type="Button" parent="UI/OptionsMenu/GameplayOptionsMenu/ThemeControls/vHBoxContainer"]
 custom_minimum_size = Vector2(65, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -825,12 +814,126 @@ theme_override_font_sizes/font_size = 44
 theme_override_styles/normal = SubResource("StyleBoxFlat_3535b")
 text = ">"
 
-[node name="MusicControls" type="Node2D" parent="UI/OptionsMenu/SettingsMenu"]
+[node name="FactsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
+unique_name_in_owner = true
+process_mode = 3
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_arbxs")
+script = ExtResource("32_jvqx8")
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="UI/OptionsMenu/FactsMenu"]
+layout_mode = 2
+theme = ExtResource("39_8ebm3")
+text = "FACTS"
+horizontal_alignment = 1
+
+[node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/FactsMenu"]
+position = Vector2(-50, -130)
+
+[node name="Save" type="Button" parent="UI/OptionsMenu/FactsMenu/SaveButtons"]
+offset_left = 90.0
+offset_top = 484.0
+offset_right = 234.0
+offset_bottom = 532.0
+theme = ExtResource("33_1qhmu")
+theme_override_colors/font_hover_color = Color(0.4947, 0.97, 0.4947, 1)
+theme_override_font_sizes/font_size = 18
+text = "Save Settings"
+
+[node name="Cancel" type="Button" parent="UI/OptionsMenu/FactsMenu/SaveButtons"]
+texture_filter = 5
+offset_left = 317.0
+offset_top = 484.0
+offset_right = 450.0
+offset_bottom = 532.0
+theme = ExtResource("33_1qhmu")
+theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
+theme_override_font_sizes/font_size = 18
+text = "Cancel"
+script = ExtResource("37_k141y")
+
+[node name="AppearanceMenu" type="PanelContainer" parent="UI/OptionsMenu"]
+unique_name_in_owner = true
+process_mode = 3
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_arbxs")
+script = ExtResource("32_jvqx8")
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="UI/OptionsMenu/AppearanceMenu"]
+layout_mode = 2
+theme = ExtResource("39_8ebm3")
+text = "APPEARANCE"
+horizontal_alignment = 1
+
+[node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/AppearanceMenu"]
+position = Vector2(-50, -130)
+
+[node name="Save" type="Button" parent="UI/OptionsMenu/AppearanceMenu/SaveButtons"]
+offset_left = 90.0
+offset_top = 484.0
+offset_right = 234.0
+offset_bottom = 532.0
+theme = ExtResource("33_1qhmu")
+theme_override_colors/font_hover_color = Color(0.4947, 0.97, 0.4947, 1)
+theme_override_font_sizes/font_size = 18
+text = "Save Settings"
+
+[node name="Cancel" type="Button" parent="UI/OptionsMenu/AppearanceMenu/SaveButtons"]
+texture_filter = 5
+offset_left = 317.0
+offset_top = 484.0
+offset_right = 450.0
+offset_bottom = 532.0
+theme = ExtResource("33_1qhmu")
+theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
+theme_override_font_sizes/font_size = 18
+text = "Cancel"
+script = ExtResource("37_k141y")
+
+[node name="SoundMenu" type="PanelContainer" parent="UI/OptionsMenu"]
+unique_name_in_owner = true
+process_mode = 3
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_arbxs")
+script = ExtResource("32_jvqx8")
+metadata/_edit_lock_ = true
+
+[node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/SoundMenu"]
+position = Vector2(-50, -130)
+
+[node name="Save" type="Button" parent="UI/OptionsMenu/SoundMenu/SaveButtons"]
+offset_left = 90.0
+offset_top = 484.0
+offset_right = 234.0
+offset_bottom = 532.0
+theme = ExtResource("33_1qhmu")
+theme_override_colors/font_hover_color = Color(0.4947, 0.97, 0.4947, 1)
+theme_override_font_sizes/font_size = 18
+text = "Save Settings"
+
+[node name="Cancel" type="Button" parent="UI/OptionsMenu/SoundMenu/SaveButtons"]
+texture_filter = 5
+offset_left = 317.0
+offset_top = 484.0
+offset_right = 450.0
+offset_bottom = 532.0
+theme = ExtResource("33_1qhmu")
+theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
+theme_override_font_sizes/font_size = 18
+text = "Cancel"
+script = ExtResource("37_k141y")
+
+[node name="MusicControls" type="Node2D" parent="UI/OptionsMenu/SoundMenu"]
 position = Vector2(102, 26)
 scale = Vector2(0.75, 0.75)
 script = ExtResource("35_8cohh")
 
-[node name="Label" type="Label" parent="UI/OptionsMenu/SettingsMenu/MusicControls"]
+[node name="Label" type="Label" parent="UI/OptionsMenu/SoundMenu/MusicControls"]
 offset_left = 210.0
 offset_top = 250.667
 offset_right = 400.0
@@ -842,7 +945,7 @@ text = "Music"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/OptionsMenu/SettingsMenu/MusicControls"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/OptionsMenu/SoundMenu/MusicControls"]
 offset_left = 225.0
 offset_top = 325.0
 offset_right = 375.0
@@ -852,7 +955,7 @@ size_flags_vertical = 4
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="Button2" type="Button" parent="UI/OptionsMenu/SettingsMenu/MusicControls/HBoxContainer"]
+[node name="Button2" type="Button" parent="UI/OptionsMenu/SoundMenu/MusicControls/HBoxContainer"]
 custom_minimum_size = Vector2(65, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -863,7 +966,7 @@ theme_override_font_sizes/font_size = 44
 theme_override_styles/normal = SubResource("StyleBoxFlat_3535b")
 text = "<"
 
-[node name="Button" type="Button" parent="UI/OptionsMenu/SettingsMenu/MusicControls/HBoxContainer"]
+[node name="Button" type="Button" parent="UI/OptionsMenu/SoundMenu/MusicControls/HBoxContainer"]
 custom_minimum_size = Vector2(65, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -874,10 +977,10 @@ theme_override_font_sizes/font_size = 44
 theme_override_styles/normal = SubResource("StyleBoxFlat_3535b")
 text = ">"
 
-[node name="VolumeControls" type="Node2D" parent="UI/OptionsMenu/SettingsMenu"]
+[node name="VolumeControls" type="Node2D" parent="UI/OptionsMenu/SoundMenu"]
 position = Vector2(-63, -88)
 
-[node name="GridContainer2" type="GridContainer" parent="UI/OptionsMenu/SettingsMenu/VolumeControls"]
+[node name="GridContainer2" type="GridContainer" parent="UI/OptionsMenu/SoundMenu/VolumeControls"]
 offset_left = 79.0
 offset_top = 148.0
 offset_right = 482.0
@@ -887,7 +990,7 @@ theme_override_constants/h_separation = 5
 theme_override_constants/v_separation = 10
 columns = 3
 
-[node name="Label" type="Label" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2"]
+[node name="Label" type="Label" parent="UI/OptionsMenu/SoundMenu/VolumeControls/GridContainer2"]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_fonts/font = ExtResource("19_3grg3")
@@ -895,7 +998,7 @@ theme_override_font_sizes/font_size = 24
 text = "Master"
 vertical_alignment = 1
 
-[node name="MasterMuted" type="Button" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2" groups=["settings_data"]]
+[node name="MasterMuted" type="Button" parent="UI/OptionsMenu/SoundMenu/VolumeControls/GridContainer2" groups=["settings_data"]]
 layout_mode = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_wd2mi")
 text = "          "
@@ -906,7 +1009,7 @@ expand_icon = true
 script = ExtResource("37_xf1vk")
 bus_name = "Master"
 
-[node name="VolumeMaster" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2" groups=["settings_data"] instance=ExtResource("38_17bv4")]
+[node name="VolumeMaster" parent="UI/OptionsMenu/SoundMenu/VolumeControls/GridContainer2" groups=["settings_data"] instance=ExtResource("38_17bv4")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -914,7 +1017,7 @@ theme_override_styles/slider = SubResource("StyleBoxLine_0f7jw")
 tick_count = 1
 bus_name = "Master"
 
-[node name="Label2" type="Label" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2"]
+[node name="Label2" type="Label" parent="UI/OptionsMenu/SoundMenu/VolumeControls/GridContainer2"]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_fonts/font = ExtResource("19_3grg3")
@@ -922,7 +1025,7 @@ theme_override_font_sizes/font_size = 24
 text = "SFX"
 vertical_alignment = 1
 
-[node name="SFXMuted" type="Button" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2" groups=["settings_data"]]
+[node name="SFXMuted" type="Button" parent="UI/OptionsMenu/SoundMenu/VolumeControls/GridContainer2" groups=["settings_data"]]
 layout_mode = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_wd2mi")
 text = "          "
@@ -933,13 +1036,13 @@ expand_icon = true
 script = ExtResource("37_xf1vk")
 bus_name = "SFX"
 
-[node name="VolumeSfx" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2" groups=["settings_data"] instance=ExtResource("38_17bv4")]
+[node name="VolumeSfx" parent="UI/OptionsMenu/SoundMenu/VolumeControls/GridContainer2" groups=["settings_data"] instance=ExtResource("38_17bv4")]
 layout_mode = 2
 value = 0.0
 tick_count = 1
 bus_name = "SFX"
 
-[node name="Label3" type="Label" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2"]
+[node name="Label3" type="Label" parent="UI/OptionsMenu/SoundMenu/VolumeControls/GridContainer2"]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_constants/shadow_outline_size = 5
@@ -949,7 +1052,7 @@ text = "Music
 "
 vertical_alignment = 1
 
-[node name="MusicMuted" type="Button" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2" groups=["settings_data"]]
+[node name="MusicMuted" type="Button" parent="UI/OptionsMenu/SoundMenu/VolumeControls/GridContainer2" groups=["settings_data"]]
 layout_mode = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_wd2mi")
 text = "          "
@@ -960,28 +1063,12 @@ expand_icon = true
 script = ExtResource("37_xf1vk")
 bus_name = "Music"
 
-[node name="VolumeMusic" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2" groups=["settings_data"] instance=ExtResource("38_17bv4")]
+[node name="VolumeMusic" parent="UI/OptionsMenu/SoundMenu/VolumeControls/GridContainer2" groups=["settings_data"] instance=ExtResource("38_17bv4")]
 layout_mode = 2
 tooltip_text = "Music"
 theme_override_styles/slider = SubResource("StyleBoxLine_kxflm")
 tick_count = 1
 bus_name = "Music"
-
-[node name="Credits" type="Node2D" parent="UI/OptionsMenu/SettingsMenu"]
-position = Vector2(180, 240)
-scale = Vector2(0.75, 0.75)
-
-[node name="Button" type="Button" parent="UI/OptionsMenu/SettingsMenu/Credits"]
-offset_left = -40.0
-offset_top = -294.666
-offset_right = 136.0
-offset_bottom = -264.666
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("33_1qhmu")
-theme_override_font_sizes/font_size = 24
-text = "View Credits"
-script = SubResource("GDScript_ao166")
 
 [node name="CreditsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
@@ -1010,7 +1097,7 @@ size_flags_vertical = 4
 theme = ExtResource("33_1qhmu")
 theme_override_font_sizes/font_size = 24
 text = "Close"
-script = SubResource("GDScript_ao166")
+script = ExtResource("37_k141y")
 
 [node name="HScrollBar" type="ScrollContainer" parent="UI/OptionsMenu/CreditsMenu/Node2D"]
 offset_left = 10.0
@@ -1289,21 +1376,27 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen2/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
 [connection signal="button_down" from="UI/ActivityMenu/NavigationArrows/LeftArrow" to="UI/ActivityMenu/NavigationArrows/LeftArrow" method="_on_button_down"]
 [connection signal="button_down" from="UI/ActivityMenu/NavigationArrows/LeftArrow2" to="UI/ActivityMenu/NavigationArrows/LeftArrow2" method="_on_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/MarginContainer/VBoxContainer/Button4" to="UI/OptionsMenu/MarginContainer/VBoxContainer" method="_on_button_3_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/MarginContainer/VBoxContainer/Button5" to="UI/OptionsMenu/MarginContainer/VBoxContainer" method="_on_button_3_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/MarginContainer/VBoxContainer/Button6" to="UI/OptionsMenu/MarginContainer/VBoxContainer" method="_on_button_3_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/MarginContainer/VBoxContainer/Button2" to="UI/OptionsMenu/MarginContainer/VBoxContainer" method="_on_button_2_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/MarginContainer/VBoxContainer/Button3" to="UI/OptionsMenu/MarginContainer/VBoxContainer" method="_on_button_3_button_down"]
-[connection signal="pressed" from="UI/OptionsMenu/SettingsMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
-[connection signal="button_up" from="UI/OptionsMenu/SettingsMenu/SaveButtons/Cancel" to="UI/OptionsMenu/SettingsMenu/SaveButtons/Cancel" method="_on_button_up"]
-[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/ThemeControls/vHBoxContainer/Button2" to="UI/OptionsMenu/SettingsMenu/ThemeControls" method="_on_back_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/ThemeControls/vHBoxContainer/Button" to="UI/OptionsMenu/SettingsMenu/ThemeControls" method="_on_forward_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MusicControls/HBoxContainer/Button2" to="UI/OptionsMenu/SettingsMenu/MusicControls" method="_on_back_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MusicControls/HBoxContainer/Button" to="UI/OptionsMenu/SettingsMenu/MusicControls" method="_on_forward_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2/MasterMuted" to="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2/MasterMuted" method="_on_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2/SFXMuted" to="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2/SFXMuted" method="_on_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2/MusicMuted" to="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2/MusicMuted" method="_on_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/Credits/Button" to="UI/OptionsMenu/SettingsMenu/Credits/Button" method="_on_button_down"]
+[connection signal="visibility_changed" from="UI/OptionsMenu" to="UI/OptionsMenu" method="_on_visibility_changed"]
+[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/AppearanceBtn" to="UI/OptionsMenu" method="_on_appearance_btn_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/FactBtn" to="UI/OptionsMenu" method="_on_fact_btn_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/GameplaySettingsBtn" to="UI/OptionsMenu" method="_on_gameplay_settings_btn_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/SoundBtn" to="UI/OptionsMenu" method="_on_sound_btn_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/CreditsBtn" to="UI/OptionsMenu" method="_on_credits_btn_button_down"]
+[connection signal="pressed" from="UI/OptionsMenu/GameplayOptionsMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
+[connection signal="button_down" from="UI/OptionsMenu/GameplayOptionsMenu/SaveButtons/Cancel" to="UI/OptionsMenu/GameplayOptionsMenu/SaveButtons/Cancel" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/GameplayOptionsMenu/ThemeControls/vHBoxContainer/Button2" to="UI/OptionsMenu/GameplayOptionsMenu/ThemeControls" method="_on_back_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/GameplayOptionsMenu/ThemeControls/vHBoxContainer/Button" to="UI/OptionsMenu/GameplayOptionsMenu/ThemeControls" method="_on_forward_button_down"]
+[connection signal="pressed" from="UI/OptionsMenu/FactsMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
+[connection signal="button_down" from="UI/OptionsMenu/FactsMenu/SaveButtons/Cancel" to="UI/OptionsMenu/FactsMenu/SaveButtons/Cancel" method="_on_button_down"]
+[connection signal="pressed" from="UI/OptionsMenu/AppearanceMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
+[connection signal="button_down" from="UI/OptionsMenu/AppearanceMenu/SaveButtons/Cancel" to="UI/OptionsMenu/AppearanceMenu/SaveButtons/Cancel" method="_on_button_down"]
+[connection signal="pressed" from="UI/OptionsMenu/SoundMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
+[connection signal="button_down" from="UI/OptionsMenu/SoundMenu/SaveButtons/Cancel" to="UI/OptionsMenu/SoundMenu/SaveButtons/Cancel" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/SoundMenu/MusicControls/HBoxContainer/Button2" to="UI/OptionsMenu/SoundMenu/MusicControls" method="_on_back_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/SoundMenu/MusicControls/HBoxContainer/Button" to="UI/OptionsMenu/SoundMenu/MusicControls" method="_on_forward_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/SoundMenu/VolumeControls/GridContainer2/MasterMuted" to="UI/OptionsMenu/SoundMenu/VolumeControls/GridContainer2/MasterMuted" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/SoundMenu/VolumeControls/GridContainer2/SFXMuted" to="UI/OptionsMenu/SoundMenu/VolumeControls/GridContainer2/SFXMuted" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/SoundMenu/VolumeControls/GridContainer2/MusicMuted" to="UI/OptionsMenu/SoundMenu/VolumeControls/GridContainer2/MusicMuted" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/CreditsMenu/Node2D/CreditsCloseBtn" to="UI/OptionsMenu/CreditsMenu/Node2D/CreditsCloseBtn" method="_on_button_down"]
 [connection signal="visibility_changed" from="UI/OptionsMenu/CreditsMenu/Node2D/HScrollBar" to="UI/OptionsMenu/CreditsMenu/Node2D/HScrollBar" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/NavigationButtons/FoodButton" to="UI/NavigationButtons/FoodButton" method="_on_button_down"]
