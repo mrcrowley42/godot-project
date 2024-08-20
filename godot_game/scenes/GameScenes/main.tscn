@@ -1,4 +1,4 @@
-[gd_scene load_steps=102 format=3 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=104 format=3 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_aqytd"]
@@ -70,6 +70,7 @@
 [ext_resource type="AudioStream" uid="uid://8ifwm2tjitur" path="res://sound_effects/yippee.mp3" id="66_uj0ps"]
 [ext_resource type="AudioStream" uid="uid://cx28efsxtr7c" path="res://sound_effects/button_click_fast.mp3" id="67_nfa6o"]
 [ext_resource type="AudioStream" uid="uid://dat0sfue6jjr5" path="res://sound_effects/metal-pipe-falling-sound-effect-made-with-Voicemod.mp3" id="68_dnpii"]
+[ext_resource type="Script" path="res://scripts/popup_manager.gd" id="69_rkm2b"]
 
 [sub_resource type="Gradient" id="Gradient_jl3ct"]
 offsets = PackedFloat32Array(0, 0.175676, 0.3, 0.4, 0.5, 0.635135, 0.7, 0.765766, 0.828829, 1)
@@ -102,6 +103,22 @@ max_value = 360.0
 _data = [Vector2(0, 255), 0.0, 0.0, 0, 0, Vector2(1, 100), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="Curve" id="Curve_wvyua"]
+_data = [Vector2(0.218, -0.1), 0.0, 0.0, 0, 0, Vector2(0.769, 1.1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_0tul1"]
+_data = [Vector2(0.218, 0.6), 0.0, 0.0, 0, 0, Vector2(0.311, 0.7), 1.45299, 1.45299, 0, 0, Vector2(0.504, 0.9), 0.0, 0.0, 0, 0, Vector2(0.659664, 0.769231), -1.37768, -1.37768, 0, 0, Vector2(0.786, 0.6), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Curve" id="Curve_r6ux5"]
+_data = [Vector2(0, 0.516), 0.0, 3.03385, 0, 0, Vector2(0.3, 1.1), 0.0, 0.0, 0, 0, Vector2(0.3, -0.1), 0.0, 0.0, 0, 0, Vector2(0.7, -0.1), 0.0, 0.0, 0, 0, Vector2(1, 0.538461), 2.27791, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Curve" id="Curve_s66ht"]
+_data = [Vector2(0, 0.85), 0.0, 0.0, 0, 0, Vector2(0.3, 0.5), 0.0, 0.0, 0, 0, Vector2(0.7, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 0.85), 0.0, 0.0, 0, 0]
+point_count = 4
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_045wl"]
 resource_local_to_scene = true
 shader = ExtResource("5_yth5i")
@@ -123,6 +140,19 @@ shader_parameter/ray_length = 0.12
 shader_parameter/ray_direction = 155.0
 shader_parameter/ray_strength = 1.5
 shader_parameter/ray_quality = 10
+shader_parameter/sun_colour = Color(0.3, 0.3, 0.15, 1)
+shader_parameter/sun_pos = Vector2(0.9, 0.3)
+shader_parameter/sun_strength = 3.0
+shader_parameter/sun_radius = 0.08
+shader_parameter/sun_fade = 0.03
+shader_parameter/moon_pos = Vector2(0.7, 0.3)
+shader_parameter/moon_strength = 0.6
+shader_parameter/moon_radius = 0.06
+shader_parameter/moon_fade = 0.007
+shader_parameter/moon_rotation = 0.01
+shader_parameter/moon_curve_intensity = 2.5
+shader_parameter/m_shadow_dist = 0.05
+shader_parameter/m_shadow_rot = 0.0
 shader_parameter/LIGHT_MAP = ExtResource("8_aulml")
 
 [sub_resource type="Gradient" id="Gradient_asbj7"]
@@ -345,6 +375,10 @@ bg_strength_curve = SubResource("Curve_s6pib")
 ray_strength_curve = SubResource("Curve_6i1ec")
 ray_length_curve = SubResource("Curve_joyfk")
 ray_direction_curve = SubResource("Curve_p4mvm")
+sun_x = SubResource("Curve_wvyua")
+sun_y = SubResource("Curve_0tul1")
+moon_x = SubResource("Curve_r6ux5")
+moon_y = SubResource("Curve_s66ht")
 
 [node name="bg_update_ticker" type="Timer" parent="Gameplay/Background"]
 autostart = true
@@ -434,6 +468,13 @@ mouse_default_cursor_shape = 6
 theme = ExtResource("11_lcq7m")
 script = ExtResource("12_n00c6")
 metadata/_edit_lock_ = true
+
+[node name="NotificationLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="NotificationManager" type="Node2D" parent="NotificationLayer"]
+unique_name_in_owner = true
+script = ExtResource("69_rkm2b")
 
 [node name="UI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
