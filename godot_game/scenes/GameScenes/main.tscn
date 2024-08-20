@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=3 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=102 format=3 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_aqytd"]
@@ -195,6 +195,36 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 corner_detail = 20
+
+[sub_resource type="GDScript" id="GDScript_c6ljj"]
+script/source = "extends GridContainer
+
+var unlockables = [preload(\"res://images/creature_sprites/hat-0.png\"),preload(\"res://images/creature_sprites/correct_scale/glasses-0.png\"),
+preload(\"res://images/creature_sprites/hat-1.png\"),preload(\"res://images/creature_sprites/correct_scale/glasses-1.png\"),
+preload(\"res://images/creature_sprites/hat-2.png\"),preload(\"res://images/creature_sprites/correct_scale/chill-0.png\"),
+preload(\"res://images/creature_sprites/sadge-1.png\"),preload(\"res://images/creature_sprites/correct_scale/confused-2.png\")]
+
+## Class that describes the cards (buttons) for memory.
+class Unlockable extends Button:
+	func _init(value):
+		icon = value
+		custom_minimum_size = Vector2(64,64)
+		size.x = 64
+		size.y = 64
+		expand_icon = false
+		add_theme_constant_override(\"icon_max_width\", 50)
+		#texture_normal = value
+		theme = load(\"res://themes/menu_btn.tres\")
+		#size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		#size_flags_vertical = Control.SIZE_EXPAND_FILL
+		
+		
+
+func _ready():
+	for item in unlockables:
+		var unlock_item = Unlockable.new(item)
+		add_child(unlock_item)
+"
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wd2mi"]
 
@@ -692,6 +722,7 @@ metadata/_edit_lock_ = true
 
 [node name="MainOptMenu" type="MarginContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 40
@@ -857,11 +888,24 @@ script = ExtResource("35_4io20")
 [node name="AppearanceMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_arbxs")
 script = ExtResource("32_jvqx8")
 metadata/_edit_lock_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/AppearanceMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="GridContainer" type="GridContainer" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 4
+script = SubResource("GDScript_c6ljj")
 
 [node name="Label" type="Label" parent="UI/OptionsMenu/AppearanceMenu"]
 layout_mode = 2
