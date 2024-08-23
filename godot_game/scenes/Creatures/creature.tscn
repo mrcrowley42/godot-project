@@ -219,10 +219,9 @@ bus = &"SFX"
 unique_name_in_owner = true
 scale = Vector2(0.225, 0.225)
 sprite_frames = SubResource("SpriteFrames_3cwqc")
-animation = &"idle"
+animation = &"baby"
 autoplay = "idle"
-frame = 2
-frame_progress = 0.273335
+frame_progress = 0.716304
 script = ExtResource("5_oh7gr")
 
 [node name="Accessories" type="Node2D" parent="Sprites"]
