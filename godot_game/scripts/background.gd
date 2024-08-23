@@ -26,7 +26,7 @@ const SECS_PER_DAY = 86400
 const BASE_COL: Color = Color(1, 1, 1, 1)
 const MAX_TIME_TINT: Color = Color(.59, .62, .74)
 const MOON_PHASES: int = 12
-const MOON_PHASE_VALUES = {
+const MOON_PHASE_VALUES = {  ## 0: distance, 1: rotation
 	0: [.09, 0],
 	1: [.07, 0],
 	2: [.055, 0],
@@ -56,10 +56,6 @@ func update_light_shader():
 	shader_rect.material.set("shader_parameter/ray_colour", ray_colour_curve.sample(day_percent))
 	
 	shader_rect.material.set("shader_parameter/bg_strength", bg_strength_curve.sample(day_percent))
-	var sample_perc = bg_time_tint_curve.sample(day_percent)
-	var p = BASE_COL * sample_perc - MAX_TIME_TINT * sample_perc
-	time_tint.color = BASE_COL - p
-	time_tint.color.a = 1;
 	
 	shader_rect.material.set("shader_parameter/ray_strength", ray_strength_curve.sample(day_percent))
 	shader_rect.material.set("shader_parameter/ray_length", ray_length_curve.sample(day_percent))
@@ -70,6 +66,12 @@ func update_light_shader():
 	
 	shader_rect.material.set("shader_parameter/m_shadow_dist", MOON_PHASE_VALUES[moon_phase][0])
 	shader_rect.material.set("shader_parameter/m_shadow_rot", MOON_PHASE_VALUES[moon_phase][1])
+	
+	# udpate background tint
+	var sample_perc = bg_time_tint_curve.sample(day_percent)
+	var col_percent: Color = BASE_COL * sample_perc - MAX_TIME_TINT * sample_perc
+	time_tint.color = BASE_COL - col_percent
+	time_tint.color.a = 1;
 
 ## clamped value
 func change_day_progress(value: float, from_debug = false):

@@ -354,7 +354,6 @@ corner_radius_bottom_left = 10
 [node name="Game" type="Node"]
 script = ExtResource("1_opnvu")
 debug_mode = true
-unlock_fps = true
 metadata/_edit_vertical_guides_ = [532.0, 8.0, 45.0, 53.0, 487.0, 495.0]
 metadata/_edit_horizontal_guides_ = [8.0, 667.0, 112.0, 111.0, 554.0, 562.0]
 
