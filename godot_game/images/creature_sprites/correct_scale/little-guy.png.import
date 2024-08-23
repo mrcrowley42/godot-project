@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d84hj0mtn2hw"
-path="res://.godot/imported/mood_24dp_FILL1_wght300_GRAD0_opsz24.svg-091f5d631ac569c3dfa57feae43396f0.ctex"
+uid="uid://dja4m82xkff5c"
+path="res://.godot/imported/little-guy.png-a8a44c0ad58c9057f649005ebc2f40b5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icons/mood_24dp_FILL1_wght300_GRAD0_opsz24.svg"
-dest_files=["res://.godot/imported/mood_24dp_FILL1_wght300_GRAD0_opsz24.svg-091f5d631ac569c3dfa57feae43396f0.ctex"]
+source_file="res://images/creature_sprites/correct_scale/little-guy.png"
+dest_files=["res://.godot/imported/little-guy.png-a8a44c0ad58c9057f649005ebc2f40b5.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.7
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

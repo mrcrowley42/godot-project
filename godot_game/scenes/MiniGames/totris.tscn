@@ -129,6 +129,7 @@ color_ramp = SubResource("Gradient_nmt2n")
 [node name="SFX" type="AudioStreamPlayer" parent="TotrisLogic"]
 unique_name_in_owner = true
 max_polyphony = 5
+bus = &"SFX"
 script = ExtResource("7_6nelh")
 
 [node name="UI" type="CanvasLayer" parent="."]
@@ -170,6 +171,7 @@ region_enabled = true
 region_rect = Rect2(0, 0, 1080, 75)
 
 [node name="StartMenu" type="Control" parent="UI/Control/TopOverlay"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 540.0
@@ -233,7 +235,6 @@ text = "Play
 "
 
 [node name="KillMenu" type="Control" parent="UI/Control/TopOverlay"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 540.0
@@ -275,9 +276,9 @@ clip_text = true
 [node name="BestScore" type="RichTextLabel" parent="UI/Control/TopOverlay/KillMenu"]
 modulate = Color(1, 0.752941, 0.196078, 1)
 layout_mode = 0
-offset_left = 341.0
+offset_left = 350.0
 offset_top = 247.0
-offset_right = 431.0
+offset_right = 440.0
 offset_bottom = 288.0
 scale = Vector2(0.7, 0.7)
 pivot_offset = Vector2(0.238159, 1.19049)
@@ -308,9 +309,9 @@ clip_text = true
 [node name="BestLevel" type="RichTextLabel" parent="UI/Control/TopOverlay/KillMenu"]
 modulate = Color(1, 0.752941, 0.196078, 1)
 layout_mode = 0
-offset_left = 341.0
+offset_left = 350.0
 offset_top = 277.0
-offset_right = 431.0
+offset_right = 440.0
 offset_bottom = 318.0
 scale = Vector2(0.7, 0.7)
 pivot_offset = Vector2(0.238159, 1.19049)

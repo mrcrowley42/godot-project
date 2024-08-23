@@ -15,6 +15,7 @@ const SQUARE_SIZE: Vector2 = Vector2(30, 30)
 var board_size: Vector2
 var all_pieces = []
 var y_corrections_left: int = 5
+var gravity_skips_left: int = 5
 var skip_next_gravity: bool = false
 var resting: bool = false
 
@@ -58,8 +59,9 @@ func perform_movement(movement_func):
 		skip_next_gravity = true
 
 func gravity_tick():
-	if skip_next_gravity:
+	if skip_next_gravity and gravity_skips_left > 0:
 		skip_next_gravity = false
+		gravity_skips_left -= 1
 		return
 	
 	body.add_y(SQUARE_SIZE.y)
