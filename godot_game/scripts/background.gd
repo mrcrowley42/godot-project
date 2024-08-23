@@ -6,6 +6,7 @@ class_name Background extends ScriptNode
 @export var ray_colour_curve: Gradient
 @export_subgroup("BG")
 @export var bg_strength_curve: Curve
+@export var bg_time_tint_curve: Curve
 @export_subgroup("Light Rays")
 @export var ray_strength_curve: Curve
 @export var ray_length_curve: Curve
@@ -18,6 +19,7 @@ class_name Background extends ScriptNode
 
 @onready var bg_sprite: Sprite2D = find_child("BG")
 @onready var shader_rect: ColorRect = find_child("LightShader")
+@onready var time_tine: CanvasModulate = find_child("TimeTint")
 
 
 const SECS_PER_DAY = 86400

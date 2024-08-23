@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bmwpenw32juko" path="res://UI stuff/Universal/background_light_map.png" id="8_aulml"]
 [ext_resource type="PackedScene" uid="uid://bebjn5n2kjwgb" path="res://scenes/Creatures/creature.tscn" id="9_ulkn4"]
 [ext_resource type="Script" path="res://scripts/Confetti.gd" id="10_tn1o6"]
-[ext_resource type="Theme" uid="uid://dl1wes8p6lqlb" path="res://themes/invisible.tres" id="11_lcq7m"]
+[ext_resource type="Theme" path="res://themes/invisible.tres" id="11_lcq7m"]
 [ext_resource type="Script" path="res://scripts/clippy_area.gd" id="12_n00c6"]
 [ext_resource type="Script" path="res://scripts/ui_theme_manager.gd" id="13_3i267"]
 [ext_resource type="Resource" uid="uid://bxhuu3qk52v3w" path="res://resources/ui_themes/green.tres" id="14_mb3dl"]
@@ -326,8 +326,9 @@ corner_radius_bottom_left = 10
 [node name="Game" type="Node"]
 script = ExtResource("1_opnvu")
 debug_mode = true
+unlock_fps = true
 metadata/_edit_vertical_guides_ = [532.0, 8.0, 45.0, 53.0, 487.0, 495.0]
-metadata/_edit_horizontal_guides_ = [8.0, 667.0, 112.0, 120.0, 554.0, 562.0]
+metadata/_edit_horizontal_guides_ = [8.0, 667.0, 112.0, 111.0, 554.0, 562.0]
 
 [node name="StatusManager" type="Node2D" parent="." groups=["save_data"]]
 unique_name_in_owner = true
@@ -359,7 +360,10 @@ moon_y = SubResource("Curve_s66ht")
 [node name="bg_update_ticker" type="Timer" parent="Gameplay/Background"]
 autostart = true
 
-[node name="BG" type="Sprite2D" parent="Gameplay/Background"]
+[node name="BGCanvasLayer" type="CanvasLayer" parent="Gameplay/Background"]
+layer = -1
+
+[node name="BG" type="Sprite2D" parent="Gameplay/Background/BGCanvasLayer"]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_045wl")
 position = Vector2(270, 337)
@@ -367,13 +371,15 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_oihh8")
 metadata/_edit_lock_ = true
 
-[node name="LightShader" type="ColorRect" parent="Gameplay/Background/BG"]
+[node name="LightShader" type="ColorRect" parent="Gameplay/Background/BGCanvasLayer/BG"]
 material = SubResource("ShaderMaterial_arjdf")
 offset_left = -434.0
 offset_top = -434.0
 offset_right = 434.0
 offset_bottom = 434.0
 color = Color(1, 1, 1, 0)
+
+[node name="TimeTint" type="CanvasModulate" parent="Gameplay/Background/BGCanvasLayer"]
 
 [node name="Creature" parent="Gameplay" node_paths=PackedStringArray("clippy_area") groups=["save_data"] instance=ExtResource("9_ulkn4")]
 unique_name_in_owner = true

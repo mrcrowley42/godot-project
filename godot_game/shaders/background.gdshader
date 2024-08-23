@@ -4,9 +4,10 @@ HYPER UNOPTIMISED RAYCASTING AHEAD
 RAY & FADE QUALITY IS CAPPED
 (for performance reasons & negligible noticable differences at higher qualities)
 
-Toggling on default fade reduces fps by ~100 atm
+Toggling on default fade reduces fps by ~80 atm
 
-for moon noise: https://godotshaders.com/snippet/2d-noise/
+perlin noise: https://godotshaders.com/snippet/2d-noise/
+fish eye: https://godotshaders.com/shader/2d-radial-distortion-fisheye-barrel/
 */
 
 shader_type canvas_item;
