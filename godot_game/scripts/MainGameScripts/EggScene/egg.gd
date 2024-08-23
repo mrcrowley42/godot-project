@@ -2,12 +2,11 @@ extends Node2D
 
 
 @onready var cracker: Timer = %EggTimer
+@onready var creature: AnimatedSprite2D = creature_selector()
 @export var skip_scene: bool
-
 
 func _enter_tree() -> void:
 
-	%LilGuy.visible = false
 	%EggSprite.visible = true
 
 func _ready() -> void:
@@ -17,10 +16,11 @@ func _ready() -> void:
 		get_tree().change_scene_to_file("res://scenes/GameScenes/prototype.tscn")
 	
 	cracker.timeout.connect(func() -> void:
+		print(creature)
 		print("done")
 		%Yip.play()
-		%EggSprite.visible=false
-		%LilGuy.visible=true
+		%EggSprite.visible= false
+		creature.visible= true
 		%Confetti.confet()
 		%StartGame.start()
 		)
@@ -30,7 +30,14 @@ func _ready() -> void:
 		get_tree().change_scene_to_file("res://scenes/GameScenes/prototype.tscn")
 		)
 
-func CreatureSelector():
-	pass
+func creature_selector():
+	var array = [
+		%LilGuy,
+		%Flopps
+	]
 	
+	for x in array:
+		x.visible = false
+		
+	return array.pick_random()
 
