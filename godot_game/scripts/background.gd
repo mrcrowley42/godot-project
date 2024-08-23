@@ -19,10 +19,12 @@ class_name Background extends ScriptNode
 
 @onready var bg_sprite: Sprite2D = find_child("BG")
 @onready var shader_rect: ColorRect = find_child("LightShader")
-@onready var time_tine: CanvasModulate = find_child("TimeTint")
+@onready var time_tint: CanvasModulate = find_child("TimeTint") 
 
 
 const SECS_PER_DAY = 86400
+const BASE_COL: Color = Color(1, 1, 1, 1)
+const MAX_TIME_TINT: Color = Color(.59, .62, .74)
 const MOON_PHASES: int = 12
 const MOON_PHASE_VALUES = {
 	0: [.09, 0],
@@ -54,6 +56,10 @@ func update_light_shader():
 	shader_rect.material.set("shader_parameter/ray_colour", ray_colour_curve.sample(day_percent))
 	
 	shader_rect.material.set("shader_parameter/bg_strength", bg_strength_curve.sample(day_percent))
+	var sample_perc = bg_time_tint_curve.sample(day_percent)
+	var p = BASE_COL * sample_perc - MAX_TIME_TINT * sample_perc
+	time_tint.color = BASE_COL - p
+	time_tint.color.a = 1;
 	
 	shader_rect.material.set("shader_parameter/ray_strength", ray_strength_curve.sample(day_percent))
 	shader_rect.material.set("shader_parameter/ray_length", ray_length_curve.sample(day_percent))
