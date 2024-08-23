@@ -1,6 +1,5 @@
 extends PanelContainer
 
-@onready var creature: Creature = %Creature
 var just_closed: bool = false
 
 func _ready():

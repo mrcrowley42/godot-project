@@ -17,4 +17,5 @@ func save() -> Dictionary:
 	return {"section": Globals.AUDIO_SECTION, self.name: self.value}
 
 func load(data) -> void:
-	self.value = data[self.name]
+	if data.has(self.name):
+		self.value = data[self.name]

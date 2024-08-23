@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cuwedaf85au8o" path="res://UI stuff/Orange Palette/orange_activity_button_pressed.png" id="2_gb0vi"]
 [ext_resource type="Texture2D" uid="uid://cbro8i4w61mun" path="res://UI stuff/Orange Palette/orange_food_button.png" id="3_jgudd"]
 [ext_resource type="Texture2D" uid="uid://b1wq26xvpcyg" path="res://UI stuff/Orange Palette/orange_food_button_pressed.png" id="4_qqe1u"]
-[ext_resource type="Script" path="res://ui_theme_class.gd" id="5_38vrr"]
+[ext_resource type="Script" path="res://scripts/base_classses/ui_theme_class.gd" id="5_38vrr"]
 [ext_resource type="Texture2D" uid="uid://b23jrnmqkd3hb" path="res://UI stuff/Orange Palette/orange_settings_button.png" id="6_776br"]
 [ext_resource type="Texture2D" uid="uid://3c6von4hx61b" path="res://UI stuff/Orange Palette/orange_settings_button_pressed.png" id="7_l7md0"]
 [ext_resource type="Texture2D" uid="uid://c3835drqnfvy" path="res://UI stuff/Orange Palette/ui_orange.png" id="8_8h4uc"]

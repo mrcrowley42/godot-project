@@ -34,5 +34,5 @@ func apply_dmg_tint():
 	self.modulate.r = clampf(1 - (1 - self.health/1000) + dying_colour.r,0,1)
 	
 	
-func dead():
-	get_tree().change_scene_to_file("res://scenes/dead.tscn")
+func game_over():
+	get_tree().change_scene_to_file("res://scenes/game_over.tscn")

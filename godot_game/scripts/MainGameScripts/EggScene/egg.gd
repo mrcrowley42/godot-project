@@ -13,7 +13,7 @@ func _ready() -> void:
 	# This is not a good way to do this, but I'm sick of clicking skip -_-
 	if skip_scene:
 		await get_tree().process_frame
-		get_tree().change_scene_to_file("res://scenes/GameScenes/prototype.tscn")
+		get_tree().change_scene_to_file("res://scenes/GameScenes/main.tscn")
 	
 	## process for when the egg timer ends, "pirnts()" are for process checking 
 	cracker.timeout.connect(func() -> void:
@@ -29,7 +29,7 @@ func _ready() -> void:
 	## process for after start game timer ends, timer is for slight delay to give time for users to process 
 	%StartGame.timeout.connect(func() -> void:
 		print("done")
-		get_tree().change_scene_to_file("res://scenes/GameScenes/prototype.tscn")
+		get_tree().change_scene_to_file("res://scenes/GameScenes/main.tscn")
 		)
 
 ## function for selecting which character to use, can be used as condition for creature class construction

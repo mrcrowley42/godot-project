@@ -15,6 +15,10 @@ run/main_scene="res://scenes/GameScenes/egg.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icons/icon.svg"
 
+[audio]
+
+buses/default_bus_layout="res://resources/default_bus_layout.tres"
+
 [autoload]
 
 Globals="*res://scripts/Globals.gd"

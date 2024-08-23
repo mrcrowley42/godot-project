@@ -1,0 +1,1502 @@
+[gd_scene load_steps=108 format=3 uid="uid://d0km03f47180a"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
+[ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_aqytd"]
+[ext_resource type="Script" path="res://scripts/MinigameManager.gd" id="3_fj5ve"]
+[ext_resource type="Script" path="res://scripts/background.gd" id="4_j8clb"]
+[ext_resource type="Shader" path="res://shaders/multiply_colour.gdshader" id="5_yth5i"]
+[ext_resource type="Texture2D" uid="uid://cdbor7hjfbusn" path="res://UI stuff/Universal/background.png" id="6_oihh8"]
+[ext_resource type="Shader" path="res://shaders/background.gdshader" id="7_1pcjq"]
+[ext_resource type="Texture2D" uid="uid://bmwpenw32juko" path="res://UI stuff/Universal/background_light_map.png" id="8_aulml"]
+[ext_resource type="PackedScene" uid="uid://bebjn5n2kjwgb" path="res://scenes/Creatures/creature.tscn" id="9_ulkn4"]
+[ext_resource type="Script" path="res://scripts/Confetti.gd" id="10_tn1o6"]
+[ext_resource type="Theme" path="res://themes/invisible.tres" id="11_lcq7m"]
+[ext_resource type="Script" path="res://scripts/clippy_area.gd" id="12_n00c6"]
+[ext_resource type="Script" path="res://scripts/ui_theme_manager.gd" id="13_3i267"]
+[ext_resource type="Resource" uid="uid://bxhuu3qk52v3w" path="res://resources/ui_themes/green.tres" id="14_mb3dl"]
+[ext_resource type="Resource" uid="uid://vt3jd46rlq4h" path="res://resources/ui_themes/orange.tres" id="15_4uyfd"]
+[ext_resource type="Resource" uid="uid://clen0bplq0q5d" path="res://resources/ui_themes/pink.tres" id="16_6dasc"]
+[ext_resource type="Script" path="res://scripts/action_menu_panel.gd" id="17_wsydk"]
+[ext_resource type="Theme" uid="uid://1dv11a5ar0hg" path="res://themes/action_btn.tres" id="18_v1mb2"]
+[ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="19_3grg3"]
+[ext_resource type="Texture2D" uid="uid://dckd2hhimpp2x" path="res://icons/cup-straw.svg" id="20_tdidc"]
+[ext_resource type="Script" path="res://scripts/heal_button.gd" id="21_u6y6n"]
+[ext_resource type="Texture2D" uid="uid://b4pvkkppy44n0" path="res://icons/icecream_48dp_FILL0_wght400_GRAD0_opsz48.svg" id="22_1ghf6"]
+[ext_resource type="Texture2D" uid="uid://pbxnymt0cqn7" path="res://images/c345a48674507fd3f61aad362db1b21b.jpg" id="23_d1w7f"]
+[ext_resource type="Texture2D" uid="uid://cb64elolo0rtd" path="res://icons/coffee_48dp_FILL0_wght400_GRAD0_opsz48.svg" id="24_dmqwv"]
+[ext_resource type="Script" path="res://scripts/kill_button.gd" id="25_lomkv"]
+[ext_resource type="Texture2D" uid="uid://cx2q4cedbcgn" path="res://images/rock-paper-scissors.png" id="26_0ku4r"]
+[ext_resource type="Texture2D" uid="uid://d3f8r28w20i4e" path="res://icons/crossword_48dp_FILL0_wght400_GRAD0_opsz48.svg" id="27_2hcht"]
+[ext_resource type="Texture2D" uid="uid://bqv3aix0mh4m8" path="res://icons/self_improvement_32dp_FFFFFF_FILL0_wght500_GRAD0_opsz20.svg" id="28_ys116"]
+[ext_resource type="Texture2D" uid="uid://douy7lywu41bc" path="res://icons/playing_cards_48dp_FILL0_wght400_GRAD0_opsz48.svg" id="29_lofmd"]
+[ext_resource type="Texture2D" uid="uid://dckcusgfn24wj" path="res://icons/arrow.svg" id="30_kovtb"]
+[ext_resource type="Script" path="res://scripts/arrowscale.gd" id="31_1bhch"]
+[ext_resource type="Script" path="res://scripts/hidden_menu_panel.gd" id="32_jvqx8"]
+[ext_resource type="Script" path="res://scripts/options_menu.gd" id="32_wbwq3"]
+[ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="33_1qhmu"]
+[ext_resource type="Script" path="res://scripts/theme_controls.gd" id="34_654l5"]
+[ext_resource type="Script" path="res://scripts/opt_menu_back_btn.gd" id="35_4io20"]
+[ext_resource type="Script" path="res://scripts/music_controls.gd" id="35_8cohh"]
+[ext_resource type="Texture2D" uid="uid://pfr6wdx80m45" path="res://icons/volume-fill.svg" id="36_g2683"]
+[ext_resource type="Script" path="res://scripts/mute_button.gd" id="37_xf1vk"]
+[ext_resource type="PackedScene" uid="uid://cbn0dv1k0onpb" path="res://scenes/UiScenes/vol_slider.tscn" id="38_17bv4"]
+[ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="39_8ebm3"]
+[ext_resource type="Texture2D" uid="uid://cawudmxbjamv0" path="res://UI stuff/Green Palette/ui_green.png" id="40_wt18k"]
+[ext_resource type="Texture2D" uid="uid://c702pbhxasm52" path="res://icons/status/heart-fill.svg" id="41_8adaw"]
+[ext_resource type="Script" path="res://scripts/hp_bar.gd" id="42_ccntj"]
+[ext_resource type="Texture2D" uid="uid://d84hj0mtn2hw" path="res://icons/status/mood_24dp_FILL1_wght300_GRAD0_opsz24.svg" id="43_qa2jm"]
+[ext_resource type="Script" path="res://scripts/fun_bar.gd" id="44_8jtdq"]
+[ext_resource type="Texture2D" uid="uid://p0oo42fr5wrp" path="res://icons/status/lunch_dining_24dp_8B1A10_FILL0_wght500_GRAD0_opsz24-svg.svg" id="45_3duvs"]
+[ext_resource type="Script" path="res://scripts/food_bar.gd" id="46_mkvi1"]
+[ext_resource type="Texture2D" uid="uid://cuaa2uyffvita" path="res://icons/status/droplet-fill.svg" id="47_qik1j"]
+[ext_resource type="Script" path="res://scripts/water_bar.gd" id="48_4mvbm"]
+[ext_resource type="Texture2D" uid="uid://d4c1k5m8u1jc0" path="res://UI stuff/Green Palette/green_food_button.png" id="49_a77pc"]
+[ext_resource type="Script" path="res://scripts/foodbutton.gd" id="50_0qet7"]
+[ext_resource type="Texture2D" uid="uid://drv50ynifh37j" path="res://UI stuff/Green Palette/green_activities_button.png" id="51_7kyvm"]
+[ext_resource type="Script" path="res://scripts/act_button.gd" id="52_mk8tu"]
+[ext_resource type="Texture2D" uid="uid://b5uf4jcvme855" path="res://UI stuff/Green Palette/green_settings_button.png" id="53_hpyyk"]
+[ext_resource type="Script" path="res://scripts/setting_button.gd" id="54_5bu15"]
+[ext_resource type="PackedScene" uid="uid://b6wocr0vo5s4v" path="res://scenes/GameScenes/debug_content.tscn" id="55_0rbaa"]
+[ext_resource type="AudioStream" uid="uid://dcet1hpt70t42" path="res://music/perfection.mp3" id="56_0sjdm"]
+[ext_resource type="Script" path="res://scripts/music_manager.gd" id="57_dawf5"]
+[ext_resource type="AudioStream" uid="uid://dwmn4dqcd6k4i" path="res://music/02 Hollywood Main Theme.mp3" id="58_tbnki"]
+[ext_resource type="AudioStream" uid="uid://dshoi5g671o7m" path="res://music/25 - Pizza & Bowling.mp3" id="59_06aow"]
+[ext_resource type="AudioStream" uid="uid://dnxx75ndliq7c" path="res://music/Esselfortium - memory=entryrrrr-.mp3" id="60_rpygf"]
+[ext_resource type="AudioStream" uid="uid://b1b1fwlrdpmcp" path="res://music/Heaven Pierce Her - ULTRAKILL- INFINITE HYPERDEATH - 01 The Fire Is Gone (for Piano, Saxophone and Trumpet).mp3" id="61_hukp3"]
+[ext_resource type="AudioStream" uid="uid://8ctfl381pnja" path="res://music/15 Seto's Memory.mp3" id="62_jbqd3"]
+[ext_resource type="AudioStream" uid="uid://ct8aoiuvdre5f" path="res://music/Aquatic Ambience [Restored].mp3" id="63_dqn1u"]
+[ext_resource type="AudioStream" uid="uid://f6qpehtbujr7" path="res://music/11 Fruit On Grass - Garden.mp3" id="64_gu8kv"]
+[ext_resource type="Script" path="res://scripts/sfx_man.gd" id="65_787cd"]
+[ext_resource type="AudioStream" uid="uid://8ifwm2tjitur" path="res://sound_effects/yippee.mp3" id="66_uj0ps"]
+[ext_resource type="AudioStream" uid="uid://cx28efsxtr7c" path="res://sound_effects/button_click_fast.mp3" id="67_nfa6o"]
+[ext_resource type="AudioStream" uid="uid://dat0sfue6jjr5" path="res://sound_effects/metal-pipe-falling-sound-effect-made-with-Voicemod.mp3" id="68_dnpii"]
+[ext_resource type="Script" path="res://scripts/popup_manager.gd" id="69_rkm2b"]
+
+[sub_resource type="Gradient" id="Gradient_jl3ct"]
+offsets = PackedFloat32Array(0, 0.175676, 0.3, 0.4, 0.5, 0.635135, 0.7, 0.765766, 0.828829, 1)
+colors = PackedColorArray(0.00784314, 0.00392157, 0.0666667, 1, 0.0852147, 0.081293, 0.163116, 1, 0.509804, 0.67451, 0.85098, 1, 0.709804, 0.913725, 1, 1, 0.556863, 0.870588, 0.992157, 1, 0.176471, 0.564706, 0.756863, 1, 0.117647, 0.321569, 0.556863, 1, 0.101961, 0.239216, 0.317647, 1, 0.027451, 0.105882, 0.14902, 1, 0.00784314, 0.00392157, 0.0666667, 1)
+
+[sub_resource type="Gradient" id="Gradient_ackms"]
+offsets = PackedFloat32Array(0, 0.193694, 0.247748, 0.3, 0.5, 0.648649, 0.747748, 0.801802, 0.864865, 1)
+colors = PackedColorArray(0.0705882, 0.0196078, 0.00392157, 1, 0.131053, 0.100228, 0.127953, 1, 0.533333, 0.458824, 0.670588, 1, 0.898039, 0.682353, 0.815686, 1, 0.407843, 0.815686, 0.984314, 1, 0.146814, 0.492569, 0.791324, 1, 0.905882, 0.803922, 0.368627, 1, 0.427451, 0.164706, 0.0392157, 1, 0.2, 0.0705882, 0.027451, 1, 0.0705882, 0.0196078, 0.00392157, 1)
+
+[sub_resource type="Gradient" id="Gradient_jl2ct"]
+offsets = PackedFloat32Array(0.0720721, 0.283784, 0.387387, 0.560847, 0.702703, 0.842342)
+colors = PackedColorArray(0.427451, 0.415686, 0.952941, 1, 0.898039, 0.682353, 0.815686, 1, 0.709804, 0.913725, 1, 1, 0.556863, 0.870588, 0.992157, 1, 0.336681, 0.693535, 0.855962, 1, 0.426188, 0.415684, 0.953144, 1)
+
+[sub_resource type="Curve" id="Curve_s6pib"]
+_data = [Vector2(0, 0.8), 0.0, -1.0, 0, 0, Vector2(0.5, 0.5), 0.0, 0.0, 0, 0, Vector2(0.8, 0.8), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_mvd5r"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.12605, 0.825503), -2.4618, -2.4618, 0, 0, Vector2(0.285714, 0), 0.0, 0.0, 0, 0, Vector2(0.689076, 0), 0.0, 0.0, 0, 0, Vector2(0.810924, 0.814597), 2.50167, 2.50167, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="Curve" id="Curve_6i1ec"]
+max_value = 2.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.15126, 0.857143), 3.10577, 3.10577, 0, 0, Vector2(0.256303, 1.27473), 1.69647, 1.69647, 0, 0, Vector2(0.5, 1.5), 0.0, 0.0, 0, 0, Vector2(0.94958, 0), -7.2426, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Curve" id="Curve_joyfk"]
+max_value = 0.5
+_data = [Vector2(0, 0.2), 0.0, 0.0, 0, 0, Vector2(0.5, 0.12), 0.0, 0.0, 0, 0, Vector2(0.848739, 0.203297), -0.0453332, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_p4mvm"]
+max_value = 360.0
+_data = [Vector2(0, 255), 0.0, 0.0, 0, 0, Vector2(1, 100), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_wvyua"]
+_data = [Vector2(0.218, -0.1), 0.0, 0.0, 0, 0, Vector2(0.769, 1.1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_0tul1"]
+_data = [Vector2(0.218, 0.6), 0.0, 0.0, 0, 0, Vector2(0.311, 0.7), 1.45299, 1.45299, 0, 0, Vector2(0.504, 0.9), 0.0, 0.0, 0, 0, Vector2(0.659664, 0.769231), -1.37768, -1.37768, 0, 0, Vector2(0.786, 0.6), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Curve" id="Curve_r6ux5"]
+_data = [Vector2(0, 0.516), 0.0, 3.03385, 0, 0, Vector2(0.3, 1.1), 0.0, 0.0, 0, 0, Vector2(0.3, -0.1), 0.0, 0.0, 0, 0, Vector2(0.7, -0.1), 0.0, 0.0, 0, 0, Vector2(1, 0.538461), 2.27791, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Curve" id="Curve_s66ht"]
+_data = [Vector2(0, 0.85), 0.0, 0.0, 0, 0, Vector2(0.3, 0.5), 0.0, 0.0, 0, 0, Vector2(0.7, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 0.85), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_045wl"]
+resource_local_to_scene = true
+shader = ExtResource("5_yth5i")
+shader_parameter/tint_colour = Color(0.870588, 0.984314, 0.87451, 1)
+shader_parameter/tint_strength = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_arjdf"]
+shader = ExtResource("7_1pcjq")
+shader_parameter/debug_mode = false
+shader_parameter/upper_colour = Color(1, 0.5, 0.4, 1)
+shader_parameter/lower_colour = Color(0, 0.4, 1, 1)
+shader_parameter/ray_colour = Color(1, 1, 1, 1)
+shader_parameter/bg_strength = 0.5
+shader_parameter/bg_fade = 0.0
+shader_parameter/fade_ray_edge = true
+shader_parameter/ray_fade_margin = 0.25
+shader_parameter/ray_fade_quality = 6
+shader_parameter/ray_length = 0.12
+shader_parameter/ray_direction = 155.0
+shader_parameter/ray_strength = 1.5
+shader_parameter/ray_quality = 10
+shader_parameter/sun_colour = Color(0.3, 0.3, 0.15, 1)
+shader_parameter/sun_pos = Vector2(0.9, 0.3)
+shader_parameter/sun_strength = 3.0
+shader_parameter/sun_radius = 0.08
+shader_parameter/sun_fade = 0.03
+shader_parameter/moon_pos = Vector2(0.7, 0.3)
+shader_parameter/moon_strength = 0.6
+shader_parameter/moon_radius = 0.06
+shader_parameter/moon_fade = 0.007
+shader_parameter/moon_rotation = 0.01
+shader_parameter/moon_curve_intensity = 2.5
+shader_parameter/m_shadow_dist = 0.05
+shader_parameter/m_shadow_rot = 0.0
+shader_parameter/LIGHT_MAP = ExtResource("8_aulml")
+
+[sub_resource type="Gradient" id="Gradient_asbj7"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.12381, 0.290476, 0.452381, 0.652381, 0.819048, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.482353, 0.321569, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0.509804, 1, 0.529412, 0, 0.745098, 1, 1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k7dc5"]
+bg_color = Color(0, 0, 0, 0.384314)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="GDScript" id="GDScript_ovb2u"]
+script/source = "extends Button
+
+@onready var creature = %Creature
+
+func _on_button_down():
+	%BtnClick.play()
+	creature.dmg(300, 'water')
+	
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_golou"]
+bg_color = Color(0.226455, 0.5709, 0.530033, 0.631373)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.443137, 0.694118, 0.635294, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="GDScript" id="GDScript_ve7ha"]
+script/source = "extends Button
+@onready var creature = %Creature
+
+func _on_button_down():
+	%BtnClick.play()
+	%PIPE.play()
+	creature.dmg(300, 'hp')
+"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b3sax"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kxv3i"]
+bg_color = Color(0, 0, 0, 0.737255)
+border_color = Color(0.8, 0.8, 0.8, 0.411765)
+
+[sub_resource type="GDScript" id="GDScript_3dqpd"]
+script/source = "extends MarginContainer
+
+func _ready():
+	visible = true
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_arbxs"]
+bg_color = Color(0, 0, 0, 0.737255)
+draw_center = false
+border_color = Color(0.8, 0.8, 0.8, 0.411765)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3535b"]
+bg_color = Color(0.822295, 0.511699, 0.352571, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 20
+
+[sub_resource type="GDScript" id="GDScript_c6ljj"]
+script/source = "extends GridContainer
+
+var unlockables = [preload(\"res://images/creature_sprites/hat-0.png\"),preload(\"res://images/creature_sprites/correct_scale/glasses-0.png\"),
+preload(\"res://images/creature_sprites/hat-1.png\"),preload(\"res://images/creature_sprites/correct_scale/glasses-1.png\"),
+preload(\"res://images/creature_sprites/hat-2.png\"),preload(\"res://images/creature_sprites/correct_scale/chill-0.png\"),
+preload(\"res://images/creature_sprites/sadge-1.png\"),preload(\"res://images/creature_sprites/correct_scale/confused-2.png\")]
+
+## Class that describes the cards (buttons) for memory.
+class Unlockable extends Button:
+	func _init(value):
+		icon = value
+		custom_minimum_size = Vector2(64,64)
+		size.x = 64
+		size.y = 64
+		expand_icon = false
+		add_theme_constant_override(\"icon_max_width\", 50)
+		#texture_normal = value
+		theme = load(\"res://themes/menu_btn.tres\")
+		#size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		#size_flags_vertical = Control.SIZE_EXPAND_FILL
+		
+		
+
+func _ready():
+	for item in unlockables:
+		var unlock_item = Unlockable.new(item)
+		add_child(unlock_item)
+"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wd2mi"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_0f7jw"]
+color = Color(0.34688, 0.524621, 0.762641, 1)
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 40
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_kxflm"]
+color = Color(0.793417, 0.388279, 0.00261003, 1)
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qyod2"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+border_color = Color(0.8, 0.8, 0.8, 0.411765)
+
+[sub_resource type="GDScript" id="GDScript_1bafj"]
+script/source = "extends ScrollContainer
+
+func _on_visibility_changed():
+	scroll_vertical = 0
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2mbbg"]
+bg_color = Color(0, 0, 0, 0.227451)
+draw_center = false
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1jn5s"]
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o1dc8"]
+bg_color = Color(0.865294, 0.372259, 0.373089, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ia234"]
+bg_color = Color(1, 0.839216, 0.376471, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s0vyl"]
+bg_color = Color(0.269819, 0.638372, 0.413971, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 10
+shadow_color = Color(0, 0.74902, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vk3l5"]
+bg_color = Color(0.333189, 0.545631, 0.906432, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="Game" type="Node"]
+script = ExtResource("1_opnvu")
+debug_mode = true
+unlock_fps = true
+metadata/_edit_vertical_guides_ = [532.0, 8.0, 45.0, 53.0, 487.0, 495.0]
+metadata/_edit_horizontal_guides_ = [8.0, 667.0, 112.0, 111.0, 554.0, 562.0]
+
+[node name="StatusManager" type="Node2D" parent="." groups=["save_data"]]
+unique_name_in_owner = true
+script = ExtResource("2_aqytd")
+food_amount = 4.0
+
+[node name="MinigameManager" type="Node2D" parent="." groups=["save_data"]]
+unique_name_in_owner = true
+script = ExtResource("3_fj5ve")
+
+[node name="Gameplay" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Background" type="Sprite2D" parent="Gameplay"]
+unique_name_in_owner = true
+script = ExtResource("4_j8clb")
+upper_colour_curve = SubResource("Gradient_jl3ct")
+lower_colour_curve = SubResource("Gradient_ackms")
+ray_colour_curve = SubResource("Gradient_jl2ct")
+bg_strength_curve = SubResource("Curve_s6pib")
+bg_time_tint_curve = SubResource("Curve_mvd5r")
+ray_strength_curve = SubResource("Curve_6i1ec")
+ray_length_curve = SubResource("Curve_joyfk")
+ray_direction_curve = SubResource("Curve_p4mvm")
+sun_x = SubResource("Curve_wvyua")
+sun_y = SubResource("Curve_0tul1")
+moon_x = SubResource("Curve_r6ux5")
+moon_y = SubResource("Curve_s66ht")
+
+[node name="bg_update_ticker" type="Timer" parent="Gameplay/Background"]
+autostart = true
+
+[node name="BGCanvasLayer" type="CanvasLayer" parent="Gameplay/Background"]
+layer = -1
+
+[node name="BG" type="Sprite2D" parent="Gameplay/Background/BGCanvasLayer"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_045wl")
+position = Vector2(270, 337)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_oihh8")
+metadata/_edit_lock_ = true
+
+[node name="LightShader" type="ColorRect" parent="Gameplay/Background/BGCanvasLayer/BG"]
+material = SubResource("ShaderMaterial_arjdf")
+offset_left = -434.0
+offset_top = -434.0
+offset_right = 434.0
+offset_bottom = 434.0
+color = Color(1, 1, 1, 0)
+
+[node name="TimeTint" type="CanvasModulate" parent="Gameplay/Background/BGCanvasLayer"]
+
+[node name="Creature" parent="Gameplay" node_paths=PackedStringArray("clippy_area") groups=["save_data"] instance=ExtResource("9_ulkn4")]
+unique_name_in_owner = true
+texture_filter = 1
+position = Vector2(270, 393.5)
+clippy_area = NodePath("../ClippyArea")
+
+[node name="Confetti" type="Node2D" parent="Gameplay"]
+script = ExtResource("10_tn1o6")
+
+[node name="ConfettiParticleL" type="CPUParticles2D" parent="Gameplay/Confetti"]
+unique_name_in_owner = true
+position = Vector2(92, 555)
+emitting = false
+amount = 15
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+direction = Vector2(0.1, -1)
+spread = 6.0
+initial_velocity_min = 500.0
+initial_velocity_max = 900.0
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+scale_amount_min = 10.0
+scale_amount_max = 15.0
+color_initial_ramp = SubResource("Gradient_asbj7")
+hue_variation_min = 1.0
+hue_variation_max = 1.0
+
+[node name="ConfettiParticleR" type="CPUParticles2D" parent="Gameplay/Confetti"]
+unique_name_in_owner = true
+position = Vector2(446, 553)
+emitting = false
+amount = 15
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+direction = Vector2(-0.1, -1)
+spread = 6.0
+initial_velocity_min = 500.0
+initial_velocity_max = 900.0
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+scale_amount_min = 10.0
+scale_amount_max = 15.0
+color_initial_ramp = SubResource("Gradient_asbj7")
+hue_variation_min = 1.0
+hue_variation_max = 1.0
+
+[node name="ClippyArea" type="Button" parent="Gameplay"]
+unique_name_in_owner = true
+editor_description = "The control that allows the window to be dragged while in clippy mode."
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 135.0
+offset_top = 270.0
+offset_right = 391.0
+offset_bottom = 526.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 6
+theme = ExtResource("11_lcq7m")
+script = ExtResource("12_n00c6")
+metadata/_edit_lock_ = true
+
+[node name="NotificationLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="NotificationManager" type="Node2D" parent="NotificationLayer"]
+unique_name_in_owner = true
+script = ExtResource("69_rkm2b")
+
+[node name="UI" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+
+[node name="UI_Theme_Manager" type="Node" parent="UI" groups=["settings_data"]]
+unique_name_in_owner = true
+script = ExtResource("13_3i267")
+themes = Array[Resource("res://scripts/base_classses/ui_theme_class.gd")]([ExtResource("14_mb3dl"), ExtResource("15_4uyfd"), ExtResource("16_6dasc")])
+
+[node name="FoodMenu" type="PanelContainer" parent="UI"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(400, 400)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_k7dc5")
+script = ExtResource("17_wsydk")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/FoodMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="GridContainer" type="GridContainer" parent="UI/FoodMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="Button 1" type="Button" parent="UI/FoodMenu/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 24
+icon = ExtResource("20_tdidc")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("21_u6y6n")
+
+[node name="Button 2" type="Button" parent="UI/FoodMenu/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+icon = ExtResource("22_1ghf6")
+icon_alignment = 1
+expand_icon = true
+script = SubResource("GDScript_ovb2u")
+
+[node name="Button 3" type="Button" parent="UI/FoodMenu/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
+text = "PIPE!"
+icon = ExtResource("23_d1w7f")
+icon_alignment = 1
+expand_icon = true
+script = SubResource("GDScript_ve7ha")
+
+[node name="Button 4" type="Button" parent="UI/FoodMenu/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+icon = ExtResource("24_dmqwv")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("25_lomkv")
+
+[node name="ActivityMenu" type="PanelContainer" parent="UI"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(400, 400)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -199.5
+offset_right = 600.0
+offset_bottom = 200.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_b3sax")
+script = ExtResource("17_wsydk")
+
+[node name="Background" type="PanelContainer" parent="UI/ActivityMenu"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_k7dc5")
+
+[node name="ActivityContent" type="HBoxContainer" parent="UI/ActivityMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Screen1" type="MarginContainer" parent="UI/ActivityMenu/ActivityContent"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="GridContainer" type="GridContainer" parent="UI/ActivityMenu/ActivityContent/Screen1"]
+custom_minimum_size = Vector2(360, 360)
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="ScissorsPaperRock" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen1/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+icon = ExtResource("26_0ku4r")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Totris" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen1/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
+icon = ExtResource("27_2hcht")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ZenMode" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen1/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+icon = ExtResource("28_ys116")
+icon_alignment = 1
+expand_icon = true
+
+[node name="MemoryGame" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen1/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
+icon = ExtResource("29_lofmd")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Screen2" type="MarginContainer" parent="UI/ActivityMenu/ActivityContent"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="GridContainer" type="GridContainer" parent="UI/ActivityMenu/ActivityContent/Screen2"]
+custom_minimum_size = Vector2(360, 360)
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="ScissorsPaperRock" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+text = "MENU 2"
+icon = ExtResource("26_0ku4r")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Tetris" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
+text = "MENU 2"
+icon = ExtResource("27_2hcht")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ZenMode" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+text = "MENU 2"
+icon = ExtResource("28_ys116")
+icon_alignment = 1
+expand_icon = true
+
+[node name="MemoryGame" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
+text = "MENU 2"
+icon = ExtResource("29_lofmd")
+icon_alignment = 1
+expand_icon = true
+
+[node name="NavigationArrows" type="Node2D" parent="UI/ActivityMenu"]
+
+[node name="LeftArrow" type="TextureButton" parent="UI/ActivityMenu/NavigationArrows"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = 145.0
+offset_right = 20.0
+offset_bottom = 253.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(14, 54)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("30_kovtb")
+script = ExtResource("31_1bhch")
+metadata/_edit_use_anchors_ = true
+
+[node name="LeftArrow2" type="TextureButton" parent="UI/ActivityMenu/NavigationArrows"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 380.0
+offset_top = 145.0
+offset_right = 408.0
+offset_bottom = 253.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.14159
+pivot_offset = Vector2(14, 54)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("30_kovtb")
+script = ExtResource("31_1bhch")
+metadata/_edit_use_anchors_ = true
+
+[node name="OptionsMenu" type="PanelContainer" parent="UI"]
+unique_name_in_owner = true
+process_mode = 3
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -217.0
+offset_top = -217.5
+offset_right = 217.0
+offset_bottom = 216.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kxv3i")
+script = ExtResource("32_wbwq3")
+metadata/_edit_lock_ = true
+
+[node name="MainOptMenu" type="MarginContainer" parent="UI/OptionsMenu"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 40
+script = SubResource("GDScript_3dqpd")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/MainOptMenu"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="AppearanceBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme = ExtResource("18_v1mb2")
+text = "Appearance"
+
+[node name="FactBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme = ExtResource("18_v1mb2")
+text = "Fact Book"
+
+[node name="GameplaySettingsBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme = ExtResource("18_v1mb2")
+text = "Options"
+
+[node name="SoundBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme = ExtResource("18_v1mb2")
+text = "Sound Settings"
+
+[node name="CreditsBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme = ExtResource("18_v1mb2")
+text = "Credits"
+
+[node name="GameplayOptionsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
+unique_name_in_owner = true
+process_mode = 3
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_arbxs")
+script = ExtResource("32_jvqx8")
+metadata/_edit_lock_ = true
+
+[node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/GameplayOptionsMenu"]
+position = Vector2(-50, -130)
+
+[node name="Save" type="Button" parent="UI/OptionsMenu/GameplayOptionsMenu/SaveButtons"]
+offset_left = 90.0
+offset_top = 484.0
+offset_right = 234.0
+offset_bottom = 532.0
+theme = ExtResource("33_1qhmu")
+theme_override_colors/font_hover_color = Color(0.4947, 0.97, 0.4947, 1)
+theme_override_font_sizes/font_size = 18
+text = "Save Settings"
+
+[node name="Cancel" type="Button" parent="UI/OptionsMenu/GameplayOptionsMenu/SaveButtons"]
+texture_filter = 5
+offset_left = 317.0
+offset_top = 484.0
+offset_right = 450.0
+offset_bottom = 532.0
+theme = ExtResource("33_1qhmu")
+theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
+theme_override_font_sizes/font_size = 18
+text = "Cancel"
+script = ExtResource("35_4io20")
+
+[node name="ThemeControls" type="Node2D" parent="UI/OptionsMenu/GameplayOptionsMenu"]
+position = Vector2(-108, 26)
+scale = Vector2(0.75, 0.75)
+script = ExtResource("34_654l5")
+
+[node name="Label" type="Label" parent="UI/OptionsMenu/GameplayOptionsMenu/ThemeControls"]
+offset_left = 210.0
+offset_top = 250.667
+offset_right = 400.0
+offset_bottom = 307.667
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 48
+text = "Theme"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="vHBoxContainer" type="HBoxContainer" parent="UI/OptionsMenu/GameplayOptionsMenu/ThemeControls"]
+offset_left = 225.0
+offset_top = 327.0
+offset_right = 375.0
+offset_bottom = 388.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Button2" type="Button" parent="UI/OptionsMenu/GameplayOptionsMenu/ThemeControls/vHBoxContainer"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 44
+theme_override_styles/normal = SubResource("StyleBoxFlat_3535b")
+text = "<"
+
+[node name="Button" type="Button" parent="UI/OptionsMenu/GameplayOptionsMenu/ThemeControls/vHBoxContainer"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_outline_color = Color(0.835294, 0.517647, 0, 0.619608)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 44
+theme_override_styles/normal = SubResource("StyleBoxFlat_3535b")
+text = ">"
+
+[node name="FactsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
+unique_name_in_owner = true
+process_mode = 3
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_arbxs")
+script = ExtResource("32_jvqx8")
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="UI/OptionsMenu/FactsMenu"]
+layout_mode = 2
+theme = ExtResource("39_8ebm3")
+text = "FACTS"
+horizontal_alignment = 1
+
+[node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/FactsMenu"]
+position = Vector2(-50, -130)
+
+[node name="Save" type="Button" parent="UI/OptionsMenu/FactsMenu/SaveButtons"]
+offset_left = 90.0
+offset_top = 484.0
+offset_right = 234.0
+offset_bottom = 532.0
+theme = ExtResource("33_1qhmu")
+theme_override_colors/font_hover_color = Color(0.4947, 0.97, 0.4947, 1)
+theme_override_font_sizes/font_size = 18
+text = "Save Settings"
+
+[node name="Cancel" type="Button" parent="UI/OptionsMenu/FactsMenu/SaveButtons"]
+texture_filter = 5
+offset_left = 317.0
+offset_top = 484.0
+offset_right = 450.0
+offset_bottom = 532.0
+theme = ExtResource("33_1qhmu")
+theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
+theme_override_font_sizes/font_size = 18
+text = "Cancel"
+script = ExtResource("35_4io20")
+
+[node name="AppearanceMenu" type="PanelContainer" parent="UI/OptionsMenu"]
+unique_name_in_owner = true
+process_mode = 3
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_arbxs")
+script = ExtResource("32_jvqx8")
+metadata/_edit_lock_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/AppearanceMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="GridContainer" type="GridContainer" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 4
+script = SubResource("GDScript_c6ljj")
+
+[node name="Label" type="Label" parent="UI/OptionsMenu/AppearanceMenu"]
+layout_mode = 2
+theme = ExtResource("39_8ebm3")
+text = "APPEARANCE"
+horizontal_alignment = 1
+
+[node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/AppearanceMenu"]
+position = Vector2(-50, -130)
+
+[node name="Save" type="Button" parent="UI/OptionsMenu/AppearanceMenu/SaveButtons"]
+offset_left = 90.0
+offset_top = 484.0
+offset_right = 234.0
+offset_bottom = 532.0
+theme = ExtResource("33_1qhmu")
+theme_override_colors/font_hover_color = Color(0.4947, 0.97, 0.4947, 1)
+theme_override_font_sizes/font_size = 18
+text = "Save Settings"
+
+[node name="Cancel" type="Button" parent="UI/OptionsMenu/AppearanceMenu/SaveButtons"]
+texture_filter = 5
+offset_left = 317.0
+offset_top = 484.0
+offset_right = 450.0
+offset_bottom = 532.0
+theme = ExtResource("33_1qhmu")
+theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
+theme_override_font_sizes/font_size = 18
+text = "Cancel"
+script = ExtResource("35_4io20")
+
+[node name="SoundMenu" type="PanelContainer" parent="UI/OptionsMenu"]
+unique_name_in_owner = true
+process_mode = 3
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_arbxs")
+script = ExtResource("32_jvqx8")
+metadata/_edit_lock_ = true
+
+[node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/SoundMenu"]
+position = Vector2(-50, -130)
+
+[node name="Save" type="Button" parent="UI/OptionsMenu/SoundMenu/SaveButtons"]
+offset_left = 90.0
+offset_top = 484.0
+offset_right = 234.0
+offset_bottom = 532.0
+theme = ExtResource("33_1qhmu")
+theme_override_colors/font_hover_color = Color(0.4947, 0.97, 0.4947, 1)
+theme_override_font_sizes/font_size = 18
+text = "Save Settings"
+
+[node name="Cancel" type="Button" parent="UI/OptionsMenu/SoundMenu/SaveButtons"]
+texture_filter = 5
+offset_left = 317.0
+offset_top = 484.0
+offset_right = 450.0
+offset_bottom = 532.0
+theme = ExtResource("33_1qhmu")
+theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
+theme_override_font_sizes/font_size = 18
+text = "Cancel"
+script = ExtResource("35_4io20")
+
+[node name="MusicControls" type="Node2D" parent="UI/OptionsMenu/SoundMenu"]
+position = Vector2(102, 26)
+scale = Vector2(0.75, 0.75)
+script = ExtResource("35_8cohh")
+
+[node name="Label" type="Label" parent="UI/OptionsMenu/SoundMenu/MusicControls"]
+offset_left = 210.0
+offset_top = 250.667
+offset_right = 400.0
+offset_bottom = 307.667
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 48
+text = "Music"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/OptionsMenu/SoundMenu/MusicControls"]
+offset_left = 225.0
+offset_top = 325.0
+offset_right = 375.0
+offset_bottom = 386.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Button2" type="Button" parent="UI/OptionsMenu/SoundMenu/MusicControls/HBoxContainer"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_outline_color = Color(0.835294, 0.517647, 0, 0.619608)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 44
+theme_override_styles/normal = SubResource("StyleBoxFlat_3535b")
+text = "<"
+
+[node name="Button" type="Button" parent="UI/OptionsMenu/SoundMenu/MusicControls/HBoxContainer"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_outline_color = Color(0.835294, 0.517647, 0, 0.619608)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 44
+theme_override_styles/normal = SubResource("StyleBoxFlat_3535b")
+text = ">"
+
+[node name="VolumeControls" type="Node2D" parent="UI/OptionsMenu/SoundMenu"]
+position = Vector2(-63, -88)
+
+[node name="GridContainer2" type="GridContainer" parent="UI/OptionsMenu/SoundMenu/VolumeControls"]
+offset_left = 79.0
+offset_top = 148.0
+offset_right = 482.0
+offset_bottom = 288.0
+size_flags_vertical = 0
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 10
+columns = 3
+
+[node name="Label" type="Label" parent="UI/OptionsMenu/SoundMenu/VolumeControls/GridContainer2"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 24
+text = "Master"
+vertical_alignment = 1
+
+[node name="MasterMuted" type="Button" parent="UI/OptionsMenu/SoundMenu/VolumeControls/GridContainer2" groups=["settings_data"]]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wd2mi")
+text = "          "
+icon = ExtResource("36_g2683")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("37_xf1vk")
+bus_name = "Master"
+
+[node name="VolumeMaster" parent="UI/OptionsMenu/SoundMenu/VolumeControls/GridContainer2" groups=["settings_data"] instance=ExtResource("38_17bv4")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/slider = SubResource("StyleBoxLine_0f7jw")
+tick_count = 1
+bus_name = "Master"
+
+[node name="Label2" type="Label" parent="UI/OptionsMenu/SoundMenu/VolumeControls/GridContainer2"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 24
+text = "SFX"
+vertical_alignment = 1
+
+[node name="SFXMuted" type="Button" parent="UI/OptionsMenu/SoundMenu/VolumeControls/GridContainer2" groups=["settings_data"]]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wd2mi")
+text = "          "
+icon = ExtResource("36_g2683")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("37_xf1vk")
+bus_name = "SFX"
+
+[node name="VolumeSfx" parent="UI/OptionsMenu/SoundMenu/VolumeControls/GridContainer2" groups=["settings_data"] instance=ExtResource("38_17bv4")]
+layout_mode = 2
+value = 0.0
+tick_count = 1
+bus_name = "SFX"
+
+[node name="Label3" type="Label" parent="UI/OptionsMenu/SoundMenu/VolumeControls/GridContainer2"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 24
+text = "Music
+"
+vertical_alignment = 1
+
+[node name="MusicMuted" type="Button" parent="UI/OptionsMenu/SoundMenu/VolumeControls/GridContainer2" groups=["settings_data"]]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wd2mi")
+text = "          "
+icon = ExtResource("36_g2683")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("37_xf1vk")
+bus_name = "Music"
+
+[node name="VolumeMusic" parent="UI/OptionsMenu/SoundMenu/VolumeControls/GridContainer2" groups=["settings_data"] instance=ExtResource("38_17bv4")]
+layout_mode = 2
+tooltip_text = "Music"
+theme_override_styles/slider = SubResource("StyleBoxLine_kxflm")
+tick_count = 1
+bus_name = "Music"
+
+[node name="CreditsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
+unique_name_in_owner = true
+process_mode = 3
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qyod2")
+script = ExtResource("32_jvqx8")
+
+[node name="Node2D" type="Node2D" parent="UI/OptionsMenu/CreditsMenu"]
+
+[node name="CreditsCloseBtn" type="Button" parent="UI/OptionsMenu/CreditsMenu/Node2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 182.0
+offset_top = 376.0
+offset_right = 258.0
+offset_bottom = 404.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("33_1qhmu")
+theme_override_font_sizes/font_size = 24
+text = "Close"
+script = ExtResource("35_4io20")
+
+[node name="HScrollBar" type="ScrollContainer" parent="UI/OptionsMenu/CreditsMenu/Node2D"]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 424.0
+offset_bottom = 343.0
+script = SubResource("GDScript_1bafj")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/CreditsMenu/Node2D/HScrollBar"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="CreditsContent" type="RichTextLabel" parent="UI/OptionsMenu/CreditsMenu/Node2D/HScrollBar/MarginContainer"]
+custom_minimum_size = Vector2(384, 0)
+layout_mode = 2
+theme = ExtResource("39_8ebm3")
+bbcode_enabled = true
+text = "
+[center]Created by [wave amp=50.0 freq=5.0 connected=1][rainbow freq=1.0 sat=0.8 val=0.9]Team Yippee[/rainbow][/wave][/center]
+[indent]
+[ul]Lachlan Cameron
+Matthew Crowley
+Ryan Gasnier
+Marcus Gellel
+Maggie O'Connell
+Bryce van Ewyk
+[/ul][/indent]
+[b]Tbh/autism creature originally by @acmeiku on Twitter[/b]
+
+VCR Font by Riciery Leal on dafont
+
+Yippee! by unknown german kid
+
+Various Sound Effects:
+[indent]
+[ul]jhyland (Freesound.org)
+beetlemuse (Freesound.org)
+kagateni (Freesound.org)
+justinvoke (Freesound.org)
+Pixabay (Pixabay)
+[/ul][/indent]
+
+Placeholder audio:
+[indent]
+[ul]Scientist Voicelines by Valve Software
+Hollywood Theme by Rik Schaffer
+Alone In The Town by Akira Yamaoka
+memory=entryrrrr- by Esselfortium
+The Fire is Gone by Heaven Pierce Her
+The Atrocity That Is The Dualshock Basement Theme by Some Fraud
+Fruit on Grass - Garden by Arvi Teikari
+Seto's Memory by Shinkichi Mitsumune
+Aquatic Ambience by David Wise
+[/ul][/indent]"
+fit_content = true
+
+[node name="UI_Overlay" type="Sprite2D" parent="UI"]
+unique_name_in_owner = true
+position = Vector2(270, 337.5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("40_wt18k")
+metadata/_edit_lock_ = true
+
+[node name="StatsDisplay" type="PanelContainer" parent="UI"]
+offset_left = 35.0
+offset_top = 570.0
+offset_right = 505.0
+offset_bottom = 658.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_2mbbg")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/StatsDisplay"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 16
+
+[node name="StatusContainer" type="GridContainer" parent="UI/StatsDisplay/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 4
+
+[node name="Heart" type="Control" parent="UI/StatsDisplay/MarginContainer/StatusContainer"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Heart-fill" type="Sprite2D" parent="UI/StatsDisplay/MarginContainer/StatusContainer/Heart"]
+modulate = Color(0.96, 0.96, 0.96, 1)
+position = Vector2(14, 0)
+scale = Vector2(0.688, 0.688)
+texture = ExtResource("41_8adaw")
+
+[node name="HP_Bar" type="ProgressBar" parent="UI/StatsDisplay/MarginContainer/StatusContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(160, 23)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_1jn5s")
+theme_override_styles/fill = SubResource("StyleBoxFlat_o1dc8")
+max_value = 1000.0
+step = 1.0
+value = 700.0
+show_percentage = false
+script = ExtResource("42_ccntj")
+
+[node name="Happiness" type="Control" parent="UI/StatsDisplay/MarginContainer/StatusContainer"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HappinessSprite" type="Sprite2D" parent="UI/StatsDisplay/MarginContainer/StatusContainer/Happiness"]
+position = Vector2(14, 0)
+scale = Vector2(0.688, 0.688)
+texture = ExtResource("43_qa2jm")
+
+[node name="Fun_Bar" type="ProgressBar" parent="UI/StatsDisplay/MarginContainer/StatusContainer"]
+custom_minimum_size = Vector2(160, 23)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_1jn5s")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ia234")
+max_value = 1000.0
+step = 1.0
+value = 700.0
+show_percentage = false
+script = ExtResource("44_8jtdq")
+
+[node name="Burger" type="Control" parent="UI/StatsDisplay/MarginContainer/StatusContainer"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BurgerSprite" type="Sprite2D" parent="UI/StatsDisplay/MarginContainer/StatusContainer/Burger"]
+position = Vector2(14, 0)
+scale = Vector2(0.688, 0.688)
+texture = ExtResource("45_3duvs")
+
+[node name="Food_Bar" type="ProgressBar" parent="UI/StatsDisplay/MarginContainer/StatusContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(160, 23)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_1jn5s")
+theme_override_styles/fill = SubResource("StyleBoxFlat_s0vyl")
+max_value = 1000.0
+step = 1.0
+value = 700.0
+show_percentage = false
+script = ExtResource("46_mkvi1")
+
+[node name="Droplet" type="Control" parent="UI/StatsDisplay/MarginContainer/StatusContainer"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="WaterSprite" type="Sprite2D" parent="UI/StatsDisplay/MarginContainer/StatusContainer/Droplet"]
+position = Vector2(14, 0)
+scale = Vector2(0.688, 0.688)
+texture = ExtResource("47_qik1j")
+
+[node name="Water_Bar" type="ProgressBar" parent="UI/StatsDisplay/MarginContainer/StatusContainer"]
+custom_minimum_size = Vector2(160, 23)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_1jn5s")
+theme_override_styles/fill = SubResource("StyleBoxFlat_vk3l5")
+max_value = 1000.0
+step = 1.0
+value = 700.0
+show_percentage = false
+script = ExtResource("48_4mvbm")
+
+[node name="NavigationButtons" type="HBoxContainer" parent="UI"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 30.0
+offset_top = 10.0
+offset_right = 459.0
+offset_bottom = 207.0
+grow_horizontal = 2
+scale = Vector2(0.5, 0.5)
+theme_override_constants/separation = 0
+
+[node name="FoodButton" type="TextureButton" parent="UI/NavigationButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = ExtResource("49_a77pc")
+script = ExtResource("50_0qet7")
+
+[node name="ActButton" type="TextureButton" parent="UI/NavigationButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = ExtResource("51_7kyvm")
+script = ExtResource("52_mk8tu")
+
+[node name="SettingButton" type="TextureButton" parent="UI/NavigationButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = ExtResource("53_hpyyk")
+script = ExtResource("54_5bu15")
+
+[node name="DebugWindow" type="Window" parent="."]
+title = "Debug Window"
+position = Vector2i(155, 36)
+size = Vector2i(540, 675)
+visible = false
+
+[node name="DebugContent" parent="DebugWindow" instance=ExtResource("55_0rbaa")]
+unique_name_in_owner = true
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="MainMusic" type="AudioStreamPlayer" parent="Audio" groups=["settings_data"]]
+unique_name_in_owner = true
+stream = ExtResource("56_0sjdm")
+autoplay = true
+bus = &"Music"
+script = ExtResource("57_dawf5")
+music_selection = Array[AudioStreamMP3]([ExtResource("58_tbnki"), ExtResource("59_06aow"), ExtResource("60_rpygf"), ExtResource("61_hukp3"), ExtResource("56_0sjdm"), ExtResource("62_jbqd3"), ExtResource("63_dqn1u"), ExtResource("64_gu8kv")])
+
+[node name="SFX" type="AudioStreamPlayer" parent="Audio"]
+unique_name_in_owner = true
+max_polyphony = 2
+bus = &"SFX"
+script = ExtResource("65_787cd")
+
+[node name="Yip" type="AudioStreamPlayer" parent="Audio"]
+unique_name_in_owner = true
+stream = ExtResource("66_uj0ps")
+pitch_scale = 0.4
+max_polyphony = 2
+bus = &"SFX"
+
+[node name="BtnClick" type="AudioStreamPlayer" parent="Audio"]
+unique_name_in_owner = true
+stream = ExtResource("67_nfa6o")
+volume_db = -1.0
+max_polyphony = 2
+bus = &"SFX"
+
+[node name="PIPE" type="AudioStreamPlayer" parent="Audio"]
+unique_name_in_owner = true
+stream = ExtResource("68_dnpii")
+volume_db = 8.0
+max_polyphony = 2
+bus = &"SFX"
+
+[connection signal="tree_exiting" from="MinigameManager" to="MinigameManager" method="_on_tree_exiting"]
+[connection signal="timeout" from="Gameplay/Background/bg_update_ticker" to="Gameplay/Background" method="_on_bg_update_ticker_timeout"]
+[connection signal="button_down" from="Gameplay/ClippyArea" to="Gameplay/ClippyArea" method="_on_button_down"]
+[connection signal="button_up" from="Gameplay/ClippyArea" to="Gameplay/ClippyArea" method="_on_button_up"]
+[connection signal="visibility_changed" from="UI/FoodMenu" to="UI/FoodMenu" method="_on_visibility_changed"]
+[connection signal="button_down" from="UI/FoodMenu/MarginContainer/GridContainer/Button 1" to="UI/FoodMenu/MarginContainer/GridContainer/Button 1" method="_on_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/MarginContainer/GridContainer/Button 2" to="UI/FoodMenu/MarginContainer/GridContainer/Button 2" method="_on_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/MarginContainer/GridContainer/Button 3" to="UI/FoodMenu/MarginContainer/GridContainer/Button 3" method="_on_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/MarginContainer/GridContainer/Button 4" to="UI/FoodMenu/MarginContainer/GridContainer/Button 4" method="_on_button_down"]
+[connection signal="visibility_changed" from="UI/ActivityMenu" to="UI/ActivityMenu" method="_on_visibility_changed"]
+[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen1/GridContainer/ScissorsPaperRock" to="MinigameManager" method="_on_scissors_paper_rock_button_down"]
+[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen1/GridContainer/Totris" to="MinigameManager" method="_on_totris_button_down"]
+[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen1/GridContainer/ZenMode" to="MinigameManager" method="_on_zen_mode_button_down"]
+[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen1/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
+[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen2/GridContainer/ScissorsPaperRock" to="MinigameManager" method="_on_scissors_paper_rock_button_down"]
+[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen2/GridContainer/ZenMode" to="MinigameManager" method="_on_zen_mode_button_down"]
+[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen2/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
+[connection signal="button_down" from="UI/ActivityMenu/NavigationArrows/LeftArrow" to="UI/ActivityMenu/NavigationArrows/LeftArrow" method="_on_button_down"]
+[connection signal="button_down" from="UI/ActivityMenu/NavigationArrows/LeftArrow2" to="UI/ActivityMenu/NavigationArrows/LeftArrow2" method="_on_button_down"]
+[connection signal="visibility_changed" from="UI/OptionsMenu" to="UI/OptionsMenu" method="_on_visibility_changed"]
+[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/AppearanceBtn" to="UI/OptionsMenu" method="_on_appearance_btn_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/FactBtn" to="UI/OptionsMenu" method="_on_fact_btn_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/GameplaySettingsBtn" to="UI/OptionsMenu" method="_on_gameplay_settings_btn_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/SoundBtn" to="UI/OptionsMenu" method="_on_sound_btn_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/CreditsBtn" to="UI/OptionsMenu" method="_on_credits_btn_button_down"]
+[connection signal="pressed" from="UI/OptionsMenu/GameplayOptionsMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
+[connection signal="button_down" from="UI/OptionsMenu/GameplayOptionsMenu/SaveButtons/Cancel" to="UI/OptionsMenu/GameplayOptionsMenu/SaveButtons/Cancel" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/GameplayOptionsMenu/ThemeControls/vHBoxContainer/Button2" to="UI/OptionsMenu/GameplayOptionsMenu/ThemeControls" method="_on_back_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/GameplayOptionsMenu/ThemeControls/vHBoxContainer/Button" to="UI/OptionsMenu/GameplayOptionsMenu/ThemeControls" method="_on_forward_button_down"]
+[connection signal="pressed" from="UI/OptionsMenu/FactsMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
+[connection signal="button_down" from="UI/OptionsMenu/FactsMenu/SaveButtons/Cancel" to="UI/OptionsMenu/FactsMenu/SaveButtons/Cancel" method="_on_button_down"]
+[connection signal="pressed" from="UI/OptionsMenu/AppearanceMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
+[connection signal="button_down" from="UI/OptionsMenu/AppearanceMenu/SaveButtons/Cancel" to="UI/OptionsMenu/AppearanceMenu/SaveButtons/Cancel" method="_on_button_down"]
+[connection signal="pressed" from="UI/OptionsMenu/SoundMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
+[connection signal="button_down" from="UI/OptionsMenu/SoundMenu/SaveButtons/Cancel" to="UI/OptionsMenu/SoundMenu/SaveButtons/Cancel" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/SoundMenu/MusicControls/HBoxContainer/Button2" to="UI/OptionsMenu/SoundMenu/MusicControls" method="_on_back_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/SoundMenu/MusicControls/HBoxContainer/Button" to="UI/OptionsMenu/SoundMenu/MusicControls" method="_on_forward_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/SoundMenu/VolumeControls/GridContainer2/MasterMuted" to="UI/OptionsMenu/SoundMenu/VolumeControls/GridContainer2/MasterMuted" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/SoundMenu/VolumeControls/GridContainer2/SFXMuted" to="UI/OptionsMenu/SoundMenu/VolumeControls/GridContainer2/SFXMuted" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/SoundMenu/VolumeControls/GridContainer2/MusicMuted" to="UI/OptionsMenu/SoundMenu/VolumeControls/GridContainer2/MusicMuted" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/CreditsMenu/Node2D/CreditsCloseBtn" to="UI/OptionsMenu/CreditsMenu/Node2D/CreditsCloseBtn" method="_on_button_down"]
+[connection signal="visibility_changed" from="UI/OptionsMenu/CreditsMenu/Node2D/HScrollBar" to="UI/OptionsMenu/CreditsMenu/Node2D/HScrollBar" method="_on_visibility_changed"]
+[connection signal="button_down" from="UI/NavigationButtons/FoodButton" to="UI/NavigationButtons/FoodButton" method="_on_button_down"]
+[connection signal="button_down" from="UI/NavigationButtons/ActButton" to="UI/NavigationButtons/ActButton" method="_on_button_down"]
+[connection signal="button_down" from="UI/NavigationButtons/SettingButton" to="UI/NavigationButtons/SettingButton" method="_on_button_down"]
+[connection signal="finished" from="Audio/MainMusic" to="Audio/MainMusic" method="_on_finished"]

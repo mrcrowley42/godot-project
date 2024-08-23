@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bebjn5n2kjwgb"]
+[gd_scene load_steps=47 format=3 uid="uid://bebjn5n2kjwgb"]
 
 [ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://images/creature_sprites/little-guy.png" id="1_obpq1"]
 [ext_resource type="Script" path="res://scripts/creature_notification_manager.gd" id="2_0vuyd"]
@@ -14,7 +14,10 @@
 [ext_resource type="Texture2D" uid="uid://c44b8y8u8ne7w" path="res://images/creature_sprites/confused-0.png" id="6_tpv3k"]
 [ext_resource type="Texture2D" uid="uid://dck4q0ce0c4mm" path="res://images/creature_sprites/chill-2.png" id="7_6xa3v"]
 [ext_resource type="Texture2D" uid="uid://cqyltj7p4b1l7" path="res://images/creature_sprites/confused-1.png" id="7_j2qgy"]
+[ext_resource type="Texture2D" uid="uid://dnud16me4mso5" path="res://icons/status/sentiment_frustrated_24dp_FFFFFF_FILL1_wght300_GRAD0_opsz24.svg" id="8_cooyl"]
 [ext_resource type="Texture2D" uid="uid://bcsj0ibb8s3y0" path="res://images/creature_sprites/confused-2.png" id="8_gbg03"]
+[ext_resource type="Texture2D" uid="uid://kma8r55lpxii" path="res://icons/status/sentiment_sad_24dp_FFFFFF_FILL1_wght300_GRAD0_opsz24.svg" id="9_xmwbg"]
+[ext_resource type="Texture2D" uid="uid://cuaa2uyffvita" path="res://icons/status/droplet-fill.svg" id="10_mvvsb"]
 [ext_resource type="Texture2D" uid="uid://dxc4uprrmyny8" path="res://images/creature_sprites/sadge-0.png" id="13_d84xb"]
 [ext_resource type="Texture2D" uid="uid://dxipq42e3qg72" path="res://images/creature_sprites/sadge-1.png" id="14_r6peb"]
 [ext_resource type="Texture2D" uid="uid://dean3vpwpml33" path="res://images/creature_sprites/hat-0.png" id="15_eqb0u"]
@@ -38,6 +41,7 @@
 [ext_resource type="Texture2D" uid="uid://diulrde0gmhnl" path="res://images/creature_sprites/notif-2.png" id="36_rk862"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="37_pguj7"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="38_wb1ql"]
+[ext_resource type="Texture2D" uid="uid://p0oo42fr5wrp" path="res://icons/status/lunch_dining_24dp_8B1A10_FILL0_wght500_GRAD0_opsz24-svg.svg" id="39_5380y"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3cwqc"]
 animations = [{
@@ -167,24 +171,28 @@ animations = [{
 script = ExtResource("2_klgk6")
 dying_colour = Color(1, 0, 0, 1)
 
-[node name="NotifcationManager" type="Node" parent="."]
+[node name="Notifcations" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("2_0vuyd")
-low_hunger = ExtResource("26_b0wvq")
+low_food = ExtResource("26_b0wvq")
 low_fun = ExtResource("27_uvaw6")
-low_regulation = ExtResource("28_qtceu")
-low_hydrate = ExtResource("29_hivox")
+low_hp = ExtResource("28_qtceu")
+low_water = ExtResource("29_hivox")
+low_food_img = ExtResource("39_5380y")
+low_fun_img = ExtResource("8_cooyl")
+low_hp_img = ExtResource("9_xmwbg")
+low_water_img = ExtResource("10_mvvsb")
 cooldown_period = 30.0
+notifcation_length = 10.0
 
-[node name="STAHP" type="AudioStreamPlayer" parent="."]
+[node name="STAHP" type="AudioStreamPlayer" parent="Notifcations"]
 unique_name_in_owner = true
 bus = &"SFX"
 script = ExtResource("16_epyie")
 sounds = Array[AudioStream]([ExtResource("16_2mdbn"), ExtResource("17_addty"), ExtResource("18_qdg0m")])
 
-[node name="LowStatSounds" type="AudioStreamPlayer" parent="."]
+[node name="LowStatSounds" type="AudioStreamPlayer" parent="Notifcations"]
 unique_name_in_owner = true
-volume_db = -3.0
 max_polyphony = 2
 bus = &"SFX"
 
@@ -218,6 +226,7 @@ autoplay = "default"
 
 [node name="NotificationBubble" type="AnimatedSprite2D" parent="Sprites"]
 unique_name_in_owner = true
+visible = false
 texture_filter = 1
 position = Vector2(-32, -185)
 scale = Vector2(1.8, 1.8)
@@ -232,6 +241,7 @@ script = ExtResource("36_lmtu2")
 
 [node name="Example" type="Label" parent="Sprites/NotificationBubble/Icons"]
 unique_name_in_owner = true
+visible = false
 texture_filter = 1
 offset_left = -89.0
 offset_top = -223.0
@@ -246,5 +256,17 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[connection signal="finished" from="LowStatSounds" to="NotifcationManager" method="_on_low_stat_sounds_finished"]
+[node name="Icon" type="TextureRect" parent="Sprites/NotificationBubble/Icons"]
+unique_name_in_owner = true
+self_modulate = Color(0, 0, 0, 1)
+offset_left = -75.0
+offset_top = -229.0
+offset_right = 25.0
+offset_bottom = -165.0
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("39_5380y")
+expand_mode = 2
+stretch_mode = 5
+
+[connection signal="finished" from="Notifcations/LowStatSounds" to="Notifcations" method="_on_low_stat_sounds_finished"]
 [connection signal="animation_changed" from="Sprites/Main" to="Sprites/Main" method="_on_animation_changed"]

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="UiTheme" load_steps=9 format=3 uid="uid://clen0bplq0q5d"]
 
-[ext_resource type="Script" path="res://ui_theme_class.gd" id="1_nijfs"]
+[ext_resource type="Script" path="res://scripts/base_classses/ui_theme_class.gd" id="1_nijfs"]
 [ext_resource type="Texture2D" uid="uid://b8y8c6h2qmqds" path="res://UI stuff/Pink Palette/pink_activities_button.png" id="1_sskum"]
 [ext_resource type="Texture2D" uid="uid://04kj5y6r82xs" path="res://UI stuff/Pink Palette/pink_activities_button_pressed.png" id="2_p2gct"]
 [ext_resource type="Texture2D" uid="uid://jj1g1lm51rt4" path="res://UI stuff/Pink Palette/pink_food_button.png" id="3_313c5"]

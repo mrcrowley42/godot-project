@@ -4,8 +4,8 @@ var og_text = self.text
 
 func _process(_delta):
 	var stats = get_node("..").stat_man
-	var rate = -(stats.sp_amount * (stats.sp_rate * stats.time_multiplier))
+	var rate = -(stats.food_amount * (stats.food_rate * stats.time_multiplier))
 	self.text = og_text % [
-			str(round(find_parent('DebugContent').creature.sp)),
+			str(round(find_parent('DebugContent').creature.food)),
 			str(rate)
 		]

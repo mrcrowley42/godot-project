@@ -6,20 +6,37 @@ const DATA = "data"
 const SAVE = "save"
 const LOAD = "load"
 
+@export var debug_mode: bool
+@export var unlock_fps: bool = false
+
 var last_opened: float
 @onready var launch_time: float = Time.get_unix_time_from_system()
 @onready var stat_man: StatusManager = %StatusManager
 #@onready var launch_date = Time.get_datetime_dict_from_system().day
 @onready var minigame_man: MinigameManager = %MinigameManager
+@onready var debug_window = $DebugWindow
 
 func _ready():
+	if unlock_fps:
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED) # HUH?
 	load_data()
 	load_settings_data()
 	calc_elapsed_time()
+	debug_window.visible = debug_mode
+	# Disable the script execution when the panel is disabled/hidden.
+	if not debug_mode:
+		debug_window.process_mode = Node.PROCESS_MODE_DISABLED
 
 func calc_elapsed_time():
 	var elapsed_time = launch_time - last_opened
-	print("%.2f seconds since last played." %[elapsed_time])
+	# please excuse the bad variable names here, this is only a temp thing anyway.
+	var _a = Color(1,0,0)
+	var _b = Color(0,1,0)
+	var max_time = 600  # in seconds
+	var _c = _b.lerp(_a, clampf(elapsed_time/max_time,0,1))
+	_c.v = 1.0
+	_c = _c.lightened(.25)
+	print_rich("[color=%s]%.2f seconds since last played.[/color]" %[_c.to_html() ,elapsed_time])
 	print("%.2f days since last played." %[elapsed_time/86400])
 	var holiday_status = "were" if stat_man.holiday_mode else "were not"
 	print("And you %s on holiday." % [holiday_status])
@@ -127,4 +144,3 @@ func _input(event) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
 		get_tree().quit()
-

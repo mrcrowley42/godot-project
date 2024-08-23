@@ -4,10 +4,14 @@ extends Control
 @onready var ui = %UI_Theme_Manager
 @onready var stat_man = %StatusManager
 @onready var music_track = %MainMusic
-@onready var screen_tint = %BG
 @onready var minigame_man: MinigameManager = %MinigameManager
 @onready var clippy_area: Button  = %ClippyArea
+@onready var background = %Background
+@onready var screen_tint = %BG
+@onready var notif_man = %NotificationManager
+@onready var game = self.find_parent("Game")
 
+var example_messages = ["random", "word", "banana", "mario", "bingus"]
 
 func _on_h_slider_value_changed(value):
 	stat_man.time_multiplier = value
@@ -22,6 +26,8 @@ func _ready():
 	$AnimSelect.selected = 3
 	$ColorPickerButton.color = creature.dying_colour
 	stat_man.finished_loading.connect(update_holiday)
+	$CheckBox.visible = game.unlock_fps
+	$CheckBox.button_pressed = game.unlock_fps
 	
 	
 func update_holiday():
@@ -66,10 +72,13 @@ func _on_h_slider_2_value_changed(value):
 	if clippy_area.clippy:
 		creature.find_child("Sprites").self_modulate = Color(1,1,1,clippy_area.clippy_opacity)
 
-
 func _on_check_box_toggled(toggled_on):
 	if toggled_on:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 	else:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
-	
+
+
+func _on_notif_btn_button_down():
+	var msg = example_messages.pick_random()
+	notif_man.new_notification(msg)

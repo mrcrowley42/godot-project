@@ -51,11 +51,8 @@ void fragment() {
 	remainder /= vec2(columnWidth, rowHeight);
 	remainder -= floor(remainder);  // actually get the remainder (will be =< 0 and > 1 whithin each grid square)
 	
-	float maxRem = max(remainder.x, remainder.y);
-	float full = 1.0 - lineSize;
-	
 	// apply colours
-	if (maxRem > full) {
+	if (max(remainder.x, remainder.y) > 1.0 - lineSize) {
 		COLOR = color;
 		
 		if (shouldOutline(screenDim, scaledUV, offset)) {

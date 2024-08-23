@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bsxiyobfp4dmq" path="res://UI stuff/Green Palette/green_activities_button_pressed.png" id="2_scgym"]
 [ext_resource type="Texture2D" uid="uid://d4c1k5m8u1jc0" path="res://UI stuff/Green Palette/green_food_button.png" id="3_xcps5"]
 [ext_resource type="Texture2D" uid="uid://ca2xeau74c5jp" path="res://UI stuff/Green Palette/green_food_button_pressed.png" id="4_mb13j"]
-[ext_resource type="Script" path="res://ui_theme_class.gd" id="5_2fgmx"]
+[ext_resource type="Script" path="res://scripts/base_classses/ui_theme_class.gd" id="5_2fgmx"]
 [ext_resource type="Texture2D" uid="uid://b5uf4jcvme855" path="res://UI stuff/Green Palette/green_settings_button.png" id="6_ygmsn"]
 [ext_resource type="Texture2D" uid="uid://ddj86anacc5ai" path="res://UI stuff/Green Palette/green_settings_button_pressed.png" id="7_jobtj"]
 [ext_resource type="Texture2D" uid="uid://cawudmxbjamv0" path="res://UI stuff/Green Palette/ui_green.png" id="8_7u5v2"]
