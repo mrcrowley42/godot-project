@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://dvngmgfihp65d"]
 
-[ext_resource type="Script" path="res://scenes/UiScenes/notification.gd" id="1_utqx5"]
-[ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="2_mjs0b"]
-[ext_resource type="AudioStream" uid="uid://ddfo6jw06fpja" path="res://sound_effects/correct.wav" id="3_lvlvs"]
+[ext_resource type="Script" path="res://scripts/notification.gd" id="1_xvh73"]
+[ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="2_4drbk"]
+[ext_resource type="AudioStream" uid="uid://ddfo6jw06fpja" path="res://sound_effects/correct.wav" id="3_2lai8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t0j48"]
 bg_color = Color(0.964706, 0.964706, 0.964706, 1)
@@ -26,7 +26,7 @@ offset_bottom = 64.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_t0j48")
-script = ExtResource("1_utqx5")
+script = ExtResource("1_xvh73")
 ease_type = 2
 animation_length = 0.4
 notification_length = 2.0
@@ -45,7 +45,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(0.185, 0.21425, 0.25, 1)
-theme_override_fonts/font = ExtResource("2_mjs0b")
+theme_override_fonts/font = ExtResource("2_4drbk")
 theme_override_font_sizes/font_size = 24
 text = "ACHIEVEMENT UNLOCKED!"
 horizontal_alignment = 1
@@ -53,5 +53,5 @@ vertical_alignment = 1
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("3_lvlvs")
+stream = ExtResource("3_2lai8")
 bus = &"SFX"
