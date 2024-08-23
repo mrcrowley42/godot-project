@@ -18,9 +18,7 @@ func _ready():
 	calc_elapsed_time()
 
 func calc_elapsed_time():
-	var elapsed_time = launch_time - last_opened
-	print("%.2f seconds since last played." %[elapsed_time])
-	print("%.2f days since last played." %[elapsed_time/86400])
+	print("%.2f seconds since last played." %[launch_time - last_opened])
 	var holiday_status = "were" if stat_man.holiday_mode else "were not"
 	print("And you %s on holiday." % [holiday_status])
 	#print(launch_date)

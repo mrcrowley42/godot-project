@@ -1,7 +1,6 @@
 [gd_scene load_steps=43 format=3 uid="uid://bebjn5n2kjwgb"]
 
 [ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://images/creature_sprites/little-guy.png" id="1_obpq1"]
-[ext_resource type="Script" path="res://scripts/creature_notification_manager.gd" id="2_0vuyd"]
 [ext_resource type="Script" path="res://scripts/creature.gd" id="2_klgk6"]
 [ext_resource type="Texture2D" uid="uid://dqtjsny24a3p1" path="res://images/creature_sprites/angry-0.png" id="3_b4v78"]
 [ext_resource type="Texture2D" uid="uid://4cfpam3be0g" path="res://images/creature_sprites/little-guy_2.png" id="3_xm5kq"]
@@ -28,13 +27,14 @@
 [ext_resource type="AudioStream" uid="uid://bux02e7112jdt" path="res://sound_effects/pain5.wav" id="18_qdg0m"]
 [ext_resource type="Texture2D" uid="uid://diuhoh5vf8a6t" path="res://images/creature_sprites/glasses-1.png" id="19_a2k16"]
 [ext_resource type="Texture2D" uid="uid://ch6mgp1qpwwjh" path="res://images/creature_sprites/glasses-2.png" id="20_ehttl"]
+[ext_resource type="Script" path="res://scripts/low_stat_sounds.gd" id="25_1luyq"]
 [ext_resource type="AudioStream" uid="uid://cl8pxd7pob5tr" path="res://sound_effects/hunger_low.wav" id="26_b0wvq"]
 [ext_resource type="AudioStream" uid="uid://p3x28bbk45v4" path="res://sound_effects/fun_low.wav" id="27_uvaw6"]
 [ext_resource type="AudioStream" uid="uid://bay1xn7u3rdq4" path="res://sound_effects/regulation_low.wav" id="28_qtceu"]
 [ext_resource type="AudioStream" uid="uid://sf20qavy3mx3" path="res://sound_effects/thirst_low.wav" id="29_hivox"]
 [ext_resource type="Texture2D" uid="uid://bk2tnjee2nsd3" path="res://images/creature_sprites/notif-0.png" id="34_x5sq7"]
 [ext_resource type="Texture2D" uid="uid://dp33npwim2x1c" path="res://images/creature_sprites/notif-1.png" id="35_1xftg"]
-[ext_resource type="Script" path="res://scripts/wiggle.gd" id="36_lmtu2"]
+[ext_resource type="Script" path="res://scenes/Creatures/wiggle.gd" id="36_p7ixw"]
 [ext_resource type="Texture2D" uid="uid://diulrde0gmhnl" path="res://images/creature_sprites/notif-2.png" id="36_rk862"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="37_pguj7"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="38_wb1ql"]
@@ -167,14 +167,29 @@ animations = [{
 script = ExtResource("2_klgk6")
 dying_colour = Color(1, 0, 0, 1)
 
-[node name="NotifcationManager" type="Node" parent="."]
+[node name="Main" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
-script = ExtResource("2_0vuyd")
-low_hunger = ExtResource("26_b0wvq")
-low_fun = ExtResource("27_uvaw6")
-low_regulation = ExtResource("28_qtceu")
-low_hydrate = ExtResource("29_hivox")
-cooldown_period = 30.0
+scale = Vector2(0.225, 0.225)
+sprite_frames = SubResource("SpriteFrames_3cwqc")
+animation = &"idle"
+autoplay = "idle"
+script = ExtResource("5_oh7gr")
+
+[node name="Hat" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(-19, -127)
+scale = Vector2(0.225, 0.225)
+sprite_frames = SubResource("SpriteFrames_3t6pq")
+autoplay = "default"
+frame_progress = 0.770958
+
+[node name="Glasses" type="AnimatedSprite2D" parent="."]
+visible = false
+modulate = Color(1, 0.807843, 0.592157, 1)
+position = Vector2(-7, -33)
+scale = Vector2(0.225, 0.225)
+sprite_frames = SubResource("SpriteFrames_xmjbo")
+autoplay = "default"
 
 [node name="STAHP" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
@@ -187,64 +202,37 @@ unique_name_in_owner = true
 volume_db = -3.0
 max_polyphony = 2
 bus = &"SFX"
+script = ExtResource("25_1luyq")
+low_hunger = ExtResource("26_b0wvq")
+low_fun = ExtResource("27_uvaw6")
+low_regulation = ExtResource("28_qtceu")
+low_hydrate = ExtResource("29_hivox")
 
-[node name="Sprites" type="CanvasGroup" parent="."]
-
-[node name="Main" type="AnimatedSprite2D" parent="Sprites"]
+[node name="NotificationBubble" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
-scale = Vector2(0.225, 0.225)
-sprite_frames = SubResource("SpriteFrames_3cwqc")
-animation = &"idle"
-autoplay = "idle"
-script = ExtResource("5_oh7gr")
-
-[node name="Accessories" type="Node2D" parent="Sprites"]
-
-[node name="Hat" type="AnimatedSprite2D" parent="Sprites/Accessories"]
 visible = false
-position = Vector2(-19, -127)
-scale = Vector2(0.225, 0.225)
-sprite_frames = SubResource("SpriteFrames_3t6pq")
-autoplay = "default"
-frame_progress = 0.770958
-
-[node name="Glasses" type="AnimatedSprite2D" parent="Sprites/Accessories"]
-visible = false
-modulate = Color(1, 0.807843, 0.592157, 1)
-position = Vector2(-7, -33)
-scale = Vector2(0.225, 0.225)
-sprite_frames = SubResource("SpriteFrames_xmjbo")
-autoplay = "default"
-
-[node name="NotificationBubble" type="AnimatedSprite2D" parent="Sprites"]
-unique_name_in_owner = true
 texture_filter = 1
 position = Vector2(-32, -185)
 scale = Vector2(1.8, 1.8)
 sprite_frames = SubResource("SpriteFrames_o130v")
 autoplay = "default"
 
-[node name="Icons" type="Node2D" parent="Sprites/NotificationBubble"]
-editor_description = "Adds wiggle to children nodes."
+[node name="Node2D" type="Node2D" parent="NotificationBubble"]
 position = Vector2(17.7778, 102.778)
 scale = Vector2(0.555556, 0.555556)
-script = ExtResource("36_lmtu2")
+script = ExtResource("36_p7ixw")
 
-[node name="Example" type="Label" parent="Sprites/NotificationBubble/Icons"]
-unique_name_in_owner = true
+[node name="Label" type="Label" parent="NotificationBubble/Node2D"]
 texture_filter = 1
-offset_left = -89.0
-offset_top = -223.0
-offset_right = 23.0
-offset_bottom = -174.0
+offset_left = -60.5556
+offset_top = -211.444
+offset_right = -3.5556
+offset_bottom = -168.444
 theme = ExtResource("37_pguj7")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("38_wb1ql")
-theme_override_font_sizes/font_size = 28
-text = "THIRSTY"
-horizontal_alignment = 1
-vertical_alignment = 1
-uppercase = true
+theme_override_font_sizes/font_size = 32
+text = ">:("
 
-[connection signal="finished" from="LowStatSounds" to="NotifcationManager" method="_on_low_stat_sounds_finished"]
-[connection signal="animation_changed" from="Sprites/Main" to="Sprites/Main" method="_on_animation_changed"]
+[connection signal="animation_changed" from="Main" to="Main" method="_on_animation_changed"]
+[connection signal="finished" from="LowStatSounds" to="LowStatSounds" method="_on_finished"]

@@ -1,4 +1,4 @@
-@icon("res://icons/class-icons/controller-icon.svg")
+@icon("res://icons/controller-icon.svg")
 class_name MiniGameLogic extends Node
 
 func close_game():

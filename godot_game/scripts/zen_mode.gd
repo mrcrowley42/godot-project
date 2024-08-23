@@ -7,13 +7,13 @@ extends MiniGameLogic
 var og_state: String
 
 func _ready():
-	og_state = creature.find_child('Main').animation
-	creature.find_child('Main').animation = "chill"
+	og_state = creature.find_child('AnimatedSprite2D').animation
+	creature.find_child('AnimatedSprite2D').animation = "chill"
 	stat_man.time_multiplier = -1.0
 	
 func _exit_tree():
 	# Return animation state to what is was before entering the scene.
-	creature.find_child('Main').animation = og_state
+	creature.find_child('AnimatedSprite2D').animation = og_state
 
 func _on_close_btn_button_down():
 	close_game()

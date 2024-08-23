@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3gqtp2shsesk"
-path="res://.godot/imported/glasses-2.png-8741ece60faa79f0732f260c129f535d.ctex"
+uid="uid://c702pbhxasm52"
+path="res://.godot/imported/heart-fill.svg-eeef06e2552db115010e23464aacc4c3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/creature_sprites/correct_scale/glasses-2.png"
-dest_files=["res://.godot/imported/glasses-2.png-8741ece60faa79f0732f260c129f535d.ctex"]
+source_file="res://icons/heart-fill.svg"
+dest_files=["res://.godot/imported/heart-fill.svg-eeef06e2552db115010e23464aacc4c3.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=2.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

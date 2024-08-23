@@ -1,7 +1,9 @@
-class_name StatusManager extends ScriptNode
+@icon("res://icons/ClassList.svg")
+class_name StatusManager extends Node2D
 ## Script responsible for passive drain of Creature stats
 
 @export_category("Status Controls")
+@export_group("Passive drain controls")
 @export var hp_rate: float = 1
 @export var hp_amount: float = 5
 @export var mp_rate: float = 4

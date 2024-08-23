@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bj6cu28tkpvkk"
-path="res://.godot/imported/sadge-1.png-11343feb0d54f2fc741a3a8908e72171.ctex"
+uid="uid://brovv5jk8jxpi"
+path="res://.godot/imported/ClassList.svg-5468e2b0a21049ae7cf13f16fcb78562.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/creature_sprites/correct_scale/sadge-1.png"
-dest_files=["res://.godot/imported/sadge-1.png-11343feb0d54f2fc741a3a8908e72171.ctex"]
+source_file="res://icons/ClassList.svg"
+dest_files=["res://.godot/imported/ClassList.svg-5468e2b0a21049ae7cf13f16fcb78562.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=4.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

@@ -2,17 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csoeqm60d22w6"
-path="res://.godot/imported/creature.svg-a36f29ad794aa0307689a04fc66763f4.ctex"
+uid="uid://c421b3t1ompki"
+path="res://.godot/imported/bolt_24dp_FILL1_wght300_GRAD0_opsz24.svg-b043b1ed24acada3d3dd28bf1a41994c.ctex"
 metadata={
-"has_editor_variant": true,
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icons/class-icons/creature.svg"
-dest_files=["res://.godot/imported/creature.svg-a36f29ad794aa0307689a04fc66763f4.ctex"]
+source_file="res://icons/bolt_24dp_FILL1_wght300_GRAD0_opsz24.svg"
+dest_files=["res://.godot/imported/bolt_24dp_FILL1_wght300_GRAD0_opsz24.svg-b043b1ed24acada3d3dd28bf1a41994c.ctex"]
 
 [params]
 
@@ -33,6 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=true
-editor/convert_colors_with_editor_theme=true
+svg/scale=1.8
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

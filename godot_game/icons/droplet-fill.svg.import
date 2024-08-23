@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6skp5u3x8qx8"
-path="res://.godot/imported/glasses-0.png-61e2aed0828035aed842666c7630960a.ctex"
+uid="uid://cuaa2uyffvita"
+path="res://.godot/imported/droplet-fill.svg-c4aa21a2917f57ee48a9e0bae75b3a68.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/creature_sprites/correct_scale/glasses-0.png"
-dest_files=["res://.godot/imported/glasses-0.png-61e2aed0828035aed842666c7630960a.ctex"]
+source_file="res://icons/droplet-fill.svg"
+dest_files=["res://.godot/imported/droplet-fill.svg-c4aa21a2917f57ee48a9e0bae75b3a68.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=2.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

@@ -11,6 +11,7 @@ func _ready():
 	self.play()
 	
 func move_track(offset=0) -> void:
+	# Wrap index around 
 	self.i = Helpers.wrap_index(music_selection, i, offset)
 	stream = music_selection[self.i]
 	self.play()
