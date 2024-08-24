@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5rg72h3xa58p"
-path="res://.godot/imported/baby-3.png-17eb6bc14b4d8063430f28c41d7ca215.ctex"
+uid="uid://chlnkbjbcn4ue"
+path="res://.godot/imported/baby-2.png-9d20ed456e75f4428d817f091c26de75.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/creature_sprites/correct_scale/baby-3.png"
-dest_files=["res://.godot/imported/baby-3.png-17eb6bc14b4d8063430f28c41d7ca215.ctex"]
+source_file="res://images/creature_sprites/correct_scale/baby-2.png"
+dest_files=["res://.godot/imported/baby-2.png-9d20ed456e75f4428d817f091c26de75.ctex"]
 
 [params]
 
