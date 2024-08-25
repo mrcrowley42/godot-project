@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gi4ytib73ibf"
-path="res://.godot/imported/egg-green.png-e19f6abe6f519bd41033508beec1b338.ctex"
+uid="uid://c5u8w2osvba5l"
+path="res://.godot/imported/egg-trans.png-a74590fafe1390b668d9f408257679eb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/egg/egg-green.png"
-dest_files=["res://.godot/imported/egg-green.png-e19f6abe6f519bd41033508beec1b338.ctex"]
+source_file="res://images/egg/egg-trans.png"
+dest_files=["res://.godot/imported/egg-trans.png-a74590fafe1390b668d9f408257679eb.ctex"]
 
 [params]
 
