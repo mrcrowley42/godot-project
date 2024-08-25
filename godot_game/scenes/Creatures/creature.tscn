@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://bebjn5n2kjwgb"]
+[gd_scene load_steps=50 format=3 uid="uid://bebjn5n2kjwgb"]
 
 [ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://images/creature_sprites/little-guy.png" id="1_obpq1"]
 [ext_resource type="Script" path="res://scripts/creature_notification_manager.gd" id="2_0vuyd"]
@@ -27,9 +27,12 @@
 [ext_resource type="Texture2D" uid="uid://ds1kv27x8e4hy" path="res://images/creature_sprites/hat-1.png" id="16_iky04"]
 [ext_resource type="AudioStream" uid="uid://it0l1d864tp5" path="res://sound_effects/pain4.wav" id="17_addty"]
 [ext_resource type="Texture2D" uid="uid://brslt7dhl7lmc" path="res://images/creature_sprites/hat-2.png" id="17_s111j"]
+[ext_resource type="Texture2D" uid="uid://dwyq4ypjep2wb" path="res://images/creature_sprites/baby-0.png" id="18_0t2re"]
 [ext_resource type="Texture2D" uid="uid://jwn24lgspht2" path="res://images/creature_sprites/glasses-0.png" id="18_52sxs"]
 [ext_resource type="AudioStream" uid="uid://bux02e7112jdt" path="res://sound_effects/pain5.wav" id="18_qdg0m"]
+[ext_resource type="Texture2D" uid="uid://dino0mqreujlr" path="res://images/creature_sprites/baby-1.png" id="19_14m7g"]
 [ext_resource type="Texture2D" uid="uid://diuhoh5vf8a6t" path="res://images/creature_sprites/glasses-1.png" id="19_a2k16"]
+[ext_resource type="Texture2D" uid="uid://banu8mr1om6vj" path="res://images/creature_sprites/baby-2.png" id="20_ciaxm"]
 [ext_resource type="Texture2D" uid="uid://ch6mgp1qpwwjh" path="res://images/creature_sprites/glasses-2.png" id="20_ehttl"]
 [ext_resource type="AudioStream" uid="uid://cl8pxd7pob5tr" path="res://sound_effects/hunger_low.wav" id="26_b0wvq"]
 [ext_resource type="AudioStream" uid="uid://p3x28bbk45v4" path="res://sound_effects/fun_low.wav" id="27_uvaw6"]
@@ -57,6 +60,20 @@ animations = [{
 }],
 "loop": true,
 "name": &"angry",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_0t2re")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_14m7g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_ciaxm")
+}],
+"loop": true,
+"name": &"baby",
 "speed": 4.0
 }, {
 "frames": [{

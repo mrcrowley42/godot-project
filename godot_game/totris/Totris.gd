@@ -79,12 +79,14 @@ func get_save_data():
 	return {"best_score": best_score, "best_level": best_level}
 
 func _on_play_button_down():
+	%SFX.play_sound("click")
 	start_menu.hide()
 	kill_menu.hide()
 	t_logic.reset_game()
 	t_logic.start()
 
 func _on_help_btn_button_down():
+	%SFX.play_sound("click")
 	help_menu.visible = !help_menu.visible
 	if t_logic.running:
 		t_logic.paused = help_menu.visible
@@ -98,5 +100,6 @@ func _on_close_btn_button_down():
 	queue_free()  # maybe dont delete? idk it'll do for now
 
 func _on_menu_button_down():
+	%SFX.play_sound("click")
 	kill_menu.hide()
 	show_start_menu()
