@@ -10,7 +10,7 @@ class_name Creature
 @export var max_water: float = 1000
 @export var max_food: float = 1000
 @export var max_fun: float = 1000
-
+@export var xp_required_for_adult: float
 @onready var main_sprite = %Main
 @export var clippy_area: Node
 
@@ -20,12 +20,14 @@ var hp: float
 var water: float
 var food: float
 var fun: float
+var xp: float
 var life_stage: LifeStage
 
 signal hp_changed()
 signal food_changed()
 signal water_changed()
 signal fun_changed()
+signal xp_changed()
 
 var stats: Dictionary = {
 	'hp': damage_hp,
@@ -34,23 +36,28 @@ var stats: Dictionary = {
 	'food': damage_food
 }
 
+func add_xp(amount):
+	xp += amount
+	xp_changed.emit()
+	if xp > xp_required_for_adult:
+		level_up()
+
+func level_up():
+	life_stage = LifeStage.Adult
+
 func _ready() -> void:
 	reset_stats()
 
 ## Sets the Creatures current stats to their maximum value.
 func reset_stats() -> void:
-	self.hp = max_hp
-	self.water = max_water
-	self.food= max_food
-	self.fun = max_fun
-	hp_changed.emit()
-	food_changed.emit()
-	fun_changed.emit()
-	water_changed.emit()
-	apply_dmg_tint()
+	dmg(-max_hp, 'hp')
+	dmg(-max_food, 'food')
+	dmg(-max_water, 'water')
+	dmg(-max_fun, 'fun')
 
 ## function to damage/heal the Creature (use a negative value to heal)
 func dmg(amount: float, stat: String) -> void:
+	#add_xp(100)
 	stats[stat].call(amount)
 	
 ## Change to game over scene.
@@ -87,10 +94,10 @@ func damage_water(amount) -> void:
 	water_changed.emit()
 
 func save() -> Dictionary:
-	return {"water": water, "food": food, "fun": fun, "hp": hp}
+	return {"water": water, "food": food, "fun": fun, "hp": hp, "xp": xp}
 	
 func load(data) -> void:
-	var stat_list = ["water", "fun", "food"]
+	var stat_list = ["water", "fun", "food", "xp"]
 	if not find_parent("Game").debug_mode:
 		stat_list.append("hp")
 	for setting in stat_list:

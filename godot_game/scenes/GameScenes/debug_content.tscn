@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b6wocr0vo5s4v"]
+[gd_scene load_steps=22 format=3 uid="uid://b6wocr0vo5s4v"]
 
 [ext_resource type="Script" path="res://scripts/debug_content.gd" id="1_jlyus"]
 [ext_resource type="Script" path="res://scripts/water_label.gd" id="2_3h2jk"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/food_label.gd" id="3_kowqt"]
 [ext_resource type="Script" path="res://scripts/fun_label.gd" id="3_qpwvx"]
 [ext_resource type="Script" path="res://scripts/theme_label.gd" id="4_pa4py"]
+[ext_resource type="Script" path="res://scenes/GameScenes/XpLabel.gd" id="7_5mkx4"]
 [ext_resource type="Script" path="res://scripts/debug_day_progress.gd" id="8_0d2ip"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="8_lqg4h"]
 [ext_resource type="FontFile" uid="uid://cukp5skadwgit" path="res://fonts/JetBrainsMono-VariableFont_wght.ttf" id="9_y33yi"]
@@ -150,6 +151,18 @@ size_flags_vertical = 6
 theme = ExtResource("2_5bhpe")
 text = "FOOD: %s (%s/sec)"
 script = ExtResource("3_kowqt")
+
+[node name="XpLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 446.0
+offset_right = 239.0
+offset_bottom = 474.0
+size_flags_horizontal = 0
+size_flags_vertical = 6
+theme = ExtResource("2_5bhpe")
+text = "XP: %s"
+script = ExtResource("7_5mkx4")
 
 [node name="ThemeLabel" type="Label" parent="."]
 layout_mode = 0
