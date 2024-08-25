@@ -14,7 +14,7 @@ class_name Creature
 @onready var main_sprite = %Main
 @export var clippy_area: Node
 
-enum LifeStage {Egg, Child, Adult}
+enum LifeStage {CHILD, ADULT}
 
 var hp: float
 var water: float
