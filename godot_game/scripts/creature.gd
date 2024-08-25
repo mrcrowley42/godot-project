@@ -10,7 +10,7 @@ class_name Creature
 @export var max_water: float = 1000
 @export var max_food: float = 1000
 @export var max_fun: float = 1000
-@export var xp_required_for_adult: float
+@export var xp_required: float
 @onready var main_sprite = %Main
 @export var clippy_area: Node
 
@@ -39,11 +39,12 @@ var stats: Dictionary = {
 func add_xp(amount):
 	xp += amount
 	xp_changed.emit()
-	if xp > xp_required_for_adult:
+	if xp > xp_required:
 		level_up()
 
 func level_up():
-	life_stage = LifeStage.Adult
+	pass
+	#life_stage = LifeStage.Adult
 
 func _ready() -> void:
 	reset_stats()

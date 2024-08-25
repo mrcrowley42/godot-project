@@ -170,6 +170,7 @@ animations = [{
 [node name="Node2D" type="Node2D"]
 script = ExtResource("2_klgk6")
 dying_colour = Color(1, 0, 0, 1)
+xp_required = 20000.0
 
 [node name="Notifcations" type="Node" parent="."]
 unique_name_in_owner = true
