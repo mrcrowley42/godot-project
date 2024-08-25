@@ -13,6 +13,7 @@ class_name Creature
 @export var xp_required: float
 @onready var main_sprite = %Main
 @export var clippy_area: Node
+@export var xp_mulitplier: float = 1.0
 
 enum LifeStage {CHILD, ADULT}
 
@@ -39,7 +40,7 @@ var stats: Dictionary = {
 func add_xp(amount):
 	xp += amount
 	xp_changed.emit()
-	if xp > xp_required:
+	if xp >= xp_required:
 		level_up()
 
 func level_up():
@@ -56,9 +57,8 @@ func reset_stats() -> void:
 	dmg(-max_water, 'water')
 	dmg(-max_fun, 'fun')
 
-## function to damage/heal the Creature (use a negative value to heal)
+## Generialised function to damage/heal the Creature (use a negative value to heal)
 func dmg(amount: float, stat: String) -> void:
-	#add_xp(100)
 	stats[stat].call(amount)
 	
 ## Change to game over scene.
@@ -72,27 +72,40 @@ func apply_dmg_tint() -> void:
 	main_sprite.modulate.r = clampf(1 - (1 - hp / max_hp) + dying_colour.r, 0, 1)
 
 func damage_hp(amount: float) -> void:
+	var temp_hp = hp
 	self.hp -= amount
 	if hp <= 0:
 		call_deferred("game_over")
 	self.hp = clampf(self.hp, 0, max_hp)
+	if hp - temp_hp > 0:
+		add_xp(hp - temp_hp * xp_mulitplier)
 	apply_dmg_tint()
 	hp_changed.emit()
 	
 func damage_food(amount) -> void:
+	var temp_food = food
 	self.food -= amount
 	self.food = clampf(self.food, 0, max_food)
+	if food - temp_food > 0:
+		add_xp(food - temp_food * xp_mulitplier)
 	food_changed.emit()
 
 func damage_fun(amount) -> void:
+	var temp_fun = fun
 	self.fun -= amount
 	self.fun = clampf(self.fun, 0, max_fun)
+	if fun - temp_fun > 0:
+		add_xp(fun - temp_fun * xp_mulitplier)
 	fun_changed.emit()
 	
 func damage_water(amount) -> void:
+	var temp_water = water
 	self.water -= amount
 	self.water = clampf(self.water, 0, max_water)
+	if water - temp_water > 0:
+		add_xp(water - temp_water * xp_mulitplier)
 	water_changed.emit()
+
 
 func save() -> Dictionary:
 	return {"water": water, "food": food, "fun": fun, "hp": hp, "xp": xp}
