@@ -1,254 +1,115 @@
-[gd_scene load_steps=23 format=3 uid="uid://bl22rtkqnj1s7"]
+[gd_scene load_steps=11 format=3 uid="uid://cn1lep32uqau0"]
 
-[ext_resource type="Script" path="res://scripts/MainGameScripts/EggScene/egg.gd" id="1_3gale"]
-[ext_resource type="AudioStream" uid="uid://8ifwm2tjitur" path="res://sound_effects/yippee.mp3" id="2_rsge0"]
-[ext_resource type="Texture2D" uid="uid://cqerxt6jjic0u" path="res://images/egg/egg01.PNG" id="3_swhes"]
-[ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://images/creature_sprites/little-guy.png" id="4_5b41r"]
-[ext_resource type="Texture2D" uid="uid://ddd55umdtwxcx" path="res://images/egg/egg02.PNG" id="4_cu5wo"]
-[ext_resource type="Texture2D" uid="uid://4cfpam3be0g" path="res://images/creature_sprites/little-guy_2.png" id="5_6fl3y"]
-[ext_resource type="Texture2D" uid="uid://do7dbsspir5oc" path="res://images/egg/egg03.PNG" id="5_vfgrm"]
-[ext_resource type="Texture2D" uid="uid://6cg5s6yf1jrl" path="res://images/egg/egg04.PNG" id="6_eimtr"]
-[ext_resource type="Texture2D" uid="uid://diwxdoruu1sob" path="res://images/creature_sprites/little-guy_3.png" id="6_ii2p7"]
-[ext_resource type="Texture2D" uid="uid://cebeodlplwmw8" path="res://images/creature_sprites/Flopps/IMG_0011.PNG" id="7_10a4q"]
-[ext_resource type="Script" path="res://scripts/MainGameScripts/EggScene/party.gd" id="8_psxin"]
-[ext_resource type="AudioStream" uid="uid://dnau787og6qky" path="res://sound_effects/EggCrack.wav" id="9_iuv6s"]
-[ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="12_w52uh"]
+[ext_resource type="Script" path="res://scripts/MainGameScripts/egg_open.gd" id="1_r0w83"]
+[ext_resource type="Texture2D" uid="uid://gi4ytib73ibf" path="res://images/egg/egg-green.png" id="2_72bes"]
+[ext_resource type="Texture2D" uid="uid://di0q6yu8qbi2u" path="res://images/egg/egg-purple.png" id="2_bwpjt"]
+[ext_resource type="Script" path="res://scripts/base_classses/egg_entry_class.gd" id="2_q4avg"]
+[ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="4_sg77q"]
+[ext_resource type="Texture2D" uid="uid://dooy32x4x0qq3" path="res://images/egg/egg-pink.png" id="5_3skwq"]
+[ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="6_4v5ac"]
 
-[sub_resource type="Gradient" id="Gradient_5hppj"]
-interpolation_mode = 2
-colors = PackedColorArray(0.658824, 0.435294, 0.423529, 1, 0.72, 0.72, 0.2088, 1)
+[sub_resource type="Resource" id="Resource_xhydc"]
+script = ExtResource("2_q4avg")
+name = "Purple Egg"
+image = ExtResource("2_bwpjt")
+hatches = Array[String]([])
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_xu33w"]
-gradient = SubResource("Gradient_5hppj")
-width = 432
-height = 432
-fill_from = Vector2(0.0457317, 0.0670732)
-fill_to = Vector2(0, 1)
+[sub_resource type="Resource" id="Resource_8kewv"]
+script = ExtResource("2_q4avg")
+name = "Green Egg"
+image = ExtResource("2_72bes")
+hatches = Array[String]([])
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_scja0"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_swhes")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_cu5wo")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_vfgrm")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_eimtr")
-}],
-"loop": false,
-"name": &"EggTime",
-"speed": 2.0
-}]
-
-[sub_resource type="GDScript" id="GDScript_31uq6"]
-script/source = "extends AnimatedSprite2D
-@onready var init_pos = self.position
-@export var enable_shake: bool
-@export var shake_amount: int
-@export var shake_rate: int
-@onready var shake_timer: Timer = Timer.new()
-
-var shake_count: int = 0
-func _ready():
-	shake_timer.autostart = false
-	shake_timer.wait_time = 1.0/shake_rate
-	add_child(shake_timer)
-	shake_timer.connect(\"timeout\", _on_shake_timer_timeout)
-	
-func shake():
-	position.x = init_pos.x + randi_range(-shake_amount,shake_amount)
-	rotation_degrees +=  randi_range(-roundi(shake_amount/6.0),roundi(shake_amount/6.0))
-	position.y = init_pos.y + randi_range(-roundi(shake_amount/2.0),roundi(shake_amount/2.0))
-
-func _on_shake_timer_timeout():
-	if enable_shake:
-		shake()
-	
-func _on_frame_changed():
-	if shake_count == 1:
-		%Crack.play()
-	shake_count += 1
-	shake_amount += roundi(shake_amount/4.0)
-	shake_timer.start()
-	await get_tree().create_timer(.3).timeout
-	shake_timer.stop()
-	position = init_pos
-	rotation_degrees = 0
-"
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_lmfc6"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("4_5b41r")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_6fl3y")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_ii2p7")
-}],
-"loop": true,
-"name": &"yippie",
-"speed": 5.0
-}]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1ew7y"]
-atlas = ExtResource("7_10a4q")
-region = Rect2(0, 0, 240, 240)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_saxbf"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1ew7y")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="Gradient" id="Gradient_4r4vg"]
-interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.12381, 0.290476, 0.452381, 0.652381, 0.819048, 1)
-colors = PackedColorArray(1, 0, 0, 1, 1, 0.482353, 0.321569, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0.509804, 1, 0.529412, 0, 0.745098, 1, 1, 1, 1, 1)
-
-[sub_resource type="GDScript" id="GDScript_bccnn"]
-script/source = "extends Button
-
-func _on_button_down():
-	get_tree().change_scene_to_file(\"res://scenes/GameScenes/main.tscn\")
-"
+[sub_resource type="Resource" id="Resource_hh3r1"]
+script = ExtResource("2_q4avg")
+name = "Pink Egg"
+image = ExtResource("5_3skwq")
+hatches = Array[String]([])
 
 [node name="Egg" type="Node2D"]
-script = ExtResource("1_3gale")
+script = ExtResource("1_r0w83")
 skip_scene = true
+existing_eggs = Array[ExtResource("2_q4avg")]([SubResource("Resource_xhydc"), SubResource("Resource_8kewv"), SubResource("Resource_hh3r1")])
+metadata/_edit_vertical_guides_ = [540.0, 64.0, 472.0, 128.0, 408.0]
+metadata/_edit_horizontal_guides_ = [675.0, 64.0, 608.0, 128.0, 544.0]
 
-[node name="BG" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(434, 434)
-offset_right = 540.0
-offset_bottom = 675.0
-size_flags_vertical = 6
-color = Color(0.7, 0.091, 0.2534, 1)
-metadata/_edit_lock_ = true
+[node name="SelectionAreaold" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 43.0
+offset_top = 220.0
+offset_right = 498.0
+offset_bottom = 372.0
 
-[node name="TextureRect" type="TextureRect" parent="."]
-modulate = Color(1, 1, 1, 0.439216)
-offset_right = 540.0
-offset_bottom = 675.0
-texture = SubResource("GradientTexture2D_xu33w")
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
 
-[node name="Yip" type="AudioStreamPlayer" parent="."]
-unique_name_in_owner = true
-stream = ExtResource("2_rsge0")
-bus = &"SFX"
+[node name="BG" type="NinePatchRect" parent="CanvasLayer"]
+offset_right = 1080.0
+offset_bottom = 1350.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_4v5ac")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
 
-[node name="EggSprite" type="AnimatedSprite2D" parent="."]
-unique_name_in_owner = true
-texture_filter = 1
-position = Vector2(275, 437)
-scale = Vector2(3, 2)
-sprite_frames = SubResource("SpriteFrames_scja0")
-animation = &"EggTime"
-autoplay = "EggTime"
-frame = 3
-frame_progress = 1.0
-offset = Vector2(-0.333336, -56.5)
-script = SubResource("GDScript_31uq6")
-enable_shake = true
-shake_amount = 10
-shake_rate = 20
+[node name="TitleBox" type="NinePatchRect" parent="CanvasLayer"]
+offset_left = 448.0
+offset_top = 191.0
+offset_right = 1162.0
+offset_bottom = 317.0
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_4v5ac")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
 
-[node name="LilGuy" type="AnimatedSprite2D" parent="."]
-unique_name_in_owner = true
-visible = false
-position = Vector2(266, 319)
-scale = Vector2(0.215, 0.215)
-sprite_frames = SubResource("SpriteFrames_lmfc6")
-animation = &"yippie"
-autoplay = "yippie"
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/TitleBox"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 698.0
+offset_bottom = 110.0
+color = Color(0, 0, 0, 0.388235)
 
-[node name="Flopps" type="AnimatedSprite2D" parent="."]
-visible = false
-position = Vector2(278, 316)
-scale = Vector2(1.8, 1.8)
-sprite_frames = SubResource("SpriteFrames_saxbf")
+[node name="SelectTitle" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 64.0
+offset_top = 145.0
+offset_right = 471.0
+offset_bottom = 185.0
+theme = ExtResource("4_sg77q")
+bbcode_enabled = true
+text = "[font_size=25][center][wave amp=40 freq=-3]Select your egg!"
+fit_content = true
 
-[node name="StartGame" type="Timer" parent="."]
-unique_name_in_owner = true
-wait_time = 2.0
-one_shot = true
+[node name="Box" type="NinePatchRect" parent="CanvasLayer"]
+offset_left = 472.0
+offset_top = 487.0
+offset_right = 1288.0
+offset_bottom = 997.0
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_4v5ac")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
 
-[node name="EggTimer" type="Timer" parent="."]
-unique_name_in_owner = true
-process_callback = 0
-wait_time = 2.0
-one_shot = true
-autostart = true
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Box"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 800.0
+offset_bottom = 494.0
+color = Color(1, 1, 1, 0.270588)
 
-[node name="Confetti" type="Node2D" parent="."]
-unique_name_in_owner = true
-script = ExtResource("8_psxin")
-
-[node name="ConfetL" type="CPUParticles2D" parent="Confetti"]
-position = Vector2(92, 555)
-emitting = false
-amount = 15
-lifetime = 2.0
-one_shot = true
-explosiveness = 1.0
-randomness = 1.0
-direction = Vector2(0.1, -1)
-spread = 6.0
-initial_velocity_min = 500.0
-initial_velocity_max = 900.0
-angular_velocity_min = -100.0
-angular_velocity_max = 100.0
-scale_amount_min = 10.0
-scale_amount_max = 15.0
-color_initial_ramp = SubResource("Gradient_4r4vg")
-hue_variation_min = 1.0
-hue_variation_max = 1.0
-
-[node name="ConfetR" type="CPUParticles2D" parent="Confetti"]
-position = Vector2(446, 553)
-emitting = false
-amount = 15
-lifetime = 2.0
-one_shot = true
-explosiveness = 1.0
-randomness = 1.0
-direction = Vector2(-0.1, -1)
-spread = 6.0
-initial_velocity_min = 500.0
-initial_velocity_max = 900.0
-angular_velocity_min = -100.0
-angular_velocity_max = 100.0
-scale_amount_min = 10.0
-scale_amount_max = 15.0
-color_initial_ramp = SubResource("Gradient_4r4vg")
-hue_variation_min = 1.0
-hue_variation_max = 1.0
-
-[node name="Crack" type="AudioStreamPlayer" parent="."]
-unique_name_in_owner = true
-stream = ExtResource("9_iuv6s")
-bus = &"SFX"
-
-[node name="Button" type="Button" parent="."]
-offset_left = 181.0
-offset_top = 512.0
-offset_right = 359.0
-offset_bottom = 605.0
-theme = ExtResource("12_w52uh")
-theme_override_font_sizes/font_size = 32
-text = "SKIP"
-script = SubResource("GDScript_bccnn")
-
-[connection signal="frame_changed" from="EggSprite" to="EggSprite" method="_on_frame_changed"]
-[connection signal="button_down" from="Button" to="Button" method="_on_button_down"]
+[node name="SelectionArea" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 64.0
+offset_top = 320.0
+offset_right = 472.0
+offset_bottom = 360.0
