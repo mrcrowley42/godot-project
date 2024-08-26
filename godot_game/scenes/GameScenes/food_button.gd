@@ -6,4 +6,4 @@ extends Button
 
 func _on_button_down():
 	%BtnClick.play()
-	creature.dmg(amount, 'food')
+	creature.damage_food(amount, food)
