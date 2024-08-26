@@ -1,4 +1,5 @@
 @icon("res://icons/class-icons/creature.svg")
+
 ## Creature base class.
 class_name Creature extends Node2D
 
