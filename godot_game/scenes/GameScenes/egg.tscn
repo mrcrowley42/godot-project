@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cn1lep32uqau0"]
+[gd_scene load_steps=13 format=3 uid="uid://cn1lep32uqau0"]
 
 [ext_resource type="Script" path="res://scripts/MainGameScripts/egg_open.gd" id="1_r0w83"]
 [ext_resource type="Texture2D" uid="uid://gi4ytib73ibf" path="res://images/egg/egg-green.png" id="2_72bes"]
@@ -7,6 +7,7 @@
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="4_sg77q"]
 [ext_resource type="Texture2D" uid="uid://dooy32x4x0qq3" path="res://images/egg/egg-pink.png" id="5_3skwq"]
 [ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="6_4v5ac"]
+[ext_resource type="Shader" path="res://shaders/voronoi.gdshader" id="8_pu7bv"]
 
 [sub_resource type="Resource" id="Resource_xhydc"]
 script = ExtResource("2_q4avg")
@@ -26,9 +27,16 @@ name = "Pink Egg"
 image = ExtResource("5_3skwq")
 hatches = Array[String]([])
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8jkob"]
+shader = ExtResource("8_pu7bv")
+shader_parameter/color = Vector4(0, 0, 0, 1)
+shader_parameter/scale = 1.0
+shader_parameter/speed = 0.2
+shader_parameter/layer = 1.0
+shader_parameter/opacity = 0.2
+
 [node name="Egg" type="Node2D"]
 script = ExtResource("1_r0w83")
-skip_scene = true
 existing_eggs = Array[ExtResource("2_q4avg")]([SubResource("Resource_xhydc"), SubResource("Resource_8kewv"), SubResource("Resource_hh3r1")])
 metadata/_edit_vertical_guides_ = [540.0, 64.0, 472.0, 128.0, 408.0]
 metadata/_edit_horizontal_guides_ = [675.0, 64.0, 608.0, 128.0, 544.0]
@@ -100,6 +108,13 @@ patch_margin_bottom = 16
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/Box"]
 layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 800.0
+offset_bottom = 494.0
+
+[node name="shader" type="ColorRect" parent="CanvasLayer/Box"]
+material = SubResource("ShaderMaterial_8jkob")
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 800.0
