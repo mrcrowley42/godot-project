@@ -1,5 +1,6 @@
 extends TextureButton
-@onready var init_pos = %ActivityContent.position
+@export var target_menu: Node
+@onready var init_pos = target_menu.position
 
 var toggle: bool = false
 var xoffset: int = 400
@@ -19,6 +20,6 @@ func _on_button_down():
 	
 	toggle = !toggle
 	if not toggle:
-		tween.tween_property( %ActivityContent, "position", Vector2(xoffset, init_pos.y), .167)
+		tween.tween_property( target_menu, "position", Vector2(xoffset, init_pos.y), .167)
 	else:
-		tween.tween_property( %ActivityContent, "position", Vector2(init_pos.x, init_pos.y), .167)
+		tween.tween_property( target_menu, "position", Vector2(init_pos.x, init_pos.y), .167)
