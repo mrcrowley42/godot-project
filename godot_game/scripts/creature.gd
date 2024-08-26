@@ -1,8 +1,9 @@
 @icon("res://icons/class-icons/creature.svg")
+
 ## Creature base class.
 class_name Creature extends Node2D
 
-# Grab reference to the main sprite so it can be manipulated
+## A Reference to the main sprite so it can be manipulated
 @onready var main_sprite = %Main
 
 ## Colour to tint creature as HP approaches 0.
@@ -16,8 +17,11 @@ class_name Creature extends Node2D
 @export var clippy_area: Node
 @export var xp_mulitplier: float = 1.0
 
+const dislike_multiplier: float = 0.5
+const like_multiplier: float = 2.0
+
 # ENUMS
-enum FoodItem {TOAST, CHIPS, FRUIT}
+enum FoodItem {NEUTRAL, TOAST, CHIPS, FRUIT}
 enum LifeStage {CHILD, ADULT}
 
 # CREATURE STATS VARIABLES
@@ -37,7 +41,7 @@ signal water_changed()
 signal fun_changed()
 signal xp_changed()
 
-# Map shorthand strings to corresponding damage function
+## Map of shorthand strings to corresponding damage function
 var stats: Dictionary = {
 	'hp': damage_hp, 'fun': damage_fun, "water": damage_water, 'food': damage_food}
 	
@@ -87,12 +91,17 @@ func damage_hp(amount: float) -> void:
 	apply_dmg_tint()
 	hp_changed.emit()
 
-func damage_food(amount) -> void:
+func damage_food(amount, kind: FoodItem = FoodItem.NEUTRAL) -> void:
+	var multi := 1.0
+	if kind in likes:
+		multi = like_multiplier
+	elif kind in dislikes:
+		multi = dislike_multiplier
 	var temp_food = food
 	self.food -= amount
 	self.food = clampf(self.food, 0, max_food)
 	if food - temp_food > 0:
-		add_xp(food - temp_food * xp_mulitplier)
+		add_xp((food - temp_food) * xp_mulitplier * multi)
 	food_changed.emit()
 
 func damage_fun(amount) -> void:

@@ -680,13 +680,17 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("18_v1mb2")
 theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("19_3grg3")
 theme_override_font_sizes/font_size = 24
-text = "TOAST"
+text = "Chips"
 icon = ExtResource("20_tdidc")
 icon_alignment = 1
 expand_icon = true
 script = ExtResource("27_xuaea")
+amount = -300.0
+food = 2
 
 [node name="Button 2" type="Button" parent="UI/FoodMenu/FoodContent/Screen3/GridContainer"]
 layout_mode = 2
@@ -694,11 +698,15 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("18_v1mb2")
 theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
-text = "Fruit"
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Toast"
 icon = ExtResource("22_1ghf6")
 icon_alignment = 1
 expand_icon = true
 script = ExtResource("27_xuaea")
+amount = -300.0
+food = 1
 
 [node name="Button 3" type="Button" parent="UI/FoodMenu/FoodContent/Screen3/GridContainer"]
 layout_mode = 2
@@ -710,12 +718,12 @@ theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("19_3grg3")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
-text = "MENU 2
-+ HP"
+text = "Neutral"
 icon = ExtResource("23_d1w7f")
 icon_alignment = 1
 expand_icon = true
 script = ExtResource("27_xuaea")
+amount = -300.0
 
 [node name="Button 4" type="Button" parent="UI/FoodMenu/FoodContent/Screen3/GridContainer"]
 layout_mode = 2
@@ -723,12 +731,15 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("18_v1mb2")
 theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
-text = "MENU 2
-+ FOOD"
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Fruit"
 icon = ExtResource("24_dmqwv")
 icon_alignment = 1
 expand_icon = true
 script = ExtResource("27_xuaea")
+amount = -300.0
+food = 3
 
 [node name="NavigationArrows" type="Node2D" parent="UI/FoodMenu"]
 
