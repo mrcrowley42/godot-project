@@ -177,10 +177,11 @@ corner_radius_bottom_left = 32
 script/source = "extends Button
 
 @onready var creature = %Creature
+@export var amount: float = 300
 
 func _on_button_down():
 	%BtnClick.play()
-	creature.dmg(300, 'water')
+	creature.dmg(amount, 'water')
 	
 "
 
@@ -199,11 +200,12 @@ corner_radius_bottom_left = 16
 [sub_resource type="GDScript" id="GDScript_ve7ha"]
 script/source = "extends Button
 @onready var creature = %Creature
+@export var amount: float = 300
 
 func _on_button_down():
 	%BtnClick.play()
 	%PIPE.play()
-	creature.dmg(300, 'hp')
+	creature.dmg(amount, 'hp')
 "
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b3sax"]
@@ -542,8 +544,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
 theme_override_fonts/font = ExtResource("19_3grg3")
 theme_override_font_sizes/font_size = 24
+text = "-FUN"
 icon = ExtResource("20_tdidc")
 icon_alignment = 1
 expand_icon = true
@@ -554,6 +558,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+text = "-WATER"
 icon = ExtResource("22_1ghf6")
 icon_alignment = 1
 expand_icon = true
@@ -569,7 +575,8 @@ theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("19_3grg3")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
-text = "PIPE!"
+text = "PIPE!
+-HP"
 icon = ExtResource("23_d1w7f")
 icon_alignment = 1
 expand_icon = true
@@ -580,6 +587,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+text = "-FOOD"
 icon = ExtResource("24_dmqwv")
 icon_alignment = 1
 expand_icon = true
@@ -599,48 +608,67 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 2
 
-[node name="ScissorsPaperRock" type="Button" parent="UI/FoodMenu/FoodContent/Screen2/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("18_v1mb2")
-text = "MENU 2"
-icon = ExtResource("26_0ku4r")
-icon_alignment = 1
-expand_icon = true
-
-[node name="Tetris" type="Button" parent="UI/FoodMenu/FoodContent/Screen2/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("18_v1mb2")
-theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
-text = "MENU 2"
-icon = ExtResource("27_2hcht")
-icon_alignment = 1
-expand_icon = true
-
-[node name="ZenMode" type="Button" parent="UI/FoodMenu/FoodContent/Screen2/GridContainer"]
+[node name="Button 1" type="Button" parent="UI/FoodMenu/FoodContent/Screen2/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("18_v1mb2")
 theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
-text = "MENU 2"
-icon = ExtResource("28_ys116")
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 24
+text = "MENU 2
++ FUN"
+icon = ExtResource("20_tdidc")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("21_u6y6n")
+amount = -300.0
 
-[node name="MemoryGame" type="Button" parent="UI/FoodMenu/FoodContent/Screen2/GridContainer"]
+[node name="Button 2" type="Button" parent="UI/FoodMenu/FoodContent/Screen2/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("18_v1mb2")
-theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
-text = "MENU 2"
-icon = ExtResource("29_lofmd")
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+text = "MENU 2
++ WATER"
+icon = ExtResource("22_1ghf6")
 icon_alignment = 1
 expand_icon = true
+script = SubResource("GDScript_ovb2u")
+amount = -300.0
+
+[node name="Button 3" type="Button" parent="UI/FoodMenu/FoodContent/Screen2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
+text = "MENU 2
++ HP"
+icon = ExtResource("23_d1w7f")
+icon_alignment = 1
+expand_icon = true
+script = SubResource("GDScript_ve7ha")
+amount = -300.0
+
+[node name="Button 4" type="Button" parent="UI/FoodMenu/FoodContent/Screen2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+text = "MENU 2
++ FOOD"
+icon = ExtResource("24_dmqwv")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("25_lomkv")
+amount = -300.0
 
 [node name="NavigationArrows" type="Node2D" parent="UI/FoodMenu"]
 
@@ -1575,9 +1603,10 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen1/GridContainer/Button 2" to="UI/FoodMenu/FoodContent/Screen1/GridContainer/Button 2" method="_on_button_down"]
 [connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen1/GridContainer/Button 3" to="UI/FoodMenu/FoodContent/Screen1/GridContainer/Button 3" method="_on_button_down"]
 [connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen1/GridContainer/Button 4" to="UI/FoodMenu/FoodContent/Screen1/GridContainer/Button 4" method="_on_button_down"]
-[connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen2/GridContainer/ScissorsPaperRock" to="MinigameManager" method="_on_scissors_paper_rock_button_down"]
-[connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen2/GridContainer/ZenMode" to="MinigameManager" method="_on_zen_mode_button_down"]
-[connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen2/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen2/GridContainer/Button 1" to="UI/FoodMenu/FoodContent/Screen2/GridContainer/Button 1" method="_on_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen2/GridContainer/Button 2" to="UI/FoodMenu/FoodContent/Screen2/GridContainer/Button 2" method="_on_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen2/GridContainer/Button 3" to="UI/FoodMenu/FoodContent/Screen2/GridContainer/Button 3" method="_on_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen2/GridContainer/Button 4" to="UI/FoodMenu/FoodContent/Screen2/GridContainer/Button 4" method="_on_button_down"]
 [connection signal="button_down" from="UI/FoodMenu/NavigationArrows/LeftArrow" to="UI/FoodMenu/NavigationArrows/LeftArrow" method="_on_button_down"]
 [connection signal="button_down" from="UI/FoodMenu/NavigationArrows/LeftArrow2" to="UI/FoodMenu/NavigationArrows/LeftArrow2" method="_on_button_down"]
 [connection signal="visibility_changed" from="UI/ActivityMenu" to="UI/ActivityMenu" method="_on_visibility_changed"]
