@@ -560,6 +560,8 @@ theme_override_constants/outline_size = 4
 text = "-WATER"
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("21_u6y6n")
+stat = 1
 
 [node name="Button 6" type="Button" parent="UI/FoodMenu/FoodContent/Screen1/GridContainer"]
 layout_mode = 2
@@ -572,6 +574,9 @@ theme_override_constants/outline_size = 4
 text = "+WATER"
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("21_u6y6n")
+amount = -300.0
+stat = 1
 
 [node name="Button 3" type="Button" parent="UI/FoodMenu/FoodContent/Screen1/GridContainer"]
 layout_mode = 2
@@ -588,6 +593,7 @@ text = "PIPE!
 icon = ExtResource("23_d1w7f")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("21_u6y6n")
 
 [node name="Button 7" type="Button" parent="UI/FoodMenu/FoodContent/Screen1/GridContainer"]
 layout_mode = 2
@@ -604,6 +610,8 @@ text = "MENU 2
 icon = ExtResource("23_d1w7f")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("21_u6y6n")
+amount = -300.0
 
 [node name="Button 4" type="Button" parent="UI/FoodMenu/FoodContent/Screen1/GridContainer"]
 layout_mode = 2
@@ -616,6 +624,8 @@ theme_override_constants/outline_size = 4
 text = "-FOOD"
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("21_u6y6n")
+stat = 2
 
 [node name="Button 8" type="Button" parent="UI/FoodMenu/FoodContent/Screen1/GridContainer"]
 layout_mode = 2
@@ -628,6 +638,9 @@ theme_override_constants/outline_size = 4
 text = "+FOOD"
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("21_u6y6n")
+amount = -300.0
+stat = 2
 
 [node name="Screen3" type="MarginContainer" parent="UI/FoodMenu/FoodContent"]
 layout_mode = 2
