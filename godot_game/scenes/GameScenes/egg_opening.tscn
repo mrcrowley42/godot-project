@@ -30,7 +30,7 @@ hatches = Array[String]([])
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8jkob"]
 shader = ExtResource("8_cwxax")
-shader_parameter/color = Vector4(0, 0, 1, 1)
+shader_parameter/color = Vector4(0, 0, 0, 1)
 shader_parameter/pixel_size = 5.0
 shader_parameter/scale = 0.6
 shader_parameter/speed = 0.05
@@ -92,7 +92,7 @@ offset_right = 439.0
 offset_bottom = 135.0
 theme = ExtResource("7_crtsy")
 bbcode_enabled = true
-text = "[font_size=25][center][wave amp=30 freq=-3]Select your egg!"
+text = "[font_size=25][center][wave amp=30 freq=-3]%s!"
 fit_content = true
 
 [node name="Box" type="NinePatchRect" parent="CanvasLayer"]
