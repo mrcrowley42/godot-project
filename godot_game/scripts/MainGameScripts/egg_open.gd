@@ -14,9 +14,11 @@ class_name EggOpen extends ScriptNode
 @onready var trans_img: Sprite2D = find_child("Transition")
 @onready var selection_title: RichTextLabel = find_child("SelectTitle")
 @onready var selection_area: Control = find_child("SelectionArea")
+@onready var egg_desc: RichTextLabel = find_child("EggDesc")
 
-const SMALL_EGG_SCALE: float = 1.5
-const BASE_EGG_SCALE: float = 1.8
+const SMALL_EGG_SCALE: Vector2 = Vector2(1.5, 1.5)
+const BASE_EGG_SCALE: Vector2 = Vector2(1.8, 1.8)
+const HOVER_EGG_SCALE: Vector2 = Vector2(2., 2.)
 
 var can_interact: bool = false  # off while tweening stuff around
 var placed_eggs: Array[EggEntry] = []
@@ -58,7 +60,7 @@ func place_eggs():
 		sprite.modulate.a = 0.
 		sprite.texture = egg.image
 		sprite.position = middle_pos + Vector2(x_pos, 0)
-		sprite.scale = Vector2(SMALL_EGG_SCALE, SMALL_EGG_SCALE)
+		sprite.scale = SMALL_EGG_SCALE
 		sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST  # sharp image
 		original_egg_positions.append(sprite.position)
 		
@@ -87,7 +89,7 @@ func begin_opening_animation(sprite: Sprite2D, i: int, is_last_egg: bool):
 	tween(sprite, "modulate", Color.WHITE, 1. + diff, .5)
 	tween(sprite, "position", Vector2(sprite.position.x, sprite.position.y - 20), 1.2 + diff, .6, Tween.EASE_OUT)
 	tween(sprite, "position", Vector2(sprite.position.x, sprite.position.y), 1.4 + diff, .4, Tween.EASE_IN)
-	var scale_tween = tween(sprite, "scale", Vector2(BASE_EGG_SCALE, BASE_EGG_SCALE), 2.2, .5)
+	var scale_tween = tween(sprite, "scale", BASE_EGG_SCALE, 2.2, .5)
 	if is_last_egg:  # set only on the last egg
 		scale_tween.connect("finished", force_check_mouse)
 
@@ -116,8 +118,22 @@ func set_can_interact(val: bool):
 
 func mouse_entered(i: int):
 	if can_interact:
-		print("enter ", i)
+		var sprite: Sprite2D = placed_egg_sprites[i]
+		tween(sprite, "scale", HOVER_EGG_SCALE, 0., .5, Tween.EASE_OUT)
+		set_egg_desc(i)
 
 func mouse_exited(i: int):
 	if can_interact:
-		print("exit ", i)
+		var sprite: Sprite2D = placed_egg_sprites[i]
+		tween(sprite, "scale", BASE_EGG_SCALE, 0., .5, Tween.EASE_OUT)
+		set_egg_desc()
+
+func set_egg_desc(i: int = -1):
+	var empty_format = "[center]%s"
+	if i < 0:
+		egg_desc.text = empty_format % ["..."]
+		return
+	
+	var egg_format = "[center][u]%s[/u]\nHatches: %s"
+	var egg: EggEntry = placed_eggs[i]
+	egg_desc.text = egg_format % [egg.name, "???"]

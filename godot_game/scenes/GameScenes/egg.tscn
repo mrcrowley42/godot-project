@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cn1lep32uqau0"]
+[gd_scene load_steps=14 format=3 uid="uid://cn1lep32uqau0"]
 
 [ext_resource type="Script" path="res://scripts/MainGameScripts/egg_open.gd" id="1_r0w83"]
 [ext_resource type="Texture2D" uid="uid://gi4ytib73ibf" path="res://images/egg/egg-green.png" id="2_72bes"]
@@ -36,8 +36,6 @@ shader_parameter/scale = 0.6
 shader_parameter/speed = 0.05
 shader_parameter/layer = 1.0
 shader_parameter/opacity = 0.15
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_top58"]
 
 [node name="Egg" type="Node2D"]
 script = ExtResource("1_r0w83")
@@ -147,7 +145,7 @@ offset_right = 698.0
 offset_bottom = 215.0
 color = Color(0, 0, 0, 0.388235)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+[node name="EggDesc" type="RichTextLabel" parent="CanvasLayer"]
 offset_left = 98.0
 offset_top = 504.0
 offset_right = 439.0
@@ -164,16 +162,11 @@ position = Vector2(270, 1200)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("9_dnahd")
 
-[node name="Area2D" type="Area2D" parent="CanvasLayer"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Area2D"]
-shape = SubResource("CircleShape2D_top58")
-
 [node name="SelectionArea" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 72.0
-offset_top = 245.0
+offset_top = 249.0
 offset_right = 463.0
-offset_bottom = 381.0
+offset_bottom = 385.0
 mouse_filter = 1
