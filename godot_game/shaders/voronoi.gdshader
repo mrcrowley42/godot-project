@@ -6,15 +6,15 @@ shader_type canvas_item;
 
 
 uniform vec4 color = vec4(0.0,0.0,0.0,1.0);
-uniform float scale : hint_range(0.1, 5.0, 0.1) = 1.;
-uniform float speed : hint_range(0.1, 5.0, 0.1) = 0.2;
+uniform float pixel_size : hint_range(2., 20., 1.) = 5;
+uniform float scale : hint_range(0.01, .5, 0.01) = .5;
+uniform float speed : hint_range(0.01, 5.0, 0.01) = 0.05;
 uniform float layer : hint_range(0.0, 2.0, 0.1) = 1.0;
-uniform float opacity : hint_range(0.0, 1.0, 0.1) = 0.2;
+uniform float opacity : hint_range(0.0, 1.0, 0.01) = 0.2;
 
 #define iTime TIME * speed
-#define iResolution 1.0/ SCREEN_PIXEL_SIZE
+#define iResolution 1.0 / screen_pixel_size
 
-varying vec4 iMouse;
 float hash12(vec2 p) {
 	vec3 p3  = fract(vec3(p.xyx) * .1031);
 	p3 += dot(p3, p3.zyx + 33.33);
@@ -29,10 +29,10 @@ vec2 cell(vec2 ip) {// 求细胞核位置
 	return vec2(cos(ag), sin(ag)) * rcel(ip);
 }
 
-void fragment() {
+vec4 voronoi(vec2 screen_pixel_size, vec2 screen_uv) {
 	vec4 O = color;
-	float ratio = SCREEN_PIXEL_SIZE.x / SCREEN_PIXEL_SIZE.y;
-	vec2 U = (SCREEN_UV) * 1000.0 * scale / vec2(ratio, 1.0);
+	float ratio = screen_pixel_size.x / screen_pixel_size.y;
+	vec2 U = (screen_uv) * 1000.0 * scale / vec2(ratio, 1.0);
 	#define bl if(iMouse.x < iResolution.x * .52)
 	vec2 R = iResolution.xy,
 		u = 3.*(U + U - R) / R.y+vec2(0,iTime),
@@ -40,10 +40,8 @@ void fragment() {
 	// 画格子
 	g = abs(g); if( g.x<g.y )g = g.yx;
 
-	vec2 p  = u,
-		ip = round(p),
-		fp = p - ip,
-		ct;
+	vec2 p = u,
+		ip = round(p);
 
 	// 参考：https://iquilezles.org/articles/voronoilinex/
 	// 找最近细胞核
@@ -79,7 +77,17 @@ void fragment() {
 	d = 10. * clamp(exp(-2e2*md), 0., 1.) * layer;
 
 	// outline
-	O = (max(O-.1*d,0.)+d );
-	COLOR = vec4(O);
+	return vec4((max(O-.1*d,0.)+d));
+}
+
+void fragment() {
+	vec2 screenDim = 1.0 / SCREEN_PIXEL_SIZE;
+	vec2 remainder = SCREEN_UV * screenDim;  // to screen space
+	remainder /= vec2(pixel_size);  // to pixel space
+	remainder -= floor(remainder);
+	remainder *= vec2(pixel_size);  // revert pixel space
+	remainder /= screenDim;  // revert screen space
+	
+	COLOR = voronoi(SCREEN_PIXEL_SIZE, SCREEN_UV - remainder);
 	COLOR.a = opacity;
 }
