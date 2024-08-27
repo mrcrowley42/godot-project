@@ -43,12 +43,14 @@ signal fun_changed()
 signal xp_changed()
 
 ## Map of shorthand strings to corresponding damage function
-var stats: Dictionary = {
-	'hp': damage_hp, 'fun': damage_fun, "water": damage_water, 'food': damage_food}
+var stats: Dictionary = {Stat.HP: damage_hp, Stat.FUN: damage_fun,
+	Stat.WATER: damage_water, Stat.FOOD: damage_food}
 
 
 ## Add the specified [param amount] to the creature's existing xp.
-func add_xp(amount) -> void:
+func add_xp(amount: float) -> void:
+	if amount <= 0:
+		return
 	xp += amount
 	xp_changed.emit()
 	if xp >= xp_required:
@@ -66,14 +68,14 @@ func _ready() -> void:
 
 ## Sets the Creatures current stats to their maximum value.
 func reset_stats() -> void:
-	dmg(-max_hp, 'hp')
-	dmg(-max_food, 'food')
-	dmg(-max_water, 'water')
-	dmg(-max_fun, 'fun')
+	dmg(-max_hp, Stat.HP)
+	dmg(-max_food, Stat.FOOD)
+	dmg(-max_water, Stat.WATER)
+	dmg(-max_fun, Stat.FUN)
 
 
 ## Generialised function to damage/heal the Creature (use a negative value to heal)
-func dmg(amount: float, stat: String) -> void:
+func dmg(amount: float, stat: Stat) -> void:
 	stats[stat].call(amount)
 
 

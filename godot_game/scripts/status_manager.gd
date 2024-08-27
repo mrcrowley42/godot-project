@@ -35,16 +35,16 @@ func _ready() -> void:
 	new_timer(fun_rate, fun_timeout)
 
 func hp_timeout() -> void:
-	creature.dmg(hp_amount * time_multiplier, 'hp')
+	creature.dmg(hp_amount * time_multiplier, Creature.Stat.HP)
 	
 func water_timeout() -> void:
-	creature.dmg(water_amount * time_multiplier, "water")
+	creature.dmg(water_amount * time_multiplier, Creature.Stat.WATER)
 
 func food_timeout() -> void:
-	creature.dmg(food_amount * time_multiplier, 'food')
+	creature.dmg(food_amount * time_multiplier, Creature.Stat.FOOD)
 
 func fun_timeout() -> void:
-	creature.dmg(fun_amount * time_multiplier, 'fun')
+	creature.dmg(fun_amount * time_multiplier, Creature.Stat.FUN)
 
 func save() -> Dictionary:
 	return {"holiday_mode": holiday_mode}
