@@ -23,6 +23,7 @@ const like_multiplier: float = 2.0
 # ENUMS
 enum FoodItem {NEUTRAL, TOAST, CHIPS, FRUIT}
 enum LifeStage {CHILD, ADULT}
+enum Stat {HP, WATER, FOOD, FUN, XP}
 
 # CREATURE STATS VARIABLES
 var hp: float
@@ -44,7 +45,8 @@ signal xp_changed()
 ## Map of shorthand strings to corresponding damage function
 var stats: Dictionary = {
 	'hp': damage_hp, 'fun': damage_fun, "water": damage_water, 'food': damage_food}
-	
+
+
 ## Add the specified [param amount] to the creature's existing xp.
 func add_xp(amount) -> void:
 	xp += amount
@@ -52,12 +54,15 @@ func add_xp(amount) -> void:
 	if xp >= xp_required:
 		level_up()
 
+
 func level_up() -> void:
 	pass
 	#life_stage = LifeStage.Adult
 
+
 func _ready() -> void:
 	reset_stats()
+
 
 ## Sets the Creatures current stats to their maximum value.
 func reset_stats() -> void:
@@ -66,19 +71,23 @@ func reset_stats() -> void:
 	dmg(-max_water, 'water')
 	dmg(-max_fun, 'fun')
 
+
 ## Generialised function to damage/heal the Creature (use a negative value to heal)
 func dmg(amount: float, stat: String) -> void:
 	stats[stat].call(amount)
 
+
 ## Change to game over scene.
 func game_over():
 	get_tree().change_scene_to_file("res://scenes/GameScenes/game_over.tscn")
+
 
 ## Tint the Create using the dying_colour set in inspector scaling the tint based on how low HP is.
 func apply_dmg_tint() -> void:
 	main_sprite.modulate.b = clampf(1 - (1 - hp / max_hp) + dying_colour.b, 0, 1)
 	main_sprite.modulate.g = clampf(1 - (1 - hp / max_hp) + dying_colour.g, 0, 1)
 	main_sprite.modulate.r = clampf(1 - (1 - hp / max_hp) + dying_colour.r, 0, 1)
+
 
 func damage_hp(amount: float) -> void:
 	var temp_hp = hp
@@ -90,6 +99,7 @@ func damage_hp(amount: float) -> void:
 		add_xp(hp - temp_hp * xp_mulitplier)
 	apply_dmg_tint()
 	hp_changed.emit()
+
 
 func damage_food(amount, kind: FoodItem = FoodItem.NEUTRAL) -> void:
 	var multi := 1.0
@@ -104,6 +114,7 @@ func damage_food(amount, kind: FoodItem = FoodItem.NEUTRAL) -> void:
 		add_xp((food - temp_food) * xp_mulitplier * multi)
 	food_changed.emit()
 
+
 func damage_fun(amount) -> void:
 	var temp_fun = fun
 	self.fun -= amount
@@ -111,6 +122,7 @@ func damage_fun(amount) -> void:
 	if fun - temp_fun > 0:
 		add_xp(fun - temp_fun * xp_mulitplier)
 	fun_changed.emit()
+
 
 func damage_water(amount) -> void:
 	var temp_water = water
@@ -120,8 +132,10 @@ func damage_water(amount) -> void:
 		add_xp(water - temp_water * xp_mulitplier)
 	water_changed.emit()
 
+
 func save() -> Dictionary:
 	return {"water": water, "food": food, "fun": fun, "hp": hp, "xp": xp}
+
 
 func load(data) -> void:
 	var stat_list = ["water", "fun", "food", "xp"]
