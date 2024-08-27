@@ -1,9 +1,10 @@
 /*
-original: https://godotshaders.com/shader/voronoi-%e7%bb%86%e8%83%9e%e8%be%b9%e7%95%8c%e8%b7%9d%e7%a6%bb/
+pixelised voronoi!
+
+original vorinoi code: https://godotshaders.com/shader/voronoi-%e7%bb%86%e8%83%9e%e8%be%b9%e7%95%8c%e8%b7%9d%e7%a6%bb/
 */
 
 shader_type canvas_item;
-
 
 uniform vec4 color = vec4(0.0,0.0,0.0,1.0);
 uniform float pixel_size : hint_range(2., 20., 1.) = 5;
@@ -75,8 +76,6 @@ vec4 voronoi(vec2 screen_pixel_size, vec2 screen_uv) {
 
 	// colour
 	d = 10. * clamp(exp(-2e2*md), 0., 1.) * layer;
-
-	// outline
 	return vec4((max(O-.1*d,0.)+d));
 }
 
