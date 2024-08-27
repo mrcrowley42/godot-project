@@ -119,6 +119,7 @@ offset_bottom = 494.0
 
 [node name="shader" type="ColorRect" parent="CanvasLayer/Box"]
 material = SubResource("ShaderMaterial_8jkob")
+layout_mode = 0
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 800.0
@@ -172,6 +173,7 @@ shape = SubResource("CircleShape2D_top58")
 layout_mode = 3
 anchors_preset = 0
 offset_left = 72.0
-offset_top = 280.0
+offset_top = 245.0
 offset_right = 463.0
-offset_bottom = 320.0
+offset_bottom = 381.0
+mouse_filter = 1

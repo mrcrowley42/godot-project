@@ -64,22 +64,23 @@ func place_eggs():
 		
 		# initialising
 		add_child(sprite)
-		add_collision_areas(sprite)
+		add_collision_areas(sprite, i)
 		begin_opening_animation(sprite, i, i == eggs_to_place.size() - 1)
 		
 		placed_egg_sprites.append(sprite)
 	placed_eggs = eggs_to_place
 
-func add_collision_areas(sprite: Sprite2D):
+func add_collision_areas(sprite: Sprite2D, i: int):
 	var area_2d: Area2D = Area2D.new()
 	var coll_shape: CollisionShape2D = CollisionShape2D.new()
+	var circle = CircleShape2D.new()
 	sprite.add_child(area_2d)
 	area_2d.add_child(coll_shape)
 	area_2d.monitorable = false  # simply not nessecary
-	var circle = CircleShape2D.new()
-	circle.radius = sprite.texture.get_size().x * sprite.scale.x * .5
+	circle.radius = sprite.texture.get_size().x * sprite.scale.x * .15
 	coll_shape.shape = circle
-	area_2d.connect("mouse_entered", p)
+	area_2d.connect("mouse_entered", mouse_entered.bind(i))
+	area_2d.connect("mouse_exited", mouse_exited.bind(i))
 
 func begin_opening_animation(sprite: Sprite2D, i: int, is_last_egg: bool):
 	var diff = .2 * i
@@ -88,7 +89,7 @@ func begin_opening_animation(sprite: Sprite2D, i: int, is_last_egg: bool):
 	tween(sprite, "position", Vector2(sprite.position.x, sprite.position.y), 1.4 + diff, .4, Tween.EASE_IN)
 	var scale_tween = tween(sprite, "scale", Vector2(BASE_EGG_SCALE, BASE_EGG_SCALE), 2.2, .5)
 	if is_last_egg:  # set only on the last egg
-		scale_tween.connect("finished", set_can_interact.bind(true))
+		scale_tween.connect("finished", force_check_mouse)
 
 func tween(obj, prop, val, delay=0., time=2., _ease=Tween.EASE_IN_OUT):
 	var t = get_tree().create_tween()
@@ -98,8 +99,25 @@ func tween(obj, prop, val, delay=0., time=2., _ease=Tween.EASE_IN_OUT):
 			.set_delay(delay)
 	return t
 
+func force_check_mouse():
+	set_can_interact(true)
+	
+	# have to do a manual mouse check :( whatever
+	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
+	for i: int in placed_egg_sprites.size():
+		var sprite: Sprite2D = placed_egg_sprites[i]
+		var dist: float = (mouse_pos - sprite.position).length()
+		var radius: float = sprite.get_child(0).get_child(0).shape.radius * (sprite.scale.x * .8)
+		if (dist < radius):
+			mouse_entered(i)
+
 func set_can_interact(val: bool):
 	can_interact = val
 
-func p():
-	print("LALA")
+func mouse_entered(i: int):
+	if can_interact:
+		print("enter ", i)
+
+func mouse_exited(i: int):
+	if can_interact:
+		print("exit ", i)
