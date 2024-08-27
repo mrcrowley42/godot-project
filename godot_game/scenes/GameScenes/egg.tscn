@@ -31,7 +31,7 @@ hatches = Array[String]([])
 shader = ExtResource("8_pu7bv")
 shader_parameter/color = Vector4(0, 0, 1, 1)
 shader_parameter/pixel_size = 5.0
-shader_parameter/scale = 0.5
+shader_parameter/scale = 0.6
 shader_parameter/speed = 0.05
 shader_parameter/layer = 1.0
 shader_parameter/opacity = 0.15
@@ -65,9 +65,9 @@ patch_margin_bottom = 16
 
 [node name="TitleBox" type="NinePatchRect" parent="CanvasLayer"]
 offset_left = 448.0
-offset_top = 191.0
+offset_top = 144.0
 offset_right = 1162.0
-offset_bottom = 317.0
+offset_bottom = 270.0
 rotation = 3.14159
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_4v5ac")
@@ -86,9 +86,9 @@ color = Color(0, 0, 0, 0.388235)
 
 [node name="SelectTitle" type="RichTextLabel" parent="CanvasLayer"]
 offset_left = 64.0
-offset_top = 145.0
+offset_top = 95.0
 offset_right = 471.0
-offset_bottom = 185.0
+offset_bottom = 135.0
 theme = ExtResource("4_sg77q")
 bbcode_enabled = true
 text = "[font_size=25][center][wave amp=40 freq=-3]Select your egg!"
@@ -96,9 +96,9 @@ fit_content = true
 
 [node name="Box" type="NinePatchRect" parent="CanvasLayer"]
 offset_left = 472.0
-offset_top = 487.0
+offset_top = 442.0
 offset_right = 1288.0
-offset_bottom = 997.0
+offset_bottom = 952.0
 rotation = 3.14159
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_4v5ac")
@@ -125,7 +125,7 @@ color = Color(1, 1, 1, 0.270588)
 [node name="SelectionArea" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 64.0
-offset_top = 320.0
-offset_right = 472.0
-offset_bottom = 360.0
+offset_left = 72.0
+offset_top = 280.0
+offset_right = 463.0
+offset_bottom = 320.0

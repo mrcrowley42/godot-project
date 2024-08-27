@@ -7,7 +7,7 @@ shader_type canvas_item;
 
 uniform vec4 color = vec4(0.0,0.0,0.0,1.0);
 uniform float pixel_size : hint_range(2., 20., 1.) = 5;
-uniform float scale : hint_range(0.01, .5, 0.01) = .5;
+uniform float scale : hint_range(0.01, 1., 0.01) = .5;
 uniform float speed : hint_range(0.01, 5.0, 0.01) = 0.05;
 uniform float layer : hint_range(0.0, 2.0, 0.1) = 1.0;
 uniform float opacity : hint_range(0.0, 1.0, 0.01) = 0.2;
