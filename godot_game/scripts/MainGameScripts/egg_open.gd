@@ -35,8 +35,8 @@ func _ready():
 	
 	place_eggs()
 
-
 func place_eggs():
+	# find the eggs to be placed
 	var eggs_to_place: Array[EggEntry] = existing_eggs.slice(0, choices_amnt)
 	if limit_to_one:
 		eggs_to_place = [existing_eggs[egg_index]]
@@ -47,30 +47,48 @@ func place_eggs():
 
 	var middle_pos = selection_area.position + Vector2(0, selection_area.size.y * .5)
 	var scalar: float = selection_area.size.x * (1. / eggs_to_place.size())
+	
 	for i: int in eggs_to_place.size():
 		var egg: EggEntry = eggs_to_place[i]
 		var sprite: Sprite2D = Sprite2D.new()
+		
+		# set default values
 		var x_pos = scalar * i
 		x_pos += scalar * .5  # center the eggs
-		
 		sprite.modulate.a = 0.
 		sprite.texture = egg.image
 		sprite.position = middle_pos + Vector2(x_pos, 0)
 		sprite.scale = Vector2(SMALL_EGG_SCALE, SMALL_EGG_SCALE)
 		sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST  # sharp image
 		original_egg_positions.append(sprite.position)
-		add_child(sprite)
 		
-		var diff = .2 * i
-		tween(sprite, "modulate", Color.WHITE, 1. + diff, .5)
-		tween(sprite, "position", Vector2(sprite.position.x, sprite.position.y - 20), 1.2 + diff, .6, Tween.EASE_OUT)
-		tween(sprite, "position", Vector2(sprite.position.x, sprite.position.y), 1.4 + diff, .4, Tween.EASE_IN)
-		var scale_tween = tween(sprite, "scale", Vector2(BASE_EGG_SCALE, BASE_EGG_SCALE), 2.2, .5)
-		if i == eggs_to_place.size() - 1:  # set only on the last egg
-			scale_tween.connect("finished", set_can_interact.bind(true))
+		# initialising
+		add_child(sprite)
+		add_collision_areas(sprite)
+		begin_opening_animation(sprite, i, i == eggs_to_place.size() - 1)
 		
 		placed_egg_sprites.append(sprite)
 	placed_eggs = eggs_to_place
+
+func add_collision_areas(sprite: Sprite2D):
+	var area_2d: Area2D = Area2D.new()
+	var coll_shape: CollisionShape2D = CollisionShape2D.new()
+	sprite.add_child(area_2d)
+	area_2d.add_child(coll_shape)
+	area_2d.monitorable = false  # simply not nessecary
+	var circle = CircleShape2D.new()
+	circle.radius = sprite.texture.get_size().x * sprite.scale.x * .5
+	coll_shape.shape = circle
+	area_2d.connect("mouse_entered", p)
+
+func begin_opening_animation(sprite: Sprite2D, i: int, is_last_egg: bool):
+	var diff = .2 * i
+	tween(sprite, "modulate", Color.WHITE, 1. + diff, .5)
+	tween(sprite, "position", Vector2(sprite.position.x, sprite.position.y - 20), 1.2 + diff, .6, Tween.EASE_OUT)
+	tween(sprite, "position", Vector2(sprite.position.x, sprite.position.y), 1.4 + diff, .4, Tween.EASE_IN)
+	var scale_tween = tween(sprite, "scale", Vector2(BASE_EGG_SCALE, BASE_EGG_SCALE), 2.2, .5)
+	if is_last_egg:  # set only on the last egg
+		scale_tween.connect("finished", set_can_interact.bind(true))
 
 func tween(obj, prop, val, delay=0., time=2., _ease=Tween.EASE_IN_OUT):
 	var t = get_tree().create_tween()
@@ -82,3 +100,6 @@ func tween(obj, prop, val, delay=0., time=2., _ease=Tween.EASE_IN_OUT):
 
 func set_can_interact(val: bool):
 	can_interact = val
+
+func p():
+	print("LALA")
