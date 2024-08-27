@@ -17,6 +17,7 @@ class_name EggOpen extends ScriptNode
 @onready var selection_area: Control = find_child("SelectionArea")
 @onready var shader_area: ColorRect = find_child("shader")
 @onready var egg_desc: RichTextLabel = find_child("EggDesc")
+@onready var back_btn: NinePatchRect = find_child("BackButton")
 
 const STRING_SELECT_YOUT_EGG: String = "Select your egg"
 const NO_EGG_FORMAT_STRING: String = "[center]%s"
@@ -43,6 +44,8 @@ func _ready():
 		get_tree().change_scene_to_file("res://scenes/GameScenes/main.tscn")
 		return
 	
+	back_btn.visible = false
+	back_btn.connect("gui_input", back_btn_input)
 	select_title_text = selection_title.text
 	selection_title.text = select_title_text % [STRING_SELECT_YOUT_EGG]
 	trans_img.position = bg.position + (bg.size * bg.scale) * .5
@@ -114,17 +117,22 @@ func tween(obj, prop, val, delay=0., time=2., _ease=Tween.EASE_IN_OUT):
 			.set_delay(delay)
 	return t
 
-func force_check_mouse():
+func force_check_mouse(sp: Sprite2D = null):
+	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
 	set_can_interact(true)
 	
+	var is_mouse_within = func(s: Sprite2D) -> bool:
+		var dist: float = (mouse_pos - s.position).length()
+		var radius: float = s.get_child(0).get_child(0).shape.radius * (s.scale.x * .8)  # scale area down just a little
+		return dist < radius
+	
 	# have to do a manual mouse check :( whatever
-	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
-	for i: int in placed_egg_sprites.size():
-		var sprite: Sprite2D = placed_egg_sprites[i]
-		var dist: float = (mouse_pos - sprite.position).length()
-		var radius: float = sprite.get_child(0).get_child(0).shape.radius * (sprite.scale.x * .8)
-		if (dist < radius):
-			mouse_entered(i)
+	if sp == null:  # check all
+		for i: int in placed_egg_sprites.size():
+			if (is_mouse_within.call(placed_egg_sprites[i])):
+				mouse_entered(i)
+	elif is_mouse_within.call(sp):  # check one
+		print("within")
 
 func set_can_interact(val: bool):
 	can_interact = val
@@ -161,10 +169,13 @@ func do_select_egg(egg: EggEntry, inx: int):
 	# set labels
 	selection_title.text = select_title_text % [selected_egg.name]
 	egg_desc.text = ""
+	back_btn.visible = true
+	back_btn.modulate.a = 0
+	tween(back_btn, "modulate", Color.WHITE, 0., 1.)
 	
 	tween(shader_area.material, "shader_parameter/color", Vector4(0, 0, 1, 1), 0., 1.)
 	tween(selected_egg_sprite, "scale", SMALL_EGG_SCALE, 0., .2, Tween.EASE_OUT)  # scale down
-	tween_sprite_to_center()  # move animation
+	tween_sprite_to_goal(selection_area.position + selection_area.size * .5)  # move to center
 	
 	# fade out other eggs
 	for i: int in placed_egg_sprites.size():
@@ -173,13 +184,17 @@ func do_select_egg(egg: EggEntry, inx: int):
 			tween(sprite, "modulate", Color(1, 1, 1, 0), 0.0, .4, Tween.EASE_OUT)
 			tween(sprite, "position", Vector2(sprite.position.x, sprite.position.y + 20), 0., .3, Tween.EASE_OUT)
 
-func tween_sprite_to_center():
-	var goal: Vector2 = selection_area.position + selection_area.size * .5
+func tween_sprite_to_goal(goal: Vector2):
 	buffers = [IntBuffer.new(selected_egg_sprite.position.x), IntBuffer.new(selected_egg_sprite.position.y)]
 	tween(buffers[0], "value", goal.x, 0., 1., Tween.EASE_OUT)  # x pos to center
 	tween(buffers[1], "value", goal.y - 50, 0., .6, Tween.EASE_OUT)  # up
 	tween(buffers[1], "value", goal.y, 0.2, .4, Tween.EASE_IN)  # down
-	tween(selected_egg_sprite, "scale", BASE_SELECTED_EGG_SCALE, .1, .5, Tween.EASE_IN)  # scale up
+	var scale_tween = tween(selected_egg_sprite, "scale", BASE_SELECTED_EGG_SCALE, .1, .5, Tween.EASE_IN)  # scale up
+	scale_tween.connect("finished", force_check_mouse.bind(selected_egg_sprite))
+
+func back_btn_input(event: InputEvent):
+	if can_interact and selected_egg != null and event.is_pressed():
+		print("back")
 
 func _process(_delta):
 	if selected_egg == null:  # dont bother if an egg is already selected

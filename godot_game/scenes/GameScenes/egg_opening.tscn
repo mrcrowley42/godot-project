@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cn1lep32uqau0"]
+[gd_scene load_steps=15 format=3 uid="uid://rrftuntvxt4t"]
 
 [ext_resource type="Script" path="res://scripts/MainGameScripts/egg_opening.gd" id="1_j41yb"]
 [ext_resource type="Texture2D" uid="uid://di0q6yu8qbi2u" path="res://images/egg/egg-purple.png" id="2_2t25y"]
@@ -36,6 +36,9 @@ shader_parameter/scale = 0.6
 shader_parameter/speed = 0.05
 shader_parameter/layer = 1.0
 shader_parameter/opacity = 0.15
+
+[sub_resource type="LabelSettings" id="LabelSettings_0ocei"]
+font_size = 24
 
 [node name="EggOpening" type="Node2D"]
 script = ExtResource("1_j41yb")
@@ -95,7 +98,7 @@ bbcode_enabled = true
 text = "[font_size=25][center][wave amp=30 freq=-3]%s!"
 fit_content = true
 
-[node name="Box" type="NinePatchRect" parent="CanvasLayer"]
+[node name="DisplayBox" type="NinePatchRect" parent="CanvasLayer"]
 offset_left = 472.0
 offset_top = 442.0
 offset_right = 1288.0
@@ -108,14 +111,14 @@ patch_margin_top = 16
 patch_margin_right = 16
 patch_margin_bottom = 16
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Box"]
+[node name="whiteBg" type="ColorRect" parent="CanvasLayer/DisplayBox"]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 800.0
 offset_bottom = 494.0
 
-[node name="shader" type="ColorRect" parent="CanvasLayer/Box"]
+[node name="shader" type="ColorRect" parent="CanvasLayer/DisplayBox"]
 material = SubResource("ShaderMaterial_8jkob")
 layout_mode = 0
 offset_left = 16.0
@@ -126,9 +129,9 @@ color = Color(1, 1, 1, 0.270588)
 
 [node name="EggDescBox" type="NinePatchRect" parent="CanvasLayer"]
 offset_left = 446.0
-offset_top = 605.0
+offset_top = 573.0
 offset_right = 1160.0
-offset_bottom = 836.0
+offset_bottom = 740.0
 rotation = 3.14159
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_4e4a6")
@@ -142,14 +145,14 @@ layout_mode = 0
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 698.0
-offset_bottom = 215.0
+offset_bottom = 151.0
 color = Color(0, 0, 0, 0.388235)
 
 [node name="EggDesc" type="RichTextLabel" parent="CanvasLayer"]
 offset_left = 98.0
 offset_top = 504.0
 offset_right = 439.0
-offset_bottom = 592.0
+offset_bottom = 564.0
 theme = ExtResource("7_crtsy")
 bbcode_enabled = true
 text = "[center]..."
@@ -161,6 +164,31 @@ layer = 10
 position = Vector2(270, 1200)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("9_gm1pd")
+
+[node name="BackButton" type="NinePatchRect" parent="CanvasLayer"]
+offset_left = 212.0
+offset_top = 151.0
+offset_right = 442.0
+offset_bottom = 221.0
+scale = Vector2(0.5, 0.5)
+mouse_filter = 0
+texture = ExtResource("6_4e4a6")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="Label" type="Label" parent="CanvasLayer/BackButton"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 214.0
+offset_bottom = 56.0
+theme = ExtResource("7_crtsy")
+text = "Back"
+label_settings = SubResource("LabelSettings_0ocei")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="SelectionArea" type="Control" parent="."]
 layout_mode = 3
