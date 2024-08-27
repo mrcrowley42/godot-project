@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cn1lep32uqau0"]
+[gd_scene load_steps=14 format=3 uid="uid://cn1lep32uqau0"]
 
 [ext_resource type="Script" path="res://scripts/MainGameScripts/egg_open.gd" id="1_r0w83"]
 [ext_resource type="Texture2D" uid="uid://gi4ytib73ibf" path="res://images/egg/egg-green.png" id="2_72bes"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dooy32x4x0qq3" path="res://images/egg/egg-pink.png" id="5_3skwq"]
 [ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="6_4v5ac"]
 [ext_resource type="Shader" path="res://shaders/voronoi.gdshader" id="8_pu7bv"]
+[ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="9_dnahd"]
 
 [sub_resource type="Resource" id="Resource_xhydc"]
 script = ExtResource("2_q4avg")
@@ -85,9 +86,9 @@ offset_bottom = 110.0
 color = Color(0, 0, 0, 0.388235)
 
 [node name="SelectTitle" type="RichTextLabel" parent="CanvasLayer"]
-offset_left = 64.0
+offset_left = 100.0
 offset_top = 95.0
-offset_right = 471.0
+offset_right = 439.0
 offset_bottom = 135.0
 theme = ExtResource("4_sg77q")
 bbcode_enabled = true
@@ -121,6 +122,44 @@ offset_top = 16.0
 offset_right = 800.0
 offset_bottom = 494.0
 color = Color(1, 1, 1, 0.270588)
+
+[node name="EggDescBox" type="NinePatchRect" parent="CanvasLayer"]
+offset_left = 446.0
+offset_top = 605.0
+offset_right = 1160.0
+offset_bottom = 836.0
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_4v5ac")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/EggDescBox"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 698.0
+offset_bottom = 215.0
+color = Color(0, 0, 0, 0.388235)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 98.0
+offset_top = 504.0
+offset_right = 439.0
+offset_bottom = 592.0
+theme = ExtResource("4_sg77q")
+bbcode_enabled = true
+text = "[center]..."
+
+[node name="TransLayer" type="CanvasLayer" parent="CanvasLayer"]
+layer = 10
+
+[node name="Transition" type="Sprite2D" parent="CanvasLayer/TransLayer"]
+position = Vector2(270, 1200)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_dnahd")
 
 [node name="SelectionArea" type="Control" parent="."]
 layout_mode = 3
