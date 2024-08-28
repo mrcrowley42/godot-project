@@ -370,6 +370,7 @@ moon_y = SubResource("Curve_s66ht")
 autostart = true
 
 [node name="BGCanvasLayer" type="CanvasLayer" parent="Gameplay/Background"]
+unique_name_in_owner = true
 layer = -1
 
 [node name="BG" type="Sprite2D" parent="Gameplay/Background/BGCanvasLayer"]

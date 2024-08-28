@@ -11,6 +11,8 @@ extends Button
 @onready var start_transform := viewport.canvas_transform
 @onready var default_stretch_mode := window.content_scale_mode
 @onready var clippy_offset := -self.position
+@onready var ui = %UI
+@onready var bg = %BGCanvasLayer
 
 var dragging: bool = false
 var offset = Vector2(0, 0)
@@ -60,8 +62,8 @@ func toggle_clippy_mode() -> void:
 	viewport.transparent_bg = clippy
 	window.transparent = clippy
 	window.always_on_top = clippy
-	%UI.visible = !clippy
-	%Background.visible = !clippy
+	ui.visible = !clippy
+	bg.visible = !clippy
 
 	if clippy:
 		# Shrink window size and shift canvas to keep focus on creature.
