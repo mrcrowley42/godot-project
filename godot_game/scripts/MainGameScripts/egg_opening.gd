@@ -197,8 +197,8 @@ func select_egg(egg: EggEntry, inx: int):
 	for i: int in placed_egg_sprites.size():
 		if i != inx:
 			var sprite: Sprite2D = placed_egg_sprites[i]
-			tween(sprite, "modulate", Color(1, 1, 1, 0), 0.0, .4, Tween.EASE_OUT)
-			tween(sprite, "position", Vector2(sprite.position.x, sprite.position.y + 20), 0., .3, Tween.EASE_OUT)
+			tween(sprite, "modulate", Color(1, 1, 1, 0), 0., .4, Tween.EASE_OUT)  # fade out
+			tween(sprite, "position", Vector2(sprite.position.x, sprite.position.y + 20), 0., .3, Tween.EASE_OUT)  # move down
 
 func de_select_egg():
 	selected_egg_inx = null
@@ -234,15 +234,18 @@ func back_btn_input(event: InputEvent):
 		for i: int in placed_egg_sprites.size():
 			if i != selected_egg_inx:
 				var sprite: Sprite2D = placed_egg_sprites[i]
-				tween(sprite, "modulate", Color(1, 1, 1, 1), 0.0, .4, Tween.EASE_OUT)
-				tween(sprite, "position", original_egg_positions[i], 0., .3, Tween.EASE_OUT)
+				tween(sprite, "modulate", Color(1, 1, 1, 1), 0., .4, Tween.EASE_OUT)  # fade in
+				tween(sprite, "position", original_egg_positions[i], 0., .3, Tween.EASE_OUT)  # move up
 
 func _process(_delta):
-	if selected_egg_inx == null:  # dont bother if an egg is already selected
+	# bob eggs slowly
+	if selected_egg_inx == null:  # do all
 		for i: int in placed_egg_sprites.size():
 			var s = sin(Time.get_unix_time_from_system() - (1. * i)) * 6
-			var sprite: Sprite2D = placed_egg_sprites[i]
-			sprite.position.y = original_egg_positions[i].y + s
+			placed_egg_sprites[i].position.y = original_egg_positions[i].y + s
+	elif can_interact:  # do only selected
+		var s = sin(Time.get_unix_time_from_system()) * 6
+		placed_egg_sprites[selected_egg_inx].position.y = original_egg_positions[selected_egg_inx].y + s
 	
 	# move selected egg animation
 	if buffers.size() > 0 and selected_egg_inx != null:
