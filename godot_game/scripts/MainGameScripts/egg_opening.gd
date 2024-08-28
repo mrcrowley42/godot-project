@@ -19,6 +19,7 @@ class_name EggOpen extends ScriptNode
 @onready var egg_desc: RichTextLabel = find_child("EggDesc")
 @onready var back_btn: NinePatchRect = find_child("BackButton")
 
+const EPSILON = 0.0001
 const STRING_SELECT_YOUR_EGG: String = "Select your egg"
 const NO_EGG_FORMAT_STRING: String = "[center]%s"
 const EGG_FORMAT_STRING: String = "[center][u]%s[/u]\nHatches: %s"
@@ -236,23 +237,12 @@ func back_btn_input(event: InputEvent):
 				tween(sprite, "modulate", Color(1, 1, 1, 1), 0.0, .4, Tween.EASE_OUT)
 				tween(sprite, "position", original_egg_positions[i], 0., .3, Tween.EASE_OUT)
 
-func _process(delta):
+func _process(_delta):
 	if selected_egg_inx == null:  # dont bother if an egg is already selected
 		for i: int in placed_egg_sprites.size():
 			var s = sin(Time.get_unix_time_from_system() - (1. * i)) * 6
 			var sprite: Sprite2D = placed_egg_sprites[i]
 			sprite.position.y = original_egg_positions[i].y + s
-	
-	# move selected egg towards mouse
-	if buffers.size() == 0 and selected_egg_inx != null:
-		var mouse_pos = get_viewport().get_mouse_position()
-		var egg_pos = placed_egg_sprites[selected_egg_inx].position
-		var mouse_dist = mouse_pos - selection_area_center
-		var center_dist = egg_pos - selection_area_center
-		
-		var addition = (mouse_dist * delta)
-		var direction = (egg_pos + addition) - egg_pos
-		placed_egg_sprites[selected_egg_inx].position += addition
 	
 	# move selected egg animation
 	if buffers.size() > 0 and selected_egg_inx != null:
