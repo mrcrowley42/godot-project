@@ -23,7 +23,7 @@ const like_multiplier: float = 2.0
 # ENUMS
 enum FoodItem {NEUTRAL, TOAST, CHIPS, FRUIT}
 enum LifeStage {CHILD, ADULT}
-enum Stat {HP, WATER, FOOD, FUN, XP}
+enum Stat {HP, WATER, FOOD, FUN}
 
 # CREATURE STATS VARIABLES
 var hp: float
