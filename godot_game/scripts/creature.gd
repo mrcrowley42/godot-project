@@ -46,7 +46,6 @@ signal xp_changed()
 var stats: Dictionary = {Stat.HP: damage_hp, Stat.FUN: damage_fun,
 	Stat.WATER: damage_water, Stat.FOOD: damage_food}
 
-
 ## Add the specified [param amount] to the creature's existing xp.
 func add_xp(amount: float) -> void:
 	if amount <= 0:

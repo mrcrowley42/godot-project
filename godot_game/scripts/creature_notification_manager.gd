@@ -38,6 +38,7 @@ extends Node
 @onready var reg_volume = notif_sounds.volume_db
 @onready var stat_files = {STAT.HP: [low_hp, low_hp_img], STAT.WATER: [low_water, low_water_img],
 	STAT.FOOD: [low_food, low_food_img], STAT.FUN: [low_fun, low_fun_img]}
+
 ## Bool to keep track whether notifications should still be on cooldown or not.
 var on_cooldown: bool = false
 
@@ -47,6 +48,7 @@ func _ready() -> void:
 	cooldown_timer.autostart = false
 	cooldown_timer.name = "CooldownTimer"
 	add_child(cooldown_timer)
+
 
 func _process(_delta) -> void:
 	notification_bubble.visible = notif_sounds.playing
@@ -74,6 +76,7 @@ func done() -> void:
 	on_cooldown = false
 	cooldown_timer.stop()
 
+
 func queue_warning(sound_file: AudioStream) -> void:
 	if not notif_sounds.playing and not on_cooldown:
 		notif_sounds.stream = sound_file
@@ -84,6 +87,7 @@ func queue_warning(sound_file: AudioStream) -> void:
 			notif_sounds.volume_db = reg_volume
 		notif_sounds.play()
 	on_cooldown = true
+
 
 ## When a sound finishes, puts the notifications on cooldown until the [param cooldown_period] is elapsed.
 func _on_low_stat_sounds_finished() -> void:
