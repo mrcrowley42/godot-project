@@ -61,6 +61,7 @@ layer = -1
 offset_right = 1080.0
 offset_bottom = 1350.0
 scale = Vector2(0.5, 0.5)
+mouse_filter = 1
 texture = ExtResource("6_4e4a6")
 patch_margin_left = 16
 patch_margin_top = 16

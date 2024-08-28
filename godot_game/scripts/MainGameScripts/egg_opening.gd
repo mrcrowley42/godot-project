@@ -28,7 +28,8 @@ const BASE_EGG_SCALE: Vector2 = Vector2(1.8, 1.8)
 const HOVER_EGG_SCALE: Vector2 = Vector2(2., 2.)
 const BASE_SELECTED_EGG_SCALE: Vector2 = Vector2(2.2, 2.2)
 
-var select_title_text: String = ""
+var selection_area_center: Vector2
+var select_title_text: String
 var buffers: Array[FloatBuffer] = []
 var can_interact: bool = false  # turn off while tweening stuff around
 
@@ -43,12 +44,17 @@ func _ready():
 		get_tree().change_scene_to_file("res://scenes/GameScenes/main.tscn")
 		return
 	
+	# setup
 	back_btn.visible = false
 	back_btn.connect("gui_input", back_btn_input)
 	select_title_text = selection_title.text
 	selection_title.text = select_title_text % [STRING_SELECT_YOUR_EGG]
+	
+	# transition
 	trans_img.position = bg.position + (bg.size * bg.scale) * .5
 	tween(trans_img, "position", trans_img.position + Vector2(0, 1000))
+	
+	selection_area_center = selection_area.position + selection_area.size * .5
 	place_eggs()
 
 func place_eggs():
@@ -93,7 +99,7 @@ func add_collision_areas(sprite: Sprite2D, i: int):
 	sprite.add_child(area_2d)
 	area_2d.add_child(coll_shape)
 	area_2d.monitorable = false  # not nessecary
-	circle.radius = sprite.texture.get_size().x * sprite.scale.x * .15
+	circle.radius = sprite.texture.get_size().x * sprite.scale.x * .15  # around the eggs size
 	coll_shape.shape = circle
 	area_2d.connect("mouse_entered", mouse_entered.bind(i))
 	area_2d.connect("mouse_exited", mouse_exited.bind(i))
@@ -101,12 +107,18 @@ func add_collision_areas(sprite: Sprite2D, i: int):
 
 func do_opening_animation(sprite: Sprite2D, i: int, is_last_egg: bool):
 	var diff = .2 * i
-	tween(sprite, "modulate", Color.WHITE, 1. + diff, .5)
-	tween(sprite, "position", Vector2(sprite.position.x, sprite.position.y - 20), 1.2 + diff, .6, Tween.EASE_OUT)
-	tween(sprite, "position", Vector2(sprite.position.x, sprite.position.y), 1.4 + diff, .4, Tween.EASE_IN)
-	var scale_tween = tween(sprite, "scale", BASE_EGG_SCALE, 2.2, .5)
-	if is_last_egg:  # set only on the last egg
-		scale_tween.connect("finished", force_check_mouse)
+	tween(sprite, "modulate", Color.WHITE, 1. + diff, .5)  # fade in
+	tween(sprite, "position", Vector2(sprite.position.x, sprite.position.y - 20), 1.2 + diff, .6, Tween.EASE_OUT)  # move up
+	var move_down_tween = tween(sprite, "position", Vector2(sprite.position.x, sprite.position.y), 1.4 + diff, .4, Tween.EASE_IN)  # move down
+	if is_last_egg:
+		move_down_tween.connect("finished", end_opening_animation)
+
+func end_opening_animation():
+	# scale all placed eggs up
+	for i: int in placed_egg_sprites.size():
+		var scale_tween = tween(placed_egg_sprites[i], "scale", BASE_EGG_SCALE, 0., .5)
+		if i == placed_eggs.size() - 1:  # only on the last egg
+			scale_tween.connect("finished", manual_mouse_check)
 
 ## generic function
 func tween(obj, prop, val, delay=0., time=2., _ease=Tween.EASE_IN_OUT):
@@ -117,13 +129,13 @@ func tween(obj, prop, val, delay=0., time=2., _ease=Tween.EASE_IN_OUT):
 			.set_delay(delay)
 	return t
 
-func force_check_mouse(sp: Sprite2D = null):
+func manual_mouse_check(sp: Sprite2D = null):
 	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
 	set_can_interact(true)
 	
 	var is_mouse_within = func(s: Sprite2D) -> bool:
 		var dist: float = (mouse_pos - s.position).length()
-		var radius: float = s.get_child(0).get_child(0).shape.radius * (s.scale.x * .8)  # scale area down just a little
+		var radius: float = s.get_child(0).get_child(0).shape.radius * (s.scale.x * .9)  # scale area down just a little
 		return dist < radius
 	
 	# have to do a manual mouse check :( whatever
@@ -150,6 +162,7 @@ func mouse_exited(i: int):
 		var sprite: Sprite2D = placed_egg_sprites[i]
 		tween(sprite, "scale", BASE_EGG_SCALE, 0., .5, Tween.EASE_OUT)
 		set_egg_desc()
+		manual_mouse_check()  # in case there are overlapping eggs
 
 func mouse_clicked(_viewport, event: InputEvent, _shape_idx, i):
 	if selected_egg_inx == null and can_interact and event.is_pressed():
@@ -177,7 +190,7 @@ func select_egg(egg: EggEntry, inx: int):
 	tween(back_btn, "modulate", Color.WHITE, 0., 1.)
 	
 	tween(shader_area.material, "shader_parameter/color", Vector4(0, 0, 1, 1), 0., 1.)
-	tween_sprite_to_goal(selection_area.position + selection_area.size * .5)  # move to center
+	tween_sprite_to_goal(selection_area_center)  # move to center
 	
 	# fade out other eggs
 	for i: int in placed_egg_sprites.size():
@@ -188,9 +201,14 @@ func select_egg(egg: EggEntry, inx: int):
 
 func de_select_egg():
 	selected_egg_inx = null
-	force_check_mouse()  # do check on all placed eggs
+	set_egg_desc()
+	manual_mouse_check()  # do check on all placed eggs
 
 func tween_sprite_to_goal(goal: Vector2, scale_goal: Vector2 = BASE_SELECTED_EGG_SCALE, end_selection: bool = false):
+	var end_movement = func(sp):
+		buffers.clear()
+		de_select_egg() if end_selection else manual_mouse_check(sp)
+	
 	tween(placed_egg_sprites[selected_egg_inx], "scale", SMALL_EGG_SCALE, 0., .2, Tween.EASE_OUT)  # scale down
 	
 	var s: Sprite2D = placed_egg_sprites[selected_egg_inx]
@@ -199,7 +217,7 @@ func tween_sprite_to_goal(goal: Vector2, scale_goal: Vector2 = BASE_SELECTED_EGG
 	tween(buffers[1], "value", goal.y - 50, 0., .6, Tween.EASE_OUT)  # up
 	tween(buffers[1], "value", goal.y, 0.2, .4, Tween.EASE_IN)  # down
 	var scale_tween = tween(s, "scale", scale_goal, .12, .5, Tween.EASE_IN)  # scale up
-	scale_tween.connect("finished", de_select_egg if end_selection else force_check_mouse.bind(s))
+	scale_tween.connect("finished", end_movement.bind(s))  # finish movement event
 
 ## bring back egg selection
 func back_btn_input(event: InputEvent):
@@ -218,16 +236,28 @@ func back_btn_input(event: InputEvent):
 				tween(sprite, "modulate", Color(1, 1, 1, 1), 0.0, .4, Tween.EASE_OUT)
 				tween(sprite, "position", original_egg_positions[i], 0., .3, Tween.EASE_OUT)
 
-func _process(_delta):
+func _process(delta):
 	if selected_egg_inx == null:  # dont bother if an egg is already selected
 		for i: int in placed_egg_sprites.size():
 			var s = sin(Time.get_unix_time_from_system() - (1. * i)) * 6
 			var sprite: Sprite2D = placed_egg_sprites[i]
 			sprite.position.y = original_egg_positions[i].y + s
 	
+	# move selected egg towards mouse
+	if buffers.size() == 0 and selected_egg_inx != null:
+		var mouse_pos = get_viewport().get_mouse_position()
+		var egg_pos = placed_egg_sprites[selected_egg_inx].position
+		var mouse_dist = mouse_pos - selection_area_center
+		var center_dist = egg_pos - selection_area_center
+		
+		var addition = (mouse_dist * delta)
+		var direction = (egg_pos + addition) - egg_pos
+		placed_egg_sprites[selected_egg_inx].position += addition
+	
 	# move selected egg animation
 	if buffers.size() > 0 and selected_egg_inx != null:
-		placed_egg_sprites[selected_egg_inx].position = Vector2(buffers[0].value, buffers[1].value)
+		var new_p = Vector2(buffers[0].value, buffers[1].value)
+		placed_egg_sprites[selected_egg_inx].position = new_p
 
 class FloatBuffer:
 	var value = 0
