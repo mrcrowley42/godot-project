@@ -19,7 +19,7 @@ class_name EggOpen extends ScriptNode
 @onready var egg_desc: RichTextLabel = find_child("EggDesc")
 @onready var back_btn: NinePatchRect = find_child("BackButton")
 
-const EPSILON = 0.0001
+const EPSILON: float = 0.0001
 const STRING_SELECT_YOUR_EGG: String = "Select your egg"
 const NO_EGG_FORMAT_STRING: String = "[center]%s"
 const EGG_FORMAT_STRING: String = "[center][u]%s[/u]\nHatches: %s"
@@ -31,7 +31,7 @@ const BASE_SELECTED_EGG_SCALE: Vector2 = Vector2(2.2, 2.2)
 
 var selection_area_center: Vector2
 var select_title_text: String
-var buffers: Array[FloatBuffer] = []
+var move_buffers: Array[FloatBuffer] = []
 var can_interact: bool = false  # turn off while tweening stuff around
 
 var placed_eggs: Array[EggEntry] = []
@@ -207,16 +207,16 @@ func de_select_egg():
 
 func tween_sprite_to_goal(goal: Vector2, scale_goal: Vector2 = BASE_SELECTED_EGG_SCALE, end_selection: bool = false):
 	var end_movement = func(sp):
-		buffers.clear()
+		move_buffers.clear()
 		de_select_egg() if end_selection else manual_mouse_check(sp)
 	
 	tween(placed_egg_sprites[selected_egg_inx], "scale", SMALL_EGG_SCALE, 0., .2, Tween.EASE_OUT)  # scale down
 	
 	var s: Sprite2D = placed_egg_sprites[selected_egg_inx]
-	buffers = [FloatBuffer.new(s.position.x), FloatBuffer.new(s.position.y)]
-	tween(buffers[0], "value", goal.x, 0., 1., Tween.EASE_OUT)  # x pos to center
-	tween(buffers[1], "value", goal.y - 50, 0., .6, Tween.EASE_OUT)  # up
-	tween(buffers[1], "value", goal.y, 0.2, .4, Tween.EASE_IN)  # down
+	move_buffers = [FloatBuffer.new(s.position.x), FloatBuffer.new(s.position.y)]
+	tween(move_buffers[0], "value", goal.x, 0., 1., Tween.EASE_OUT)  # x pos to center
+	tween(move_buffers[1], "value", goal.y - 50, 0., .6, Tween.EASE_OUT)  # up
+	tween(move_buffers[1], "value", goal.y, 0.2, .4, Tween.EASE_IN)  # down
 	var scale_tween = tween(s, "scale", scale_goal, .12, .5, Tween.EASE_IN)  # scale up
 	scale_tween.connect("finished", end_movement.bind(s))  # finish movement event
 
@@ -243,13 +243,14 @@ func _process(_delta):
 		for i: int in placed_egg_sprites.size():
 			var s = sin(Time.get_unix_time_from_system() - (1. * i)) * 6
 			placed_egg_sprites[i].position.y = original_egg_positions[i].y + s
+			#placed_egg_sprites[i].rotation = 0 + s * .1
 	elif can_interact:  # do only selected
 		var s = sin(Time.get_unix_time_from_system()) * 6
 		placed_egg_sprites[selected_egg_inx].position.y = original_egg_positions[selected_egg_inx].y + s
 	
 	# move selected egg animation
-	if buffers.size() > 0 and selected_egg_inx != null:
-		var new_p = Vector2(buffers[0].value, buffers[1].value)
+	if move_buffers.size() > 0 and selected_egg_inx != null:
+		var new_p = Vector2(move_buffers[0].value, move_buffers[1].value)
 		placed_egg_sprites[selected_egg_inx].position = new_p
 
 class FloatBuffer:
