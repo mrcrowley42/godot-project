@@ -2,6 +2,7 @@ class_name EggOpen extends ScriptNode
 
 @export var skip_scene: bool = false
 @export var existing_eggs: Array[EggEntry]
+@export var bar_progress_color: Gradient
 
 @export_subgroup("limit egg selection")
 @export var sequence_start_inx: int = 0
@@ -18,7 +19,11 @@ class_name EggOpen extends ScriptNode
 @onready var shader_area: ColorRect = find_child("shader")
 @onready var egg_desc: RichTextLabel = find_child("EggDesc")
 @onready var back_btn: NinePatchRect = find_child("BackButton")
+@onready var bar_cont: Control = find_child("EggBarContainer")
+@onready var bar: ProgressBar = find_child("Bar")
 
+const BAR_ADDITION: int = 100
+const BAR_DRAIN_AMOUNT: int = 100
 const OFFSET: Vector2 = Vector2(0, -20)
 const EPSILON: float = 0.0001
 const STRING_SELECT_YOUR_EGG: String = "Select your egg"
@@ -29,16 +34,20 @@ const SMALL_EGG_SCALE: Vector2 = Vector2(1.5, 1.5)
 const BASE_EGG_SCALE: Vector2 = Vector2(1.8, 1.8)
 const HOVER_EGG_SCALE: Vector2 = Vector2(2., 2.)
 const BASE_SELECTED_EGG_SCALE: Vector2 = Vector2(2.2, 2.2)
+const MAX_SELECTED_EGG_SCALE: Vector2 = Vector2(3, 3)
+const HOVER_SELECTED_EGG_ADDITION: Vector2 = Vector2(.2, .2)
 
 var selection_area_center: Vector2
 var select_title_text: String
 var move_buffers: Array[FloatBuffer] = []
+var rotation_buffer: FloatBuffer = FloatBuffer.new(0.)
 var can_interact: bool = false  # turn off while tweening stuff around
 
 var placed_eggs: Array[EggEntry] = []
 var placed_egg_sprites: Array[Control] = []
 var original_egg_positions: Array[Vector2] = []
 var selected_egg_inx = null  # int
+var scale_addition: Vector2 = Vector2(0, 0)
 
 func _ready():
 	if skip_scene:
@@ -47,6 +56,7 @@ func _ready():
 		return
 	
 	# setup
+	bar_cont.visible = false
 	back_btn.visible = false
 	back_btn.connect("gui_input", back_btn_input)
 	select_title_text = selection_title.text
@@ -156,29 +166,36 @@ func manual_mouse_check(sprite_c: Control = null):
 			if (is_mouse_within.call(placed_egg_sprites[i])):
 				mouse_entered(i)
 	elif is_mouse_within.call(sprite_c):  # check selected egg
-		print("within")
+		mouse_entered(selected_egg_inx)
 
 func set_can_interact(val: bool):
 	can_interact = val
 
 func mouse_entered(i: int):
-	# entered a placed egg
-	if selected_egg_inx == null and can_interact:
-		var sprite_c: Control = placed_egg_sprites[i]
-		tween(sprite_c, "scale", HOVER_EGG_SCALE, 0., .5, Tween.EASE_OUT)
-		set_egg_desc(i)
+	if can_interact:
+		# entered a placed egg
+		if selected_egg_inx == null:
+			scale_egg(i, HOVER_EGG_SCALE)
+			set_egg_desc(i)
+		elif i == selected_egg_inx:
+			tween(self, "scale_addition", HOVER_SELECTED_EGG_ADDITION, 0., .5, Tween.EASE_OUT)
 
 func mouse_exited(i: int):
-	# entered a placed egg
-	if selected_egg_inx == null and can_interact:
-		var sprite_c: Control = placed_egg_sprites[i]
-		tween(sprite_c, "scale", BASE_EGG_SCALE, 0., .5, Tween.EASE_OUT)
-		set_egg_desc()
-		manual_mouse_check()  # in case there are overlapping eggs
+	if can_interact:
+		# entered a placed egg
+		if selected_egg_inx == null and can_interact:
+			scale_egg(i, HOVER_EGG_SCALE)
+			set_egg_desc()
+			manual_mouse_check()  # in case there are overlapping eggs
+		elif i == selected_egg_inx:
+			tween(self, "scale_addition", Vector2(0, 0), 0., .5, Tween.EASE_OUT)
 
 func mouse_clicked(_viewport, event: InputEvent, _shape_idx, i):
-	if selected_egg_inx == null and can_interact and event.is_pressed():
-		select_egg(placed_eggs[i], i)
+	if can_interact and event.is_pressed():
+		if selected_egg_inx == null:
+			select_egg(placed_eggs[i], i)
+		elif i == selected_egg_inx:
+			click_selected_egg()
 
 ## when hovering over a placed egg
 func set_egg_desc(i: int = -1):
@@ -197,9 +214,9 @@ func select_egg(egg: EggEntry, inx: int):
 	# set labels
 	selection_title.text = select_title_text % [egg.name]
 	egg_desc.text = ""
-	back_btn.visible = true
-	back_btn.modulate.a = 0
-	tween(back_btn, "modulate", Color.WHITE, 0., 1.)
+	bar.value = 0  # reset
+	fade(back_btn)
+	fade(bar_cont)
 	
 	tween(shader_area.material, "shader_parameter/color", Vector4(0, 0, 1, 1), 0., 1.)
 	tween_sprite_to_goal(selection_area_center)  # move to center
@@ -211,10 +228,32 @@ func select_egg(egg: EggEntry, inx: int):
 			tween(sprite_c, "modulate", Color(1, 1, 1, 0), 0., .4, Tween.EASE_OUT)  # fade out
 			tween(sprite_c, "position", Vector2(sprite_c.position.x, sprite_c.position.y + 20), 0., .3, Tween.EASE_OUT)  # move down
 
+## generic scale of eggs
+func scale_egg(inx: int, to_scale: Vector2):
+	var sprite_c: Control = placed_egg_sprites[inx]
+	tween(sprite_c, "scale", to_scale, 0., .5, Tween.EASE_OUT)
+
+## generic fade in or out
+func fade(obj, fade_in: bool = true):
+	if fade_in:
+		obj.visible = true
+		obj.modulate.a = 0
+	var col = Color.WHITE if fade_in else Color(1, 1, 1, 0)
+	var time = 1.0 if fade_in else .5
+	var _ease = Tween.EASE_IN_OUT if fade_in else Tween.EASE_OUT
+	tween(obj, "modulate", col, 0., time, _ease)
+
 func de_select_egg():
 	selected_egg_inx = null
 	set_egg_desc()
 	manual_mouse_check()  # do check on all placed eggs
+
+func click_selected_egg():
+	bar.value += BAR_ADDITION
+	
+	# rotation
+	tween(rotation_buffer, "value", 1, 0., .1)
+	tween(rotation_buffer, "value", 0, 0.1, .4)
 
 func tween_sprite_to_goal(goal: Vector2, scale_goal: Vector2 = BASE_SELECTED_EGG_SCALE, end_selection: bool = false):
 	var end_movement = func(sp: Control):
@@ -235,11 +274,14 @@ func tween_sprite_to_goal(goal: Vector2, scale_goal: Vector2 = BASE_SELECTED_EGG
 func back_btn_input(event: InputEvent):
 	if can_interact and selected_egg_inx != null and event.is_pressed():
 		set_can_interact(false)
-		tween(back_btn, "modulate", Color(1, 1, 1, 0), 0., .5, Tween.EASE_OUT)  # fade out back btn
+		fade(back_btn, false)
+		fade(bar_cont, false)
 		tween_sprite_to_goal(original_egg_positions[selected_egg_inx], BASE_EGG_SCALE, true)
 		
 		selection_title.text = select_title_text % [STRING_SELECT_YOUR_EGG]
 		tween(shader_area.material, "shader_parameter/color", Vector4(0, 0, 0, 1), 0., 1.)
+		placed_egg_sprites[selected_egg_inx].rotation = 0
+		print(placed_egg_sprites[selected_egg_inx].rotation)
 		
 		# fade back in other eggs
 		for i: int in placed_egg_sprites.size():
@@ -248,7 +290,27 @@ func back_btn_input(event: InputEvent):
 				tween(sprite_c, "modulate", Color(1, 1, 1, 1), 0., .4, Tween.EASE_OUT)  # fade in
 				tween(sprite_c, "position", original_egg_positions[i], 0., .3, Tween.EASE_OUT)  # move up
 
-func _process(_delta):
+func update_bar(delta):
+	var percent = bar.value / bar.max_value
+	var sprite_c: Control = placed_egg_sprites[selected_egg_inx]
+	
+	bar.value -= BAR_DRAIN_AMOUNT * delta
+	bar["theme_override_styles/fill"].bg_color = bar_progress_color.sample(percent)
+	
+	# scale
+	sprite_c.scale = BASE_SELECTED_EGG_SCALE + (MAX_SELECTED_EGG_SCALE - BASE_SELECTED_EGG_SCALE) * percent
+	sprite_c.scale += scale_addition
+	
+	# rotation
+	if can_interact:
+		var s = sin(Time.get_unix_time_from_system() * (20 + 2 * percent)) * (.1 + .1 * percent)
+		s *= rotation_buffer.value
+		sprite_c.rotation = s
+
+func _process(delta):
+	if selected_egg_inx != null:
+		update_bar(delta)
+	
 	# bob eggs slowly
 	if selected_egg_inx == null:  # do all
 		for i: int in placed_egg_sprites.size():
@@ -264,6 +326,6 @@ func _process(_delta):
 		placed_egg_sprites[selected_egg_inx].position = new_p
 
 class FloatBuffer:
-	var value = 0
+	var value: float = 0.
 	func _init(v):
 		value = v
