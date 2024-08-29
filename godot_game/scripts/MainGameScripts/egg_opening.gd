@@ -29,7 +29,7 @@ class_name EggOpen extends ScriptNode
 @onready var hatch_timer: Timer = find_child("HatchTimer")
 
 const BAR_ADDITION: int = 100
-const BAR_DRAIN_AMOUNT: int = 100
+const BAR_DRAIN_AMOUNT: int = 200
 const OFFSET: Vector2 = Vector2(0, -20)
 const EPSILON: float = 0.0001
 const STRING_SELECT_YOUR_EGG: String = "Select your egg"
@@ -59,7 +59,7 @@ var scale_addition: Vector2 = Vector2(0, 0)
 
 func _ready():
 	if skip_scene:
-		load_game_scene()
+		load_main_scene()
 		return
 	
 	# setup
@@ -78,7 +78,7 @@ func _ready():
 	selection_area_center = selection_area.position + selection_area.size * .5
 	spawn_eggs()
 
-func load_game_scene():
+func load_main_scene():
 	await get_tree().process_frame
 	get_tree().change_scene_to_file("res://scenes/GameScenes/main.tscn")
 
@@ -276,9 +276,10 @@ func hatch_egg():
 
 func progress_hatching():
 	hatch_progress += 1
-	print(hatch_progress)
 	if hatch_progress == 4:
 		finish_hatching()
+		return
+	print(hatch_progress)
 
 func finish_hatching():
 	set_can_interact(true)
@@ -288,12 +289,13 @@ func finish_hatching():
 	continue_btn.connect("gui_input", continue_btn_input)
 	fade(continue_btn)
 
+## transition out & load main scene
 func continue_btn_input(event: InputEvent):
 	if can_interact and event.is_pressed():
 		trans_img.rotation = PI
 		trans_img.position.y = -1000
 		var t = tween(trans_img, "position", bg.position + (bg.size * bg.scale) * .5, 0., 1.)
-		t.connect("finished", load_game_scene)
+		t.connect("finished", load_main_scene)
 
 ## generic scale of eggs
 func scale_egg(inx: int, to_scale: Vector2, time: float = .5):
@@ -378,7 +380,7 @@ func update_selected_egg(delta):
 	
 	# rotation
 	if can_interact:
-		var freq = Time.get_unix_time_from_system() * 15 + (5 * percent)
+		var freq = Time.get_unix_time_from_system() * 15 + (10 * percent)
 		var amp = .08 + (.08 * percent)  # additions are for randomness
 		sprite_c.rotation = (sin(freq) * amp) * rotation_buffer.value
 
