@@ -29,6 +29,7 @@ class_name EggOpen extends ScriptNode
 @onready var display_bg: ColorRect = find_child("whiteBg")
 @onready var display_shader: ColorRect = find_child("shader")
 @onready var hatch_timer: Timer = find_child("HatchTimer")
+@onready var example_creature: AnimatedSprite2D = find_child("ExampleCreature")
 
 @onready var alpha_shader = preload("res://shaders/apply_alpha_map.gdshader")
 @onready var alpha_map = preload("res://images/egg/egg-crack-map.png")
@@ -350,6 +351,13 @@ func finish_hatching(sprite_c: Control):
 	tween(bottom, "rotation", .1, .0, speed)
 	fade(top, false, .3)
 	fade(bottom, false, .3)
+	
+	# spawn creature
+	example_creature.position = sprite_c.position + Vector2(0, -30)  # offset
+	example_creature.modulate.a = 0.
+	example_creature.visible = true
+	fade(example_creature, true)
+	tween(example_creature, "scale", Vector2(.25, .25), .3, .5)
 
 ## transition out & load main scene
 func continue_btn_input(event: InputEvent):
@@ -358,7 +366,7 @@ func continue_btn_input(event: InputEvent):
 		trans_img.position.y = -1000
 		tween(trans_img, "position", bg.position + (bg.size * bg.scale) * .5, 0., 1.).connect("finished", load_main_scene)
 
-## generic scale of eggs
+## generic scale of egg
 func scale_egg(inx: int, to_scale: Vector2, time: float = .5):
 	var sprite_c: Control = placed_egg_sprites[inx]
 	return tween(sprite_c, "scale", to_scale, 0., time)
