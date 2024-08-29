@@ -9,7 +9,7 @@
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="7_crtsy"]
 [ext_resource type="Shader" path="res://shaders/voronoi.gdshader" id="8_cwxax"]
 [ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="9_gm1pd"]
-[ext_resource type="Texture2D" uid="uid://c702pbhxasm52" path="res://icons/status/heart-fill.svg" id="10_lso7w"]
+[ext_resource type="Texture2D" uid="uid://dld1yhay54y36" path="res://icons/status/egg-fill.svg" id="10_acgju"]
 
 [sub_resource type="Resource" id="Resource_xhydc"]
 script = ExtResource("3_n45ee")
@@ -30,8 +30,8 @@ image = ExtResource("5_747x5")
 hatches = Array[String]([])
 
 [sub_resource type="Gradient" id="Gradient_wiwer"]
-offsets = PackedFloat32Array(0, 0.25, 0.5, 1)
-colors = PackedColorArray(1, 0.627451, 0.501961, 1, 1, 0.752941, 0.501961, 1, 1, 0.87451, 0.501961, 1, 0.647059, 0.831373, 0.415686, 1)
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 0.627451, 0.501961, 1, 1, 0.87451, 0.501961, 1, 0.647059, 0.831373, 0.415686, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8jkob"]
 shader = ExtResource("8_cwxax")
@@ -82,6 +82,7 @@ offset_left = 43.0
 offset_top = 220.0
 offset_right = 498.0
 offset_bottom = 372.0
+metadata/_edit_use_anchors_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -104,12 +105,14 @@ patch_margin_left = 16
 patch_margin_top = 16
 patch_margin_right = 16
 patch_margin_bottom = 16
+metadata/_edit_use_anchors_ = true
 
 [node name="TitleContainer" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
 
 [node name="TitleBox" type="NinePatchRect" parent="CanvasLayer/TitleContainer"]
 offset_left = 448.0
@@ -123,6 +126,7 @@ patch_margin_left = 16
 patch_margin_top = 16
 patch_margin_right = 16
 patch_margin_bottom = 16
+metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/TitleContainer/TitleBox"]
 layout_mode = 0
@@ -131,6 +135,7 @@ offset_top = 16.0
 offset_right = 698.0
 offset_bottom = 110.0
 color = Color(0, 0, 0, 0.388235)
+metadata/_edit_use_anchors_ = true
 
 [node name="SelectTitle" type="RichTextLabel" parent="CanvasLayer/TitleContainer"]
 offset_left = 100.0
@@ -141,12 +146,14 @@ theme = ExtResource("7_crtsy")
 bbcode_enabled = true
 text = "[font_size=25][center][wave amp=30 freq=-3]%s!"
 fit_content = true
+metadata/_edit_use_anchors_ = true
 
 [node name="DescContainer" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
 
 [node name="EggDescBox" type="NinePatchRect" parent="CanvasLayer/DescContainer"]
 offset_left = 446.0
@@ -160,6 +167,7 @@ patch_margin_left = 16
 patch_margin_top = 16
 patch_margin_right = 16
 patch_margin_bottom = 16
+metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/DescContainer/EggDescBox"]
 layout_mode = 0
@@ -168,6 +176,7 @@ offset_top = 16.0
 offset_right = 698.0
 offset_bottom = 151.0
 color = Color(0, 0, 0, 0.388235)
+metadata/_edit_use_anchors_ = true
 
 [node name="EggDesc" type="RichTextLabel" parent="CanvasLayer/DescContainer"]
 offset_left = 98.0
@@ -177,8 +186,10 @@ offset_bottom = 564.0
 theme = ExtResource("7_crtsy")
 bbcode_enabled = true
 text = "[center]..."
+metadata/_edit_use_anchors_ = true
 
 [node name="DisplayBox" type="NinePatchRect" parent="CanvasLayer"]
+anchors_preset = -1
 offset_left = 472.0
 offset_top = 442.0
 offset_right = 1288.0
@@ -190,6 +201,7 @@ patch_margin_left = 16
 patch_margin_top = 16
 patch_margin_right = 16
 patch_margin_bottom = 16
+metadata/_edit_use_anchors_ = true
 
 [node name="whiteBg" type="ColorRect" parent="CanvasLayer/DisplayBox"]
 layout_mode = 0
@@ -197,6 +209,7 @@ offset_left = 16.0
 offset_top = 16.0
 offset_right = 800.0
 offset_bottom = 494.0
+metadata/_edit_use_anchors_ = true
 
 [node name="shader" type="ColorRect" parent="CanvasLayer/DisplayBox"]
 material = SubResource("ShaderMaterial_8jkob")
@@ -206,6 +219,7 @@ offset_top = 16.0
 offset_right = 800.0
 offset_bottom = 494.0
 color = Color(1, 1, 1, 0.270588)
+metadata/_edit_use_anchors_ = true
 
 [node name="BackButton" type="NinePatchRect" parent="CanvasLayer"]
 offset_left = 212.0
@@ -219,6 +233,7 @@ patch_margin_left = 16
 patch_margin_top = 16
 patch_margin_right = 16
 patch_margin_bottom = 16
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="CanvasLayer/BackButton"]
 layout_mode = 0
@@ -231,12 +246,14 @@ text = "Back"
 label_settings = SubResource("LabelSettings_0ocei")
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="EggBarContainer" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
 
 [node name="EggIcon" type="Control" parent="CanvasLayer/EggBarContainer"]
 custom_minimum_size = Vector2(28, 0)
@@ -248,19 +265,20 @@ offset_right = 199.0
 offset_bottom = 532.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+metadata/_edit_use_anchors_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/EggBarContainer/EggIcon"]
 modulate = Color(0.96, 0.96, 0.96, 1)
-position = Vector2(14, 0)
+position = Vector2(10.008, 0)
 scale = Vector2(0.688, 0.688)
-texture = ExtResource("10_lso7w")
+texture = ExtResource("10_acgju")
 
 [node name="Bar" type="ProgressBar" parent="CanvasLayer/EggBarContainer"]
 clip_contents = true
 custom_minimum_size = Vector2(160, 23)
-offset_left = 206.0
+offset_left = 202.008
 offset_top = 520.0
-offset_right = 366.0
+offset_right = 362.008
 offset_bottom = 543.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -269,6 +287,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_3yxpu")
 max_value = 1000.0
 step = 1.0
 show_percentage = false
+metadata/_edit_use_anchors_ = true
 
 [node name="SelectionArea" type="Control" parent="."]
 layout_mode = 3
@@ -278,3 +297,4 @@ offset_top = 249.0
 offset_right = 463.0
 offset_bottom = 385.0
 mouse_filter = 1
+metadata/_edit_use_anchors_ = true
