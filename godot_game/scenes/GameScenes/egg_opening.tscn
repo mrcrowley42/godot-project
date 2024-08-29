@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://rrftuntvxt4t"]
+[gd_scene load_steps=22 format=3 uid="uid://rrftuntvxt4t"]
 
 [ext_resource type="Script" path="res://scripts/MainGameScripts/egg_opening.gd" id="1_j41yb"]
 [ext_resource type="Texture2D" uid="uid://di0q6yu8qbi2u" path="res://images/egg/egg-purple.png" id="2_2t25y"]
@@ -6,8 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://gi4ytib73ibf" path="res://images/egg/egg-green.png" id="4_b7spl"]
 [ext_resource type="Texture2D" uid="uid://dooy32x4x0qq3" path="res://images/egg/egg-pink.png" id="5_747x5"]
 [ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="6_4e4a6"]
+[ext_resource type="Texture2D" uid="uid://kodwkhqgbclh" path="res://images/egg/egg-crack-1.png" id="6_a8aos"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="7_crtsy"]
+[ext_resource type="Texture2D" uid="uid://bpr248rssut1k" path="res://images/egg/egg-crack-2.png" id="7_ika8w"]
 [ext_resource type="Shader" path="res://shaders/voronoi.gdshader" id="8_cwxax"]
+[ext_resource type="Texture2D" uid="uid://d4apajj2al24d" path="res://images/egg/egg-crack-3.png" id="8_rhfgm"]
 [ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="9_gm1pd"]
 [ext_resource type="Texture2D" uid="uid://dld1yhay54y36" path="res://icons/status/egg-fill.svg" id="10_acgju"]
 
@@ -71,6 +74,7 @@ corner_detail = 10
 [node name="EggOpening" type="Node2D"]
 script = ExtResource("1_j41yb")
 existing_eggs = Array[ExtResource("3_n45ee")]([SubResource("Resource_xhydc"), SubResource("Resource_8kewv"), SubResource("Resource_hh3r1")])
+egg_cracks = Array[Texture2D]([ExtResource("6_a8aos"), ExtResource("7_ika8w"), ExtResource("8_rhfgm")])
 bar_progress_color = SubResource("Gradient_wiwer")
 metadata/_edit_vertical_guides_ = [540.0, 64.0, 472.0, 128.0, 408.0]
 metadata/_edit_horizontal_guides_ = [675.0, 64.0, 608.0, 128.0, 544.0]
@@ -115,6 +119,7 @@ offset_bottom = 40.0
 metadata/_edit_use_anchors_ = true
 
 [node name="TitleBox" type="NinePatchRect" parent="CanvasLayer/TitleContainer"]
+layout_mode = 0
 offset_left = 448.0
 offset_top = 144.0
 offset_right = 1162.0
@@ -138,6 +143,7 @@ color = Color(0, 0, 0, 0.388235)
 metadata/_edit_use_anchors_ = true
 
 [node name="SelectTitle" type="RichTextLabel" parent="CanvasLayer/TitleContainer"]
+layout_mode = 0
 offset_left = 100.0
 offset_top = 95.0
 offset_right = 439.0
@@ -156,6 +162,7 @@ offset_bottom = 40.0
 metadata/_edit_use_anchors_ = true
 
 [node name="EggDescBox" type="NinePatchRect" parent="CanvasLayer/DescContainer"]
+layout_mode = 0
 offset_left = 446.0
 offset_top = 573.0
 offset_right = 1160.0
@@ -179,6 +186,7 @@ color = Color(0, 0, 0, 0.388235)
 metadata/_edit_use_anchors_ = true
 
 [node name="EggDesc" type="RichTextLabel" parent="CanvasLayer/DescContainer"]
+layout_mode = 0
 offset_left = 98.0
 offset_top = 504.0
 offset_right = 439.0
@@ -189,7 +197,6 @@ text = "[center]..."
 metadata/_edit_use_anchors_ = true
 
 [node name="DisplayBox" type="NinePatchRect" parent="CanvasLayer"]
-anchors_preset = -1
 offset_left = 472.0
 offset_top = 442.0
 offset_right = 1288.0
@@ -280,6 +287,7 @@ texture = ExtResource("10_acgju")
 [node name="Bar" type="ProgressBar" parent="CanvasLayer/EggBarContainer"]
 clip_contents = true
 custom_minimum_size = Vector2(160, 23)
+layout_mode = 0
 offset_left = 202.008
 offset_top = 520.0
 offset_right = 362.008

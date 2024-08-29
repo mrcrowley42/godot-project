@@ -2,6 +2,7 @@ class_name EggOpen extends ScriptNode
 
 @export var skip_scene: bool = false
 @export var existing_eggs: Array[EggEntry]
+@export var egg_cracks: Array[Texture2D]
 @export var bar_progress_color: Gradient
 
 @export_subgroup("limit egg selection")
@@ -274,12 +275,28 @@ func hatch_egg():
 	hatch_timer.start()
 	hatch_timer.connect("timeout", progress_hatching)
 
+## 3 progressions & then finish
 func progress_hatching():
 	hatch_progress += 1
 	if hatch_progress == 4:
 		finish_hatching()
 		return
-	print(hatch_progress)
+	
+	# add crack image
+	var sprite_c: Control = placed_egg_sprites[selected_egg_inx]
+	var crack_sprite: Sprite2D = Sprite2D.new()
+	crack_sprite.texture = egg_cracks[hatch_progress - 1]
+	crack_sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	sprite_c.add_child(crack_sprite)
+	
+	# egg scale
+	var scale_add = Vector2(.2, .2) + Vector2(.1, .1) * hatch_progress
+	sprite_c.scale = MAX_SELECTED_EGG_SCALE + scale_add
+	scale_egg(selected_egg_inx, MAX_SELECTED_EGG_SCALE + (scale_add * .5))
+	
+	# egg rotation
+	rotation_buffer.value = 1.
+	tween(rotation_buffer, "value", 0, 0., .4, Tween.EASE_IN_OUT)  # tween to 0
 
 func finish_hatching():
 	set_can_interact(true)
@@ -384,7 +401,18 @@ func update_selected_egg(delta):
 		var amp = .08 + (.08 * percent)  # additions are for randomness
 		sprite_c.rotation = (sin(freq) * amp) * rotation_buffer.value
 
+func update_hatching_egg():
+	var sprite_c: Control = placed_egg_sprites[selected_egg_inx]
+	var freq = Time.get_unix_time_from_system() * 20
+	var amp = .15 + (.04 * hatch_progress)
+	sprite_c.rotation = (sin(freq) * amp) * rotation_buffer.value
+
 func _process(delta):
+	# hatching
+	if hatching:
+		update_hatching_egg()
+	
+	# progress bar
 	if selected_egg_inx != null and !hatching:
 		update_selected_egg(delta)
 	
