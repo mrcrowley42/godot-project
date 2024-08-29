@@ -43,7 +43,7 @@ shader_parameter/layer = 1.0
 shader_parameter/opacity = 0.15
 
 [sub_resource type="LabelSettings" id="LabelSettings_0ocei"]
-font_size = 24
+font_size = 32
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pg8mm"]
 border_width_left = 3
@@ -222,10 +222,11 @@ color = Color(1, 1, 1, 0.270588)
 metadata/_edit_use_anchors_ = true
 
 [node name="BackButton" type="NinePatchRect" parent="CanvasLayer"]
-offset_left = 212.0
-offset_top = 151.0
-offset_right = 442.0
-offset_bottom = 221.0
+visible = false
+offset_left = 202.0
+offset_top = 600.0
+offset_right = 452.0
+offset_bottom = 690.0
 scale = Vector2(0.5, 0.5)
 mouse_filter = 0
 texture = ExtResource("6_4e4a6")
@@ -236,7 +237,10 @@ patch_margin_bottom = 16
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="CanvasLayer/BackButton"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.08
+anchor_bottom = 0.2
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 214.0
@@ -289,6 +293,37 @@ step = 1.0
 show_percentage = false
 metadata/_edit_use_anchors_ = true
 
+[node name="ContinueButton" type="NinePatchRect" parent="CanvasLayer"]
+visible = false
+offset_left = 202.0
+offset_top = 600.0
+offset_right = 452.0
+offset_bottom = 690.0
+scale = Vector2(0.5, 0.5)
+mouse_filter = 0
+texture = ExtResource("6_4e4a6")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="CanvasLayer/ContinueButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.08
+anchor_bottom = 0.2
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 214.0
+offset_bottom = 56.0
+theme = ExtResource("7_crtsy")
+text = "Continue"
+label_settings = SubResource("LabelSettings_0ocei")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
 [node name="SelectionArea" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -298,3 +333,6 @@ offset_right = 463.0
 offset_bottom = 385.0
 mouse_filter = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="HatchTimer" type="Timer" parent="."]
+wait_time = 0.8
