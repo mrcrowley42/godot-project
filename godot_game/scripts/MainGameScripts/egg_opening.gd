@@ -113,10 +113,12 @@ func spawn_eggs():
 	for i: int in eggs_to_place.size():
 		var egg: EggEntry = eggs_to_place[i]
 		var sprite_c: Control = Control.new()
+		sprite_c.name = "egg-%s" % [i]
 		
 		# add top and bottom images of egg
 		for x: int in 2:
 			var c: Control = Control.new()
+			c.name = "top" if !x else "bottom"
 			var sprite: Sprite2D = Sprite2D.new()
 			var mat: ShaderMaterial = ShaderMaterial.new()
 			mat.shader = alpha_shader
