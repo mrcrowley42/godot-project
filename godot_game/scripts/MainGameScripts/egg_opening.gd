@@ -3,6 +3,7 @@ class_name EggOpen extends ScriptNode
 @export var skip_scene: bool = false
 @export var existing_eggs: Array[EggEntry]
 @export var egg_cracks: Array[Texture2D]
+@export var egg_crack_map: Texture2D  # trust me bro
 @export var bar_progress_color: Gradient
 
 @export_subgroup("limit egg selection")
@@ -29,9 +30,11 @@ class_name EggOpen extends ScriptNode
 @onready var display_shader: ColorRect = find_child("shader")
 @onready var hatch_timer: Timer = find_child("HatchTimer")
 
+@onready var alpha_shader = preload("res://shaders/apply_alpha_map.gdshader")
+@onready var alpha_map = preload("res://images/egg/egg-crack-map.png")
+
 const BAR_CLICK_ADDITION: int = 100
 const BAR_DRAIN_AMOUNT: int = 200
-const OFFSET: Vector2 = Vector2(0, -20)
 const EPSILON: float = 0.0001
 const STRING_SELECT_YOUR_EGG: String = "Select your egg"
 const NO_EGG_FORMAT_STRING: String = "[center]%s"
@@ -86,7 +89,10 @@ func load_main_scene():
 
 ## structure of egg:
 ## - Control  (scale & move this, rotate for centeral rotation)
-##   - Sprite2D  (rotate for offset reotation, pivot is at bottom of egg)
+##   - Control  (top)
+##     - Sprite2D
+##   - Control  (bottom)
+##     - Sprite2D
 ##   - Area2D  (mouse detection)
 ##     - CollisionShape2D
 func spawn_eggs():
@@ -107,15 +113,24 @@ func spawn_eggs():
 	for i: int in eggs_to_place.size():
 		var egg: EggEntry = eggs_to_place[i]
 		var sprite_c: Control = Control.new()
-		var sprite: Sprite2D = Sprite2D.new()
+		
+		# add top and bottom images of egg
+		for x: int in 2:
+			var c: Control = Control.new()
+			var sprite: Sprite2D = Sprite2D.new()
+			var mat: ShaderMaterial = ShaderMaterial.new()
+			mat.shader = alpha_shader
+			sprite.texture = egg.image
+			sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST  # sharp image
+			sprite.material = mat
+			sprite.material["shader_parameter/normal"] = Vector2(x, 1 - x);
+			sprite.material["shader_parameter/alpha_map"] = alpha_map;
+			c.add_child(sprite)
+			sprite_c.add_child(c)
 		
 		# set default values
 		var x_pos = scalar * i
 		x_pos += scalar * .5  # center the eggs
-		sprite.texture = egg.image
-		sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST  # sharp image
-		sprite.position = -OFFSET  # offset the offset
-		sprite.offset = OFFSET
 		sprite_c.modulate.a = 0.
 		sprite_c.position = middle_pos + Vector2(x_pos, 0)
 		sprite_c.scale = SMALL_EGG_SCALE
@@ -123,15 +138,14 @@ func spawn_eggs():
 		
 		# initialising
 		add_child(sprite_c)
-		sprite_c.add_child(sprite)
-		add_collision_areas(sprite_c, sprite, i)
+		add_collision_areas(sprite_c, i)
 		do_opening_animation(sprite_c, i, i == eggs_to_place.size() - 1)
 		
 		placed_egg_sprites.append(sprite_c)
 	placed_eggs = eggs_to_place
 
 ## add to each egg as it is spawned
-func add_collision_areas(sprite_cl: Control, sprite: Sprite2D, i: int):
+func add_collision_areas(sprite_cl: Control, i: int):
 	var area_2d: Area2D = Area2D.new()
 	var coll_shape: CollisionShape2D = CollisionShape2D.new()
 	var circle = CircleShape2D.new()
@@ -139,7 +153,7 @@ func add_collision_areas(sprite_cl: Control, sprite: Sprite2D, i: int):
 	sprite_cl.add_child(area_2d)
 	area_2d.add_child(coll_shape)
 	area_2d.monitorable = false  # not nessecary
-	circle.radius = sprite.texture.get_size().x * sprite.scale.x * .2  # close enough to the eggs size
+	circle.radius = 25  # close enough to the eggs size
 	coll_shape.shape = circle
 	
 	# setup mouse events
@@ -180,7 +194,7 @@ func manual_mouse_check(sprite_c: Control = null):
 	
 	var is_mouse_within = func(s: Control) -> bool:
 		var dist: float = (mouse_pos - s.position).length()
-		var area: Area2D = s.get_child(1)
+		var area: Area2D = s.get_child(-1)
 		var radius: float = area.get_child(0).shape.radius * (s.scale.x * .9)  # scale area down just a little
 		return dist < radius
 	
@@ -283,12 +297,19 @@ func progress_hatching():
 		finish_hatching()
 		return
 	
-	# add crack image
 	var sprite_c: Control = placed_egg_sprites[selected_egg_inx]
-	var crack_sprite: Sprite2D = Sprite2D.new()
-	crack_sprite.texture = egg_cracks[hatch_progress - 1]
-	crack_sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	sprite_c.add_child(crack_sprite)
+	# add top & bottom crack image to top & bottom egg Controls
+	for i: int in 2:
+		var c: Control = sprite_c.get_child(i)  # 0 = top, 1 = bottom
+		var crack_sprite: Sprite2D = Sprite2D.new()
+		var mat: ShaderMaterial = ShaderMaterial.new()
+		mat.shader = alpha_shader
+		crack_sprite.texture = egg_cracks[hatch_progress - 1]
+		crack_sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		crack_sprite.material = mat
+		crack_sprite.material["shader_parameter/normal"] = Vector2(i, 1 - i);
+		crack_sprite.material["shader_parameter/alpha_map"] = alpha_map;
+		c.add_child(crack_sprite)
 	
 	# egg scale
 	var scale_add = Vector2(.2, .2) + Vector2(.1, .1) * hatch_progress
@@ -300,21 +321,21 @@ func progress_hatching():
 	tween(rotation_buffer, "value", 0, 0., .4, Tween.EASE_IN_OUT)  # tween to 0
 
 func finish_hatching():
+	var connect_continue_input = func():  # so no accidently skipping creature reveal
+		continue_btn.connect("gui_input", continue_btn_input)
+	
 	set_can_interact(true)
 	finished_hatching = true
 	hatch_timer.stop()
 	egg_desc.text = "[center][u]Some Creature!"
-	
-	continue_btn.connect("gui_input", continue_btn_input)
-	fade(continue_btn)
+	fade(continue_btn).connect("finished", connect_continue_input)
 
 ## transition out & load main scene
 func continue_btn_input(event: InputEvent):
 	if can_interact and event.is_pressed():
 		trans_img.rotation = PI
 		trans_img.position.y = -1000
-		var t = tween(trans_img, "position", bg.position + (bg.size * bg.scale) * .5, 0., 1.)
-		t.connect("finished", load_main_scene)
+		tween(trans_img, "position", bg.position + (bg.size * bg.scale) * .5, 0., 1.).connect("finished", load_main_scene)
 
 ## generic scale of eggs
 func scale_egg(inx: int, to_scale: Vector2, time: float = .5):
@@ -329,7 +350,7 @@ func fade(obj, fade_in: bool = true):
 	var col = Color.WHITE if fade_in else Color(1, 1, 1, 0)
 	var time = 1.0 if fade_in else .5
 	var _ease = Tween.EASE_IN_OUT if fade_in else Tween.EASE_OUT
-	tween(obj, "modulate", col, 0., time, _ease)
+	return tween(obj, "modulate", col, 0., time, _ease)
 
 func de_select_egg():
 	selected_egg_inx = null
@@ -361,8 +382,7 @@ func tween_sprite_to_goal(goal: Vector2, scale_goal: Vector2 = BASE_SELECTED_EGG
 	tween(move_buffers[0], "value", goal.x, 0., 1.)  # x pos to center
 	tween(move_buffers[1], "value", goal.y - 50, 0., .6)  # up
 	tween(move_buffers[1], "value", goal.y, 0.2, .4, Tween.EASE_IN)  # down
-	var scale_tween = tween(s, "scale", scale_goal, .12, .5, Tween.EASE_IN)  # scale up
-	scale_tween.connect("finished", end_movement.bind(s))  # finish movement event
+	tween(s, "scale", scale_goal, .12, .5, Tween.EASE_IN).connect("finished", end_movement.bind(s))  # scale up & finish movement event
 
 ## bring back egg selection
 func back_btn_input(event: InputEvent):
