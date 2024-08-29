@@ -1,12 +1,12 @@
 extends ScriptNode
 
-func generate_confetti():
+func generate_confetti() -> void:
 	var confetti_l = find_child("ConfettiParticleL");
 	var confetti_r = find_child("ConfettiParticleR");
-	
+
 	var new_l = confetti_l.duplicate()
 	var new_r = confetti_r.duplicate()
-	
+
 	%Yip.play()
 	new_l.emitting = true;
 	new_r.emitting = true;
@@ -15,11 +15,12 @@ func generate_confetti():
 	add_child(new_l)
 	add_child(new_r)
 
-func remove(obj):
+
+func remove(obj) -> void:
 	obj.queue_free()
 
-func _input(event):
+
+func _input(event) -> void:
 	if (event is InputEventKey) and event.pressed:
 		if event.keycode == KEY_Y:
 			generate_confetti()
-			

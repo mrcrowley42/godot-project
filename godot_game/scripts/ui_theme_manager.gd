@@ -2,6 +2,7 @@ class_name UiThemeManager extends ScriptNode
 
 ## List of available UI themes.
 @export var themes: Array[UiTheme]
+
 @onready var food_btn = %FoodButton
 @onready var act_btn = %ActButton
 @onready var setting_btn = %SettingButton
@@ -10,7 +11,6 @@ class_name UiThemeManager extends ScriptNode
 
 ## The current index in the list of themes.
 var i: int
-
 
 ## Moves the index of the currently selected theme by [param shift] if a value
 ## is provided, then loads the colours and textures of the current theme.
@@ -26,17 +26,22 @@ func update_theme(shift: int = 0) -> void:
 	setting_btn.texture_normal = themes[i].setting_btn
 	setting_btn.texture_pressed = themes[i].setting_btn_pressed
 
+
 func cycle_forward() -> void:
 	update_theme(1)
+
 
 func cycle_backwards() -> void:
 	update_theme(-1)
 
+
 func get_current_theme() -> UiTheme:
 	return themes[i]
 
+
 func save() -> Dictionary:
 	return {"section": Globals.UI_SECTION, "Theme": abs(self.i)}
+
 
 func load(data) -> void:
 	if data.has("Theme"):

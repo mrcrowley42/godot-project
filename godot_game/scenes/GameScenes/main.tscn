@@ -20,17 +20,18 @@
 [ext_resource type="Theme" uid="uid://1dv11a5ar0hg" path="res://themes/action_btn.tres" id="18_v1mb2"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="19_3grg3"]
 [ext_resource type="Texture2D" uid="uid://dckd2hhimpp2x" path="res://icons/cup-straw.svg" id="20_tdidc"]
-[ext_resource type="Script" path="res://scripts/heal_button.gd" id="21_u6y6n"]
+[ext_resource type="Script" path="res://scripts/change_stat_button.gd" id="21_u6y6n"]
 [ext_resource type="Texture2D" uid="uid://b4pvkkppy44n0" path="res://icons/icecream_48dp_FILL0_wght400_GRAD0_opsz48.svg" id="22_1ghf6"]
 [ext_resource type="Texture2D" uid="uid://pbxnymt0cqn7" path="res://images/c345a48674507fd3f61aad362db1b21b.jpg" id="23_d1w7f"]
 [ext_resource type="Texture2D" uid="uid://cb64elolo0rtd" path="res://icons/coffee_48dp_FILL0_wght400_GRAD0_opsz48.svg" id="24_dmqwv"]
-[ext_resource type="Script" path="res://scripts/kill_button.gd" id="25_lomkv"]
 [ext_resource type="Texture2D" uid="uid://cx2q4cedbcgn" path="res://images/rock-paper-scissors.png" id="26_0ku4r"]
 [ext_resource type="Texture2D" uid="uid://d3f8r28w20i4e" path="res://icons/crossword_48dp_FILL0_wght400_GRAD0_opsz48.svg" id="27_2hcht"]
+[ext_resource type="Script" path="res://scripts/navigation_arrows.gd" id="27_imll8"]
+[ext_resource type="Script" path="res://scripts/food_button.gd" id="27_xuaea"]
 [ext_resource type="Texture2D" uid="uid://bqv3aix0mh4m8" path="res://icons/self_improvement_32dp_FFFFFF_FILL0_wght500_GRAD0_opsz20.svg" id="28_ys116"]
 [ext_resource type="Texture2D" uid="uid://douy7lywu41bc" path="res://icons/playing_cards_48dp_FILL0_wght400_GRAD0_opsz48.svg" id="29_lofmd"]
 [ext_resource type="Texture2D" uid="uid://dckcusgfn24wj" path="res://icons/arrow.svg" id="30_kovtb"]
-[ext_resource type="Script" path="res://scripts/arrowscale.gd" id="31_1bhch"]
+[ext_resource type="Script" path="res://scripts/arrow_scale.gd" id="31_1bhch"]
 [ext_resource type="Script" path="res://scripts/hidden_menu_panel.gd" id="32_jvqx8"]
 [ext_resource type="Script" path="res://scripts/options_menu.gd" id="32_wbwq3"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="33_1qhmu"]
@@ -164,23 +165,14 @@ interpolation_mode = 1
 offsets = PackedFloat32Array(0, 0.12381, 0.290476, 0.452381, 0.652381, 0.819048, 1)
 colors = PackedColorArray(1, 0, 0, 1, 1, 0.482353, 0.321569, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0.509804, 1, 0.529412, 0, 0.745098, 1, 1, 1, 1, 1)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xvtbm"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k7dc5"]
 bg_color = Color(0, 0, 0, 0.384314)
 corner_radius_top_left = 32
 corner_radius_top_right = 32
 corner_radius_bottom_right = 32
 corner_radius_bottom_left = 32
-
-[sub_resource type="GDScript" id="GDScript_ovb2u"]
-script/source = "extends Button
-
-@onready var creature = %Creature
-
-func _on_button_down():
-	%BtnClick.play()
-	creature.dmg(300, 'water')
-	
-"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_golou"]
 bg_color = Color(0.226455, 0.5709, 0.530033, 0.631373)
@@ -193,16 +185,6 @@ corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
-
-[sub_resource type="GDScript" id="GDScript_ve7ha"]
-script/source = "extends Button
-@onready var creature = %Creature
-
-func _on_button_down():
-	%BtnClick.play()
-	%PIPE.play()
-	creature.dmg(300, 'hp')
-"
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b3sax"]
 
@@ -389,6 +371,7 @@ moon_y = SubResource("Curve_s66ht")
 autostart = true
 
 [node name="BGCanvasLayer" type="CanvasLayer" parent="Gameplay/Background"]
+unique_name_in_owner = true
 layer = -1
 
 [node name="BG" type="Sprite2D" parent="Gameplay/Background/BGCanvasLayer"]
@@ -498,56 +481,104 @@ themes = Array[Resource("res://scripts/base_classses/ui_theme_class.gd")]([ExtRe
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(400, 400)
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -200.0
+offset_left = 70.0
 offset_top = -200.0
-offset_right = 200.0
+offset_right = 1270.0
 offset_bottom = 200.0
-grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_k7dc5")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_xvtbm")
 script = ExtResource("17_wsydk")
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/FoodMenu"]
+[node name="Background" type="PanelContainer" parent="UI/FoodMenu"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_k7dc5")
+
+[node name="FoodContent" type="HBoxContainer" parent="UI/FoodMenu"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Screen1" type="MarginContainer" parent="UI/FoodMenu/FoodContent"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="GridContainer" type="GridContainer" parent="UI/FoodMenu/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="UI/FoodMenu/FoodContent/Screen1"]
+custom_minimum_size = Vector2(360, 360)
 layout_mode = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 2
 
-[node name="Button 1" type="Button" parent="UI/FoodMenu/MarginContainer/GridContainer"]
+[node name="Button 1" type="Button" parent="UI/FoodMenu/FoodContent/Screen1/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("19_3grg3")
 theme_override_font_sizes/font_size = 24
-icon = ExtResource("20_tdidc")
+text = "-FUN"
 icon_alignment = 1
 expand_icon = true
 script = ExtResource("21_u6y6n")
+stat = 3
 
-[node name="Button 2" type="Button" parent="UI/FoodMenu/MarginContainer/GridContainer"]
+[node name="Button 5" type="Button" parent="UI/FoodMenu/FoodContent/Screen1/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("18_v1mb2")
-icon = ExtResource("22_1ghf6")
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 24
+text = "+FUN"
 icon_alignment = 1
 expand_icon = true
-script = SubResource("GDScript_ovb2u")
+script = ExtResource("21_u6y6n")
+amount = -300.0
+stat = 3
 
-[node name="Button 3" type="Button" parent="UI/FoodMenu/MarginContainer/GridContainer"]
+[node name="Button 2" type="Button" parent="UI/FoodMenu/FoodContent/Screen1/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "-WATER"
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("21_u6y6n")
+stat = 1
+
+[node name="Button 6" type="Button" parent="UI/FoodMenu/FoodContent/Screen1/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "+WATER"
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("21_u6y6n")
+amount = -300.0
+stat = 1
+
+[node name="Button 3" type="Button" parent="UI/FoodMenu/FoodContent/Screen1/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -557,36 +588,439 @@ theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("19_3grg3")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
-text = "PIPE!"
+text = "PIPE!
+-HP"
 icon = ExtResource("23_d1w7f")
 icon_alignment = 1
 expand_icon = true
-script = SubResource("GDScript_ve7ha")
+script = ExtResource("21_u6y6n")
 
-[node name="Button 4" type="Button" parent="UI/FoodMenu/MarginContainer/GridContainer"]
+[node name="Button 7" type="Button" parent="UI/FoodMenu/FoodContent/Screen1/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
+text = "MENU 2
++ HP"
+icon = ExtResource("23_d1w7f")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("21_u6y6n")
+amount = -300.0
+
+[node name="Button 4" type="Button" parent="UI/FoodMenu/FoodContent/Screen1/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "-FOOD"
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("21_u6y6n")
+stat = 2
+
+[node name="Button 8" type="Button" parent="UI/FoodMenu/FoodContent/Screen1/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "+FOOD"
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("21_u6y6n")
+amount = -300.0
+stat = 2
+
+[node name="Screen2" type="MarginContainer" parent="UI/FoodMenu/FoodContent"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="GridContainer" type="GridContainer" parent="UI/FoodMenu/FoodContent/Screen2"]
+custom_minimum_size = Vector2(360, 360)
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="Button 1" type="Button" parent="UI/FoodMenu/FoodContent/Screen2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 24
+text = "Chips"
+icon = ExtResource("20_tdidc")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("27_xuaea")
+amount = -300.0
+food = 2
+
+[node name="Button 2" type="Button" parent="UI/FoodMenu/FoodContent/Screen2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Toast"
+icon = ExtResource("22_1ghf6")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("27_xuaea")
+amount = -300.0
+food = 1
+
+[node name="Button 3" type="Button" parent="UI/FoodMenu/FoodContent/Screen2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
+text = "Neutral"
+icon = ExtResource("23_d1w7f")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("27_xuaea")
+amount = -300.0
+
+[node name="Button 4" type="Button" parent="UI/FoodMenu/FoodContent/Screen2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Fruit"
 icon = ExtResource("24_dmqwv")
 icon_alignment = 1
 expand_icon = true
-script = ExtResource("25_lomkv")
+script = ExtResource("27_xuaea")
+amount = -300.0
+food = 3
 
-[node name="ActivityMenu" type="PanelContainer" parent="UI"]
-unique_name_in_owner = true
-visible = false
-custom_minimum_size = Vector2(400, 400)
+[node name="Screen3" type="MarginContainer" parent="UI/FoodMenu/FoodContent"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="GridContainer" type="GridContainer" parent="UI/FoodMenu/FoodContent/Screen3"]
+custom_minimum_size = Vector2(360, 360)
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="Button 1" type="Button" parent="UI/FoodMenu/FoodContent/Screen3/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 24
+text = "Chips 2"
+icon = ExtResource("20_tdidc")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("27_xuaea")
+amount = -300.0
+food = 2
+
+[node name="Button 2" type="Button" parent="UI/FoodMenu/FoodContent/Screen3/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Toast 2"
+icon = ExtResource("22_1ghf6")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("27_xuaea")
+amount = -300.0
+food = 1
+
+[node name="Button 3" type="Button" parent="UI/FoodMenu/FoodContent/Screen3/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
+text = "Neutral 2"
+icon = ExtResource("23_d1w7f")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("27_xuaea")
+amount = -300.0
+
+[node name="Button 4" type="Button" parent="UI/FoodMenu/FoodContent/Screen3/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Fruit 2"
+icon = ExtResource("24_dmqwv")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("27_xuaea")
+amount = -300.0
+food = 3
+
+[node name="Screen4" type="MarginContainer" parent="UI/FoodMenu/FoodContent"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="GridContainer" type="GridContainer" parent="UI/FoodMenu/FoodContent/Screen4"]
+custom_minimum_size = Vector2(360, 360)
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="Button 1" type="Button" parent="UI/FoodMenu/FoodContent/Screen4/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 24
+text = "Chips 3"
+icon = ExtResource("20_tdidc")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("27_xuaea")
+amount = -300.0
+food = 2
+
+[node name="Button 2" type="Button" parent="UI/FoodMenu/FoodContent/Screen4/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Toast 3"
+icon = ExtResource("22_1ghf6")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("27_xuaea")
+amount = -300.0
+food = 1
+
+[node name="Button 3" type="Button" parent="UI/FoodMenu/FoodContent/Screen4/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
+text = "Neutral 3"
+icon = ExtResource("23_d1w7f")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("27_xuaea")
+amount = -300.0
+
+[node name="Button 4" type="Button" parent="UI/FoodMenu/FoodContent/Screen4/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Fruit 3"
+icon = ExtResource("24_dmqwv")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("27_xuaea")
+amount = -300.0
+food = 3
+
+[node name="Screen5" type="MarginContainer" parent="UI/FoodMenu/FoodContent"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="GridContainer" type="GridContainer" parent="UI/FoodMenu/FoodContent/Screen5"]
+custom_minimum_size = Vector2(360, 360)
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="Button 1" type="Button" parent="UI/FoodMenu/FoodContent/Screen5/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 24
+text = "Chips 4"
+icon = ExtResource("20_tdidc")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("27_xuaea")
+amount = -300.0
+food = 2
+
+[node name="Button 2" type="Button" parent="UI/FoodMenu/FoodContent/Screen5/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Toast 4"
+icon = ExtResource("22_1ghf6")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("27_xuaea")
+amount = -300.0
+food = 1
+
+[node name="Button 3" type="Button" parent="UI/FoodMenu/FoodContent/Screen5/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_golou")
+text = "Neutral 4"
+icon = ExtResource("23_d1w7f")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("27_xuaea")
+amount = -300.0
+
+[node name="Button 4" type="Button" parent="UI/FoodMenu/FoodContent/Screen5/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Fruit 4"
+icon = ExtResource("24_dmqwv")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("27_xuaea")
+amount = -300.0
+food = 3
+
+[node name="NavigationArrows" type="Node2D" parent="UI/FoodMenu" node_paths=PackedStringArray("target_menu", "left_arrow", "right_arrow")]
+script = ExtResource("27_imll8")
+target_menu = NodePath("../FoodContent")
+left_arrow = NodePath("LeftArrow")
+right_arrow = NodePath("RightArrow")
+
+[node name="LeftArrow" type="TextureButton" parent="UI/FoodMenu/NavigationArrows"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -199.5
-offset_right = 600.0
-offset_bottom = 200.5
+offset_left = -8.0
+offset_top = 145.0
+offset_right = 20.0
+offset_bottom = 253.0
 grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(14, 54)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("30_kovtb")
+script = ExtResource("31_1bhch")
+metadata/_edit_use_anchors_ = true
+
+[node name="RightArrow" type="TextureButton" parent="UI/FoodMenu/NavigationArrows"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 380.0
+offset_top = 145.0
+offset_right = 408.0
+offset_bottom = 253.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.14159
+pivot_offset = Vector2(14, 54)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("30_kovtb")
+script = ExtResource("31_1bhch")
+metadata/_edit_use_anchors_ = true
+
+[node name="ActivityMenu" type="PanelContainer" parent="UI"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 400)
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 70.0
+offset_top = -200.0
+offset_right = 1270.0
+offset_bottom = 200.0
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_b3sax")
 script = ExtResource("17_wsydk")
@@ -598,7 +1032,6 @@ size_flags_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_k7dc5")
 
 [node name="ActivityContent" type="HBoxContainer" parent="UI/ActivityMenu"]
-unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 0
 
@@ -712,7 +1145,68 @@ icon = ExtResource("29_lofmd")
 icon_alignment = 1
 expand_icon = true
 
-[node name="NavigationArrows" type="Node2D" parent="UI/ActivityMenu"]
+[node name="Screen3" type="MarginContainer" parent="UI/ActivityMenu/ActivityContent"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="GridContainer" type="GridContainer" parent="UI/ActivityMenu/ActivityContent/Screen3"]
+custom_minimum_size = Vector2(360, 360)
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="ScissorsPaperRock" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen3/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+text = "MENU 3"
+icon = ExtResource("26_0ku4r")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Tetris" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen3/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
+text = "MENU 3"
+icon = ExtResource("27_2hcht")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ZenMode" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen3/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+text = "MENU 3"
+icon = ExtResource("28_ys116")
+icon_alignment = 1
+expand_icon = true
+
+[node name="MemoryGame" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen3/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
+text = "MENU 3"
+icon = ExtResource("29_lofmd")
+icon_alignment = 1
+expand_icon = true
+
+[node name="NavigationArrows" type="Node2D" parent="UI/ActivityMenu" node_paths=PackedStringArray("target_menu", "left_arrow", "right_arrow")]
+script = ExtResource("27_imll8")
+target_menu = NodePath("../ActivityContent")
+left_arrow = NodePath("LeftArrow")
+right_arrow = NodePath("RightArrow")
 
 [node name="LeftArrow" type="TextureButton" parent="UI/ActivityMenu/NavigationArrows"]
 anchors_preset = 8
@@ -733,7 +1227,7 @@ texture_normal = ExtResource("30_kovtb")
 script = ExtResource("31_1bhch")
 metadata/_edit_use_anchors_ = true
 
-[node name="LeftArrow2" type="TextureButton" parent="UI/ActivityMenu/NavigationArrows"]
+[node name="RightArrow" type="TextureButton" parent="UI/ActivityMenu/NavigationArrows"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1457,10 +1951,33 @@ bus = &"SFX"
 [connection signal="button_down" from="Gameplay/ClippyArea" to="Gameplay/ClippyArea" method="_on_button_down"]
 [connection signal="button_up" from="Gameplay/ClippyArea" to="Gameplay/ClippyArea" method="_on_button_up"]
 [connection signal="visibility_changed" from="UI/FoodMenu" to="UI/FoodMenu" method="_on_visibility_changed"]
-[connection signal="button_down" from="UI/FoodMenu/MarginContainer/GridContainer/Button 1" to="UI/FoodMenu/MarginContainer/GridContainer/Button 1" method="_on_button_down"]
-[connection signal="button_down" from="UI/FoodMenu/MarginContainer/GridContainer/Button 2" to="UI/FoodMenu/MarginContainer/GridContainer/Button 2" method="_on_button_down"]
-[connection signal="button_down" from="UI/FoodMenu/MarginContainer/GridContainer/Button 3" to="UI/FoodMenu/MarginContainer/GridContainer/Button 3" method="_on_button_down"]
-[connection signal="button_down" from="UI/FoodMenu/MarginContainer/GridContainer/Button 4" to="UI/FoodMenu/MarginContainer/GridContainer/Button 4" method="_on_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen1/GridContainer/Button 1" to="UI/FoodMenu/FoodContent/Screen1/GridContainer/Button 1" method="_on_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen1/GridContainer/Button 5" to="UI/FoodMenu/FoodContent/Screen1/GridContainer/Button 5" method="_on_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen1/GridContainer/Button 2" to="UI/FoodMenu/FoodContent/Screen1/GridContainer/Button 2" method="_on_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen1/GridContainer/Button 6" to="UI/FoodMenu/FoodContent/Screen1/GridContainer/Button 6" method="_on_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen1/GridContainer/Button 3" to="UI/FoodMenu/FoodContent/Screen1/GridContainer/Button 3" method="_on_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen1/GridContainer/Button 7" to="UI/FoodMenu/FoodContent/Screen1/GridContainer/Button 7" method="_on_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen1/GridContainer/Button 4" to="UI/FoodMenu/FoodContent/Screen1/GridContainer/Button 4" method="_on_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen1/GridContainer/Button 8" to="UI/FoodMenu/FoodContent/Screen1/GridContainer/Button 8" method="_on_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen2/GridContainer/Button 1" to="UI/FoodMenu/FoodContent/Screen2/GridContainer/Button 1" method="_on_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen2/GridContainer/Button 2" to="UI/FoodMenu/FoodContent/Screen2/GridContainer/Button 2" method="_on_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen2/GridContainer/Button 3" to="UI/FoodMenu/FoodContent/Screen2/GridContainer/Button 3" method="_on_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen2/GridContainer/Button 4" to="UI/FoodMenu/FoodContent/Screen2/GridContainer/Button 4" method="_on_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen3/GridContainer/Button 1" to="UI/FoodMenu/FoodContent/Screen3/GridContainer/Button 1" method="_on_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen3/GridContainer/Button 2" to="UI/FoodMenu/FoodContent/Screen3/GridContainer/Button 2" method="_on_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen3/GridContainer/Button 3" to="UI/FoodMenu/FoodContent/Screen3/GridContainer/Button 3" method="_on_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen3/GridContainer/Button 4" to="UI/FoodMenu/FoodContent/Screen3/GridContainer/Button 4" method="_on_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen4/GridContainer/Button 1" to="UI/FoodMenu/FoodContent/Screen4/GridContainer/Button 1" method="_on_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen4/GridContainer/Button 2" to="UI/FoodMenu/FoodContent/Screen4/GridContainer/Button 2" method="_on_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen4/GridContainer/Button 3" to="UI/FoodMenu/FoodContent/Screen4/GridContainer/Button 3" method="_on_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen4/GridContainer/Button 4" to="UI/FoodMenu/FoodContent/Screen4/GridContainer/Button 4" method="_on_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen5/GridContainer/Button 1" to="UI/FoodMenu/FoodContent/Screen5/GridContainer/Button 1" method="_on_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen5/GridContainer/Button 2" to="UI/FoodMenu/FoodContent/Screen5/GridContainer/Button 2" method="_on_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen5/GridContainer/Button 3" to="UI/FoodMenu/FoodContent/Screen5/GridContainer/Button 3" method="_on_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen5/GridContainer/Button 4" to="UI/FoodMenu/FoodContent/Screen5/GridContainer/Button 4" method="_on_button_down"]
+[connection signal="visibility_changed" from="UI/FoodMenu/NavigationArrows" to="UI/FoodMenu/NavigationArrows" method="_on_visibility_changed"]
+[connection signal="button_down" from="UI/FoodMenu/NavigationArrows/LeftArrow" to="UI/FoodMenu/NavigationArrows" method="_on_left_arrow_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/NavigationArrows/RightArrow" to="UI/FoodMenu/NavigationArrows" method="_on_right_arrow_button_down"]
 [connection signal="visibility_changed" from="UI/ActivityMenu" to="UI/ActivityMenu" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen1/GridContainer/ScissorsPaperRock" to="MinigameManager" method="_on_scissors_paper_rock_button_down"]
 [connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen1/GridContainer/Totris" to="MinigameManager" method="_on_totris_button_down"]
@@ -1469,8 +1986,12 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen2/GridContainer/ScissorsPaperRock" to="MinigameManager" method="_on_scissors_paper_rock_button_down"]
 [connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen2/GridContainer/ZenMode" to="MinigameManager" method="_on_zen_mode_button_down"]
 [connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen2/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
-[connection signal="button_down" from="UI/ActivityMenu/NavigationArrows/LeftArrow" to="UI/ActivityMenu/NavigationArrows/LeftArrow" method="_on_button_down"]
-[connection signal="button_down" from="UI/ActivityMenu/NavigationArrows/LeftArrow2" to="UI/ActivityMenu/NavigationArrows/LeftArrow2" method="_on_button_down"]
+[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen3/GridContainer/ScissorsPaperRock" to="MinigameManager" method="_on_scissors_paper_rock_button_down"]
+[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen3/GridContainer/ZenMode" to="MinigameManager" method="_on_zen_mode_button_down"]
+[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen3/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
+[connection signal="visibility_changed" from="UI/ActivityMenu/NavigationArrows" to="UI/ActivityMenu/NavigationArrows" method="_on_visibility_changed"]
+[connection signal="button_down" from="UI/ActivityMenu/NavigationArrows/LeftArrow" to="UI/ActivityMenu/NavigationArrows" method="_on_left_arrow_button_down"]
+[connection signal="button_down" from="UI/ActivityMenu/NavigationArrows/RightArrow" to="UI/ActivityMenu/NavigationArrows" method="_on_right_arrow_button_down"]
 [connection signal="visibility_changed" from="UI/OptionsMenu" to="UI/OptionsMenu" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/AppearanceBtn" to="UI/OptionsMenu" method="_on_appearance_btn_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/FactBtn" to="UI/OptionsMenu" method="_on_fact_btn_button_down"]
