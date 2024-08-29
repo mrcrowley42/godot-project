@@ -26,6 +26,15 @@ func _ready():
 	# Disable the script execution when the panel is disabled/hidden.
 	if not debug_mode:
 		debug_window.process_mode = Node.PROCESS_MODE_DISABLED
+	
+	# transition screen
+	var ui_overlay: Sprite2D = find_child("UI_Overlay")
+	var trans_img: Sprite2D = find_child("Transition")
+	trans_img.position = ui_overlay.position
+	get_tree().create_tween().tween_property(trans_img, "position", trans_img.position + Vector2(0, 1000), 1.5)\
+		.set_trans(Tween.TRANS_EXPO)\
+		.set_ease(Tween.EASE_OUT)\
+		.set_delay(.2)
 
 func calc_elapsed_time():
 	var elapsed_time = launch_time - last_opened
