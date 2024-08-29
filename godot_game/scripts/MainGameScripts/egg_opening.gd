@@ -50,6 +50,7 @@ var move_buffers: Array[FloatBuffer] = []
 var rotation_buffer: FloatBuffer = FloatBuffer.new(0.)
 var can_interact: bool = false  # turn off while tweening stuff around
 var hatching: bool = false
+var finished_hatching: bool = false
 var hatch_progress: int = 0
 
 var placed_eggs: Array[EggEntry] = []
@@ -194,7 +195,7 @@ func set_can_interact(val: bool):
 	can_interact = val
 
 func mouse_entered(i: int):
-	if can_interact:
+	if can_interact and !finished_hatching:
 		if selected_egg_inx == null:  # entered a placed egg
 			scale_egg(i, HOVER_EGG_SCALE)
 			set_egg_desc(i)
@@ -202,7 +203,7 @@ func mouse_entered(i: int):
 			tween(self, "scale_addition", HOVER_SELECTED_EGG_ADDITION, 0., .5)
 
 func mouse_exited(i: int):
-	if can_interact:
+	if can_interact and !finished_hatching:
 		if selected_egg_inx == null:  # exited a placed egg
 			scale_egg(i, BASE_EGG_SCALE)
 			set_egg_desc()
@@ -211,7 +212,7 @@ func mouse_exited(i: int):
 			tween(self, "scale_addition", Vector2(0, 0), 0., .5)
 
 func mouse_clicked(_viewport, event: InputEvent, _shape_idx, i):
-	if can_interact and event.is_pressed():
+	if can_interact and event.is_pressed() and !finished_hatching:
 		if selected_egg_inx == null:
 			select_egg(placed_eggs[i], i)
 		elif i == selected_egg_inx:
@@ -300,6 +301,7 @@ func progress_hatching():
 
 func finish_hatching():
 	set_can_interact(true)
+	finished_hatching = true
 	hatch_timer.stop()
 	egg_desc.text = "[center][u]Some Creature!"
 	
