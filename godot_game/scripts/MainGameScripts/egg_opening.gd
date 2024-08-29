@@ -6,7 +6,7 @@ class_name EggOpen extends ScriptNode
 @export var bar_progress_color: Gradient
 
 @export_subgroup("limit egg selection")
-@export var sequence_start_inx: int = 0
+@export var choices_start_inx: int = 0
 @export var choices_amnt: int = 3;
 @export var limit_to_one: bool = false
 @export var egg_index: int
@@ -29,7 +29,7 @@ class_name EggOpen extends ScriptNode
 @onready var display_shader: ColorRect = find_child("shader")
 @onready var hatch_timer: Timer = find_child("HatchTimer")
 
-const BAR_ADDITION: int = 100
+const BAR_CLICK_ADDITION: int = 100
 const BAR_DRAIN_AMOUNT: int = 200
 const OFFSET: Vector2 = Vector2(0, -20)
 const EPSILON: float = 0.0001
@@ -91,7 +91,7 @@ func load_main_scene():
 ##     - CollisionShape2D
 func spawn_eggs():
 	# find the eggs to be placed
-	var eggs_to_place: Array[EggEntry] = existing_eggs.slice(sequence_start_inx, sequence_start_inx + choices_amnt)
+	var eggs_to_place: Array[EggEntry] = existing_eggs.slice(choices_start_inx, choices_start_inx + choices_amnt)
 	if limit_to_one:
 		eggs_to_place = [existing_eggs[egg_index]]
 	if limit_to_many:
@@ -337,7 +337,7 @@ func de_select_egg():
 	manual_mouse_check()  # do check on all placed eggs
 
 func click_selected_egg():
-	bar.value += BAR_ADDITION
+	bar.value += BAR_CLICK_ADDITION
 	
 	# rotation
 	tween(rotation_buffer, "value", 1, 0., .1, Tween.EASE_IN_OUT)  # tween to 1
