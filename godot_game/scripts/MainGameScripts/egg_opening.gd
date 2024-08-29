@@ -70,8 +70,8 @@ func _ready():
 	spawn_eggs()
 
 ## structure of egg:
-## - Control  (scale & move this)
-##   - Sprite2D  (rotate this)
+## - Control  (scale & move this, rotate for centeral rotation)
+##   - Sprite2D  (so the rotation pivot can be around bottom of egg)
 ##   - Area2D  (mouse detection)
 ##     - CollisionShape2D
 func spawn_eggs():
@@ -252,8 +252,8 @@ func click_selected_egg():
 	bar.value += BAR_ADDITION
 	
 	# rotation
-	tween(rotation_buffer, "value", 1, 0., .1)
-	tween(rotation_buffer, "value", 0, 0.1, .4)
+	tween(rotation_buffer, "value", 1, 0., .1)  # tween to 1
+	tween(rotation_buffer, "value", 0, 0.1, .4)  # tween to 0
 
 func tween_sprite_to_goal(goal: Vector2, scale_goal: Vector2 = BASE_SELECTED_EGG_SCALE, end_selection: bool = false):
 	var end_movement = func(sp: Control):
@@ -291,7 +291,7 @@ func back_btn_input(event: InputEvent):
 				tween(sprite_c, "position", original_egg_positions[i], 0., .3, Tween.EASE_OUT)  # move up
 
 func update_bar(delta):
-	var percent = bar.value / bar.max_value
+	var percent: float = bar.value / bar.max_value
 	var sprite_c: Control = placed_egg_sprites[selected_egg_inx]
 	
 	bar.value -= BAR_DRAIN_AMOUNT * delta
@@ -303,8 +303,9 @@ func update_bar(delta):
 	
 	# rotation
 	if can_interact:
-		var s = sin(Time.get_unix_time_from_system() * (20 + 2 * percent)) * (.1 + .1 * percent)
-		s *= rotation_buffer.value
+		var freq = Time.get_unix_time_from_system() * 15 + (5 * percent)
+		var amp = .1 + (.1 * percent)  # additions are for randomness
+		var s = (sin(freq) * amp) * rotation_buffer.value  
 		sprite_c.rotation = s
 
 func _process(delta):
