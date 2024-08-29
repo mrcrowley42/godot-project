@@ -182,9 +182,9 @@ func mouse_entered(i: int):
 
 func mouse_exited(i: int):
 	if can_interact:
-		# entered a placed egg
-		if selected_egg_inx == null and can_interact:
-			scale_egg(i, HOVER_EGG_SCALE)
+		# exited a placed egg
+		if selected_egg_inx == null:
+			scale_egg(i, BASE_EGG_SCALE)
 			set_egg_desc()
 			manual_mouse_check()  # in case there are overlapping eggs
 		elif i == selected_egg_inx:
@@ -254,6 +254,9 @@ func click_selected_egg():
 	# rotation
 	tween(rotation_buffer, "value", 1, 0., .1)  # tween to 1
 	tween(rotation_buffer, "value", 0, 0.1, .4)  # tween to 0
+	
+	if bar.value == bar.max_value:
+		print("HATCH!")
 
 func tween_sprite_to_goal(goal: Vector2, scale_goal: Vector2 = BASE_SELECTED_EGG_SCALE, end_selection: bool = false):
 	var end_movement = func(sp: Control):
@@ -281,7 +284,6 @@ func back_btn_input(event: InputEvent):
 		selection_title.text = select_title_text % [STRING_SELECT_YOUR_EGG]
 		tween(shader_area.material, "shader_parameter/color", Vector4(0, 0, 0, 1), 0., 1.)
 		placed_egg_sprites[selected_egg_inx].rotation = 0
-		print(placed_egg_sprites[selected_egg_inx].rotation)
 		
 		# fade back in other eggs
 		for i: int in placed_egg_sprites.size():
@@ -290,7 +292,7 @@ func back_btn_input(event: InputEvent):
 				tween(sprite_c, "modulate", Color(1, 1, 1, 1), 0., .4, Tween.EASE_OUT)  # fade in
 				tween(sprite_c, "position", original_egg_positions[i], 0., .3, Tween.EASE_OUT)  # move up
 
-func update_bar(delta):
+func update_selected_egg(delta):
 	var percent: float = bar.value / bar.max_value
 	var sprite_c: Control = placed_egg_sprites[selected_egg_inx]
 	
@@ -299,18 +301,17 @@ func update_bar(delta):
 	
 	# scale
 	sprite_c.scale = BASE_SELECTED_EGG_SCALE + (MAX_SELECTED_EGG_SCALE - BASE_SELECTED_EGG_SCALE) * percent
-	sprite_c.scale += scale_addition
+	sprite_c.scale += scale_addition  # for mouse hovering
 	
 	# rotation
 	if can_interact:
 		var freq = Time.get_unix_time_from_system() * 15 + (5 * percent)
-		var amp = .1 + (.1 * percent)  # additions are for randomness
-		var s = (sin(freq) * amp) * rotation_buffer.value  
-		sprite_c.rotation = s
+		var amp = .08 + (.08 * percent)  # additions are for randomness
+		sprite_c.rotation = (sin(freq) * amp) * rotation_buffer.value
 
 func _process(delta):
 	if selected_egg_inx != null:
-		update_bar(delta)
+		update_selected_egg(delta)
 	
 	# bob eggs slowly
 	if selected_egg_inx == null:  # do all
