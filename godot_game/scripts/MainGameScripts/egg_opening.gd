@@ -335,13 +335,19 @@ func finish_hatching(sprite_c: Control):
 	egg_desc.text = "[center][u]Some Creature!"
 	fade(continue_btn).connect("finished", connect_continue_input)
 	
+	# last scale
+	var scale_add = Vector2(.2, .2) + Vector2(.1, .1) * hatch_progress
+	sprite_c.scale = MAX_SELECTED_EGG_SCALE + scale_add
+	scale_egg(selected_egg_inx, MAX_SELECTED_EGG_SCALE + (scale_add * .5))
+	
 	# open egg
 	var top: Control = sprite_c.get_child(0)
 	var bottom: Control = sprite_c.get_child(1)
-	tween(top, "position", top.position + Vector2(0, -15), .0, .5)
-	tween(top, "rotation", -.1, .0, .5)
-	tween(bottom, "position", bottom.position + Vector2(0, 15), .0, .5)
-	tween(bottom, "rotation", .1, .0, .5)
+	var speed = .5
+	tween(top, "position", top.position + Vector2(0, -15), .0, speed)
+	tween(top, "rotation", -.1, .0, speed)
+	tween(bottom, "position", bottom.position + Vector2(0, 15), .0, speed)
+	tween(bottom, "rotation", .1, .0, speed)
 	fade(top, false, .3)
 	fade(bottom, false, .3)
 
