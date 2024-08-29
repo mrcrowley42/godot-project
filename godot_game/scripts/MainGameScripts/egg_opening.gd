@@ -91,8 +91,10 @@ func load_main_scene():
 ## - Control  (scale & move this, rotate for centeral rotation)
 ##   - Control  (top)
 ##     - Sprite2D
+##     - <egg crack Sprite2D's>
 ##   - Control  (bottom)
 ##     - Sprite2D
+##     - <egg crack Sprite2D's>
 ##   - Area2D  (mouse detection)
 ##     - CollisionShape2D
 func spawn_eggs():
@@ -118,15 +120,11 @@ func spawn_eggs():
 		# add top and bottom images of egg
 		for x: int in 2:
 			var c: Control = Control.new()
-			c.name = "top" if !x else "bottom"
 			var sprite: Sprite2D = Sprite2D.new()
-			var mat: ShaderMaterial = ShaderMaterial.new()
-			mat.shader = alpha_shader
+			c.name = "top" if !x else "bottom"
 			sprite.texture = egg.image
 			sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST  # sharp image
-			sprite.material = mat
-			sprite.material["shader_parameter/normal"] = Vector2(x, 1 - x);
-			sprite.material["shader_parameter/alpha_map"] = alpha_map;
+			add_alpha_mask(sprite, x)
 			c.add_child(sprite)
 			sprite_c.add_child(c)
 		
@@ -145,6 +143,14 @@ func spawn_eggs():
 		
 		placed_egg_sprites.append(sprite_c)
 	placed_eggs = eggs_to_place
+
+## add alpha mask shader to obj and its normal is decided by given x
+func add_alpha_mask(obj, x: int):
+	var mat: ShaderMaterial = ShaderMaterial.new()
+	mat.shader = alpha_shader
+	obj.material = mat
+	obj.material["shader_parameter/normal"] = Vector2(1 - x, x);
+	obj.material["shader_parameter/alpha_map"] = alpha_map;
 
 ## add to each egg as it is spawned
 func add_collision_areas(sprite_cl: Control, i: int):
@@ -295,22 +301,19 @@ func hatch_egg():
 ## 3 progressions & then finish
 func progress_hatching():
 	hatch_progress += 1
+	var sprite_c: Control = placed_egg_sprites[selected_egg_inx]
+	
 	if hatch_progress == 4:
-		finish_hatching()
+		finish_hatching(sprite_c)
 		return
 	
-	var sprite_c: Control = placed_egg_sprites[selected_egg_inx]
 	# add top & bottom crack image to top & bottom egg Controls
 	for i: int in 2:
 		var c: Control = sprite_c.get_child(i)  # 0 = top, 1 = bottom
 		var crack_sprite: Sprite2D = Sprite2D.new()
-		var mat: ShaderMaterial = ShaderMaterial.new()
-		mat.shader = alpha_shader
 		crack_sprite.texture = egg_cracks[hatch_progress - 1]
 		crack_sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-		crack_sprite.material = mat
-		crack_sprite.material["shader_parameter/normal"] = Vector2(i, 1 - i);
-		crack_sprite.material["shader_parameter/alpha_map"] = alpha_map;
+		add_alpha_mask(crack_sprite, i)
 		c.add_child(crack_sprite)
 	
 	# egg scale
@@ -322,7 +325,7 @@ func progress_hatching():
 	rotation_buffer.value = 1.
 	tween(rotation_buffer, "value", 0, 0., .4, Tween.EASE_IN_OUT)  # tween to 0
 
-func finish_hatching():
+func finish_hatching(sprite_c: Control):
 	var connect_continue_input = func():  # so no accidently skipping creature reveal
 		continue_btn.connect("gui_input", continue_btn_input)
 	
@@ -331,6 +334,16 @@ func finish_hatching():
 	hatch_timer.stop()
 	egg_desc.text = "[center][u]Some Creature!"
 	fade(continue_btn).connect("finished", connect_continue_input)
+	
+	# open egg
+	var top: Control = sprite_c.get_child(0)
+	var bottom: Control = sprite_c.get_child(1)
+	tween(top, "position", top.position + Vector2(0, -15), .0, .5)
+	tween(top, "rotation", -.1, .0, .5)
+	tween(bottom, "position", bottom.position + Vector2(0, 15), .0, .5)
+	tween(bottom, "rotation", .1, .0, .5)
+	fade(top, false, .3)
+	fade(bottom, false, .3)
 
 ## transition out & load main scene
 func continue_btn_input(event: InputEvent):
@@ -345,14 +358,14 @@ func scale_egg(inx: int, to_scale: Vector2, time: float = .5):
 	return tween(sprite_c, "scale", to_scale, 0., time)
 
 ## generic fade in or out
-func fade(obj, fade_in: bool = true):
+func fade(obj, fade_in: bool = true, delay: float = 0.):
 	if fade_in:
 		obj.visible = true
 		obj.modulate.a = 0
 	var col = Color.WHITE if fade_in else Color(1, 1, 1, 0)
 	var time = 1.0 if fade_in else .5
 	var _ease = Tween.EASE_IN_OUT if fade_in else Tween.EASE_OUT
-	return tween(obj, "modulate", col, 0., time, _ease)
+	return tween(obj, "modulate", col, delay, time, _ease)
 
 func de_select_egg():
 	selected_egg_inx = null
