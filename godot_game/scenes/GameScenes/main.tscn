@@ -966,9 +966,11 @@ script = ExtResource("27_xuaea")
 amount = -300.0
 food = 3
 
-[node name="NavigationArrows" type="Node2D" parent="UI/FoodMenu" node_paths=PackedStringArray("target_menu")]
+[node name="NavigationArrows" type="Node2D" parent="UI/FoodMenu" node_paths=PackedStringArray("target_menu", "left_arrow", "right_arrow")]
 script = ExtResource("27_imll8")
 target_menu = NodePath("../FoodContent")
+left_arrow = NodePath("LeftArrow")
+right_arrow = NodePath("RightArrow")
 
 [node name="LeftArrow" type="TextureButton" parent="UI/FoodMenu/NavigationArrows"]
 anchors_preset = 8
@@ -989,7 +991,7 @@ texture_normal = ExtResource("30_kovtb")
 script = ExtResource("31_1bhch")
 metadata/_edit_use_anchors_ = true
 
-[node name="RightARrow" type="TextureButton" parent="UI/FoodMenu/NavigationArrows"]
+[node name="RightArrow" type="TextureButton" parent="UI/FoodMenu/NavigationArrows"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1146,9 +1148,11 @@ icon = ExtResource("29_lofmd")
 icon_alignment = 1
 expand_icon = true
 
-[node name="NavigationArrows" type="Node2D" parent="UI/ActivityMenu" node_paths=PackedStringArray("target_menu")]
+[node name="NavigationArrows" type="Node2D" parent="UI/ActivityMenu" node_paths=PackedStringArray("target_menu", "left_arrow", "right_arrow")]
 script = ExtResource("27_imll8")
 target_menu = NodePath("../ActivityContent")
+left_arrow = NodePath("LeftArrow")
+right_arrow = NodePath("RightArrow")
 
 [node name="LeftArrow" type="TextureButton" parent="UI/ActivityMenu/NavigationArrows"]
 anchors_preset = 8
@@ -1169,7 +1173,7 @@ texture_normal = ExtResource("30_kovtb")
 script = ExtResource("31_1bhch")
 metadata/_edit_use_anchors_ = true
 
-[node name="RightARrow" type="TextureButton" parent="UI/ActivityMenu/NavigationArrows"]
+[node name="RightArrow" type="TextureButton" parent="UI/ActivityMenu/NavigationArrows"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1918,8 +1922,9 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen5/GridContainer/Button 2" to="UI/FoodMenu/FoodContent/Screen5/GridContainer/Button 2" method="_on_button_down"]
 [connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen5/GridContainer/Button 3" to="UI/FoodMenu/FoodContent/Screen5/GridContainer/Button 3" method="_on_button_down"]
 [connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen5/GridContainer/Button 4" to="UI/FoodMenu/FoodContent/Screen5/GridContainer/Button 4" method="_on_button_down"]
+[connection signal="visibility_changed" from="UI/FoodMenu/NavigationArrows" to="UI/FoodMenu/NavigationArrows" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/FoodMenu/NavigationArrows/LeftArrow" to="UI/FoodMenu/NavigationArrows" method="_on_left_arrow_button_down"]
-[connection signal="button_down" from="UI/FoodMenu/NavigationArrows/RightARrow" to="UI/FoodMenu/NavigationArrows" method="_on_right_a_rrow_button_down"]
+[connection signal="button_down" from="UI/FoodMenu/NavigationArrows/RightArrow" to="UI/FoodMenu/NavigationArrows" method="_on_right_arrow_button_down"]
 [connection signal="visibility_changed" from="UI/ActivityMenu" to="UI/ActivityMenu" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen1/GridContainer/ScissorsPaperRock" to="MinigameManager" method="_on_scissors_paper_rock_button_down"]
 [connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen1/GridContainer/Totris" to="MinigameManager" method="_on_totris_button_down"]
@@ -1928,8 +1933,9 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen2/GridContainer/ScissorsPaperRock" to="MinigameManager" method="_on_scissors_paper_rock_button_down"]
 [connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen2/GridContainer/ZenMode" to="MinigameManager" method="_on_zen_mode_button_down"]
 [connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen2/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
-[connection signal="button_down" from="UI/ActivityMenu/NavigationArrows/LeftArrow" to="UI/FoodMenu/NavigationArrows" method="_on_left_arrow_button_down"]
-[connection signal="button_down" from="UI/ActivityMenu/NavigationArrows/RightARrow" to="UI/ActivityMenu/NavigationArrows" method="_on_right_a_rrow_button_down"]
+[connection signal="visibility_changed" from="UI/ActivityMenu/NavigationArrows" to="UI/ActivityMenu/NavigationArrows" method="_on_visibility_changed"]
+[connection signal="button_down" from="UI/ActivityMenu/NavigationArrows/LeftArrow" to="UI/ActivityMenu/NavigationArrows" method="_on_left_arrow_button_down"]
+[connection signal="button_down" from="UI/ActivityMenu/NavigationArrows/RightArrow" to="UI/ActivityMenu/NavigationArrows" method="_on_right_arrow_button_down"]
 [connection signal="visibility_changed" from="UI/OptionsMenu" to="UI/OptionsMenu" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/AppearanceBtn" to="UI/OptionsMenu" method="_on_appearance_btn_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/FactBtn" to="UI/OptionsMenu" method="_on_fact_btn_button_down"]

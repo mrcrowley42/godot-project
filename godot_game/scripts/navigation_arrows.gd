@@ -1,6 +1,7 @@
 extends Node2D
 @export var target_menu: Node
-
+@export var left_arrow: Node
+@export var right_arrow: Node
 const xoffset: int = 400
 
 @onready var init_pos = target_menu.position
@@ -16,7 +17,19 @@ func shift_screen(offset:int) -> void:
 
 func _on_left_arrow_button_down() -> void:
 	shift_screen(-1)
+	if index == 0:
+		left_arrow.hide()
+	right_arrow.show()
 
 
-func _on_right_a_rrow_button_down() -> void:
+func _on_right_arrow_button_down() -> void:
 	shift_screen(1)
+	if index == screen_count -1:
+		right_arrow.hide()
+	left_arrow.show()
+
+
+func _on_visibility_changed():
+	index = 0
+	left_arrow.hide()
+	right_arrow.show()
