@@ -1148,6 +1148,63 @@ icon = ExtResource("29_lofmd")
 icon_alignment = 1
 expand_icon = true
 
+[node name="Screen3" type="MarginContainer" parent="UI/ActivityMenu/ActivityContent"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="GridContainer" type="GridContainer" parent="UI/ActivityMenu/ActivityContent/Screen3"]
+custom_minimum_size = Vector2(360, 360)
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="ScissorsPaperRock" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen3/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+text = "MENU 2"
+icon = ExtResource("26_0ku4r")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Tetris" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen3/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
+text = "MENU 2"
+icon = ExtResource("27_2hcht")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ZenMode" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen3/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
+text = "MENU 2"
+icon = ExtResource("28_ys116")
+icon_alignment = 1
+expand_icon = true
+
+[node name="MemoryGame" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen3/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("18_v1mb2")
+theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
+text = "MENU 2"
+icon = ExtResource("29_lofmd")
+icon_alignment = 1
+expand_icon = true
+
 [node name="NavigationArrows" type="Node2D" parent="UI/ActivityMenu" node_paths=PackedStringArray("target_menu", "left_arrow", "right_arrow")]
 script = ExtResource("27_imll8")
 target_menu = NodePath("../ActivityContent")
@@ -1933,6 +1990,9 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen2/GridContainer/ScissorsPaperRock" to="MinigameManager" method="_on_scissors_paper_rock_button_down"]
 [connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen2/GridContainer/ZenMode" to="MinigameManager" method="_on_zen_mode_button_down"]
 [connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen2/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
+[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen3/GridContainer/ScissorsPaperRock" to="MinigameManager" method="_on_scissors_paper_rock_button_down"]
+[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen3/GridContainer/ZenMode" to="MinigameManager" method="_on_zen_mode_button_down"]
+[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen3/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
 [connection signal="visibility_changed" from="UI/ActivityMenu/NavigationArrows" to="UI/ActivityMenu/NavigationArrows" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/ActivityMenu/NavigationArrows/LeftArrow" to="UI/ActivityMenu/NavigationArrows" method="_on_left_arrow_button_down"]
 [connection signal="button_down" from="UI/ActivityMenu/NavigationArrows/RightArrow" to="UI/ActivityMenu/NavigationArrows" method="_on_right_arrow_button_down"]
