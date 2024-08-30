@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bpr248rssut1k" path="res://images/egg/egg-crack-2.png" id="7_ika8w"]
 [ext_resource type="Shader" path="res://shaders/voronoi.gdshader" id="8_cwxax"]
 [ext_resource type="Texture2D" uid="uid://d4apajj2al24d" path="res://images/egg/egg-crack-3.png" id="8_rhfgm"]
-[ext_resource type="Texture2D" uid="uid://djwd23psem8vo" path="res://images/egg/egg-crack-map.png" id="9_ac20n"]
+[ext_resource type="Texture2D" uid="uid://djwd23psem8vo" path="res://images/egg/egg-alpha-map.png" id="9_ac20n"]
 [ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="9_gm1pd"]
 [ext_resource type="Texture2D" uid="uid://dld1yhay54y36" path="res://icons/status/egg-fill.svg" id="10_acgju"]
 [ext_resource type="Texture2D" uid="uid://dqtjsny24a3p1" path="res://images/creature_sprites/angry-0.png" id="15_yxdat"]
@@ -181,7 +181,7 @@ animations = [{
 script = ExtResource("1_j41yb")
 existing_eggs = Array[ExtResource("3_n45ee")]([SubResource("Resource_xhydc"), SubResource("Resource_8kewv"), SubResource("Resource_hh3r1")])
 egg_cracks = Array[Texture2D]([ExtResource("6_a8aos"), ExtResource("7_ika8w"), ExtResource("8_rhfgm")])
-egg_crack_map = ExtResource("9_ac20n")
+egg_alpha_map = ExtResource("9_ac20n")
 bar_progress_color = SubResource("Gradient_wiwer")
 metadata/_edit_vertical_guides_ = [540.0, 64.0, 472.0, 128.0, 408.0]
 metadata/_edit_horizontal_guides_ = [675.0, 64.0, 608.0, 128.0, 544.0]

@@ -3,7 +3,7 @@ class_name EggOpen extends ScriptNode
 @export var skip_scene: bool = false
 @export var existing_eggs: Array[EggEntry]
 @export var egg_cracks: Array[Texture2D]
-@export var egg_crack_map: Texture2D  # trust me bro
+@export var egg_alpha_map: Texture2D  # trust me bro
 @export var bar_progress_color: Gradient
 
 @export_subgroup("limit egg selection")
@@ -32,7 +32,7 @@ class_name EggOpen extends ScriptNode
 @onready var example_creature: AnimatedSprite2D = find_child("ExampleCreature")
 
 @onready var alpha_shader = preload("res://shaders/apply_alpha_map.gdshader")
-@onready var alpha_map = preload("res://images/egg/egg-crack-map.png")
+@onready var alpha_map = preload("res://images/egg/egg-alpha-map.png")
 
 const BAR_CLICK_ADDITION: int = 100
 const BAR_DRAIN_AMOUNT: int = 200
@@ -353,7 +353,7 @@ func finish_hatching(sprite_c: Control):
 	fade(bottom, false, .3)
 	
 	# spawn creature
-	example_creature.position = sprite_c.position + Vector2(0, -30)  # offset
+	example_creature.position = sprite_c.position + Vector2(0, -35)  # offset (may need to be different for each creature)
 	example_creature.modulate.a = 0.
 	example_creature.visible = true
 	fade(example_creature, true)

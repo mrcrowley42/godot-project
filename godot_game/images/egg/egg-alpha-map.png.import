@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://djwd23psem8vo"
-path="res://.godot/imported/egg-crack-map.png-db888606bba218b76d64b0737be656d5.ctex"
+path="res://.godot/imported/egg-alpha-map.png-425e6ca0d85f3a58728576af4ef77e30.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/egg/egg-crack-map.png"
-dest_files=["res://.godot/imported/egg-crack-map.png-db888606bba218b76d64b0737be656d5.ctex"]
+source_file="res://images/egg/egg-alpha-map.png"
+dest_files=["res://.godot/imported/egg-alpha-map.png-425e6ca0d85f3a58728576af4ef77e30.ctex"]
 
 [params]
 
