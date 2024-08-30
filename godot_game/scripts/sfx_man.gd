@@ -3,6 +3,7 @@ extends AudioStreamPlayer
 var correct = preload("res://sound_effects/correct.wav")
 var wrong = preload("res://sound_effects/wrong.wav")
 var draw = preload("res://sound_effects/confirm.wav")
+var click = preload("res://sound_effects/button_click_fast.mp3")
 
 # tetris (8 & 16 bit sounds, in desperate need of balancing)
 var t_place = preload("res://sound_effects/totris_place.wav")
@@ -12,7 +13,7 @@ var t_linebreak = preload("res://sound_effects/totris_linebreak.wav")
 var t_no = preload("res://sound_effects/totris_no.wav")
 
 var lookup= {
-		"draw": draw, "correct": correct, "wrong": wrong,
+		"draw": draw, "correct": correct, "wrong": wrong, "click": click,
 		"t_place": t_place, "t_place_inst": t_place_inst, "t_biglinebreak": t_biglinebreak, "t_linebreak": t_linebreak, "t_no": t_no
 	}
 
