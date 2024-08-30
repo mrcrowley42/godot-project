@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CreatureType" load_steps=3 format=3 uid="uid://cxtahs454inpc"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/creature_type.gd" id="1_hdyqw"]
+[ext_resource type="SpriteFrames" uid="uid://68skicj7tsu2" path="res://resources/creatures/main_creature_sprite_frames.tres" id="2_jpj2q"]
+
+[resource]
+script = ExtResource("1_hdyqw")
+creature_name = "Little Guy"
+max_hp = 1000
+max_water = 1000
+max_food = 1000
+max_fun = 1000
+sprite_frames = ExtResource("2_jpj2q")
+likes = Array[int]([1])
+dislikes = Array[int]([3])

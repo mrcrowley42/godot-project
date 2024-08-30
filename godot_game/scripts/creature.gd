@@ -6,12 +6,14 @@ class_name Creature extends Node2D
 ## A Reference to the main sprite so it can be manipulated
 @onready var main_sprite = %Main
 
+var creature_type: CreatureType = load("res://resources/creatures/main_creature.tres")
+
 ## Colour to tint creature as HP approaches 0.
 @export var dying_colour: Color;
-@export var max_hp: float = 1000
-@export var max_water: float = 1000
-@export var max_food: float = 1000
-@export var max_fun: float = 1000
+@export var max_hp: float = creature_type.max_hp
+@export var max_water: float = creature_type.max_water
+@export var max_food: float = creature_type.max_food
+@export var max_fun: float = creature_type.max_fun
 ## XP required for the creature to reach the [param ADULT] [param LifeStage] stage
 @export var xp_required: float
 @export var clippy_area: Node
@@ -32,8 +34,9 @@ var food: float
 var fun: float
 var xp: float
 var life_stage: LifeStage
-var likes: Array = [FoodItem.CHIPS]
-var dislikes: Array = [FoodItem.FRUIT]
+var likes: Array = creature_type.likes
+var dislikes: Array = creature_type.dislikes
+var creature_name: String = creature_type.creature_name
 
 # SIGNALS
 signal hp_changed()
@@ -62,6 +65,7 @@ func level_up() -> void:
 
 
 func _ready() -> void:
+	main_sprite.sprite_frames = creature_type.sprite_frames
 	reset_stats()
 	
 
