@@ -3,7 +3,7 @@ extends ScriptNode
 func remove(obj: Object) -> void:
 	obj.queue_free()
 
-func confet() -> void:
+func fire() -> void:
 	var confetti_l: CPUParticles2D = find_child("ConfetL");
 	var confetti_r: CPUParticles2D = find_child("ConfetR");
 

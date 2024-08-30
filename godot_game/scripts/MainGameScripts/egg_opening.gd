@@ -30,6 +30,7 @@ class_name EggOpen extends ScriptNode
 @onready var display_shader: ColorRect = find_child("shader")
 @onready var hatch_timer: Timer = find_child("HatchTimer")
 @onready var example_creature: AnimatedSprite2D = find_child("ExampleCreature")
+@onready var confetti: ScriptNode = find_child("Confetti")
 
 @onready var alpha_shader = preload("res://shaders/apply_alpha_map.gdshader")
 @onready var alpha_map = preload("res://images/egg/egg-alpha-map.png")
@@ -329,6 +330,8 @@ func progress_hatching():
 func finish_hatching(sprite_c: Control):
 	var connect_continue_input = func():  # so no accidently skipping creature reveal
 		continue_btn.connect("gui_input", continue_btn_input)
+	var fire_confetti = func():
+		confetti.fire()
 	
 	set_can_interact(true)
 	finished_hatching = true
@@ -355,7 +358,7 @@ func finish_hatching(sprite_c: Control):
 	# spawn creature
 	example_creature.position = sprite_c.position + Vector2(0, -35)  # offset (may need to be different for each creature)
 	fade(example_creature, true)
-	tween(example_creature, "scale", Vector2(.25, .25), .3, .5)
+	tween(example_creature, "scale", Vector2(.25, .25), .3, .5).connect("finished", fire_confetti)
 	## SAVE SOMETHING HERE
 
 ## transition out & load main scene

@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://rrftuntvxt4t"]
+[gd_scene load_steps=44 format=3 uid="uid://rrftuntvxt4t"]
 
 [ext_resource type="Script" path="res://scripts/MainGameScripts/egg_opening.gd" id="1_j41yb"]
 [ext_resource type="Texture2D" uid="uid://di0q6yu8qbi2u" path="res://images/egg/egg-purple.png" id="2_2t25y"]
@@ -32,6 +32,7 @@
 [ext_resource type="Texture2D" uid="uid://dxc4uprrmyny8" path="res://images/creature_sprites/sadge-0.png" id="30_n6b1i"]
 [ext_resource type="Texture2D" uid="uid://dxipq42e3qg72" path="res://images/creature_sprites/sadge-1.png" id="31_sfngk"]
 [ext_resource type="Texture2D" uid="uid://c8vn6brl68787" path="res://images/creature_sprites/sadge-2.png" id="32_o2hp7"]
+[ext_resource type="Script" path="res://scripts/MainGameScripts/EggScene/confetti.gd" id="33_h0t5y"]
 
 [sub_resource type="Resource" id="Resource_xhydc"]
 script = ExtResource("3_n45ee")
@@ -176,6 +177,11 @@ animations = [{
 "name": &"sad",
 "speed": 4.0
 }]
+
+[sub_resource type="Gradient" id="Gradient_38bvm"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.12381, 0.290476, 0.452381, 0.652381, 0.819048, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.482353, 0.321569, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0.509804, 1, 0.529412, 0, 0.745098, 1, 1, 1, 1, 1)
 
 [node name="EggOpening" type="Node2D"]
 script = ExtResource("1_j41yb")
@@ -445,6 +451,49 @@ scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_scray")
 animation = &"baby"
 autoplay = "baby"
+
+[node name="Confetti" type="Node2D" parent="CanvasLayer"]
+script = ExtResource("33_h0t5y")
+
+[node name="ConfetL" type="CPUParticles2D" parent="CanvasLayer/Confetti"]
+position = Vector2(92, 430)
+emitting = false
+amount = 20
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+direction = Vector2(0.1, -1)
+spread = 6.0
+initial_velocity_min = 400.0
+initial_velocity_max = 800.0
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+scale_amount_min = 10.0
+scale_amount_max = 15.0
+color_initial_ramp = SubResource("Gradient_38bvm")
+hue_variation_min = 1.0
+hue_variation_max = 1.0
+
+[node name="ConfetR" type="CPUParticles2D" parent="CanvasLayer/Confetti"]
+position = Vector2(446, 430)
+emitting = false
+amount = 20
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+direction = Vector2(-0.1, -1)
+spread = 6.0
+initial_velocity_min = 400.0
+initial_velocity_max = 800.0
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+scale_amount_min = 10.0
+scale_amount_max = 15.0
+color_initial_ramp = SubResource("Gradient_38bvm")
+hue_variation_min = 1.0
+hue_variation_max = 1.0
 
 [node name="SelectionArea" type="Control" parent="."]
 layout_mode = 3
