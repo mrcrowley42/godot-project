@@ -82,3 +82,9 @@ func _on_check_box_toggled(toggled_on):
 func _on_notif_btn_button_down():
 	var msg = example_messages.pick_random()
 	notif_man.new_notification(msg)
+
+
+func _on_wipe_btn_button_down():
+	var d = DirAccess.open("res://")
+	d.remove(Globals.SAVE_DATA_FILE)
+	get_tree().quit()

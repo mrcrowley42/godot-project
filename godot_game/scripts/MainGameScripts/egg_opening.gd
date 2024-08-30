@@ -64,7 +64,7 @@ var selected_egg_inx = null  # int
 var scale_addition: Vector2 = Vector2(0, 0)
 
 func _ready():
-	if skip_scene:
+	if skip_scene or DataGlobals.has_save_data():
 		load_main_scene()
 		return
 	
