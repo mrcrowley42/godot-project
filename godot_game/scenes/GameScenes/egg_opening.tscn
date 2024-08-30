@@ -1,19 +1,18 @@
-[gd_scene load_steps=44 format=3 uid="uid://cllomtwak1vy"]
+[gd_scene load_steps=40 format=3 uid="uid://cllomtwak1vy"]
 
 [ext_resource type="Script" path="res://scripts/MainGameScripts/egg_opening.gd" id="1_j41yb"]
-[ext_resource type="Texture2D" uid="uid://di0q6yu8qbi2u" path="res://images/egg/egg-purple.png" id="2_2t25y"]
-[ext_resource type="Script" path="res://scripts/base_classses/egg_entry_class.gd" id="3_n45ee"]
-[ext_resource type="Texture2D" uid="uid://gi4ytib73ibf" path="res://images/egg/egg-green.png" id="4_b7spl"]
-[ext_resource type="Texture2D" uid="uid://dooy32x4x0qq3" path="res://images/egg/egg-pink.png" id="5_747x5"]
+[ext_resource type="Resource" uid="uid://iew8c64p2g4" path="res://resources/eggs/purple_egg.tres" id="2_76prt"]
+[ext_resource type="Resource" uid="uid://8qkgq02pnyvq" path="res://resources/eggs/green_egg.tres" id="3_ckgoo"]
+[ext_resource type="Resource" uid="uid://xrht2i6qwx4s" path="res://resources/eggs/pink_egg.tres" id="4_8oa7j"]
 [ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="6_4e4a6"]
-[ext_resource type="Texture2D" path="res://images/egg/egg-crack-1.png" id="6_a8aos"]
+[ext_resource type="Texture2D" uid="uid://kodwkhqgbclh" path="res://images/egg/egg-crack-1.png" id="6_a8aos"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="7_crtsy"]
-[ext_resource type="Texture2D" path="res://images/egg/egg-crack-2.png" id="7_ika8w"]
+[ext_resource type="Texture2D" uid="uid://bpr248rssut1k" path="res://images/egg/egg-crack-2.png" id="7_ika8w"]
 [ext_resource type="Shader" path="res://shaders/voronoi.gdshader" id="8_cwxax"]
-[ext_resource type="Texture2D" path="res://images/egg/egg-crack-3.png" id="8_rhfgm"]
-[ext_resource type="Texture2D" path="res://images/egg/egg-alpha-map.png" id="9_ac20n"]
-[ext_resource type="Texture2D" path="res://images/transition_img_long.png" id="9_gm1pd"]
-[ext_resource type="Texture2D" path="res://icons/status/egg-fill.svg" id="10_acgju"]
+[ext_resource type="Texture2D" uid="uid://d4apajj2al24d" path="res://images/egg/egg-crack-3.png" id="8_rhfgm"]
+[ext_resource type="Texture2D" uid="uid://djwd23psem8vo" path="res://images/egg/egg-alpha-map.png" id="9_ac20n"]
+[ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="9_gm1pd"]
+[ext_resource type="Texture2D" uid="uid://dld1yhay54y36" path="res://icons/status/egg-fill.svg" id="10_acgju"]
 [ext_resource type="Texture2D" uid="uid://dqtjsny24a3p1" path="res://images/creature_sprites/angry-0.png" id="15_yxdat"]
 [ext_resource type="Texture2D" uid="uid://cq86852isqqkq" path="res://images/creature_sprites/angry-1.png" id="16_efmb7"]
 [ext_resource type="Texture2D" uid="uid://dd12vpparynjh" path="res://images/creature_sprites/angry-2.png" id="17_scuc7"]
@@ -33,24 +32,6 @@
 [ext_resource type="Texture2D" uid="uid://dxipq42e3qg72" path="res://images/creature_sprites/sadge-1.png" id="31_sfngk"]
 [ext_resource type="Texture2D" uid="uid://c8vn6brl68787" path="res://images/creature_sprites/sadge-2.png" id="32_o2hp7"]
 [ext_resource type="Script" path="res://scripts/MainGameScripts/EggScene/confetti.gd" id="33_h0t5y"]
-
-[sub_resource type="Resource" id="Resource_xhydc"]
-script = ExtResource("3_n45ee")
-name = "Purple Egg"
-image = ExtResource("2_2t25y")
-hatches = Array[String]([])
-
-[sub_resource type="Resource" id="Resource_8kewv"]
-script = ExtResource("3_n45ee")
-name = "Green Egg"
-image = ExtResource("4_b7spl")
-hatches = Array[String]([])
-
-[sub_resource type="Resource" id="Resource_hh3r1"]
-script = ExtResource("3_n45ee")
-name = "Pink Egg"
-image = ExtResource("5_747x5")
-hatches = Array[String]([])
 
 [sub_resource type="Gradient" id="Gradient_wiwer"]
 offsets = PackedFloat32Array(0, 0.5, 1)
@@ -185,7 +166,7 @@ colors = PackedColorArray(1, 0, 0, 1, 1, 0.482353, 0.321569, 1, 1, 1, 0, 1, 1, 0
 
 [node name="EggOpening" type="Node2D"]
 script = ExtResource("1_j41yb")
-existing_eggs = Array[ExtResource("3_n45ee")]([SubResource("Resource_xhydc"), SubResource("Resource_8kewv"), SubResource("Resource_hh3r1")])
+existing_eggs = Array[Resource("res://scripts/base_classses/egg_entry_class.gd")]([ExtResource("2_76prt"), ExtResource("3_ckgoo"), ExtResource("4_8oa7j")])
 egg_cracks = Array[Texture2D]([ExtResource("6_a8aos"), ExtResource("7_ika8w"), ExtResource("8_rhfgm")])
 egg_alpha_map = ExtResource("9_ac20n")
 bar_progress_color = SubResource("Gradient_wiwer")

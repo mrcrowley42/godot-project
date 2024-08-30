@@ -1,18 +1,8 @@
-[gd_scene load_steps=50 format=3 uid="uid://bebjn5n2kjwgb"]
+[gd_scene load_steps=32 format=3 uid="uid://bebjn5n2kjwgb"]
 
 [ext_resource type="Script" path="res://scripts/creature_notification_manager.gd" id="2_0vuyd"]
 [ext_resource type="Script" path="res://scripts/creature.gd" id="2_klgk6"]
 [ext_resource type="Script" path="res://scripts/creature_anim.gd" id="5_oh7gr"]
-[ext_resource type="Texture2D" uid="uid://k3q3fb85fm3h" path="res://images/creature_sprites/chill-1.png" id="6_t62e5"]
-[ext_resource type="Texture2D" uid="uid://c44b8y8u8ne7w" path="res://images/creature_sprites/confused-0.png" id="6_tpv3k"]
-[ext_resource type="Texture2D" uid="uid://dck4q0ce0c4mm" path="res://images/creature_sprites/chill-2.png" id="7_6xa3v"]
-[ext_resource type="Texture2D" uid="uid://cqyltj7p4b1l7" path="res://images/creature_sprites/confused-1.png" id="7_j2qgy"]
-[ext_resource type="Texture2D" uid="uid://dnud16me4mso5" path="res://icons/status/sentiment_frustrated_24dp_FFFFFF_FILL1_wght300_GRAD0_opsz24.svg" id="8_cooyl"]
-[ext_resource type="Texture2D" uid="uid://bcsj0ibb8s3y0" path="res://images/creature_sprites/confused-2.png" id="8_gbg03"]
-[ext_resource type="Texture2D" uid="uid://kma8r55lpxii" path="res://icons/status/sentiment_sad_24dp_FFFFFF_FILL1_wght300_GRAD0_opsz24.svg" id="9_xmwbg"]
-[ext_resource type="Texture2D" uid="uid://cuaa2uyffvita" path="res://icons/status/droplet-fill.svg" id="10_mvvsb"]
-[ext_resource type="Texture2D" uid="uid://dxc4uprrmyny8" path="res://images/creature_sprites/sadge-0.png" id="13_d84xb"]
-[ext_resource type="Texture2D" uid="uid://dxipq42e3qg72" path="res://images/creature_sprites/sadge-1.png" id="14_r6peb"]
 [ext_resource type="Texture2D" uid="uid://dnud16me4mso5" path="res://icons/status/sentiment_frustrated_24dp_FFFFFF_FILL1_wght300_GRAD0_opsz24.svg" id="8_cooyl"]
 [ext_resource type="Texture2D" uid="uid://kma8r55lpxii" path="res://icons/status/sentiment_sad_24dp_FFFFFF_FILL1_wght300_GRAD0_opsz24.svg" id="9_xmwbg"]
 [ext_resource type="Texture2D" uid="uid://cuaa2uyffvita" path="res://icons/status/droplet-fill.svg" id="10_mvvsb"]
@@ -93,7 +83,6 @@ animations = [{
 [node name="Node2D" type="Node2D"]
 script = ExtResource("2_klgk6")
 dying_colour = Color(1, 0, 0, 1)
-xp_required = 20000.0
 
 [node name="Notifcations" type="Node" parent="."]
 unique_name_in_owner = true
