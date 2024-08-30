@@ -305,6 +305,11 @@ func progress_hatching():
 	hatch_progress += 1
 	var sprite_c: Control = placed_egg_sprites[selected_egg_inx]
 	
+	# egg scale (do before finishing)
+	var scale_add = Vector2(.2, .2) + Vector2(.1, .1) * hatch_progress
+	sprite_c.scale = MAX_SELECTED_EGG_SCALE + scale_add
+	scale_egg(selected_egg_inx, MAX_SELECTED_EGG_SCALE + (scale_add * .5))
+	
 	if hatch_progress == 4:
 		finish_hatching(sprite_c)
 		return
@@ -317,11 +322,6 @@ func progress_hatching():
 		crack_sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 		add_alpha_mask(crack_sprite, i)
 		c.add_child(crack_sprite)
-	
-	# egg scale
-	var scale_add = Vector2(.2, .2) + Vector2(.1, .1) * hatch_progress
-	sprite_c.scale = MAX_SELECTED_EGG_SCALE + scale_add
-	scale_egg(selected_egg_inx, MAX_SELECTED_EGG_SCALE + (scale_add * .5))
 	
 	# egg rotation
 	rotation_buffer.value = 1.
@@ -338,11 +338,6 @@ func finish_hatching(sprite_c: Control):
 	hatch_timer.stop()
 	egg_desc.text = "[center][u]Some Creature!"
 	fade(continue_btn).connect("finished", connect_continue_input)
-	
-	# last scale
-	var scale_add = Vector2(.2, .2) + Vector2(.1, .1) * hatch_progress
-	sprite_c.scale = MAX_SELECTED_EGG_SCALE + scale_add
-	scale_egg(selected_egg_inx, MAX_SELECTED_EGG_SCALE + (scale_add * .5))
 	
 	# open egg
 	var top: Control = sprite_c.get_child(0)
