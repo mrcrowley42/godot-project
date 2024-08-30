@@ -13,7 +13,7 @@
 [ext_resource type="Theme" path="res://themes/invisible.tres" id="11_lcq7m"]
 [ext_resource type="Script" path="res://scripts/clippy_area.gd" id="12_n00c6"]
 [ext_resource type="Script" path="res://scripts/ui_theme_manager.gd" id="13_3i267"]
-[ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="14_k2ios"]
+[ext_resource type="Texture2D" path="res://images/transition_img_long.png" id="14_k2ios"]
 [ext_resource type="Resource" uid="uid://bxhuu3qk52v3w" path="res://resources/ui_themes/green.tres" id="14_mb3dl"]
 [ext_resource type="Resource" uid="uid://vt3jd46rlq4h" path="res://resources/ui_themes/orange.tres" id="15_4uyfd"]
 [ext_resource type="Resource" uid="uid://clen0bplq0q5d" path="res://resources/ui_themes/pink.tres" id="16_6dasc"]
