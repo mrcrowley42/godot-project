@@ -65,6 +65,7 @@ func level_up() -> void:
 
 
 func _ready() -> void:
+	main_sprite.sprite_frames = creature_type.sprite_frames
 	reset_stats()
 
 
