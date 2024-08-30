@@ -26,11 +26,11 @@ enum LifeStage {CHILD, ADULT}
 enum Stat {HP, WATER, FOOD, FUN}
 
 # CREATURE STATS VARIABLES
-var hp: float
-var water: float
-var food: float
-var fun: float
-var xp: float
+var hp: float = max_hp
+var water: float = max_water
+var food: float = max_food
+var fun: float = max_fun
+var xp: float = 0
 var life_stage: LifeStage
 var likes: Array = [FoodItem.CHIPS]
 var dislikes: Array = [FoodItem.FRUIT]
@@ -62,7 +62,8 @@ func level_up() -> void:
 
 
 func _ready() -> void:
-	reset_stats()
+	pass
+	#reset_stats()
 
 
 ## Sets the Creatures current stats to their maximum value.
@@ -99,6 +100,7 @@ func damage_hp(amount: float) -> void:
 	if hp - temp_hp > 0:
 		add_xp(hp - temp_hp * xp_mulitplier)
 	apply_dmg_tint()
+	print(amount)
 	hp_changed.emit()
 
 
@@ -139,9 +141,9 @@ func save() -> Dictionary:
 
 
 func load(data) -> void:
-	var stat_list = ["water", "fun", "food", "xp"]
-	if not find_parent("Game").debug_mode:
-		stat_list.append("hp")
+	var stat_list = ["water", "fun", "food", "hp", "xp"]
+	#if not find_parent("Game").debug_mode:
+		#stat_list.append("hp")
 	for setting in stat_list:
 		if data.has(setting):
 			self[setting] = data[setting]

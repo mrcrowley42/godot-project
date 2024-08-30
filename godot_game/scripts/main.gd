@@ -67,7 +67,6 @@ func _notification(noti):
 		minigame_man.finalise_save_data()  # call before saving
 		DataGlobals.save_data()
 
-
 func _input(event) -> void:
 	# close when [param esc key] is pressed
 	if event.is_action_pressed("ui_cancel"):
