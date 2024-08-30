@@ -2,6 +2,8 @@ extends Node
 
 
 
+var last_opened: float
+
 @export var debug_mode: bool
 @export var unlock_fps: bool = false
 
@@ -56,6 +58,7 @@ func calc_elapsed_time():
 	var holiday_status = "were" if stat_man.holiday_mode else "were not"
 	print("And you %s on holiday." % [holiday_status])
 
+
 func _on_save_pressed():
 	%BtnClick.play()
 	%SFX.play_sound("correct")
@@ -66,6 +69,7 @@ func _notification(noti):
 	if noti == NOTIFICATION_WM_CLOSE_REQUEST:
 		minigame_man.finalise_save_data()  # call before saving
 		DataGlobals.save_data()
+
 
 func _input(event) -> void:
 	# close when [param esc key] is pressed

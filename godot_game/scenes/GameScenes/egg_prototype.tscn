@@ -173,6 +173,7 @@ animation = &"yippie"
 autoplay = "yippie"
 
 [node name="Flopps" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
 visible = false
 position = Vector2(278, 316)
 scale = Vector2(1.8, 1.8)

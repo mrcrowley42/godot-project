@@ -9,6 +9,7 @@ class_name MinigameManager extends Node2D
 
 @onready var clippy_area = %ClippyArea
 @onready var act_menu = %ActivityMenu
+@onready var status_manager = %StatusManager
 
 var save_data: Dictionary = {}
 var current_minigame = null;
@@ -21,8 +22,8 @@ func load_minigame(pre_loaded=null, instance=null) -> void:
 	assert(pre_loaded != null or instance != null)  # either one or the other
 	if current_minigame == null:
 		%BtnClick.play()
-		current_time_scale = %StatusManager.time_multiplier
-		%StatusManager.time_multiplier = 0
+		current_time_scale = status_manager.time_multiplier
+		status_manager.time_multiplier = 0
 		act_menu.hide()
 		var game = pre_loaded.instantiate() if pre_loaded != null else instance
 		find_parent("Game").find_child("UI").add_child(game)
@@ -31,11 +32,12 @@ func load_minigame(pre_loaded=null, instance=null) -> void:
 		%ActButton.disabled = true
 		%FoodButton.disabled = true
 
+
 ## Tell game that a minigame is no longer open.
 func unload_minigame() -> void:
 	%BtnClick.play()
 	current_minigame = null;
-	%StatusManager.time_multiplier = current_time_scale
+	status_manager.time_multiplier = current_time_scale
 	%ActButton.disabled = false
 	%FoodButton.disabled = false
 
