@@ -31,7 +31,6 @@ func save_data():
 			PATH: node.get_path(),
 			DATA: node.call(SAVE)
 		}
-		print(node_data)
 		all_data.append(JSON.stringify(node_data))
 	
 	var bytes_array: PackedByteArray = var_to_bytes(all_data)

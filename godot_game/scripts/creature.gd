@@ -100,7 +100,6 @@ func damage_hp(amount: float) -> void:
 	if hp - temp_hp > 0:
 		add_xp(hp - temp_hp * xp_mulitplier)
 	apply_dmg_tint()
-	print(amount)
 	hp_changed.emit()
 
 
