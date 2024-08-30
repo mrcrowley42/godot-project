@@ -44,3 +44,7 @@ func creature_selector():
 		
 	return array.pick_random()
 
+
+
+func _on_lil_guy_visibility_changed():
+	pass # Replace with function body.

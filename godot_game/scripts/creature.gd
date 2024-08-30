@@ -36,6 +36,7 @@ var stats: Dictionary = {
 
 func _ready() -> void:
 	reset_stats()
+	
 
 ## Sets the Creatures current stats to their maximum value.
 func reset_stats() -> void:
