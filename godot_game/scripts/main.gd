@@ -1,9 +1,5 @@
 extends Node
 
-
-
-var last_opened: float
-
 @export var debug_mode: bool
 @export var unlock_fps: bool = false
 
