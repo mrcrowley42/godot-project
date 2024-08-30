@@ -354,8 +354,6 @@ func finish_hatching(sprite_c: Control):
 	
 	# spawn creature
 	example_creature.position = sprite_c.position + Vector2(0, -35)  # offset (may need to be different for each creature)
-	example_creature.modulate.a = 0.
-	example_creature.visible = true
 	fade(example_creature, true)
 	tween(example_creature, "scale", Vector2(.25, .25), .3, .5)
 
