@@ -22,7 +22,7 @@ func _ready() -> void:
 		%Yip.play()
 		%EggSprite.visible= false
 		creature.visible= true
-		%Confetti.confet()
+		%Confetti.fire()
 		%StartGame.start()
 		)
 	
