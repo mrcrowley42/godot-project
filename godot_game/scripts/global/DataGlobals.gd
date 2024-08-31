@@ -6,7 +6,7 @@ const DATA = "data"
 const SAVE = "save"
 const LOAD = "load"
 
-## store the metatada that was last loaded from the save file
+## storage of the metadata that was last loaded from the save file
 var metadata_last_loaded: Dictionary = {}
 
 func has_save_data() -> bool:
