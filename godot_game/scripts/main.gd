@@ -18,7 +18,10 @@ func _ready():
 	# load in data
 	if has_save_data:
 		var metadata = DataGlobals.load_data()
-		last_opened = metadata["last_opened"]
+		if metadata.has("last_opened"):
+			last_opened = metadata["last_opened"]
+		else:
+			last_opened = launch_time
 		DataGlobals.load_settings_data()
 		calc_elapsed_time()
 	
