@@ -4,7 +4,7 @@ extends Node
 @export var unlock_fps: bool = false
 
 var has_save_data: bool = DataGlobals.has_save_data()
-var last_opened: float
+var last_saved: float
 @onready var launch_time: float = Time.get_unix_time_from_system()
 @onready var stat_man: StatusManager = %StatusManager
 #@onready var launch_date = Time.get_datetime_dict_from_system().day
@@ -18,7 +18,7 @@ func _ready():
 	# load in data
 	if has_save_data:
 		var metadata = DataGlobals.load_data()
-		last_opened = metadata["last_opened"]
+		last_saved = metadata["last_saved"]
 		DataGlobals.load_settings_data()
 		calc_elapsed_time()
 	
@@ -41,7 +41,7 @@ func perform_opening_transition():
 
 ## temp print to console
 func calc_elapsed_time():
-	var elapsed_time = launch_time - last_opened
+	var elapsed_time = launch_time - last_saved
 	# please excuse the bad variable names here, this is only a temp thing anyway.
 	var _a = Color(1,0,0)
 	var _b = Color(0,1,0)

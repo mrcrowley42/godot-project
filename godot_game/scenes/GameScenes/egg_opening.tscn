@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://cllomtwak1vy"]
+[gd_scene load_steps=30 format=3 uid="uid://cllomtwak1vy"]
 
 [ext_resource type="Script" path="res://scripts/game/egg_opening/egg_opening.gd" id="1_j41yb"]
 [ext_resource type="Resource" uid="uid://iew8c64p2g4" path="res://resources/eggs/purple_egg.tres" id="2_76prt"]
@@ -15,24 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://dld1yhay54y36" path="res://icons/status/egg-fill.svg" id="10_acgju"]
 [ext_resource type="Script" path="res://scripts/game/egg_opening/egg_back_btn.gd" id="13_mvaqa"]
 [ext_resource type="Script" path="res://scripts/game/egg_opening/egg_continue_btn.gd" id="15_pne1v"]
-[ext_resource type="Texture2D" uid="uid://dqtjsny24a3p1" path="res://images/creature_sprites/angry-0.png" id="15_yxdat"]
-[ext_resource type="Texture2D" uid="uid://cq86852isqqkq" path="res://images/creature_sprites/angry-1.png" id="16_efmb7"]
-[ext_resource type="Texture2D" uid="uid://dd12vpparynjh" path="res://images/creature_sprites/angry-2.png" id="17_scuc7"]
-[ext_resource type="Texture2D" uid="uid://dwyq4ypjep2wb" path="res://images/creature_sprites/baby-0.png" id="18_tkq65"]
-[ext_resource type="Texture2D" uid="uid://dino0mqreujlr" path="res://images/creature_sprites/baby-1.png" id="19_hh1fo"]
-[ext_resource type="Texture2D" uid="uid://banu8mr1om6vj" path="res://images/creature_sprites/baby-2.png" id="20_vd0ba"]
-[ext_resource type="Texture2D" uid="uid://b3q3krfrwwvff" path="res://images/creature_sprites/chill-0.png" id="21_1v8rx"]
-[ext_resource type="Texture2D" uid="uid://k3q3fb85fm3h" path="res://images/creature_sprites/chill-1.png" id="22_dopsm"]
-[ext_resource type="Texture2D" uid="uid://dck4q0ce0c4mm" path="res://images/creature_sprites/chill-2.png" id="23_udoqc"]
-[ext_resource type="Texture2D" uid="uid://c44b8y8u8ne7w" path="res://images/creature_sprites/confused-0.png" id="24_prawp"]
-[ext_resource type="Texture2D" uid="uid://cqyltj7p4b1l7" path="res://images/creature_sprites/confused-1.png" id="25_woby8"]
-[ext_resource type="Texture2D" uid="uid://bcsj0ibb8s3y0" path="res://images/creature_sprites/confused-2.png" id="26_akkjy"]
-[ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://images/creature_sprites/little-guy.png" id="27_c0830"]
-[ext_resource type="Texture2D" uid="uid://4cfpam3be0g" path="res://images/creature_sprites/little-guy_2.png" id="28_oevk4"]
-[ext_resource type="Texture2D" uid="uid://diwxdoruu1sob" path="res://images/creature_sprites/little-guy_3.png" id="29_m42nv"]
-[ext_resource type="Texture2D" uid="uid://dxc4uprrmyny8" path="res://images/creature_sprites/sadge-0.png" id="30_n6b1i"]
-[ext_resource type="Texture2D" uid="uid://dxipq42e3qg72" path="res://images/creature_sprites/sadge-1.png" id="31_sfngk"]
-[ext_resource type="Texture2D" uid="uid://c8vn6brl68787" path="res://images/creature_sprites/sadge-2.png" id="32_o2hp7"]
 [ext_resource type="Texture2D" uid="uid://dn8cpibgvjwup" path="res://icons/music-note.svg" id="33_a6fxr"]
 [ext_resource type="Script" path="res://scripts/sfx_man.gd" id="33_eitoc"]
 [ext_resource type="Script" path="res://scripts/game/egg_opening/confetti.gd" id="33_h0t5y"]
@@ -80,93 +62,6 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 corner_detail = 10
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_scray"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("15_yxdat")
-}, {
-"duration": 1.0,
-"texture": ExtResource("16_efmb7")
-}, {
-"duration": 1.0,
-"texture": ExtResource("17_scuc7")
-}],
-"loop": true,
-"name": &"angry",
-"speed": 4.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("18_tkq65")
-}, {
-"duration": 1.0,
-"texture": ExtResource("19_hh1fo")
-}, {
-"duration": 1.0,
-"texture": ExtResource("20_vd0ba")
-}],
-"loop": true,
-"name": &"baby",
-"speed": 4.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("21_1v8rx")
-}, {
-"duration": 1.0,
-"texture": ExtResource("22_dopsm")
-}, {
-"duration": 1.0,
-"texture": ExtResource("23_udoqc")
-}],
-"loop": true,
-"name": &"chill",
-"speed": 4.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("24_prawp")
-}, {
-"duration": 1.0,
-"texture": ExtResource("25_woby8")
-}, {
-"duration": 1.0,
-"texture": ExtResource("26_akkjy")
-}],
-"loop": true,
-"name": &"confused",
-"speed": 4.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("27_c0830")
-}, {
-"duration": 1.0,
-"texture": ExtResource("28_oevk4")
-}, {
-"duration": 1.0,
-"texture": ExtResource("29_m42nv")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 4.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("30_n6b1i")
-}, {
-"duration": 1.0,
-"texture": ExtResource("31_sfngk")
-}, {
-"duration": 1.0,
-"texture": ExtResource("32_o2hp7")
-}],
-"loop": true,
-"name": &"sad",
-"speed": 4.0
-}]
 
 [sub_resource type="Gradient" id="Gradient_38bvm"]
 interpolation_mode = 1
@@ -437,12 +332,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="ExampleCreature" type="AnimatedSprite2D" parent="CanvasLayer"]
+[node name="Creature" type="AnimatedSprite2D" parent="CanvasLayer"]
 visible = false
 texture_filter = 1
 scale = Vector2(0.1, 0.1)
-sprite_frames = SubResource("SpriteFrames_scray")
-animation = &"baby"
 autoplay = "baby"
 
 [node name="Confetti" type="Node2D" parent="CanvasLayer"]

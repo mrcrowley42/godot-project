@@ -27,7 +27,7 @@ class_name EggOpening extends ScriptNode
 @onready var display_shader: ColorRect = find_child("shader")
 @onready var shader_area: ColorRect = find_child("shader")
 @onready var hatch_timer: Timer = find_child("HatchTimer")
-@onready var example_creature: AnimatedSprite2D = find_child("ExampleCreature")
+@onready var creature_sprite: AnimatedSprite2D = find_child("Creature")
 @onready var confetti: ScriptNode = find_child("Confetti")
 
 @onready var continue_btn: NinePatchRect = find_child("ContinueBtn")
@@ -71,6 +71,7 @@ func _ready():
 	if skip_scene or DataGlobals.has_save_data():
 		load_main_scene()
 		return
+	DataGlobals.load_metadata()
 	
 	# setup
 	bar_container.visible = false
@@ -256,7 +257,21 @@ func set_egg_desc(i: int = -1):
 		return
 	
 	var egg: EggEntry = placed_eggs[i]
-	egg_desc.text = EGG_FORMAT_STRING % [egg.name, "???"]
+	var hatches_list: Array[String] = []
+	
+	# build hatches list
+	for creature_entry: EggCreatureEntry in egg.hatches:
+		var uid = ResourceLoader.get_resource_uid(creature_entry.creature_type.resource_path)
+		if is_creature_known(uid):
+			var texture = creature_entry.creature_type.sprite_frames.get_frame_texture("idle", 0).resource_path
+			hatches_list.append("[img=25]%s[/img]" % texture)
+		else:
+			hatches_list.append("?")
+	egg_desc.text = EGG_FORMAT_STRING % [egg.name, ", ".join(hatches_list)]
+
+func is_creature_known(uid: int) -> bool:
+	var metadata = DataGlobals.metadata_last_loaded
+	return metadata.has(DataGlobals.CREATURES_DISCOVERED) and uid in metadata[DataGlobals.CREATURES_DISCOVERED]
 
 ## when one egg is selected from placed eggs
 func select_egg(egg: EggEntry, inx: int):
@@ -282,6 +297,26 @@ func select_egg(egg: EggEntry, inx: int):
 			var sprite_c: Control = placed_egg_sprites[i]
 			tween(sprite_c, "modulate", Color(1, 1, 1, 0), 0., .4)  # fade out
 			tween(sprite_c, "position", Vector2(sprite_c.position.x, sprite_c.position.y + 20), 0., .3)  # move down
+
+func de_select_egg():
+	selected_egg_inx = null
+	set_egg_desc()
+	manual_mouse_check()  # do check on all placed eggs
+
+func click_selected_egg():
+	bar.value += BAR_CLICK_ADDITION
+	
+	# rotation
+	tween(rotation_buffer, "value", 1, 0., .1, Tween.EASE_IN_OUT)  # tween to 1
+	tween(rotation_buffer, "value", 0, 0.1, .4, Tween.EASE_IN_OUT)  # tween to 0
+	
+	# sound
+	%SFX.pitch_scale = .5 + 2 * (bar.value / bar.max_value)
+	%SFX.play_sound("pop")
+	
+	# hatch!
+	if bar.value == bar.max_value:
+		hatch_egg()
 
 func hatch_egg():
 	%SFX.pitch_scale = 1.5
@@ -371,10 +406,36 @@ func finish_hatching(sprite_c: Control):
 	fade(bottom, false, .3)
 	
 	# spawn creature
-	example_creature.position = sprite_c.position + Vector2(0, -35)  # offset (may need to be different for each creature)
-	fade(example_creature, true)
-	tween(example_creature, "scale", Vector2(.25, .25), .3, .5).connect("finished", fire_confetti)
-	## SAVE SOMETHING HERE
+	var creature_hatched: CreatureType = pick_creature_to_hatch()
+	creature_sprite.sprite_frames = creature_hatched.sprite_frames
+	creature_sprite.animation = "baby"  # they *should* all have a baby animation
+	creature_sprite.play()
+	creature_sprite.position = sprite_c.position + Vector2(0, -35)  # offset to be centered (may need to be different for each creature)
+	fade(creature_sprite, true)
+	tween(creature_sprite, "scale", Vector2(.25, .25), .3, .5).connect("finished", fire_confetti)
+	
+	# save data
+	var uid = ResourceLoader.get_resource_uid(creature_hatched.resource_path)
+	DataGlobals.metadata_to_add[DataGlobals.CREATURES_DISCOVERED] = [uid]
+	DataGlobals.metadata_to_override[DataGlobals.CURRENT_CREATURE] = uid
+	## SAVE ONLY THE METADATA NOW
+
+## randomly pick a creature to hatch from the selected egg
+func pick_creature_to_hatch() -> CreatureType:
+	var weighted_choices: Array[CreatureType] = []
+	var add_weighted_choices = func(ignore_known: bool = true):
+		for egg_creature_entry: EggCreatureEntry in placed_eggs[selected_egg_inx].hatches:
+			var creature_type: CreatureType = egg_creature_entry.creature_type
+			var uid = ResourceLoader.get_resource_uid(creature_type.resource_path)
+			if ignore_known and is_creature_known(uid):
+				continue
+			for z in egg_creature_entry.weight:
+				weighted_choices.append(creature_type)
+	
+	add_weighted_choices.call()  # build list in unknown creatures
+	if weighted_choices.size() == 0:
+		add_weighted_choices.call(false)  # build list of known creatures
+	return weighted_choices.pick_random()
 
 ## generic scale of egg
 func scale_egg(inx: int, to_scale: Vector2, time: float = .5):
@@ -390,26 +451,6 @@ func fade(obj, fade_in: bool = true, delay: float = 0.):
 	var time = 1.0 if fade_in else .5
 	var _ease = Tween.EASE_IN_OUT if fade_in else Tween.EASE_OUT
 	return tween(obj, "modulate", col, delay, time, _ease)
-
-func de_select_egg():
-	selected_egg_inx = null
-	set_egg_desc()
-	manual_mouse_check()  # do check on all placed eggs
-
-func click_selected_egg():
-	bar.value += BAR_CLICK_ADDITION
-	
-	# rotation
-	tween(rotation_buffer, "value", 1, 0., .1, Tween.EASE_IN_OUT)  # tween to 1
-	tween(rotation_buffer, "value", 0, 0.1, .4, Tween.EASE_IN_OUT)  # tween to 0
-	
-	# sound
-	%SFX.pitch_scale = .5 + 2 * (bar.value / bar.max_value)
-	%SFX.play_sound("pop")
-	
-	# hatch!
-	if bar.value == bar.max_value:
-		hatch_egg()
 
 func tween_sprite_to_goal(goal: Vector2, scale_goal: Vector2 = BASE_SELECTED_EGG_SCALE, end_selection: bool = false):
 	var end_movement = func(sp: Control):
