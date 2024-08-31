@@ -67,7 +67,15 @@ func save_settings_data():
 ##    LOADING
 ## --------------
 
-## returns metadata
+## loads only the metadata line from save (if it exists)
+func load_metadata() -> Dictionary:
+	if has_save_data():
+		var save_file = FileAccess.open(Globals.SAVE_DATA_FILE, FileAccess.READ)
+		var file_lines: Array = bytes_to_var(save_file.get_var())
+		metadata_last_loaded = file_lines.pop_at(0)
+	return metadata_last_loaded
+
+## loads data, and passes it to saved nodes. returns metadata
 func load_data() -> Dictionary:
 	if has_save_data():
 		var save_file = FileAccess.open(Globals.SAVE_DATA_FILE, FileAccess.READ)
