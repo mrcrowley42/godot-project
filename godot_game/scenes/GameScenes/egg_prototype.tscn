@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=3 uid="uid://bl22rtkqnj1s7"]
 
 [ext_resource type="Script" path="res://scripts/game/egg_opening/egg_prototype.gd" id="1_0u5kd"]
-[ext_resource type="AudioStream" uid="uid://8ifwm2tjitur" path="res://sound_effects/yippee.mp3" id="2_70m0g"]
+[ext_resource type="AudioStream" uid="uid://duyklqjldkwn1" path="res://sound_effects/yippee.wav" id="2_70m0g"]
 [ext_resource type="Texture2D" uid="uid://cqerxt6jjic0u" path="res://images/egg/egg01.PNG" id="3_xrijt"]
 [ext_resource type="Texture2D" uid="uid://ddd55umdtwxcx" path="res://images/egg/egg02.PNG" id="4_14d6j"]
 [ext_resource type="Texture2D" uid="uid://do7dbsspir5oc" path="res://images/egg/egg03.PNG" id="5_2m43l"]
