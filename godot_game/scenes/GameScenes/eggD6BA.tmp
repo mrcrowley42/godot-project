@@ -1,0 +1,560 @@
+[gd_scene load_steps=49 format=3 uid="uid://cllomtwak1vy"]
+
+[ext_resource type="Script" path="res://scripts/game/egg_opening/egg_opening.gd" id="1_j41yb"]
+[ext_resource type="Resource" uid="uid://iew8c64p2g4" path="res://resources/eggs/purple_egg.tres" id="2_76prt"]
+[ext_resource type="Resource" uid="uid://8qkgq02pnyvq" path="res://resources/eggs/green_egg.tres" id="3_ckgoo"]
+[ext_resource type="Resource" uid="uid://xrht2i6qwx4s" path="res://resources/eggs/pink_egg.tres" id="4_8oa7j"]
+[ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="6_4e4a6"]
+[ext_resource type="Texture2D" uid="uid://kodwkhqgbclh" path="res://images/egg/egg-crack-1.png" id="6_a8aos"]
+[ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="7_crtsy"]
+[ext_resource type="Texture2D" uid="uid://bpr248rssut1k" path="res://images/egg/egg-crack-2.png" id="7_ika8w"]
+[ext_resource type="Shader" path="res://shaders/voronoi.gdshader" id="8_cwxax"]
+[ext_resource type="Texture2D" uid="uid://d4apajj2al24d" path="res://images/egg/egg-crack-3.png" id="8_rhfgm"]
+[ext_resource type="Texture2D" uid="uid://djwd23psem8vo" path="res://images/egg/egg-alpha-map.png" id="9_ac20n"]
+[ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="9_gm1pd"]
+[ext_resource type="Texture2D" uid="uid://dld1yhay54y36" path="res://icons/status/egg-fill.svg" id="10_acgju"]
+[ext_resource type="Script" path="res://scripts/game/egg_opening/egg_back_btn.gd" id="13_mvaqa"]
+[ext_resource type="Script" path="res://scripts/game/egg_opening/egg_continue_btn.gd" id="15_pne1v"]
+[ext_resource type="Texture2D" uid="uid://dqtjsny24a3p1" path="res://images/creature_sprites/angry-0.png" id="15_yxdat"]
+[ext_resource type="Texture2D" uid="uid://cq86852isqqkq" path="res://images/creature_sprites/angry-1.png" id="16_efmb7"]
+[ext_resource type="Texture2D" uid="uid://dd12vpparynjh" path="res://images/creature_sprites/angry-2.png" id="17_scuc7"]
+[ext_resource type="Texture2D" uid="uid://dwyq4ypjep2wb" path="res://images/creature_sprites/baby-0.png" id="18_tkq65"]
+[ext_resource type="Texture2D" uid="uid://dino0mqreujlr" path="res://images/creature_sprites/baby-1.png" id="19_hh1fo"]
+[ext_resource type="Texture2D" uid="uid://banu8mr1om6vj" path="res://images/creature_sprites/baby-2.png" id="20_vd0ba"]
+[ext_resource type="Texture2D" uid="uid://b3q3krfrwwvff" path="res://images/creature_sprites/chill-0.png" id="21_1v8rx"]
+[ext_resource type="Texture2D" uid="uid://k3q3fb85fm3h" path="res://images/creature_sprites/chill-1.png" id="22_dopsm"]
+[ext_resource type="Texture2D" uid="uid://dck4q0ce0c4mm" path="res://images/creature_sprites/chill-2.png" id="23_udoqc"]
+[ext_resource type="Texture2D" uid="uid://c44b8y8u8ne7w" path="res://images/creature_sprites/confused-0.png" id="24_prawp"]
+[ext_resource type="Texture2D" uid="uid://cqyltj7p4b1l7" path="res://images/creature_sprites/confused-1.png" id="25_woby8"]
+[ext_resource type="Texture2D" uid="uid://bcsj0ibb8s3y0" path="res://images/creature_sprites/confused-2.png" id="26_akkjy"]
+[ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://images/creature_sprites/little-guy.png" id="27_c0830"]
+[ext_resource type="Texture2D" uid="uid://4cfpam3be0g" path="res://images/creature_sprites/little-guy_2.png" id="28_oevk4"]
+[ext_resource type="Texture2D" uid="uid://diwxdoruu1sob" path="res://images/creature_sprites/little-guy_3.png" id="29_m42nv"]
+[ext_resource type="Texture2D" uid="uid://dxc4uprrmyny8" path="res://images/creature_sprites/sadge-0.png" id="30_n6b1i"]
+[ext_resource type="Texture2D" uid="uid://dxipq42e3qg72" path="res://images/creature_sprites/sadge-1.png" id="31_sfngk"]
+[ext_resource type="Texture2D" uid="uid://c8vn6brl68787" path="res://images/creature_sprites/sadge-2.png" id="32_o2hp7"]
+[ext_resource type="Script" path="res://scripts/sfx_man.gd" id="33_eitoc"]
+[ext_resource type="Script" path="res://scripts/game/egg_opening/confetti.gd" id="33_h0t5y"]
+[ext_resource type="Texture2D" uid="uid://cv4176j71328s" path="res://icons/volume-up-fill.svg" id="34_6fk7j"]
+[ext_resource type="AudioStream" uid="uid://dd72nxiptfej6" path="res://music/Clouds - Aether OST (Emile van Krieken).mp3" id="34_dy8vj"]
+[ext_resource type="Script" path="res://scripts/game/egg_opening/egg_scene_music.gd" id="35_4jftv"]
+[ext_resource type="Script" path="res://scripts/game/egg_opening/egg_music_btn.gd" id="35_ypdon"]
+[ext_resource type="Texture2D" uid="uid://d24nlsfksun0e" path="res://icons/music-note-mute.svg" id="36_etmx1"]
+[ext_resource type="Script" path="res://scripts/game/egg_opening/egg_sfx_btn.gd" id="37_ps1se"]
+
+[sub_resource type="Gradient" id="Gradient_wiwer"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 0.627451, 0.501961, 1, 1, 0.87451, 0.501961, 1, 0.647059, 0.831373, 0.415686, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8jkob"]
+shader = ExtResource("8_cwxax")
+shader_parameter/color = Vector4(0, 0, 0, 1)
+shader_parameter/pixel_size = 5.0
+shader_parameter/scale = 0.6
+shader_parameter/speed = 0.05
+shader_parameter/layer = 1.0
+shader_parameter/opacity = 0.15
+
+[sub_resource type="LabelSettings" id="LabelSettings_0ocei"]
+font_size = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pg8mm"]
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3yxpu"]
+bg_color = Color(0.865294, 0.372259, 0.373089, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 10
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_scray"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_yxdat")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_efmb7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_scuc7")
+}],
+"loop": true,
+"name": &"angry",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_tkq65")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_hh1fo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_vd0ba")
+}],
+"loop": true,
+"name": &"baby",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("21_1v8rx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_dopsm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_udoqc")
+}],
+"loop": true,
+"name": &"chill",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("24_prawp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_woby8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_akkjy")
+}],
+"loop": true,
+"name": &"confused",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("27_c0830")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_oevk4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_m42nv")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("30_n6b1i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_sfngk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_o2hp7")
+}],
+"loop": true,
+"name": &"sad",
+"speed": 4.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_38bvm"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.12381, 0.290476, 0.452381, 0.652381, 0.819048, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.482353, 0.321569, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0.509804, 1, 0.529412, 0, 0.745098, 1, 1, 1, 1, 1)
+
+[node name="EggOpening" type="Node2D"]
+script = ExtResource("1_j41yb")
+existing_eggs = Array[Resource("res://scripts/base_classses/egg_entry_class.gd")]([ExtResource("2_76prt"), ExtResource("3_ckgoo"), ExtResource("4_8oa7j")])
+egg_cracks = Array[Texture2D]([ExtResource("6_a8aos"), ExtResource("7_ika8w"), ExtResource("8_rhfgm")])
+egg_alpha_map = ExtResource("9_ac20n")
+bar_progress_color = SubResource("Gradient_wiwer")
+metadata/_edit_vertical_guides_ = [540.0, 64.0, 472.0, 128.0, 408.0]
+metadata/_edit_horizontal_guides_ = [675.0, 64.0, 608.0, 128.0, 544.0]
+
+[node name="SelectionAreaold" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 43.0
+offset_top = 220.0
+offset_right = 498.0
+offset_bottom = 372.0
+metadata/_edit_use_anchors_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="TransLayer" type="CanvasLayer" parent="CanvasLayer"]
+layer = 10
+
+[node name="Transition" type="Sprite2D" parent="CanvasLayer/TransLayer"]
+position = Vector2(270, 1200)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_gm1pd")
+
+[node name="BG" type="NinePatchRect" parent="CanvasLayer"]
+offset_right = 1080.0
+offset_bottom = 1350.0
+scale = Vector2(0.5, 0.5)
+mouse_filter = 1
+texture = ExtResource("6_4e4a6")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+metadata/_edit_use_anchors_ = true
+
+[node name="TitleContainer" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="TitleBox" type="NinePatchRect" parent="CanvasLayer/TitleContainer"]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 144.0
+offset_right = 1162.0
+offset_bottom = 270.0
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_4e4a6")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/TitleContainer/TitleBox"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 698.0
+offset_bottom = 110.0
+color = Color(0, 0, 0, 0.388235)
+metadata/_edit_use_anchors_ = true
+
+[node name="SelectTitle" type="RichTextLabel" parent="CanvasLayer/TitleContainer"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 95.0
+offset_right = 439.0
+offset_bottom = 135.0
+theme = ExtResource("7_crtsy")
+bbcode_enabled = true
+text = "[font_size=25][center][wave amp=30 freq=-3]%s!"
+fit_content = true
+metadata/_edit_use_anchors_ = true
+
+[node name="DescContainer" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="EggDescBox" type="NinePatchRect" parent="CanvasLayer/DescContainer"]
+layout_mode = 0
+offset_left = 446.0
+offset_top = 573.0
+offset_right = 1160.0
+offset_bottom = 740.0
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_4e4a6")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/DescContainer/EggDescBox"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 698.0
+offset_bottom = 151.0
+color = Color(0, 0, 0, 0.388235)
+metadata/_edit_use_anchors_ = true
+
+[node name="EggDesc" type="RichTextLabel" parent="CanvasLayer/DescContainer"]
+layout_mode = 0
+offset_left = 98.0
+offset_top = 504.0
+offset_right = 439.0
+offset_bottom = 564.0
+theme = ExtResource("7_crtsy")
+bbcode_enabled = true
+text = "[center]..."
+metadata/_edit_use_anchors_ = true
+
+[node name="DisplayBox" type="NinePatchRect" parent="CanvasLayer"]
+offset_left = 472.0
+offset_top = 442.0
+offset_right = 1288.0
+offset_bottom = 952.0
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_4e4a6")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+metadata/_edit_use_anchors_ = true
+
+[node name="whiteBg" type="ColorRect" parent="CanvasLayer/DisplayBox"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 800.0
+offset_bottom = 494.0
+metadata/_edit_use_anchors_ = true
+
+[node name="shader" type="ColorRect" parent="CanvasLayer/DisplayBox"]
+material = SubResource("ShaderMaterial_8jkob")
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 800.0
+offset_bottom = 494.0
+color = Color(1, 1, 1, 0.270588)
+metadata/_edit_use_anchors_ = true
+
+[node name="BackBtn" type="NinePatchRect" parent="CanvasLayer"]
+visible = false
+offset_left = 202.0
+offset_top = 600.0
+offset_right = 452.0
+offset_bottom = 690.0
+scale = Vector2(0.5, 0.5)
+mouse_filter = 0
+texture = ExtResource("6_4e4a6")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+script = ExtResource("13_mvaqa")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="CanvasLayer/BackBtn"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.08
+anchor_bottom = 0.2
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 214.0
+offset_bottom = 56.0
+theme = ExtResource("7_crtsy")
+text = "Back"
+label_settings = SubResource("LabelSettings_0ocei")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="EggBarContainer" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="EggIcon" type="Control" parent="CanvasLayer/EggBarContainer"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 171.0
+offset_top = 532.0
+offset_right = 199.0
+offset_bottom = 532.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/EggBarContainer/EggIcon"]
+modulate = Color(0.96, 0.96, 0.96, 1)
+position = Vector2(10.008, 0)
+scale = Vector2(0.688, 0.688)
+texture = ExtResource("10_acgju")
+
+[node name="Bar" type="ProgressBar" parent="CanvasLayer/EggBarContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(160, 23)
+layout_mode = 0
+offset_left = 202.008
+offset_top = 520.0
+offset_right = 362.008
+offset_bottom = 543.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_pg8mm")
+theme_override_styles/fill = SubResource("StyleBoxFlat_3yxpu")
+max_value = 1000.0
+step = 1.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="ContinueBtn" type="NinePatchRect" parent="CanvasLayer"]
+visible = false
+offset_left = 202.0
+offset_top = 600.0
+offset_right = 452.0
+offset_bottom = 690.0
+scale = Vector2(0.5, 0.5)
+mouse_filter = 0
+texture = ExtResource("6_4e4a6")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+script = ExtResource("15_pne1v")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="CanvasLayer/ContinueBtn"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.08
+anchor_bottom = 0.2
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 214.0
+offset_bottom = 56.0
+theme = ExtResource("7_crtsy")
+text = "Continue"
+label_settings = SubResource("LabelSettings_0ocei")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ExampleCreature" type="AnimatedSprite2D" parent="CanvasLayer"]
+visible = false
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_scray")
+animation = &"baby"
+autoplay = "baby"
+
+[node name="Confetti" type="Node2D" parent="CanvasLayer"]
+script = ExtResource("33_h0t5y")
+
+[node name="ConfetL" type="CPUParticles2D" parent="CanvasLayer/Confetti"]
+position = Vector2(92, 430)
+emitting = false
+amount = 20
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+direction = Vector2(0.1, -1)
+spread = 6.0
+initial_velocity_min = 400.0
+initial_velocity_max = 800.0
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+scale_amount_min = 10.0
+scale_amount_max = 15.0
+color_initial_ramp = SubResource("Gradient_38bvm")
+hue_variation_min = 1.0
+hue_variation_max = 1.0
+
+[node name="ConfetR" type="CPUParticles2D" parent="CanvasLayer/Confetti"]
+position = Vector2(446, 430)
+emitting = false
+amount = 20
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+direction = Vector2(-0.1, -1)
+spread = 6.0
+initial_velocity_min = 400.0
+initial_velocity_max = 800.0
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+scale_amount_min = 10.0
+scale_amount_max = 15.0
+color_initial_ramp = SubResource("Gradient_38bvm")
+hue_variation_min = 1.0
+hue_variation_max = 1.0
+
+[node name="MusicBtn" type="NinePatchRect" parent="CanvasLayer"]
+offset_left = 484.0
+offset_top = 16.0
+offset_right = 564.0
+offset_bottom = 96.0
+scale = Vector2(0.5, 0.5)
+mouse_filter = 0
+texture = ExtResource("6_4e4a6")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+script = ExtResource("35_ypdon")
+metadata/_edit_use_anchors_ = true
+
+[node name="icon" type="Sprite2D" parent="CanvasLayer/MusicBtn"]
+position = Vector2(40, 40)
+scale = Vector2(1.375, 1.375)
+texture = ExtResource("36_etmx1")
+
+[node name="SfxBtn" type="NinePatchRect" parent="CanvasLayer"]
+offset_left = 432.0
+offset_top = 16.0
+offset_right = 512.0
+offset_bottom = 96.0
+scale = Vector2(0.5, 0.5)
+mouse_filter = 0
+texture = ExtResource("6_4e4a6")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+script = ExtResource("37_ps1se")
+metadata/_edit_use_anchors_ = true
+
+[node name="icon" type="Sprite2D" parent="CanvasLayer/SfxBtn"]
+position = Vector2(40, 40)
+scale = Vector2(1.375, 1.375)
+texture = ExtResource("34_6fk7j")
+
+[node name="SelectionArea" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 72.0
+offset_top = 249.0
+offset_right = 463.0
+offset_bottom = 385.0
+mouse_filter = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="HatchTimer" type="Timer" parent="."]
+wait_time = 0.8
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+max_polyphony = 4
+bus = &"SFX"
+script = ExtResource("33_eitoc")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("34_dy8vj")
+autoplay = true
+bus = &"Music"
+script = ExtResource("35_4jftv")
+
+[connection signal="gui_input" from="CanvasLayer/BackBtn" to="CanvasLayer/BackBtn" method="_on_gui_input"]
+[connection signal="gui_input" from="CanvasLayer/ContinueBtn" to="CanvasLayer/ContinueBtn" method="_on_gui_input"]
+[connection signal="gui_input" from="CanvasLayer/MusicBtn" to="CanvasLayer/MusicBtn" method="_on_gui_input"]
+[connection signal="gui_input" from="CanvasLayer/SfxBtn" to="CanvasLayer/SfxBtn" method="_on_gui_input"]
+[connection signal="finished" from="Music" to="Music" method="_on_finished"]

@@ -1,10 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://c5dr54dk0502t"]
+[gd_scene load_steps=14 format=3 uid="uid://c5dr54dk0502t"]
 
 [ext_resource type="Script" path="res://totris/Totris.gd" id="1_82aiy"]
 [ext_resource type="Script" path="res://totris/TotrisLogic.gd" id="2_7s788"]
 [ext_resource type="Texture2D" uid="uid://cgfufcnmd24wf" path="res://UI stuff/Green Palette/ui_green_tetris.png" id="2_de7pv"]
 [ext_resource type="Shader" path="res://shaders/grid.gdshader" id="3_udord"]
-[ext_resource type="Script" path="res://scripts/tetrisGridBG.gd" id="4_2wjys"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="5_d7726"]
 [ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="6_fphhh"]
 [ext_resource type="Script" path="res://scripts/sfx_man.gd" id="7_6nelh"]
@@ -158,7 +157,6 @@ offset_top = 37.0
 offset_right = 420.0
 offset_bottom = 637.0
 color = Color(0, 0, 0, 1)
-script = ExtResource("4_2wjys")
 
 [node name="TopOverlay" type="CanvasLayer" parent="UI/Control"]
 layer = 12

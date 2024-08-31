@@ -1,6 +1,6 @@
-[gd_scene load_steps=40 format=3 uid="uid://cllomtwak1vy"]
+[gd_scene load_steps=49 format=3 uid="uid://cllomtwak1vy"]
 
-[ext_resource type="Script" path="res://scripts/MainGameScripts/egg_opening.gd" id="1_j41yb"]
+[ext_resource type="Script" path="res://scripts/game/egg_opening/egg_opening.gd" id="1_j41yb"]
 [ext_resource type="Resource" uid="uid://iew8c64p2g4" path="res://resources/eggs/purple_egg.tres" id="2_76prt"]
 [ext_resource type="Resource" uid="uid://8qkgq02pnyvq" path="res://resources/eggs/green_egg.tres" id="3_ckgoo"]
 [ext_resource type="Resource" uid="uid://xrht2i6qwx4s" path="res://resources/eggs/pink_egg.tres" id="4_8oa7j"]
@@ -13,6 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://djwd23psem8vo" path="res://images/egg/egg-alpha-map.png" id="9_ac20n"]
 [ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="9_gm1pd"]
 [ext_resource type="Texture2D" uid="uid://dld1yhay54y36" path="res://icons/status/egg-fill.svg" id="10_acgju"]
+[ext_resource type="Script" path="res://scripts/game/egg_opening/egg_back_btn.gd" id="13_mvaqa"]
+[ext_resource type="Script" path="res://scripts/game/egg_opening/egg_continue_btn.gd" id="15_pne1v"]
 [ext_resource type="Texture2D" uid="uid://dqtjsny24a3p1" path="res://images/creature_sprites/angry-0.png" id="15_yxdat"]
 [ext_resource type="Texture2D" uid="uid://cq86852isqqkq" path="res://images/creature_sprites/angry-1.png" id="16_efmb7"]
 [ext_resource type="Texture2D" uid="uid://dd12vpparynjh" path="res://images/creature_sprites/angry-2.png" id="17_scuc7"]
@@ -31,7 +33,14 @@
 [ext_resource type="Texture2D" uid="uid://dxc4uprrmyny8" path="res://images/creature_sprites/sadge-0.png" id="30_n6b1i"]
 [ext_resource type="Texture2D" uid="uid://dxipq42e3qg72" path="res://images/creature_sprites/sadge-1.png" id="31_sfngk"]
 [ext_resource type="Texture2D" uid="uid://c8vn6brl68787" path="res://images/creature_sprites/sadge-2.png" id="32_o2hp7"]
-[ext_resource type="Script" path="res://scripts/MainGameScripts/EggScene/confetti.gd" id="33_h0t5y"]
+[ext_resource type="Texture2D" uid="uid://dn8cpibgvjwup" path="res://icons/music-note.svg" id="33_a6fxr"]
+[ext_resource type="Script" path="res://scripts/sfx_man.gd" id="33_eitoc"]
+[ext_resource type="Script" path="res://scripts/game/egg_opening/confetti.gd" id="33_h0t5y"]
+[ext_resource type="AudioStream" uid="uid://dd72nxiptfej6" path="res://music/Clouds - Aether OST (Emile van Krieken).mp3" id="34_dy8vj"]
+[ext_resource type="Script" path="res://scripts/game/egg_opening/egg_scene_music.gd" id="35_4jftv"]
+[ext_resource type="Script" path="res://scripts/game/egg_opening/egg_music_btn.gd" id="35_ypdon"]
+[ext_resource type="Script" path="res://scripts/game/egg_opening/egg_sfx_btn.gd" id="37_ps1se"]
+[ext_resource type="Texture2D" uid="uid://pfr6wdx80m45" path="res://icons/volume-fill.svg" id="38_bui3m"]
 
 [sub_resource type="Gradient" id="Gradient_wiwer"]
 offsets = PackedFloat32Array(0, 0.5, 1)
@@ -322,7 +331,7 @@ offset_bottom = 494.0
 color = Color(1, 1, 1, 0.270588)
 metadata/_edit_use_anchors_ = true
 
-[node name="BackButton" type="NinePatchRect" parent="CanvasLayer"]
+[node name="BackBtn" type="NinePatchRect" parent="CanvasLayer"]
 visible = false
 offset_left = 202.0
 offset_top = 600.0
@@ -335,9 +344,10 @@ patch_margin_left = 16
 patch_margin_top = 16
 patch_margin_right = 16
 patch_margin_bottom = 16
+script = ExtResource("13_mvaqa")
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="CanvasLayer/BackButton"]
+[node name="Label" type="Label" parent="CanvasLayer/BackBtn"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.08
@@ -395,7 +405,7 @@ step = 1.0
 show_percentage = false
 metadata/_edit_use_anchors_ = true
 
-[node name="ContinueButton" type="NinePatchRect" parent="CanvasLayer"]
+[node name="ContinueBtn" type="NinePatchRect" parent="CanvasLayer"]
 visible = false
 offset_left = 202.0
 offset_top = 600.0
@@ -408,9 +418,10 @@ patch_margin_left = 16
 patch_margin_top = 16
 patch_margin_right = 16
 patch_margin_bottom = 16
+script = ExtResource("15_pne1v")
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="CanvasLayer/ContinueButton"]
+[node name="Label" type="Label" parent="CanvasLayer/ContinueBtn"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.08
@@ -476,6 +487,46 @@ color_initial_ramp = SubResource("Gradient_38bvm")
 hue_variation_min = 1.0
 hue_variation_max = 1.0
 
+[node name="MusicBtn" type="NinePatchRect" parent="CanvasLayer"]
+offset_left = 484.0
+offset_top = 16.0
+offset_right = 564.0
+offset_bottom = 96.0
+scale = Vector2(0.5, 0.5)
+mouse_filter = 0
+texture = ExtResource("6_4e4a6")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+script = ExtResource("35_ypdon")
+metadata/_edit_use_anchors_ = true
+
+[node name="icon" type="Sprite2D" parent="CanvasLayer/MusicBtn"]
+position = Vector2(40, 40)
+scale = Vector2(1.375, 1.375)
+texture = ExtResource("33_a6fxr")
+
+[node name="SfxBtn" type="NinePatchRect" parent="CanvasLayer"]
+offset_left = 432.0
+offset_top = 16.0
+offset_right = 512.0
+offset_bottom = 96.0
+scale = Vector2(0.5, 0.5)
+mouse_filter = 0
+texture = ExtResource("6_4e4a6")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+script = ExtResource("37_ps1se")
+metadata/_edit_use_anchors_ = true
+
+[node name="icon" type="Sprite2D" parent="CanvasLayer/SfxBtn"]
+position = Vector2(40, 40)
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("38_bui3m")
+
 [node name="SelectionArea" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -488,3 +539,22 @@ metadata/_edit_use_anchors_ = true
 
 [node name="HatchTimer" type="Timer" parent="."]
 wait_time = 0.8
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+max_polyphony = 4
+bus = &"SFX"
+script = ExtResource("33_eitoc")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("34_dy8vj")
+autoplay = true
+bus = &"Music"
+script = ExtResource("35_4jftv")
+
+[connection signal="gui_input" from="CanvasLayer/BackBtn" to="CanvasLayer/BackBtn" method="_on_gui_input"]
+[connection signal="gui_input" from="CanvasLayer/ContinueBtn" to="CanvasLayer/ContinueBtn" method="_on_gui_input"]
+[connection signal="gui_input" from="CanvasLayer/MusicBtn" to="CanvasLayer/MusicBtn" method="_on_gui_input"]
+[connection signal="gui_input" from="CanvasLayer/SfxBtn" to="CanvasLayer/SfxBtn" method="_on_gui_input"]
+[connection signal="finished" from="Music" to="Music" method="_on_finished"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=3 uid="uid://bl22rtkqnj1s7"]
 
-[ext_resource type="Script" path="res://scripts/MainGameScripts/EggScene/egg_prototype.gd" id="1_0u5kd"]
+[ext_resource type="Script" path="res://scripts/game/egg_opening/egg_prototype.gd" id="1_0u5kd"]
 [ext_resource type="AudioStream" uid="uid://8ifwm2tjitur" path="res://sound_effects/yippee.mp3" id="2_70m0g"]
 [ext_resource type="Texture2D" uid="uid://cqerxt6jjic0u" path="res://images/egg/egg01.PNG" id="3_xrijt"]
 [ext_resource type="Texture2D" uid="uid://ddd55umdtwxcx" path="res://images/egg/egg02.PNG" id="4_14d6j"]
@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://4cfpam3be0g" path="res://images/creature_sprites/little-guy_2.png" id="8_5mdcr"]
 [ext_resource type="Texture2D" uid="uid://diwxdoruu1sob" path="res://images/creature_sprites/little-guy_3.png" id="9_h8sqb"]
 [ext_resource type="Texture2D" uid="uid://cebeodlplwmw8" path="res://images/creature_sprites/Flopps/IMG_0011.PNG" id="10_v74pg"]
-[ext_resource type="Script" path="res://scripts/MainGameScripts/EggScene/confetti.gd" id="11_co15r"]
+[ext_resource type="Script" path="res://scripts/game/egg_opening/confetti.gd" id="11_co15r"]
 [ext_resource type="AudioStream" uid="uid://dnau787og6qky" path="res://sound_effects/EggCrack.wav" id="12_4xcj4"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="13_koe7n"]
 

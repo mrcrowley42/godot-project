@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dd72nxiptfej6"
+path="res://.godot/imported/Clouds - Aether OST (Emile van Krieken).mp3-1eb5a8130fb91c74112f8bc3e2528595.mp3str"
+
+[deps]
+
+source_file="res://music/Clouds - Aether OST (Emile van Krieken).mp3"
+dest_files=["res://.godot/imported/Clouds - Aether OST (Emile van Krieken).mp3-1eb5a8130fb91c74112f8bc3e2528595.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

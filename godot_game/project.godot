@@ -21,8 +21,8 @@ buses/default_bus_layout="res://resources/default_bus_layout.tres"
 
 [autoload]
 
-Globals="*res://scripts/global_scripts/Globals.gd"
-DataGlobals="*res://scripts/global_scripts/DataGlobals.gd"
+Globals="*res://scripts/global/Globals.gd"
+DataGlobals="*res://scripts/global/DataGlobals.gd"
 
 [display]
 
