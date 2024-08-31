@@ -175,7 +175,12 @@ func add_collision_areas(sprite_cl: Control, i: int):
 
 ## call for each egg as it is spawned
 func do_opening_animation(sprite_c: Control, i: int, is_last_egg: bool):
+	var play_spawn_sound = func():
+		%SFX.pitch_scale = 1. + i * .1
+		%SFX.play_sound("pop")
+	
 	var diff = .2 * i
+	tween(FloatBuffer.new(0), "value", 0, 1. + diff, .1).connect("finished", play_spawn_sound)  # spawning sound effect
 	tween(sprite_c, "modulate", Color.WHITE, 1. + diff, .5, Tween.EASE_IN_OUT)  # fade in
 	tween(sprite_c, "position", Vector2(sprite_c.position.x, sprite_c.position.y - 20), 1.2 + diff, .6)  # move up
 	var move_down_tween = tween(sprite_c, "position", Vector2(sprite_c.position.x, sprite_c.position.y), 1.4 + diff, .4, Tween.EASE_IN)  # move down
@@ -255,6 +260,8 @@ func set_egg_desc(i: int = -1):
 
 ## when one egg is selected from placed eggs
 func select_egg(egg: EggEntry, inx: int):
+	%SFX.pitch_scale = 1.
+	%SFX.play_sound("pop")
 	can_interact = false
 	selected_egg_inx = inx
 	
@@ -277,6 +284,8 @@ func select_egg(egg: EggEntry, inx: int):
 			tween(sprite_c, "position", Vector2(sprite_c.position.x, sprite_c.position.y + 20), 0., .3)  # move down
 
 func hatch_egg():
+	%SFX.pitch_scale = 1.5
+	%SFX.play_sound("confirm")
 	var sprite_c: Control = placed_egg_sprites[selected_egg_inx]
 	set_can_interact(false)
 	hatching = true
@@ -328,17 +337,27 @@ func progress_hatching():
 	# egg rotation
 	rotation_buffer.value = 1.
 	tween(rotation_buffer, "value", 0, 0., .4, Tween.EASE_IN_OUT)  # tween to 0
+	
+	# sfx
+	%SFX.pitch_scale = 1. + (hatch_progress - 1) * .2
+	%SFX.play_sound("egg_crack_2")
 
 func finish_hatching(sprite_c: Control):
 	var set_interation = func():  # so no accidently skipping creature reveal
 		set_can_interact(true)
 	var fire_confetti = func():
+		%SFX.pitch_scale = 1.
+		%SFX.play_sound("yippe")
 		confetti.fire()
 	
 	finished_hatching = true
 	hatch_timer.stop()
 	egg_desc.text = "[center][u]Some Creature!"
 	fade(continue_btn).connect("finished", set_interation)
+	
+	# sfx
+	%SFX.pitch_scale = 1.5
+	%SFX.play_sound("egg_crack_1")
 	
 	# open egg
 	var top: Control = sprite_c.get_child(0)
@@ -383,6 +402,10 @@ func click_selected_egg():
 	# rotation
 	tween(rotation_buffer, "value", 1, 0., .1, Tween.EASE_IN_OUT)  # tween to 1
 	tween(rotation_buffer, "value", 0, 0.1, .4, Tween.EASE_IN_OUT)  # tween to 0
+	
+	# sound
+	%SFX.pitch_scale = .5 + 2 * (bar.value / bar.max_value)
+	%SFX.play_sound("pop")
 	
 	# hatch!
 	if bar.value == bar.max_value:

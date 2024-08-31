@@ -5,6 +5,7 @@ extends NinePatchRect
 ## bring back egg selection
 func _on_gui_input(event):
 	if parent.can_interact and parent.selected_egg_inx != null and event.is_pressed():
+		%SFX.pitch_scale = 1.  # reset
 		%SFX.play_sound("click")
 		parent.set_can_interact(false)
 		parent.fade(self, false)

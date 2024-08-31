@@ -439,6 +439,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="ExampleCreature" type="AnimatedSprite2D" parent="CanvasLayer"]
 visible = false
+texture_filter = 1
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_scray")
 animation = &"baby"
@@ -542,7 +543,7 @@ wait_time = 0.8
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-max_polyphony = 4
+max_polyphony = 6
 bus = &"SFX"
 script = ExtResource("33_eitoc")
 
