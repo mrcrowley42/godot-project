@@ -1,5 +1,8 @@
 extends Node
 
+const LAST_SAVED = "last_saved"
+const CURRENT_CREATURE = "current_creature"
+const CREATURES_DISCOVERED = "creatures_discovered"
 const SECTION = "section"
 const PATH = "path"
 const DATA = "data"
@@ -8,6 +11,10 @@ const LOAD = "load"
 
 ## storage of the metadata that was last loaded from the save file
 var metadata_last_loaded: Dictionary = {}
+## metadata to be overriden on next save (override the current metadata for something new)
+var metadata_to_override: Dictionary = {}
+## metadata to be added to on next save (e.g. to be appended to a list)
+var metadata_to_add: Dictionary = {}
 
 func has_save_data() -> bool:
 	return FileAccess.file_exists(Globals.SAVE_DATA_FILE)
@@ -19,16 +26,33 @@ func has_settings_data() -> bool:
 ##    SAVING
 ## --------------
 
+func generate_metadata_to_save() -> Dictionary:
+	var get_if_exists = func(key: String, fallback, check_for_override: bool = false):
+		if check_for_override and metadata_to_override.has(key):
+			return metadata_to_override[key]  # old value is to be overridden, return new value
+		return metadata_last_loaded[key] if metadata_last_loaded.has(key) else fallback
+	
+	var get_and_check_for_addition = func(key: String, fallback):
+		var val = get_if_exists.call(key, fallback)
+		if metadata_to_add.has(key):
+			val += metadata_to_add[key]  # generically (and unsafely) add to old value
+		return val
+	
+	return {
+		LAST_SAVED: Time.get_unix_time_from_system(),
+		CURRENT_CREATURE: get_if_exists.call(CURRENT_CREATURE, null, true),
+		CREATURES_DISCOVERED: get_and_check_for_addition.call(CREATURES_DISCOVERED, [])
+	}
+
 # save file structure:
 # line 1  = metadata
 # line 2+ = node data  (each node is assigned its own line)
 func save_data():
 	var save_file = FileAccess.open(Globals.SAVE_DATA_FILE, FileAccess.WRITE)
 	var save_nodes = get_tree().get_nodes_in_group(Globals.SAVE_DATA_GROUP)
-	var all_data = []
-
-	var metadata = {"last_opened": Time.get_unix_time_from_system()}
-	all_data.append(metadata)
+	var all_data = [generate_metadata_to_save()]  # metadata is first
+	metadata_to_override.clear()
+	metadata_to_add.clear()
 
 	# save node data
 	for node in save_nodes:
@@ -67,7 +91,15 @@ func save_settings_data():
 ##    LOADING
 ## --------------
 
-## returns metadata
+## loads only the metadata line from save (if it exists)
+func load_metadata() -> Dictionary:
+	if has_save_data():
+		var save_file = FileAccess.open(Globals.SAVE_DATA_FILE, FileAccess.READ)
+		var file_lines: Array = bytes_to_var(save_file.get_var())
+		metadata_last_loaded = file_lines.pop_at(0)
+	return metadata_last_loaded
+
+## loads data, and passes it to saved nodes. returns metadata
 func load_data() -> Dictionary:
 	if has_save_data():
 		var save_file = FileAccess.open(Globals.SAVE_DATA_FILE, FileAccess.READ)
