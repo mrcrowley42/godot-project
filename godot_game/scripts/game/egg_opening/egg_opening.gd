@@ -41,6 +41,7 @@ class_name EggOpening extends ScriptNode
 const BAR_CLICK_ADDITION: int = 100
 const BAR_DRAIN_AMOUNT: int = 200
 const EPSILON: float = 0.0001
+const DISPLAY_BOX_ADITION: Vector2 = Vector2(0, 240)
 const STRING_SELECT_YOUR_EGG: String = "Select your egg"
 const NO_EGG_FORMAT_STRING: String = "[center]%s"
 const EGG_FORMAT_STRING: String = "[center][u]%s[/u]\nHatches: %s"
@@ -51,6 +52,7 @@ const HOVER_EGG_SCALE: Vector2 = Vector2(2., 2.)
 const BASE_SELECTED_EGG_SCALE: Vector2 = Vector2(2.2, 2.2)
 const MAX_SELECTED_EGG_SCALE: Vector2 = Vector2(3, 3)
 const HOVER_SELECTED_EGG_ADDITION: Vector2 = Vector2(.2, .2)
+const CREATURE_PLACEMENT_OFFSET: Vector2 = Vector2(0, -35)
 
 var selection_area_center: Vector2
 var select_title_text: String
@@ -68,29 +70,35 @@ var selected_egg_inx = null  # int
 var scale_addition: Vector2 = Vector2(0, 0)
 
 func _ready():
-	if skip_scene or DataGlobals.has_save_data():
-		load_main_scene()
-		return
 	DataGlobals.load_metadata()
+	if skip_scene or DataGlobals.has_save_data():
+		if !DataGlobals.has_only_metadata():
+			load_main_scene()
+			return
+		else:
+			instant_open_to_continue_screen()
+			return
 	
 	# setup
 	bar_container.visible = false
 	continue_btn.visible = false
 	back_btn.visible = false
 	select_title_text = selection_title.text
-	selection_title.text = select_title_text % [STRING_SELECT_YOUR_EGG]
-	
-	# transition
-	trans_img.position = bg.position + (bg.size * bg.scale) * .5
-	tween(trans_img, "position", trans_img.position + Vector2(0, 1000), .5, 1.5)
+	selection_title.text = select_title_text % STRING_SELECT_YOUR_EGG
 	
 	# eggs
 	selection_area_center = selection_area.position + selection_area.size * .5
 	spawn_eggs()
+	
+	do_opening_transition()
 
 func load_main_scene():
 	await get_tree().process_frame
 	get_tree().change_scene_to_file("res://scenes/GameScenes/main.tscn")
+
+func do_opening_transition():
+	trans_img.position = bg.position + (bg.size * bg.scale) * .5
+	return tween(trans_img, "position", trans_img.position + Vector2(0, 1000), .5, 1.5)
 
 ## structure of egg:
 ## - Control  (scale & move this, rotate for centeral rotation)
@@ -120,7 +128,7 @@ func spawn_eggs():
 	for i: int in eggs_to_place.size():
 		var egg: EggEntry = eggs_to_place[i]
 		var sprite_c: Control = Control.new()
-		sprite_c.name = "egg-%s" % [i]
+		sprite_c.name = "egg-%s" % i
 		
 		# add top and bottom images of egg
 		for x: int in 2:
@@ -253,7 +261,7 @@ func mouse_clicked(_viewport, event: InputEvent, _shape_idx, i):
 ## when hovering over a placed egg
 func set_egg_desc(i: int = -1):
 	if i < 0:
-		egg_desc.text = NO_EGG_FORMAT_STRING % ["..."]
+		egg_desc.text = NO_EGG_FORMAT_STRING % "..."
 		return
 	
 	var egg: EggEntry = placed_eggs[i]
@@ -269,9 +277,9 @@ func set_egg_desc(i: int = -1):
 			hatches_list.append("?")
 	egg_desc.text = EGG_FORMAT_STRING % [egg.name, ", ".join(hatches_list)]
 
-func is_creature_known(uid: int) -> bool:
+func is_creature_known(creature_type_uid: int) -> bool:
 	var metadata = DataGlobals.metadata_last_loaded
-	return metadata.has(DataGlobals.CREATURES_DISCOVERED) and uid in metadata[DataGlobals.CREATURES_DISCOVERED]
+	return metadata.has(DataGlobals.CREATURES_DISCOVERED) and creature_type_uid in metadata[DataGlobals.CREATURES_DISCOVERED]
 
 ## when one egg is selected from placed eggs
 func select_egg(egg: EggEntry, inx: int):
@@ -281,7 +289,7 @@ func select_egg(egg: EggEntry, inx: int):
 	selected_egg_inx = inx
 	
 	# set labels
-	selection_title.text = select_title_text % [egg.name]
+	selection_title.text = select_title_text % egg.name
 	egg_desc.text = ""
 	bar.value = 0  # reset
 	fade(back_btn)
@@ -332,15 +340,14 @@ func hatch_egg():
 	set_egg_desc()  # "..."
 	
 	# scale display box
-	var addition = Vector2(0, 240)
-	tween(display_box, "size", display_box.size + addition, 0.1, .5)
-	tween(display_bg, "size", display_bg.size + addition, 0.1, .5)
-	tween(display_shader, "size", display_shader.size + addition, 0.1, .5)
+	tween(display_box, "size", display_box.size + DISPLAY_BOX_ADITION, 0.1, .5)
+	tween(display_bg, "size", display_bg.size + DISPLAY_BOX_ADITION, 0.1, .5)
+	tween(display_shader, "size", display_shader.size + DISPLAY_BOX_ADITION, 0.1, .5)
 	tween(shader_area.material, "shader_parameter/color", Vector4(0, 0, 0, 1), 0.1, .5)
 	
 	# move egg
 	sprite_c.rotation = 0
-	tween(sprite_c, "position", sprite_c.position - addition * .25, .1, .5)
+	tween(sprite_c, "position", sprite_c.position - DISPLAY_BOX_ADITION * .25, .1, .5)
 	
 	# timer
 	hatch_timer.start()
@@ -387,7 +394,6 @@ func finish_hatching(sprite_c: Control):
 	
 	finished_hatching = true
 	hatch_timer.stop()
-	egg_desc.text = "[center][u]Some Creature!"
 	fade(continue_btn).connect("finished", set_interation)
 	
 	# sfx
@@ -407,18 +413,16 @@ func finish_hatching(sprite_c: Control):
 	
 	# spawn creature
 	var creature_hatched: CreatureType = pick_creature_to_hatch()
-	creature_sprite.sprite_frames = creature_hatched.sprite_frames
-	creature_sprite.animation = "baby"  # they *should* all have a baby animation
-	creature_sprite.play()
-	creature_sprite.position = sprite_c.position + Vector2(0, -35)  # offset to be centered (may need to be different for each creature)
+	spawn_creature(creature_hatched, sprite_c.position)
 	fade(creature_sprite, true)
 	tween(creature_sprite, "scale", Vector2(.25, .25), .3, .5).connect("finished", fire_confetti)
+	egg_desc.text = "[center][u]%s" % creature_hatched.creature_name
 	
 	# save data
 	var uid = ResourceLoader.get_resource_uid(creature_hatched.resource_path)
 	DataGlobals.metadata_to_add[DataGlobals.CREATURES_DISCOVERED] = [uid]
 	DataGlobals.metadata_to_override[DataGlobals.CURRENT_CREATURE] = uid
-	## SAVE ONLY THE METADATA NOW
+	DataGlobals.save_only_metadata()  # SAVE!
 
 ## randomly pick a creature to hatch from the selected egg
 func pick_creature_to_hatch() -> CreatureType:
@@ -436,6 +440,33 @@ func pick_creature_to_hatch() -> CreatureType:
 	if weighted_choices.size() == 0:
 		add_weighted_choices.call(false)  # build list of known creatures
 	return weighted_choices.pick_random()
+
+## for when first loading in and continue button wasn't pressed before game was closed last
+func instant_open_to_continue_screen():
+	do_opening_transition().connect("finished", set_can_interact.bind(true))
+	var metadata = DataGlobals.metadata_last_loaded
+	var uid = metadata[DataGlobals.CURRENT_CREATURE]
+	var creature_hatched: CreatureType = load(ResourceUID.get_id_path(uid))
+	
+	# setup display
+	display_box.size += DISPLAY_BOX_ADITION
+	display_bg.size += DISPLAY_BOX_ADITION
+	display_shader.size += DISPLAY_BOX_ADITION
+	bar_container.visible = false
+	continue_btn.visible = true
+	finished_hatching = true
+	
+	# place creature
+	spawn_creature(creature_hatched, display_box.position - (display_box.size * display_box.scale) / 2)
+	creature_sprite.visible = true
+	creature_sprite.scale = Vector2(.25, .25)
+	egg_desc.text = "[center][u]%s" % creature_hatched.creature_name
+
+func spawn_creature(creature: CreatureType, pos: Vector2):
+	creature_sprite.sprite_frames = creature.sprite_frames
+	creature_sprite.animation = "baby"  # they *should* all have a baby animation
+	creature_sprite.play()
+	creature_sprite.position = pos + CREATURE_PLACEMENT_OFFSET  # offset to be centered (may need to be different for each creature)
 
 ## generic scale of egg
 func scale_egg(inx: int, to_scale: Vector2, time: float = .5):

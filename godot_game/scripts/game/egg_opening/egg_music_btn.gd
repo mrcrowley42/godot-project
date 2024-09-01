@@ -17,5 +17,5 @@ func _on_gui_input(event):
 		get_child(0).texture = mute_img if muted else img
 		texture = selected if muted else de_selected
 		
-		%Music.volume_db = -50. if muted else 0.
+		%Music.volume_db = -100. if muted else 0.
 		%SFX.play_sound("click")
