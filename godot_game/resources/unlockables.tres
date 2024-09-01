@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Unlockables" load_steps=2 format=3 uid="uid://dlaw3d7wos0co"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/unlockables.gd" id="1_gdfgk"]
+
+[resource]
+script = ExtResource("1_gdfgk")
+unlockables = Array[Resource("res://scripts/base_classses/cosmetic.gd")]([null])

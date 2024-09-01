@@ -3,18 +3,20 @@
 [ext_resource type="Script" path="res://scripts/volume_slider.gd" id="1_vfrrs"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_elks1"]
-color = Color(0.34688, 0.524621, 0.762641, 1)
+color = Color(0.339937, 0.383586, 0.682463, 1)
 grow_begin = 0.0
 grow_end = 0.0
 thickness = 40
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qf5at"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xql7d"]
+bg_color = Color(0.13625, 0.280075, 0.356808, 1)
 
 [node name="VolumeSlider" type="HSlider"]
 offset_right = 1110.0
 offset_bottom = 304.0
 theme_override_styles/slider = SubResource("StyleBoxLine_elks1")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_qf5at")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_xql7d")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_xql7d")
 max_value = 1.0
 step = 0.01
 value = 0.5
