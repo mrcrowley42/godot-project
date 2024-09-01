@@ -277,6 +277,9 @@ func set_egg_desc(i: int = -1):
 			hatches_list.append("?")
 	egg_desc.text = EGG_FORMAT_STRING % [egg.name, ", ".join(hatches_list)]
 
+func set_creature_desc(creature: CreatureType):
+	egg_desc.text = "[center][u]%s![/u]\n[font top=6 s=15]%s" % [creature.name, creature.desc]
+
 func is_creature_known(creature_type_uid: int) -> bool:
 	var metadata = DataGlobals.metadata_last_loaded
 	return metadata.has(DataGlobals.CREATURES_DISCOVERED) and creature_type_uid in metadata[DataGlobals.CREATURES_DISCOVERED]
@@ -416,7 +419,7 @@ func finish_hatching(sprite_c: Control):
 	spawn_creature(creature_hatched, sprite_c.position)
 	fade(creature_sprite, true)
 	tween(creature_sprite, "scale", Vector2(.25, .25), .3, .5).connect("finished", fire_confetti)
-	egg_desc.text = "[center][u]%s" % creature_hatched.creature_name
+	set_creature_desc(creature_hatched)
 	
 	# save data
 	var uid = ResourceLoader.get_resource_uid(creature_hatched.resource_path)
@@ -458,9 +461,9 @@ func instant_open_to_continue_screen():
 	
 	# place creature
 	spawn_creature(creature_hatched, display_box.position - (display_box.size * display_box.scale) / 2)
+	set_creature_desc(creature_hatched)
 	creature_sprite.visible = true
 	creature_sprite.scale = Vector2(.25, .25)
-	egg_desc.text = "[center][u]%s" % creature_hatched.creature_name
 
 func spawn_creature(creature: CreatureType, pos: Vector2):
 	creature_sprite.sprite_frames = creature.sprite_frames
