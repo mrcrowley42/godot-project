@@ -17,10 +17,18 @@ var metadata_to_override: Dictionary = {}
 var metadata_to_add: Dictionary = {}
 
 func has_save_data() -> bool:
-	return FileAccess.file_exists(Globals.SAVE_DATA_FILE)
+	if FileAccess.file_exists(Globals.SAVE_DATA_FILE):
+		return len(FileAccess.get_file_as_bytes(Globals.SAVE_DATA_FILE))
+	return false
 
 func has_settings_data() -> bool:
 	return FileAccess.file_exists(Globals.SAVE_SETTINGS_FILE)
+
+func has_only_metadata() -> bool:
+	if has_save_data():
+		var save_file = FileAccess.open(Globals.SAVE_DATA_FILE, FileAccess.READ)
+		return bytes_to_var(save_file.get_var()).size() == 1  # only one line in save file
+	return false
 
 ## --------------
 ##    SAVING
@@ -67,6 +75,21 @@ func save_data():
 		all_data.append(JSON.stringify(node_data))
 	
 	var bytes_array: PackedByteArray = var_to_bytes(all_data)
+	save_file.store_var(bytes_array)
+
+## changes only the first line (the metadata line) in save file, everything else remains unchanged
+func save_only_metadata():
+	var file_existed = has_save_data()
+	var save_file = FileAccess.open(Globals.SAVE_DATA_FILE, FileAccess.WRITE)
+	var file_lines: Array = bytes_to_var(save_file.get_var()) if file_existed else [{}]
+	
+	# replace existing metadata with new
+	file_lines[0] = generate_metadata_to_save()  
+	metadata_last_loaded = file_lines[0]
+	metadata_to_override.clear()
+	metadata_to_add.clear()
+	
+	var bytes_array: PackedByteArray = var_to_bytes(file_lines)
 	save_file.store_var(bytes_array)
 
 func save_settings_data():
