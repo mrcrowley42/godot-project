@@ -77,15 +77,6 @@ bar_progress_color = SubResource("Gradient_wiwer")
 metadata/_edit_vertical_guides_ = [540.0, 64.0, 472.0, 128.0, 408.0]
 metadata/_edit_horizontal_guides_ = [675.0, 64.0, 608.0, 128.0, 544.0]
 
-[node name="SelectionAreaold" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 43.0
-offset_top = 220.0
-offset_right = 498.0
-offset_bottom = 372.0
-metadata/_edit_use_anchors_ = true
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
 
