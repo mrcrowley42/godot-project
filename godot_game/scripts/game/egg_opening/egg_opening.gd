@@ -89,7 +89,6 @@ func _ready():
 	# eggs
 	selection_area_center = selection_area.position + selection_area.size * .5
 	spawn_eggs()
-	
 	do_opening_transition()
 
 func load_main_scene():
@@ -330,9 +329,8 @@ func click_selected_egg():
 		hatch_egg()
 
 func hatch_egg():
-	%SFX.pitch_scale = 1.5
+	%SFX.pitch_scale = 1.5  # it sounds better with slightly higher pitch
 	%SFX.play_sound("confirm")
-	var sprite_c: Control = placed_egg_sprites[selected_egg_inx]
 	set_can_interact(false)
 	hatching = true
 	
@@ -349,6 +347,7 @@ func hatch_egg():
 	tween(shader_area.material, "shader_parameter/color", Vector4(0, 0, 0, 1), 0.1, .5)
 	
 	# move egg
+	var sprite_c: Control = placed_egg_sprites[selected_egg_inx]
 	sprite_c.rotation = 0
 	tween(sprite_c, "position", sprite_c.position - DISPLAY_BOX_ADITION * .25, .1, .5)
 	
@@ -447,8 +446,7 @@ func pick_creature_to_hatch() -> CreatureType:
 ## for when first loading in and continue button wasn't pressed before game was closed last
 func instant_open_to_continue_screen():
 	do_opening_transition().connect("finished", set_can_interact.bind(true))
-	var metadata = DataGlobals.metadata_last_loaded
-	var uid = metadata[DataGlobals.CURRENT_CREATURE]
+	var uid = DataGlobals.metadata_last_loaded[DataGlobals.CURRENT_CREATURE]
 	var creature_hatched: CreatureType = load(ResourceUID.get_id_path(uid))
 	
 	# setup display
@@ -521,6 +519,7 @@ func update_selected_egg(delta):
 		var amp = .08 + (.08 * percent)  # additions are for randomness
 		sprite_c.rotation = (sin(freq) * amp) * rotation_buffer.value
 
+## pretty much just for rotation
 func update_hatching_egg():
 	var sprite_c: Control = placed_egg_sprites[selected_egg_inx]
 	var freq = Time.get_unix_time_from_system() * 20
@@ -552,5 +551,5 @@ func _process(delta):
 
 class FloatBuffer:
 	var value: float = 0.
-	func _init(v):
+	func _init(v: float):
 		value = v
