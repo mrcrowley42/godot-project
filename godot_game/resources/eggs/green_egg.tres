@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="EggEntry" load_steps=6 format=3 uid="uid://8qkgq02pnyvq"]
 
-[ext_resource type="Script" path="res://scripts/base_classses/egg_entry_class.gd" id="1_8ok2j"]
+[ext_resource type="Script" path="res://scripts/base_classses/egg_entry.gd" id="1_8ok2j"]
 [ext_resource type="Texture2D" uid="uid://gi4ytib73ibf" path="res://images/egg/egg-green.png" id="1_knhbg"]
 [ext_resource type="Resource" uid="uid://cxtahs454inpc" path="res://resources/creatures/main_creature.tres" id="1_y5x2i"]
 [ext_resource type="Script" path="res://scripts/base_classses/egg_creature_entry.gd" id="2_brefb"]

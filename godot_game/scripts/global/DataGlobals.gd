@@ -27,6 +27,7 @@ func has_save_data() -> bool:
 func has_settings_data() -> bool:
 	return FileAccess.file_exists(Globals.SAVE_SETTINGS_FILE)
 
+## does save file only contain metadata (only 1 line exists)
 func has_only_metadata() -> bool:
 	if has_save_data():
 		var save_file = FileAccess.open(Globals.SAVE_DATA_FILE, FileAccess.READ)
@@ -37,7 +38,7 @@ func has_only_metadata() -> bool:
 ##    SAVING
 ## --------------
 
-## takes into account the metadata to override and add
+## takes into account the metadata to override and to add
 func generate_metadata_to_save() -> Dictionary:
 	var get_if_exists = func(key: String, fallback, check_for_override: bool = false):
 		if check_for_override and metadata_to_override.has(key):

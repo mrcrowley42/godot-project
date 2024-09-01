@@ -3,7 +3,6 @@ extends Node
 @export var debug_mode: bool
 @export var unlock_fps: bool = false
 
-var has_save_data: bool = DataGlobals.has_save_data()
 var last_saved: float
 @onready var launch_time: float = Time.get_unix_time_from_system()
 @onready var stat_man: StatusManager = %StatusManager
@@ -16,12 +15,9 @@ func _ready():
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED) # HUH?
 	
 	# load in data
-	if has_save_data:
+	if DataGlobals.has_save_data():
 		var metadata = DataGlobals.load_data()
-		if metadata.has("last_saved"):
-			last_saved = metadata["last_saved"]
-		else:
-			last_saved = launch_time
+		last_saved = metadata[DataGlobals.LAST_SAVED] if metadata.has(DataGlobals.LAST_SAVED) else launch_time
 		DataGlobals.load_settings_data()
 		calc_elapsed_time()
 	
