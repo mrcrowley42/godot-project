@@ -3,6 +3,7 @@ extends Node
 const LAST_SAVED = "last_saved"
 const CURRENT_CREATURE = "current_creature"
 const CREATURES_DISCOVERED = "creatures_discovered"
+const UNLOCKED_ITEMS = "unlocked_items"
 const SECTION = "section"
 const PATH = "path"
 const DATA = "data"
