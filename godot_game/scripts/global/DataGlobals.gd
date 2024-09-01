@@ -1,9 +1,12 @@
 extends Node
 
+# metadata items
 const LAST_SAVED = "last_saved"
 const CURRENT_CREATURE = "current_creature"
 const CREATURES_DISCOVERED = "creatures_discovered"
 const UNLOCKED_ITEMS = "unlocked_items"
+
+# other
 const SECTION = "section"
 const PATH = "path"
 const DATA = "data"
@@ -35,6 +38,7 @@ func has_only_metadata() -> bool:
 ##    SAVING
 ## --------------
 
+## takes into account the metadata to override and add
 func generate_metadata_to_save() -> Dictionary:
 	var get_if_exists = func(key: String, fallback, check_for_override: bool = false):
 		if check_for_override and metadata_to_override.has(key):
@@ -47,6 +51,7 @@ func generate_metadata_to_save() -> Dictionary:
 			val += metadata_to_add[key]  # generically (and unsafely) add to old value
 		return val
 	
+	# give these values the custom function they require
 	return {
 		LAST_SAVED: Time.get_unix_time_from_system(),
 		CURRENT_CREATURE: get_if_exists.call(CURRENT_CREATURE, null, true),
