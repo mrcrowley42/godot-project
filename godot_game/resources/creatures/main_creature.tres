@@ -5,7 +5,8 @@
 
 [resource]
 script = ExtResource("1_hdyqw")
-creature_name = "Little Guy"
+name = "Little Guy"
+desc = "just a little guy"
 max_hp = 1000
 max_water = 1000
 max_food = 1000

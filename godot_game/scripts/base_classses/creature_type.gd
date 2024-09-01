@@ -1,7 +1,8 @@
 class_name CreatureType extends Resource
 ## A custom resource to store the information about an individual creature
 
-@export var creature_name: String
+@export var name: String
+@export var desc: String
 @export var max_hp: int
 @export var max_water: int
 @export var max_food: int
