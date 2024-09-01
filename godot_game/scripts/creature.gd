@@ -10,12 +10,12 @@ var creature_type: CreatureType = load("res://resources/creatures/main_creature.
 
 ## Colour to tint creature as HP approaches 0.
 @export var dying_colour: Color;
-@export var max_hp: float = creature_type.max_hp
-@export var max_water: float = creature_type.max_water
-@export var max_food: float = creature_type.max_food
-@export var max_fun: float = creature_type.max_fun
+var max_hp: float = creature_type.max_hp
+var max_water: float = creature_type.max_water
+var max_food: float = creature_type.max_food
+var max_fun: float = creature_type.max_fun
 ## XP required for the creature to reach the [param ADULT] [param LifeStage] stage
-@export var xp_required: float
+var xp_required: float
 @export var clippy_area: Node
 @export var xp_mulitplier: float = 1.0
 
@@ -26,6 +26,7 @@ const like_multiplier: float = 2.0
 enum FoodItem {NEUTRAL, TOAST, CHIPS, FRUIT}
 enum LifeStage {CHILD, ADULT}
 enum Stat {HP, WATER, FOOD, FUN}
+
 
 # CREATURE STATS VARIABLES
 var hp: float = max_hp
@@ -144,8 +145,6 @@ func save() -> Dictionary:
 
 func load(data) -> void:
 	var stat_list = ["water", "fun", "food", "hp", "xp"]
-	#if not find_parent("Game").debug_mode:
-		#stat_list.append("hp")
 	for setting in stat_list:
 		if data.has(setting):
 			self[setting] = data[setting]

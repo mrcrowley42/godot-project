@@ -1,4 +1,4 @@
-[gd_scene load_steps=109 format=3 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=107 format=3 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_aqytd"]
@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bmwpenw32juko" path="res://UI stuff/Universal/background_light_map.png" id="8_aulml"]
 [ext_resource type="PackedScene" uid="uid://bebjn5n2kjwgb" path="res://scenes/Creatures/creature.tscn" id="9_ulkn4"]
 [ext_resource type="Script" path="res://scripts/Confetti.gd" id="10_tn1o6"]
-[ext_resource type="Theme" path="res://themes/invisible.tres" id="11_lcq7m"]
+[ext_resource type="Theme" uid="uid://dl1wes8p6lqlb" path="res://themes/invisible.tres" id="11_lcq7m"]
 [ext_resource type="Script" path="res://scripts/clippy_area.gd" id="12_n00c6"]
 [ext_resource type="Script" path="res://scripts/ui_theme_manager.gd" id="13_3i267"]
 [ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="14_k2ios"]
@@ -222,13 +222,14 @@ preload(\"res://images/creature_sprites/sadge-1.png\"),preload(\"res://images/cr
 
 ## Class that describes the cards (buttons) for memory.
 class Unlockable extends Button:
-	func _init(value):
+	func _init(value, unlocked: bool):
 		icon = value
 		custom_minimum_size = Vector2(64,64)
 		size.x = 64
 		size.y = 64
 		expand_icon = false
 		add_theme_constant_override(\"icon_max_width\", 50)
+		disabled = !unlocked
 		#texture_normal = value
 		theme = load(\"res://themes/menu_btn.tres\")
 		#size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -238,23 +239,11 @@ class Unlockable extends Button:
 
 func _ready():
 	for item in unlockables:
-		var unlock_item = Unlockable.new(item)
+		var unlock_item = Unlockable.new(item, [true, false].pick_random())
 		add_child(unlock_item)
 "
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wd2mi"]
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_0f7jw"]
-color = Color(0.34688, 0.524621, 0.762641, 1)
-grow_begin = 0.0
-grow_end = 0.0
-thickness = 40
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_kxflm"]
-color = Color(0.793417, 0.388279, 0.00261003, 1)
-grow_begin = 0.0
-grow_end = 0.0
-thickness = 40
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qyod2"]
 bg_color = Color(0.2, 0.2, 0.2, 1)
@@ -1024,6 +1013,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="ActivityMenu" type="PanelContainer" parent="UI"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(400, 400)
 anchors_preset = 4
 anchor_top = 0.5
@@ -1444,6 +1434,7 @@ script = ExtResource("35_4io20")
 [node name="AppearanceMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_arbxs")
 script = ExtResource("32_jvqx8")
@@ -1497,7 +1488,6 @@ script = ExtResource("35_4io20")
 [node name="SoundMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_arbxs")
 script = ExtResource("32_jvqx8")
@@ -1613,7 +1603,6 @@ bus_name = "Master"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-theme_override_styles/slider = SubResource("StyleBoxLine_0f7jw")
 tick_count = 1
 bus_name = "Master"
 
@@ -1666,7 +1655,6 @@ bus_name = "Music"
 [node name="VolumeMusic" parent="UI/OptionsMenu/SoundMenu/VolumeControls/GridContainer2" groups=["settings_data"] instance=ExtResource("38_17bv4")]
 layout_mode = 2
 tooltip_text = "Music"
-theme_override_styles/slider = SubResource("StyleBoxLine_kxflm")
 tick_count = 1
 bus_name = "Music"
 

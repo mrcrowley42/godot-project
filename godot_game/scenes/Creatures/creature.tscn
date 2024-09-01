@@ -120,7 +120,6 @@ autoplay = "idle"
 script = ExtResource("5_oh7gr")
 
 [node name="Accessories" type="Node2D" parent="Sprites"]
-script = ExtResource("2_klgk6")
 
 [node name="Hat" type="AnimatedSprite2D" parent="Sprites/Accessories"]
 visible = false
