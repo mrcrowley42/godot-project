@@ -36,7 +36,7 @@ var xp: float = 0
 var life_stage: LifeStage
 var likes: Array = creature_type.likes
 var dislikes: Array = creature_type.dislikes
-var creature_name: String = creature_type.creature_name
+var creature_name: String = creature_type.name
 
 # SIGNALS
 signal hp_changed()
