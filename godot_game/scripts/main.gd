@@ -14,12 +14,16 @@ func _ready():
 	if unlock_fps:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED) # HUH?
 	
+	# if no data exists, file has been tampered with, set the bare minimum
+	# metadata is set automatically after egg opening scene, and before this scene
+	if !DataGlobals.has_save_data():
+		DataGlobals.save_only_metadata()
+	
 	# load in data
-	if DataGlobals.has_save_data():
-		var metadata = DataGlobals.load_data()
-		last_saved = metadata[DataGlobals.LAST_SAVED] if metadata.has(DataGlobals.LAST_SAVED) else launch_time
-		DataGlobals.load_settings_data()
-		calc_elapsed_time()
+	var metadata = DataGlobals.load_data()
+	last_saved = metadata[DataGlobals.LAST_SAVED] if metadata.has(DataGlobals.LAST_SAVED) else launch_time
+	DataGlobals.load_settings_data()
+	calc_elapsed_time()
 	
 	# Disable the script execution when the panel is disabled/hidden.
 	debug_window.visible = debug_mode

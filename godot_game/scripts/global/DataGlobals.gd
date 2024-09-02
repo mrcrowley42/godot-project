@@ -56,7 +56,8 @@ func generate_metadata_to_save() -> Dictionary:
 	return {
 		LAST_SAVED: Time.get_unix_time_from_system(),
 		CURRENT_CREATURE: get_if_exists.call(CURRENT_CREATURE, null, true),
-		CREATURES_DISCOVERED: get_and_check_for_addition.call(CREATURES_DISCOVERED, [])
+		CREATURES_DISCOVERED: get_and_check_for_addition.call(CREATURES_DISCOVERED, []),
+		UNLOCKED_ITEMS: get_and_check_for_addition.call(UNLOCKED_ITEMS, [])
 	}
 
 # save file structure:
