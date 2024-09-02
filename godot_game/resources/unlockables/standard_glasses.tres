@@ -7,6 +7,6 @@
 script = ExtResource("1_tulc5")
 name = "Standard Glasses"
 desc = "Regular old glasses."
-unlocked = false
+unlocked_by_default = false
 thumbnail = ExtResource("2_bemxb")
 category = 1
