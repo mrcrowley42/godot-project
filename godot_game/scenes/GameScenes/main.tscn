@@ -242,9 +242,8 @@ func _ready():
 	var unlocked_items = DataGlobals.metadata_last_loaded[DataGlobals.UNLOCKED_ITEMS]
 	
 	for item: CosmeticItem in unlockables.unlockables:
-		print(item.get_class())
 		var uid = ResourceLoader.get_resource_uid(item.resource_path)
-		var is_unlocked = item.unlocked_by_default or uid in unlocked_items
+		var is_unlocked = item.unlocked or uid in unlocked_items
 		
 		var item_btn = UnlockableIcon.new(item, is_unlocked)
 		add_child(item_btn)
