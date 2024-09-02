@@ -558,17 +558,30 @@ theme = ExtResource("2_5bhpe")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Unlock FPS"
 
-[node name="WipeBtn" type="Button" parent="."]
+[node name="WipeAllBtn" type="Button" parent="."]
 layout_mode = 0
-offset_left = 355.0
+offset_left = 343.0
 offset_top = 639.0
-offset_right = 577.0
+offset_right = 450.0
 offset_bottom = 672.0
 scale = Vector2(0.7, 0.7)
+tooltip_text = "wipe all save data (including metadata)"
 theme = ExtResource("8_lqg4h")
 theme_override_fonts/font = ExtResource("9_y33yi")
 theme_override_font_sizes/font_size = 20
-text = "Wipe all save data"
+text = "Wipe all"
+
+[node name="WipeNodesBtn" type="Button" parent="."]
+offset_left = 437.0
+offset_top = 639.0
+offset_right = 563.0
+offset_bottom = 672.0
+scale = Vector2(0.7, 0.7)
+tooltip_text = "wipe node save data (excluding metadata)"
+theme = ExtResource("8_lqg4h")
+theme_override_fonts/font = ExtResource("9_y33yi")
+theme_override_font_sizes/font_size = 20
+text = "Wipe node"
 
 [connection signal="drag_ended" from="dayprog/slider" to="dayprog" method="_on_day_progress_drag_ended"]
 [connection signal="drag_started" from="dayprog/slider" to="dayprog" method="_on_day_progress_drag_started"]
@@ -591,4 +604,5 @@ text = "Wipe all save data"
 [connection signal="pressed" from="ClippyBtn" to="." method="_on_clippy_btn_pressed"]
 [connection signal="toggled" from="HolidayBtn" to="." method="_on_button_3_toggled"]
 [connection signal="toggled" from="CheckBox" to="." method="_on_check_box_toggled"]
-[connection signal="button_down" from="WipeBtn" to="." method="_on_wipe_btn_button_down"]
+[connection signal="button_down" from="WipeAllBtn" to="." method="_on_wipe_btn_button_down"]
+[connection signal="button_down" from="WipeNodesBtn" to="." method="_on_wipe_nodes_btn_button_down"]

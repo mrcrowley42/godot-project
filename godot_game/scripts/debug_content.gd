@@ -88,3 +88,10 @@ func _on_wipe_btn_button_down():
 	var d = DirAccess.open("res://")
 	d.remove(Globals.SAVE_DATA_FILE)
 	get_tree().quit()
+
+
+func _on_wipe_nodes_btn_button_down():
+	var d = DirAccess.open("res://")
+	d.remove(Globals.SAVE_DATA_FILE)
+	DataGlobals.save_only_metadata()
+	get_tree().quit()
