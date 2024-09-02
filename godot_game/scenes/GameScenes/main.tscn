@@ -1,4 +1,4 @@
-[gd_scene load_steps=107 format=3 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=108 format=3 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_aqytd"]
@@ -212,6 +212,48 @@ corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 corner_detail = 20
 
+[sub_resource type="GDScript" id="GDScript_8nmuy"]
+script/source = "extends GridContainer
+
+var unlockables = load(\"res://resources/unlockables.tres\")
+
+## Class that describes the button object for each cosmetic item.
+class UnlockableIcon extends Button:
+	var cosmetic_name
+	
+	func _init(unlockable: CosmeticItem):
+		# Universal Styling and sizeing
+		custom_minimum_size = Vector2(64,64)
+		size.x = 64
+		size.y = 64
+		add_theme_constant_override(\"icon_max_width\", 50)
+		theme = load(\"res://themes/menu_btn.tres\")
+		expand_icon = false
+		# Individual properites
+		tooltip_text = unlockable.desc
+		icon = unlockable.thumbnail
+		cosmetic_name = unlockable.name
+		disabled = !unlockable.unlocked
+		
+	## Action when button is pressed.
+	func _pressed():
+		print(self.cosmetic_name)
+
+
+func _ready():
+	# Dynamically build menu
+	for i in range(5):
+		for item in unlockables.unlockables:
+			if item.category == CosmeticItem.Cosmetic_Category.HAT:
+				var unlock_item = UnlockableIcon.new(item)
+				add_child(unlock_item)
+
+
+## Update menu when an item is unlocked.
+func update_menu():
+	pass
+"
+
 [sub_resource type="GDScript" id="GDScript_c6ljj"]
 script/source = "extends GridContainer
 
@@ -220,31 +262,38 @@ var unlockables = load(\"res://resources/unlockables.tres\")
 ## Class that describes the button object for each cosmetic item.
 class UnlockableIcon extends Button:
 	var cosmetic_name
+	
 	func _init(unlockable: CosmeticItem):
-		icon = unlockable.thumbnail
+		# Universal Styling and sizeing
 		custom_minimum_size = Vector2(64,64)
 		size.x = 64
 		size.y = 64
-		cosmetic_name = unlockable.name
-		expand_icon = false
-		tooltip_text = unlockable.desc
 		add_theme_constant_override(\"icon_max_width\", 50)
-		disabled = !unlockable.unlocked
-		#texture_normal = value
 		theme = load(\"res://themes/menu_btn.tres\")
-
-
+		expand_icon = false
+		# Individual properites
+		tooltip_text = unlockable.desc
+		icon = unlockable.thumbnail
+		cosmetic_name = unlockable.name
+		disabled = !unlockable.unlocked
+		
+	## Action when button is pressed.
 	func _pressed():
 		print(self.cosmetic_name)
 
 
 func _ready():
-	for item in unlockables.unlockables:
-		var x: CosmeticItem = item
-		print(x.get_class())
-		#if item. == CosmeticItem:
-		var unlock_item = UnlockableIcon.new(item)
-		add_child(unlock_item)
+	# Dynamically build menu
+	for i in range(5):
+		for item in unlockables.unlockables:
+			if item.category == CosmeticItem.Cosmetic_Category.GLASSES:
+				var unlock_item = UnlockableIcon.new(item)
+				add_child(unlock_item)
+
+
+## Update menu when an item is unlocked.
+func update_menu():
+	pass
 "
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wd2mi"]
@@ -1445,34 +1494,59 @@ metadata/_edit_lock_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/AppearanceMenu"]
 layout_mode = 2
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 40
-theme_override_constants/margin_right = 40
-theme_override_constants/margin_bottom = 40
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 40
+theme_override_constants/separation = 24
 
-[node name="GridContainer" type="GridContainer" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/h_separation = 16
-theme_override_constants/v_separation = 16
-columns = 4
-script = SubResource("GDScript_c6ljj")
-
-[node name="GridContainer2" type="GridContainer" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/h_separation = 16
-theme_override_constants/v_separation = 16
-columns = 4
-script = SubResource("GDScript_c6ljj")
-
-[node name="Label" type="Label" parent="UI/OptionsMenu/AppearanceMenu"]
-layout_mode = 2
-theme = ExtResource("39_8ebm3")
-text = "APPEARANCE"
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 24
+text = "HATS"
 horizontal_alignment = 1
+
+[node name="HatContainer" type="GridContainer" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 5
+script = SubResource("GDScript_8nmuy")
+
+[node name="Glasses" type="Label" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 24
+text = "GLASSES"
+horizontal_alignment = 1
+
+[node name="GlassesContainer" type="GridContainer" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 5
+script = SubResource("GDScript_c6ljj")
+
+[node name="Other" type="Label" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 24
+text = "GLASSES"
+horizontal_alignment = 1
+
+[node name="OtherContainer" type="GridContainer" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 5
+script = SubResource("GDScript_c6ljj")
 
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/AppearanceMenu"]
 position = Vector2(-50, -130)
@@ -1482,6 +1556,7 @@ offset_left = 90.0
 offset_top = 484.0
 offset_right = 234.0
 offset_bottom = 532.0
+scale = Vector2(0.75, 0.75)
 theme = ExtResource("33_1qhmu")
 theme_override_colors/font_hover_color = Color(0.4947, 0.97, 0.4947, 1)
 theme_override_font_sizes/font_size = 18
@@ -1493,6 +1568,7 @@ offset_left = 317.0
 offset_top = 484.0
 offset_right = 450.0
 offset_bottom = 532.0
+scale = Vector2(0.75, 0.75)
 theme = ExtResource("33_1qhmu")
 theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
 theme_override_font_sizes/font_size = 18
