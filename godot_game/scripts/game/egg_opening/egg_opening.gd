@@ -445,16 +445,16 @@ func pick_creature_to_hatch() -> CreatureType:
 
 ## for when first loading in and continue button wasn't pressed before game was closed last
 func instant_open_to_continue_screen():
-	do_opening_transition().connect("finished", set_can_interact.bind(true))
+	do_opening_transition()
 	var uid = DataGlobals.metadata_last_loaded[DataGlobals.CURRENT_CREATURE]
 	var creature_hatched: CreatureType = load(ResourceUID.get_id_path(uid))
 	
 	# setup display
+	fade(continue_btn, true, 1.).connect("finished", set_can_interact.bind(true))
 	display_box.size += DISPLAY_BOX_ADITION
 	display_bg.size += DISPLAY_BOX_ADITION
 	display_shader.size += DISPLAY_BOX_ADITION
 	bar_container.visible = false
-	continue_btn.visible = true
 	finished_hatching = true
 	
 	# place creature
