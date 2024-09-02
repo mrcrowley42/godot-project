@@ -4,3 +4,4 @@ class_name CosmeticItem
 @export var name: String
 @export_multiline var desc: String
 @export var unlocked: bool = false
+@export var thumbnail: Texture2D
