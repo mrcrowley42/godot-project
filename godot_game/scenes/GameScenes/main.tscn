@@ -1404,6 +1404,7 @@ script = ExtResource("35_4io20")
 [node name="AppearanceMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_arbxs")
 script = ExtResource("32_jvqx8")
@@ -1497,7 +1498,6 @@ script = ExtResource("35_4io20")
 [node name="SoundMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_arbxs")
 script = ExtResource("32_jvqx8")

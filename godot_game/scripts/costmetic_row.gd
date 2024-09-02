@@ -20,7 +20,7 @@ class UnlockableIcon extends Button:
 		icon = unlockable.thumbnail
 		cosmetic_name = unlockable.name
 		if not is_unlocked or !unlockable.unlocked:
-			disabled = true 
+			disabled = true
 		
 	## Action when button is pressed.
 	func _pressed():
