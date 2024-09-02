@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bmwpenw32juko" path="res://UI stuff/Universal/background_light_map.png" id="8_aulml"]
 [ext_resource type="PackedScene" uid="uid://bebjn5n2kjwgb" path="res://scenes/Creatures/creature.tscn" id="9_ulkn4"]
 [ext_resource type="Script" path="res://scripts/Confetti.gd" id="10_tn1o6"]
-[ext_resource type="Theme" path="res://themes/invisible.tres" id="11_lcq7m"]
+[ext_resource type="Theme" uid="uid://dl1wes8p6lqlb" path="res://themes/invisible.tres" id="11_lcq7m"]
 [ext_resource type="Script" path="res://scripts/clippy_area.gd" id="12_n00c6"]
 [ext_resource type="Script" path="res://scripts/ui_theme_manager.gd" id="13_3i267"]
 [ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="14_k2ios"]
@@ -45,6 +45,7 @@
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="39_8ebm3"]
 [ext_resource type="Texture2D" uid="uid://cawudmxbjamv0" path="res://UI stuff/Green Palette/ui_green.png" id="40_wt18k"]
 [ext_resource type="Texture2D" uid="uid://c702pbhxasm52" path="res://icons/status/heart-fill.svg" id="41_8adaw"]
+[ext_resource type="Script" path="res://scripts/costmetic_row.gd" id="41_pook7"]
 [ext_resource type="Script" path="res://scripts/hp_bar.gd" id="42_ccntj"]
 [ext_resource type="Texture2D" uid="uid://d84hj0mtn2hw" path="res://icons/status/mood_24dp_FILL1_wght300_GRAD0_opsz24.svg" id="43_qa2jm"]
 [ext_resource type="Script" path="res://scripts/fun_bar.gd" id="44_8jtdq"]
@@ -1449,34 +1450,61 @@ metadata/_edit_lock_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/AppearanceMenu"]
 layout_mode = 2
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 40
-theme_override_constants/margin_right = 40
-theme_override_constants/margin_bottom = 40
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 40
+theme_override_constants/separation = 24
 
-[node name="GridContainer" type="GridContainer" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/h_separation = 16
-theme_override_constants/v_separation = 16
-columns = 4
-script = SubResource("GDScript_c6ljj")
-
-[node name="GridContainer2" type="GridContainer" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/h_separation = 16
-theme_override_constants/v_separation = 16
-columns = 4
-script = SubResource("GDScript_c6ljj")
-
-[node name="Label" type="Label" parent="UI/OptionsMenu/AppearanceMenu"]
-layout_mode = 2
-theme = ExtResource("39_8ebm3")
-text = "APPEARANCE"
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 24
+text = "HATS"
 horizontal_alignment = 1
+
+[node name="HatContainer" type="GridContainer" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 5
+script = ExtResource("41_pook7")
+
+[node name="Glasses" type="Label" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 24
+text = "GLASSES"
+horizontal_alignment = 1
+
+[node name="GlassesContainer" type="GridContainer" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 5
+script = ExtResource("41_pook7")
+category = 1
+
+[node name="Other" type="Label" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 24
+text = "GLASSES"
+horizontal_alignment = 1
+
+[node name="OtherContainer" type="GridContainer" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 5
+script = ExtResource("41_pook7")
+category = 1
 
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/AppearanceMenu"]
 position = Vector2(-50, -130)
@@ -1486,6 +1514,7 @@ offset_left = 90.0
 offset_top = 484.0
 offset_right = 234.0
 offset_bottom = 532.0
+scale = Vector2(0.75, 0.75)
 theme = ExtResource("33_1qhmu")
 theme_override_colors/font_hover_color = Color(0.4947, 0.97, 0.4947, 1)
 theme_override_font_sizes/font_size = 18
@@ -1497,6 +1526,7 @@ offset_left = 317.0
 offset_top = 484.0
 offset_right = 450.0
 offset_bottom = 532.0
+scale = Vector2(0.75, 0.75)
 theme = ExtResource("33_1qhmu")
 theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
 theme_override_font_sizes/font_size = 18
