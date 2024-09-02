@@ -572,6 +572,7 @@ theme_override_font_sizes/font_size = 20
 text = "Wipe all"
 
 [node name="WipeNodesBtn" type="Button" parent="."]
+layout_mode = 0
 offset_left = 437.0
 offset_top = 639.0
 offset_right = 563.0
