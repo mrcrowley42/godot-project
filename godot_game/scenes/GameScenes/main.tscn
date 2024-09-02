@@ -215,25 +215,27 @@ corner_detail = 20
 [sub_resource type="GDScript" id="GDScript_c6ljj"]
 script/source = "extends GridContainer
 
+const BTN_SIZE: Vector2 = Vector2(64, 64)
+
 var unlockables = load(\"res://resources/unlockables.tres\")
 
 ## Class that describes the button object for each cosmetic item.
 class UnlockableIcon extends Button:
 	var cosmetic_name
+	
 	func _init(unlockable: CosmeticItem, is_unlocked: bool):
-		icon = unlockable.thumbnail
-		custom_minimum_size = Vector2(64,64)
-		size.x = 64
-		size.y = 64
 		cosmetic_name = unlockable.name
-		expand_icon = false
+		icon = unlockable.thumbnail
+		custom_minimum_size = BTN_SIZE
+		size = BTN_SIZE
 		tooltip_text = unlockable.desc
-		add_theme_constant_override(\"icon_max_width\", 50)
+		
+		expand_icon = false
 		disabled = !is_unlocked
-		#texture_normal = value
+		
 		theme = load(\"res://themes/menu_btn.tres\")
-
-
+		add_theme_constant_override(\"icon_max_width\", 50)
+	
 	func _pressed():
 		print(self.cosmetic_name)
 
@@ -243,7 +245,7 @@ func _ready():
 	
 	for item: CosmeticItem in unlockables.unlockables:
 		var uid = ResourceLoader.get_resource_uid(item.resource_path)
-		var is_unlocked = item.unlocked or uid in unlocked_items
+		var is_unlocked = item.unlocked_by_default or uid in unlocked_items
 		
 		var item_btn = UnlockableIcon.new(item, is_unlocked)
 		add_child(item_btn)
