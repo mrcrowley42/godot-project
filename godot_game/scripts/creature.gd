@@ -34,6 +34,7 @@ var water: float = max_water
 var food: float = max_food
 var fun: float = max_fun
 var xp: float = 0
+var ready_to_grow_up: bool = false
 var life_stage: LifeStage
 var likes: Array = creature_type.likes
 var dislikes: Array = creature_type.dislikes
@@ -52,23 +53,14 @@ var stats: Dictionary = {Stat.HP: damage_hp, Stat.FUN: damage_fun,
 
 ## Add the specified [param amount] to the creature's existing xp.
 func add_xp(amount: float) -> void:
-	if amount <= 0:
-		return
+	if amount <= 0: return
 	xp += amount
+	
+	# the creature is ready to become an adult
+	if life_stage != LifeStage.ADULT and xp >= xp_required:
+		ready_to_grow_up = true
+	
 	xp_changed.emit()
-	if xp >= xp_required:
-		level_up()
-
-
-func level_up() -> void:
-	pass
-	#life_stage = LifeStage.Adult
-
-
-func _ready() -> void:
-	pass
-	#reset_stats()
-
 
 ## Sets the Creatures current stats to their maximum value.
 func reset_stats() -> void:
@@ -97,57 +89,62 @@ func apply_dmg_tint() -> void:
 
 func damage_hp(amount: float) -> void:
 	var temp_hp = hp
-	self.hp -= amount
+	self.hp = clampf(self.hp - amount, 0, max_hp)
 	if hp <= 0:
 		call_deferred("game_over")
-	self.hp = clampf(self.hp, 0, max_hp)
 	if hp - temp_hp > 0:
 		add_xp(hp - temp_hp * xp_mulitplier)
+	
 	apply_dmg_tint()
 	hp_changed.emit()
 
 
 func damage_food(amount, kind: FoodItem = FoodItem.NEUTRAL) -> void:
-	var multi := 1.0
-	if kind in likes:
-		multi = like_multiplier
-	elif kind in dislikes:
-		multi = dislike_multiplier
+	var preference_multi := 1.0
+	if kind in likes: preference_multi = like_multiplier
+	elif kind in dislikes: preference_multi = dislike_multiplier
+	
 	var temp_food = food
-	self.food -= amount
-	self.food = clampf(self.food, 0, max_food)
+	self.food = clampf(self.food - amount, 0, max_food)
 	if food - temp_food > 0:
-		add_xp((food - temp_food) * xp_mulitplier * multi)
+		add_xp((food - temp_food) * xp_mulitplier * preference_multi)
+	
 	food_changed.emit()
 
 
 func damage_fun(amount) -> void:
 	var temp_fun = fun
-	self.fun -= amount
-	self.fun = clampf(self.fun, 0, max_fun)
+	self.fun = clampf(self.fun - amount, 0, max_fun)
 	if fun - temp_fun > 0:
 		add_xp(fun - temp_fun * xp_mulitplier)
+	
 	fun_changed.emit()
 
 
 func damage_water(amount) -> void:
 	var temp_water = water
-	self.water -= amount
-	self.water = clampf(self.water, 0, max_water)
-	if water - temp_water > 0:
+	self.water = clampf(self.water - amount, 0, max_water)
+	if water - temp_water > 0: 
 		add_xp(water - temp_water * xp_mulitplier)
+	
 	water_changed.emit()
 
 
 func save() -> Dictionary:
-	return {"water": water, "food": food, "fun": fun, "hp": hp, "xp": xp}
+	return {
+		"water": water, "food": food, "fun": fun, "hp": hp, 
+		"xp": xp, "ready_to_grow_up": ready_to_grow_up
+	}
 
 
 func load(data) -> void:
-	var stat_list = ["water", "fun", "food", "hp", "xp"]
-	for setting in stat_list:
-		if data.has(setting):
-			self[setting] = data[setting]
-			var signal_name = setting + "_changed"
-			self[signal_name].emit()
+	var prop_list = ["water", "fun", "food", "hp", "xp", "ready_to_grow_up"]
+	
+	for property in prop_list:
+		if data.has(property):
+			self[property] = data[property]
+			
+			var signal_name = property + "_changed"
+			if self.has_signal(signal_name):
+				self[signal_name].emit()
 	apply_dmg_tint()
