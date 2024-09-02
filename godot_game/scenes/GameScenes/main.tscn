@@ -226,7 +226,7 @@ class UnlockableIcon extends Button:
 		size.y = 64
 		expand_icon = false
 		add_theme_constant_override(\"icon_max_width\", 50)
-		disabled = !unlockable.unlocked
+		disabled = !unlockable.unlocked_by_default
 		#texture_normal = value
 		theme = load(\"res://themes/menu_btn.tres\")
 		#size_flags_horizontal = Control.SIZE_EXPAND_FILL

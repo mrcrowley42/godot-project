@@ -7,5 +7,6 @@
 script = ExtResource("1_v0kdc")
 name = "Propeller Hat"
 desc = "The classic propeller hat!"
-unlocked = true
+unlocked_by_default = true
 thumbnail = ExtResource("2_llcvw")
+category = 0

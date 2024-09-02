@@ -9,3 +9,4 @@ name = "Standard Glasses"
 desc = "Regular old glasses."
 unlocked = false
 thumbnail = ExtResource("2_bemxb")
+category = 1
