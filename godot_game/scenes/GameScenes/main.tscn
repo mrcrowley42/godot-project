@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bmwpenw32juko" path="res://UI stuff/Universal/background_light_map.png" id="8_aulml"]
 [ext_resource type="PackedScene" uid="uid://bebjn5n2kjwgb" path="res://scenes/Creatures/creature.tscn" id="9_ulkn4"]
 [ext_resource type="Script" path="res://scripts/Confetti.gd" id="10_tn1o6"]
-[ext_resource type="Theme" uid="uid://dl1wes8p6lqlb" path="res://themes/invisible.tres" id="11_lcq7m"]
+[ext_resource type="Theme" path="res://themes/invisible.tres" id="11_lcq7m"]
 [ext_resource type="Script" path="res://scripts/clippy_area.gd" id="12_n00c6"]
 [ext_resource type="Script" path="res://scripts/ui_theme_manager.gd" id="13_3i267"]
 [ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="14_k2ios"]
@@ -293,7 +293,14 @@ func _ready():
 
 ## Update menu when an item is unlocked.
 func update_menu():
-	pass
+	var unlocked_items = DataGlobals.metadata_last_loaded[DataGlobals.UNLOCKED_ITEMS]
+	
+	for item: CosmeticItem in unlockables.unlockables:
+		var uid = ResourceLoader.get_resource_uid(item.resource_path)
+		var is_unlocked = item.unlocked or uid in unlocked_items
+		
+		var item_btn = UnlockableIcon.new(item, is_unlocked)
+		add_child(item_btn)
 "
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wd2mi"]
