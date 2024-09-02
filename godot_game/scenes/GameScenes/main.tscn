@@ -219,20 +219,23 @@ var unlockables = load(\"res://resources/unlockables.tres\")
 
 ## Class that describes the button object for each cosmetic item.
 class UnlockableIcon extends Button:
+	var cosmetic_name
 	func _init(unlockable: CosmeticItem):
 		icon = unlockable.thumbnail
 		custom_minimum_size = Vector2(64,64)
 		size.x = 64
 		size.y = 64
+		cosmetic_name = unlockable.name
 		expand_icon = false
 		tooltip_text = unlockable.desc
 		add_theme_constant_override(\"icon_max_width\", 50)
 		disabled = !unlockable.unlocked_by_default
 		#texture_normal = value
 		theme = load(\"res://themes/menu_btn.tres\")
-		#size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		#size_flags_vertical = Control.SIZE_EXPAND_FILL
 
+
+	func _pressed():
+		print(self.cosmetic_name)
 
 func _ready():
 	for item in unlockables.unlockables:
