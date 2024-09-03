@@ -15,7 +15,6 @@ class_name EggOpening extends ScriptNode
 @export var egg_indexes: Array[int]
 
 @onready var bg: NinePatchRect = find_child("BG")
-@onready var music: AudioStreamPlayer = find_child("Music")
 @onready var display_box: NinePatchRect = find_child("DisplayBox")
 @onready var trans_img: Sprite2D = find_child("Transition")
 @onready var title_container: Control = find_child("TitleContainer")
@@ -81,7 +80,7 @@ func _ready():
 			return
 	
 	# setup
-	music.play()
+	%Music.play()
 	bar_container.visible = false
 	continue_btn.visible = false
 	back_btn.visible = false
