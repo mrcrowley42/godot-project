@@ -13,7 +13,7 @@ var max_hp: float
 var max_water: float
 var max_food: float
 var max_fun: float
-var xp_required: float  # XP required for the creature to reach the [param ADULT] [param LifeStage] stage
+var xp_required: float = 1000  # XP required for the creature to reach the [param ADULT] [param LifeStage] stage
 
 const DISLIKE_MULTIPLIER: float = 0.5
 const LIKE_MULTIPLIER: float = 2.0
@@ -50,6 +50,7 @@ var stats: Dictionary = {Stat.HP: damage_hp, Stat.FUN: damage_fun,
 func _ready():
 	var uid = DataGlobals.metadata_last_loaded[DataGlobals.CURRENT_CREATURE]
 	creature_type = load(ResourceUID.get_id_path(uid))
+	main_sprite.sprite_frames = creature_type.sprite_frames
 	set_up_default_values()
 	
 	if life_stage == LifeStage.CHILD:
@@ -76,7 +77,7 @@ func add_xp(amount: float) -> void:
 	xp += amount
 	
 	# the creature is ready to become an adult
-	if life_stage != LifeStage.ADULT and xp >= xp_required:
+	if life_stage != LifeStage.ADULT and xp >= xp_required and !ready_to_grow_up:
 		ready_to_grow_up = true
 	
 	xp_changed.emit()
