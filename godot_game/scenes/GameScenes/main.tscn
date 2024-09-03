@@ -1253,6 +1253,7 @@ metadata/_edit_lock_ = true
 
 [node name="MainOptMenu" type="MarginContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 40
@@ -1388,46 +1389,114 @@ text = ">"
 [node name="FactsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_arbxs")
+theme_override_styles/panel = SubResource("StyleBoxFlat_cuoxy")
 script = ExtResource("32_jvqx8")
 metadata/_edit_lock_ = true
 
-[node name="Label" type="Label" parent="UI/OptionsMenu/FactsMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/FactsMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/FactsMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Label" type="Label" parent="UI/OptionsMenu/FactsMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("39_8ebm3")
 text = "FACTS"
 horizontal_alignment = 1
 
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/OptionsMenu/FactsMenu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 240)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/FactsMenu/MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/OptionsMenu/FactsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Button" type="Button" parent="UI/OptionsMenu/FactsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(112, 192)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "BOOK 1"
+
+[node name="Button2" type="Button" parent="UI/OptionsMenu/FactsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(112, 192)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "BOOK 2"
+
+[node name="Button4" type="Button" parent="UI/OptionsMenu/FactsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(112, 192)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "BOOK 3"
+
+[node name="Button3" type="Button" parent="UI/OptionsMenu/FactsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(112, 192)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "BOOK 4
+"
+
+[node name="Button5" type="Button" parent="UI/OptionsMenu/FactsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(112, 192)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "BOOK 5
+"
+
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/FactsMenu"]
 position = Vector2(-50, -130)
 
 [node name="Save" type="Button" parent="UI/OptionsMenu/FactsMenu/SaveButtons"]
-offset_left = 90.0
-offset_top = 484.0
-offset_right = 234.0
-offset_bottom = 532.0
+offset_left = 391.0
+offset_top = 511.0
+offset_right = 492.0
+offset_bottom = 559.0
+scale = Vector2(0.75, 0.75)
 theme = ExtResource("33_1qhmu")
 theme_override_colors/font_hover_color = Color(0.4947, 0.97, 0.4947, 1)
 theme_override_font_sizes/font_size = 18
-text = "Save Settings"
+text = "Save"
 
 [node name="Cancel" type="Button" parent="UI/OptionsMenu/FactsMenu/SaveButtons"]
 texture_filter = 5
-offset_left = 317.0
-offset_top = 484.0
-offset_right = 450.0
-offset_bottom = 532.0
+offset_left = 64.0
+offset_top = 510.0
+offset_right = 168.0
+offset_bottom = 558.0
+scale = Vector2(0.75, 0.75)
 theme = ExtResource("33_1qhmu")
 theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
 theme_override_font_sizes/font_size = 18
-text = "Cancel"
+text = "Back"
 script = ExtResource("35_4io20")
 
 [node name="AppearanceMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_cuoxy")
 script = ExtResource("32_jvqx8")
