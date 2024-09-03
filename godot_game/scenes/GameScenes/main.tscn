@@ -1,4 +1,4 @@
-[gd_scene load_steps=107 format=3 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=106 format=3 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_aqytd"]
@@ -54,9 +54,8 @@
 [ext_resource type="Texture2D" uid="uid://cuaa2uyffvita" path="res://icons/status/droplet-fill.svg" id="47_qik1j"]
 [ext_resource type="Script" path="res://scripts/water_bar.gd" id="48_4mvbm"]
 [ext_resource type="Texture2D" uid="uid://d4c1k5m8u1jc0" path="res://UI stuff/Green Palette/green_food_button.png" id="49_a77pc"]
-[ext_resource type="Script" path="res://scripts/foodbutton.gd" id="50_0qet7"]
+[ext_resource type="Script" path="res://scripts/nav_button.gd" id="50_0qet7"]
 [ext_resource type="Texture2D" uid="uid://drv50ynifh37j" path="res://UI stuff/Green Palette/green_activities_button.png" id="51_7kyvm"]
-[ext_resource type="Script" path="res://scripts/act_button.gd" id="52_mk8tu"]
 [ext_resource type="Texture2D" uid="uid://b5uf4jcvme855" path="res://UI stuff/Green Palette/green_settings_button.png" id="53_hpyyk"]
 [ext_resource type="Script" path="res://scripts/setting_button.gd" id="54_5bu15"]
 [ext_resource type="PackedScene" uid="uid://b6wocr0vo5s4v" path="res://scenes/GameScenes/debug_content.tscn" id="55_0rbaa"]
@@ -1892,17 +1891,19 @@ grow_horizontal = 2
 scale = Vector2(0.5, 0.5)
 theme_override_constants/separation = 0
 
-[node name="FoodButton" type="TextureButton" parent="UI/NavigationButtons"]
+[node name="FoodButton" type="TextureButton" parent="UI/NavigationButtons" node_paths=PackedStringArray("target_menu")]
 unique_name_in_owner = true
 layout_mode = 2
 texture_normal = ExtResource("49_a77pc")
 script = ExtResource("50_0qet7")
+target_menu = NodePath("../../FoodMenu")
 
-[node name="ActButton" type="TextureButton" parent="UI/NavigationButtons"]
+[node name="ActButton" type="TextureButton" parent="UI/NavigationButtons" node_paths=PackedStringArray("target_menu")]
 unique_name_in_owner = true
 layout_mode = 2
 texture_normal = ExtResource("51_7kyvm")
-script = ExtResource("52_mk8tu")
+script = ExtResource("50_0qet7")
+target_menu = NodePath("../../ActivityMenu")
 
 [node name="SettingButton" type="TextureButton" parent="UI/NavigationButtons"]
 unique_name_in_owner = true
