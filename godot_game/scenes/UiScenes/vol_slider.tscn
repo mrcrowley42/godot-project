@@ -1,22 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://cbn0dv1k0onpb"]
+[gd_scene load_steps=6 format=3 uid="uid://cbn0dv1k0onpb"]
 
+[ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="1_doqau"]
 [ext_resource type="Script" path="res://scripts/volume_slider.gd" id="1_vfrrs"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_ftj5d"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_elks1"]
-color = Color(0.339937, 0.383586, 0.682463, 1)
+color = Color(0.28875, 0.203, 0.35, 1)
 grow_begin = 0.0
 grow_end = 0.0
 thickness = 40
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xql7d"]
-bg_color = Color(0.13625, 0.280075, 0.356808, 1)
+bg_color = Color(0.58381, 0.3318, 0.79, 1)
 
 [node name="VolumeSlider" type="HSlider"]
 offset_right = 1110.0
 offset_bottom = 304.0
+mouse_default_cursor_shape = 10
+theme = ExtResource("1_doqau")
 theme_override_icons/grabber = SubResource("ImageTexture_ftj5d")
+theme_override_icons/grabber_highlight = SubResource("ImageTexture_ftj5d")
+theme_override_icons/grabber_disabled = SubResource("ImageTexture_ftj5d")
 theme_override_styles/slider = SubResource("StyleBoxLine_elks1")
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_xql7d")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_xql7d")
