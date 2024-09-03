@@ -1,10 +1,9 @@
 extends TextureButton
 
-
-@onready var act_menu = %ActivityMenu
+@export var target_menu: Node
 @onready var options_menu = %OptionsMenu
 
 func _on_button_down():
 	%BtnClick.play()
 	options_menu.hide()
-	act_menu.visible = !act_menu.visible
+	target_menu.visible = !target_menu.visible

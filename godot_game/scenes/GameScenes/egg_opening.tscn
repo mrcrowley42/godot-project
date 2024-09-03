@@ -434,7 +434,6 @@ script = ExtResource("33_eitoc")
 [node name="Music" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("34_dy8vj")
-autoplay = true
 bus = &"Music"
 script = ExtResource("35_4jftv")
 
