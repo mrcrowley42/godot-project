@@ -16,7 +16,10 @@ bg_color = Color(0.13625, 0.280075, 0.356808, 1)
 [node name="VolumeSlider" type="HSlider"]
 offset_right = 1110.0
 offset_bottom = 304.0
+mouse_default_cursor_shape = 10
 theme_override_icons/grabber = SubResource("ImageTexture_ftj5d")
+theme_override_icons/grabber_highlight = SubResource("ImageTexture_ftj5d")
+theme_override_icons/grabber_disabled = SubResource("ImageTexture_ftj5d")
 theme_override_styles/slider = SubResource("StyleBoxLine_elks1")
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_xql7d")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_xql7d")
