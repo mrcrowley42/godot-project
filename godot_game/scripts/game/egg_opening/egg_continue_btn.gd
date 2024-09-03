@@ -14,4 +14,7 @@ func _on_gui_input(event):
 			parent.bg.position + (parent.bg.size * parent.bg.scale) * .5, 
 			0., 
 			1.
-		).connect("finished", parent.load_main_scene)
+		)
+		# load main scene after .5 seconds
+		await get_tree().create_timer(.5).timeout
+		parent.load_main_scene()

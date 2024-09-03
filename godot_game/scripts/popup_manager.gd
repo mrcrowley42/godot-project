@@ -3,6 +3,11 @@
 extends Node2D
 
 @onready var toast = preload("res://scenes/UiScenes/basic_notification.tscn")
+@onready var grow_up_btn: NinePatchRect = find_child("GrowUpBtn")
+
+func _ready():
+	grow_up_btn.position.y = 580
+	%Creature.ready_to_grow_up.connect(show_grow_up_btn)
 
 ## Creates a toast notification with the passed string.
 func new_notification(message: String, type: PackedScene=toast) -> void:
@@ -21,3 +26,12 @@ func new_notification(message: String, type: PackedScene=toast) -> void:
 	notif.message = message
 	notif.position = start_pos
 	add_child(notif)
+
+func show_grow_up_btn():
+	get_tree().create_tween().tween_property(
+		grow_up_btn, "position", Vector2(grow_up_btn.position.x, 505), 1.
+	).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+
+func _on_grow_up_btn_gui_input(event: InputEvent):
+	if event.is_pressed() and %Creature.is_ready_to_grow_up:
+		print("to adult")

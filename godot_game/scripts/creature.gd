@@ -29,7 +29,7 @@ var water: float
 var food: float
 var fun: float
 var xp: float = 0
-var ready_to_grow_up: bool = false
+var is_ready_to_grow_up: bool = false
 var life_stage: LifeStage
 var likes: Array
 var dislikes: Array
@@ -41,6 +41,7 @@ signal food_changed()
 signal water_changed()
 signal fun_changed()
 signal xp_changed()
+signal ready_to_grow_up()
 
 ## Map of shorthand strings to corresponding damage function
 var stats: Dictionary = {Stat.HP: damage_hp, Stat.FUN: damage_fun,
@@ -80,8 +81,9 @@ func add_xp(amount: float) -> void:
 	xp += amount
 	
 	# the creature is ready to become an adult
-	if life_stage != LifeStage.ADULT and xp >= xp_required and !ready_to_grow_up:
-		ready_to_grow_up = true
+	if life_stage != LifeStage.ADULT and xp >= xp_required and !is_ready_to_grow_up:
+		is_ready_to_grow_up = true
+		ready_to_grow_up.emit()
 	
 	xp_changed.emit()
 
@@ -149,11 +151,11 @@ func damage_water(amount) -> void:
 func save() -> Dictionary:
 	return {
 		"water": water, "food": food, "fun": fun, "hp": hp, 
-		"xp": xp, "ready_to_grow_up": ready_to_grow_up
+		"xp": xp, "is_ready_to_grow_up": is_ready_to_grow_up
 	}
 
 func load(data) -> void:
-	var prop_list = ["water", "fun", "food", "hp", "xp", "ready_to_grow_up"]
+	var prop_list = ["water", "fun", "food", "hp", "xp", "is_ready_to_grow_up"]
 	
 	for property in prop_list:
 		if data.has(property):
@@ -162,4 +164,7 @@ func load(data) -> void:
 			var signal_name = property + "_changed"
 			if self.has_signal(signal_name):
 				self[signal_name].emit()
+	
+	if is_ready_to_grow_up:
+		ready_to_grow_up.emit()
 	apply_dmg_tint()
