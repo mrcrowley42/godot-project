@@ -1,4 +1,4 @@
-[gd_scene load_steps=106 format=3 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=110 format=3 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_aqytd"]
@@ -46,6 +46,7 @@
 [ext_resource type="Texture2D" uid="uid://cawudmxbjamv0" path="res://UI stuff/Green Palette/ui_green.png" id="40_wt18k"]
 [ext_resource type="Texture2D" uid="uid://c702pbhxasm52" path="res://icons/status/heart-fill.svg" id="41_8adaw"]
 [ext_resource type="Script" path="res://scripts/costmetic_row.gd" id="41_pook7"]
+[ext_resource type="Texture2D" uid="uid://b30byopy2beum" path="res://images/creature_sprites/correct_scale/chill-1.png" id="42_828ml"]
 [ext_resource type="Script" path="res://scripts/hp_bar.gd" id="42_ccntj"]
 [ext_resource type="Texture2D" uid="uid://d84hj0mtn2hw" path="res://icons/status/mood_24dp_FILL1_wght300_GRAD0_opsz24.svg" id="43_qa2jm"]
 [ext_resource type="Script" path="res://scripts/fun_bar.gd" id="44_8jtdq"]
@@ -199,6 +200,13 @@ func _ready():
 	visible = true
 "
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eucah"]
+bg_color = Color(0.694616, 0.0129038, 0.202883, 1)
+corner_radius_top_left = 200
+corner_radius_top_right = 200
+corner_radius_bottom_right = 200
+corner_radius_bottom_left = 200
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_arbxs"]
 bg_color = Color(0, 0, 0, 0.737255)
 draw_center = false
@@ -211,6 +219,13 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 corner_detail = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cuoxy"]
+bg_color = Color(0.162066, 0.162066, 0.162066, 1)
+border_color = Color(0.8, 0.8, 0.8, 0.411765)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2rfxe"]
+bg_color = Color(0.57, 1, 0.706167, 0.611765)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wd2mi"]
 
@@ -1238,7 +1253,6 @@ metadata/_edit_lock_ = true
 
 [node name="MainOptMenu" type="MarginContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 40
@@ -1279,6 +1293,16 @@ custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme = ExtResource("18_v1mb2")
 text = "Credits"
+
+[node name="Node2D" type="Node2D" parent="UI/OptionsMenu/MainOptMenu"]
+
+[node name="Button" type="Button" parent="UI/OptionsMenu/MainOptMenu/Node2D"]
+offset_left = 11.0
+offset_top = 12.0
+offset_right = 35.0
+offset_bottom = 36.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_eucah")
+text = "X"
 
 [node name="GameplayOptionsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
@@ -1404,95 +1428,137 @@ script = ExtResource("35_4io20")
 [node name="AppearanceMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_arbxs")
+theme_override_styles/panel = SubResource("StyleBoxFlat_cuoxy")
 script = ExtResource("32_jvqx8")
 metadata/_edit_lock_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/AppearanceMenu"]
 layout_mode = 2
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 16
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="Label" type="Label" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 0
-theme_override_fonts/font = ExtResource("19_3grg3")
-theme_override_font_sizes/font_size = 24
-text = "HATS"
-horizontal_alignment = 1
+text = "PREVIEW TEXT
+"
 
-[node name="HatContainer" type="GridContainer" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 158)
 layout_mode = 2
-theme_override_constants/h_separation = 16
-theme_override_constants/v_separation = 16
+theme_override_styles/panel = SubResource("StyleBoxFlat_2rfxe")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="CosmeticItems" type="GridContainer" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
 columns = 5
 script = ExtResource("41_pook7")
 
-[node name="Glasses" type="Label" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems"]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-size_flags_vertical = 0
-theme_override_fonts/font = ExtResource("19_3grg3")
-theme_override_font_sizes/font_size = 24
-text = "GLASSES"
-horizontal_alignment = 1
+text = "A"
 
-[node name="GlassesContainer" type="GridContainer" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer"]
+[node name="Button2" type="Button" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems"]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-theme_override_constants/h_separation = 16
-theme_override_constants/v_separation = 16
-columns = 5
-script = ExtResource("41_pook7")
-category = 1
+text = "A"
 
-[node name="Other" type="Label" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer"]
+[node name="Button3" type="Button" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems"]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-size_flags_vertical = 0
-theme_override_fonts/font = ExtResource("19_3grg3")
-theme_override_font_sizes/font_size = 24
-text = "GLASSES"
-horizontal_alignment = 1
+text = "A"
 
-[node name="OtherContainer" type="GridContainer" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer"]
+[node name="Button4" type="Button" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems"]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-theme_override_constants/h_separation = 16
-theme_override_constants/v_separation = 16
-columns = 5
-script = ExtResource("41_pook7")
-category = 1
+text = "A"
+
+[node name="Button5" type="Button" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+text = "A"
+
+[node name="Button6" type="Button" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+text = "A"
+
+[node name="Button7" type="Button" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+text = "A"
+
+[node name="Button20" type="Button" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+text = "A"
+
+[node name="Button8" type="Button" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+text = "A"
+
+[node name="Button9" type="Button" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+text = "A"
+
+[node name="Button21" type="Button" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+text = "A"
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TextureRect" type="TextureRect" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("42_828ml")
+expand_mode = 5
+stretch_mode = 5
 
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/AppearanceMenu"]
 position = Vector2(-50, -130)
 
 [node name="Save" type="Button" parent="UI/OptionsMenu/AppearanceMenu/SaveButtons"]
-offset_left = 90.0
-offset_top = 484.0
-offset_right = 234.0
-offset_bottom = 532.0
+offset_left = 391.0
+offset_top = 511.0
+offset_right = 492.0
+offset_bottom = 559.0
 scale = Vector2(0.75, 0.75)
 theme = ExtResource("33_1qhmu")
 theme_override_colors/font_hover_color = Color(0.4947, 0.97, 0.4947, 1)
 theme_override_font_sizes/font_size = 18
-text = "Save Settings"
+text = "Save"
 
 [node name="Cancel" type="Button" parent="UI/OptionsMenu/AppearanceMenu/SaveButtons"]
 texture_filter = 5
-offset_left = 317.0
-offset_top = 484.0
-offset_right = 450.0
-offset_bottom = 532.0
+offset_left = 64.0
+offset_top = 510.0
+offset_right = 168.0
+offset_bottom = 558.0
 scale = Vector2(0.75, 0.75)
 theme = ExtResource("33_1qhmu")
 theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
 theme_override_font_sizes/font_size = 18
-text = "Cancel"
+text = "Back"
 script = ExtResource("35_4io20")
 
 [node name="SoundMenu" type="PanelContainer" parent="UI/OptionsMenu"]
