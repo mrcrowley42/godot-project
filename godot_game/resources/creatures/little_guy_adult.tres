@@ -1,35 +1,32 @@
-[gd_resource type="SpriteFrames" load_steps=19 format=3 uid="uid://68skicj7tsu2"]
+[gd_resource type="SpriteFrames" load_steps=16 format=3 uid="uid://68skicj7tsu2"]
 
-[ext_resource type="Texture2D" uid="uid://dqtjsny24a3p1" path="res://images/creature_sprites/angry-0.png" id="1_3g8ax"]
-[ext_resource type="Texture2D" uid="uid://cq86852isqqkq" path="res://images/creature_sprites/angry-1.png" id="2_g6veo"]
-[ext_resource type="Texture2D" uid="uid://dd12vpparynjh" path="res://images/creature_sprites/angry-2.png" id="3_k1761"]
-[ext_resource type="Texture2D" uid="uid://dwyq4ypjep2wb" path="res://images/creature_sprites/baby-0.png" id="4_r8opo"]
-[ext_resource type="Texture2D" uid="uid://dino0mqreujlr" path="res://images/creature_sprites/baby-1.png" id="5_2123n"]
-[ext_resource type="Texture2D" uid="uid://banu8mr1om6vj" path="res://images/creature_sprites/baby-2.png" id="6_2asg0"]
-[ext_resource type="Texture2D" uid="uid://b3q3krfrwwvff" path="res://images/creature_sprites/chill-0.png" id="7_4s75p"]
-[ext_resource type="Texture2D" uid="uid://k3q3fb85fm3h" path="res://images/creature_sprites/chill-1.png" id="8_m7fki"]
-[ext_resource type="Texture2D" uid="uid://dck4q0ce0c4mm" path="res://images/creature_sprites/chill-2.png" id="9_6pqhr"]
-[ext_resource type="Texture2D" uid="uid://c44b8y8u8ne7w" path="res://images/creature_sprites/confused-0.png" id="10_p2ot0"]
-[ext_resource type="Texture2D" uid="uid://cqyltj7p4b1l7" path="res://images/creature_sprites/confused-1.png" id="11_56lld"]
-[ext_resource type="Texture2D" uid="uid://bcsj0ibb8s3y0" path="res://images/creature_sprites/confused-2.png" id="12_ul3y2"]
-[ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://images/creature_sprites/little-guy.png" id="13_wmcbw"]
-[ext_resource type="Texture2D" uid="uid://4cfpam3be0g" path="res://images/creature_sprites/little-guy_2.png" id="14_jve4g"]
-[ext_resource type="Texture2D" uid="uid://diwxdoruu1sob" path="res://images/creature_sprites/little-guy_3.png" id="15_j5y3e"]
-[ext_resource type="Texture2D" uid="uid://dxc4uprrmyny8" path="res://images/creature_sprites/sadge-0.png" id="16_bysa2"]
-[ext_resource type="Texture2D" uid="uid://dxipq42e3qg72" path="res://images/creature_sprites/sadge-1.png" id="17_hbupg"]
-[ext_resource type="Texture2D" uid="uid://c8vn6brl68787" path="res://images/creature_sprites/sadge-2.png" id="18_van78"]
+[ext_resource type="Texture2D" uid="uid://dqtjsny24a3p1" path="res://images/creature_sprites/angry-0.png" id="1_ywj23"]
+[ext_resource type="Texture2D" uid="uid://cq86852isqqkq" path="res://images/creature_sprites/angry-1.png" id="2_ra3iv"]
+[ext_resource type="Texture2D" uid="uid://dd12vpparynjh" path="res://images/creature_sprites/angry-2.png" id="3_jkaog"]
+[ext_resource type="Texture2D" uid="uid://b3q3krfrwwvff" path="res://images/creature_sprites/chill-0.png" id="4_x2mys"]
+[ext_resource type="Texture2D" uid="uid://k3q3fb85fm3h" path="res://images/creature_sprites/chill-1.png" id="5_qme2n"]
+[ext_resource type="Texture2D" uid="uid://dck4q0ce0c4mm" path="res://images/creature_sprites/chill-2.png" id="6_t66fq"]
+[ext_resource type="Texture2D" uid="uid://c44b8y8u8ne7w" path="res://images/creature_sprites/confused-0.png" id="7_bv6mv"]
+[ext_resource type="Texture2D" uid="uid://cqyltj7p4b1l7" path="res://images/creature_sprites/confused-1.png" id="8_imjha"]
+[ext_resource type="Texture2D" uid="uid://bcsj0ibb8s3y0" path="res://images/creature_sprites/confused-2.png" id="9_16g8j"]
+[ext_resource type="Texture2D" uid="uid://cb3y68flsjyc" path="res://images/creature_sprites/little-guy.png" id="10_qruhh"]
+[ext_resource type="Texture2D" uid="uid://4cfpam3be0g" path="res://images/creature_sprites/little-guy_2.png" id="11_xhquc"]
+[ext_resource type="Texture2D" uid="uid://diwxdoruu1sob" path="res://images/creature_sprites/little-guy_3.png" id="12_g1rru"]
+[ext_resource type="Texture2D" uid="uid://dxc4uprrmyny8" path="res://images/creature_sprites/sadge-0.png" id="13_tuu0y"]
+[ext_resource type="Texture2D" uid="uid://dxipq42e3qg72" path="res://images/creature_sprites/sadge-1.png" id="14_cdd7m"]
+[ext_resource type="Texture2D" uid="uid://c8vn6brl68787" path="res://images/creature_sprites/sadge-2.png" id="15_7a5bw"]
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_3g8ax")
+"texture": ExtResource("1_ywj23")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_g6veo")
+"texture": ExtResource("2_ra3iv")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_k1761")
+"texture": ExtResource("3_jkaog")
 }],
 "loop": true,
 "name": &"angry",
@@ -37,27 +34,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_r8opo")
+"texture": ExtResource("4_x2mys")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_2123n")
+"texture": ExtResource("5_qme2n")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_2asg0")
-}],
-"loop": true,
-"name": &"baby",
-"speed": 4.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("7_4s75p")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_m7fki")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_6pqhr")
+"texture": ExtResource("6_t66fq")
 }],
 "loop": true,
 "name": &"chill",
@@ -65,13 +48,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("10_p2ot0")
+"texture": ExtResource("7_bv6mv")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_56lld")
+"texture": ExtResource("8_imjha")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_ul3y2")
+"texture": ExtResource("9_16g8j")
 }],
 "loop": true,
 "name": &"confused",
@@ -79,13 +62,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_wmcbw")
+"texture": ExtResource("10_qruhh")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_jve4g")
+"texture": ExtResource("11_xhquc")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_j5y3e")
+"texture": ExtResource("12_g1rru")
 }],
 "loop": true,
 "name": &"idle",
@@ -93,13 +76,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("16_bysa2")
+"texture": ExtResource("13_tuu0y")
 }, {
 "duration": 1.0,
-"texture": ExtResource("17_hbupg")
+"texture": ExtResource("14_cdd7m")
 }, {
 "duration": 1.0,
-"texture": ExtResource("18_van78")
+"texture": ExtResource("15_7a5bw")
 }],
 "loop": true,
 "name": &"sad",
