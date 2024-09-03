@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/base_classses/egg_entry.gd" id="1_8ok2j"]
 [ext_resource type="Texture2D" uid="uid://gi4ytib73ibf" path="res://images/egg/egg-green.png" id="1_knhbg"]
-[ext_resource type="Resource" uid="uid://cxtahs454inpc" path="res://resources/creatures/main_creature.tres" id="1_y5x2i"]
+[ext_resource type="Resource" uid="uid://cxtahs454inpc" path="res://resources/creatures/little_guy_creature.tres" id="1_y5x2i"]
 [ext_resource type="Script" path="res://scripts/base_classses/egg_creature_entry.gd" id="2_brefb"]
 
 [sub_resource type="Resource" id="Resource_1h8fn"]
