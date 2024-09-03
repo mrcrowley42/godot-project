@@ -38,3 +38,7 @@ func _ready():
 			var is_unlocked = item.unlocked or uid in unlocked_items
 			var item_btn = UnlockableIcon.new(item, is_unlocked)
 			add_child(item_btn)
+
+
+func _on_visibility_changed():
+	$"../..".scroll_vertical = 0

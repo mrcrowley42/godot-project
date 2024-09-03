@@ -2081,6 +2081,7 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/OptionsMenu/GameplayOptionsMenu/ThemeControls/vHBoxContainer/Button" to="UI/OptionsMenu/GameplayOptionsMenu/ThemeControls" method="_on_forward_button_down"]
 [connection signal="pressed" from="UI/OptionsMenu/FactsMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
 [connection signal="button_down" from="UI/OptionsMenu/FactsMenu/SaveButtons/Cancel" to="UI/OptionsMenu/FactsMenu/SaveButtons/Cancel" method="_on_button_down"]
+[connection signal="visibility_changed" from="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems" to="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems" method="_on_visibility_changed"]
 [connection signal="pressed" from="UI/OptionsMenu/AppearanceMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
 [connection signal="button_down" from="UI/OptionsMenu/AppearanceMenu/SaveButtons/Cancel" to="UI/OptionsMenu/AppearanceMenu/SaveButtons/Cancel" method="_on_button_down"]
 [connection signal="pressed" from="UI/OptionsMenu/SoundMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
