@@ -1,12 +1,14 @@
 @icon("res://icons/class-icons/bell-fill.svg")
-
-extends Node2D
+class_name NotificationManager extends ScriptNode
 
 @onready var toast = preload("res://scenes/UiScenes/basic_notification.tscn")
 @onready var grow_up_btn: NinePatchRect = find_child("GrowUpBtn")
 
+var og_pos: Vector2
+
 func _ready():
-	grow_up_btn.position.y = 580
+	og_pos = grow_up_btn.position
+	grow_up_btn.position.y += grow_up_btn.size.y * grow_up_btn.scale.y * 2.
 	%Creature.ready_to_grow_up.connect(show_grow_up_btn)
 
 ## Creates a toast notification with the passed string.
@@ -29,9 +31,17 @@ func new_notification(message: String, type: PackedScene=toast) -> void:
 
 func show_grow_up_btn():
 	get_tree().create_tween().tween_property(
-		grow_up_btn, "position", Vector2(grow_up_btn.position.x, 505), 1.
+		grow_up_btn, "position", og_pos, 1.
 	).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 
 func _on_grow_up_btn_gui_input(event: InputEvent):
 	if event.is_pressed() and %Creature.is_ready_to_grow_up:
 		print("to adult")
+
+
+func _on_grow_up_btn_mouse_entered() -> void:
+	print("enter")
+
+
+func _on_grow_up_btn_mouse_exited() -> void:
+	print("exit")

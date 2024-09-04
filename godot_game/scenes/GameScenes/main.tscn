@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="14_k2ios"]
 [ext_resource type="Resource" uid="uid://bxhuu3qk52v3w" path="res://resources/ui_themes/green.tres" id="14_mb3dl"]
 [ext_resource type="Resource" uid="uid://vt3jd46rlq4h" path="res://resources/ui_themes/orange.tres" id="15_4uyfd"]
+[ext_resource type="Texture2D" uid="uid://do0i17klbrer7" path="res://icons/arrow-up-square.svg" id="15_8x1u0"]
 [ext_resource type="Resource" uid="uid://clen0bplq0q5d" path="res://resources/ui_themes/pink.tres" id="16_6dasc"]
 [ext_resource type="Script" path="res://scripts/action_menu_panel.gd" id="17_wsydk"]
 [ext_resource type="Theme" uid="uid://1dv11a5ar0hg" path="res://themes/action_btn.tres" id="18_v1mb2"]
@@ -435,15 +436,20 @@ metadata/_edit_lock_ = true
 [node name="NotificationLayer" type="CanvasLayer" parent="."]
 layer = 0
 
-[node name="NotificationManager" type="Node2D" parent="NotificationLayer"]
+[node name="NotificationManager" type="Node" parent="NotificationLayer"]
 unique_name_in_owner = true
 script = ExtResource("69_rkm2b")
 
 [node name="GrowUpBtn" type="NinePatchRect" parent="NotificationLayer/NotificationManager"]
-offset_left = 435.0
-offset_top = 506.0
-offset_right = 515.0
-offset_bottom = 586.0
+anchors_preset = -1
+anchor_left = -0.00925926
+anchor_top = -0.00740741
+anchor_right = 0.00925937
+anchor_bottom = 0.00740741
+offset_left = 437.0
+offset_top = 504.0
+offset_right = 517.0
+offset_bottom = 584.0
 scale = Vector2(0.5, 0.5)
 mouse_filter = 0
 texture = ExtResource("14_fimo1")
@@ -454,9 +460,9 @@ patch_margin_bottom = 16
 metadata/_edit_use_anchors_ = true
 
 [node name="icon" type="Sprite2D" parent="NotificationLayer/NotificationManager/GrowUpBtn"]
-position = Vector2(40, 40)
-scale = Vector2(1, 0.999999)
-texture = ExtResource("41_8adaw")
+position = Vector2(45, 44.9999)
+scale = Vector2(1.4375, 1.4375)
+texture = ExtResource("15_8x1u0")
 
 [node name="UI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
@@ -2101,6 +2107,8 @@ bus = &"SFX"
 [connection signal="button_down" from="Gameplay/ClippyArea" to="Gameplay/ClippyArea" method="_on_button_down"]
 [connection signal="button_up" from="Gameplay/ClippyArea" to="Gameplay/ClippyArea" method="_on_button_up"]
 [connection signal="gui_input" from="NotificationLayer/NotificationManager/GrowUpBtn" to="NotificationLayer/NotificationManager" method="_on_grow_up_btn_gui_input"]
+[connection signal="mouse_entered" from="NotificationLayer/NotificationManager/GrowUpBtn" to="NotificationLayer/NotificationManager" method="_on_grow_up_btn_mouse_entered"]
+[connection signal="mouse_exited" from="NotificationLayer/NotificationManager/GrowUpBtn" to="NotificationLayer/NotificationManager" method="_on_grow_up_btn_mouse_exited"]
 [connection signal="visibility_changed" from="UI/FoodMenu" to="UI/FoodMenu" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen1/GridContainer/Button 1" to="UI/FoodMenu/FoodContent/Screen1/GridContainer/Button 1" method="_on_button_down"]
 [connection signal="button_down" from="UI/FoodMenu/FoodContent/Screen1/GridContainer/Button 5" to="UI/FoodMenu/FoodContent/Screen1/GridContainer/Button 5" method="_on_button_down"]
