@@ -1,6 +1,6 @@
 extends AnimatedSprite2D
 
-@onready var creature = $"../.."
+@onready var creature = find_parent("Creature")
 
 func _ready():
 	#creature.food_changed.connect(angry)
