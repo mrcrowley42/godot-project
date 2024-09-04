@@ -201,13 +201,6 @@ func _ready():
 	visible = true
 "
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eucah"]
-bg_color = Color(0.694616, 0.0129038, 0.202883, 1)
-corner_radius_top_left = 200
-corner_radius_top_right = 200
-corner_radius_bottom_right = 200
-corner_radius_bottom_left = 200
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_arbxs"]
 bg_color = Color(0, 0, 0, 0.737255)
 draw_center = false
@@ -1315,16 +1308,6 @@ layout_mode = 2
 theme = ExtResource("18_v1mb2")
 text = "Credits"
 
-[node name="Node2D" type="Node2D" parent="UI/OptionsMenu/MainOptMenu"]
-
-[node name="Button" type="Button" parent="UI/OptionsMenu/MainOptMenu/Node2D"]
-offset_left = 11.0
-offset_top = 12.0
-offset_right = 35.0
-offset_bottom = 36.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_eucah")
-text = "X"
-
 [node name="GameplayOptionsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
@@ -1409,6 +1392,7 @@ text = ">"
 [node name="FactsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_cuoxy")
 script = ExtResource("32_jvqx8")
@@ -1516,7 +1500,6 @@ script = ExtResource("35_4io20")
 [node name="AppearanceMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_cuoxy")
 script = ExtResource("32_jvqx8")
