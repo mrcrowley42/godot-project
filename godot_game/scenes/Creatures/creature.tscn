@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bebjn5n2kjwgb"]
+[gd_scene load_steps=33 format=3 uid="uid://bebjn5n2kjwgb"]
 
 [ext_resource type="Script" path="res://scripts/creature_notification_manager.gd" id="2_0vuyd"]
 [ext_resource type="Script" path="res://scripts/creature.gd" id="2_klgk6"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://scripts/pain.gd" id="16_epyie"]
 [ext_resource type="Texture2D" uid="uid://ds1kv27x8e4hy" path="res://images/creature_sprites/hat-1.png" id="16_iky04"]
 [ext_resource type="AudioStream" uid="uid://it0l1d864tp5" path="res://sound_effects/pain4.wav" id="17_addty"]
+[ext_resource type="Script" path="res://scripts/accessory_manager.gd" id="17_dc6c6"]
 [ext_resource type="Texture2D" uid="uid://brslt7dhl7lmc" path="res://images/creature_sprites/hat-2.png" id="17_s111j"]
 [ext_resource type="Texture2D" uid="uid://jwn24lgspht2" path="res://images/creature_sprites/glasses-0.png" id="18_52sxs"]
 [ext_resource type="AudioStream" uid="uid://bux02e7112jdt" path="res://sound_effects/pain5.wav" id="18_qdg0m"]
@@ -80,7 +81,7 @@ animations = [{
 "speed": 4.0
 }]
 
-[node name="Node2D" type="Node2D"]
+[node name="Creature" type="Node2D"]
 script = ExtResource("2_klgk6")
 dying_colour = Color(1, 0, 0, 1)
 
@@ -119,9 +120,10 @@ animation = &"idle"
 autoplay = "idle"
 script = ExtResource("5_oh7gr")
 
-[node name="Accessories" type="Node2D" parent="Sprites"]
+[node name="AccessoryManager" type="Node2D" parent="Sprites"]
+script = ExtResource("17_dc6c6")
 
-[node name="Hat" type="AnimatedSprite2D" parent="Sprites/Accessories"]
+[node name="Hat" type="AnimatedSprite2D" parent="Sprites/AccessoryManager"]
 visible = false
 position = Vector2(-19, -127)
 scale = Vector2(0.225, 0.225)
@@ -129,7 +131,7 @@ sprite_frames = SubResource("SpriteFrames_3t6pq")
 autoplay = "default"
 frame_progress = 0.770958
 
-[node name="Glasses" type="AnimatedSprite2D" parent="Sprites/Accessories"]
+[node name="Glasses" type="AnimatedSprite2D" parent="Sprites/AccessoryManager"]
 visible = false
 modulate = Color(1, 0.807843, 0.592157, 1)
 position = Vector2(-7, -33)

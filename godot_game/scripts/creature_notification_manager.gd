@@ -55,6 +55,7 @@ func _process(_delta) -> void:
 	if on_cooldown:
 		return
 	var low_stats = []
+	# This looks bad, but it's to catch multiple stats being low at a time.
 	if creature.water <= water_threshold:
 		low_stats.append(Creature.Stat.WATER)
 	if creature.food <= food_threshold:
