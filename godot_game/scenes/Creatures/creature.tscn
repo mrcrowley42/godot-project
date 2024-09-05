@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bebjn5n2kjwgb"]
+[gd_scene load_steps=26 format=3 uid="uid://bebjn5n2kjwgb"]
 
 [ext_resource type="Script" path="res://scripts/creature_notification_manager.gd" id="2_0vuyd"]
 [ext_resource type="Script" path="res://scripts/creature.gd" id="2_klgk6"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://dnud16me4mso5" path="res://icons/status/sentiment_frustrated_24dp_FFFFFF_FILL1_wght300_GRAD0_opsz24.svg" id="8_cooyl"]
 [ext_resource type="Texture2D" uid="uid://kma8r55lpxii" path="res://icons/status/sentiment_sad_24dp_FFFFFF_FILL1_wght300_GRAD0_opsz24.svg" id="9_xmwbg"]
 [ext_resource type="Texture2D" uid="uid://cuaa2uyffvita" path="res://icons/status/droplet-fill.svg" id="10_mvvsb"]
-[ext_resource type="SpriteFrames" uid="uid://68skicj7tsu2" path="res://resources/creatures/main_creature_sprite_frames.tres" id="15_p8q2b"]
 [ext_resource type="AudioStream" uid="uid://pgmpt3uti87" path="res://sound_effects/pain3.wav" id="16_2mdbn"]
 [ext_resource type="Script" path="res://scripts/pain.gd" id="16_epyie"]
 [ext_resource type="AudioStream" uid="uid://it0l1d864tp5" path="res://sound_effects/pain4.wav" id="17_addty"]
@@ -77,9 +76,6 @@ bus = &"SFX"
 [node name="Main" type="AnimatedSprite2D" parent="Sprites"]
 unique_name_in_owner = true
 scale = Vector2(0.225, 0.225)
-sprite_frames = ExtResource("15_p8q2b")
-animation = &"idle"
-autoplay = "idle"
 script = ExtResource("5_oh7gr")
 
 [node name="AccessoryManager" type="Node2D" parent="Sprites" groups=["save_data"]]
