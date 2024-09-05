@@ -466,7 +466,7 @@ func instant_open_to_continue_screen():
 	creature_sprite.scale = Vector2(.25, .25)
 
 func spawn_creature(creature: CreatureType, pos: Vector2):
-	creature_sprite.sprite_frames = creature.sprite_frames
+	creature_sprite.sprite_frames = creature.adult_sprite_frames
 	creature_sprite.animation = "baby"  # they *should* all have a baby animation
 	creature_sprite.play()
 	creature_sprite.position = pos + CREATURE_PLACEMENT_OFFSET  # offset to be centered (may need to be different for each creature)

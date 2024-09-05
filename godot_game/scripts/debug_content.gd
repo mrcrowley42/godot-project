@@ -92,5 +92,13 @@ func _on_wipe_nodes_btn_button_down():
 
 
 func _on_unlock_button_button_down():
-	# todo add unlock for glasses
-	pass
+	var unlockables = load("res://resources/unlockables.tres").unlockables
+	var item_list = []
+	for item in unlockables:
+		item_list.append(ResourceLoader.get_resource_uid(item.resource_path))
+
+	DataGlobals.metadata_to_add[DataGlobals.UNLOCKED_ITEMS] = item_list
+	
+	## -->>> bad  #DataGlobals.save_only_metadata()
+	#
+	#DataGlobals.load_metadata()
