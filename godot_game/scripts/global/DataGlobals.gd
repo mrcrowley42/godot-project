@@ -82,7 +82,7 @@ func save_data():
 		}
 		all_data.append(JSON.stringify(node_data))
 	
-	save_file.store_var(all_data)
+	save_file.store_string("\n".join(all_data))
 
 ## changes only the first line (the metadata line) in save file, everything else remains unchanged
 func save_only_metadata():
@@ -131,12 +131,12 @@ func load_metadata() -> Dictionary:
 func load_data() -> Dictionary:
 	if has_save_data():
 		var save_file = FileAccess.open(Globals.SAVE_DATA_FILE, FileAccess.READ)
-		var file_lines: Array = save_file.get_var()
 		
 		## retrieve metadata
-		metadata_last_loaded = file_lines.pop_at(0)
+		metadata_last_loaded = JSON.parse_string(save_file.get_line())
 		
-		for line in file_lines:
+		while save_file.get_position() < save_file.get_length():
+			var line = save_file.get_line()
 			var parsed_line = JSON.parse_string(line)
 			
 			# check data has necessary values

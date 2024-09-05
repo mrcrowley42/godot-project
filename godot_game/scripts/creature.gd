@@ -49,7 +49,7 @@ var stats: Dictionary = {Stat.HP: damage_hp, Stat.FUN: damage_fun,
 
 
 func _ready():
-	var uid = DataGlobals.metadata_last_loaded[DataGlobals.CURRENT_CREATURE]
+	var uid = int(DataGlobals.metadata_last_loaded[DataGlobals.CURRENT_CREATURE])
 	creature_type = load(ResourceUID.get_id_path(uid))
 	main_sprite.sprite_frames = creature_type.adult_sprite_frames
 	main_sprite.animation = "idle"
