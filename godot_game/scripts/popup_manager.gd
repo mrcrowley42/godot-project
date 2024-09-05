@@ -36,12 +36,4 @@ func show_grow_up_btn():
 
 func _on_grow_up_btn_gui_input(event: InputEvent):
 	if event.is_pressed() and %Creature.is_ready_to_grow_up:
-		print("to adult")
-
-
-func _on_grow_up_btn_mouse_entered() -> void:
-	print("enter")
-
-
-func _on_grow_up_btn_mouse_exited() -> void:
-	print("exit")
+		get_tree().root.propagate_notification(Globals.NOFITICATION_GROW_TO_ADULT_SCENE)

@@ -10,6 +10,8 @@ var last_saved: float
 @onready var minigame_man: MinigameManager = %MinigameManager
 @onready var debug_window = $DebugWindow
 
+var is_in_transition: bool = true;
+
 func _ready():
 	if unlock_fps:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED) # HUH?
@@ -33,6 +35,9 @@ func _ready():
 	# do last
 	perform_opening_transition()
 
+func set_is_in_trans(value: bool):
+	is_in_transition = value
+
 func perform_opening_transition():
 	var ui_overlay: Sprite2D = find_child("UI_Overlay")
 	var trans_img: Sprite2D = find_child("Transition")
@@ -40,7 +45,22 @@ func perform_opening_transition():
 	get_tree().create_tween().tween_property(trans_img, "position", trans_img.position + Vector2(0, 1000), 1.5)\
 		.set_trans(Tween.TRANS_EXPO)\
 		.set_ease(Tween.EASE_OUT)\
-		.set_delay(.3)
+		.set_delay(.3).connect("finished", set_is_in_trans.bind(false))
+
+func perform_closing_transition(func_to_call):
+	if !is_in_transition:
+		set_is_in_trans(true)
+		var ui_overlay: Sprite2D = find_child("UI_Overlay")
+		var trans_img: Sprite2D = find_child("Transition")
+		trans_img.rotation = PI
+		trans_img.position.y = -1000
+		get_tree().create_tween().tween_property(trans_img, 
+			"position", 
+			ui_overlay.position, 
+			1.
+		).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+		await get_tree().create_timer(.5).timeout
+		func_to_call.call()
 
 ## temp print to console
 func calc_elapsed_time():
@@ -68,6 +88,10 @@ func _notification(noti):
 	if noti == NOTIFICATION_WM_CLOSE_REQUEST:
 		minigame_man.finalise_save_data()  # call before saving
 		DataGlobals.save_data()
+	
+	if noti == Globals.NOFITICATION_GROW_TO_ADULT_SCENE:
+		var p = func(): print("done")
+		perform_closing_transition(p)
 
 
 func _input(event) -> void:
