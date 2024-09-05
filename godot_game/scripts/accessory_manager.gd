@@ -48,6 +48,7 @@ func toggle_cosmetic(cosmetic: CosmeticItem) -> void:
 		for i in range(len(current_cosmetics)):
 			if current_cosmetics[i] == cosmetic.name:
 				current_cosmetics.remove_at(i)
+				break
 
 
 func save() -> Dictionary:

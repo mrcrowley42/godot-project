@@ -8,7 +8,7 @@
 script = ExtResource("1_tulc5")
 name = "Standard Glasses"
 desc = "Regular old glasses."
-unlocked = false
+unlocked = true
 thumbnail = ExtResource("2_bemxb")
 category = 1
 sprite = ExtResource("2_qgxkc")
