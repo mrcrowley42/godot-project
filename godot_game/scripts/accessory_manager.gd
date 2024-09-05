@@ -1,5 +1,7 @@
 class_name AccessoryManager extends ScriptNode
 
+## Manages cosmetic items for the creature.
+
 @onready var creature = find_parent("Creature")
 @onready var unlockables = load("res://resources/unlockables.tres").unlockables
 

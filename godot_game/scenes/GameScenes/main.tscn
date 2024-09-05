@@ -1576,12 +1576,13 @@ custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 text = "A"
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer"]
+[node name="PreviewContainer" type="MarginContainer" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="TextureRect" type="TextureRect" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/MarginContainer"]
+[node name="MainSprite" type="TextureRect" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/PreviewContainer"]
 layout_mode = 2
 texture = ExtResource("42_828ml")
 expand_mode = 5

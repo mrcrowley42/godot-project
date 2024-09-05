@@ -11,7 +11,7 @@ class UnlockableIcon extends Button:
 	var cosmetic_name
 	var cosmetic_category
 	var cosmetic
-	
+
 	func _init(unlockable: CosmeticItem, is_unlocked: bool):
 		# Universal Styling and sizeing
 		custom_minimum_size = BTN_SIZE
@@ -19,7 +19,7 @@ class UnlockableIcon extends Button:
 		#theme = load("res://themes/menu_btn.tres")
 		expand_icon = false
 		add_theme_constant_override("icon_max_width", 50)
-		
+
 		# Individual properites
 		cosmetic = unlockable
 		tooltip_text = unlockable.desc
@@ -28,14 +28,12 @@ class UnlockableIcon extends Button:
 		cosmetic_category = unlockable.Cosmetic_Category
 		if not is_unlocked or !unlockable.unlocked:
 			disabled = true
-		
+
 	## Action when button is pressed.
 	func _pressed():
 		var cre: Creature = find_parent("CosmeticItems").creature
 		var be: AccessoryManager = cre.find_child("AccessoryManager")
 		be.toggle_cosmetic(self.cosmetic)
-	
-		print(self.cosmetic_name)
 
 
 func _ready():
