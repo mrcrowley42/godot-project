@@ -8,6 +8,7 @@ class_name CreatureType extends Resource
 @export var max_food: int
 @export var max_fun: int
 @export var sprite_frames: SpriteFrames
+@export var cosmetic_positions: Array[CosmeticPosition]
 @export_group("Preferences")
 @export var likes: Array[Creature.FoodItem]
 @export var dislikes: Array[Creature.FoodItem]

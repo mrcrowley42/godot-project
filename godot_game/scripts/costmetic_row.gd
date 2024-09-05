@@ -4,10 +4,13 @@ const BTN_SIZE: Vector2 = Vector2(64, 64)
 
 var unlockables = load("res://resources/unlockables.tres")
 
+@export var creature: Creature
+
 ## Class that describes the button object for each cosmetic item.
 class UnlockableIcon extends Button:
 	var cosmetic_name
 	var cosmetic_category
+	var cosmetic
 	
 	func _init(unlockable: CosmeticItem, is_unlocked: bool):
 		# Universal Styling and sizeing
@@ -18,6 +21,7 @@ class UnlockableIcon extends Button:
 		add_theme_constant_override("icon_max_width", 50)
 		
 		# Individual properites
+		cosmetic = unlockable
 		tooltip_text = unlockable.desc
 		icon = unlockable.thumbnail
 		cosmetic_name = unlockable.name
@@ -27,6 +31,10 @@ class UnlockableIcon extends Button:
 		
 	## Action when button is pressed.
 	func _pressed():
+		var cre: Creature = find_parent("CosmeticItems").creature
+		var be: AccessoryManager = cre.find_child("AccessoryManager")
+		be.toggle_cosmetic(self.cosmetic)
+	
 		print(self.cosmetic_name)
 
 

@@ -1512,12 +1512,13 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="CosmeticItems" type="GridContainer" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+[node name="CosmeticItems" type="GridContainer" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer" node_paths=PackedStringArray("creature")]
 layout_mode = 2
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 columns = 5
 script = ExtResource("41_pook7")
+creature = NodePath("../../../../../../../../Gameplay/Creature")
 
 [node name="Button" type="Button" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems"]
 custom_minimum_size = Vector2(64, 64)
