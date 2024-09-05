@@ -101,7 +101,7 @@ animation = &"idle"
 autoplay = "idle"
 script = ExtResource("5_oh7gr")
 
-[node name="AccessoryManager" type="Node2D" parent="Sprites"]
+[node name="AccessoryManager" type="Node2D" parent="Sprites" groups=["save_data"]]
 unique_name_in_owner = true
 script = ExtResource("17_dc6c6")
 
