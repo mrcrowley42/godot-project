@@ -22,7 +22,8 @@ var metadata_to_add: Dictionary = {}
 
 func has_save_data() -> bool:
 	if FileAccess.file_exists(Globals.SAVE_DATA_FILE):
-		return len(FileAccess.get_file_as_bytes(Globals.SAVE_DATA_FILE))
+		var save_file = FileAccess.open(Globals.SAVE_DATA_FILE, FileAccess.READ)
+		return save_file.get_length() > 0
 	return false
 
 func has_settings_data() -> bool:
@@ -87,16 +88,22 @@ func save_data():
 ## changes only the first line (the metadata line) in save file, everything else remains unchanged
 func save_only_metadata():
 	var file_existed = has_save_data()
-	var save_file = FileAccess.open(Globals.SAVE_DATA_FILE, FileAccess.WRITE)
-	var file_lines: Array = save_file.get_var() if file_existed else [{}]
+	var save_file = FileAccess.open(Globals.SAVE_DATA_FILE, FileAccess.READ)
+	if file_existed: save_file.get_line()  # remove old metadata
 	
 	# replace existing metadata with new
-	file_lines[0] = generate_metadata_to_save()  
-	metadata_last_loaded = file_lines[0]
+	var new_metadata = generate_metadata_to_save()  
+	metadata_last_loaded = new_metadata
 	metadata_to_override.clear()
 	metadata_to_add.clear()
 	
-	save_file.store_string("\n".join(file_lines))
+	var all_lines = [new_metadata]
+	if file_existed:  # get the reat of the file
+		while save_file.get_position() < save_file.get_length(): 
+			all_lines.append(save_file.get_line())
+	
+	save_file = FileAccess.open(Globals.SAVE_DATA_FILE, FileAccess.WRITE)
+	save_file.store_string("\n".join(all_lines))
 
 func save_settings_data():
 	var config = ConfigFile.new()

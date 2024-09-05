@@ -95,13 +95,7 @@ func _on_unlock_button_button_down():
 	var unlockables = load("res://resources/unlockables.tres").unlockables
 	var item_list = []
 	for item in unlockables:
-		item_list.append(ResourceLoader.get_resource_uid(item.resource_path))
+		item_list.append(str(ResourceLoader.get_resource_uid(item.resource_path)))
 
 	DataGlobals.metadata_to_add[DataGlobals.UNLOCKED_ITEMS] = item_list
-	print(FileAccess.get_file_as_string(Globals.SAVE_DATA_FILE))
-	print(DataGlobals.metadata_to_add)
-	#DataGlobals.save_only_metadata()
-	
-	## -->>> bad  #DataGlobals.save_only_metadata()
-	#
-	#DataGlobals.load_metadata()
+	DataGlobals.save_only_metadata()

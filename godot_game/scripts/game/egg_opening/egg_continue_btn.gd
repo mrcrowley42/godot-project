@@ -6,6 +6,7 @@ extends NinePatchRect
 func _on_gui_input(event):
 	if parent.can_interact and parent.finished_hatching and event.is_pressed():
 		%SFX.play_sound("click")
+		parent.set_can_interact(false)
 		parent.tween(%Music, "volume_db", -100, .0, .5, Tween.EASE_IN)  # ease out music
 		parent.trans_img.rotation = PI
 		parent.trans_img.position.y = -1000
