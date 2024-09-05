@@ -34,6 +34,10 @@ func toggle_cosmetic(cosmetic: CosmeticItem) -> void:
 		add_child(new_sprite, true)
 		current_cosmetics.append(cosmetic.name)
 	else:
+		var x = get_children()
+		for y in x:
+			if y.name == cosmetic.name:
+				remove_child(y)
 		#remove_child(find_child(cosmetic.name))
 		# Painful to do this with an array but whatever
 		for i in range(len(current_cosmetics)):

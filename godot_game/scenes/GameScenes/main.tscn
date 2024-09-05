@@ -215,6 +215,7 @@ corner_detail = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cuoxy"]
 bg_color = Color(0.162066, 0.162066, 0.162066, 1)
+draw_center = false
 border_color = Color(0.8, 0.8, 0.8, 0.411765)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2rfxe"]
