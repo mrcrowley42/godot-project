@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bebjn5n2kjwgb"]
+[gd_scene load_steps=27 format=3 uid="uid://bebjn5n2kjwgb"]
 
 [ext_resource type="Script" path="res://scripts/creature_notification_manager.gd" id="2_0vuyd"]
 [ext_resource type="Script" path="res://scripts/creature.gd" id="2_klgk6"]
@@ -11,11 +11,9 @@
 [ext_resource type="Script" path="res://scripts/pain.gd" id="16_epyie"]
 [ext_resource type="AudioStream" uid="uid://it0l1d864tp5" path="res://sound_effects/pain4.wav" id="17_addty"]
 [ext_resource type="Script" path="res://scripts/accessory_manager.gd" id="17_dc6c6"]
-[ext_resource type="Texture2D" uid="uid://jwn24lgspht2" path="res://images/creature_sprites/glasses-0.png" id="18_52sxs"]
 [ext_resource type="SpriteFrames" uid="uid://cpitoi4php8a2" path="res://resources/unlockables/propeller_hat_sprite_frames.tres" id="18_nnrph"]
 [ext_resource type="AudioStream" uid="uid://bux02e7112jdt" path="res://sound_effects/pain5.wav" id="18_qdg0m"]
-[ext_resource type="Texture2D" uid="uid://diuhoh5vf8a6t" path="res://images/creature_sprites/glasses-1.png" id="19_a2k16"]
-[ext_resource type="Texture2D" uid="uid://ch6mgp1qpwwjh" path="res://images/creature_sprites/glasses-2.png" id="20_ehttl"]
+[ext_resource type="SpriteFrames" uid="uid://blmif1nujgs1a" path="res://resources/unlockables/standard_glasses_sprite_frames.tres" id="19_uwmsa"]
 [ext_resource type="AudioStream" uid="uid://cl8pxd7pob5tr" path="res://sound_effects/hunger_low.wav" id="26_b0wvq"]
 [ext_resource type="AudioStream" uid="uid://p3x28bbk45v4" path="res://sound_effects/fun_low.wav" id="27_uvaw6"]
 [ext_resource type="AudioStream" uid="uid://bay1xn7u3rdq4" path="res://sound_effects/regulation_low.wav" id="28_qtceu"]
@@ -27,23 +25,6 @@
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="37_pguj7"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="38_wb1ql"]
 [ext_resource type="Texture2D" uid="uid://p0oo42fr5wrp" path="res://icons/status/lunch_dining_24dp_8B1A10_FILL0_wght500_GRAD0_opsz24-svg.svg" id="39_5380y"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_xmjbo"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("18_52sxs")
-}, {
-"duration": 1.0,
-"texture": ExtResource("19_a2k16")
-}, {
-"duration": 1.0,
-"texture": ExtResource("20_ehttl")
-}],
-"loop": true,
-"name": &"default",
-"speed": 4.0
-}]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o130v"]
 animations = [{
@@ -105,7 +86,7 @@ script = ExtResource("5_oh7gr")
 unique_name_in_owner = true
 script = ExtResource("17_dc6c6")
 
-[node name="Hat" type="AnimatedSprite2D" parent="Sprites/AccessoryManager"]
+[node name="ReferenceHat" type="AnimatedSprite2D" parent="Sprites/AccessoryManager"]
 visible = false
 position = Vector2(-19, -127)
 scale = Vector2(0.225, 0.225)
@@ -113,12 +94,12 @@ sprite_frames = ExtResource("18_nnrph")
 autoplay = "default"
 frame_progress = 0.770958
 
-[node name="Glasses" type="AnimatedSprite2D" parent="Sprites/AccessoryManager"]
+[node name="ReferenceGlasses" type="AnimatedSprite2D" parent="Sprites/AccessoryManager"]
 visible = false
 modulate = Color(1, 0.807843, 0.592157, 1)
 position = Vector2(-7, -33)
 scale = Vector2(0.225, 0.225)
-sprite_frames = SubResource("SpriteFrames_xmjbo")
+sprite_frames = ExtResource("19_uwmsa")
 autoplay = "default"
 
 [node name="NotificationBubble" type="AnimatedSprite2D" parent="Sprites"]

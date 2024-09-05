@@ -54,12 +54,6 @@ func _on_overlay_strength_value_changed(value):
 func _on_color_picker_button_popup_closed():
 	creature.dying_colour = $ColorPickerButton.color
 
-func _on_hat_btn_button_down():
-	creature.find_child('Hat').visible = !creature.find_child('Hat').visible
-
-func _on_glasses_btn_button_down():
-	creature.find_child('Glasses').visible = !creature.find_child('Glasses').visible
-
 func _on_button_3_toggled(toggled_on):
 	stat_man.holiday_mode = toggled_on
 	print(stat_man.holiday_mode)
@@ -95,3 +89,8 @@ func _on_wipe_nodes_btn_button_down():
 	d.remove(Globals.SAVE_DATA_FILE)
 	DataGlobals.save_only_metadata()
 	get_tree().quit()
+
+
+func _on_unlock_button_button_down():
+	# todo add unlock for glasses
+	pass
