@@ -423,7 +423,8 @@ func finish_hatching(sprite_c: Control):
 	
 	# save data
 	var uid = ResourceLoader.get_resource_uid(creature_hatched.resource_path)
-	DataGlobals.metadata_to_add[DataGlobals.CREATURES_DISCOVERED] = [uid]
+	
+	DataGlobals.metadata_to_add[DataGlobals.CREATURES_DISCOVERED] = [str(uid)]
 	DataGlobals.metadata_to_override[DataGlobals.CURRENT_CREATURE] = uid
 	DataGlobals.save_only_metadata()  # SAVE!
 
@@ -446,8 +447,8 @@ func pick_creature_to_hatch() -> CreatureType:
 
 ## for when first loading in and continue button wasn't pressed before game was closed last
 func instant_open_to_continue_screen():
-	do_opening_transition()
-	var uid = DataGlobals.metadata_last_loaded[DataGlobals.CURRENT_CREATURE]
+	do_opening_transition().connect("finished", set_can_interact.bind(true))
+	var uid = int(DataGlobals.metadata_last_loaded[DataGlobals.CURRENT_CREATURE])
 	var creature_hatched: CreatureType = load(ResourceUID.get_id_path(uid))
 	
 	# setup display

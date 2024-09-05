@@ -32,7 +32,7 @@ func has_settings_data() -> bool:
 func has_only_metadata() -> bool:
 	if has_save_data():
 		var save_file = FileAccess.open(Globals.SAVE_DATA_FILE, FileAccess.READ)
-		return bytes_to_var(save_file.get_var()).size() == 1  # only one line in save file
+		return save_file.get_length() == len(save_file.get_line())  # only one line in save file
 	return false
 
 ## --------------
@@ -55,7 +55,7 @@ func generate_metadata_to_save() -> Dictionary:
 	# give these values the custom function they require
 	return {
 		LAST_SAVED: Time.get_unix_time_from_system(),
-		CURRENT_CREATURE: get_if_exists.call(CURRENT_CREATURE, null, true),
+		CURRENT_CREATURE: str(get_if_exists.call(CURRENT_CREATURE, null, true)),
 		CREATURES_DISCOVERED: get_and_check_for_addition.call(CREATURES_DISCOVERED, []),
 		UNLOCKED_ITEMS: get_and_check_for_addition.call(UNLOCKED_ITEMS, [])
 	}
@@ -82,14 +82,13 @@ func save_data():
 		}
 		all_data.append(JSON.stringify(node_data))
 	
-	var bytes_array: PackedByteArray = var_to_bytes(all_data)
-	save_file.store_var(bytes_array)
+	save_file.store_var(all_data)
 
 ## changes only the first line (the metadata line) in save file, everything else remains unchanged
 func save_only_metadata():
 	var file_existed = has_save_data()
 	var save_file = FileAccess.open(Globals.SAVE_DATA_FILE, FileAccess.WRITE)
-	var file_lines: Array = bytes_to_var(save_file.get_var()) if file_existed else [{}]
+	var file_lines: Array = save_file.get_var() if file_existed else [{}]
 	
 	# replace existing metadata with new
 	file_lines[0] = generate_metadata_to_save()  
@@ -97,8 +96,7 @@ func save_only_metadata():
 	metadata_to_override.clear()
 	metadata_to_add.clear()
 	
-	var bytes_array: PackedByteArray = var_to_bytes(file_lines)
-	save_file.store_var(bytes_array)
+	save_file.store_string("\n".join(file_lines))
 
 func save_settings_data():
 	var config = ConfigFile.new()
@@ -126,15 +124,14 @@ func save_settings_data():
 func load_metadata() -> Dictionary:
 	if has_save_data():
 		var save_file = FileAccess.open(Globals.SAVE_DATA_FILE, FileAccess.READ)
-		var file_lines: Array = bytes_to_var(save_file.get_var())
-		metadata_last_loaded = file_lines.pop_at(0)
+		metadata_last_loaded = JSON.parse_string(save_file.get_line())
 	return metadata_last_loaded
 
 ## loads data, and passes it to saved nodes. returns metadata
 func load_data() -> Dictionary:
 	if has_save_data():
 		var save_file = FileAccess.open(Globals.SAVE_DATA_FILE, FileAccess.READ)
-		var file_lines: Array = bytes_to_var(save_file.get_var())
+		var file_lines: Array = save_file.get_var()
 		
 		## retrieve metadata
 		metadata_last_loaded = file_lines.pop_at(0)
