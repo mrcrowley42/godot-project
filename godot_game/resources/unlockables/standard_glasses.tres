@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="CosmeticItem" load_steps=3 format=3 uid="uid://c0gf34lgpdkmh"]
+[gd_resource type="Resource" script_class="CosmeticItem" load_steps=4 format=3 uid="uid://c0gf34lgpdkmh"]
 
 [ext_resource type="Script" path="res://scripts/base_classses/cosmetic.gd" id="1_tulc5"]
 [ext_resource type="Texture2D" uid="uid://jwn24lgspht2" path="res://images/creature_sprites/glasses-0.png" id="2_bemxb"]
+[ext_resource type="SpriteFrames" uid="uid://blmif1nujgs1a" path="res://resources/unlockables/standard_glasses_sprite_frames.tres" id="2_qgxkc"]
 
 [resource]
 script = ExtResource("1_tulc5")
 name = "Standard Glasses"
 desc = "Regular old glasses."
-unlocked_by_default = false
+unlocked = false
 thumbnail = ExtResource("2_bemxb")
 category = 1
+sprite = ExtResource("2_qgxkc")

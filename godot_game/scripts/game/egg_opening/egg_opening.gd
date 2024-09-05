@@ -15,6 +15,7 @@ class_name EggOpening extends ScriptNode
 @export var egg_indexes: Array[int]
 
 @onready var bg: NinePatchRect = find_child("BG")
+@onready var music: AudioStreamPlayer = find_child("Music")
 @onready var display_box: NinePatchRect = find_child("DisplayBox")
 @onready var trans_img: Sprite2D = find_child("Transition")
 @onready var title_container: Control = find_child("TitleContainer")
@@ -80,7 +81,7 @@ func _ready():
 			return
 	
 	# setup
-	%Music.play()
+	music.play()
 	bar_container.visible = false
 	continue_btn.visible = false
 	back_btn.visible = false
@@ -452,11 +453,11 @@ func instant_open_to_continue_screen():
 	var creature_hatched: CreatureType = load(ResourceUID.get_id_path(uid))
 	
 	# setup display
-	fade(continue_btn, true, 1.).connect("finished", set_can_interact.bind(true))
 	display_box.size += DISPLAY_BOX_ADITION
 	display_bg.size += DISPLAY_BOX_ADITION
 	display_shader.size += DISPLAY_BOX_ADITION
 	bar_container.visible = false
+	continue_btn.visible = true
 	finished_hatching = true
 	
 	# place creature
@@ -466,8 +467,8 @@ func instant_open_to_continue_screen():
 	creature_sprite.scale = Vector2(.25, .25)
 
 func spawn_creature(creature: CreatureType, pos: Vector2):
-	creature_sprite.sprite_frames = creature.baby_sprite_frames
-	creature_sprite.animation = "idle"
+	creature_sprite.sprite_frames = creature.adult_sprite_frames
+	creature_sprite.animation = "baby"  # they *should* all have a baby animation
 	creature_sprite.play()
 	creature_sprite.position = pos + CREATURE_PLACEMENT_OFFSET  # offset to be centered (may need to be different for each creature)
 

@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://scripts/base_classses/egg_entry.gd" id="1_6gxbj"]
 [ext_resource type="Texture2D" uid="uid://di0q6yu8qbi2u" path="res://images/egg/egg-purple.png" id="1_7oere"]
-[ext_resource type="Resource" uid="uid://cxtahs454inpc" path="res://resources/creatures/little_guy_creature.tres" id="1_tvhm4"]
+[ext_resource type="Resource" uid="uid://cxtahs454inpc" path="res://resources/creatures/main_creature.tres" id="1_lr8uk"]
 [ext_resource type="Script" path="res://scripts/base_classses/egg_creature_entry.gd" id="2_uoicc"]
 
 [sub_resource type="Resource" id="Resource_w1sa5"]
 script = ExtResource("2_uoicc")
-creature_type = ExtResource("1_tvhm4")
+creature_type = ExtResource("1_lr8uk")
 weight = 1
 
 [resource]

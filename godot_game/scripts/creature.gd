@@ -1,39 +1,44 @@
 @icon("res://icons/class-icons/creature.svg")
+
+## Creature base class.
 class_name Creature extends Node2D
 
-@onready var main_sprite: AnimatedSprite2D = %Main
+## A Reference to the main sprite so it can be manipulated
+@onready var main_sprite = %Main
+
+var creature_type: CreatureType = load("res://resources/creatures/main_creature.tres")
 
 ## Colour to tint creature as HP approaches 0.
 @export var dying_colour: Color;
+var max_hp: float = creature_type.max_hp
+var max_water: float = creature_type.max_water
+var max_food: float = creature_type.max_food
+var max_fun: float = creature_type.max_fun
+## XP required for the creature to reach the [param ADULT] [param LifeStage] stage
+var xp_required: float
 @export var clippy_area: Node
 @export var xp_mulitplier: float = 1.0
 
-var creature_type: CreatureType
-var max_hp: float
-var max_water: float
-var max_food: float
-var max_fun: float
-var xp_required: float = 1000  # XP required for the creature to reach the [param ADULT] [param LifeStage] stage
-
-const DISLIKE_MULTIPLIER: float = 0.5
-const LIKE_MULTIPLIER: float = 2.0
+const dislike_multiplier: float = 0.5
+const like_multiplier: float = 2.0
 
 # ENUMS
 enum FoodItem {NEUTRAL, TOAST, CHIPS, FRUIT}
 enum LifeStage {CHILD, ADULT}
 enum Stat {HP, WATER, FOOD, FUN}
 
+
 # CREATURE STATS VARIABLES
-var hp: float
-var water: float
-var food: float
-var fun: float
+var hp: float = max_hp
+var water: float = max_water
+var food: float = max_food
+var fun: float = max_fun
 var xp: float = 0
 var is_ready_to_grow_up: bool = false
 var life_stage: LifeStage
-var likes: Array
-var dislikes: Array
-var creature_name: String
+var likes: Array = creature_type.likes
+var dislikes: Array = creature_type.dislikes
+var creature_name: String = creature_type.name
 
 # SIGNALS
 signal hp_changed()
@@ -94,19 +99,23 @@ func reset_stats() -> void:
 	dmg(-max_water, Stat.WATER)
 	dmg(-max_fun, Stat.FUN)
 
+
 ## Generialised function to damage/heal the Creature (use a negative value to heal)
 func dmg(amount: float, stat: Stat) -> void:
 	stats[stat].call(amount)
 
+
 ## Change to game over scene.
 func game_over():
 	get_tree().change_scene_to_file("res://scenes/GameScenes/game_over.tscn")
+
 
 ## Tint the Create using the dying_colour set in inspector scaling the tint based on how low HP is.
 func apply_dmg_tint() -> void:
 	main_sprite.modulate.b = clampf(1 - (1 - hp / max_hp) + dying_colour.b, 0, 1)
 	main_sprite.modulate.g = clampf(1 - (1 - hp / max_hp) + dying_colour.g, 0, 1)
 	main_sprite.modulate.r = clampf(1 - (1 - hp / max_hp) + dying_colour.r, 0, 1)
+
 
 func damage_hp(amount: float) -> void:
 	var temp_hp = hp
@@ -122,8 +131,8 @@ func damage_hp(amount: float) -> void:
 
 func damage_food(amount, kind: FoodItem = FoodItem.NEUTRAL) -> void:
 	var preference_multi := 1.0
-	if kind in likes: preference_multi = LIKE_MULTIPLIER
-	elif kind in dislikes: preference_multi = DISLIKE_MULTIPLIER
+	if kind in likes: preference_multi = like_multiplier
+	elif kind in dislikes: preference_multi = dislike_multiplier
 	
 	var temp_food = food
 	self.food = clampf(self.food - amount, 0, max_food)
@@ -131,6 +140,7 @@ func damage_food(amount, kind: FoodItem = FoodItem.NEUTRAL) -> void:
 		add_xp((food - temp_food) * xp_mulitplier * preference_multi)
 	
 	food_changed.emit()
+
 
 func damage_fun(amount) -> void:
 	var temp_fun = fun
@@ -140,6 +150,7 @@ func damage_fun(amount) -> void:
 	
 	fun_changed.emit()
 
+
 func damage_water(amount) -> void:
 	var temp_water = water
 	self.water = clampf(self.water - amount, 0, max_water)
@@ -148,11 +159,13 @@ func damage_water(amount) -> void:
 	
 	water_changed.emit()
 
+
 func save() -> Dictionary:
 	return {
 		"water": water, "food": food, "fun": fun, "hp": hp, 
 		"xp": xp, "is_ready_to_grow_up": is_ready_to_grow_up
 	}
+
 
 func load(data) -> void:
 	var prop_list = ["water", "fun", "food", "hp", "xp", "is_ready_to_grow_up"]
