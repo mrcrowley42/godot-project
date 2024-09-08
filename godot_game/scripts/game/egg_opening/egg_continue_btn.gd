@@ -10,10 +10,10 @@ func _on_gui_input(event):
 		parent.tween(%Music, "volume_db", -100, .0, .5, Tween.EASE_IN)  # ease out music
 		parent.trans_img.rotation = PI
 		parent.trans_img.position.y = -1000
-		parent.tween(parent.trans_img, 
-			"position", 
-			parent.bg.position + (parent.bg.size * parent.bg.scale) * .5, 
-			0., 
+		parent.tween(parent.trans_img,
+			"position",
+			parent.bg.position + (parent.bg.size * parent.bg.scale) * .5,
+			0.,
 			1.
 		)
 		# load main scene after .5 seconds

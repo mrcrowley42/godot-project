@@ -15,23 +15,23 @@ var is_in_transition: bool = true;
 func _ready():
 	if unlock_fps:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED) # HUH?
-	
+
 	# if no data exists, file has been tampered with, set the bare minimum
 	# metadata is set automatically after egg opening scene, and before this scene
 	if !DataGlobals.has_save_data():
 		DataGlobals.save_only_metadata()
-	
+
 	# load in data
 	var metadata = DataGlobals.load_data()
 	last_saved = metadata[DataGlobals.LAST_SAVED] if metadata.has(DataGlobals.LAST_SAVED) else launch_time
 	DataGlobals.load_settings_data()
 	calc_elapsed_time()
-	
+
 	# Disable the script execution when the panel is disabled/hidden.
 	debug_window.visible = debug_mode
 	if not debug_mode:
 		debug_window.process_mode = Node.PROCESS_MODE_DISABLED
-	
+
 	# do last
 	perform_opening_transition()
 
@@ -54,9 +54,9 @@ func perform_closing_transition(func_to_call):
 		var trans_img: Sprite2D = find_child("Transition")
 		trans_img.rotation = PI
 		trans_img.position.y = -1000
-		get_tree().create_tween().tween_property(trans_img, 
-			"position", 
-			ui_overlay.position, 
+		get_tree().create_tween().tween_property(trans_img,
+			"position",
+			ui_overlay.position,
 			1.
 		).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 		await get_tree().create_timer(.5).timeout
@@ -88,7 +88,7 @@ func _notification(noti):
 	if noti == NOTIFICATION_WM_CLOSE_REQUEST:
 		minigame_man.finalise_save_data()  # call before saving
 		DataGlobals.save_data()
-	
+
 	if noti == Globals.NOFITICATION_GROW_TO_ADULT_SCENE:
 		var p = func(): print("done")
 		await perform_closing_transition(p)

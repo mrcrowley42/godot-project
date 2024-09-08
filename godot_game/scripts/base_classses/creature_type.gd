@@ -14,4 +14,3 @@ class_name CreatureType extends Resource
 @export_group("Preferences")
 @export var likes: Array[Creature.FoodItem]
 @export var dislikes: Array[Creature.FoodItem]
-

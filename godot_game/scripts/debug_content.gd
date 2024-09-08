@@ -103,7 +103,7 @@ func _on_wipe_nodes_btn_button_down() -> void:
 
 
 func _on_unlock_button_button_down() -> void:
-	# this is kinda horrendous ngl but I just wanted it to work 
+	# this is kinda horrendous ngl but I just wanted it to work
 	var uid_dict: Dictionary = {}
 	var unlocked_items = DataGlobals.load_metadata()['unlocked_items']
 	for item: CosmeticItem in load("res://resources/unlockables.tres").unlockables:

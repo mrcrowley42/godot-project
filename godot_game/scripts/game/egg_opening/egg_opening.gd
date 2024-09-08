@@ -79,7 +79,7 @@ func _ready():
 		else:
 			instant_open_to_continue_screen()
 			return
-	
+
 	# setup
 	music.play()
 	bar_container.visible = false
@@ -87,7 +87,7 @@ func _ready():
 	back_btn.visible = false
 	select_title_text = selection_title.text
 	selection_title.text = select_title_text % STRING_SELECT_YOUR_EGG
-	
+
 	# eggs
 	selection_area_center = selection_area.position + selection_area.size * .5
 	spawn_eggs()
@@ -120,17 +120,17 @@ func spawn_eggs():
 		eggs_to_place = []
 		for i: int in egg_indexes:
 			eggs_to_place.append(existing_eggs[i])
-	
+
 	# placement values
 	var middle_pos = selection_area.position + Vector2(0, selection_area.size.y * .5)
 	var scalar: float = selection_area.size.x * (1. / eggs_to_place.size())
-	
+
 	# place each egg evenly & animate them
 	for i: int in eggs_to_place.size():
 		var egg: EggEntry = eggs_to_place[i]
 		var sprite_c: Control = Control.new()
 		sprite_c.name = "egg-%s" % i
-		
+
 		# add top and bottom images of egg
 		for x: int in 2:
 			var c: Control = Control.new()
@@ -141,7 +141,7 @@ func spawn_eggs():
 			add_alpha_mask(sprite, x)
 			c.add_child(sprite)
 			sprite_c.add_child(c)
-		
+
 		# set default values
 		var x_pos = scalar * i
 		x_pos += scalar * .5  # center the eggs
@@ -149,12 +149,12 @@ func spawn_eggs():
 		sprite_c.position = middle_pos + Vector2(x_pos, 0)
 		sprite_c.scale = SMALL_EGG_SCALE
 		original_egg_positions.append(sprite_c.position)
-		
+
 		# initialising
 		add_child(sprite_c)
 		add_collision_areas(sprite_c, i)
 		do_opening_animation(sprite_c, i, i == eggs_to_place.size() - 1)
-		
+
 		placed_egg_sprites.append(sprite_c)
 	placed_eggs = eggs_to_place
 
@@ -171,13 +171,13 @@ func add_collision_areas(sprite_cl: Control, i: int):
 	var area_2d: Area2D = Area2D.new()
 	var coll_shape: CollisionShape2D = CollisionShape2D.new()
 	var circle = CircleShape2D.new()
-	
+
 	sprite_cl.add_child(area_2d)
 	area_2d.add_child(coll_shape)
 	area_2d.monitorable = false  # not nessecary
 	circle.radius = 25  # close enough to the eggs size
 	coll_shape.shape = circle
-	
+
 	# setup mouse events
 	area_2d.connect("mouse_entered", mouse_entered.bind(i))
 	area_2d.connect("mouse_exited", mouse_exited.bind(i))
@@ -188,7 +188,7 @@ func do_opening_animation(sprite_c: Control, i: int, is_last_egg: bool):
 	var play_spawn_sound = func():
 		%SFX.pitch_scale = 1. + i * .1
 		%SFX.play_sound("pop")
-	
+
 	var diff = .2 * i
 	tween(FloatBuffer.new(0), "value", 0, 1. + diff, .1).connect("finished", play_spawn_sound)  # spawning sound effect
 	tween(sprite_c, "modulate", Color.WHITE, 1. + diff, .5, Tween.EASE_IN_OUT)  # fade in
@@ -218,13 +218,13 @@ func tween(obj, prop, val, delay=0., time=2., _ease=Tween.EASE_OUT):
 func manual_mouse_check(sprite_c: Control = null):
 	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
 	set_can_interact(true)
-	
+
 	var is_mouse_within = func(s: Control) -> bool:
 		var dist: float = (mouse_pos - s.position).length()
 		var area: Area2D = s.get_child(-1)
 		var radius: float = area.get_child(0).shape.radius * (s.scale.x * .9)  # scale area down just a little
 		return dist < radius
-	
+
 	if sprite_c == null:  # check placed eggs
 		for i: int in placed_egg_sprites.size():
 			if (is_mouse_within.call(placed_egg_sprites[i])):
@@ -264,10 +264,10 @@ func set_egg_desc(i: int = -1):
 	if i < 0:
 		egg_desc.text = NO_EGG_FORMAT_STRING % "..."
 		return
-	
+
 	var egg: EggEntry = placed_eggs[i]
 	var hatches_list: Array[String] = []
-	
+
 	# build hatches list
 	for creature_entry: EggCreatureEntry in egg.hatches:
 		var uid = ResourceLoader.get_resource_uid(creature_entry.creature_type.resource_path)
@@ -291,18 +291,18 @@ func select_egg(egg: EggEntry, inx: int):
 	%SFX.play_sound("pop")
 	can_interact = false
 	selected_egg_inx = inx
-	
+
 	# set labels
 	selection_title.text = select_title_text % egg.name
 	egg_desc.text = ""
 	bar.value = 0  # reset
 	fade(back_btn)
 	fade(bar_container)
-	
+
 	# shader
 	tween(shader_area.material, "shader_parameter/color", Vector4(0, 0, 1, 1), 0., 1., Tween.EASE_IN_OUT)
 	tween_sprite_to_goal(selection_area_center)  # move selected to center
-	
+
 	# fade out other eggs
 	for i: int in placed_egg_sprites.size():
 		if i != inx:
@@ -317,15 +317,15 @@ func de_select_egg():
 
 func click_selected_egg():
 	bar.value += BAR_CLICK_ADDITION
-	
+
 	# rotation
 	tween(rotation_buffer, "value", 1, 0., .1, Tween.EASE_IN_OUT)  # tween to 1
 	tween(rotation_buffer, "value", 0, 0.1, .4, Tween.EASE_IN_OUT)  # tween to 0
-	
+
 	# sound
 	%SFX.pitch_scale = .5 + 2 * (bar.value / bar.max_value)
 	%SFX.play_sound("pop")
-	
+
 	# hatch!
 	if bar.value == bar.max_value:
 		hatch_egg()
@@ -335,24 +335,24 @@ func hatch_egg():
 	%SFX.play_sound("confirm")
 	set_can_interact(false)
 	hatching = true
-	
+
 	# fade stuff out
 	fade(title_container, false)
 	fade(back_btn, false)
 	fade(bar_container, false)
 	set_egg_desc()  # "..."
-	
+
 	# scale display box
 	tween(display_box, "size", display_box.size + DISPLAY_BOX_ADITION, 0.1, .5)
 	tween(display_bg, "size", display_bg.size + DISPLAY_BOX_ADITION, 0.1, .5)
 	tween(display_shader, "size", display_shader.size + DISPLAY_BOX_ADITION, 0.1, .5)
 	tween(shader_area.material, "shader_parameter/color", Vector4(0, 0, 0, 1), 0.1, .5)
-	
+
 	# move egg
 	var sprite_c: Control = placed_egg_sprites[selected_egg_inx]
 	sprite_c.rotation = 0
 	tween(sprite_c, "position", sprite_c.position - DISPLAY_BOX_ADITION * .25, .1, .5)
-	
+
 	# timer
 	hatch_timer.start()
 	hatch_timer.connect("timeout", progress_hatching)
@@ -361,16 +361,16 @@ func hatch_egg():
 func progress_hatching():
 	hatch_progress += 1
 	var sprite_c: Control = placed_egg_sprites[selected_egg_inx]
-	
+
 	# egg scale (do before finishing)
 	var scale_add = Vector2(.2, .2) + Vector2(.1, .1) * hatch_progress
 	sprite_c.scale = MAX_SELECTED_EGG_SCALE + scale_add
 	scale_egg(selected_egg_inx, MAX_SELECTED_EGG_SCALE + (scale_add * .5))
-	
+
 	if hatch_progress == 4:
 		finish_hatching(sprite_c)
 		return
-	
+
 	# add top & bottom crack image to top & bottom egg Controls
 	for i: int in 2:
 		var c: Control = sprite_c.get_child(i)  # 0 = top, 1 = bottom
@@ -379,11 +379,11 @@ func progress_hatching():
 		crack_sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 		add_alpha_mask(crack_sprite, i)
 		c.add_child(crack_sprite)
-	
+
 	# egg rotation
 	rotation_buffer.value = 1.
 	tween(rotation_buffer, "value", 0, 0., .4, Tween.EASE_IN_OUT)  # tween to 0
-	
+
 	# sfx
 	%SFX.pitch_scale = 1. + (hatch_progress - 1) * .2
 	%SFX.play_sound("egg_crack_2")
@@ -395,15 +395,15 @@ func finish_hatching(sprite_c: Control):
 		%SFX.pitch_scale = 1.
 		%SFX.play_sound("yippe")
 		confetti.fire()
-	
+
 	finished_hatching = true
 	hatch_timer.stop()
 	fade(continue_btn).connect("finished", set_interation)
-	
+
 	# sfx
 	%SFX.pitch_scale = 1.5
 	%SFX.play_sound("egg_crack_1")
-	
+
 	# open egg
 	var top: Control = sprite_c.get_child(0)
 	var bottom: Control = sprite_c.get_child(1)
@@ -414,17 +414,17 @@ func finish_hatching(sprite_c: Control):
 	tween(bottom, "rotation", .1, .0, speed)
 	fade(top, false, .3)
 	fade(bottom, false, .3)
-	
+
 	# spawn creature
 	var creature_hatched: CreatureType = pick_creature_to_hatch()
 	spawn_creature(creature_hatched, sprite_c.position)
 	fade(creature_sprite, true)
 	tween(creature_sprite, "scale", Vector2(.25, .25), .3, .5).connect("finished", fire_confetti)
 	set_creature_desc(creature_hatched)
-	
+
 	# save data
 	var uid = ResourceLoader.get_resource_uid(creature_hatched.resource_path)
-	
+
 	DataGlobals.metadata_to_add[DataGlobals.CREATURES_DISCOVERED] = [str(uid)]
 	DataGlobals.metadata_to_override[DataGlobals.CURRENT_CREATURE] = uid
 	DataGlobals.save_only_metadata()  # SAVE!
@@ -440,7 +440,7 @@ func pick_creature_to_hatch() -> CreatureType:
 				continue
 			for z in egg_creature_entry.weight:
 				weighted_choices.append(creature_type)
-	
+
 	add_weighted_choices.call()  # build list in unknown creatures
 	if weighted_choices.size() == 0:
 		add_weighted_choices.call(false)  # build list of known creatures
@@ -451,7 +451,7 @@ func instant_open_to_continue_screen():
 	do_opening_transition()
 	var uid = int(DataGlobals.metadata_last_loaded[DataGlobals.CURRENT_CREATURE])
 	var creature_hatched: CreatureType = load(ResourceUID.get_id_path(uid))
-	
+
 	# setup display
 	fade(continue_btn, true, 1.).connect("finished", set_can_interact.bind(true))
 	display_box.size += DISPLAY_BOX_ADITION
@@ -459,7 +459,7 @@ func instant_open_to_continue_screen():
 	display_shader.size += DISPLAY_BOX_ADITION
 	bar_container.visible = false
 	finished_hatching = true
-	
+
 	# place creature
 	spawn_creature(creature_hatched, display_box.position - (display_box.size * display_box.scale) / 2)
 	set_creature_desc(creature_hatched)
@@ -491,10 +491,10 @@ func tween_sprite_to_goal(goal: Vector2, scale_goal: Vector2 = BASE_SELECTED_EGG
 	var end_movement = func(sp: Control):
 		move_buffers.clear()
 		de_select_egg() if end_selection else manual_mouse_check(sp)
-	
+
 	# scale down
 	scale_egg(selected_egg_inx, SMALL_EGG_SCALE, .2)
-	
+
 	# move animation
 	var s: Control = placed_egg_sprites[selected_egg_inx]
 	move_buffers = [FloatBuffer.new(s.position.x), FloatBuffer.new(s.position.y)]
@@ -507,15 +507,15 @@ func tween_sprite_to_goal(goal: Vector2, scale_goal: Vector2 = BASE_SELECTED_EGG
 func update_selected_egg(delta):
 	var percent: float = bar.value / bar.max_value
 	var sprite_c: Control = placed_egg_sprites[selected_egg_inx]
-	
+
 	# bar
 	bar.value -= BAR_DRAIN_AMOUNT * delta
 	bar["theme_override_styles/fill"].bg_color = bar_progress_color.sample(percent)
-	
+
 	# scale
 	sprite_c.scale = BASE_SELECTED_EGG_SCALE + (MAX_SELECTED_EGG_SCALE - BASE_SELECTED_EGG_SCALE) * percent
 	sprite_c.scale += scale_addition  # for mouse hovering
-	
+
 	# rotation
 	if can_interact:
 		var freq = Time.get_unix_time_from_system() * 15 + (10 * percent)
@@ -533,11 +533,11 @@ func _process(delta):
 	# hatching
 	if hatching:
 		update_hatching_egg()
-	
+
 	# progress bar
 	if selected_egg_inx != null and !hatching:
 		update_selected_egg(delta)
-	
+
 	# bob eggs slowly
 	if selected_egg_inx == null:  # do all
 		for i: int in placed_egg_sprites.size():
@@ -546,7 +546,7 @@ func _process(delta):
 	elif can_interact and !hatching:  # do only selected
 		var s = sin(Time.get_unix_time_from_system()) * 6
 		placed_egg_sprites[selected_egg_inx].position.y = original_egg_positions[selected_egg_inx].y + s
-	
+
 	# move selected egg animation
 	if move_buffers.size() > 0 and selected_egg_inx != null:
 		var new_p = Vector2(move_buffers[0].value, move_buffers[1].value)

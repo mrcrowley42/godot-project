@@ -22,7 +22,7 @@ signal complete()
 func _ready():
 	message_label.text = message
 	#modulate = Color(1,1,1,0)
-	
+
 	var tween = create_tween()
 	tween.set_ease(ease_type)
 	tween.set_trans(transition_type)
@@ -30,7 +30,7 @@ func _ready():
 	tween.parallel().tween_property(self, "position", new_position, animation_length)
 	%SFX.play()
 	await get_tree().create_timer(notification_length).timeout
-	
+
 	var fadeout_tween = create_tween()
 	fadeout_tween.tween_property(self, "modulate", Color(1,1,1,0), animation_length/4)
 	fadeout_tween.finished.connect(tween_finished)

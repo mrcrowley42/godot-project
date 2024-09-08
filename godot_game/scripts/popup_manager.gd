@@ -5,7 +5,7 @@ class_name NotificationManager extends ScriptNode
 @onready var grow_up_btn: NinePatchRect = find_child("GrowUpBtn")
 
 var og_pos: Vector2
-var child_count: int 
+var child_count: int
 
 func _ready():
 	og_pos = grow_up_btn.position

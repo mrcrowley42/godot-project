@@ -34,8 +34,8 @@ class UnlockableIcon extends Button:
 		var cre: Creature = find_parent("CosmeticItems").creature
 		var be: AccessoryManager = cre.find_child("AccessoryManager")
 		be.toggle_cosmetic(self.cosmetic)
-	
-	
+
+
 	func update_locked():
 		var unlocked_items = DataGlobals.load_metadata()['unlocked_items']
 		var uid = str(ResourceLoader.get_resource_uid(self.cosmetic.resource_path))
@@ -55,7 +55,7 @@ func _ready():
 
 func update_buttons():
 	propagate_call("update_locked")
-	
-	
+
+
 func _on_visibility_changed():
 	$"../..".scroll_vertical = 0
