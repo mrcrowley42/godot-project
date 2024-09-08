@@ -103,13 +103,16 @@ func _on_wipe_nodes_btn_button_down() -> void:
 
 
 func _on_unlock_button_button_down() -> void:
-	notif_man.new_notification("msg")
-	#notif_man.new_notification("yo")
-	var uid_dict: Dictionary
-	for item in load("res://resources/unlockables.tres").unlockables:
-		uid_dict[str(ResourceLoader.get_resource_uid(item.resource_path))] = item
-	var unlockables = load("res://resources/unlockables.tres").unlockables
+	# this is kinda horrendous ngl but I just wanted it to work 
+	var uid_dict: Dictionary = {}
 	var unlocked_items = DataGlobals.load_metadata()['unlocked_items']
+	for item: CosmeticItem in load("res://resources/unlockables.tres").unlockables:
+		var uid = str(ResourceLoader.get_resource_uid(item.resource_path))
+		if item.unlocked:
+			unlocked_items.append(uid)
+		uid_dict[uid] = item
+	var unlockables = load("res://resources/unlockables.tres").unlockables
+
 	var item_list = []
 	for item in unlockables:
 		item_list.append(str(ResourceLoader.get_resource_uid(item.resource_path)))
@@ -119,6 +122,5 @@ func _on_unlock_button_button_down() -> void:
 	for item in DataGlobals.load_metadata()['unlocked_items']:
 		if item not in unlocked_items:
 			var cosmetic = uid_dict[item]
-			print(cosmetic.name)
 			var message = "%s Unlocked!" %[cosmetic.name]
 			notif_man.new_notification(message)

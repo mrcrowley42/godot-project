@@ -5,11 +5,13 @@ class_name NotificationManager extends ScriptNode
 @onready var grow_up_btn: NinePatchRect = find_child("GrowUpBtn")
 
 var og_pos: Vector2
+var child_count: int 
 
 func _ready():
 	og_pos = grow_up_btn.position
 	grow_up_btn.position.y += grow_up_btn.size.y * grow_up_btn.scale.y * 2.
 	%Creature.ready_to_grow_up.connect(show_grow_up_btn)
+	child_count = get_child_count()
 
 ## Creates a toast notification with the passed string.
 func new_notification(message: String, type: PackedScene=toast) -> void:
@@ -20,9 +22,9 @@ func new_notification(message: String, type: PackedScene=toast) -> void:
 
 	# Checks every second that the node has no children before executing
 	# Seems to queue consecutive calls ¯\_(ツ)_/¯
-	while get_child_count() != 0:
+	while get_child_count() != child_count:
 		await get_tree().create_timer(1).timeout
-		if get_child_count() == 0:
+		if get_child_count() == child_count:
 			continue
 	var notif = toast.instantiate()
 	notif.message = message
