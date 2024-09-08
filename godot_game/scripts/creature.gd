@@ -49,6 +49,8 @@ signal xp_changed()
 signal ready_to_grow_up()
 signal finished_loading()
 
+var loaded = false
+
 ## Map of shorthand strings to corresponding damage function
 var stats: Dictionary = {Stat.HP: damage_hp, Stat.FUN: damage_fun,
 	Stat.WATER: damage_water, Stat.FOOD: damage_food}
@@ -60,6 +62,9 @@ func _ready():
 	main_sprite.animation = "idle"
 	set_up_default_values()
 	finished_loading.connect(update_sprite)
+	if not loaded:
+		update_sprite()
+
 
 func update_sprite():
 	if life_stage == LifeStage.CHILD:
@@ -187,3 +192,4 @@ func load(data) -> void:
 		ready_to_grow_up.emit()
 	apply_dmg_tint()
 	finished_loading.emit()
+	loaded = true
