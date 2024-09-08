@@ -14,13 +14,15 @@ extends Control
 
 var example_messages = ["random", "word", "banana", "mario", "bingus"]
 
-func _on_h_slider_value_changed(value):
+func _on_h_slider_value_changed(value) -> void:
 	stat_man.time_multiplier = value
 
-func _on_button_button_down():
+
+func _on_button_button_down() -> void:
 	creature.reset_stats()
-	
-func _ready():
+
+
+func _ready() -> void:
 	var anims = creature.find_child('Main').sprite_frames.get_animation_names()
 	for anim in anims:
 		$AnimSelect.add_item(anim)
@@ -29,13 +31,14 @@ func _ready():
 	stat_man.finished_loading.connect(update_holiday)
 	$CheckBox.visible = game.unlock_fps
 	$CheckBox.button_pressed = game.unlock_fps
-	
-	
-func update_holiday():
+
+
+func update_holiday() -> void:
 	if stat_man.holiday_mode:
 		$HolidayBtn.set_pressed_no_signal(true)
-		
-func _process(_delta):
+
+
+func _process(_delta) -> void:
 	$Strength.text =  '%.2f' % [stat_man.time_multiplier]
 	var fps = Engine.get_frames_per_second()
 	$Label3.text = str(fps)
@@ -45,54 +48,61 @@ func _process(_delta):
 		$Label3.set("theme_override_colors/font_color", Color.LIGHT_GOLDENROD)
 	else:
 		$Label3.set("theme_override_colors/font_color", Color.LIGHT_GREEN)
-	
-func _on_anim_select_item_selected(index):
+
+
+func _on_anim_select_item_selected(index) -> void:
 	creature.find_child('Main').animation = $AnimSelect.get_item_text(index)
 
-func _on_overlay_strength_value_changed(value):
+
+func _on_overlay_strength_value_changed(value) -> void:
 	screen_tint.material.set("shader_parameter/tint_strength", value)
 
-func _on_color_picker_button_popup_closed():
+
+func _on_color_picker_button_popup_closed() -> void:
 	creature.dying_colour = $ColorPickerButton.color
 
-func _on_button_3_toggled(toggled_on):
+
+func _on_button_3_toggled(toggled_on) -> void:
 	stat_man.holiday_mode = toggled_on
 	print(stat_man.holiday_mode)
 
-func _on_clippy_btn_pressed():
+
+func _on_clippy_btn_pressed() -> void:
 	clippy_area.toggle_clippy_mode()
 
-func _on_h_slider_2_value_changed(value):
+
+func _on_h_slider_2_value_changed(value) -> void:
 	clippy_area.clippy_opacity = value
 	if clippy_area.clippy:
 		creature.find_child("Sprites").self_modulate = Color(1,1,1,clippy_area.clippy_opacity)
 
-func _on_check_box_toggled(toggled_on):
+
+func _on_check_box_toggled(toggled_on) -> void:
 	if toggled_on:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 	else:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 
 
-func _on_notif_btn_button_down():
+func _on_notif_btn_button_down() -> void:
 	var msg = example_messages.pick_random()
 	notif_man.new_notification(msg)
 
 
-func _on_wipe_btn_button_down():
+func _on_wipe_btn_button_down() -> void:
 	var d = DirAccess.open("res://")
 	d.remove(Globals.SAVE_DATA_FILE)
 	get_tree().quit()
 
 
-func _on_wipe_nodes_btn_button_down():
+func _on_wipe_nodes_btn_button_down() -> void:
 	var d = DirAccess.open("res://")
 	d.remove(Globals.SAVE_DATA_FILE)
 	DataGlobals.save_only_metadata()
 	get_tree().quit()
 
 
-func _on_unlock_button_button_down():
+func _on_unlock_button_button_down() -> void:
 	var unlockables = load("res://resources/unlockables.tres").unlockables
 	var item_list = []
 	for item in unlockables:
@@ -100,4 +110,3 @@ func _on_unlock_button_button_down():
 	DataGlobals.metadata_to_add[DataGlobals.UNLOCKED_ITEMS] = item_list
 	DataGlobals.save_only_metadata()
 	cosmetic_btns.update_buttons()
-	
