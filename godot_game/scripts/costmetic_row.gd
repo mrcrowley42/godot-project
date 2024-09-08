@@ -26,7 +26,7 @@ class UnlockableIcon extends Button:
 		icon = unlockable.thumbnail
 		cosmetic_name = unlockable.name
 		cosmetic_category = unlockable.Cosmetic_Category
-		if not is_unlocked or !unlockable.unlocked:
+		if not is_unlocked:
 			disabled = true
 
 	## Action when button is pressed.
@@ -34,17 +34,28 @@ class UnlockableIcon extends Button:
 		var cre: Creature = find_parent("CosmeticItems").creature
 		var be: AccessoryManager = cre.find_child("AccessoryManager")
 		be.toggle_cosmetic(self.cosmetic)
+	
+	
+	func update_locked():
+		var unlocked_items = DataGlobals.load_metadata()['unlocked_items']
+		var uid = str(ResourceLoader.get_resource_uid(self.cosmetic.resource_path))
+		self.disabled = false if self.cosmetic.unlocked else not uid in unlocked_items
 
 
 func _ready():
-	var unlocked_items = DataGlobals.metadata_last_loaded[DataGlobals.UNLOCKED_ITEMS]
+	var unlocked_items = DataGlobals.load_metadata()['unlocked_items']
+	#var unlocked_items = DataGlobals.metadata_last_loaded[DataGlobals.UNLOCKED_ITEMS]
 	for i in range(10): # temp loop to boost numbers to better aid visualisation
 		for item: CosmeticItem in unlockables.unlockables:
-			var uid = ResourceLoader.get_resource_uid(item.resource_path)
-			var is_unlocked = item.unlocked or uid in unlocked_items
+			var uid = str(ResourceLoader.get_resource_uid(item.resource_path))
+			var is_unlocked = true if item.unlocked else uid in unlocked_items
 			var item_btn = UnlockableIcon.new(item, is_unlocked)
 			add_child(item_btn)
 
 
+func update_buttons():
+	propagate_call("update_locked")
+	
+	
 func _on_visibility_changed():
 	$"../..".scroll_vertical = 0

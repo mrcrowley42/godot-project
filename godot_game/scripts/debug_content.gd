@@ -9,6 +9,7 @@ extends Control
 @onready var background = %Background
 @onready var screen_tint = %BG
 @onready var notif_man = %NotificationManager
+@onready var cosmetic_btns = %CosmeticItems
 @onready var game = self.find_parent("Game")
 
 var example_messages = ["random", "word", "banana", "mario", "bingus"]
@@ -96,6 +97,7 @@ func _on_unlock_button_button_down():
 	var item_list = []
 	for item in unlockables:
 		item_list.append(str(ResourceLoader.get_resource_uid(item.resource_path)))
-
 	DataGlobals.metadata_to_add[DataGlobals.UNLOCKED_ITEMS] = item_list
 	DataGlobals.save_only_metadata()
+	cosmetic_btns.update_buttons()
+	
