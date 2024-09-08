@@ -27,6 +27,7 @@ max_food = 1000
 max_fun = 1000
 baby_sprite_frames = ExtResource("2_7dn81")
 adult_sprite_frames = ExtResource("2_jpj2q")
+notification_position = Vector2(-32, -185)
 cosmetic_positions = Array[ExtResource("2_3k38g")]([SubResource("Resource_lnaki"), SubResource("Resource_o1qvh")])
 likes = Array[int]([1])
 dislikes = Array[int]([3])

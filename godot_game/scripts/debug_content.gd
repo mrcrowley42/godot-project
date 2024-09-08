@@ -103,10 +103,22 @@ func _on_wipe_nodes_btn_button_down() -> void:
 
 
 func _on_unlock_button_button_down() -> void:
+	notif_man.new_notification("msg")
+	#notif_man.new_notification("yo")
+	var uid_dict: Dictionary
+	for item in load("res://resources/unlockables.tres").unlockables:
+		uid_dict[str(ResourceLoader.get_resource_uid(item.resource_path))] = item
 	var unlockables = load("res://resources/unlockables.tres").unlockables
+	var unlocked_items = DataGlobals.load_metadata()['unlocked_items']
 	var item_list = []
 	for item in unlockables:
 		item_list.append(str(ResourceLoader.get_resource_uid(item.resource_path)))
 	DataGlobals.metadata_to_add[DataGlobals.UNLOCKED_ITEMS] = item_list
 	DataGlobals.save_only_metadata()
 	cosmetic_btns.update_buttons()
+	for item in DataGlobals.load_metadata()['unlocked_items']:
+		if item not in unlocked_items:
+			var cosmetic = uid_dict[item]
+			print(cosmetic.name)
+			var message = "%s Unlocked!" %[cosmetic.name]
+			notif_man.new_notification(message)

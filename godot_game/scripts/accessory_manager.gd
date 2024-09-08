@@ -35,9 +35,10 @@ func toggle_cosmetic(cosmetic: CosmeticItem) -> void:
 		var new_sprite = CosmeticSprite.new(cosmetic)
 		new_sprite.name = cosmetic.name
 		new_sprite.position = position_dict[cosmetic]
-		# possibly link animation up with main sprite so frame rate meets up
-		new_sprite.play()
 		add_child(new_sprite, true)
+		# Should maintain sync with main sprite
+		await %Main.frame_changed
+		new_sprite.play()
 		current_cosmetics.append(cosmetic.name)
 	else:
 		# this is ridiculous

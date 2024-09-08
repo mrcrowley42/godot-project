@@ -43,6 +43,8 @@ extends Node
 var on_cooldown: bool = false
 
 func _ready() -> void:
+	# TODO Update this when creature changes.
+	notification_bubble.position = creature.creature_type.notification_position
 	cooldown_timer.wait_time = cooldown_period
 	cooldown_timer.timeout.connect(done)
 	cooldown_timer.autostart = false
@@ -94,3 +96,4 @@ func queue_warning(sound_file: AudioStream) -> void:
 func _on_low_stat_sounds_finished() -> void:
 	on_cooldown = true
 	cooldown_timer.start()
+
