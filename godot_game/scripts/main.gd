@@ -91,7 +91,11 @@ func _notification(noti):
 	
 	if noti == Globals.NOFITICATION_GROW_TO_ADULT_SCENE:
 		var p = func(): print("done")
-		perform_closing_transition(p)
+		await perform_closing_transition(p)
+		var creature: Creature = find_child("Creature")
+		creature.life_stage = Creature.LifeStage.ADULT if creature.life_stage != 1 else 0
+		creature.update_sprite()
+		perform_opening_transition()
 
 
 func _input(event) -> void:

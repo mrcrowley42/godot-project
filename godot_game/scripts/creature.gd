@@ -47,6 +47,7 @@ signal water_changed()
 signal fun_changed()
 signal xp_changed()
 signal ready_to_grow_up()
+signal finished_loading()
 
 ## Map of shorthand strings to corresponding damage function
 var stats: Dictionary = {Stat.HP: damage_hp, Stat.FUN: damage_fun,
@@ -56,13 +57,15 @@ var stats: Dictionary = {Stat.HP: damage_hp, Stat.FUN: damage_fun,
 func _ready():
 	var uid = int(DataGlobals.metadata_last_loaded[DataGlobals.CURRENT_CREATURE])
 	creature_type = load(ResourceUID.get_id_path(uid))
-	main_sprite.sprite_frames = creature_type.adult_sprite_frames
 	main_sprite.animation = "idle"
 	set_up_default_values()
-	
+	finished_loading.connect(update_sprite)
+
+func update_sprite():
 	if life_stage == LifeStage.CHILD:
 		main_sprite.sprite_frames = creature_type.baby_sprite_frames
-	
+	else:
+		main_sprite.sprite_frames = creature_type.adult_sprite_frames
 	main_sprite.play()
 
 func set_up_default_values():
@@ -163,12 +166,14 @@ func damage_water(amount) -> void:
 func save() -> Dictionary:
 	return {
 		"water": water, "food": food, "fun": fun, "hp": hp, 
-		"xp": xp, "is_ready_to_grow_up": is_ready_to_grow_up
+		"xp": xp, "is_ready_to_grow_up": is_ready_to_grow_up,
+		 "life_stage": life_stage
 	}
 
 
 func load(data) -> void:
-	var prop_list = ["water", "fun", "food", "hp", "xp", "is_ready_to_grow_up"]
+	var prop_list = ["water", "fun", "food", "hp", "xp", "is_ready_to_grow_up"
+					, "life_stage"]
 	
 	for property in prop_list:
 		if data.has(property):
@@ -181,3 +186,4 @@ func load(data) -> void:
 	if is_ready_to_grow_up:
 		ready_to_grow_up.emit()
 	apply_dmg_tint()
+	finished_loading.emit()
