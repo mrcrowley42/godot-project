@@ -10,7 +10,7 @@ var last_saved: float
 @onready var minigame_man: MinigameManager = %MinigameManager
 @onready var debug_window = $DebugWindow
 
-var is_in_transition: bool = true;
+var is_in_transition: bool = false;
 
 func _ready():
 	if unlock_fps:
@@ -41,6 +41,7 @@ func set_is_in_trans(value: bool):
 func perform_opening_transition():
 	var ui_overlay: Sprite2D = find_child("UI_Overlay")
 	var trans_img: Sprite2D = find_child("Transition")
+	trans_img.rotation = 0
 	trans_img.position = ui_overlay.position
 	get_tree().create_tween().tween_property(trans_img, "position", trans_img.position + Vector2(0, 1000), 1.5)\
 		.set_trans(Tween.TRANS_EXPO)\

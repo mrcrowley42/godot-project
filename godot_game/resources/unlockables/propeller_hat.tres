@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/base_classses/cosmetic.gd" id="1_v0kdc"]
 [ext_resource type="Texture2D" uid="uid://clhwpfi84yq0u" path="res://images/creature_sprites/correct_scale/hat-0.png" id="2_llcvw"]
-[ext_resource type="SpriteFrames" uid="uid://cpitoi4php8a2" path="res://resources/unlockables/propeller_hat_sprite_frames.tres" id="2_pierd"]
+[ext_resource type="SpriteFrames" path="res://resources/unlockables/propeller_hat_sprite_frames.tres" id="2_pierd"]
 
 [resource]
 script = ExtResource("1_v0kdc")

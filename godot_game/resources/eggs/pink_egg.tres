@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EggEntry" load_steps=6 format=3 uid="uid://xrht2i6qwx4s"]
 
 [ext_resource type="Script" path="res://scripts/base_classses/egg_entry.gd" id="1_e8rho"]
-[ext_resource type="Resource" uid="uid://cxtahs454inpc" path="res://resources/creatures/main_creature.tres" id="1_idus6"]
+[ext_resource type="Resource" uid="uid://dthrakyjbb2np" path="res://resources/creatures/main_creature.tres" id="1_idus6"]
 [ext_resource type="Texture2D" uid="uid://dooy32x4x0qq3" path="res://images/egg/egg-pink.png" id="1_mln40"]
 [ext_resource type="Script" path="res://scripts/base_classses/egg_creature_entry.gd" id="2_l6186"]
 

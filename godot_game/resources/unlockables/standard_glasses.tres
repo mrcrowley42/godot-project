@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/base_classses/cosmetic.gd" id="1_tulc5"]
 [ext_resource type="Texture2D" uid="uid://jwn24lgspht2" path="res://images/creature_sprites/glasses-0.png" id="2_bemxb"]
-[ext_resource type="SpriteFrames" uid="uid://blmif1nujgs1a" path="res://resources/unlockables/standard_glasses_sprite_frames.tres" id="2_qgxkc"]
+[ext_resource type="SpriteFrames" path="res://resources/unlockables/standard_glasses_sprite_frames.tres" id="2_qgxkc"]
 
 [resource]
 script = ExtResource("1_tulc5")
