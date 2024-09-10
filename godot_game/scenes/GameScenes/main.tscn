@@ -1,4 +1,4 @@
-[gd_scene load_steps=111 format=3 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=112 format=3 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_aqytd"]
@@ -10,14 +10,14 @@
 [ext_resource type="Texture2D" uid="uid://bmwpenw32juko" path="res://UI stuff/Universal/background_light_map.png" id="8_aulml"]
 [ext_resource type="PackedScene" uid="uid://bebjn5n2kjwgb" path="res://scenes/Creatures/creature.tscn" id="9_ulkn4"]
 [ext_resource type="Script" path="res://scripts/Confetti.gd" id="10_tn1o6"]
-[ext_resource type="Theme" path="res://themes/invisible.tres" id="11_lcq7m"]
+[ext_resource type="Theme" uid="uid://dl1wes8p6lqlb" path="res://themes/invisible.tres" id="11_lcq7m"]
 [ext_resource type="Script" path="res://scripts/clippy_area.gd" id="12_n00c6"]
 [ext_resource type="Script" path="res://scripts/ui_theme_manager.gd" id="13_3i267"]
 [ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="14_fimo1"]
 [ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="14_k2ios"]
 [ext_resource type="Resource" uid="uid://bxhuu3qk52v3w" path="res://resources/ui_themes/green.tres" id="14_mb3dl"]
 [ext_resource type="Resource" uid="uid://vt3jd46rlq4h" path="res://resources/ui_themes/orange.tres" id="15_4uyfd"]
-[ext_resource type="Texture2D" path="res://icons/arrow-up-square.svg" id="15_8x1u0"]
+[ext_resource type="Texture2D" uid="uid://do0i17klbrer7" path="res://icons/arrow-up-square.svg" id="15_8x1u0"]
 [ext_resource type="Resource" uid="uid://clen0bplq0q5d" path="res://resources/ui_themes/pink.tres" id="16_6dasc"]
 [ext_resource type="Script" path="res://scripts/action_menu_panel.gd" id="17_wsydk"]
 [ext_resource type="Theme" uid="uid://1dv11a5ar0hg" path="res://themes/action_btn.tres" id="18_v1mb2"]
@@ -49,6 +49,7 @@
 [ext_resource type="Texture2D" uid="uid://c702pbhxasm52" path="res://icons/status/heart-fill.svg" id="41_8adaw"]
 [ext_resource type="Script" path="res://scripts/costmetic_row.gd" id="41_pook7"]
 [ext_resource type="Texture2D" uid="uid://b30byopy2beum" path="res://images/creature_sprites/correct_scale/chill-1.png" id="42_828ml"]
+[ext_resource type="Theme" uid="uid://bqu43buo5gcrc" path="res://themes/vcr_font.tres" id="42_c1jtf"]
 [ext_resource type="Script" path="res://scripts/hp_bar.gd" id="42_ccntj"]
 [ext_resource type="Texture2D" uid="uid://d84hj0mtn2hw" path="res://icons/status/mood_24dp_FILL1_wght300_GRAD0_opsz24.svg" id="43_qa2jm"]
 [ext_resource type="Script" path="res://scripts/fun_bar.gd" id="44_8jtdq"]
@@ -1257,7 +1258,6 @@ metadata/_edit_use_anchors_ = true
 [node name="OptionsMenu" type="PanelContainer" parent="UI"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1401,7 +1401,6 @@ text = ">"
 [node name="FactsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_cuoxy")
 script = ExtResource("32_jvqx8")
@@ -1416,13 +1415,14 @@ theme_override_constants/margin_bottom = 16
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/FactsMenu/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 32
+theme_override_constants/separation = 16
 
 [node name="Label" type="Label" parent="UI/OptionsMenu/FactsMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("39_8ebm3")
-text = "FACTS"
+theme = ExtResource("42_c1jtf")
+text = "Fact Library"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/OptionsMenu/FactsMenu/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 240)
@@ -1447,58 +1447,61 @@ custom_minimum_size = Vector2(112, 192)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-text = "BOOK 1"
+theme = ExtResource("42_c1jtf")
+theme_override_font_sizes/font_size = 20
+text = "Topic 1"
 
 [node name="Button2" type="Button" parent="UI/OptionsMenu/FactsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(112, 192)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-text = "BOOK 2"
-
-[node name="Button4" type="Button" parent="UI/OptionsMenu/FactsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(112, 192)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-text = "BOOK 3"
+theme = ExtResource("42_c1jtf")
+theme_override_font_sizes/font_size = 20
+text = "Topic 2"
 
 [node name="Button3" type="Button" parent="UI/OptionsMenu/FactsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(112, 192)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-text = "BOOK 4
-"
+theme = ExtResource("42_c1jtf")
+theme_override_font_sizes/font_size = 20
+text = "Topic 3"
 
-[node name="Button5" type="Button" parent="UI/OptionsMenu/FactsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer"]
+[node name="Button4" type="Button" parent="UI/OptionsMenu/FactsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(112, 192)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-text = "BOOK 5
-"
+theme = ExtResource("42_c1jtf")
+theme_override_font_sizes/font_size = 20
+text = "Topic 4"
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/FactsMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 8
+
+[node name="RichTextLabel" type="Label" parent="UI/OptionsMenu/FactsMenu/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("39_8ebm3")
+text = "Fun: 2/2
+Trivia: 2/15
+Etc: 3/16"
+horizontal_alignment = 2
 
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/FactsMenu"]
 position = Vector2(-50, -130)
 
-[node name="Save" type="Button" parent="UI/OptionsMenu/FactsMenu/SaveButtons"]
-offset_left = 391.0
-offset_top = 511.0
-offset_right = 492.0
-offset_bottom = 559.0
-scale = Vector2(0.75, 0.75)
-theme = ExtResource("33_1qhmu")
-theme_override_colors/font_hover_color = Color(0.4947, 0.97, 0.4947, 1)
-theme_override_font_sizes/font_size = 18
-text = "Save"
-
 [node name="Cancel" type="Button" parent="UI/OptionsMenu/FactsMenu/SaveButtons"]
 texture_filter = 5
-offset_left = 64.0
-offset_top = 510.0
-offset_right = 168.0
-offset_bottom = 558.0
+offset_left = 78.0
+offset_top = 495.0
+offset_right = 182.0
+offset_bottom = 543.0
 scale = Vector2(0.75, 0.75)
 theme = ExtResource("33_1qhmu")
 theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
@@ -1509,6 +1512,7 @@ script = ExtResource("35_4io20")
 [node name="AppearanceMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_cuoxy")
 script = ExtResource("32_jvqx8")
@@ -2165,7 +2169,6 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/OptionsMenu/GameplayOptionsMenu/SaveButtons/Cancel" to="UI/OptionsMenu/GameplayOptionsMenu/SaveButtons/Cancel" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/GameplayOptionsMenu/ThemeControls/vHBoxContainer/Button2" to="UI/OptionsMenu/GameplayOptionsMenu/ThemeControls" method="_on_back_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/GameplayOptionsMenu/ThemeControls/vHBoxContainer/Button" to="UI/OptionsMenu/GameplayOptionsMenu/ThemeControls" method="_on_forward_button_down"]
-[connection signal="pressed" from="UI/OptionsMenu/FactsMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
 [connection signal="button_down" from="UI/OptionsMenu/FactsMenu/SaveButtons/Cancel" to="UI/OptionsMenu/FactsMenu/SaveButtons/Cancel" method="_on_button_down"]
 [connection signal="visibility_changed" from="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems" to="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems" method="_on_visibility_changed"]
 [connection signal="pressed" from="UI/OptionsMenu/AppearanceMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
