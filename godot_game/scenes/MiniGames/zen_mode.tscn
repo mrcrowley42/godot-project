@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://drotl04h8ywfe"]
 
-[ext_resource type="Script" path="res://scripts/zen_mode.gd" id="1_kb7c0"]
+[ext_resource type="Script" path="res://scripts/minigames/zen_mode.gd" id="1_kb7c0"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="2_s7g67"]
 
 [sub_resource type="Gradient" id="Gradient_5hppj"]

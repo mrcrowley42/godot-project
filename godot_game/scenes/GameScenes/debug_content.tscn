@@ -1,18 +1,20 @@
 [gd_scene load_steps=22 format=3 uid="uid://b6wocr0vo5s4v"]
 
-[ext_resource type="Script" path="res://scripts/debug_content.gd" id="1_jlyus"]
-[ext_resource type="Script" path="res://scripts/water_label.gd" id="2_3h2jk"]
+[ext_resource type="Script" path="res://scripts/debug/debug_content.gd" id="1_jlyus"]
+[ext_resource type="Script" path="res://scripts/debug/water_label.gd" id="2_3h2jk"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="2_5bhpe"]
-[ext_resource type="Script" path="res://scripts/hp_label.gd" id="3_jj2ny"]
-[ext_resource type="Script" path="res://scripts/food_label.gd" id="3_kowqt"]
-[ext_resource type="Script" path="res://scripts/fun_label.gd" id="3_qpwvx"]
-[ext_resource type="Script" path="res://scripts/theme_label.gd" id="4_pa4py"]
-[ext_resource type="Script" path="res://scripts/XpLabel.gd" id="7_5mkx4"]
-[ext_resource type="Script" path="res://scripts/debug_day_progress.gd" id="8_0d2ip"]
+[ext_resource type="Script" path="res://scripts/debug/hp_label.gd" id="3_jj2ny"]
+[ext_resource type="Script" path="res://scripts/debug/food_label.gd" id="3_kowqt"]
+[ext_resource type="Script" path="res://scripts/debug/fun_label.gd" id="3_qpwvx"]
+[ext_resource type="Script" path="res://scripts/debug/theme_label.gd" id="4_pa4py"]
+[ext_resource type="Script" path="res://scripts/debug/XpLabel.gd" id="7_5mkx4"]
+[ext_resource type="Script" path="res://scripts/debug/debug_day_progress.gd" id="8_0d2ip"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="8_lqg4h"]
+[ext_resource type="Script" path="res://scripts/debug/music_track_label.gd" id="9_p2vi0"]
 [ext_resource type="FontFile" uid="uid://cukp5skadwgit" path="res://fonts/JetBrainsMono-VariableFont_wght.ttf" id="9_y33yi"]
-[ext_resource type="Script" path="res://scripts/minimax.gd" id="10_4e6rj"]
-[ext_resource type="Script" path="res://scripts/debug_minigame.gd" id="11_y5yt0"]
+[ext_resource type="Script" path="res://scripts/debug/minimax.gd" id="10_4e6rj"]
+[ext_resource type="Script" path="res://scripts/debug/debug_clippy_opacity.gd" id="11_xtmvi"]
+[ext_resource type="Script" path="res://scripts/debug/debug_minigame.gd" id="11_y5yt0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fjahq"]
 bg_color = Color(0, 0, 0, 0.290196)
@@ -50,17 +52,6 @@ expand_margin_bottom = 14.0
 [sub_resource type="LabelSettings" id="LabelSettings_itiye"]
 line_spacing = 5.0
 
-[sub_resource type="GDScript" id="GDScript_v57jq"]
-script/source = "extends Label
-
-var og_text = self.text
-
-func _process(_delta):
-	self.text = og_text % [
-		str(find_parent('DebugContent').music_track.stream.resource_path.get_file().get_basename())
-		]
-"
-
 [sub_resource type="GDScript" id="GDScript_oisou"]
 script/source = "extends Label
 
@@ -74,13 +65,6 @@ script/source = "extends HSlider
 func _process(_delta):
 	if value >=.95 and value <=1.05:
 		value = 1.0
-"
-
-[sub_resource type="GDScript" id="GDScript_1tr3v"]
-script/source = "extends Label
-
-func _process(_delta):
-	text = '%.2f' % find_parent('DebugContent').clippy_area.clippy_opacity
 "
 
 [sub_resource type="LabelSettings" id="LabelSettings_na8du"]
@@ -188,7 +172,7 @@ text = "
 label_settings = SubResource("LabelSettings_itiye")
 autowrap_mode = 3
 text_overrun_behavior = 3
-script = SubResource("GDScript_v57jq")
+script = ExtResource("9_p2vi0")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
@@ -361,7 +345,7 @@ offset_right = 478.0
 offset_bottom = 449.0
 theme = ExtResource("2_5bhpe")
 text = "1.0"
-script = SubResource("GDScript_1tr3v")
+script = ExtResource("11_xtmvi")
 
 [node name="HSlider2" type="HSlider" parent="."]
 layout_mode = 0

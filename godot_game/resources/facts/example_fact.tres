@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Fact" load_steps=2 format=3 uid="uid://dxi61ouc4ajpn"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/fact.gd" id="1_cohfd"]
+
+[resource]
+script = ExtResource("1_cohfd")
+Title = "Example"
+category = 0
+source = "The internet"
+fact = "The biggest mammel is the blue whale."
+unlocked = true

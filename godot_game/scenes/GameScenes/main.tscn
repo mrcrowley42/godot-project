@@ -323,6 +323,7 @@ script = ExtResource("3_fj5ve")
 
 [node name="Gameplay" type="Node2D" parent="."]
 unique_name_in_owner = true
+visible = false
 
 [node name="Background" type="Sprite2D" parent="Gameplay"]
 unique_name_in_owner = true
@@ -346,6 +347,7 @@ autostart = true
 [node name="BGCanvasLayer" type="CanvasLayer" parent="Gameplay/Background"]
 unique_name_in_owner = true
 layer = -1
+visible = false
 
 [node name="BG" type="Sprite2D" parent="Gameplay/Background/BGCanvasLayer"]
 unique_name_in_owner = true
