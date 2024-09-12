@@ -1,7 +1,8 @@
-[gd_scene load_steps=30 format=3 uid="uid://cllomtwak1vy"]
+[gd_scene load_steps=31 format=3 uid="uid://cllomtwak1vy"]
 
 [ext_resource type="Script" path="res://scripts/game/egg_opening/egg_opening.gd" id="1_j41yb"]
 [ext_resource type="Resource" uid="uid://iew8c64p2g4" path="res://resources/eggs/purple_egg.tres" id="2_76prt"]
+[ext_resource type="Script" path="res://scripts/base_classses/egg_entry.gd" id="2_vii74"]
 [ext_resource type="Resource" uid="uid://8qkgq02pnyvq" path="res://resources/eggs/green_egg.tres" id="3_ckgoo"]
 [ext_resource type="Resource" uid="uid://xrht2i6qwx4s" path="res://resources/eggs/pink_egg.tres" id="4_8oa7j"]
 [ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="6_4e4a6"]
@@ -70,7 +71,7 @@ colors = PackedColorArray(1, 0, 0, 1, 1, 0.482353, 0.321569, 1, 1, 1, 0, 1, 1, 0
 
 [node name="EggOpening" type="Node2D"]
 script = ExtResource("1_j41yb")
-existing_eggs = Array[Resource("res://scripts/base_classses/egg_entry.gd")]([ExtResource("2_76prt"), ExtResource("3_ckgoo"), ExtResource("4_8oa7j")])
+existing_eggs = Array[ExtResource("2_vii74")]([ExtResource("2_76prt"), ExtResource("3_ckgoo"), ExtResource("4_8oa7j")])
 egg_cracks = Array[Texture2D]([ExtResource("6_a8aos"), ExtResource("7_ika8w"), ExtResource("8_rhfgm")])
 egg_alpha_map = ExtResource("9_ac20n")
 bar_progress_color = SubResource("Gradient_wiwer")

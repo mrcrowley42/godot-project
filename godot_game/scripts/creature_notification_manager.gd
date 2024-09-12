@@ -96,4 +96,3 @@ func queue_warning(sound_file: AudioStream) -> void:
 func _on_low_stat_sounds_finished() -> void:
 	on_cooldown = true
 	cooldown_timer.start()
-

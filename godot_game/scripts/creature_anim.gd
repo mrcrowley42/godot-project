@@ -24,4 +24,3 @@ func _on_animation_changed():
 		#%NotificationBubble.show()
 	#else:
 		#%NotificationBubble.hide()
-
