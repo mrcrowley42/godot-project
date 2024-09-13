@@ -11,4 +11,3 @@ void fragment() {
 	//colour.b = colour.b *COLOR.b;
 	COLOR.rgb = blended;
 }
-
