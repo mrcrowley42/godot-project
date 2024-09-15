@@ -1,0 +1,93 @@
+[gd_scene load_steps=6 format=3 uid="uid://bq6vf2btekkij"]
+
+[ext_resource type="Script" path="res://scripts/fact_popup.gd" id="1_78rey"]
+[ext_resource type="Theme" uid="uid://bqu43buo5gcrc" path="res://themes/vcr_font.tres" id="1_ehrng"]
+[ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="2_4am8h"]
+[ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="3_0xwps"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cnlcg"]
+bg_color = Color(0.26325, 0.195, 0.39, 1)
+expand_margin_left = 24.0
+expand_margin_top = 16.0
+expand_margin_right = 24.0
+expand_margin_bottom = 16.0
+
+[node name="FactPopup" type="MarginContainer"]
+offset_right = 434.0
+offset_bottom = 434.0
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 16
+script = ExtResource("1_78rey")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cnlcg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_ehrng")
+text = "Did you know?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(386, 270)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ScrollContainer"]
+custom_minimum_size = Vector2(378, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 0
+
+[node name="Content" type="Label" parent="VBoxContainer/ScrollContainer/MarginContainer"]
+custom_minimum_size = Vector2(370, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("2_4am8h")
+theme_override_font_sizes/font_size = 17
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eros lectus, euismod blandit nulla vitae, blandit luctus justo. Proin suscipit rutrum lectus, at ultrices ligula rutrum at. Pellentesque tristique nisi erat, vitae efficitur nibh porta at. Sed rutrum, nisi quis tincidunt euismod, elit lacus aliquam nulla, vel tincidunt ligula ante eget urna. Phasellus posuere sagittis turpis, vel finibus lectus rhoncus et. Maecenas euismod placerat augue eleifend accumsan. Integer eu feugiat erat. Quisque vel ante vitae velit ultricies auctor. Fusce lorem magna, ultricies ut semper non, fringilla eget nisi. "
+autowrap_mode = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 108
+theme_override_constants/margin_top = -24
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 8
+
+[node name="Source" type="Label" parent="VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+theme = ExtResource("2_4am8h")
+theme_override_font_sizes/font_size = 16
+text = "Source: %s"
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="SaveButtons" type="Node2D" parent="."]
+position = Vector2(-50, -130)
+
+[node name="Cancel" type="Button" parent="SaveButtons"]
+texture_filter = 5
+offset_left = 78.0
+offset_top = 487.0
+offset_right = 182.0
+offset_bottom = 535.0
+scale = Vector2(0.75, 0.75)
+theme = ExtResource("3_0xwps")
+theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
+theme_override_font_sizes/font_size = 18
+text = "Back"
+
+[connection signal="hidden" from="." to="." method="_on_hidden"]
+[connection signal="button_down" from="SaveButtons/Cancel" to="." method="_on_cancel_button_down"]

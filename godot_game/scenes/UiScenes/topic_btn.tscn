@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyapnl5xgvivn"]
+
+[ext_resource type="Theme" uid="uid://bqu43buo5gcrc" path="res://themes/vcr_font.tres" id="1_e3xoi"]
+[ext_resource type="Script" path="res://scripts/fact-category-btn.gd" id="2_btmt2"]
+
+[node name="Button" type="Button"]
+custom_minimum_size = Vector2(112, 192)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_e3xoi")
+theme_override_font_sizes/font_size = 20
+text = "Topic 1"
+script = ExtResource("2_btmt2")
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]

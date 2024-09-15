@@ -10,4 +10,3 @@ void fragment() {
 	vec4 displaced_colour = texture(SCREEN_TEXTURE, SCREEN_UV + strength/100.0 * noise_colour.rr);
 	COLOR = displaced_colour;
 }
-
