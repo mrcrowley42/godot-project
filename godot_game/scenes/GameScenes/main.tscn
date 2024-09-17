@@ -1447,32 +1447,16 @@ alignment = 1
 [node name="Button" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer" instance=ExtResource("44_y5a0d")]
 layout_mode = 2
 
-[node name="Button2" type="Button" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(112, 192)
+[node name="Button2" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer" instance=ExtResource("44_y5a0d")]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("42_c1jtf")
-theme_override_font_sizes/font_size = 20
-text = "Topic 2"
+category = 1
 
-[node name="Button3" type="Button" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(112, 192)
+[node name="Button3" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer" instance=ExtResource("44_y5a0d")]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("42_c1jtf")
-theme_override_font_sizes/font_size = 20
-text = "Topic 3"
+category = 2
 
-[node name="Button4" type="Button" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(112, 192)
+[node name="Button4" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer" instance=ExtResource("44_y5a0d")]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("42_c1jtf")
-theme_override_font_sizes/font_size = 20
-text = "Topic 4"
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer"]
 layout_mode = 2
