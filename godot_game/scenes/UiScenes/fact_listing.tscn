@@ -1,0 +1,77 @@
+[gd_scene load_steps=6 format=3 uid="uid://yms8ggyicux1"]
+
+[ext_resource type="Script" path="res://scripts/fact_listing.gd" id="1_gtqsy"]
+[ext_resource type="Theme" uid="uid://bqu43buo5gcrc" path="res://themes/vcr_font.tres" id="2_nyd6t"]
+[ext_resource type="Theme" uid="uid://1dv11a5ar0hg" path="res://themes/action_btn.tres" id="3_h1uor"]
+[ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="4_ik51a"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cnlcg"]
+bg_color = Color(0.26325, 0.195, 0.39, 1)
+expand_margin_left = 24.0
+expand_margin_top = 16.0
+expand_margin_right = 24.0
+expand_margin_bottom = 16.0
+
+[node name="FactPopup" type="MarginContainer"]
+offset_right = 434.0
+offset_bottom = 434.0
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 16
+script = ExtResource("1_gtqsy")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cnlcg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Category" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_nyd6t")
+text = "Did you know?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(386, 290)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ScrollContainer"]
+custom_minimum_size = Vector2(378, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="AppearanceBtn" type="Button" parent="VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme = ExtResource("3_h1uor")
+text = "Fact 1"
+
+[node name="SaveButtons" type="Node2D" parent="."]
+position = Vector2(-50, -130)
+
+[node name="Cancel" type="Button" parent="SaveButtons"]
+texture_filter = 5
+offset_left = 78.0
+offset_top = 503.0
+offset_right = 182.0
+offset_bottom = 551.0
+scale = Vector2(0.75, 0.75)
+theme = ExtResource("4_ik51a")
+theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
+theme_override_font_sizes/font_size = 18
+text = "Back"
+
+[connection signal="hidden" from="." to="." method="_on_hidden"]
+[connection signal="button_down" from="SaveButtons/Cancel" to="." method="_on_cancel_button_down"]
