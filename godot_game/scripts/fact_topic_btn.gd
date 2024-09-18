@@ -19,6 +19,7 @@ func _ready() -> void:
 func _on_button_down() -> void:
 	# temp stuff
 	var fact_listing = fact_listing_scene.instantiate()
+	fact_listing.add_facts()
 	fact_menu.add_child(fact_listing)
 	
 	print(category)
