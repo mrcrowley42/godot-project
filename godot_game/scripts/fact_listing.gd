@@ -17,5 +17,5 @@ func _on_hidden() -> void:
 	queue_free()
 
 func add_facts():
-	
-	add_child(fact_btn)
+	pass
+	#add_child(fact_btn)
