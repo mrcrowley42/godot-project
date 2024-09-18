@@ -18,4 +18,5 @@ func _on_hidden() -> void:
 
 func add_facts():
 	pass
+	## yep facts
 	#add_child(fact_btn)
