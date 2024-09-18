@@ -3,7 +3,7 @@ extends MarginContainer
 @onready var btn_sfx = find_parent("Game").find_child("BtnClick")
 @onready var content = find_child("Content")
 @onready var source = find_child("Source")
-@onready var fact: Fact = load("res://resources/facts/example_fact.tres")
+var fact: Fact = load("res://resources/facts/example_fact.tres")
 
 func _ready() -> void:
 	content.text = fact.fact

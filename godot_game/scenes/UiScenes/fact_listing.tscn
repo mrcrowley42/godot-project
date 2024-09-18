@@ -12,7 +12,7 @@ expand_margin_top = 16.0
 expand_margin_right = 24.0
 expand_margin_bottom = 16.0
 
-[node name="FactPopup" type="MarginContainer"]
+[node name="List" type="MarginContainer" node_paths=PackedStringArray("heading", "fact_container")]
 offset_right = 434.0
 offset_bottom = 434.0
 theme_override_constants/margin_left = 24
@@ -20,6 +20,8 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 16
 script = ExtResource("1_gtqsy")
+heading = NodePath("VBoxContainer/Category")
+fact_container = NodePath("VBoxContainer/ScrollContainer/MarginContainer/FactList")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 2
