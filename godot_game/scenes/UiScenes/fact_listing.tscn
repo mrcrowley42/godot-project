@@ -55,6 +55,7 @@ layout_mode = 2
 theme_override_constants/separation = 14
 
 [node name="AppearanceBtn" parent="VBoxContainer/ScrollContainer/MarginContainer/FactList" instance=ExtResource("3_omm3u")]
+visible = false
 layout_mode = 2
 
 [node name="SaveButtons" type="Node2D" parent="."]

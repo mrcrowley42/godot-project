@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Fact" load_steps=2 format=3 uid="uid://pksdktylohnl"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/fact.gd" id="1_tpal8"]
+
+[resource]
+script = ExtResource("1_tpal8")
+title = "Example 3"
+category = 0
+source = "The internet"
+fact = "Fact info go here"
+unlocked = true

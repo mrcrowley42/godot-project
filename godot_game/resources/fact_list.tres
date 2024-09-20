@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="FactList" load_steps=8 format=3 uid="uid://doohxcguevuke"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/fact.gd" id="1_hdmg6"]
+[ext_resource type="Resource" uid="uid://dxi61ouc4ajpn" path="res://resources/facts/example_fact.tres" id="2_2jj5x"]
+[ext_resource type="Script" path="res://scripts/base_classses/fact_list.gd" id="2_f4y74"]
+[ext_resource type="Resource" uid="uid://rjnxi3x0gjfj" path="res://resources/facts/example_fact2.tres" id="2_oaoii"]
+[ext_resource type="Resource" uid="uid://pksdktylohnl" path="res://resources/facts/example_fact3.tres" id="3_xcesv"]
+[ext_resource type="Resource" uid="uid://bwrcylbqgmqst" path="res://resources/facts/example_fact4.tres" id="4_b16ry"]
+[ext_resource type="Resource" uid="uid://gpv414fjx2w1" path="res://resources/facts/example_fact5.tres" id="5_5ju3g"]
+
+[resource]
+script = ExtResource("2_f4y74")
+facts = Array[ExtResource("1_hdmg6")]([ExtResource("2_oaoii"), ExtResource("3_xcesv"), ExtResource("4_b16ry"), ExtResource("5_5ju3g"), ExtResource("2_2jj5x")])

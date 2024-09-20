@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://1dv11a5ar0hg" path="res://themes/action_btn.tres" id="1_uiybw"]
 [ext_resource type="Script" path="res://scripts/fact-btn.gd" id="2_1t51s"]
 
-[node name="AppearanceBtn" type="Button"]
+[node name="FactLink" type="Button"]
 custom_minimum_size = Vector2(0, 60)
 theme = ExtResource("1_uiybw")
 text = "Fact 1"

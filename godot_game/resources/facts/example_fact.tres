@@ -4,8 +4,8 @@
 
 [resource]
 script = ExtResource("1_cohfd")
-Title = "Example"
-category = 0
+title = "Example 1"
+category = 1
 source = "The internet"
 fact = "The biggest mammel is the blue whale."
 unlocked = true

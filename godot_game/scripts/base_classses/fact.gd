@@ -4,7 +4,7 @@ class_name Fact extends Resource
 
 enum FactCategory {FUN, NEURO, ETC}
 
-@export var Title: String
+@export var title: String
 @export var category: FactCategory
 @export var source: String
 @export_multiline var fact: String
