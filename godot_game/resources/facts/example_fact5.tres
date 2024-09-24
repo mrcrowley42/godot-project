@@ -8,4 +8,4 @@ title = "Example 5"
 category = 1
 source = "The internet"
 fact = "FACT 5 "
-unlocked = true
+unlocked = false
