@@ -4,7 +4,7 @@ extends Node
 const LAST_SAVED = "last_saved"
 const CURRENT_CREATURE = "current_creature"
 const CREATURES_DISCOVERED = "creatures_discovered"
-const UNLOCKED_ITEMS = "unlocked_items"
+const UNLOCKED_COSMETICS = "unlocked_cosmetics"
 const UNLOCKED_FACTS = "unlocked_facts"
 
 # other
@@ -59,7 +59,7 @@ func generate_metadata_to_save() -> Dictionary:
 		LAST_SAVED: Time.get_unix_time_from_system(),
 		CURRENT_CREATURE: str(get_if_exists.call(CURRENT_CREATURE, null, true)),
 		CREATURES_DISCOVERED: get_and_check_for_addition.call(CREATURES_DISCOVERED, []),
-		UNLOCKED_ITEMS: get_and_check_for_addition.call(UNLOCKED_ITEMS, []),
+		UNLOCKED_COSMETICS: get_and_check_for_addition.call(UNLOCKED_COSMETICS, []),
 		UNLOCKED_FACTS: get_and_check_for_addition.call(UNLOCKED_FACTS, [])
 	}
 

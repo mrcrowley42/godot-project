@@ -37,13 +37,13 @@ class UnlockableIcon extends Button:
 
 
 	func update_locked():
-		var unlocked_items = DataGlobals.load_metadata()['unlocked_items']
+		var unlocked_items = DataGlobals.load_metadata()['unlocked_cosmetics']
 		var uid = str(ResourceLoader.get_resource_uid(self.cosmetic.resource_path))
 		self.disabled = false if self.cosmetic.unlocked else not uid in unlocked_items
 
 
 func _ready():
-	var unlocked_items = DataGlobals.load_metadata()['unlocked_items']
+	var unlocked_items = DataGlobals.load_metadata()['unlocked_cosmetics']
 	#var unlocked_items = DataGlobals.metadata_last_loaded[DataGlobals.UNLOCKED_ITEMS]
 	for i in range(10): # temp loop to boost numbers to better aid visualisation
 		for item: CosmeticItem in unlockables.unlockables:

@@ -105,7 +105,7 @@ func _on_wipe_nodes_btn_button_down() -> void:
 func _on_unlock_button_button_down() -> void:
 	# this is kinda horrendous ngl but I just wanted it to work
 	var uid_dict: Dictionary = {}
-	var unlocked_items = DataGlobals.load_metadata()['unlocked_items']
+	var unlocked_items = DataGlobals.load_metadata()['unlocked_cosmetics']
 	for item: CosmeticItem in load("res://resources/unlockables.tres").unlockables:
 		var uid = str(ResourceLoader.get_resource_uid(item.resource_path))
 		if item.unlocked:
@@ -116,10 +116,10 @@ func _on_unlock_button_button_down() -> void:
 	var item_list = []
 	for item in unlockables:
 		item_list.append(str(ResourceLoader.get_resource_uid(item.resource_path)))
-	DataGlobals.metadata_to_add[DataGlobals.UNLOCKED_ITEMS] = item_list
+	DataGlobals.metadata_to_add[DataGlobals.UNLOCKED_COSMETICS] = item_list
 	DataGlobals.save_only_metadata()
 	cosmetic_btns.update_buttons()
-	for item in DataGlobals.load_metadata()['unlocked_items']:
+	for item in DataGlobals.load_metadata()['unlocked_cosmetics']:
 		if item not in unlocked_items:
 			var cosmetic = uid_dict[item]
 			var message = "%s Unlocked!" %[cosmetic.name]
