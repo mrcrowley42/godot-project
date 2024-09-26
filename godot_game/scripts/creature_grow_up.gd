@@ -68,13 +68,23 @@ func add_cosmetic(cosmetic: CosmeticItem) -> void:
 
 
 var i = -1;
-func _on_timer_timeout() -> void:
-	i += 1
-	
-	if i == 6: return  # stay an adult for 1 tick
-	if i == 7:
-		parent.finish_grow_up()
-		return
-	
+func swap():
 	baby_sprite.visible = i % 2 == 0
 	adult_sprite.visible = i % 2 == 1
+
+func _on_fast_timer_timeout() -> void:
+	i += 1
+	
+	if i == 10: return  # stay an adult for 1 tick
+	if i == 11:
+		parent.finish_grow_up()
+		return
+	swap()
+
+func _on_slow_timer_timeout() -> void:
+	i += 1;
+	
+	if i == 4:
+		%SlowTimer.stop()
+		%FastTimer.start()
+	swap()

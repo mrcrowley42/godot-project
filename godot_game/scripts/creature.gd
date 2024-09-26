@@ -93,6 +93,7 @@ func setup_default_values():
 	food = max_food
 	fun = max_fun
 	water = max_water
+	xp_required = creature_type.xp_required_for_adult
 
 
 ## Add the specified [param amount] to the creature's existing xp.

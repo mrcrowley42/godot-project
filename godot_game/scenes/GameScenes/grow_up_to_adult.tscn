@@ -307,10 +307,15 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Timer" type="Timer" parent="."]
+[node name="FastTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 0.2
 
+[node name="SlowTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.3
+
 [connection signal="gui_input" from="UI/GrowBtn" to="UI/GrowBtn" method="_on_gui_input"]
 [connection signal="gui_input" from="UI/ContinueBtn" to="UI/ContinueBtn" method="_on_gui_input"]
-[connection signal="timeout" from="Timer" to="UI/Creature" method="_on_timer_timeout"]
+[connection signal="timeout" from="FastTimer" to="UI/Creature" method="_on_fast_timer_timeout"]
+[connection signal="timeout" from="SlowTimer" to="UI/Creature" method="_on_slow_timer_timeout"]

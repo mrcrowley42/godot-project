@@ -10,7 +10,7 @@ func _ready() -> void:
 	Globals.perform_opening_transition(trans_img, bg.position + (bg.size * bg.scale) * .5)
 
 func finish_grow_up():
-	%Timer.stop()
+	%FastTimer.stop()
 	%Confetti.fire()
 	
 	continue_btn.visible = true
