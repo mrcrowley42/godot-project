@@ -19,6 +19,10 @@ const NOFITICATION_GROW_TO_ADULT_SCENE = 502
 const NOTIFICATION_CREATURE_IS_LOADED = 503
 
 
+## for use when passing data between scenes
+var general_dict = {}
+
+
 ## general helper functions
 func send_notification(noti: int):
 	get_tree().root.propagate_notification(noti)

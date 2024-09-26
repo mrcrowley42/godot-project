@@ -182,6 +182,11 @@ func set_to_adult():
 	setup_main_sprite()
 	DataGlobals.save_only_metadata()
 
+func get_current_cosmetics():
+	return %AccessoryManager.current_cosmetics
+
+func get_loaded_cosmetics():
+	return %AccessoryManager.unlockables_dict
 
 func save() -> Dictionary:
 	return {

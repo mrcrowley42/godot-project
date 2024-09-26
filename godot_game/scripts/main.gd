@@ -73,6 +73,8 @@ func _notification(noti):
 	if noti == Globals.NOFITICATION_GROW_TO_ADULT_SCENE and not is_in_transition:
 		if not is_in_transition:
 			set_is_in_trans(true)
+			Globals.general_dict["current_cosmetics"] = %Creature.get_current_cosmetics()
+			Globals.general_dict["loaded_cosmetics"] = %Creature.get_loaded_cosmetics()
 			var ui_overlay: Sprite2D = find_child("UI_Overlay")
 			var trans_img: Sprite2D = find_child("Transition")
 			await Globals.perform_closing_transition(trans_img, ui_overlay.position)
