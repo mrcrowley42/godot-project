@@ -22,15 +22,10 @@ func _on_hidden() -> void:
 	queue_free()
 
 
-var unlocked_items = DataGlobals.load_metadata()['unlocked_facts']
-
-
 func add_facts() -> void:
 	for fact in facts.facts:
-		var uid = str(ResourceLoader.get_resource_uid(fact.resource_path))
-		var is_unlocked = true if fact.unlocked else uid in unlocked_items
 		if fact.category == category:
 			var btn = fact_btn_scene.instantiate()
 			btn.fact_to_display = fact
-			btn.disabled = !is_unlocked
+			btn.update_locked()
 			fact_container.add_child(btn)

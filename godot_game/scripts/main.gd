@@ -6,7 +6,6 @@ extends Node
 var last_saved: float
 @onready var launch_time: float = Time.get_unix_time_from_system()
 @onready var stat_man: StatusManager = %StatusManager
-#@onready var launch_date = Time.get_datetime_dict_from_system().day
 @onready var minigame_man: MinigameManager = %MinigameManager
 @onready var debug_window = $DebugWindow
 

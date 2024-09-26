@@ -9,3 +9,4 @@ enum FactCategory {FUN, NEURO, ETC}
 @export var source: String
 @export_multiline var fact: String
 @export var unlocked: bool
+@export var hint: String = ""
