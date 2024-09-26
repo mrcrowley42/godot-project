@@ -271,7 +271,7 @@ func set_egg_desc(i: int = -1):
 	for creature_entry: EggCreatureEntry in egg.hatches:
 		var uid = ResourceLoader.get_resource_uid(creature_entry.creature_type.resource_path)
 		if is_creature_known(uid):
-			var texture = creature_entry.creature_type.sprite_frames.get_frame_texture("idle", 0).resource_path
+			var texture = creature_entry.creature_type.baby.sprite_frames.get_frame_texture("idle", 0).resource_path
 			hatches_list.append("[img=25]%s[/img]" % texture)
 		else:
 			hatches_list.append("?")
@@ -466,8 +466,8 @@ func instant_open_to_continue_screen():
 	creature_sprite.scale = Vector2(.25, .25)
 
 func spawn_creature(creature: CreatureType, pos: Vector2):
-	creature_sprite.sprite_frames = creature.adult_sprite_frames
-	creature_sprite.animation = "baby"  # they *should* all have a baby animation
+	creature_sprite.sprite_frames = creature.baby.sprite_frames
+	creature_sprite.animation = "idle"  # they *should* all have a baby animation
 	creature_sprite.play()
 	creature_sprite.position = pos + CREATURE_PLACEMENT_OFFSET  # offset to be centered (may need to be different for each creature)
 

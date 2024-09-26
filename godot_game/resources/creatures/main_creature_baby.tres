@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="CreatureTypePart" load_steps=8 format=3 uid="uid://cex07vgtv0cgi"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/cosmetic_position.gd" id="1_n52fl"]
+[ext_resource type="Script" path="res://scripts/base_classses/creature_type_part.gd" id="2_ge5l4"]
+[ext_resource type="Resource" uid="uid://boatniuf6yx3d" path="res://resources/cosmetics/propeller_hat.tres" id="2_jav23"]
+[ext_resource type="Resource" uid="uid://c0gf34lgpdkmh" path="res://resources/cosmetics/standard_glasses.tres" id="3_i2cyu"]
+[ext_resource type="SpriteFrames" uid="uid://y7r6kfnngoko" path="res://resources/creatures/main_creature_baby_sprite_frames.tres" id="5_802xt"]
+
+[sub_resource type="Resource" id="Resource_4vd6u"]
+script = ExtResource("1_n52fl")
+position = Vector2(-19, -50)
+item = ExtResource("2_jav23")
+
+[sub_resource type="Resource" id="Resource_8dggf"]
+script = ExtResource("1_n52fl")
+position = Vector2(-12, 15)
+item = ExtResource("3_i2cyu")
+
+[resource]
+script = ExtResource("2_ge5l4")
+max_hp = 1000
+max_water = 1000
+max_food = 1000
+max_fun = 1000
+sprite_frames = ExtResource("5_802xt")
+notification_position = Vector2(-30, -120)
+cosmetic_positions = Array[ExtResource("1_n52fl")]([SubResource("Resource_4vd6u"), SubResource("Resource_8dggf")])
+likes = Array[int]([])
+dislikes = Array[int]([])

@@ -16,9 +16,13 @@ const NOTIFICATION_MINIGAME_CLOSED = 500
 const NOTIFICATION_TOTRIS_CLOSED = 501
 
 const NOFITICATION_GROW_TO_ADULT_SCENE = 502
+const NOTIFICATION_CREATURE_IS_LOADED = 503
 
 
 ## general helper functions
+func send_notification(noti: int):
+	get_tree().root.propagate_notification(noti)
+
 func perform_opening_transition(trans_img: Sprite2D, mid_pos: Vector2, end_func=null):
 	trans_img.rotation = 0
 	trans_img.position = mid_pos

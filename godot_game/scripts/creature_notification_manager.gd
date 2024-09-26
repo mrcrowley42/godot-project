@@ -44,13 +44,15 @@ var on_cooldown: bool = false
 
 func _ready() -> void:
 	# TODO Update this when creature changes.
-	notification_bubble.position = creature.creature_type.notification_position
 	cooldown_timer.wait_time = cooldown_period
 	cooldown_timer.timeout.connect(done)
 	cooldown_timer.autostart = false
 	cooldown_timer.name = "CooldownTimer"
 	add_child(cooldown_timer)
 
+func _notification(noti: int) -> void:
+	if noti == Globals.NOTIFICATION_CREATURE_IS_LOADED:
+		notification_bubble.position = creature.creature.notification_position
 
 func _process(_delta) -> void:
 	notification_bubble.visible = notif_sounds.playing

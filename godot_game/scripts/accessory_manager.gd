@@ -11,7 +11,6 @@ var unlockables_dict: Dictionary
 
 ## Class to define a cosmetic as it appears in game.
 class CosmeticSprite extends AnimatedSprite2D:
-
 	func _init(cosmetic: CosmeticItem):
 		self.sprite_frames = cosmetic.sprite
 		# TODO will change depending on whether the correctly scaled versions of sprites are used.
@@ -22,10 +21,13 @@ func _ready() -> void:
 	# Build dictionary for each unlockable item with the key being the items name.
 	for item in unlockables:
 		unlockables_dict[item.name] = item
+
+func _notification(noti: int) -> void:
 	# Build dictionary for each cosmetic items appropriate position for the current creature.
 	# TODO may need to regenerate this for differnet lifestages or add a second set of positions for an adult?
-	for item in find_parent("Creature").creature_type.cosmetic_positions:
-		position_dict[item.item] = item.position
+	if noti == Globals.NOTIFICATION_CREATURE_IS_LOADED:
+		for item in find_parent("Creature").creature.cosmetic_positions:
+			position_dict[item.item] = item.position
 
 
 ## If the passed cosmetic item isn't already in the scene, and add it, at the location set
