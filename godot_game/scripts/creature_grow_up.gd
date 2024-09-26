@@ -64,3 +64,13 @@ func add_cosmetic(cosmetic: CosmeticItem) -> void:
 	await baby_sprite.frame_changed
 	baby_cos.play()
 	adult_cos.play()
+
+
+var i = 0;
+func _on_timer_timeout() -> void:
+	baby_sprite.visible = i % 2 == 0
+	adult_sprite.visible = i % 2 == 1
+	i += 1
+	
+	if i == 6:
+		%Timer.stop()
