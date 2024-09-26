@@ -1,7 +1,6 @@
 extends Button
 
 @export var category: Fact.FactCategory
-
 @onready var fact_listing_scene = preload("res://scenes/UiScenes/fact_listing.tscn")
 @onready var fact_menu = %FactsMenu
 

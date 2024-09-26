@@ -102,23 +102,40 @@ func _on_wipe_nodes_btn_button_down() -> void:
 	get_tree().quit()
 
 
+#func unlock_item():
+
+
 func _on_unlock_button_button_down() -> void:
-	# this is kinda horrendous ngl but I just wanted it to work
 	var uid_dict: Dictionary = {}
 	var unlocked_items = DataGlobals.load_metadata()['unlocked_cosmetics']
-	for item: CosmeticItem in load("res://resources/unlockables.tres").unlockables:
+	var unlockables = load("res://resources/unlockables.tres").unlockables
+	for item: CosmeticItem in unlockables :
 		var uid = str(ResourceLoader.get_resource_uid(item.resource_path))
 		if item.unlocked:
 			unlocked_items.append(uid)
 		uid_dict[uid] = item
-	var unlockables = load("res://resources/unlockables.tres").unlockables
 
 	var item_list = []
 	for item in unlockables:
 		item_list.append(str(ResourceLoader.get_resource_uid(item.resource_path)))
 	DataGlobals.metadata_to_add[DataGlobals.UNLOCKED_COSMETICS] = item_list
 	DataGlobals.save_only_metadata()
+	
+	var fact_list = []
+	var facts = load("res://resources/fact_list.tres").facts
+	for item in facts:
+		item_list.append(str(ResourceLoader.get_resource_uid(item.resource_path)))
+		
+	DataGlobals.metadata_to_add[DataGlobals.UNLOCKED_FACTS] = fact_list
+	DataGlobals.save_only_metadata()
+	
+	print(DataGlobals.load_metadata()['unlocked_facts'])
+	
+	# Rerender buttons
 	cosmetic_btns.update_buttons()
+
+	# NOTIFICATIONS AFTER UPDATING THE LIST OF UNLOCKED STUFF
+
 	for item in DataGlobals.load_metadata()['unlocked_cosmetics']:
 		if item not in unlocked_items:
 			var cosmetic = uid_dict[item]
