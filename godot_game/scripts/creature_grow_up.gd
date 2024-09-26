@@ -1,5 +1,6 @@
 extends Node2D
 
+@onready var parent: GrowUpToAdult = find_parent("GrowUpToAdult")
 @onready var baby_sprite: AnimatedSprite2D = find_child("Baby")
 @onready var adult_sprite: AnimatedSprite2D = find_child("Adult")
 @onready var display_box: NinePatchRect = find_parent("UI").find_child("DisplayBox")
@@ -66,11 +67,14 @@ func add_cosmetic(cosmetic: CosmeticItem) -> void:
 	adult_cos.play()
 
 
-var i = 0;
+var i = -1;
 func _on_timer_timeout() -> void:
-	baby_sprite.visible = i % 2 == 0
-	adult_sprite.visible = i % 2 == 1
 	i += 1
 	
-	if i == 6:
-		%Timer.stop()
+	if i == 6: return  # stay an adult for 1 tick
+	if i == 7:
+		parent.finish_grow_up()
+		return
+	
+	baby_sprite.visible = i % 2 == 0
+	adult_sprite.visible = i % 2 == 1
