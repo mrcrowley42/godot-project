@@ -10,6 +10,7 @@ extends Control
 @onready var screen_tint = %BG
 @onready var notif_man = %NotificationManager
 @onready var cosmetic_btns = %CosmeticItems
+@onready var facts_menu = %FactsMenu
 @onready var game = self.find_parent("Game")
 
 var example_messages = ["random", "word", "banana", "mario", "bingus"]
@@ -121,6 +122,9 @@ func _on_unlock_button_button_down() -> void:
 	DataGlobals.metadata_to_add[DataGlobals.UNLOCKED_COSMETICS] = item_list
 	DataGlobals.save_only_metadata()
 
+
+#### --------------------------------------------------
+
 	var fact_list = []
 	var facts = load("res://resources/fact_list.tres").facts
 	for item in facts:
@@ -133,8 +137,9 @@ func _on_unlock_button_button_down() -> void:
 	## need a generic unlock for items and then just iterate it for above
 
 	# Rerender buttons
-
+	
 	cosmetic_btns.update_buttons() # Need a version for the facts for this
+	facts_menu.propagate_call("update_locked")
 	# obviously will fail if they're not there so need to check that first.
 
 ## need something better for below
