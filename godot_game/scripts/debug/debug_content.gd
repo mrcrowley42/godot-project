@@ -100,8 +100,8 @@ func _on_wipe_nodes_btn_button_down() -> void:
 	d.remove(Globals.SAVE_DATA_FILE)
 	DataGlobals.save_only_metadata()
 	get_tree().quit()
-
-
+	
+	
 #func unlock_item():
 
 
@@ -120,20 +120,20 @@ func _on_unlock_button_button_down() -> void:
 		item_list.append(str(ResourceLoader.get_resource_uid(item.resource_path)))
 	DataGlobals.metadata_to_add[DataGlobals.UNLOCKED_COSMETICS] = item_list
 	DataGlobals.save_only_metadata()
-	
+
 	var fact_list = []
 	var facts = load("res://resources/fact_list.tres").facts
 	for item in facts:
 		fact_list.append(str(ResourceLoader.get_resource_uid(item.resource_path)))
-		
+
 	DataGlobals.metadata_to_add[DataGlobals.UNLOCKED_FACTS] = fact_list
 	DataGlobals.save_only_metadata()
-	
-	
-	## need a generic unlock for items and then just iterate it for above 
-	
+
+
+	## need a generic unlock for items and then just iterate it for above
+
 	# Rerender buttons
-	
+
 	cosmetic_btns.update_buttons() # Need a version for the facts for this
 	# obviously will fail if they're not there so need to check that first.
 
