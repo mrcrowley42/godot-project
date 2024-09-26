@@ -8,51 +8,35 @@ var unlockables = load("res://resources/unlockables.tres")
 
 ## Class that describes the button object for each cosmetic item.
 class UnlockableIcon extends Button:
-	var cosmetic_name
-	var cosmetic_category
 	var cosmetic
 
-	func _init(unlockable: CosmeticItem, is_unlocked: bool):
-		# Universal Styling and sizeing
+	func _init(unlockable: CosmeticItem):
 		custom_minimum_size = BTN_SIZE
 		size = BTN_SIZE
 		expand_icon = false
 		add_theme_constant_override("icon_max_width", 50)
-
-		# Individual properites
 		cosmetic = unlockable
-		cosmetic_name = unlockable.name
-		cosmetic_category = unlockable.Cosmetic_Category
-		if not is_unlocked:
-			disabled = true
-		tooltip_text = unlockable.hint if disabled else unlockable.desc
-		if not disabled:
-			icon = unlockable.thumbnail
-		else:
-			text = "?"
-
+		update_locked()
 
 	## Action when button is pressed.
 	func _pressed():
-		var cre: Creature = find_parent("CosmeticItems").creature
-		var be: AccessoryManager = cre.find_child("AccessoryManager")
-		be.toggle_cosmetic(self.cosmetic)
-
+		var creature: Creature = find_parent("CosmeticItems").creature
+		var manager: AccessoryManager = creature.find_child("AccessoryManager")
+		manager.toggle_cosmetic(self.cosmetic)
 
 	func update_locked():
 		var unlocked_items = DataGlobals.load_metadata()['unlocked_cosmetics']
 		var uid = str(ResourceLoader.get_resource_uid(self.cosmetic.resource_path))
 		self.disabled = false if self.cosmetic.unlocked else not uid in unlocked_items
+		self.tooltip_text = cosmetic.hint if disabled else cosmetic.desc
+		self.text = "?" if self.disabled else ""
+		icon = null if self.disabled else cosmetic.thumbnail
 
 
 func _ready():
-	var unlocked_items = DataGlobals.load_metadata()['unlocked_cosmetics']
-	for i in range(10):
-		for item: CosmeticItem in unlockables.unlockables:
-			var uid = str(ResourceLoader.get_resource_uid(item.resource_path))
-			var is_unlocked = true if item.unlocked else uid in unlocked_items
-			var item_btn = UnlockableIcon.new(item, is_unlocked)
-			add_child(item_btn)
+	for item: CosmeticItem in unlockables.unlockables:
+		var item_btn = UnlockableIcon.new(item)
+		add_child(item_btn)
 
 
 func update_buttons():
