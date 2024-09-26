@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="Unlockables" load_steps=5 format=3 uid="uid://sc3p3bwjnend"]
 
 [ext_resource type="Script" path="res://scripts/base_classses/unlockables.gd" id="1_gdfgk"]
-[ext_resource type="Resource" uid="uid://boatniuf6yx3d" path="res://resources/unlockables/propeller_hat.tres" id="2_1jikp"]
+[ext_resource type="Resource" uid="uid://boatniuf6yx3d" path="res://resources/cosmetics/propeller_hat.tres" id="2_1jikp"]
 [ext_resource type="Script" path="res://scripts/base_classses/cosmetic.gd" id="2_jtf78"]
-[ext_resource type="Resource" uid="uid://c0gf34lgpdkmh" path="res://resources/unlockables/standard_glasses.tres" id="3_6e8cd"]
+[ext_resource type="Resource" uid="uid://c0gf34lgpdkmh" path="res://resources/cosmetics/standard_glasses.tres" id="3_6e8cd"]
 
 [resource]
 script = ExtResource("1_gdfgk")

@@ -16,18 +16,23 @@ class UnlockableIcon extends Button:
 		# Universal Styling and sizeing
 		custom_minimum_size = BTN_SIZE
 		size = BTN_SIZE
-		#theme = load("res://themes/menu_btn.tres")
+
 		expand_icon = false
+		#add_theme_
 		add_theme_constant_override("icon_max_width", 50)
 
 		# Individual properites
 		cosmetic = unlockable
-		tooltip_text = unlockable.desc
-		icon = unlockable.thumbnail
 		cosmetic_name = unlockable.name
 		cosmetic_category = unlockable.Cosmetic_Category
 		if not is_unlocked:
 			disabled = true
+		tooltip_text = unlockable.hint if disabled else unlockable.desc
+		if not disabled:
+			icon = unlockable.thumbnail
+		else:
+			text = "?"
+
 
 	## Action when button is pressed.
 	func _pressed():

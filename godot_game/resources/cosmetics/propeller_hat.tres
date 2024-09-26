@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CosmeticItem" load_steps=4 format=3 uid="uid://boatniuf6yx3d"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/cosmetic.gd" id="1_v0kdc"]
+[ext_resource type="Texture2D" uid="uid://clhwpfi84yq0u" path="res://images/creature_sprites/correct_scale/hat-0.png" id="2_llcvw"]
+[ext_resource type="SpriteFrames" uid="uid://cpitoi4php8a2" path="res://resources/cosmetics/propeller_hat_sprite_frames.tres" id="2_pierd"]
+
+[resource]
+script = ExtResource("1_v0kdc")
+name = "Propeller Hat"
+desc = "The classic propeller hat!"
+unlocked = true
+thumbnail = ExtResource("2_llcvw")
+category = 0
+sprite = ExtResource("2_pierd")

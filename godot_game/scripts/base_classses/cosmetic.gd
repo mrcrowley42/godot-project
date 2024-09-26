@@ -10,3 +10,4 @@ enum Cosmetic_Category {HAT, GLASSES}
 @export var thumbnail: Texture2D
 @export var category: Cosmetic_Category
 @export var sprite: SpriteFrames
+@export var hint: String
