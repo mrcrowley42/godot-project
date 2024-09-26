@@ -16,9 +16,7 @@ class UnlockableIcon extends Button:
 		# Universal Styling and sizeing
 		custom_minimum_size = BTN_SIZE
 		size = BTN_SIZE
-
 		expand_icon = false
-		#add_theme_
 		add_theme_constant_override("icon_max_width", 50)
 
 		# Individual properites
@@ -49,8 +47,7 @@ class UnlockableIcon extends Button:
 
 func _ready():
 	var unlocked_items = DataGlobals.load_metadata()['unlocked_cosmetics']
-	#var unlocked_items = DataGlobals.metadata_last_loaded[DataGlobals.UNLOCKED_ITEMS]
-	for i in range(10): # temp loop to boost numbers to better aid visualisation
+	for i in range(10):
 		for item: CosmeticItem in unlockables.unlockables:
 			var uid = str(ResourceLoader.get_resource_uid(item.resource_path))
 			var is_unlocked = true if item.unlocked else uid in unlocked_items

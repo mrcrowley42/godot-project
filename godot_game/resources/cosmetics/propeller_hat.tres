@@ -12,3 +12,4 @@ unlocked = true
 thumbnail = ExtResource("2_llcvw")
 category = 0
 sprite = ExtResource("2_pierd")
+hint = ""
