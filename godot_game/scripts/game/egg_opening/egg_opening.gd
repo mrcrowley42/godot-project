@@ -98,8 +98,7 @@ func load_main_scene():
 	get_tree().change_scene_to_file("res://scenes/GameScenes/main.tscn")
 
 func do_opening_transition():
-	trans_img.position = bg.position + (bg.size * bg.scale) * .5
-	return tween(trans_img, "position", trans_img.position + Vector2(0, 1000), .5, 1.5)
+	Globals.perform_opening_transition(trans_img, bg.position + (bg.size * bg.scale) * .5)
 
 ## structure of egg:
 ## - Control  (scale & move this, rotate for centeral rotation)

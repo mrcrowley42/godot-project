@@ -16,3 +16,27 @@ const NOTIFICATION_MINIGAME_CLOSED = 500
 const NOTIFICATION_TOTRIS_CLOSED = 501
 
 const NOFITICATION_GROW_TO_ADULT_SCENE = 502
+
+
+## general helper functions
+func perform_opening_transition(trans_img: Sprite2D, mid_pos: Vector2, end_func=null):
+	trans_img.rotation = 0
+	trans_img.position = mid_pos
+	var trans = get_tree().create_tween().tween_property(trans_img, "position", trans_img.position + Vector2(0, 1000), 1.5)\
+		.set_trans(Tween.TRANS_EXPO)\
+		.set_ease(Tween.EASE_OUT)\
+		.set_delay(.3)
+	if end_func:
+		trans.connect("finished", end_func)
+
+func perform_closing_transition(trans_img: Sprite2D, mid_pos: Vector2, end_func=null):
+	trans_img.rotation = PI
+	trans_img.position.y = -1000
+	get_tree().create_tween().tween_property(trans_img,
+		"position",
+		mid_pos,
+		1.
+	).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	await get_tree().create_timer(.5).timeout
+	if end_func:
+		end_func.call()

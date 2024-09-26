@@ -8,14 +8,9 @@ func _on_gui_input(event):
 		%SFX.play_sound("click")
 		parent.set_can_interact(false)
 		parent.tween(%Music, "volume_db", -100, .0, .5, Tween.EASE_IN)  # ease out music
-		parent.trans_img.rotation = PI
-		parent.trans_img.position.y = -1000
-		parent.tween(parent.trans_img,
-			"position",
+		
+		Globals.perform_closing_transition(
+			parent.trans_img, 
 			parent.bg.position + (parent.bg.size * parent.bg.scale) * .5,
-			0.,
-			1.
+			parent.load_main_scene
 		)
-		# load main scene after .5 seconds
-		await get_tree().create_timer(.5).timeout
-		parent.load_main_scene()

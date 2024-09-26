@@ -176,6 +176,11 @@ func damage_water(amount) -> void:
 	water_changed.emit()
 
 
+func set_to_adult():
+	life_stage = LifeStage.ADULT if life_stage != 1 else 0
+	update_sprite()
+
+
 func save() -> Dictionary:
 	return {
 		"water": water, "food": food, "fun": fun, "hp": hp,
