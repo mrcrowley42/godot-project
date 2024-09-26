@@ -9,3 +9,4 @@ category = 1
 source = "The internet"
 fact = "FACT 5 "
 unlocked = false
+hint = "Play Totris"
