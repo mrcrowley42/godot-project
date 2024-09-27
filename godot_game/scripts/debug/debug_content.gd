@@ -124,15 +124,20 @@ func _on_unlock_button_button_down() -> void:
 	var fact_list = []
 	var facts = load("res://resources/fact_list.tres").facts
 	for item in facts:
-		item_list.append(str(ResourceLoader.get_resource_uid(item.resource_path)))
+		fact_list.append(str(ResourceLoader.get_resource_uid(item.resource_path)))
 		
 	DataGlobals.metadata_to_add[DataGlobals.UNLOCKED_FACTS] = fact_list
 	DataGlobals.save_only_metadata()
 	
-	print(DataGlobals.load_metadata()['unlocked_facts'])
+	
+	## need a generic unlock for items and then just iterate it for above 
 	
 	# Rerender buttons
-	cosmetic_btns.update_buttons()
+	
+	cosmetic_btns.update_buttons() # Need a version for the facts for this
+	# obviously will fail if they're not there so need to check that first.
+
+## need something better for below
 
 	# NOTIFICATIONS AFTER UPDATING THE LIST OF UNLOCKED STUFF
 
