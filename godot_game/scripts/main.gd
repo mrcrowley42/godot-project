@@ -30,37 +30,19 @@ func _ready():
 	debug_window.visible = debug_mode
 	if not debug_mode:
 		debug_window.process_mode = Node.PROCESS_MODE_DISABLED
+	
+	# force this function to run since load() isn't called
+	if DataGlobals.has_only_metadata():
+		%Creature.setup_creature()
 
 	# do last
-	perform_opening_transition()
+	var ui_overlay: Sprite2D = find_child("UI_Overlay")
+	var trans_img: Sprite2D = find_child("Transition")
+	set_is_in_trans(true)
+	Globals.perform_opening_transition(trans_img, ui_overlay.position, set_is_in_trans.bind(false))
 
 func set_is_in_trans(value: bool):
 	is_in_transition = value
-
-func perform_opening_transition():
-	var ui_overlay: Sprite2D = find_child("UI_Overlay")
-	var trans_img: Sprite2D = find_child("Transition")
-	trans_img.rotation = 0
-	trans_img.position = ui_overlay.position
-	get_tree().create_tween().tween_property(trans_img, "position", trans_img.position + Vector2(0, 1000), 1.5)\
-		.set_trans(Tween.TRANS_EXPO)\
-		.set_ease(Tween.EASE_OUT)\
-		.set_delay(.3).connect("finished", set_is_in_trans.bind(false))
-
-func perform_closing_transition(func_to_call):
-	if !is_in_transition:
-		set_is_in_trans(true)
-		var ui_overlay: Sprite2D = find_child("UI_Overlay")
-		var trans_img: Sprite2D = find_child("Transition")
-		trans_img.rotation = PI
-		trans_img.position.y = -1000
-		get_tree().create_tween().tween_property(trans_img,
-			"position",
-			ui_overlay.position,
-			1.
-		).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
-		await get_tree().create_timer(.5).timeout
-		func_to_call.call()
 
 ## temp print to console
 func calc_elapsed_time():
@@ -85,21 +67,25 @@ func _on_save_pressed():
 
 ## finilise & save data before closure
 func _notification(noti):
+	# close game
 	if noti == NOTIFICATION_WM_CLOSE_REQUEST:
 		minigame_man.finalise_save_data()  # call before saving
 		DataGlobals.save_data()
-
-	if noti == Globals.NOFITICATION_GROW_TO_ADULT_SCENE:
-		var p = func(): print("done")
-		await perform_closing_transition(p)
-		var creature: Creature = find_child("Creature")
-		creature.life_stage = Creature.LifeStage.ADULT if creature.life_stage != 1 else 0
-		creature.update_sprite()
-		perform_opening_transition()
-
+	
+	# grow up
+	if noti == Globals.NOFITICATION_GROW_TO_ADULT_SCENE and not is_in_transition:
+		if not is_in_transition:
+			set_is_in_trans(true)
+			DataGlobals.save_data()  # important!
+			Globals.general_dict["current_cosmetics"] = %Creature.get_current_cosmetics()
+			Globals.general_dict["loaded_cosmetics"] = %Creature.get_loaded_cosmetics()
+			var ui_overlay: Sprite2D = find_child("UI_Overlay")
+			var trans_img: Sprite2D = find_child("Transition")
+			await Globals.perform_closing_transition(trans_img, ui_overlay.position)
+			Globals.change_to_scene("res://scenes/GameScenes/grow_up_to_adult.tscn")
 
 func _input(event) -> void:
 	# close when [param esc key] is pressed
 	if event.is_action_pressed("ui_cancel"):
-		get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
+		Globals.send_notification(NOTIFICATION_WM_CLOSE_REQUEST)
 		get_tree().quit()

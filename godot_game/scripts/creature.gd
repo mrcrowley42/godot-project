@@ -3,42 +3,43 @@
 ## Creature base class.
 class_name Creature extends Node2D
 
-## A Reference to the main sprite so it can be manipulated
-@onready var main_sprite = %Main
-
-var creature_type: CreatureType = load("res://resources/creatures/main_creature.tres")
-
-## Colour to tint creature as HP approaches 0.
-@export var dying_colour: Color;
-var max_hp: float = creature_type.max_hp
-var max_water: float = creature_type.max_water
-var max_food: float = creature_type.max_food
-var max_fun: float = creature_type.max_fun
-## XP required for the creature to reach the [param ADULT] [param LifeStage] stage
-var xp_required: float
-@export var clippy_area: Node
-@export var xp_mulitplier: float = 1.0
-
-const dislike_multiplier: float = 0.5
-const like_multiplier: float = 2.0
-
 # ENUMS
 enum FoodItem {NEUTRAL, TOAST, CHIPS, FRUIT}
 enum LifeStage {CHILD, ADULT}
 enum Stat {HP, WATER, FOOD, FUN}
 
+const dislike_multiplier: float = 0.5
+const like_multiplier: float = 2.0
+
+
+## A Reference to the main sprite so it can be manipulated
+@onready var main_sprite = %Main
+@export var dying_colour: Color;
+@export var clippy_area: Node
+@export var xp_mulitplier: float = 1.0
+
+
+## XP required for the creature to reach the [param ADULT] [param LifeStage] stage
+var xp_required: float
+var creature_type: CreatureType
+var creature: CreatureTypePart
 
 # CREATURE STATS VARIABLES
-var hp: float = max_hp
-var water: float = max_water
-var food: float = max_food
-var fun: float = max_fun
+var max_hp: float
+var max_water: float
+var max_food: float
+var max_fun: float
+var hp: float
+var water: float
+var food: float
+var fun: float
+
 var xp: float = 0
 var is_ready_to_grow_up: bool = false
 var life_stage: LifeStage
-var likes: Array = creature_type.likes
-var dislikes: Array = creature_type.dislikes
-var creature_name: String = creature_type.name
+var likes: Array
+var dislikes: Array
+var creature_name: String
 
 # SIGNALS
 signal hp_changed()
@@ -49,50 +50,48 @@ signal xp_changed()
 signal ready_to_grow_up()
 signal finished_loading()
 
-var loaded: bool = false
-
 ## Map of shorthand strings to corresponding damage function
 var stats: Dictionary = {Stat.HP: damage_hp, Stat.FUN: damage_fun,
 	Stat.WATER: damage_water, Stat.FOOD: damage_food}
 
 
 func _ready() -> void:
+	finished_loading.connect(setup_creature)
+
+func setup_creature():
 	var uid = int(DataGlobals.metadata_last_loaded[DataGlobals.CURRENT_CREATURE])
 	creature_type = load(ResourceUID.get_id_path(uid))
-	main_sprite.animation = "idle"
-	set_up_default_values()
-
-	# Using a singal to wait for load to fjnish so that life stage is correct
-	# for when updating sprite, also because transitioning to main scene from egg scene
-	# doesn't trigger the load method, we force it to update.
-	finished_loading.connect(update_sprite)
-	if not loaded:
-		update_sprite()
-
+	creature = creature_type.baby if life_stage == LifeStage.CHILD else creature_type.adult
+	setup_default_values()
+	setup_main_sprite()
+	Globals.send_notification(Globals.NOTIFICATION_CREATURE_IS_LOADED)
 
 ## Update the [param sprite_frames] of the current creature based on the current [param life_stage]
-func update_sprite() -> void:
-	if life_stage == LifeStage.CHILD:
-		main_sprite.sprite_frames = creature_type.baby_sprite_frames
-	else:
-		main_sprite.sprite_frames = creature_type.adult_sprite_frames
+func setup_main_sprite() -> void:
+	main_sprite.sprite_frames = creature.sprite_frames
+	main_sprite.animation = "idle"
 	main_sprite.play()
 
+func setup_default_values():
+	max_hp = creature.max_hp
+	max_food = creature.max_food
+	max_fun = creature.max_fun
+	max_water = creature.max_water
 
-func set_up_default_values():
-	max_hp = creature_type.max_hp
-	max_food = creature_type.max_food
-	max_fun = creature_type.max_fun
-	max_water = creature_type.max_water
-
-	likes = creature_type.likes
-	dislikes = creature_type.dislikes
+	likes = creature.likes
+	dislikes = creature.dislikes
 	creature_name = creature_type.name
 
 	hp = max_hp
 	food = max_food
 	fun = max_fun
 	water = max_water
+	xp_required = creature_type.xp_required_for_adult
+	
+	hp_changed.emit()
+	food_changed.emit()
+	fun_changed.emit()
+	water_changed.emit()
 
 
 ## Add the specified [param amount] to the creature's existing xp.
@@ -176,17 +175,28 @@ func damage_water(amount) -> void:
 	water_changed.emit()
 
 
+func set_to_adult():
+	life_stage = LifeStage.ADULT
+	is_ready_to_grow_up = false
+	setup_creature()
+
+func get_current_cosmetics():
+	return %AccessoryManager.current_cosmetics
+
+func get_loaded_cosmetics():
+	return %AccessoryManager.unlockables_dict
+
 func save() -> Dictionary:
 	return {
 		"water": water, "food": food, "fun": fun, "hp": hp,
 		"xp": xp, "is_ready_to_grow_up": is_ready_to_grow_up,
-		 "life_stage": life_stage
+		"life_stage": life_stage
 	}
 
 
 func load(data) -> void:
-	var prop_list = ["water", "fun", "food", "hp", "xp", "is_ready_to_grow_up"
-					, "life_stage"]
+	var prop_list = ["water", "fun", "food", "hp", "xp", 
+					"is_ready_to_grow_up", "life_stage"]
 
 	for property in prop_list:
 		if data.has(property):
@@ -195,10 +205,13 @@ func load(data) -> void:
 			var signal_name = property + "_changed"
 			if self.has_signal(signal_name):
 				self[signal_name].emit()
+	
+	if Globals.general_dict.has("is_now_adult"):
+		Globals.general_dict.erase("is_now_adult")
+		life_stage = LifeStage.ADULT
 
-	if is_ready_to_grow_up:
+	if is_ready_to_grow_up and life_stage == LifeStage.CHILD:
 		ready_to_grow_up.emit()
 
 	apply_dmg_tint()
 	finished_loading.emit()
-	loaded = true
