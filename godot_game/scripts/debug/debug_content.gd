@@ -107,6 +107,9 @@ func _on_wipe_nodes_btn_button_down() -> void:
 
 
 func _on_unlock_button_button_down() -> void:
+	
+	## COSMETICS UNLOCK ALL
+	
 	var uid_dict: Dictionary = {}
 	var unlocked_items = DataGlobals.load_metadata()['unlocked_cosmetics']
 	var unlockables = load("res://resources/unlockables.tres").unlockables
@@ -122,7 +125,7 @@ func _on_unlock_button_button_down() -> void:
 	DataGlobals.metadata_to_add[DataGlobals.UNLOCKED_COSMETICS] = item_list
 	DataGlobals.save_only_metadata()
 
-
+#### FACTS UNLOCK ALL
 #### --------------------------------------------------
 
 	var fact_list = []
@@ -136,14 +139,12 @@ func _on_unlock_button_button_down() -> void:
 
 	## need a generic unlock for items and then just iterate it for above
 
-	# Rerender buttons
-	
-	cosmetic_btns.update_buttons() # Need a version for the facts for this
+	# Rerender unlockable item buttons
+	cosmetic_btns.update_buttons()
 	facts_menu.propagate_call("update_locked")
-	# obviously will fail if they're not there so need to check that first.
 
-## need something better for below
-
+	# ONLY FOR COSMETICS ATM 
+	
 	# NOTIFICATIONS AFTER UPDATING THE LIST OF UNLOCKED STUFF
 
 	for item in DataGlobals.load_metadata()['unlocked_cosmetics']:
