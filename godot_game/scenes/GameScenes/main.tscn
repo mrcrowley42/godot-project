@@ -1,4 +1,4 @@
-[gd_scene load_steps=116 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=117 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_aqytd"]
@@ -79,6 +79,7 @@
 [ext_resource type="AudioStream" uid="uid://cx28efsxtr7c" path="res://sound_effects/button_click_fast.mp3" id="67_nfa6o"]
 [ext_resource type="AudioStream" uid="uid://dat0sfue6jjr5" path="res://sound_effects/metal-pipe-falling-sound-effect-made-with-Voicemod.mp3" id="68_dnpii"]
 [ext_resource type="Script" path="res://scripts/popup_manager.gd" id="69_rkm2b"]
+[ext_resource type="Script" path="res://scripts/sound_scape_manager.gd" id="80_83777"]
 
 [sub_resource type="Gradient" id="Gradient_jl3ct"]
 offsets = PackedFloat32Array(0, 0.175676, 0.3, 0.4, 0.5, 0.635135, 0.7, 0.765766, 0.828829, 1)
@@ -2066,6 +2067,9 @@ stream = ExtResource("68_dnpii")
 volume_db = 8.0
 max_polyphony = 2
 bus = &"SFX"
+
+[node name="AmbienceManager" type="Node" parent="." groups=["settings_data"]]
+script = ExtResource("80_83777")
 
 [connection signal="tree_exiting" from="MinigameManager" to="MinigameManager" method="_on_tree_exiting"]
 [connection signal="timeout" from="Gameplay/Background/bg_update_ticker" to="Gameplay/Background" method="_on_bg_update_ticker_timeout"]
