@@ -79,10 +79,8 @@ func _on_h_slider_2_value_changed(value) -> void:
 
 
 func _on_check_box_toggled(toggled_on) -> void:
-	if toggled_on:
-		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
-	else:
-		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+	var vsync = DisplayServer.VSYNC_DISABLED if toggled_on else DisplayServer.VSYNC_ENABLED
+	DisplayServer.window_set_vsync_mode(vsync)
 
 
 func _on_notif_btn_button_down() -> void:
@@ -103,7 +101,8 @@ func _on_wipe_nodes_btn_button_down() -> void:
 	get_tree().quit()
 	
 	
-#func unlock_item():
+func unlock_fact(fact: Fact) -> void:
+	pass
 
 
 func _on_unlock_button_button_down() -> void:
