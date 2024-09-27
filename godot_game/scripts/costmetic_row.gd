@@ -1,5 +1,8 @@
 extends GridContainer
 
+@warning_ignore("unused_signal")  # shut up
+signal cosmetic_btn_pressed
+
 const BTN_SIZE: Vector2 = Vector2(64, 64)
 
 var unlockables = load("res://resources/unlockables.tres")
@@ -20,9 +23,11 @@ class UnlockableIcon extends Button:
 
 	## Action when button is pressed.
 	func _pressed():
-		var creature: Creature = find_parent("CosmeticItems").creature
+		var parent = find_parent("CosmeticItems")
+		var creature: Creature = parent.creature
 		var manager: AccessoryManager = creature.find_child("AccessoryManager")
 		manager.toggle_cosmetic(self.cosmetic)
+		parent.cosmetic_btn_pressed.emit()
 
 	func update_locked():
 		var unlocked_items = DataGlobals.load_metadata()['unlocked_cosmetics']

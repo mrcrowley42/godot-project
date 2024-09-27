@@ -13,6 +13,7 @@ const like_multiplier: float = 2.0
 
 
 ## A Reference to the main sprite so it can be manipulated
+@onready var accessory_manager: AccessoryManager = find_child("AccessoryManager")
 @onready var main_sprite = %Main
 @export var dying_colour: Color;
 @export var clippy_area: Node

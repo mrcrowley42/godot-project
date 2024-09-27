@@ -50,7 +50,6 @@
 [ext_resource type="Texture2D" uid="uid://cawudmxbjamv0" path="res://UI stuff/Green Palette/ui_green.png" id="40_wt18k"]
 [ext_resource type="Texture2D" uid="uid://c702pbhxasm52" path="res://icons/status/heart-fill.svg" id="41_8adaw"]
 [ext_resource type="Script" path="res://scripts/costmetic_row.gd" id="41_pook7"]
-[ext_resource type="Texture2D" uid="uid://b30byopy2beum" path="res://images/creature_sprites/correct_scale/chill-1.png" id="42_828ml"]
 [ext_resource type="Theme" uid="uid://bqu43buo5gcrc" path="res://themes/vcr_font.tres" id="42_c1jtf"]
 [ext_resource type="Script" path="res://scripts/hp_bar.gd" id="42_ccntj"]
 [ext_resource type="Texture2D" uid="uid://d84hj0mtn2hw" path="res://icons/status/mood_24dp_FILL1_wght300_GRAD0_opsz24.svg" id="43_qa2jm"]
@@ -61,6 +60,7 @@
 [ext_resource type="Texture2D" uid="uid://cuaa2uyffvita" path="res://icons/status/droplet-fill.svg" id="47_qik1j"]
 [ext_resource type="Script" path="res://scripts/water_bar.gd" id="48_4mvbm"]
 [ext_resource type="Texture2D" uid="uid://d4c1k5m8u1jc0" path="res://UI stuff/Green Palette/green_food_button.png" id="49_a77pc"]
+[ext_resource type="Script" path="res://scripts/cosmetics_preview.gd" id="49_p7hc5"]
 [ext_resource type="Script" path="res://scripts/nav_button.gd" id="50_0qet7"]
 [ext_resource type="Texture2D" uid="uid://drv50ynifh37j" path="res://UI stuff/Green Palette/green_activities_button.png" id="51_7kyvm"]
 [ext_resource type="Texture2D" uid="uid://b5uf4jcvme855" path="res://UI stuff/Green Palette/green_settings_button.png" id="53_hpyyk"]
@@ -224,7 +224,6 @@ corner_detail = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cuoxy"]
 bg_color = Color(0.162066, 0.162066, 0.162066, 1)
-draw_center = false
 border_color = Color(0.8, 0.8, 0.8, 0.411765)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2rfxe"]
@@ -1293,7 +1292,6 @@ metadata/_edit_use_anchors_ = true
 [node name="OptionsMenu" type="PanelContainer" parent="UI"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1437,6 +1435,7 @@ text = ">"
 [node name="FactsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_cuoxy")
 script = ExtResource("32_jvqx8")
@@ -1526,7 +1525,6 @@ script = ExtResource("35_4io20")
 [node name="AppearanceMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_cuoxy")
 script = ExtResource("32_jvqx8")
@@ -1569,72 +1567,15 @@ columns = 5
 script = ExtResource("41_pook7")
 creature = NodePath("../../../../../../../../Gameplay/Creature")
 
-[node name="Button" type="Button" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-text = "A"
-
-[node name="Button2" type="Button" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-text = "A"
-
-[node name="Button3" type="Button" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-text = "A"
-
-[node name="Button4" type="Button" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-text = "A"
-
-[node name="Button5" type="Button" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-text = "A"
-
-[node name="Button6" type="Button" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-text = "A"
-
-[node name="Button7" type="Button" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-text = "A"
-
-[node name="Button20" type="Button" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-text = "A"
-
-[node name="Button8" type="Button" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-text = "A"
-
-[node name="Button9" type="Button" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-text = "A"
-
-[node name="Button21" type="Button" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-text = "A"
-
 [node name="PreviewContainer" type="MarginContainer" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="MainSprite" type="TextureRect" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/PreviewContainer"]
-layout_mode = 2
-texture = ExtResource("42_828ml")
-expand_mode = 5
-stretch_mode = 5
+[node name="CreaturePreview" type="AnimatedSprite2D" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/PreviewContainer"]
+scale = Vector2(0.15, 0.15)
+script = ExtResource("49_p7hc5")
 
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/AppearanceMenu"]
 position = Vector2(-50, -130)
@@ -2186,6 +2127,7 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/OptionsMenu/GameplayOptionsMenu/ThemeControls/vHBoxContainer/Button2" to="UI/OptionsMenu/GameplayOptionsMenu/ThemeControls" method="_on_back_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/GameplayOptionsMenu/ThemeControls/vHBoxContainer/Button" to="UI/OptionsMenu/GameplayOptionsMenu/ThemeControls" method="_on_forward_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/FactsMenu/Library/SaveButtons/Cancel" to="UI/OptionsMenu/FactsMenu/Library/SaveButtons/Cancel" method="_on_button_down"]
+[connection signal="cosmetic_btn_pressed" from="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems" to="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/PreviewContainer/CreaturePreview" method="_on_cosmetic_items_cosmetic_btn_pressed"]
 [connection signal="visibility_changed" from="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems" to="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems" method="_on_visibility_changed"]
 [connection signal="pressed" from="UI/OptionsMenu/AppearanceMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
 [connection signal="button_down" from="UI/OptionsMenu/AppearanceMenu/SaveButtons/Cancel" to="UI/OptionsMenu/AppearanceMenu/SaveButtons/Cancel" method="_on_button_down"]

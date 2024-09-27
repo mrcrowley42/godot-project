@@ -17,6 +17,7 @@ const NOTIFICATION_TOTRIS_CLOSED = 501
 
 const NOFITICATION_GROW_TO_ADULT_SCENE = 502
 const NOTIFICATION_CREATURE_IS_LOADED = 503
+const NOTIFICATION_CREATURE_ACCESSORIES_ARE_LOADED = 504
 
 
 ## for use when passing data between scenes
@@ -26,7 +27,7 @@ var general_dict: Dictionary = {}
 
 ## general helper functions
 func change_to_scene(scene_path: String):
-	await get_tree().process_frame
+	await get_tree().process_frame  # important
 	get_tree().change_scene_to_file(scene_path)
 
 func send_notification(noti: int):

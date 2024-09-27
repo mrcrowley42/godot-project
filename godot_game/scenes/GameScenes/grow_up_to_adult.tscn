@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://nt0d2yx4ub2w"]
+[gd_scene load_steps=14 format=3 uid="uid://cx2gycrxks36j"]
 
 [ext_resource type="Script" path="res://scripts/MainGameScripts/grow_up_to_adult.gd" id="1_mprwa"]
 [ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="2_do0fl"]

@@ -32,7 +32,7 @@ func _notification(noti: int) -> void:
 			set_ready()
 
 
-## we wait for both creature to load and for this to load
+## we wait for both creature to load and for this to load before placing cosmetics
 func set_ready():
 	if ready_to_place_cosmetics:
 		place_all_cosmetics()
@@ -44,9 +44,10 @@ func place_all_cosmetics():
 		position_dict[item.item] = item.position
 	
 	# place cosmetics on creature
-	print(current_cosmetics)
 	for cosmetic in current_cosmetics:
 		place_cosmetic(unlockables_dict[cosmetic])
+	
+	Globals.send_notification(Globals.NOTIFICATION_CREATURE_ACCESSORIES_ARE_LOADED)
 
 
 func place_cosmetic(cosmetic: CosmeticItem):

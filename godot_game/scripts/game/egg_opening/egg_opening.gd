@@ -488,8 +488,11 @@ func fade(obj, fade_in: bool = true, delay: float = 0.):
 func tween_sprite_to_goal(goal: Vector2, scale_goal: Vector2 = BASE_SELECTED_EGG_SCALE, end_selection: bool = false):
 	var end_movement = func(sp: Control):
 		move_buffers.clear()
-		de_select_egg() if end_selection else manual_mouse_check(sp)
-
+		if end_selection:
+			de_select_egg()
+		else:
+			manual_mouse_check(sp)
+	
 	# scale down
 	scale_egg(selected_egg_inx, SMALL_EGG_SCALE, .2)
 
