@@ -30,6 +30,10 @@ func _ready():
 	debug_window.visible = debug_mode
 	if not debug_mode:
 		debug_window.process_mode = Node.PROCESS_MODE_DISABLED
+	
+	# force this function to run since load() isn't called
+	if DataGlobals.has_only_metadata():
+		%Creature.setup_creature()
 
 	# do last
 	var ui_overlay: Sprite2D = find_child("UI_Overlay")
@@ -72,14 +76,13 @@ func _notification(noti):
 	if noti == Globals.NOFITICATION_GROW_TO_ADULT_SCENE and not is_in_transition:
 		if not is_in_transition:
 			set_is_in_trans(true)
+			DataGlobals.save_data()  # important!
 			Globals.general_dict["current_cosmetics"] = %Creature.get_current_cosmetics()
 			Globals.general_dict["loaded_cosmetics"] = %Creature.get_loaded_cosmetics()
 			var ui_overlay: Sprite2D = find_child("UI_Overlay")
 			var trans_img: Sprite2D = find_child("Transition")
 			await Globals.perform_closing_transition(trans_img, ui_overlay.position)
-			await get_tree().process_frame
-			get_tree().change_scene_to_file("res://scenes/GameScenes/grow_up_to_adult.tscn")
-
+			Globals.change_to_scene("res://scenes/GameScenes/grow_up_to_adult.tscn")
 
 func _input(event) -> void:
 	# close when [param esc key] is pressed

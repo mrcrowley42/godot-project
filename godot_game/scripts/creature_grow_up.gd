@@ -35,7 +35,10 @@ func _ready() -> void:
 		adult_position_dict[item.item] = item.position
 	
 	current_cosmetics = Globals.general_dict["current_cosmetics"]
+	Globals.general_dict.erase("current_cosmetics")
 	loaded_cosmetics = Globals.general_dict["loaded_cosmetics"]
+	Globals.general_dict.erase("loaded_cosmetics")
+	
 	for item in current_cosmetics:
 		add_cosmetic(loaded_cosmetics[item])
 	

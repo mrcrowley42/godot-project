@@ -5,9 +5,11 @@ class_name AccessoryManager extends ScriptNode
 @onready var creature = find_parent("Creature")
 @onready var unlockables = load("res://resources/unlockables.tres").unlockables
 
-var current_cosmetics: Array[String]
+var current_cosmetics: Array
 var position_dict: Dictionary
 var unlockables_dict: Dictionary
+
+var ready_to_place_cosmetics: bool = false
 
 ## Class to define a cosmetic as it appears in game.
 class CosmeticSprite extends AnimatedSprite2D:
@@ -23,24 +25,44 @@ func _ready() -> void:
 		unlockables_dict[item.name] = item
 
 func _notification(noti: int) -> void:
-	# Build dictionary for each cosmetic items appropriate position for the current creature.
-	# TODO may need to regenerate this for differnet lifestages or add a second set of positions for an adult?
 	if noti == Globals.NOTIFICATION_CREATURE_IS_LOADED:
-		for item in find_parent("Creature").creature.cosmetic_positions:
-			position_dict[item.item] = item.position
+		if DataGlobals.has_only_metadata():
+			place_all_cosmetics()
+		else:
+			set_ready()
 
+
+## we wait for both creature to load and for this to load
+func set_ready():
+	if ready_to_place_cosmetics:
+		place_all_cosmetics()
+	ready_to_place_cosmetics = true
+
+func place_all_cosmetics():
+	# Build dictionary for each cosmetic items appropriate position for the current creature
+	for item in find_parent("Creature").creature.cosmetic_positions:
+		position_dict[item.item] = item.position
+	
+	# place cosmetics on creature
+	print(current_cosmetics)
+	for cosmetic in current_cosmetics:
+		place_cosmetic(unlockables_dict[cosmetic])
+
+
+func place_cosmetic(cosmetic: CosmeticItem):
+	var new_sprite = CosmeticSprite.new(cosmetic)
+	new_sprite.name = cosmetic.name
+	new_sprite.position = position_dict[cosmetic]
+	add_child(new_sprite, true)
+	# Should maintain sync with main sprite
+	await %Main.frame_changed
+	new_sprite.play()
 
 ## If the passed cosmetic item isn't already in the scene, and add it, at the location set
 ## for the current creature. If it does exist, remove that instance.
 func toggle_cosmetic(cosmetic: CosmeticItem) -> void:
 	if cosmetic.name not in current_cosmetics:
-		var new_sprite = CosmeticSprite.new(cosmetic)
-		new_sprite.name = cosmetic.name
-		new_sprite.position = position_dict[cosmetic]
-		add_child(new_sprite, true)
-		# Should maintain sync with main sprite
-		await %Main.frame_changed
-		new_sprite.play()
+		place_cosmetic(cosmetic)
 		current_cosmetics.append(cosmetic.name)
 	else:
 		# this is ridiculous
@@ -62,5 +84,5 @@ func save() -> Dictionary:
 
 func load(data) -> void:
 	if data.has("current_cosmetics"):
-		for item in data["current_cosmetics"]:
-			toggle_cosmetic(unlockables_dict[item])
+		current_cosmetics = data["current_cosmetics"]
+	set_ready()

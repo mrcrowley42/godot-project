@@ -50,34 +50,27 @@ signal xp_changed()
 signal ready_to_grow_up()
 signal finished_loading()
 
-var loaded: bool = false
-
 ## Map of shorthand strings to corresponding damage function
 var stats: Dictionary = {Stat.HP: damage_hp, Stat.FUN: damage_fun,
 	Stat.WATER: damage_water, Stat.FOOD: damage_food}
 
 
 func _ready() -> void:
+	finished_loading.connect(setup_creature)
+
+func setup_creature():
 	var uid = int(DataGlobals.metadata_last_loaded[DataGlobals.CURRENT_CREATURE])
 	creature_type = load(ResourceUID.get_id_path(uid))
 	creature = creature_type.baby if life_stage == LifeStage.CHILD else creature_type.adult
 	setup_default_values()
-
-	# Using a singal to wait for load to fjnish so that life stage is correct
-	# for when updating sprite, also because transitioning to main scene from egg scene
-	# doesn't trigger the load method, we force it to update.
-	finished_loading.connect(setup_main_sprite)
-	if not loaded:
-		setup_main_sprite()
+	setup_main_sprite()
 	Globals.send_notification(Globals.NOTIFICATION_CREATURE_IS_LOADED)
-
 
 ## Update the [param sprite_frames] of the current creature based on the current [param life_stage]
 func setup_main_sprite() -> void:
 	main_sprite.sprite_frames = creature.sprite_frames
 	main_sprite.animation = "idle"
 	main_sprite.play()
-
 
 func setup_default_values():
 	max_hp = creature.max_hp
@@ -94,6 +87,11 @@ func setup_default_values():
 	fun = max_fun
 	water = max_water
 	xp_required = creature_type.xp_required_for_adult
+	
+	hp_changed.emit()
+	food_changed.emit()
+	fun_changed.emit()
+	water_changed.emit()
 
 
 ## Add the specified [param amount] to the creature's existing xp.
@@ -178,10 +176,9 @@ func damage_water(amount) -> void:
 
 
 func set_to_adult():
-	life_stage = LifeStage.ADULT if life_stage != 1 else 0
-	creature = creature_type.adult
-	setup_main_sprite()
-	DataGlobals.save_only_metadata()
+	life_stage = LifeStage.ADULT
+	is_ready_to_grow_up = false
+	setup_creature()
 
 func get_current_cosmetics():
 	return %AccessoryManager.current_cosmetics
@@ -193,13 +190,13 @@ func save() -> Dictionary:
 	return {
 		"water": water, "food": food, "fun": fun, "hp": hp,
 		"xp": xp, "is_ready_to_grow_up": is_ready_to_grow_up,
-		 "life_stage": life_stage
+		"life_stage": life_stage
 	}
 
 
 func load(data) -> void:
-	var prop_list = ["water", "fun", "food", "hp", "xp", "is_ready_to_grow_up"
-					, "life_stage"]
+	var prop_list = ["water", "fun", "food", "hp", "xp", 
+					"is_ready_to_grow_up", "life_stage"]
 
 	for property in prop_list:
 		if data.has(property):
@@ -208,10 +205,13 @@ func load(data) -> void:
 			var signal_name = property + "_changed"
 			if self.has_signal(signal_name):
 				self[signal_name].emit()
+	
+	if Globals.general_dict.has("is_now_adult"):
+		Globals.general_dict.erase("is_now_adult")
+		life_stage = LifeStage.ADULT
 
-	if is_ready_to_grow_up:
+	if is_ready_to_grow_up and life_stage == LifeStage.CHILD:
 		ready_to_grow_up.emit()
 
 	apply_dmg_tint()
 	finished_loading.emit()
-	loaded = true

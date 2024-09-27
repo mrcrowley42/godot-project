@@ -94,8 +94,7 @@ func _ready():
 	do_opening_transition()
 
 func load_main_scene():
-	await get_tree().process_frame
-	get_tree().change_scene_to_file("res://scenes/GameScenes/main.tscn")
+	Globals.change_to_scene("res://scenes/GameScenes/main.tscn")
 
 func do_opening_transition():
 	Globals.perform_opening_transition(trans_img, bg.position + (bg.size * bg.scale) * .5)

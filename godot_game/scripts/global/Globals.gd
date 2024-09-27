@@ -20,10 +20,15 @@ const NOTIFICATION_CREATURE_IS_LOADED = 503
 
 
 ## for use when passing data between scenes
-var general_dict = {}
+# please use .erase() after extracting items to keep everything clean
+var general_dict: Dictionary = {}
 
 
 ## general helper functions
+func change_to_scene(scene_path: String):
+	await get_tree().process_frame
+	get_tree().change_scene_to_file(scene_path)
+
 func send_notification(noti: int):
 	get_tree().root.propagate_notification(noti)
 
