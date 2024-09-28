@@ -1,4 +1,4 @@
-[gd_scene load_steps=117 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=114 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_aqytd"]
@@ -51,14 +51,10 @@
 [ext_resource type="Texture2D" uid="uid://c702pbhxasm52" path="res://icons/status/heart-fill.svg" id="41_8adaw"]
 [ext_resource type="Script" path="res://scripts/costmetic_row.gd" id="41_pook7"]
 [ext_resource type="Theme" uid="uid://bqu43buo5gcrc" path="res://themes/vcr_font.tres" id="42_c1jtf"]
-[ext_resource type="Script" path="res://scripts/hp_bar.gd" id="42_ccntj"]
 [ext_resource type="Texture2D" uid="uid://d84hj0mtn2hw" path="res://icons/status/mood_24dp_FILL1_wght300_GRAD0_opsz24.svg" id="43_qa2jm"]
-[ext_resource type="Script" path="res://scripts/fun_bar.gd" id="44_8jtdq"]
 [ext_resource type="PackedScene" uid="uid://dyapnl5xgvivn" path="res://scenes/UiScenes/topic_btn.tscn" id="44_y5a0d"]
 [ext_resource type="Texture2D" uid="uid://p0oo42fr5wrp" path="res://icons/status/lunch_dining_24dp_8B1A10_FILL0_wght500_GRAD0_opsz24-svg.svg" id="45_3duvs"]
-[ext_resource type="Script" path="res://scripts/food_bar.gd" id="46_mkvi1"]
 [ext_resource type="Texture2D" uid="uid://cuaa2uyffvita" path="res://icons/status/droplet-fill.svg" id="47_qik1j"]
-[ext_resource type="Script" path="res://scripts/water_bar.gd" id="48_4mvbm"]
 [ext_resource type="Texture2D" uid="uid://d4c1k5m8u1jc0" path="res://UI stuff/Green Palette/green_food_button.png" id="49_a77pc"]
 [ext_resource type="Script" path="res://scripts/cosmetics_preview.gd" id="49_p7hc5"]
 [ext_resource type="Script" path="res://scripts/nav_button.gd" id="50_0qet7"]
@@ -67,6 +63,7 @@
 [ext_resource type="Script" path="res://scripts/setting_button.gd" id="54_5bu15"]
 [ext_resource type="PackedScene" uid="uid://b6wocr0vo5s4v" path="res://scenes/GameScenes/debug_content.tscn" id="55_0rbaa"]
 [ext_resource type="AudioStream" uid="uid://dcet1hpt70t42" path="res://music/perfection.mp3" id="56_0sjdm"]
+[ext_resource type="Script" path="res://scripts/stat_bar.gd" id="57_ani8q"]
 [ext_resource type="Script" path="res://scripts/music_manager.gd" id="57_dawf5"]
 [ext_resource type="AudioStream" uid="uid://dwmn4dqcd6k4i" path="res://music/02 Hollywood Main Theme.mp3" id="58_tbnki"]
 [ext_resource type="AudioStream" uid="uid://dshoi5g671o7m" path="res://music/25 - Pizza & Bowling.mp3" id="59_06aow"]
@@ -1917,7 +1914,8 @@ max_value = 1000.0
 step = 1.0
 value = 700.0
 show_percentage = false
-script = ExtResource("42_ccntj")
+script = ExtResource("57_ani8q")
+stat = "hp"
 
 [node name="Happiness" type="Control" parent="UI/StatsDisplay/MarginContainer/StatusContainer"]
 custom_minimum_size = Vector2(28, 0)
@@ -1940,7 +1938,8 @@ max_value = 1000.0
 step = 1.0
 value = 700.0
 show_percentage = false
-script = ExtResource("44_8jtdq")
+script = ExtResource("57_ani8q")
+stat = "fun"
 
 [node name="Burger" type="Control" parent="UI/StatsDisplay/MarginContainer/StatusContainer"]
 custom_minimum_size = Vector2(28, 0)
@@ -1965,7 +1964,8 @@ max_value = 1000.0
 step = 1.0
 value = 700.0
 show_percentage = false
-script = ExtResource("46_mkvi1")
+script = ExtResource("57_ani8q")
+stat = "food"
 
 [node name="Droplet" type="Control" parent="UI/StatsDisplay/MarginContainer/StatusContainer"]
 custom_minimum_size = Vector2(28, 0)
@@ -1989,7 +1989,8 @@ max_value = 1000.0
 step = 1.0
 value = 700.0
 show_percentage = false
-script = ExtResource("48_4mvbm")
+script = ExtResource("57_ani8q")
+stat = "water"
 
 [node name="NavigationButtons" type="HBoxContainer" parent="UI"]
 anchors_preset = 10
