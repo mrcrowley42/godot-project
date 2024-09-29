@@ -26,7 +26,7 @@ signal item_unlocked(details)
 var general_dict: Dictionary = {}
 
 
-## general helper functions
+# general helper functions
 func change_to_scene(scene_path: String):
 	await get_tree().process_frame  # important
 	get_tree().change_scene_to_file(scene_path)
@@ -56,11 +56,15 @@ func perform_closing_transition(trans_img: Sprite2D, mid_pos: Vector2, end_func=
 	if end_func:
 		end_func.call()
 
+
+## Unlocks the passed [param fact] resource
 func unlock_fact(fact: Fact) -> void:
-	# If fact is already in unlocked facts, do nothing.
+	# Ignore already unlocked facts
+	if fact.unlocked:
+		return
 	var fact_uid = Helpers.uid_str(fact)
 	var unlocked_facts = DataGlobals.load_metadata()['unlocked_facts']
-	if fact_uid in unlocked_facts or fact.unlocked:
+	if fact_uid in unlocked_facts:
 		return
 	# If fact isn't unlocked, add it to unlocked list.
 	DataGlobals.metadata_to_add[DataGlobals.UNLOCKED_FACTS] = [fact_uid]
@@ -70,11 +74,14 @@ func unlock_fact(fact: Fact) -> void:
 	item_unlocked.emit(message)
 
 
+## Unlocks the passed [param cosmetic] resource
 func unlock_cosmetic(cosmetic: CosmeticItem) -> void:
-	# If cosmetic is already in unlocked cosmetics, do nothing.
+	# Ignore already unlocked
+	if cosmetic.unlocked:
+		return
 	var cosmetic_uid = Helpers.uid_str(cosmetic)
 	var unlocked_cosmetics = DataGlobals.load_metadata()['unlocked_cosmetics']
-	if cosmetic_uid in unlocked_cosmetics or cosmetic.unlocked:
+	if cosmetic_uid in unlocked_cosmetics:
 		return
 	# If cosmetic isn't unlocked, add it to unlocked list.
 	DataGlobals.metadata_to_add[DataGlobals.UNLOCKED_COSMETICS] = [cosmetic_uid]
