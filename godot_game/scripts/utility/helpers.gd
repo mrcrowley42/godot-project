@@ -7,3 +7,7 @@ static func wrap_index(list: Array, current_index: int, offset: int) -> int:
 	if new_index < 0:
 		new_index = list.size() + new_index
 	return new_index
+
+## Returns the uid of a resource as a string.
+static func uid_str(resource: Resource) -> String:
+	return str(ResourceLoader.get_resource_uid(resource.resource_path))
