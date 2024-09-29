@@ -101,42 +101,14 @@ func _on_wipe_nodes_btn_button_down() -> void:
 	get_tree().quit()
 
 
-func unlock_fact(fact: Fact) -> void:
-	# If fact is already in unlocked facts, do nothing.
-	var fact_uid = Helpers.uid_str(fact)
-	var unlocked_facts = DataGlobals.load_metadata()['unlocked_facts']
-	if fact_uid in unlocked_facts or fact.unlocked:
-		return
-	# If fact isn't unlocked, add it to unlocked list.
-	DataGlobals.metadata_to_add[DataGlobals.UNLOCKED_FACTS] = [fact_uid]
-	DataGlobals.save_only_metadata()
-	# Display notification
-	var message = "%s Unlocked!" %[fact.title]
-	notif_man.new_notification(message)
-
-
-func unlock_cosmetic(cosmetic: CosmeticItem) -> void:
-	# If cosmetic is already in unlocked cosmetics, do nothing.
-	var cosmetic_uid = Helpers.uid_str(cosmetic)
-	var unlocked_cosmetics = DataGlobals.load_metadata()['unlocked_cosmetics']
-	if cosmetic_uid in unlocked_cosmetics or cosmetic.unlocked:
-		return
-	# If cosmetic isn't unlocked, add it to unlocked list.
-	DataGlobals.metadata_to_add[DataGlobals.UNLOCKED_COSMETICS] = [cosmetic_uid]
-	DataGlobals.save_only_metadata()
-	# Display notification
-	var message = "%s Unlocked!" %[cosmetic.name]
-	notif_man.new_notification(message)
-
-
 func _on_unlock_button_button_down() -> void:
 	# UNLOCK ALL COSMETICS
 	for cosmetic in load("res://resources/unlockables.tres").unlockables:
-		unlock_cosmetic(cosmetic)
+		Globals.unlock_cosmetic(cosmetic)
 
 	# UNLOCK ALL FACTS
 	for fact in load("res://resources/fact_list.tres").facts:
-		unlock_fact(fact)
+		Globals.unlock_fact(fact)
 
 	# Rerender unlockable item buttons
 	cosmetic_btns.update_buttons()

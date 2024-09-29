@@ -19,6 +19,7 @@ const NOFITICATION_GROW_TO_ADULT_SCENE = 502
 const NOTIFICATION_CREATURE_IS_LOADED = 503
 const NOTIFICATION_CREATURE_ACCESSORIES_ARE_LOADED = 504
 
+signal item_unlocked(details)
 
 ## for use when passing data between scenes
 # please use .erase() after extracting items to keep everything clean
@@ -54,3 +55,30 @@ func perform_closing_transition(trans_img: Sprite2D, mid_pos: Vector2, end_func=
 	await get_tree().create_timer(.5).timeout
 	if end_func:
 		end_func.call()
+
+func unlock_fact(fact: Fact) -> void:
+	# If fact is already in unlocked facts, do nothing.
+	var fact_uid = Helpers.uid_str(fact)
+	var unlocked_facts = DataGlobals.load_metadata()['unlocked_facts']
+	if fact_uid in unlocked_facts or fact.unlocked:
+		return
+	# If fact isn't unlocked, add it to unlocked list.
+	DataGlobals.metadata_to_add[DataGlobals.UNLOCKED_FACTS] = [fact_uid]
+	DataGlobals.save_only_metadata()
+	# Display notification
+	var message = "%s Unlocked!" %[fact.title]
+	item_unlocked.emit(message)
+
+
+func unlock_cosmetic(cosmetic: CosmeticItem) -> void:
+	# If cosmetic is already in unlocked cosmetics, do nothing.
+	var cosmetic_uid = Helpers.uid_str(cosmetic)
+	var unlocked_cosmetics = DataGlobals.load_metadata()['unlocked_cosmetics']
+	if cosmetic_uid in unlocked_cosmetics or cosmetic.unlocked:
+		return
+	# If cosmetic isn't unlocked, add it to unlocked list.
+	DataGlobals.metadata_to_add[DataGlobals.UNLOCKED_COSMETICS] = [cosmetic_uid]
+	DataGlobals.save_only_metadata()
+	# Display notification
+	var message = "%s Unlocked!" %[cosmetic.name]
+	item_unlocked.emit(message)
