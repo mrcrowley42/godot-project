@@ -17,7 +17,7 @@ class AmbientSound extends AudioStreamPlayer:
 			self.connect("finished", _on_finished)
 
 	func _on_finished() -> void:
-		#await get_tree().create_timer(1).timeout # Wait 1 second before looping again.
+		await get_tree().create_timer(1).timeout # Wait 1 second before looping again.
 		self.play()
 
 
