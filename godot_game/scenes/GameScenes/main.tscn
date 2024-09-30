@@ -220,7 +220,7 @@ corner_radius_bottom_left = 6
 corner_detail = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cuoxy"]
-bg_color = Color(0.162066, 0.162066, 0.162066, 1)
+bg_color = Color(0.176419, 0.176419, 0.176419, 1)
 border_color = Color(0.8, 0.8, 0.8, 0.411765)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2rfxe"]
@@ -438,7 +438,7 @@ script = ExtResource("12_n00c6")
 metadata/_edit_lock_ = true
 
 [node name="NotificationLayer" type="CanvasLayer" parent="."]
-layer = 0
+layer = 2
 
 [node name="NotificationManager" type="Node" parent="NotificationLayer"]
 unique_name_in_owner = true
@@ -1289,7 +1289,6 @@ metadata/_edit_use_anchors_ = true
 [node name="OptionsMenu" type="PanelContainer" parent="UI"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

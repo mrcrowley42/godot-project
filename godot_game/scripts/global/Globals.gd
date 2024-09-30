@@ -89,3 +89,13 @@ func unlock_cosmetic(cosmetic: CosmeticItem) -> void:
 	# Display notification
 	var message = "%s Unlocked!" %[cosmetic.name]
 	item_unlocked.emit(message)
+
+
+## generic tween function
+func tween(obj, prop, val, delay=0., time=2., _ease=Tween.EASE_OUT):
+	var t = get_tree().create_tween()
+	t.tween_property(obj, prop, val, time)\
+			.set_trans(Tween.TRANS_EXPO)\
+			.set_ease(_ease)\
+			.set_delay(delay)
+	return t
