@@ -1,4 +1,4 @@
-[gd_scene load_steps=114 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=110 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_aqytd"]
@@ -15,15 +15,11 @@
 [ext_resource type="Script" path="res://scripts/ui_theme_manager.gd" id="13_3i267"]
 [ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="14_fimo1"]
 [ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="14_k2ios"]
-[ext_resource type="Resource" uid="uid://bxhuu3qk52v3w" path="res://resources/ui_themes/green.tres" id="14_mb3dl"]
-[ext_resource type="Resource" uid="uid://vt3jd46rlq4h" path="res://resources/ui_themes/orange.tres" id="15_4uyfd"]
 [ext_resource type="Texture2D" uid="uid://do0i17klbrer7" path="res://icons/arrow-up-square.svg" id="15_8x1u0"]
-[ext_resource type="Resource" uid="uid://clen0bplq0q5d" path="res://resources/ui_themes/pink.tres" id="16_6dasc"]
 [ext_resource type="Script" path="res://scripts/grow_up_btn.gd" id="16_mj2i7"]
 [ext_resource type="Script" path="res://scripts/action_menu_panel.gd" id="17_wsydk"]
 [ext_resource type="Theme" uid="uid://1dv11a5ar0hg" path="res://themes/action_btn.tres" id="18_v1mb2"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="19_3grg3"]
-[ext_resource type="Script" path="res://scripts/base_classses/ui_theme_class.gd" id="19_42gny"]
 [ext_resource type="Texture2D" uid="uid://dckd2hhimpp2x" path="res://icons/cup-straw.svg" id="20_tdidc"]
 [ext_resource type="Script" path="res://scripts/change_stat_button.gd" id="21_u6y6n"]
 [ext_resource type="Texture2D" uid="uid://b4pvkkppy44n0" path="res://icons/icecream_48dp_FILL0_wght400_GRAD0_opsz48.svg" id="22_1ghf6"]
@@ -514,7 +510,6 @@ texture = ExtResource("14_k2ios")
 [node name="UI_Theme_Manager" type="Node" parent="UI" groups=["settings_data"]]
 unique_name_in_owner = true
 script = ExtResource("13_3i267")
-themes = Array[ExtResource("19_42gny")]([ExtResource("14_mb3dl"), ExtResource("15_4uyfd"), ExtResource("16_6dasc")])
 
 [node name="FoodMenu" type="PanelContainer" parent="UI"]
 unique_name_in_owner = true

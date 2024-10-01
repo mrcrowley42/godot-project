@@ -20,3 +20,4 @@ act_btn_pressed = ExtResource("2_scgym")
 setting_btn = ExtResource("6_ygmsn")
 setting_btn_pressed = ExtResource("7_jobtj")
 ui_overlay = ExtResource("8_7u5v2")
+unlocked = true

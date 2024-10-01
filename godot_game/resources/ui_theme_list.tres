@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="UiThemes" load_steps=6 format=3 uid="uid://baglbx4ipttsy"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/ui_themes.gd" id="1_vhdoq"]
+[ext_resource type="Script" path="res://scripts/base_classses/ui_theme_class.gd" id="2_7cpaf"]
+[ext_resource type="Resource" uid="uid://bxhuu3qk52v3w" path="res://resources/ui_themes/green.tres" id="3_7h6a4"]
+[ext_resource type="Resource" uid="uid://vt3jd46rlq4h" path="res://resources/ui_themes/orange.tres" id="4_akupb"]
+[ext_resource type="Resource" uid="uid://clen0bplq0q5d" path="res://resources/ui_themes/pink.tres" id="5_t2kdr"]
+
+[resource]
+script = ExtResource("1_vhdoq")
+theme_list = Array[ExtResource("2_7cpaf")]([ExtResource("3_7h6a4"), ExtResource("4_akupb"), ExtResource("5_t2kdr")])
