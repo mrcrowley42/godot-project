@@ -109,6 +109,10 @@ func _on_unlock_button_button_down() -> void:
 	# UNLOCK ALL FACTS
 	for fact in load("res://resources/fact_list.tres").facts:
 		Globals.unlock_fact(fact)
+		
+	# UNLOCK ALL THEMES
+	for ui_theme in load("res://resources/ui_theme_list.tres").theme_list:
+		Globals.unlock_theme(ui_theme)
 
 	# Rerender unlockable item buttons
 	cosmetic_btns.update_buttons()
