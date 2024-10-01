@@ -1,4 +1,4 @@
-[gd_scene load_steps=109 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=110 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_aqytd"]
@@ -40,6 +40,7 @@
 [ext_resource type="Script" path="res://scripts/opt_menu_back_btn.gd" id="35_4io20"]
 [ext_resource type="Script" path="res://scripts/music_controls.gd" id="35_8cohh"]
 [ext_resource type="Texture2D" uid="uid://pfr6wdx80m45" path="res://icons/volume-fill.svg" id="36_g2683"]
+[ext_resource type="Script" path="res://scenes/GameScenes/theme_display.gd" id="37_tokl0"]
 [ext_resource type="Script" path="res://scripts/mute_button.gd" id="37_xf1vk"]
 [ext_resource type="PackedScene" uid="uid://cbn0dv1k0onpb" path="res://scenes/UiScenes/vol_slider.tscn" id="38_17bv4"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="39_8ebm3"]
@@ -1379,11 +1380,13 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="CosmeticItems" type="GridContainer" parent="UI/OptionsMenu/GameplayOptionsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+[node name="CosmeticItems" type="GridContainer" parent="UI/OptionsMenu/GameplayOptionsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer" node_paths=PackedStringArray("theme_manager")]
 layout_mode = 2
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 columns = 5
+script = ExtResource("37_tokl0")
+theme_manager = NodePath("../../../../../../../UI_Theme_Manager")
 
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/GameplayOptionsMenu"]
 position = Vector2(-50, -130)
@@ -2152,6 +2155,7 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/GameplaySettingsBtn" to="UI/OptionsMenu" method="_on_gameplay_settings_btn_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/SoundBtn" to="UI/OptionsMenu" method="_on_sound_btn_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/CreditsBtn" to="UI/OptionsMenu" method="_on_credits_btn_button_down"]
+[connection signal="visibility_changed" from="UI/OptionsMenu/GameplayOptionsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems" to="UI/OptionsMenu/GameplayOptionsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems" method="_on_visibility_changed"]
 [connection signal="pressed" from="UI/OptionsMenu/GameplayOptionsMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
 [connection signal="button_down" from="UI/OptionsMenu/GameplayOptionsMenu/SaveButtons/Cancel" to="UI/OptionsMenu/GameplayOptionsMenu/SaveButtons/Cancel" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/GameplayOptionsMenu/ThemeControls/vHBoxContainer/Button2" to="UI/OptionsMenu/GameplayOptionsMenu/ThemeControls" method="_on_back_button_down"]
