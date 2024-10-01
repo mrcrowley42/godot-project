@@ -107,3 +107,12 @@ func unlock_theme(theme: UiTheme) -> void:
 	item_unlocked.emit(message)
 
 # really want to refactor these functions into one now...
+
+## generic tween function
+func tween(obj, prop, val, delay=0., time=2., _ease=Tween.EASE_OUT):
+	var t = get_tree().create_tween()
+	t.tween_property(obj, prop, val, time)\
+			.set_trans(Tween.TRANS_EXPO)\
+			.set_ease(_ease)\
+			.set_delay(delay)
+	return t

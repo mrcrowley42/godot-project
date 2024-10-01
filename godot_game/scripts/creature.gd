@@ -82,11 +82,6 @@ func setup_default_values():
 	likes = creature.likes
 	dislikes = creature.dislikes
 	creature_name = creature_type.name
-
-	hp = max_hp
-	food = max_food
-	fun = max_fun
-	water = max_water
 	xp_required = creature_type.xp_required_for_adult
 	
 	hp_changed.emit()

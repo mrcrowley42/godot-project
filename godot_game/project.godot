@@ -38,6 +38,10 @@ window/handheld/orientation=1
 
 project/assembly_name="Godot Game"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+
 [file_customization]
 
 folder_colors={
