@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=109 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_aqytd"]
@@ -207,6 +207,9 @@ bg_color = Color(0, 0, 0, 0.737255)
 draw_center = false
 border_color = Color(0.8, 0.8, 0.8, 0.411765)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2rfxe"]
+bg_color = Color(0.57, 1, 0.706167, 0.611765)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3535b"]
 bg_color = Color(0.822295, 0.511699, 0.352571, 1)
 corner_radius_top_left = 6
@@ -218,9 +221,6 @@ corner_detail = 20
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cuoxy"]
 bg_color = Color(0.176419, 0.176419, 0.176419, 1)
 border_color = Color(0.8, 0.8, 0.8, 0.411765)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2rfxe"]
-bg_color = Color(0.57, 1, 0.706167, 0.611765)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wd2mi"]
 
@@ -1346,11 +1346,44 @@ text = "Credits"
 [node name="GameplayOptionsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_arbxs")
 script = ExtResource("32_jvqx8")
 metadata/_edit_lock_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/GameplayOptionsMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/GameplayOptionsMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Button" type="Button" parent="UI/OptionsMenu/GameplayOptionsMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "PREVIEW TEXT
+"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/OptionsMenu/GameplayOptionsMenu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 158)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2rfxe")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/GameplayOptionsMenu/MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="CosmeticItems" type="GridContainer" parent="UI/OptionsMenu/GameplayOptionsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 5
 
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/GameplayOptionsMenu"]
 position = Vector2(-50, -130)
@@ -1517,6 +1550,7 @@ script = ExtResource("35_4io20")
 [node name="AppearanceMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_cuoxy")
 script = ExtResource("32_jvqx8")
