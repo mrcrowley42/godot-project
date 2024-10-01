@@ -10,6 +10,7 @@ extends Control
 @onready var screen_tint = %BG
 @onready var notif_man = %NotificationManager
 @onready var cosmetic_btns = %CosmeticItems
+@onready var theme_btns = %ThemeBtns
 @onready var facts_menu = %FactsMenu
 @onready var game = self.find_parent("Game")
 
@@ -116,4 +117,5 @@ func _on_unlock_button_button_down() -> void:
 
 	# Rerender unlockable item buttons
 	cosmetic_btns.update_buttons()
+	theme_btns.update_buttons()
 	facts_menu.propagate_call("update_locked")

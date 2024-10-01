@@ -6,28 +6,25 @@ const BTN_SIZE: Vector2 = Vector2(64, 64)
 ## Class that describes UI theme button.
 class UiThemeButton extends Button:
 	var ui_theme
-	@warning_ignore("shadowed_variable")  # be quiet
-	func _init(ui_theme: UiTheme):
+	func _init(_ui_theme: UiTheme):
 		self.custom_minimum_size = BTN_SIZE
 		self.size = BTN_SIZE
 		self.expand_icon = false
-		self.ui_theme = ui_theme
-		self.text = ui_theme.theme_name
-		#update_locked()
+		self.ui_theme = _ui_theme
+		self.text = _ui_theme.theme_name
+		update_locked()
 
 	## Action when button is pressed.
 	func _pressed():
 		var manager = find_parent("Game").find_child("UI_Theme_Manager")
 		manager.set_theme(self.ui_theme)
 
-
-	#func update_locked():
-		#var unlocked_items = DataGlobals.load_metadata()['unlocked_cosmetics']
-		#var uid = str(ResourceLoader.get_resource_uid(self.cosmetic.resource_path))
-		#self.disabled = false if self.cosmetic.unlocked else not uid in unlocked_items
-		#self.tooltip_text = cosmetic.hint if disabled else cosmetic.desc
-		#self.text = "?" if self.disabled else ""
-		#icon = null if self.disabled else cosmetic.thumbnail
+	func update_locked():
+		var unlocked_items = DataGlobals.load_metadata()['unlocked_themes']
+		var uid = Helpers.uid_str(self.ui_theme)
+		self.disabled = false if self.ui_theme.unlocked else not uid in unlocked_items
+		#self.tooltip_text = ui_theme.hint if disabled else ""
+		self.text = "?" if self.disabled else ""
 
 
 func _ready():

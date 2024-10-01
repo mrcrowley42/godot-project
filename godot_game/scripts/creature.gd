@@ -66,6 +66,7 @@ func setup_creature():
 	setup_default_values()
 	setup_main_sprite()
 	Globals.send_notification(Globals.NOTIFICATION_CREATURE_IS_LOADED)
+	apply_dmg_tint()
 
 ## Update the [param sprite_frames] of the current creature based on the current [param life_stage]
 func setup_main_sprite() -> void:

@@ -32,7 +32,7 @@ class UnlockableIcon extends Button:
 
 	func update_locked():
 		var unlocked_items = DataGlobals.load_metadata()['unlocked_cosmetics']
-		var uid = str(ResourceLoader.get_resource_uid(self.cosmetic.resource_path))
+		var uid = Helpers.uid_str(self.cosmetic)
 		self.disabled = false if self.cosmetic.unlocked else not uid in unlocked_items
 		self.tooltip_text = cosmetic.hint if disabled else cosmetic.desc
 		self.text = "?" if self.disabled else ""
