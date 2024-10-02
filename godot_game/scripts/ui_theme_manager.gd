@@ -1,7 +1,7 @@
 class_name UiThemeManager extends ScriptNode
 
 ## List of available UI themes.
-var themes = load("res://resources/ui_theme_list.tres").theme_list
+var themes = preload("res://resources/ui_theme_list.tres").theme_list
 
 @onready var food_btn = %FoodButton
 @onready var act_btn = %ActButton
@@ -47,3 +47,13 @@ func load(data) -> void:
 	if data.has("Theme"):
 		self.i = int(data["Theme"])
 	update_theme()
+	
+func set_theme(ui_theme):
+	ui_overlay.texture = ui_theme.ui_overlay
+	bg.material.set("shader_parameter/tint_colour", ui_theme.screen_tint)
+	food_btn.texture_normal = ui_theme.food_btn
+	food_btn.texture_pressed = ui_theme.food_btn_pressed
+	act_btn.texture_normal = ui_theme.act_btn
+	act_btn.texture_pressed = ui_theme.act_btn_pressed
+	setting_btn.texture_normal = ui_theme.setting_btn
+	setting_btn.texture_pressed = ui_theme.setting_btn_pressed

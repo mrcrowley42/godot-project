@@ -36,6 +36,7 @@ func load_soundscape() -> void:
 func add_sound_node(sound: AudioStream) -> void:
 	var sound_node = AmbientSound.new()
 	sound_node.stream = sound
+	#sound_node.name = sound.resource_path
 	add_child(sound_node)
 
 
