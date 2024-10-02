@@ -20,3 +20,4 @@ act_btn_pressed = ExtResource("2_gb0vi")
 setting_btn = ExtResource("6_776br")
 setting_btn_pressed = ExtResource("7_l7md0")
 ui_overlay = ExtResource("8_8h4uc")
+unlocked = true

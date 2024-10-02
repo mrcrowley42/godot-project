@@ -1,7 +1,7 @@
 class_name UiThemeManager extends ScriptNode
 
 ## List of available UI themes.
-@export var themes: Array[UiTheme]
+var themes = load("res://resources/ui_theme_list.tres").theme_list
 
 @onready var food_btn = %FoodButton
 @onready var act_btn = %ActButton

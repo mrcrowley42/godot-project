@@ -6,6 +6,7 @@ const CURRENT_CREATURE = "current_creature"
 const CREATURES_DISCOVERED = "creatures_discovered"
 const UNLOCKED_COSMETICS = "unlocked_cosmetics"
 const UNLOCKED_FACTS = "unlocked_facts"
+const UNLOCKED_THEMES = "unlocked_themes"
 
 # other
 const SECTION = "section"
@@ -60,7 +61,8 @@ func generate_metadata_to_save() -> Dictionary:
 		CURRENT_CREATURE: str(get_if_exists.call(CURRENT_CREATURE, null, true)),
 		CREATURES_DISCOVERED: get_and_check_for_addition.call(CREATURES_DISCOVERED, []),
 		UNLOCKED_COSMETICS: get_and_check_for_addition.call(UNLOCKED_COSMETICS, []),
-		UNLOCKED_FACTS: get_and_check_for_addition.call(UNLOCKED_FACTS, [])
+		UNLOCKED_FACTS: get_and_check_for_addition.call(UNLOCKED_FACTS, []),
+		UNLOCKED_THEMES: get_and_check_for_addition.call(UNLOCKED_THEMES, [])
 	}
 
 # save file structure:

@@ -66,7 +66,7 @@ func unlock_fact(fact: Fact) -> void:
 	var unlocked_facts = DataGlobals.load_metadata()['unlocked_facts']
 	if fact_uid in unlocked_facts:
 		return
-	# If fact isn't unlocked, add it to unlocked list.
+	# If item isn't unlocked, add it to unlocked list.
 	DataGlobals.metadata_to_add[DataGlobals.UNLOCKED_FACTS] = [fact_uid]
 	DataGlobals.save_only_metadata()
 	# Display notification
@@ -83,13 +83,30 @@ func unlock_cosmetic(cosmetic: CosmeticItem) -> void:
 	var unlocked_cosmetics = DataGlobals.load_metadata()['unlocked_cosmetics']
 	if cosmetic_uid in unlocked_cosmetics:
 		return
-	# If cosmetic isn't unlocked, add it to unlocked list.
+	# If item isn't unlocked, add it to unlocked list.
 	DataGlobals.metadata_to_add[DataGlobals.UNLOCKED_COSMETICS] = [cosmetic_uid]
 	DataGlobals.save_only_metadata()
 	# Display notification
 	var message = "%s Unlocked!" %[cosmetic.name]
 	item_unlocked.emit(message)
 
+## Unlocks the passed [param cosmetic] resource
+func unlock_theme(theme: UiTheme) -> void:
+	# Ignore already unlocked
+	if theme.unlocked:
+		return
+	var theme_uid = Helpers.uid_str(theme)
+	var unlocked_themes = DataGlobals.load_metadata()['unlocked_themes']
+	if theme_uid in unlocked_themes:
+		return
+	# If item isn't unlocked, add it to unlocked list.
+	DataGlobals.metadata_to_add[DataGlobals.UNLOCKED_THEMES] = [theme_uid]
+	DataGlobals.save_only_metadata()
+	# Display notification
+	var message = "%s Unlocked!" %[theme.theme_name]
+	item_unlocked.emit(message)
+
+# really want to refactor these functions into one now...
 
 ## generic tween function
 func tween(obj, prop, val, delay=0., time=2., _ease=Tween.EASE_OUT):
