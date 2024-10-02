@@ -13,7 +13,7 @@ var is_in_transition: bool = false;
 
 func _ready():
 	if unlock_fps:
-		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED) # HUH?
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 
 	# if no data exists, file has been tampered with, set the bare minimum
 	# metadata is set automatically after egg opening scene, and before this scene
@@ -34,6 +34,7 @@ func _ready():
 	# force this function to run since load() isn't called
 	if DataGlobals.has_only_metadata():
 		%Creature.setup_creature()
+		%Creature.reset_stats()
 
 	# do last
 	var ui_overlay: Sprite2D = find_child("UI_Overlay")

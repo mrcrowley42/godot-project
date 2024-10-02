@@ -35,6 +35,7 @@ var water: float
 var food: float
 var fun: float
 
+var lock_xp: bool = false
 var xp: float = 0
 var is_ready_to_grow_up: bool = false
 var life_stage: LifeStage
@@ -92,7 +93,7 @@ func setup_default_values():
 
 ## Add the specified [param amount] to the creature's existing xp.
 func add_xp(amount: float) -> void:
-	if amount <= 0: return
+	if amount <= 0 or lock_xp: return
 	xp += amount
 
 	# The creature is ready to become an adult
@@ -105,10 +106,12 @@ func add_xp(amount: float) -> void:
 
 ## Sets the Creatures current stats to their maximum value.
 func reset_stats() -> void:
+	lock_xp = true
 	dmg(-max_hp, Stat.HP)
 	dmg(-max_food, Stat.FOOD)
 	dmg(-max_water, Stat.WATER)
 	dmg(-max_fun, Stat.FUN)
+	lock_xp = false
 
 
 ## Generialised function to damage/heal the Creature (use a negative value to heal)
