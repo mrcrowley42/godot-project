@@ -1390,6 +1390,12 @@ columns = 5
 script = ExtResource("37_tokl0")
 theme_manager = NodePath("../../../../../../../UI_Theme_Manager")
 
+[node name="Button" type="Button" parent="UI/OptionsMenu/GameplayOptionsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ThemeBtns"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme = ExtResource("42_c1jtf")
+text = "Green"
+
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/GameplayOptionsMenu"]
 position = Vector2(-50, -130)
 

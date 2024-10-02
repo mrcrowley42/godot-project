@@ -17,11 +17,15 @@ class UiThemeButton extends Button:
 		
 		var box = StyleBoxFlat.new()
 		box.bg_color = ui_theme.screen_tint
+		box.set_corner_radius_all(50)
+		self.add_theme_constant_override("outline_size", 2)
 		self.add_theme_stylebox_override("normal", box)
 		self.add_theme_stylebox_override("hover", box)
 		#self.add_theme_stylebox_override("pressed", box)
-		#self.add_theme_stylebox_override("focus", box)
 		self.add_theme_stylebox_override("disabled", box)
+		self.add_theme_stylebox_override("focus", box)
+		
+		
 		update_locked()
 
 	## Action when button is pressed.
