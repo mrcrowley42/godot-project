@@ -12,6 +12,16 @@ class UiThemeButton extends Button:
 		self.expand_icon = false
 		self.ui_theme = _ui_theme
 		self.text = _ui_theme.theme_name
+		
+		theme = load("res://themes/vcr_font.tres")
+		
+		var box = StyleBoxFlat.new()
+		box.bg_color = ui_theme.screen_tint
+		self.add_theme_stylebox_override("normal", box)
+		self.add_theme_stylebox_override("hover", box)
+		#self.add_theme_stylebox_override("pressed", box)
+		#self.add_theme_stylebox_override("focus", box)
+		self.add_theme_stylebox_override("disabled", box)
 		update_locked()
 
 	## Action when button is pressed.
