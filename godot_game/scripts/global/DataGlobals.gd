@@ -1,9 +1,5 @@
 extends Node
 
-# testing
-var use_test_file: bool = false
-const TEST_SAVE_FILE = "res://tests/save_data_test.save"
-
 # metadata items
 const LAST_SAVED = "last_saved"
 const CURRENT_CREATURE = "current_creature"
@@ -190,3 +186,19 @@ func load_settings_data():
 				if key != SECTION and config.has_section(section) and config.has_section_key(section, key):
 					data_to_send[key] = config.get_value(section, key)
 			node.call(LOAD, data_to_send)
+
+
+## --------------
+##    TESTING
+## --------------
+
+var use_test_file: bool = false
+const TEST_SAVE_FILE = "res://tests/save_data_test.save"
+
+func setup_test_environ():
+	use_test_file = true
+	
+	# clear potentially set values
+	metadata_last_loaded.clear()
+	metadata_to_add.clear()
+	metadata_to_override.clear()
