@@ -1,5 +1,9 @@
 extends Node
 
+# testing
+var use_test_file: bool = false
+const TEST_SAVE_FILE = "res://tests/save_data_test.save"
+
 # metadata items
 const LAST_SAVED = "last_saved"
 const CURRENT_CREATURE = "current_creature"
@@ -22,9 +26,12 @@ var metadata_to_override: Dictionary = {}
 ## metadata to be added to on next save (e.g. to be appended to a list)
 var metadata_to_add: Dictionary = {}
 
+func get_save_data_file():
+	return TEST_SAVE_FILE if use_test_file else Globals.SAVE_DATA_FILE
+
 func has_save_data() -> bool:
-	if FileAccess.file_exists(Globals.SAVE_DATA_FILE):
-		var save_file = FileAccess.open(Globals.SAVE_DATA_FILE, FileAccess.READ)
+	if FileAccess.file_exists(get_save_data_file()):
+		var save_file = FileAccess.open(get_save_data_file(), FileAccess.READ)
 		return save_file.get_length() > 0
 	return false
 
@@ -34,7 +41,7 @@ func has_settings_data() -> bool:
 ## does save file only contain metadata (only 1 line exists)
 func has_only_metadata() -> bool:
 	if has_save_data():
-		var save_file = FileAccess.open(Globals.SAVE_DATA_FILE, FileAccess.READ)
+		var save_file = FileAccess.open(get_save_data_file(), FileAccess.READ)
 		return save_file.get_length() == len(save_file.get_line())  # only one line in save file
 	return false
 
@@ -69,7 +76,7 @@ func generate_metadata_to_save() -> Dictionary:
 # line 1  = metadata
 # line 2+ = node data  (each node is assigned its own line)
 func save_data():
-	var save_file = FileAccess.open(Globals.SAVE_DATA_FILE, FileAccess.WRITE)
+	var save_file = FileAccess.open(get_save_data_file(), FileAccess.WRITE)
 	var save_nodes = get_tree().get_nodes_in_group(Globals.SAVE_DATA_GROUP)
 	var all_data = [generate_metadata_to_save()]  # metadata is first
 	metadata_to_override.clear()
@@ -92,7 +99,7 @@ func save_data():
 ## changes only the first line (the metadata line) in save file, everything else remains unchanged
 func save_only_metadata():
 	var file_existed = has_save_data()
-	var save_file = FileAccess.open(Globals.SAVE_DATA_FILE, FileAccess.READ)
+	var save_file = FileAccess.open(get_save_data_file(), FileAccess.READ)
 	if file_existed: save_file.get_line()  # remove old metadata
 
 	# replace existing metadata with new
@@ -106,7 +113,7 @@ func save_only_metadata():
 		while save_file.get_position() < save_file.get_length():
 			all_lines.append(save_file.get_line())
 
-	save_file = FileAccess.open(Globals.SAVE_DATA_FILE, FileAccess.WRITE)
+	save_file = FileAccess.open(get_save_data_file(), FileAccess.WRITE)
 	save_file.store_string("\n".join(all_lines))
 
 func save_settings_data():
@@ -134,14 +141,14 @@ func save_settings_data():
 ## loads only the metadata line from save (if it exists)
 func load_metadata() -> Dictionary:
 	if has_save_data():
-		var save_file = FileAccess.open(Globals.SAVE_DATA_FILE, FileAccess.READ)
+		var save_file = FileAccess.open(get_save_data_file(), FileAccess.READ)
 		metadata_last_loaded = JSON.parse_string(save_file.get_line())
 	return metadata_last_loaded
 
 ## loads data, and passes it to saved nodes. returns metadata
 func load_data() -> Dictionary:
 	if has_save_data():
-		var save_file = FileAccess.open(Globals.SAVE_DATA_FILE, FileAccess.READ)
+		var save_file = FileAccess.open(get_save_data_file(), FileAccess.READ)
 
 		## retrieve metadata
 		metadata_last_loaded = JSON.parse_string(save_file.get_line())
