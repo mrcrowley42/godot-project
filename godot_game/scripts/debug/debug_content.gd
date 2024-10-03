@@ -13,6 +13,7 @@ extends Control
 @onready var theme_btns = %ThemeBtns
 @onready var facts_menu = %FactsMenu
 @onready var game = self.find_parent("Game")
+@onready var ambience_man = game.find_child("AmbienceManager")
 
 var example_messages = ["random", "word", "banana", "mario", "bingus"]
 
@@ -119,3 +120,12 @@ func _on_unlock_button_button_down() -> void:
 	cosmetic_btns.update_buttons()
 	theme_btns.update_buttons()
 	facts_menu.propagate_call("update_locked")
+
+
+func _on_button_2_button_down() -> void:
+	ambience_man.add_sound_node(load("res://ambient_audio/Crickets1.mp3"))
+	
+
+
+func _on_button_3_button_down() -> void:
+	ambience_man.blah()

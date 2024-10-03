@@ -5,13 +5,14 @@ const SETTING_KEY = "Ambience"
 
 var placeholder = "empty"
 var soundscape = [load("res://sound_effects/yippee.wav"), load("res://sound_effects/tap.wav")]
-
+var sound_settings
 signal finished_loading()
 
 ## Custom streamplayer class, that loops audio by default.
 class AmbientSound extends AudioStreamPlayer:
-	
+	var hug: int
 	func _init(loop: bool = true) -> void:
+		self.hug = 12
 		self.autoplay = true
 		if loop:
 			self.connect("finished", _on_finished)
@@ -27,9 +28,10 @@ func _ready() -> void:
 
 
 func load_soundscape() -> void:
-	for sound in soundscape:
-		add_sound_node(sound)
-	print(placeholder) # <- just checking save/loading
+	if sound_settings:
+		for sound_setting in sound_settings:
+			add_sound_node(sound_setting)
+		print(placeholder) # <- just checking save/loading
 
 
 ## Create a [param AmbientSound] with the passed audio file.
@@ -41,10 +43,20 @@ func add_sound_node(sound: AudioStream) -> void:
 
 
 func save() -> Dictionary:
-	return {"section": Globals.AUDIO_SECTION, SETTING_KEY: "placeholder"}
+	var settings_data = []
+	var nodes = get_children()
+	for node in nodes:
+		settings_data.append(node.hug)
+	
+	return {"section": Globals.AUDIO_SECTION, SETTING_KEY: settings_data}
 
 
 func load(data) -> void:
 	if data.has(SETTING_KEY):
 		self.placeholder = data[SETTING_KEY]
 	finished_loading.emit()
+	
+func blah():
+	var children = get_children()
+	for child in children:
+		print(child.hug)
