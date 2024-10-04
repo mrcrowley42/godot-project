@@ -9,8 +9,12 @@ extends GutTest
 func set_test_dir():
 	remove_test_save_data()
 	DataGlobals.setup_test_environ()
-	
 	assert_eq(DataGlobals.get_save_data_file(), DataGlobals.TEST_SAVE_FILE)
+	
+	# remove all children
+	for child in get_children():
+		remove_child(child)
+	assert_eq(get_children(), [])
 
 ## (Optional) Call at the end of tests
 func remove_test_save_data():
@@ -19,6 +23,17 @@ func remove_test_save_data():
 		d.remove(DataGlobals.TEST_SAVE_FILE)
 	assert_false(FileAccess.file_exists(DataGlobals.TEST_SAVE_FILE))
 
+## a node to use for saveing
+class TestNode extends Node2D:
+	var data_to_save = "some_data!"
+	var data_loaded = null
+	
+	func _init() -> void:
+		add_to_group("save_data")
+	func save():
+		return data_to_save
+	func load(data):
+		data_loaded = data
 
 ## ------------
 ##    TESTS
@@ -102,3 +117,43 @@ func test_metadata_to_add():
 	DataGlobals.save_only_metadata()
 	var newer = DataGlobals.metadata_last_loaded
 	assert_eq(newer[DataGlobals.CREATURES_DISCOVERED], ["creature1", "creature2", "creature3"])
+
+## test nodes with save group are saved
+func test_save_node_data():
+	set_test_dir()
+	
+	var node := TestNode.new()
+	add_child(node)
+	
+	assert_false(DataGlobals.has_save_data())
+	assert_false(DataGlobals.has_only_metadata())
+	DataGlobals.save_data()
+	assert_true(DataGlobals.has_save_data())
+	assert_false(DataGlobals.has_only_metadata())
+	
+	var save_file := FileAccess.open(DataGlobals.get_save_data_file(), FileAccess.READ)
+	var first_line = JSON.parse_string(save_file.get_line())
+	assert_same(str(first_line), str(DataGlobals.load_metadata()))
+	
+	var second_line = JSON.parse_string(save_file.get_line())
+	assert_eq(second_line[DataGlobals.PATH], str(node.get_path()))
+	assert_eq(second_line[DataGlobals.DATA], node.data_to_save)
+
+## test data saved is loaded to the nodes
+func test_load_node_data():
+	set_test_dir()
+	
+	var node := TestNode.new()
+	add_child(node)
+	assert_eq(node.data_loaded, null)
+	
+	# save & load
+	DataGlobals.save_data()
+	assert_true(DataGlobals.has_save_data())
+	DataGlobals.load_data()
+	
+	var save_file := FileAccess.open(DataGlobals.get_save_data_file(), FileAccess.READ)
+	var first_line = JSON.parse_string(save_file.get_line())
+	assert_same(str(first_line), str(DataGlobals.metadata_last_loaded))
+	
+	assert_eq(node.data_loaded, node.data_to_save)
