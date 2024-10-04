@@ -25,6 +25,9 @@ var metadata_to_add: Dictionary = {}
 func get_save_data_file():
 	return TEST_SAVE_FILE if use_test_file else Globals.SAVE_DATA_FILE
 
+func get_settings_file():
+	return TEST_SETTINGS_FILE if use_test_file else Globals.SAVE_SETTINGS_FILE
+
 func has_save_data() -> bool:
 	if FileAccess.file_exists(get_save_data_file()):
 		var save_file = FileAccess.open(get_save_data_file(), FileAccess.READ)
@@ -32,7 +35,7 @@ func has_save_data() -> bool:
 	return false
 
 func has_settings_data() -> bool:
-	return FileAccess.file_exists(Globals.SAVE_SETTINGS_FILE)
+	return FileAccess.file_exists(get_settings_file())
 
 ## does save file only contain metadata (only 1 line exists)
 func has_only_metadata() -> bool:
@@ -122,13 +125,16 @@ func save_settings_data():
 			continue
 
 		var data = node.call(SAVE)
+		if typeof(data) != TYPE_DICTIONARY:
+			print("Node '%s' save data is not of type dictionary (data: '%s'). Skipping" % [node.name, data])
+			return
 		var section = data[SECTION] if data.has(SECTION) else Globals.DEFAULT_SECTION
 
 		for key in data.keys():
 			if key != SECTION:
 				config.set_value(section, key, data[key])
 
-		config.save(Globals.SAVE_SETTINGS_FILE)
+		config.save(get_settings_file())
 
 ## --------------
 ##    LOADING
@@ -170,7 +176,7 @@ func load_data() -> Dictionary:
 func load_settings_data():
 	if has_settings_data():
 		var config = ConfigFile.new()
-		config.load(Globals.SAVE_SETTINGS_FILE)
+		config.load(get_settings_file())
 
 		var settings_nodes = get_tree().get_nodes_in_group(Globals.SAVE_SETTINGS_GROUP)
 		for node in settings_nodes:
@@ -194,6 +200,7 @@ func load_settings_data():
 
 var use_test_file: bool = false
 const TEST_SAVE_FILE = "res://tests/save_data_test.save"
+const TEST_SETTINGS_FILE = "res://tests/settings_test.cfg"
 
 func setup_test_environ():
 	use_test_file = true

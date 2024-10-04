@@ -6,30 +6,42 @@ extends GutTest
 ## --------------
 
 ## Must be called at the beginning of tests
-func set_test_dir():
+func setup_test_environment():
 	remove_test_save_data()
+	remove_test_settings_data()
 	DataGlobals.setup_test_environ()
 	assert_eq(DataGlobals.get_save_data_file(), DataGlobals.TEST_SAVE_FILE)
+	assert_eq(DataGlobals.get_settings_file(), DataGlobals.TEST_SETTINGS_FILE)
 	
 	# remove all children
 	for child in get_children():
 		remove_child(child)
 	assert_eq(get_children(), [])
 
-## (Optional) Call at the end of tests
+## Deletes save data file
 func remove_test_save_data():
 	if FileAccess.file_exists(DataGlobals.TEST_SAVE_FILE):
 		var d = DirAccess.open("res://")
 		d.remove(DataGlobals.TEST_SAVE_FILE)
 	assert_false(FileAccess.file_exists(DataGlobals.TEST_SAVE_FILE))
 
-## a node to use for saveing
+## Deletes settings file
+func remove_test_settings_data():
+	if FileAccess.file_exists(DataGlobals.TEST_SETTINGS_FILE):
+		var d = DirAccess.open("res://")
+		d.remove(DataGlobals.TEST_SETTINGS_FILE)
+	assert_false(FileAccess.file_exists(DataGlobals.TEST_SETTINGS_FILE))
+
+## a node to use for saving
 class TestNode extends Node2D:
-	var data_to_save = "some_data!"
+	var data_to_save = {"some_data": [54, 1, 2]}
 	var data_loaded = null
 	
-	func _init() -> void:
-		add_to_group("save_data")
+	func _init(settings_group=false) -> void:
+		if settings_group:
+			add_to_group("settings_data")
+		else:
+			add_to_group("save_data")
 	func save():
 		return data_to_save
 	func load(data):
@@ -44,11 +56,13 @@ func test_save_data_file_is_segregated():
 	assert_false(DataGlobals.use_test_file)
 	assert_eq(DataGlobals.get_save_data_file(), Globals.SAVE_DATA_FILE)
 	
-	set_test_dir()
+	# setup test environment
+	setup_test_environment()
 	assert_true(DataGlobals.use_test_file)
 	assert_eq(DataGlobals.get_save_data_file(), DataGlobals.TEST_SAVE_FILE)
 	assert_false(FileAccess.file_exists(DataGlobals.TEST_SAVE_FILE))
 	
+	# create save data file
 	DataGlobals.save_only_metadata()
 	assert_true(FileAccess.file_exists(DataGlobals.TEST_SAVE_FILE))
 	
@@ -57,7 +71,7 @@ func test_save_data_file_is_segregated():
 
 ## test metadata_only saves only metadata
 func test_save_metadata_only():
-	set_test_dir()
+	setup_test_environment()
 	
 	assert_false(DataGlobals.has_save_data())
 	assert_eq(DataGlobals.metadata_last_loaded, {})
@@ -75,7 +89,7 @@ func test_save_metadata_only():
 
 ## test metadata is overridden when set in the override dict
 func test_metadata_to_override():
-	set_test_dir()
+	setup_test_environment()
 	
 	DataGlobals.save_only_metadata()
 	var old = DataGlobals.metadata_last_loaded
@@ -93,14 +107,14 @@ func test_metadata_to_override():
 	var newer = DataGlobals.metadata_last_loaded
 	assert_eq(newer[DataGlobals.CURRENT_CREATURE], "creature2")
 	
-	# check override is retained on next save
+	# check override is retained
 	DataGlobals.save_only_metadata()
 	var retained = DataGlobals.metadata_last_loaded
 	assert_eq(retained[DataGlobals.CURRENT_CREATURE], "creature2")
 
 ## test metadata is add to when set in the add dict
 func test_metadata_to_add():
-	set_test_dir()
+	setup_test_environment()
 	
 	DataGlobals.save_only_metadata()
 	var old = DataGlobals.metadata_last_loaded
@@ -120,7 +134,7 @@ func test_metadata_to_add():
 
 ## test nodes with save group are saved
 func test_save_node_data():
-	set_test_dir()
+	setup_test_environment()
 	
 	var node := TestNode.new()
 	add_child(node)
@@ -137,11 +151,11 @@ func test_save_node_data():
 	
 	var second_line = JSON.parse_string(save_file.get_line())
 	assert_eq(second_line[DataGlobals.PATH], str(node.get_path()))
-	assert_eq(second_line[DataGlobals.DATA], node.data_to_save)
+	assert_eq(str(second_line[DataGlobals.DATA]), str(node.data_to_save))
 
 ## test data saved is loaded to the nodes
 func test_load_node_data():
-	set_test_dir()
+	setup_test_environment()
 	
 	var node := TestNode.new()
 	add_child(node)
@@ -155,5 +169,40 @@ func test_load_node_data():
 	var save_file := FileAccess.open(DataGlobals.get_save_data_file(), FileAccess.READ)
 	var first_line = JSON.parse_string(save_file.get_line())
 	assert_same(str(first_line), str(DataGlobals.metadata_last_loaded))
+	assert_eq(str(node.data_loaded), str(node.data_to_save))
+
+## test settings data is saved
+func test_save_settings_data():
+	setup_test_environment()
+	
+	var node := TestNode.new(true)
+	add_child(node)
+	
+	assert_false(DataGlobals.has_settings_data())
+	DataGlobals.save_settings_data()
+	assert_true(DataGlobals.has_settings_data())
+	
+	var settings_file := FileAccess.open(DataGlobals.get_settings_file(), FileAccess.READ)
+	var first_line = settings_file.get_line()
+	assert_eq(first_line, "[general]")
+	
+	var second_line = settings_file.get_line()
+	assert_eq(second_line, "")
+	
+	var third_line = settings_file.get_line()
+	var key = node.data_to_save.keys()[0]
+	assert_same(third_line, "%s=%s" % [key, str(node.data_to_save[key])])
+
+## test settings data is loaded
+func test_load_settings_data():
+	setup_test_environment()
+	
+	var node := TestNode.new(true)
+	add_child(node)
+	assert_eq(node.data_loaded, null)
+	
+	DataGlobals.save_settings_data()
+	assert_true(DataGlobals.has_settings_data())
+	DataGlobals.load_settings_data()
 	
 	assert_eq(node.data_loaded, node.data_to_save)
