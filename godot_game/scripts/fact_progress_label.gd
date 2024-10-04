@@ -1,10 +1,11 @@
 extends Label
 
 func _ready() -> void:
+	Globals.item_unlocked.connect(update_text)
 	update_text()
 
 
-func update_text():
+func update_text(_null=null):
 	var base_text = ""
 	var unlocked_facts = DataGlobals.load_metadata()['unlocked_facts']
 	var fact_list = load("res://resources/fact_list.tres").facts
@@ -19,8 +20,7 @@ func update_text():
 	text = base_text
 
 
-func get_category_progress(fact_list, category, unlocked_facts):
+func get_category_progress(fact_list, category, unlocked_facts) -> Array[int]:
 	var facts = fact_list.filter(func(x): return x.category == category)
 	var unlocked = facts.filter(func(x): return Helpers.uid_str(x) in unlocked_facts or x.unlocked)
-
 	return [len(unlocked), len(facts)]
