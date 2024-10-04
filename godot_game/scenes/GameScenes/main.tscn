@@ -1,4 +1,4 @@
-[gd_scene load_steps=111 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=114 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_aqytd"]
@@ -40,7 +40,7 @@
 [ext_resource type="Script" path="res://scripts/opt_menu_back_btn.gd" id="35_4io20"]
 [ext_resource type="Script" path="res://scripts/music_controls.gd" id="35_8cohh"]
 [ext_resource type="Texture2D" uid="uid://pfr6wdx80m45" path="res://icons/volume-fill.svg" id="36_g2683"]
-[ext_resource type="Script" path="res://scenes/GameScenes/theme_display.gd" id="37_tokl0"]
+[ext_resource type="Script" path="res://scripts/theme_display.gd" id="37_tokl0"]
 [ext_resource type="Script" path="res://scripts/mute_button.gd" id="37_xf1vk"]
 [ext_resource type="PackedScene" uid="uid://cbn0dv1k0onpb" path="res://scenes/UiScenes/vol_slider.tscn" id="38_17bv4"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="39_8ebm3"]
@@ -49,6 +49,7 @@
 [ext_resource type="Script" path="res://scripts/costmetic_row.gd" id="41_pook7"]
 [ext_resource type="Theme" uid="uid://bqu43buo5gcrc" path="res://themes/vcr_font.tres" id="42_c1jtf"]
 [ext_resource type="Texture2D" uid="uid://d84hj0mtn2hw" path="res://icons/status/mood_24dp_FILL1_wght300_GRAD0_opsz24.svg" id="43_qa2jm"]
+[ext_resource type="Script" path="res://scripts/fact_progress_label.gd" id="44_t23g2"]
 [ext_resource type="PackedScene" uid="uid://dyapnl5xgvivn" path="res://scenes/UiScenes/topic_btn.tscn" id="44_y5a0d"]
 [ext_resource type="Texture2D" uid="uid://p0oo42fr5wrp" path="res://icons/status/lunch_dining_24dp_8B1A10_FILL0_wght500_GRAD0_opsz24-svg.svg" id="45_3duvs"]
 [ext_resource type="Texture2D" uid="uid://cuaa2uyffvita" path="res://icons/status/droplet-fill.svg" id="47_qik1j"]
@@ -211,6 +212,23 @@ border_color = Color(0.8, 0.8, 0.8, 0.411765)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2rfxe"]
 bg_color = Color(0.57, 1, 0.706167, 0.611765)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jv2ux"]
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="GDScript" id="GDScript_4s3go"]
+script/source = "extends Button
+
+const colour = Color.CRIMSON
+
+func _ready() -> void:
+	for style in [\"normal\", \"pressed\", \"hover\", \"disabled\", \"focus\"]:
+		var box = get_theme_stylebox(style)
+		box.bg_color = colour
+"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3535b"]
 bg_color = Color(0.822295, 0.511699, 0.352571, 1)
@@ -1286,7 +1304,6 @@ metadata/_edit_use_anchors_ = true
 [node name="OptionsMenu" type="PanelContainer" parent="UI"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1395,7 +1412,12 @@ theme_manager = NodePath("../../../../../../../UI_Theme_Manager")
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 theme = ExtResource("42_c1jtf")
-text = "Green"
+theme_override_styles/disabled = SubResource("StyleBoxFlat_jv2ux")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jv2ux")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jv2ux")
+theme_override_styles/normal = SubResource("StyleBoxFlat_jv2ux")
+text = "x"
+script = SubResource("GDScript_4s3go")
 
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/GameplayOptionsMenu"]
 position = Vector2(-50, -130)
@@ -1472,7 +1494,6 @@ text = ">"
 [node name="FactsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_cuoxy")
 script = ExtResource("32_jvqx8")
@@ -1535,13 +1556,14 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 8
 
-[node name="RichTextLabel" type="Label" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer/MarginContainer"]
+[node name="FactProgressLabel" type="Label" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer/MarginContainer"]
 layout_mode = 2
 theme = ExtResource("39_8ebm3")
 text = "Fun: 2/2
 Trivia: 2/15
 Etc: 3/16"
 horizontal_alignment = 2
+script = ExtResource("44_t23g2")
 
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/FactsMenu/Library"]
 position = Vector2(-50, -130)
