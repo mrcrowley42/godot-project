@@ -3,16 +3,17 @@ class_name AmbienceManager extends ScriptNode
 
 const SETTING_KEY = "Ambience"
 
-var placeholder = "empty"
-var soundscape = [load("res://sound_effects/yippee.wav"), load("res://sound_effects/tap.wav")]
-var sound_settings
+var soundscape = []
+var sound_list = build_sound_map()
+
 signal finished_loading()
 
 ## Custom streamplayer class, that loops audio by default.
 class AmbientSound extends AudioStreamPlayer:
-	var hug: int
+	var sound_name: String
+
 	func _init(loop: bool = true) -> void:
-		self.hug = 12
+		self.bus = &"Music" # Using Music bus for now.
 		self.autoplay = true
 		if loop:
 			self.connect("finished", _on_finished)
@@ -27,18 +28,21 @@ func _ready() -> void:
 	finished_loading.connect(load_soundscape)
 
 
+## Regenerate soundscape from saved settings.
 func load_soundscape() -> void:
-	if sound_settings:
-		for sound_setting in sound_settings:
-			add_sound_node(sound_setting)
-		print(placeholder) # <- just checking save/loading
+	if soundscape:
+		for sound in soundscape:
+			var audio = load(sound_list[sound[0]])
+			var volume = sound[1]
+			add_sound_node(audio, volume)
 
 
 ## Create a [param AmbientSound] with the passed audio file.
-func add_sound_node(sound: AudioStream) -> void:
+func add_sound_node(sound: AudioStream, volume: float = 0.5) -> void:
 	var sound_node = AmbientSound.new()
 	sound_node.stream = sound
-	#sound_node.name = sound.resource_path
+	sound_node.volume_db = linear_to_db(volume)
+	sound_node.sound_name = get_file_name(sound)
 	add_child(sound_node)
 
 
@@ -46,17 +50,33 @@ func save() -> Dictionary:
 	var settings_data = []
 	var nodes = get_children()
 	for node in nodes:
-		settings_data.append(node.hug)
-	
+		settings_data.append([
+			node.sound_name,
+			db_to_linear(node.volume_db)])
+
+	#soundscape = settings_data
 	return {"section": Globals.AUDIO_SECTION, SETTING_KEY: settings_data}
 
 
 func load(data) -> void:
 	if data.has(SETTING_KEY):
-		self.placeholder = data[SETTING_KEY]
+		self.soundscape = data[SETTING_KEY]
 	finished_loading.emit()
-	
-func blah():
-	var children = get_children()
-	for child in children:
-		print(child.hug)
+
+
+## [DEBUG] Print current soundscape.
+func current_sounds():
+	print(soundscape)
+
+
+## Returns the file name of an audio file.
+func get_file_name(sound: Resource) -> String:
+	return sound.resource_path.get_file().get_basename()
+
+
+## Returns a dictionary of file_names to resource_path for each ambient sound.
+func build_sound_map() -> Dictionary:
+	var sound_dict = Dictionary()
+	for sound in load("res://ambient_audio/ambient_sounds.tres").files:
+		sound_dict[get_file_name(sound)] = sound.resource_path
+	return sound_dict

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="AmbientSounds" load_steps=21 format=3 uid="uid://dgff1r2kx6h7p"]
+
+[ext_resource type="AudioStream" uid="uid://cra31m1ssxxax" path="res://ambient_audio/Birdsong1.mp3" id="1_4h76j"]
+[ext_resource type="Script" path="res://scripts/base_classses/ambience_sound_list.gd" id="1_dpfpj"]
+[ext_resource type="AudioStream" uid="uid://dqqme5vk787xb" path="res://ambient_audio/Birdsong2.mp3" id="2_1e87p"]
+[ext_resource type="AudioStream" uid="uid://cnd4tii1ao87n" path="res://ambient_audio/Birdsong3.mp3" id="3_wj2sl"]
+[ext_resource type="AudioStream" uid="uid://ch1rjiboakgm5" path="res://ambient_audio/Crickets1.mp3" id="4_lu3o3"]
+[ext_resource type="AudioStream" uid="uid://bace0ut7b7qvj" path="res://ambient_audio/Crickets2.mp3" id="5_ap6iw"]
+[ext_resource type="AudioStream" uid="uid://bpyw1enowofdt" path="res://ambient_audio/Fire1.mp3" id="6_lx6pf"]
+[ext_resource type="AudioStream" uid="uid://c42q2c7qfqfgw" path="res://ambient_audio/Fire2.mp3" id="7_xxwaa"]
+[ext_resource type="AudioStream" uid="uid://cue8mabr4y0k1" path="res://ambient_audio/Fire3.mp3" id="8_2ob2d"]
+[ext_resource type="AudioStream" uid="uid://dlcdts1q3gata" path="res://ambient_audio/Forest.mp3" id="9_08iju"]
+[ext_resource type="AudioStream" uid="uid://deuf2hrq0b2o4" path="res://ambient_audio/Ocean.mp3" id="10_21e2d"]
+[ext_resource type="AudioStream" uid="uid://txpgh8ygr5iu" path="res://ambient_audio/Rain1.mp3" id="11_6dk01"]
+[ext_resource type="AudioStream" uid="uid://cjfbdfoh2k7j4" path="res://ambient_audio/Rain2.mp3" id="12_blgwn"]
+[ext_resource type="AudioStream" uid="uid://b5uwuwaukt1in" path="res://ambient_audio/RecordScratch.mp3" id="13_ken02"]
+[ext_resource type="AudioStream" uid="uid://crlt6prnv0njc" path="res://ambient_audio/Stream1.mp3" id="14_fgyjb"]
+[ext_resource type="AudioStream" uid="uid://bteicgp1c4sf6" path="res://ambient_audio/Stream2.mp3" id="15_wtm13"]
+[ext_resource type="AudioStream" uid="uid://dnhpkqmqrgyew" path="res://ambient_audio/Thunder1.mp3" id="16_savxv"]
+[ext_resource type="AudioStream" uid="uid://bnc5v8ef5w054" path="res://ambient_audio/Thunder2.mp3" id="17_u8j21"]
+[ext_resource type="AudioStream" uid="uid://cg0qfmu6opxo3" path="res://ambient_audio/Wind1.mp3" id="18_om2r3"]
+[ext_resource type="AudioStream" uid="uid://clveruiq1o18j" path="res://ambient_audio/Wind2.mp3" id="19_6fw1i"]
+
+[resource]
+script = ExtResource("1_dpfpj")
+files = Array[Resource]([ExtResource("1_4h76j"), ExtResource("2_1e87p"), ExtResource("3_wj2sl"), ExtResource("4_lu3o3"), ExtResource("5_ap6iw"), ExtResource("6_lx6pf"), ExtResource("7_xxwaa"), ExtResource("8_2ob2d"), ExtResource("9_08iju"), ExtResource("10_21e2d"), ExtResource("11_6dk01"), ExtResource("12_blgwn"), ExtResource("13_ken02"), ExtResource("14_fgyjb"), ExtResource("15_wtm13"), ExtResource("16_savxv"), ExtResource("17_u8j21"), ExtResource("18_om2r3"), ExtResource("19_6fw1i")])

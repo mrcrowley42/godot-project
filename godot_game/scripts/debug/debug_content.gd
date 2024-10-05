@@ -111,7 +111,7 @@ func _on_unlock_button_button_down() -> void:
 	# UNLOCK ALL FACTS
 	for fact in load("res://resources/fact_list.tres").facts:
 		Globals.unlock_fact(fact)
-		
+
 	# UNLOCK ALL THEMES
 	for ui_theme in load("res://resources/ui_theme_list.tres").theme_list:
 		Globals.unlock_theme(ui_theme)
@@ -123,9 +123,9 @@ func _on_unlock_button_button_down() -> void:
 
 
 func _on_button_2_button_down() -> void:
-	ambience_man.add_sound_node(load("res://ambient_audio/Crickets1.mp3"))
-	
+	var sounds = [load("res://ambient_audio/Birdsong3.mp3"), load("res://ambient_audio/Fire1.mp3"), load("res://ambient_audio/Ocean.mp3")]
+	ambience_man.add_sound_node(sounds.pick_random())
 
 
 func _on_button_3_button_down() -> void:
-	ambience_man.blah()
+	ambience_man.current_sounds()
