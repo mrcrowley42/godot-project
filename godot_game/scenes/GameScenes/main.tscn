@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bmwpenw32juko" path="res://UI stuff/Universal/background_light_map.png" id="8_aulml"]
 [ext_resource type="PackedScene" uid="uid://bebjn5n2kjwgb" path="res://scenes/Creatures/creature.tscn" id="9_ulkn4"]
 [ext_resource type="Script" path="res://scripts/Confetti.gd" id="10_tn1o6"]
-[ext_resource type="Theme" uid="uid://dl1wes8p6lqlb" path="res://themes/invisible.tres" id="11_lcq7m"]
+[ext_resource type="Theme" path="res://themes/invisible.tres" id="11_lcq7m"]
 [ext_resource type="Script" path="res://scripts/clippy_area.gd" id="12_n00c6"]
 [ext_resource type="Script" path="res://scripts/ui_theme_manager.gd" id="13_3i267"]
 [ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="14_fimo1"]
@@ -1321,7 +1321,6 @@ metadata/_edit_lock_ = true
 
 [node name="MainOptMenu" type="MarginContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 40
@@ -1337,7 +1336,13 @@ theme_override_constants/separation = 14
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme = ExtResource("18_v1mb2")
-text = "Appearance"
+text = "Cosmetics"
+
+[node name="ThemeBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme = ExtResource("18_v1mb2")
+text = "Theme"
 
 [node name="FactBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
@@ -1345,27 +1350,34 @@ layout_mode = 2
 theme = ExtResource("18_v1mb2")
 text = "Fact Book"
 
-[node name="GameplaySettingsBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer"]
+[node name="AmbienceBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme = ExtResource("18_v1mb2")
-text = "Options"
+text = "Ambient Sounds"
 
-[node name="SoundBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="SoundBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
+size_flags_horizontal = 3
 theme = ExtResource("18_v1mb2")
-text = "Sound Settings"
+text = "Settings"
 
-[node name="CreditsBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer"]
+[node name="CreditsBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
+size_flags_horizontal = 3
 theme = ExtResource("18_v1mb2")
 text = "Credits"
 
 [node name="GameplayOptionsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_arbxs")
 script = ExtResource("32_jvqx8")
@@ -1494,6 +1506,7 @@ text = ">"
 [node name="FactsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_cuoxy")
 script = ExtResource("32_jvqx8")
@@ -2185,10 +2198,10 @@ script = ExtResource("80_83777")
 [connection signal="button_down" from="UI/ActivityMenu/NavigationArrows/RightArrow" to="UI/ActivityMenu/NavigationArrows" method="_on_right_arrow_button_down"]
 [connection signal="visibility_changed" from="UI/OptionsMenu" to="UI/OptionsMenu" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/AppearanceBtn" to="UI/OptionsMenu" method="_on_appearance_btn_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/ThemeBtn" to="UI/OptionsMenu" method="_on_gameplay_settings_btn_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/FactBtn" to="UI/OptionsMenu" method="_on_fact_btn_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/GameplaySettingsBtn" to="UI/OptionsMenu" method="_on_gameplay_settings_btn_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/SoundBtn" to="UI/OptionsMenu" method="_on_sound_btn_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/CreditsBtn" to="UI/OptionsMenu" method="_on_credits_btn_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer/SoundBtn" to="UI/OptionsMenu" method="_on_sound_btn_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer/CreditsBtn" to="UI/OptionsMenu" method="_on_credits_btn_button_down"]
 [connection signal="visibility_changed" from="UI/OptionsMenu/GameplayOptionsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ThemeBtns" to="UI/OptionsMenu/GameplayOptionsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ThemeBtns" method="_on_visibility_changed"]
 [connection signal="pressed" from="UI/OptionsMenu/GameplayOptionsMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
 [connection signal="button_down" from="UI/OptionsMenu/GameplayOptionsMenu/SaveButtons/Cancel" to="UI/OptionsMenu/GameplayOptionsMenu/SaveButtons/Cancel" method="_on_button_down"]
