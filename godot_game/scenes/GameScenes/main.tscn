@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bmwpenw32juko" path="res://UI stuff/Universal/background_light_map.png" id="8_aulml"]
 [ext_resource type="PackedScene" uid="uid://bebjn5n2kjwgb" path="res://scenes/Creatures/creature.tscn" id="9_ulkn4"]
 [ext_resource type="Script" path="res://scripts/Confetti.gd" id="10_tn1o6"]
-[ext_resource type="Theme" path="res://themes/invisible.tres" id="11_lcq7m"]
+[ext_resource type="Theme" uid="uid://dl1wes8p6lqlb" path="res://themes/invisible.tres" id="11_lcq7m"]
 [ext_resource type="Script" path="res://scripts/clippy_area.gd" id="12_n00c6"]
 [ext_resource type="Script" path="res://scripts/ui_theme_manager.gd" id="13_3i267"]
 [ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="14_fimo1"]
@@ -1358,6 +1358,7 @@ text = "Ambient Sounds"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 14
 alignment = 1
 
 [node name="SoundBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer"]
