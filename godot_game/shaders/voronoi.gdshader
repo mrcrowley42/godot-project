@@ -10,7 +10,7 @@ uniform vec4 color = vec4(0.0,0.0,0.0,1.0);
 uniform float pixel_size : hint_range(2., 20., 1.) = 5;
 uniform float scale : hint_range(0.01, 1., 0.01) = .5;
 uniform float speed : hint_range(0.01, 5.0, 0.01) = 0.05;
-uniform float layer : hint_range(0.0, 2.0, 0.1) = 1.0;
+uniform float brightness : hint_range(0.0, 2.0, 0.1) = 1.0;
 uniform float opacity : hint_range(0.0, 1.0, 0.01) = 0.2;
 
 #define iTime TIME * speed
@@ -60,7 +60,7 @@ vec4 voronoi(vec2 screen_pixel_size, vec2 screen_uv) {
 		}
 	}
 	// colour
-	O += mix(vec4(.5,0,(ia.y-iTime)/2.,1)+.3,vec4(0,.3,(ia.x-0.)*.3,0)+.2,hash12(ia) ) * layer;
+	O += mix(vec4(.5,0,(ia.y-iTime)/2.,1)+.3,vec4(0,.3,(ia.x-0.)*.3,0)+.2,hash12(ia) ) * brightness;
 
 	// 求到相交边界的距离
 	md=1e8;
@@ -75,7 +75,7 @@ vec4 voronoi(vec2 screen_pixel_size, vec2 screen_uv) {
 	}
 
 	// colour
-	d = 10. * clamp(exp(-2e2*md), 0., 1.) * layer;
+	d = 10. * clamp(exp(-2e2*md), 0., 1.) * brightness;
 	return vec4((max(O-.1*d,0.)+d));
 }
 

@@ -3,14 +3,14 @@ extends PanelContainer
 @onready var main_menu = %MainOptMenu
 @onready var settings_menu = %GameplayOptionsMenu
 @onready var sound_menu = %SoundMenu
-@onready var appearance_menu = %AppearanceMenu
+@onready var cosmetics_menu = %CosmeticsMenu
 @onready var facts_menu = %FactsMenu
 @onready var ambience_menu = %AmbienceMenu
 
 enum Menu {CREDITS, SOUND, SETTINGS, FACTS, APPEARANCE, AMBIENCE}
 @onready var menus = {Menu.CREDITS: credits, Menu.SOUND: sound_menu,
 	Menu.SETTINGS: settings_menu, Menu.FACTS: facts_menu,
-	Menu.APPEARANCE: appearance_menu, Menu.AMBIENCE: ambience_menu }
+	Menu.APPEARANCE: cosmetics_menu, Menu.AMBIENCE: ambience_menu }
 
 var current_menu
 

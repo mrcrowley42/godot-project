@@ -1,4 +1,4 @@
-[gd_scene load_steps=116 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=118 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_aqytd"]
@@ -52,6 +52,7 @@
 [ext_resource type="Script" path="res://scripts/fact_progress_label.gd" id="44_t23g2"]
 [ext_resource type="PackedScene" uid="uid://dyapnl5xgvivn" path="res://scenes/UiScenes/topic_btn.tscn" id="44_y5a0d"]
 [ext_resource type="Texture2D" uid="uid://p0oo42fr5wrp" path="res://icons/status/lunch_dining_24dp_8B1A10_FILL0_wght500_GRAD0_opsz24-svg.svg" id="45_3duvs"]
+[ext_resource type="Shader" path="res://shaders/pattern_1.gdshader" id="45_bgevw"]
 [ext_resource type="Theme" uid="uid://bqgwnv42jeh15" path="res://themes/menu_title.tres" id="45_e031c"]
 [ext_resource type="Theme" uid="uid://bvenu5jrxbavx" path="res://themes/scroll_container.tres" id="46_r0sdd"]
 [ext_resource type="Texture2D" uid="uid://cuaa2uyffvita" path="res://icons/status/droplet-fill.svg" id="47_qik1j"]
@@ -241,8 +242,18 @@ corner_radius_bottom_left = 6
 corner_detail = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cuoxy"]
-bg_color = Color(0.162066, 0.162066, 0.162066, 1)
+bg_color = Color(0.195766, 0.142776, 0.185097, 1)
 border_color = Color(0.8, 0.8, 0.8, 0.411765)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_357to"]
+shader = ExtResource("45_bgevw")
+shader_parameter/bg_col = Color(0.0104201, 0.0468058, 0.02102, 1)
+shader_parameter/one_col = Color(0.00158813, 0.00884845, 0.00326036, 1)
+shader_parameter/one_speed = 0.02
+shader_parameter/one_size = 10.0
+shader_parameter/two_col = Color(0, 0.0129714, 0.000732833, 1)
+shader_parameter/two_speed = -0.02
+shader_parameter/two_size = 10.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wd2mi"]
 
@@ -1598,45 +1609,45 @@ theme_override_font_sizes/font_size = 18
 text = "Back"
 script = ExtResource("35_4io20")
 
-[node name="AppearanceMenu" type="PanelContainer" parent="UI/OptionsMenu"]
+[node name="CosmeticsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+material = SubResource("ShaderMaterial_357to")
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_cuoxy")
 script = ExtResource("32_jvqx8")
 metadata/_edit_lock_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/AppearanceMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/CosmeticsMenu"]
 layout_mode = 2
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/CosmeticsMenu/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="Button" type="Button" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("45_e031c")
 theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
 text = "PREVIEW TEXT
 "
 
-[node name="ScrollContainer" type="ScrollContainer" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 158)
 layout_mode = 2
 theme = ExtResource("46_r0sdd")
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="CosmeticItems" type="GridContainer" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer" node_paths=PackedStringArray("creature")]
+[node name="CosmeticItems" type="GridContainer" parent="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer" node_paths=PackedStringArray("creature")]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/h_separation = 10
@@ -1645,20 +1656,20 @@ columns = 5
 script = ExtResource("41_pook7")
 creature = NodePath("../../../../../../../../Gameplay/Creature")
 
-[node name="PreviewContainer" type="MarginContainer" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer"]
+[node name="PreviewContainer" type="MarginContainer" parent="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="CreaturePreview" type="AnimatedSprite2D" parent="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/PreviewContainer"]
+[node name="CreaturePreview" type="AnimatedSprite2D" parent="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/PreviewContainer"]
 scale = Vector2(0.15, 0.15)
 script = ExtResource("49_p7hc5")
 
-[node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/AppearanceMenu"]
+[node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/CosmeticsMenu"]
 position = Vector2(-50, -130)
 
-[node name="Save" type="Button" parent="UI/OptionsMenu/AppearanceMenu/SaveButtons"]
+[node name="Save" type="Button" parent="UI/OptionsMenu/CosmeticsMenu/SaveButtons"]
 offset_left = 391.0
 offset_top = 511.0
 offset_right = 492.0
@@ -1669,7 +1680,7 @@ theme_override_colors/font_hover_color = Color(0.4947, 0.97, 0.4947, 1)
 theme_override_font_sizes/font_size = 18
 text = "Save"
 
-[node name="Cancel" type="Button" parent="UI/OptionsMenu/AppearanceMenu/SaveButtons"]
+[node name="Cancel" type="Button" parent="UI/OptionsMenu/CosmeticsMenu/SaveButtons"]
 texture_filter = 5
 offset_left = 64.0
 offset_top = 510.0
@@ -2359,10 +2370,10 @@ script = ExtResource("80_83777")
 [connection signal="button_down" from="UI/OptionsMenu/GameplayOptionsMenu/ThemeControls/vHBoxContainer/Button2" to="UI/OptionsMenu/GameplayOptionsMenu/ThemeControls" method="_on_back_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/GameplayOptionsMenu/ThemeControls/vHBoxContainer/Button" to="UI/OptionsMenu/GameplayOptionsMenu/ThemeControls" method="_on_forward_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/FactsMenu/Library/SaveButtons/Cancel" to="UI/OptionsMenu/FactsMenu/Library/SaveButtons/Cancel" method="_on_button_down"]
-[connection signal="cosmetic_btn_pressed" from="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems" to="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/PreviewContainer/CreaturePreview" method="_on_cosmetic_items_cosmetic_btn_pressed"]
-[connection signal="visibility_changed" from="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems" to="UI/OptionsMenu/AppearanceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems" method="_on_visibility_changed"]
-[connection signal="pressed" from="UI/OptionsMenu/AppearanceMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
-[connection signal="button_down" from="UI/OptionsMenu/AppearanceMenu/SaveButtons/Cancel" to="UI/OptionsMenu/AppearanceMenu/SaveButtons/Cancel" method="_on_button_down"]
+[connection signal="cosmetic_btn_pressed" from="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems" to="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/PreviewContainer/CreaturePreview" method="_on_cosmetic_items_cosmetic_btn_pressed"]
+[connection signal="visibility_changed" from="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems" to="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems" method="_on_visibility_changed"]
+[connection signal="pressed" from="UI/OptionsMenu/CosmeticsMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
+[connection signal="button_down" from="UI/OptionsMenu/CosmeticsMenu/SaveButtons/Cancel" to="UI/OptionsMenu/CosmeticsMenu/SaveButtons/Cancel" method="_on_button_down"]
 [connection signal="pressed" from="UI/OptionsMenu/SoundMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
 [connection signal="button_down" from="UI/OptionsMenu/SoundMenu/SaveButtons/Cancel" to="UI/OptionsMenu/SoundMenu/SaveButtons/Cancel" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/SoundMenu/MusicControls/HBoxContainer/Button2" to="UI/OptionsMenu/SoundMenu/MusicControls" method="_on_back_button_down"]
