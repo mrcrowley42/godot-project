@@ -1,4 +1,4 @@
-[gd_scene load_steps=117 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=116 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_aqytd"]
@@ -256,9 +256,6 @@ script/source = "extends ScrollContainer
 func _on_visibility_changed():
 	scroll_vertical = 0
 "
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m073d"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2mbbg"]
 bg_color = Color(0, 0, 0, 0.227451)
@@ -1915,6 +1912,16 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_jv2ux")
 text = "x"
 script = SubResource("GDScript_4s3go")
 
+[node name="Label" type="Label" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Ambient Sounds"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/AmbienceMenu"]
 position = Vector2(-50, -130)
 
@@ -1986,6 +1993,13 @@ theme_override_constants/outline_size = 3
 theme_override_font_sizes/font_size = 44
 theme_override_styles/normal = SubResource("StyleBoxFlat_3535b")
 text = ">"
+
+[node name="MarginContainer2" type="MarginContainer" parent="UI/OptionsMenu/AmbienceMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 16
 
 [node name="CreditsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
@@ -2073,31 +2087,6 @@ Seto's Memory by Shinkichi Mitsumune
 Aquatic Ambience by David Wise
 [/ul][/indent]"
 fit_content = true
-
-[node name="AmbienceMenu" type="PanelContainer" parent="UI/OptionsMenu"]
-unique_name_in_owner = true
-process_mode = 3
-visible = false
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_m073d")
-script = ExtResource("32_jvqx8")
-
-[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/AmbienceMenu"]
-layout_mode = 2
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 16
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 24
-
-[node name="Label" type="Label" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Ambient Sounds"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="UI_Overlay" type="Sprite2D" parent="UI"]
 unique_name_in_owner = true
