@@ -13,7 +13,7 @@ class UiThemeButton extends Button:
 		self.ui_theme = _ui_theme
 		self.text = _ui_theme.theme_name
 		
-		theme = load("res://themes/vcr_font.tres")
+		theme = load("res://themes/menu_btn_dark.tres")
 		
 		var box = StyleBoxFlat.new()
 		box.bg_color = ui_theme.screen_tint

@@ -5,11 +5,12 @@ extends PanelContainer
 @onready var sound_menu = %SoundMenu
 @onready var appearance_menu = %AppearanceMenu
 @onready var facts_menu = %FactsMenu
+@onready var ambience_menu = %AmbienceMenu
 
-enum Menu {CREDITS, SOUND, SETTINGS, FACTS, APPEARANCE}
+enum Menu {CREDITS, SOUND, SETTINGS, FACTS, APPEARANCE, AMBIENCE}
 @onready var menus = {Menu.CREDITS: credits, Menu.SOUND: sound_menu,
 	Menu.SETTINGS: settings_menu, Menu.FACTS: facts_menu,
-	Menu.APPEARANCE: appearance_menu }
+	Menu.APPEARANCE: appearance_menu, Menu.AMBIENCE: ambience_menu }
 
 var current_menu
 
@@ -49,3 +50,7 @@ func _on_appearance_btn_button_down():
 
 func _on_fact_btn_button_down():
 	change_menu(Menu.FACTS)
+
+
+func _on_ambience_btn_button_down():
+	change_menu(Menu.AMBIENCE)
