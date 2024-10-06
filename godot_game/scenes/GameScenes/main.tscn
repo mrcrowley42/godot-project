@@ -248,12 +248,14 @@ border_color = Color(0.8, 0.8, 0.8, 0.411765)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_357to"]
 shader = ExtResource("45_bgevw")
 shader_parameter/bg_col = Color(0.0104201, 0.0468058, 0.02102, 1)
-shader_parameter/one_col = Color(0.00158813, 0.00884845, 0.00326036, 1)
+shader_parameter/one_col = Color(0.0117647, 0.0470588, 0.0196078, 1)
 shader_parameter/one_speed = 0.02
 shader_parameter/one_size = 10.0
-shader_parameter/two_col = Color(0, 0.0129714, 0.000732833, 1)
+shader_parameter/one_opacity = 0.2
+shader_parameter/two_col = Color(0.0117647, 0.0470588, 0.0196078, 1)
 shader_parameter/two_speed = -0.02
 shader_parameter/two_size = 10.0
+shader_parameter/two_opacity = 0.2
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wd2mi"]
 
