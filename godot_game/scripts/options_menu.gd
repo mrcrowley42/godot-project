@@ -1,15 +1,15 @@
 extends PanelContainer
 @onready var credits = %CreditsMenu
 @onready var main_menu = %MainOptMenu
-@onready var settings_menu = %GameplayOptionsMenu
-@onready var sound_menu = %SoundMenu
+@onready var theme_menu = %ThemeMenu
+@onready var settings_menu = %SettingsMenu
 @onready var cosmetics_menu = %CosmeticsMenu
 @onready var facts_menu = %FactsMenu
 @onready var ambience_menu = %AmbienceMenu
 
-enum Menu {CREDITS, SOUND, SETTINGS, FACTS, APPEARANCE, AMBIENCE}
-@onready var menus = {Menu.CREDITS: credits, Menu.SOUND: sound_menu,
-	Menu.SETTINGS: settings_menu, Menu.FACTS: facts_menu,
+enum Menu {CREDITS, SETTINGS, THEME, FACTS, APPEARANCE, AMBIENCE}
+@onready var menus = {Menu.CREDITS: credits, Menu.SETTINGS: settings_menu,
+	Menu.THEME: theme_menu, Menu.FACTS: facts_menu,
 	Menu.APPEARANCE: cosmetics_menu, Menu.AMBIENCE: ambience_menu }
 
 var current_menu
@@ -32,7 +32,7 @@ func _on_credits_btn_button_down():
 	change_menu(Menu.CREDITS)
 
 func _on_sound_btn_button_down():
-	change_menu(Menu.SOUND)
+	change_menu(Menu.SETTINGS)
 
 func _on_visibility_changed():
 	## DO WE WANT THIS?
@@ -41,7 +41,7 @@ func _on_visibility_changed():
 
 
 func _on_gameplay_settings_btn_button_down():
-	change_menu(Menu.SETTINGS)
+	change_menu(Menu.THEME)
 
 
 func _on_appearance_btn_button_down():
