@@ -213,9 +213,6 @@ func _ready():
 shader = ExtResource("50_tajtf")
 shader_parameter/bg_col = Color(0.00451957, 0.0762496, 0.16597, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2rfxe"]
-bg_color = Color(0.57, 1, 0.706167, 0.611765)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jv2ux"]
 corner_radius_top_left = 32
 corner_radius_top_right = 32
@@ -248,7 +245,7 @@ border_color = Color(0.8, 0.8, 0.8, 0.411765)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_357to"]
 shader = ExtResource("45_bgevw")
 shader_parameter/bg_col = Color(0.0104201, 0.0468058, 0.02102, 1)
-shader_parameter/shift_one_left = false
+shader_parameter/shift_one_right = true
 shader_parameter/one_col = Color(0.0117647, 0.0470588, 0.0196078, 1)
 shader_parameter/one_speed = 0.02
 shader_parameter/one_size = 10.0
@@ -264,6 +261,9 @@ draw_center = false
 border_color = Color(0.8, 0.8, 0.8, 0.411765)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wd2mi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2rfxe"]
+bg_color = Color(0.57, 1, 0.706167, 0.611765)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qyod2"]
 bg_color = Color(0.2, 0.2, 0.2, 1)
@@ -1419,13 +1419,13 @@ theme_override_constants/separation = 24
 
 [node name="Button" type="Button" parent="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "PREVIEW TEXT
-"
+theme = ExtResource("45_e031c")
+text = "Themes"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 158)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_2rfxe")
+theme = ExtResource("46_r0sdd")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer/ScrollContainer"]
 layout_mode = 2
@@ -1640,8 +1640,7 @@ theme_override_constants/separation = 24
 layout_mode = 2
 theme = ExtResource("45_e031c")
 theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
-text = "PREVIEW TEXT
-"
+text = "Creature Cosmetics"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 158)

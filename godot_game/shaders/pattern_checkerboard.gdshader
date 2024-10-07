@@ -1,7 +1,7 @@
 shader_type canvas_item;
 
 uniform vec4 bg_col : source_color;
-uniform bool shift_one_left = false;
+uniform bool shift_one_right = false;
 
 uniform vec4 one_col : source_color = vec4(.03, .0, .03, 1.);
 uniform float one_speed : hint_range(-.5, .5, 0.01) = .02;
@@ -23,7 +23,7 @@ void fragment() {
 	
 	vec2 uv1 = UV + TIME * one_speed;
 	vec2 uv2 = UV + TIME * two_speed;
-	if (shift_one_left) {
+	if (shift_one_right) {
 		uv1 = vec2(-uv1.y, uv1.x);
 	}
 	
