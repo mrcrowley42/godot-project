@@ -221,7 +221,7 @@ shader_parameter/one_speed = 0.02
 shader_parameter/one_opacity = 0.1
 shader_parameter/two_col = Color(0.101961, 0.0196078, 0.219608, 1)
 shader_parameter/two_speed = 0.02
-shader_parameter/two_opacity = 0.1
+shader_parameter/two_opacity = 0.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3535b"]
 bg_color = Color(0.822295, 0.511699, 0.352571, 1)
