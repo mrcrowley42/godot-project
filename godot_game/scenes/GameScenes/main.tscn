@@ -47,14 +47,14 @@
 [ext_resource type="Texture2D" uid="uid://cawudmxbjamv0" path="res://UI stuff/Green Palette/ui_green.png" id="40_wt18k"]
 [ext_resource type="Texture2D" uid="uid://c702pbhxasm52" path="res://icons/status/heart-fill.svg" id="41_8adaw"]
 [ext_resource type="Script" path="res://scripts/costmetic_row.gd" id="41_pook7"]
-[ext_resource type="Theme" uid="uid://bqu43buo5gcrc" path="res://themes/menu_btn_dark.tres" id="42_c1jtf"]
+[ext_resource type="Theme" path="res://themes/vcr_font.tres" id="42_c1jtf"]
 [ext_resource type="Texture2D" uid="uid://d84hj0mtn2hw" path="res://icons/status/mood_24dp_FILL1_wght300_GRAD0_opsz24.svg" id="43_qa2jm"]
 [ext_resource type="Script" path="res://scripts/fact_progress_label.gd" id="44_t23g2"]
 [ext_resource type="PackedScene" uid="uid://dyapnl5xgvivn" path="res://scenes/UiScenes/topic_btn.tscn" id="44_y5a0d"]
 [ext_resource type="Texture2D" uid="uid://p0oo42fr5wrp" path="res://icons/status/lunch_dining_24dp_8B1A10_FILL0_wght500_GRAD0_opsz24-svg.svg" id="45_3duvs"]
 [ext_resource type="Shader" path="res://shaders/pattern_checkerboard.gdshader" id="45_bgevw"]
-[ext_resource type="Theme" uid="uid://bqgwnv42jeh15" path="res://themes/menu_title.tres" id="45_e031c"]
-[ext_resource type="Theme" uid="uid://bvenu5jrxbavx" path="res://themes/scroll_container.tres" id="46_r0sdd"]
+[ext_resource type="Theme" uid="uid://x6rgwcyh7bnk" path="res://themes/menu_title.tres" id="45_e031c"]
+[ext_resource type="Theme" uid="uid://bv3clfelw5gun" path="res://themes/scroll_container.tres" id="46_r0sdd"]
 [ext_resource type="Texture2D" uid="uid://cuaa2uyffvita" path="res://icons/status/droplet-fill.svg" id="47_qik1j"]
 [ext_resource type="Texture2D" uid="uid://d4c1k5m8u1jc0" path="res://UI stuff/Green Palette/green_food_button.png" id="49_a77pc"]
 [ext_resource type="Script" path="res://scripts/cosmetics_preview.gd" id="49_p7hc5"]
@@ -237,13 +237,13 @@ border_color = Color(0.8, 0.8, 0.8, 0.411765)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_357to"]
 shader = ExtResource("45_bgevw")
-shader_parameter/bg_col = Color(0.0104201, 0.0468058, 0.02102, 1)
+shader_parameter/bg_col = Color(0.0259102, 0.0937369, 0.0511778, 1)
 shader_parameter/shift_one_right = true
-shader_parameter/one_col = Color(0.0117647, 0.0470588, 0.0196078, 1)
+shader_parameter/one_col = Color(0.0210611, 0.0750532, 0.0350906, 1)
 shader_parameter/one_speed = 0.02
 shader_parameter/one_size = 10.0
 shader_parameter/one_opacity = 0.2
-shader_parameter/two_col = Color(0.0117647, 0.0470588, 0.0196078, 1)
+shader_parameter/two_col = Color(0.0196078, 0.0745098, 0.0352941, 1)
 shader_parameter/two_speed = -0.02
 shader_parameter/two_size = 10.0
 shader_parameter/two_opacity = 0.2
@@ -1393,6 +1393,7 @@ text = "Credits"
 [node name="ThemeMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 material = SubResource("ShaderMaterial_gyxpl")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -1605,7 +1606,6 @@ script = ExtResource("35_4io20")
 [node name="CosmeticsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 material = SubResource("ShaderMaterial_357to")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
