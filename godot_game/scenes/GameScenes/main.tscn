@@ -212,11 +212,14 @@ func _ready():
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gyxpl"]
 shader = ExtResource("50_tajtf")
-shader_parameter/bg_col = Color(0.0117647, 0.0470588, 0.0196078, 1)
-shader_parameter/one_col = Color(0.0117647, 0.0470588, 0.0196078, 1)
+shader_parameter/bg_col = Color(0.0346503, 0.00458007, 0.100115, 1)
+shader_parameter/rotation = 275.0
+shader_parameter/double = true
+shader_parameter/size = 12.0
+shader_parameter/one_col = Color(0.101713, 0.0200512, 0.217692, 1)
 shader_parameter/one_speed = 0.02
 shader_parameter/one_opacity = 0.1
-shader_parameter/two_col = Color(0.0117647, 0.0470588, 0.0196078, 1)
+shader_parameter/two_col = Color(0.101961, 0.0196078, 0.219608, 1)
 shader_parameter/two_speed = 0.02
 shader_parameter/two_opacity = 0.1
 
