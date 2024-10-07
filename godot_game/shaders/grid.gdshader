@@ -41,20 +41,20 @@ bool shouldOutline(vec2 screenDim, vec2 scaledUV, vec2 offset) {
 void fragment() {
 	vec2 screenDim = 1.0 / SCREEN_PIXEL_SIZE;  // inverted to get dimensions
 	vec2 scaledUV = UV * screenDim;
-	
+
 	float columnWidth = screenDim.x / columns;
 	float rowHeight = screenDim.y / rows;
 	vec2 offset = offsetCentered ? vec2((lineSize * columnWidth) * 0.5, (lineSize * rowHeight) * 0.5) : offsetOverride;
-	
+
 	// perform 'modulus' operation with floats
 	vec2 remainder = vec2(scaledUV.x - offset.x, scaledUV.y - offset.y);
 	remainder /= vec2(columnWidth, rowHeight);
 	remainder -= floor(remainder);  // actually get the remainder (will be =< 0 and > 1 whithin each grid square)
-	
+
 	// apply colours
 	if (max(remainder.x, remainder.y) > 1.0 - lineSize) {
 		COLOR = color;
-		
+
 		if (shouldOutline(screenDim, scaledUV, offset)) {
 			COLOR = outlineColor;
 		} else if (shouldBevel(remainder)) {

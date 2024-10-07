@@ -212,7 +212,13 @@ func _ready():
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gyxpl"]
 shader = ExtResource("50_tajtf")
-shader_parameter/bg_col = Color(0.00451957, 0.0762496, 0.16597, 1)
+shader_parameter/bg_col = Color(0.0117647, 0.0470588, 0.0196078, 1)
+shader_parameter/one_col = Color(0.0117647, 0.0470588, 0.0196078, 1)
+shader_parameter/one_speed = 0.02
+shader_parameter/one_opacity = 0.1
+shader_parameter/two_col = Color(0.0117647, 0.0470588, 0.0196078, 1)
+shader_parameter/two_speed = 0.02
+shader_parameter/two_opacity = 0.1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3535b"]
 bg_color = Color(0.822295, 0.511699, 0.352571, 1)
@@ -1309,7 +1315,6 @@ metadata/_edit_use_anchors_ = true
 [node name="OptionsMenu" type="PanelContainer" parent="UI"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1385,7 +1390,6 @@ text = "Credits"
 [node name="ThemeMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 material = SubResource("ShaderMaterial_gyxpl")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -1598,6 +1602,7 @@ script = ExtResource("35_4io20")
 [node name="CosmeticsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 material = SubResource("ShaderMaterial_357to")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
