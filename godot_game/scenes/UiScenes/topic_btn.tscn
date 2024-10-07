@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dyapnl5xgvivn"]
 
-[ext_resource type="Theme" uid="uid://bqu43buo5gcrc" path="res://themes/menu_btn_dark.tres" id="1_e3xoi"]
+[ext_resource type="Theme" path="res://themes/menu_btn_dark.tres" id="1_e3xoi"]
 [ext_resource type="Script" path="res://scripts/fact_topic_btn.gd" id="2_5a1jf"]
 
 [node name="Button" type="Button"]
