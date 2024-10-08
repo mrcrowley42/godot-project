@@ -77,6 +77,6 @@ func get_file_name(sound: Resource) -> String:
 ## Returns a dictionary of file_names to resource_path for each ambient sound.
 func build_sound_map() -> Dictionary:
 	var sound_dict = Dictionary()
-	for sound in load("res://resources/ambient_sounds/categories/category_fire.tres").sound_files:
+	for sound in load("res://resources/ambient_sounds/categories/category_fire.tres").sound_resources:
 		sound_dict[get_file_name(sound)] = sound.file
 	return sound_dict

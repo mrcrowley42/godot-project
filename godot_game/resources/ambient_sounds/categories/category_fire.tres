@@ -10,4 +10,4 @@
 script = ExtResource("1_tmiid")
 category_name = "Crackling Fire"
 image = ExtResource("1_8vbq3")
-sound_files = Array[Resource]([ExtResource("3_ldiia"), ExtResource("4_dsohu"), ExtResource("5_244as")])
+sound_resources = Array[Resource]([ExtResource("3_ldiia"), ExtResource("4_dsohu"), ExtResource("5_244as")])
