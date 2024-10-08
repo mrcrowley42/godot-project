@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AmbientSoundCategory" load_steps=6 format=3 uid="uid://du8awqtm0cx1e"]
+
+[ext_resource type="Texture2D" uid="uid://dq73ygrgb5m0o" path="res://images/ambience/campfire.png" id="1_8vbq3"]
+[ext_resource type="Script" path="res://scripts/base_classses/ambient_sound_category.gd" id="1_tmiid"]
+[ext_resource type="Resource" uid="uid://ck4rw23kcbodh" path="res://resources/ambient_sounds/sounds/sound_fire_1.tres" id="3_ldiia"]
+[ext_resource type="Resource" uid="uid://48tep8fw4x24" path="res://resources/ambient_sounds/sounds/sound_fire_2.tres" id="4_dsohu"]
+[ext_resource type="Resource" uid="uid://d3w5bxue236y4" path="res://resources/ambient_sounds/sounds/sound_fire_3.tres" id="5_244as"]
+
+[resource]
+script = ExtResource("1_tmiid")
+category_name = "Crackling Fire"
+image = ExtResource("1_8vbq3")
+sound_files = Array[Resource]([ExtResource("3_ldiia"), ExtResource("4_dsohu"), ExtResource("5_244as")])

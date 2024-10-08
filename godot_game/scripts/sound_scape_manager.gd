@@ -9,7 +9,7 @@ var sound_list = build_sound_map()
 signal finished_loading()
 
 ## Custom streamplayer class, that loops audio by default.
-class AmbientSound extends AudioStreamPlayer:
+class AmbientSoundPlayer extends AudioStreamPlayer:
 	var sound_name: String
 
 	func _init(loop: bool = true) -> void:
@@ -77,6 +77,6 @@ func get_file_name(sound: Resource) -> String:
 ## Returns a dictionary of file_names to resource_path for each ambient sound.
 func build_sound_map() -> Dictionary:
 	var sound_dict = Dictionary()
-	for sound in load("res://ambient_audio/ambient_sounds.tres").files:
-		sound_dict[get_file_name(sound)] = sound.resource_path
+	for sound in load("res://resources/ambient_sounds/categories/category_fire.tres").sound_files:
+		sound_dict[get_file_name(sound)] = sound.file
 	return sound_dict
