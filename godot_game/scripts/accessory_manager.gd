@@ -11,6 +11,8 @@ var unlockables_dict: Dictionary
 
 var ready_to_place_cosmetics: bool = false
 
+signal cosmetics_loaded
+
 ## Class to define a cosmetic as it appears in game.
 class CosmeticSprite extends AnimatedSprite2D:
 	func _init(cosmetic: CosmeticItem):
@@ -36,6 +38,7 @@ func _notification(noti: int) -> void:
 func set_ready():
 	if ready_to_place_cosmetics:
 		place_all_cosmetics()
+		cosmetics_loaded.emit()
 	ready_to_place_cosmetics = true
 
 func place_all_cosmetics():
