@@ -1,0 +1,70 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://duyys0blxefyd"]
+
+[ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="1_gjxuf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rl3qu"]
+bg_color = Color(0.232, 0.232, 0.232, 0.521)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xcx6q"]
+draw_center = false
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_syfaa"]
+bg_color = Color(0.349065, 0.349065, 0.349065, 1)
+border_color = Color(0.808998, 0.808998, 0.808998, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rt26j"]
+bg_color = Color(0.275091, 0.275091, 0.27509, 1)
+border_color = Color(0.696886, 0.696886, 0.696886, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_11noq"]
+bg_color = Color(0.523781, 0.523781, 0.52378, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.900705, 0.900705, 0.900705, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[resource]
+default_font = ExtResource("1_gjxuf")
+default_font_size = 28
+Button/styles/disabled = SubResource("StyleBoxFlat_rl3qu")
+Button/styles/focus = SubResource("StyleBoxFlat_xcx6q")
+Button/styles/hover = SubResource("StyleBoxFlat_syfaa")
+Button/styles/normal = SubResource("StyleBoxFlat_rt26j")
+Button/styles/pressed = SubResource("StyleBoxFlat_11noq")

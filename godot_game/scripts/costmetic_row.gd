@@ -13,9 +13,10 @@ class UnlockableIcon extends Button:
 	var cosmetic
 
 	func _init(unlockable: CosmeticItem):
-		theme = load("res://themes/menu_btn_dark.tres")
+		theme = load("res://themes/cosmetic_btn_theme.tres")
 		custom_minimum_size = BTN_SIZE
 		toggle_mode = true
+		icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		size = BTN_SIZE
 		expand_icon = false
 		add_theme_constant_override("icon_max_width", 50)
