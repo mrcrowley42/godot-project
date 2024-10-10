@@ -1906,6 +1906,7 @@ layout_mode = 2
 [node name="CategoryBtn" type="OptionButton" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 selected = 0
+allow_reselect = true
 item_count = 1
 popup/item_0/text = "CATEGORY"
 
@@ -2321,6 +2322,7 @@ script = ExtResource("80_83777")
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2/MasterMuted" to="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2/MasterMuted" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2/SFXMuted" to="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2/SFXMuted" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2/MusicMuted" to="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2/MusicMuted" method="_on_button_down"]
+[connection signal="item_selected" from="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/HBoxContainer/CategoryBtn" to="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer" method="_on_category_btn_item_selected"]
 [connection signal="pressed" from="UI/OptionsMenu/AmbienceMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
 [connection signal="button_down" from="UI/OptionsMenu/AmbienceMenu/SaveButtons/Cancel" to="UI/OptionsMenu/AmbienceMenu/SaveButtons/Cancel" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/CreditsMenu/Node2D/CreditsCloseBtn" to="UI/OptionsMenu/CreditsMenu/Node2D/CreditsCloseBtn" method="_on_button_down"]
