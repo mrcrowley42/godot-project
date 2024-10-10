@@ -30,19 +30,23 @@ func _ready() -> void:
 
 ## Regenerate soundscape from saved settings.
 func load_soundscape() -> void:
-	if soundscape:
-		for sound in soundscape:
+	if not soundscape:
+		return
+	for sound in soundscape:
+		if sound_list.has(sound[0]):
 			var audio = load(sound_list[sound[0]])
 			var volume = sound[1]
 			add_sound_node(audio, volume)
+		else:
+			soundscape.pop_front()  # Remove corrupt filenames
 
 
-## Create a [param AmbientSound] with the passed audio file.
-func add_sound_node(sound: AudioStream, volume: float = 0.5) -> void:
-	var sound_node = AmbientSound.new()
-	sound_node.stream = sound
+## Create a [param AmbientSoundPlayer] with the passed audio file.
+func add_sound_node(sound: AmbientSound, volume: float = 0.5) -> void:
+	var sound_node = AmbientSoundPlayer.new()
+	sound_node.stream = sound.file
 	sound_node.volume_db = linear_to_db(volume)
-	sound_node.sound_name = get_file_name(sound)
+	sound_node.sound_name = sound.sound_name.to_lower().replace(" ",  "")
 	add_child(sound_node)
 
 
@@ -54,7 +58,7 @@ func save() -> Dictionary:
 			node.sound_name,
 			db_to_linear(node.volume_db)])
 
-	#soundscape = settings_data
+	soundscape = settings_data
 	return {"section": Globals.AUDIO_SECTION, SETTING_KEY: settings_data}
 
 
@@ -69,14 +73,13 @@ func current_sounds():
 	print(soundscape)
 
 
-## Returns the file name of an audio file.
-func get_file_name(sound: Resource) -> String:
-	return sound.resource_path.get_file().get_basename()
-
-
 ## Returns a dictionary of file_names to resource_path for each ambient sound.
 func build_sound_map() -> Dictionary:
 	var sound_dict = Dictionary()
-	for sound in load("res://resources/ambient_sounds/categories/category_fire.tres").sound_resources:
-		sound_dict[get_file_name(sound)] = sound.file
+	for category in load("res://resources/ambience_categories.tres").items:
+		for sound in category.sound_resources:
+			# Format sound key to avoid strict formating.
+			var sound_key: String = sound.sound_name.to_lower().replace(" ",  "")
+			sound_dict[sound_key] = sound
+	print(sound_dict)
 	return sound_dict
