@@ -32,13 +32,14 @@ func _ready() -> void:
 func load_soundscape() -> void:
 	if not soundscape:
 		return
+	# Remove invalid or corrupt file names.
+	soundscape = soundscape.filter(func(x): return sound_list.has(x[0]))
+	# TODO NEED SOME WAY OF PREVENTING DUPLICATES
+	# ALSO CURRENTLY REQUIRES TO PRESS A SAVE BUTTON MAYBE MOVE IT TO SAVE RATHER THAN SETTINGS
 	for sound in soundscape:
-		if sound_list.has(sound[0]):
-			var audio = load(sound_list[sound[0]])
-			var volume = sound[1]
-			add_sound_node(audio, volume)
-		else:
-			soundscape.pop_front()  # Remove corrupt filenames
+		var file = sound_list[sound[0]]
+		var volume = sound[1]
+		add_sound_node(file, volume)
 
 
 ## Create a [param AmbientSoundPlayer] with the passed audio file.
@@ -81,5 +82,4 @@ func build_sound_map() -> Dictionary:
 			# Format sound key to avoid strict formating.
 			var sound_key: String = sound.sound_name.to_lower().replace(" ",  "")
 			sound_dict[sound_key] = sound
-	print(sound_dict)
 	return sound_dict
