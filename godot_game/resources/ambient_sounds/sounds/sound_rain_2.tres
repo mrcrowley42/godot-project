@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AmbientSound" load_steps=3 format=3 uid="uid://b48nwerrqtvh0"]
+
+[ext_resource type="AudioStream" uid="uid://cjfbdfoh2k7j4" path="res://ambient_audio/Rain2.mp3" id="1_yio8i"]
+[ext_resource type="Script" path="res://scripts/base_classses/ambient_sound.gd" id="2_yuvk8"]
+
+[resource]
+script = ExtResource("2_yuvk8")
+sound_name = "Rain 2"
+file = ExtResource("1_yio8i")

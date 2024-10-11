@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="AmbientSoundCategory" load_steps=5 format=3 uid="uid://byw6m20dn1fpc"]
+
+[ext_resource type="Texture2D" uid="uid://bywi6adx37u74" path="res://images/ambience/water_droplets.png" id="1_nulxk"]
+[ext_resource type="Script" path="res://scripts/base_classses/ambient_sound_category.gd" id="2_vlkg2"]
+[ext_resource type="Resource" uid="uid://bvix1b5dy1p40" path="res://resources/ambient_sounds/sounds/sound_rain_1.tres" id="3_4k8uc"]
+[ext_resource type="Resource" uid="uid://b48nwerrqtvh0" path="res://resources/ambient_sounds/sounds/sound_rain_2.tres" id="4_23jjo"]
+
+[resource]
+script = ExtResource("2_vlkg2")
+category_name = "Rain"
+image = ExtResource("1_nulxk")
+sound_resources = Array[Resource]([ExtResource("3_4k8uc"), ExtResource("4_23jjo")])
