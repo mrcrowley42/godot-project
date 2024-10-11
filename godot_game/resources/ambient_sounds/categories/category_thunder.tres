@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AmbientSoundCategory" load_steps=6 format=3 uid="uid://cavxwt6vaf655"]
+
+[ext_resource type="Texture2D" uid="uid://c84jxvpljlenf" path="res://images/ambience/lightning.png" id="1_wp46s"]
+[ext_resource type="Script" path="res://scripts/base_classses/ambient_sound_category.gd" id="1_wplnm"]
+[ext_resource type="Script" path="res://scripts/base_classses/ambient_sound.gd" id="2_dxie4"]
+[ext_resource type="Resource" uid="uid://dim5fmq7tb4eo" path="res://resources/ambient_sounds/sounds/sound_thunder_1.tres" id="4_jkkwa"]
+[ext_resource type="Resource" uid="uid://j01asjipxyv3" path="res://resources/ambient_sounds/sounds/sound_thunder_2.tres" id="5_53egn"]
+
+[resource]
+script = ExtResource("1_wplnm")
+category_name = "Thunder"
+image = ExtResource("1_wp46s")
+sound_resources = Array[ExtResource("2_dxie4")]([ExtResource("4_jkkwa"), ExtResource("5_53egn")])

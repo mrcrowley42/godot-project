@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="AmbientSoundCategory" load_steps=5 format=3 uid="uid://dvkxov4my6chj"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/ambient_sound_category.gd" id="1_vkaob"]
+[ext_resource type="Texture2D" uid="uid://jbipk7xu0une" path="res://images/ambience/ocean.png" id="1_xrv05"]
+[ext_resource type="Script" path="res://scripts/base_classses/ambient_sound.gd" id="2_lcrqm"]
+[ext_resource type="Resource" uid="uid://btvolbg6xquk8" path="res://resources/ambient_sounds/sounds/sound_ocean_1.tres" id="4_jpmfh"]
+
+[resource]
+script = ExtResource("1_vkaob")
+category_name = "Ocean"
+image = ExtResource("1_xrv05")
+sound_resources = Array[ExtResource("2_lcrqm")]([ExtResource("4_jpmfh")])

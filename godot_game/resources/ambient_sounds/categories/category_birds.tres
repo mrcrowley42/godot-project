@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AmbientSoundCategory" load_steps=6 format=3 uid="uid://rma8fuqv61w7"]
+
+[ext_resource type="Texture2D" uid="uid://qpirsebyahse" path="res://images/ambience/bird.png" id="1_2q3jh"]
+[ext_resource type="Script" path="res://scripts/base_classses/ambient_sound_category.gd" id="1_4svil"]
+[ext_resource type="Resource" uid="uid://rgy47kinq6t" path="res://resources/ambient_sounds/sounds/sound_bird_1.tres" id="3_iyoe6"]
+[ext_resource type="Resource" uid="uid://bvlek5wh2oixh" path="res://resources/ambient_sounds/sounds/sound_bird_2.tres" id="4_ouitp"]
+[ext_resource type="Resource" uid="uid://cgb3wrs3h41wj" path="res://resources/ambient_sounds/sounds/sound_bird_3.tres" id="5_iwh7i"]
+
+[resource]
+script = ExtResource("1_4svil")
+category_name = "Birds"
+image = ExtResource("1_2q3jh")
+sound_resources = Array[Resource]([ExtResource("3_iyoe6"), ExtResource("4_ouitp"), ExtResource("5_iwh7i")])
