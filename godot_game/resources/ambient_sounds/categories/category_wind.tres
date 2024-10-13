@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AmbientSoundCategory" load_steps=6 format=3 uid="uid://cp1ts6fr03ux2"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/ambient_sound_category.gd" id="1_hmg8h"]
+[ext_resource type="Texture2D" uid="uid://cp73jqo5f8s42" path="res://images/ambience/windy.png" id="1_r0njx"]
+[ext_resource type="Script" path="res://scripts/base_classses/ambient_sound.gd" id="2_2hjch"]
+[ext_resource type="Resource" uid="uid://da6vmu7igoga8" path="res://resources/ambient_sounds/sounds/sound_wind_1.tres" id="4_7158e"]
+[ext_resource type="Resource" uid="uid://becimk8i12nnd" path="res://resources/ambient_sounds/sounds/sound_wind_2.tres" id="5_04q5w"]
+
+[resource]
+script = ExtResource("1_hmg8h")
+category_name = "Wind"
+image = ExtResource("1_r0njx")
+sound_resources = Array[ExtResource("2_2hjch")]([ExtResource("4_7158e"), ExtResource("5_04q5w")])
