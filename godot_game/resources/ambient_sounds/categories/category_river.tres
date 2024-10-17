@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AmbientSoundCategory" load_steps=6 format=3 uid="uid://bhvw6p7xus60b"]
+
+[ext_resource type="Texture2D" uid="uid://jgpk5ryofm74" path="res://images/ambience/river.png" id="1_6s4mx"]
+[ext_resource type="Script" path="res://scripts/base_classses/ambient_sound_category.gd" id="1_q47lu"]
+[ext_resource type="Script" path="res://scripts/base_classses/ambient_sound.gd" id="2_u5wow"]
+[ext_resource type="Resource" uid="uid://b20ygmosnvob8" path="res://resources/ambient_sounds/sounds/sound_river_1.tres" id="4_mta68"]
+[ext_resource type="Resource" uid="uid://dd36uf7y0cph7" path="res://resources/ambient_sounds/sounds/sound_river_2.tres" id="5_d2xqp"]
+
+[resource]
+script = ExtResource("1_q47lu")
+category_name = "River"
+image = ExtResource("1_6s4mx")
+sound_resources = Array[ExtResource("2_u5wow")]([ExtResource("4_mta68"), ExtResource("5_d2xqp")])

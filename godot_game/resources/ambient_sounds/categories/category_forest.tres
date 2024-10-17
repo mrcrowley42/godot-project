@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="AmbientSoundCategory" load_steps=5 format=3 uid="uid://b0ob8ly1msia0"]
+
+[ext_resource type="Texture2D" uid="uid://wo64brcmlmf8" path="res://images/ambience/forest.png" id="1_lbbg8"]
+[ext_resource type="Script" path="res://scripts/base_classses/ambient_sound_category.gd" id="1_unm03"]
+[ext_resource type="Script" path="res://scripts/base_classses/ambient_sound.gd" id="2_t6521"]
+[ext_resource type="Resource" uid="uid://c3o6a2pec6y02" path="res://resources/ambient_sounds/sounds/sound_forest_1.tres" id="4_m2s7d"]
+
+[resource]
+script = ExtResource("1_unm03")
+category_name = "Forest"
+image = ExtResource("1_lbbg8")
+sound_resources = Array[ExtResource("2_t6521")]([ExtResource("4_m2s7d")])

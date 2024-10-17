@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AmbientSoundCategory" load_steps=6 format=3 uid="uid://cdw0cdyqtlpas"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/ambient_sound_category.gd" id="1_mcvyx"]
+[ext_resource type="Texture2D" uid="uid://bgrn8k7pd06l4" path="res://images/ambience/moon.png" id="1_ot8wv"]
+[ext_resource type="Script" path="res://scripts/base_classses/ambient_sound.gd" id="2_ywg24"]
+[ext_resource type="Resource" uid="uid://03mrgwx3rn7" path="res://resources/ambient_sounds/sounds/sound_night_1.tres" id="4_ts2fs"]
+[ext_resource type="Resource" uid="uid://bff3rqdd5iluv" path="res://resources/ambient_sounds/sounds/sound_night_2.tres" id="5_wy3mf"]
+
+[resource]
+script = ExtResource("1_mcvyx")
+category_name = "Night"
+image = ExtResource("1_ot8wv")
+sound_resources = Array[ExtResource("2_ywg24")]([ExtResource("4_ts2fs"), ExtResource("5_wy3mf")])

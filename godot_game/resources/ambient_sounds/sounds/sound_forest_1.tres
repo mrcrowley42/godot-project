@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AmbientSound" load_steps=3 format=3 uid="uid://c3o6a2pec6y02"]
+
+[ext_resource type="AudioStream" uid="uid://dlcdts1q3gata" path="res://ambient_audio/Forest.mp3" id="1_n46gh"]
+[ext_resource type="Script" path="res://scripts/base_classses/ambient_sound.gd" id="2_075xk"]
+
+[resource]
+script = ExtResource("2_075xk")
+sound_name = "Forest 1"
+file = ExtResource("1_n46gh")

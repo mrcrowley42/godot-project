@@ -5,5 +5,5 @@
 
 [resource]
 script = ExtResource("2_w3b7e")
-sound_name = "Sound_thunder_2"
+sound_name = "Thunder 2"
 file = ExtResource("1_k4uy4")
