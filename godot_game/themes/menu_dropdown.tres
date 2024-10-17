@@ -1,6 +1,6 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://d0m1upkiiwl2s"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://dvpqr6ekggufg"]
 
-[ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="1_ieppp"]
+[ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="1_75ib0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rl3qu"]
 bg_color = Color(0.232, 0.232, 0.232, 0.521)
@@ -8,6 +8,8 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_right = 4.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xcx6q"]
 draw_center = false
@@ -23,6 +25,8 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_right = 4.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rt26j"]
 bg_color = Color(0.275091, 0.275091, 0.27509, 1)
@@ -35,6 +39,8 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_right = 4.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_11noq"]
 bg_color = Color(0.523781, 0.523781, 0.52378, 1)
@@ -47,9 +53,11 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_right = 4.0
 
 [resource]
-default_font = ExtResource("1_ieppp")
+default_font = ExtResource("1_75ib0")
 default_font_size = 16
 Button/styles/disabled = SubResource("StyleBoxFlat_rl3qu")
 Button/styles/focus = SubResource("StyleBoxFlat_xcx6q")
