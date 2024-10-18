@@ -257,11 +257,11 @@ shader_parameter/shift_one_right = true
 shader_parameter/one_col = Color(0.0210611, 0.0750532, 0.0350906, 1)
 shader_parameter/one_speed = 0.02
 shader_parameter/one_size = 10.0
-shader_parameter/one_opacity = 0.2
+shader_parameter/one_opacity = 0.3
 shader_parameter/two_col = Color(0.0196078, 0.0745098, 0.0352941, 1)
 shader_parameter/two_speed = -0.02
 shader_parameter/two_size = 10.0
-shader_parameter/two_opacity = 0.2
+shader_parameter/two_opacity = 0.3
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1s3b6"]
 shader = ExtResource("45_bgevw")
@@ -1485,26 +1485,18 @@ layout_mode = 2
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/ThemeMenu"]
 position = Vector2(-50, -130)
 
-[node name="Save" type="Button" parent="UI/OptionsMenu/ThemeMenu/SaveButtons"]
-offset_left = 90.0
-offset_top = 484.0
-offset_right = 234.0
-offset_bottom = 532.0
-theme = ExtResource("33_1qhmu")
-theme_override_colors/font_hover_color = Color(0.4947, 0.97, 0.4947, 1)
-theme_override_font_sizes/font_size = 18
-text = "Save Settings"
-
-[node name="Cancel" type="Button" parent="UI/OptionsMenu/ThemeMenu/SaveButtons"]
+[node name="Back" type="Button" parent="UI/OptionsMenu/ThemeMenu/SaveButtons"]
 texture_filter = 5
-offset_left = 317.0
-offset_top = 484.0
-offset_right = 450.0
-offset_bottom = 532.0
+custom_minimum_size = Vector2(100, 40)
+offset_left = 73.0
+offset_top = 513.0
+offset_right = 173.0
+offset_bottom = 553.0
+scale = Vector2(0.75, 0.75)
 theme = ExtResource("33_1qhmu")
 theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
 theme_override_font_sizes/font_size = 18
-text = "Cancel"
+text = "Back"
 script = ExtResource("35_4io20")
 
 [node name="ThemeControls" type="Node2D" parent="UI/OptionsMenu/ThemeMenu"]
@@ -1557,7 +1549,6 @@ text = ">"
 [node name="FactsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 material = SubResource("ShaderMaterial_kjclt")
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_cuoxy")
@@ -1633,12 +1624,13 @@ script = ExtResource("44_t23g2")
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/FactsMenu/Library"]
 position = Vector2(-50, -130)
 
-[node name="Cancel" type="Button" parent="UI/OptionsMenu/FactsMenu/Library/SaveButtons"]
+[node name="Back" type="Button" parent="UI/OptionsMenu/FactsMenu/Library/SaveButtons"]
 texture_filter = 5
-offset_left = 78.0
-offset_top = 508.0
-offset_right = 182.0
-offset_bottom = 556.0
+custom_minimum_size = Vector2(100, 40)
+offset_left = 73.0
+offset_top = 513.0
+offset_right = 173.0
+offset_bottom = 553.0
 scale = Vector2(0.75, 0.75)
 theme = ExtResource("33_1qhmu")
 theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
@@ -1706,23 +1698,13 @@ script = ExtResource("49_p7hc5")
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/CosmeticsMenu"]
 position = Vector2(-50, -130)
 
-[node name="Save" type="Button" parent="UI/OptionsMenu/CosmeticsMenu/SaveButtons"]
-offset_left = 391.0
-offset_top = 511.0
-offset_right = 492.0
-offset_bottom = 559.0
-scale = Vector2(0.75, 0.75)
-theme = ExtResource("33_1qhmu")
-theme_override_colors/font_hover_color = Color(0.4947, 0.97, 0.4947, 1)
-theme_override_font_sizes/font_size = 18
-text = "Save"
-
-[node name="Cancel" type="Button" parent="UI/OptionsMenu/CosmeticsMenu/SaveButtons"]
+[node name="Back" type="Button" parent="UI/OptionsMenu/CosmeticsMenu/SaveButtons"]
 texture_filter = 5
-offset_left = 64.0
-offset_top = 510.0
-offset_right = 168.0
-offset_bottom = 558.0
+custom_minimum_size = Vector2(100, 40)
+offset_left = 73.0
+offset_top = 513.0
+offset_right = 173.0
+offset_bottom = 553.0
 scale = Vector2(0.75, 0.75)
 theme = ExtResource("33_1qhmu")
 theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
@@ -1743,25 +1725,27 @@ metadata/_edit_lock_ = true
 position = Vector2(-50, -130)
 
 [node name="Save" type="Button" parent="UI/OptionsMenu/SettingsMenu/SaveButtons"]
-offset_left = 90.0
-offset_top = 484.0
-offset_right = 234.0
-offset_bottom = 532.0
+offset_left = 312.0
+offset_top = 494.0
+offset_right = 456.0
+offset_bottom = 542.0
 theme = ExtResource("33_1qhmu")
 theme_override_colors/font_hover_color = Color(0.4947, 0.97, 0.4947, 1)
 theme_override_font_sizes/font_size = 18
 text = "Save Settings"
 
-[node name="Cancel" type="Button" parent="UI/OptionsMenu/SettingsMenu/SaveButtons"]
+[node name="Back" type="Button" parent="UI/OptionsMenu/SettingsMenu/SaveButtons"]
 texture_filter = 5
-offset_left = 317.0
-offset_top = 484.0
-offset_right = 450.0
-offset_bottom = 532.0
+custom_minimum_size = Vector2(100, 40)
+offset_left = 73.0
+offset_top = 513.0
+offset_right = 173.0
+offset_bottom = 553.0
+scale = Vector2(0.75, 0.75)
 theme = ExtResource("33_1qhmu")
 theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
 theme_override_font_sizes/font_size = 18
-text = "Cancel"
+text = "Back"
 script = ExtResource("35_4io20")
 
 [node name="MusicControls" type="Node2D" parent="UI/OptionsMenu/SettingsMenu"]
@@ -1907,6 +1891,7 @@ bus_name = "Music"
 [node name="AmbienceMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 material = SubResource("ShaderMaterial_e5rr0")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -1968,10 +1953,17 @@ theme = ExtResource("46_r0sdd")
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 
-[node name="CloseBtn" type="Button" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer"]
+[node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/AmbienceMenu"]
+position = Vector2(-50, -130)
+
+[node name="Back" type="Button" parent="UI/OptionsMenu/AmbienceMenu/SaveButtons"]
 texture_filter = 5
-layout_mode = 2
-size_flags_horizontal = 4
+custom_minimum_size = Vector2(100, 40)
+offset_left = 73.0
+offset_top = 513.0
+offset_right = 173.0
+offset_bottom = 553.0
+scale = Vector2(0.75, 0.75)
 theme = ExtResource("33_1qhmu")
 theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
 theme_override_font_sizes/font_size = 18
@@ -1988,25 +1980,6 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_qyod2")
 script = ExtResource("32_jvqx8")
 
 [node name="Node2D" type="Node2D" parent="UI/OptionsMenu/CreditsMenu"]
-
-[node name="CreditsCloseBtn" type="Button" parent="UI/OptionsMenu/CreditsMenu/Node2D"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 182.0
-offset_top = 376.0
-offset_right = 258.0
-offset_bottom = 404.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("33_1qhmu")
-theme_override_font_sizes/font_size = 24
-text = "Close"
-script = ExtResource("35_4io20")
 
 [node name="HScrollBar" type="ScrollContainer" parent="UI/OptionsMenu/CreditsMenu/Node2D"]
 offset_left = 10.0
@@ -2065,6 +2038,23 @@ Seto's Memory by Shinkichi Mitsumune
 Aquatic Ambience by David Wise
 [/ul][/indent]"
 fit_content = true
+
+[node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/CreditsMenu"]
+position = Vector2(-50, -130)
+
+[node name="Back" type="Button" parent="UI/OptionsMenu/CreditsMenu/SaveButtons"]
+texture_filter = 5
+custom_minimum_size = Vector2(100, 40)
+offset_left = 73.0
+offset_top = 513.0
+offset_right = 173.0
+offset_bottom = 553.0
+scale = Vector2(0.75, 0.75)
+theme = ExtResource("33_1qhmu")
+theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
+theme_override_font_sizes/font_size = 18
+text = "Back"
+script = ExtResource("35_4io20")
 
 [node name="UI_Overlay" type="Sprite2D" parent="UI"]
 unique_name_in_owner = true
@@ -2332,17 +2322,15 @@ script = ExtResource("80_83777")
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer/SoundBtn" to="UI/OptionsMenu" method="_on_sound_btn_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer/CreditsBtn" to="UI/OptionsMenu" method="_on_credits_btn_button_down"]
 [connection signal="visibility_changed" from="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ThemeBtns" to="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ThemeBtns" method="_on_visibility_changed"]
-[connection signal="pressed" from="UI/OptionsMenu/ThemeMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
-[connection signal="button_down" from="UI/OptionsMenu/ThemeMenu/SaveButtons/Cancel" to="UI/OptionsMenu/ThemeMenu/SaveButtons/Cancel" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/ThemeMenu/SaveButtons/Back" to="UI/OptionsMenu/ThemeMenu/SaveButtons/Back" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/ThemeMenu/ThemeControls/vHBoxContainer/Button2" to="UI/OptionsMenu/ThemeMenu/ThemeControls" method="_on_back_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/ThemeMenu/ThemeControls/vHBoxContainer/Button" to="UI/OptionsMenu/ThemeMenu/ThemeControls" method="_on_forward_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/FactsMenu/Library/SaveButtons/Cancel" to="UI/OptionsMenu/FactsMenu/Library/SaveButtons/Cancel" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/FactsMenu/Library/SaveButtons/Back" to="UI/OptionsMenu/FactsMenu/Library/SaveButtons/Back" method="_on_button_down"]
 [connection signal="cosmetic_btn_pressed" from="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems" to="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/PreviewContainer/CreaturePreview" method="_on_cosmetic_items_cosmetic_btn_pressed"]
 [connection signal="visibility_changed" from="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems" to="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems" method="_on_visibility_changed"]
-[connection signal="pressed" from="UI/OptionsMenu/CosmeticsMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
-[connection signal="button_down" from="UI/OptionsMenu/CosmeticsMenu/SaveButtons/Cancel" to="UI/OptionsMenu/CosmeticsMenu/SaveButtons/Cancel" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/CosmeticsMenu/SaveButtons/Back" to="UI/OptionsMenu/CosmeticsMenu/SaveButtons/Back" method="_on_button_down"]
 [connection signal="pressed" from="UI/OptionsMenu/SettingsMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
-[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/SaveButtons/Cancel" to="UI/OptionsMenu/SettingsMenu/SaveButtons/Cancel" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/SaveButtons/Back" to="UI/OptionsMenu/SettingsMenu/SaveButtons/Back" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MusicControls/HBoxContainer/Button2" to="UI/OptionsMenu/SettingsMenu/MusicControls" method="_on_back_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MusicControls/HBoxContainer/Button" to="UI/OptionsMenu/SettingsMenu/MusicControls" method="_on_forward_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2/MasterMuted" to="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2/MasterMuted" method="_on_button_down"]
@@ -2351,9 +2339,9 @@ script = ExtResource("80_83777")
 [connection signal="item_selected" from="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/HBoxContainer/CategoryBtn" to="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer" method="_on_category_btn_item_selected"]
 [connection signal="item_selected" from="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/HBoxContainer/SoundBtn" to="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer" method="_on_sound_btn_item_selected"]
 [connection signal="button_down" from="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/HBoxContainer/AddSoundBtn" to="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer" method="_on_add_sound_btn_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/CloseBtn" to="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/CloseBtn" method="_on_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/CreditsMenu/Node2D/CreditsCloseBtn" to="UI/OptionsMenu/CreditsMenu/Node2D/CreditsCloseBtn" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/AmbienceMenu/SaveButtons/Back" to="UI/OptionsMenu/AmbienceMenu/SaveButtons/Back" method="_on_button_down"]
 [connection signal="visibility_changed" from="UI/OptionsMenu/CreditsMenu/Node2D/HScrollBar" to="UI/OptionsMenu/CreditsMenu/Node2D/HScrollBar" method="_on_visibility_changed"]
+[connection signal="button_down" from="UI/OptionsMenu/CreditsMenu/SaveButtons/Back" to="UI/OptionsMenu/CreditsMenu/SaveButtons/Back" method="_on_button_down"]
 [connection signal="button_down" from="UI/NavigationButtons/FoodButton" to="UI/NavigationButtons/FoodButton" method="_on_button_down"]
 [connection signal="button_down" from="UI/NavigationButtons/ActButton" to="UI/NavigationButtons/ActButton" method="_on_button_down"]
 [connection signal="button_down" from="UI/NavigationButtons/SettingButton" to="UI/NavigationButtons/SettingButton" method="_on_button_down"]

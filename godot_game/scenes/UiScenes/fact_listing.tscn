@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/fact_listing.gd" id="1_gtqsy"]
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="2_nyd6t"]
-[ext_resource type="PackedScene" uid="uid://cfto5f3wtfdqt" path="res://scenes/UiScenes/fact_btn.tscn" id="3_omm3u"]
+[ext_resource type="PackedScene" path="res://scenes/UiScenes/fact_btn.tscn" id="3_omm3u"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="4_ik51a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cnlcg"]
@@ -61,12 +61,13 @@ layout_mode = 2
 [node name="SaveButtons" type="Node2D" parent="."]
 position = Vector2(-50, -130)
 
-[node name="Cancel" type="Button" parent="SaveButtons"]
+[node name="Back" type="Button" parent="SaveButtons"]
 texture_filter = 5
-offset_left = 78.0
-offset_top = 503.0
-offset_right = 182.0
-offset_bottom = 551.0
+custom_minimum_size = Vector2(100, 40)
+offset_left = 73.0
+offset_top = 513.0
+offset_right = 173.0
+offset_bottom = 553.0
 scale = Vector2(0.75, 0.75)
 theme = ExtResource("4_ik51a")
 theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
@@ -74,4 +75,4 @@ theme_override_font_sizes/font_size = 18
 text = "Back"
 
 [connection signal="hidden" from="." to="." method="_on_hidden"]
-[connection signal="button_down" from="SaveButtons/Cancel" to="." method="_on_cancel_button_down"]
+[connection signal="button_down" from="SaveButtons/Back" to="." method="_on_back_button_down"]
