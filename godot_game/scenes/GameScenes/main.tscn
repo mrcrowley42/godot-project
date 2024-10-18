@@ -1914,19 +1914,23 @@ text = "Ambient Audio"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_constants/separation = 15
 alignment = 1
 
 [node name="CategoryBtn" type="OptionButton" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 theme = ExtResource("56_in74o")
 selected = 0
+fit_to_longest_item = false
 allow_reselect = true
 item_count = 1
 popup/item_0/text = "CATEGORY"
 
 [node name="SoundBtn" type="OptionButton" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 theme = ExtResource("56_in74o")
 selected = 0
 item_count = 1
@@ -1934,6 +1938,7 @@ popup/item_0/text = "SOUND NAME"
 
 [node name="AddSoundBtn" type="Button" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 theme = ExtResource("56_in74o")
 text = "  +  "
 
