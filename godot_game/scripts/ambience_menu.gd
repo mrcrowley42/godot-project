@@ -29,6 +29,8 @@ func _on_category_btn_item_selected(index: int) -> void:
 
 func _on_add_sound_btn_button_down() -> void:
 	ambience_man.add_sound_node(current_sound)
+	%BtnClick.play()
+	DataGlobals.save_settings_data()
 
 
 func _on_sound_btn_item_selected(index: int) -> void:
