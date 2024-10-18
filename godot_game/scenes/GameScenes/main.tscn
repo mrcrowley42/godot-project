@@ -299,6 +299,9 @@ shader_parameter/size = 8.0
 shader_parameter/one_col = Color(0.142856, 0.00014864, 0.220684, 1)
 shader_parameter/one_speed = 0.1
 shader_parameter/one_opacity = 0.2
+shader_parameter/two_col = Color(0.0745098, 0, 0.12549, 1)
+shader_parameter/two_speed = 0.02
+shader_parameter/two_opacity = 0.2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qyod2"]
 bg_color = Color(0.2, 0.2, 0.2, 1)
