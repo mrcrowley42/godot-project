@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://or61a20rqt0e"]
+
+[ext_resource type="Script" path="res://scripts/ambience_control.gd" id="1_r2qd8"]
+[ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="2_qoy0g"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_ftj5d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r1wje"]
+content_margin_left = 0.0
+content_margin_top = 8.0
+content_margin_right = 0.0
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xql7d"]
+bg_color = Color(0.58381, 0.3318, 0.79, 1)
+
+[node name="PanelContainer" type="PanelContainer"]
+offset_right = 369.0
+offset_bottom = 107.0
+script = ExtResource("1_r2qd8")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SoundLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Sound Effect Name"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VolumeSfx" type="HSlider" parent="MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 10
+theme = ExtResource("2_qoy0g")
+theme_override_icons/grabber = SubResource("ImageTexture_ftj5d")
+theme_override_icons/grabber_highlight = SubResource("ImageTexture_ftj5d")
+theme_override_icons/grabber_disabled = SubResource("ImageTexture_ftj5d")
+theme_override_styles/slider = SubResource("StyleBoxFlat_r1wje")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_xql7d")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_xql7d")
+max_value = 1.0
+step = 0.01
+tick_count = 1
