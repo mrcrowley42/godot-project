@@ -7,11 +7,11 @@ uniform float size : hint_range(1.0, 20.0, 0.5) = 12.;
 
 uniform vec4 one_col : source_color;
 uniform float one_speed : hint_range(-.5, .5, 0.01) = .02;
-uniform float one_opacity : hint_range(0.0, 1.0, 0.1) = .2;
+uniform float one_opacity : hint_range(0.0, 1.0, 0.05) = .2;
 
 uniform vec4 two_col : source_color;
 uniform float two_speed : hint_range(-.5, .5, 0.01) = .02;
-uniform float two_opacity : hint_range(0.0, 1.0, 0.1) = .2;
+uniform float two_opacity : hint_range(0.0, 1.0, 0.05) = .2;
 
 vec2 rotate_point(vec2 pos, float angle){
      return vec2(cos(angle) * pos.x - sin(angle) * pos.y + pos.x,

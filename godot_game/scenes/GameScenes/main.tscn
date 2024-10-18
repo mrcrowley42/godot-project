@@ -1,4 +1,4 @@
-[gd_scene load_steps=120 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=121 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_aqytd"]
@@ -53,8 +53,8 @@
 [ext_resource type="PackedScene" uid="uid://dyapnl5xgvivn" path="res://scenes/UiScenes/topic_btn.tscn" id="44_y5a0d"]
 [ext_resource type="Texture2D" uid="uid://p0oo42fr5wrp" path="res://icons/status/lunch_dining_24dp_8B1A10_FILL0_wght500_GRAD0_opsz24-svg.svg" id="45_3duvs"]
 [ext_resource type="Shader" path="res://shaders/pattern_checker.gdshader" id="45_bgevw"]
-[ext_resource type="Theme" uid="uid://cpmafqggr8ryy" path="res://themes/menu_title.tres" id="45_e031c"]
-[ext_resource type="Theme" uid="uid://c6iqo2crlvcwv" path="res://themes/scroll_container.tres" id="46_r0sdd"]
+[ext_resource type="Theme" uid="uid://x6rgwcyh7bnk" path="res://themes/menu_title.tres" id="45_e031c"]
+[ext_resource type="Theme" uid="uid://bv3clfelw5gun" path="res://themes/scroll_container.tres" id="46_r0sdd"]
 [ext_resource type="Texture2D" uid="uid://cuaa2uyffvita" path="res://icons/status/droplet-fill.svg" id="47_qik1j"]
 [ext_resource type="Texture2D" uid="uid://d4c1k5m8u1jc0" path="res://UI stuff/Green Palette/green_food_button.png" id="49_a77pc"]
 [ext_resource type="Script" path="res://scripts/cosmetics_preview.gd" id="49_p7hc5"]
@@ -66,6 +66,7 @@
 [ext_resource type="Script" path="res://scripts/setting_button.gd" id="54_5bu15"]
 [ext_resource type="PackedScene" uid="uid://b6wocr0vo5s4v" path="res://scenes/GameScenes/debug_content.tscn" id="55_0rbaa"]
 [ext_resource type="AudioStream" uid="uid://dcet1hpt70t42" path="res://music/perfection.mp3" id="56_0sjdm"]
+[ext_resource type="Theme" uid="uid://dvpqr6ekggufg" path="res://themes/menu_dropdown.tres" id="56_in74o"]
 [ext_resource type="Script" path="res://scripts/stat_bar.gd" id="57_ani8q"]
 [ext_resource type="Script" path="res://scripts/music_manager.gd" id="57_dawf5"]
 [ext_resource type="AudioStream" uid="uid://dwmn4dqcd6k4i" path="res://music/02 Hollywood Main Theme.mp3" id="58_tbnki"]
@@ -239,10 +240,10 @@ shader_parameter/double = true
 shader_parameter/size = 8.0
 shader_parameter/one_col = Color(0.042462, 0.10514, 0.0989875, 1)
 shader_parameter/one_speed = 0.02
-shader_parameter/one_opacity = 0.2
+shader_parameter/one_opacity = 0.15
 shader_parameter/two_col = Color(0.0431373, 0.105882, 0.0980392, 1)
 shader_parameter/two_speed = 0.02
-shader_parameter/two_opacity = 0.2
+shader_parameter/two_opacity = 0.15
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cuoxy"]
 bg_color = Color(0.195766, 0.142776, 0.185097, 1)
@@ -268,8 +269,18 @@ border_color = Color(0.8, 0.8, 0.8, 0.411765)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wd2mi"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2rfxe"]
-bg_color = Color(0.57, 1, 0.706167, 0.611765)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e5rr0"]
+shader = ExtResource("50_tajtf")
+shader_parameter/bg_col = Color(0.0812107, 1.19424e-06, 0.0583388, 1)
+shader_parameter/rotation = 90.0
+shader_parameter/double = false
+shader_parameter/size = 8.0
+shader_parameter/one_col = Color(0, 0, 0, 1)
+shader_parameter/one_speed = 0.02
+shader_parameter/one_opacity = 0.0
+shader_parameter/two_col = Color(0.209652, 5.60122e-06, 0.164316, 1)
+shader_parameter/two_speed = -0.04
+shader_parameter/two_opacity = 0.2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qyod2"]
 bg_color = Color(0.2, 0.2, 0.2, 1)
@@ -1528,6 +1539,7 @@ text = ">"
 [node name="FactsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 material = SubResource("ShaderMaterial_kjclt")
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_cuoxy")
@@ -1877,9 +1889,8 @@ bus_name = "Music"
 [node name="AmbienceMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
+material = SubResource("ShaderMaterial_e5rr0")
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_arbxs")
 script = ExtResource("32_jvqx8")
 metadata/_edit_lock_ = true
 
@@ -1898,33 +1909,43 @@ ambience_man = NodePath("../../../../../AmbienceManager")
 
 [node name="Button" type="Button" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "PREVIEW TEXT
-"
+theme = ExtResource("45_e031c")
+text = "Ambient Audio"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 15
+alignment = 1
 
 [node name="CategoryBtn" type="OptionButton" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("56_in74o")
 selected = 0
+fit_to_longest_item = false
 allow_reselect = true
 item_count = 1
 popup/item_0/text = "CATEGORY"
 
 [node name="SoundBtn" type="OptionButton" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("56_in74o")
 selected = 0
 item_count = 1
 popup/item_0/text = "SOUND NAME"
 
 [node name="AddSoundBtn" type="Button" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("56_in74o")
 text = "  +  "
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 200)
+custom_minimum_size = Vector2(0, 180)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_2rfxe")
+theme = ExtResource("46_r0sdd")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/ScrollContainer"]
 layout_mode = 2
