@@ -1,4 +1,4 @@
-[gd_scene load_steps=121 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=123 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_aqytd"]
@@ -69,6 +69,7 @@
 [ext_resource type="Theme" uid="uid://dvpqr6ekggufg" path="res://themes/menu_dropdown.tres" id="56_in74o"]
 [ext_resource type="Script" path="res://scripts/stat_bar.gd" id="57_ani8q"]
 [ext_resource type="Script" path="res://scripts/music_manager.gd" id="57_dawf5"]
+[ext_resource type="Shader" path="res://shaders/pattern_wavy.gdshader" id="57_qy3v8"]
 [ext_resource type="AudioStream" uid="uid://dwmn4dqcd6k4i" path="res://music/02 Hollywood Main Theme.mp3" id="58_tbnki"]
 [ext_resource type="AudioStream" uid="uid://dshoi5g671o7m" path="res://music/25 - Pizza & Bowling.mp3" id="59_06aow"]
 [ext_resource type="AudioStream" uid="uid://dnxx75ndliq7c" path="res://music/Esselfortium - memory=entryrrrr-.mp3" id="60_rpygf"]
@@ -251,7 +252,7 @@ border_color = Color(0.8, 0.8, 0.8, 0.411765)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_357to"]
 shader = ExtResource("45_bgevw")
-shader_parameter/bg_col = Color(0.0259102, 0.0937369, 0.0511778, 1)
+shader_parameter/bg_col = Color(0.0127177, 0.0556114, 0.0256521, 1)
 shader_parameter/shift_one_right = true
 shader_parameter/one_col = Color(0.0210611, 0.0750532, 0.0350906, 1)
 shader_parameter/one_speed = 0.02
@@ -262,10 +263,18 @@ shader_parameter/two_speed = -0.02
 shader_parameter/two_size = 10.0
 shader_parameter/two_opacity = 0.2
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_arbxs"]
-bg_color = Color(0, 0, 0, 0.737255)
-draw_center = false
-border_color = Color(0.8, 0.8, 0.8, 0.411765)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1s3b6"]
+shader = ExtResource("45_bgevw")
+shader_parameter/bg_col = Color(7.52043e-10, 0.0253661, 0.0523019, 1)
+shader_parameter/shift_one_right = false
+shader_parameter/one_col = Color(1.26343e-07, 0.130371, 0.202951, 1)
+shader_parameter/one_speed = 0.03
+shader_parameter/one_size = 10.0
+shader_parameter/one_opacity = 0.2
+shader_parameter/two_col = Color(0.01, 0, 0.06, 1)
+shader_parameter/two_speed = -0.02
+shader_parameter/two_size = 10.0
+shader_parameter/two_opacity = 0.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wd2mi"]
 
@@ -281,6 +290,15 @@ shader_parameter/one_opacity = 0.0
 shader_parameter/two_col = Color(0.209652, 5.60122e-06, 0.164316, 1)
 shader_parameter/two_speed = -0.04
 shader_parameter/two_opacity = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oo67g"]
+shader = ExtResource("57_qy3v8")
+shader_parameter/bg_col = Color(0.0529501, 3.59567e-05, 0.0964741, 1)
+shader_parameter/double = false
+shader_parameter/size = 8.0
+shader_parameter/one_col = Color(0.142856, 0.00014864, 0.220684, 1)
+shader_parameter/one_speed = 0.1
+shader_parameter/one_opacity = 0.2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qyod2"]
 bg_color = Color(0.2, 0.2, 0.2, 1)
@@ -1631,7 +1649,6 @@ script = ExtResource("35_4io20")
 [node name="CosmeticsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 material = SubResource("ShaderMaterial_357to")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -1716,8 +1733,8 @@ script = ExtResource("35_4io20")
 unique_name_in_owner = true
 process_mode = 3
 visible = false
+material = SubResource("ShaderMaterial_1s3b6")
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_arbxs")
 script = ExtResource("32_jvqx8")
 metadata/_edit_lock_ = true
 
@@ -1889,6 +1906,7 @@ bus_name = "Music"
 [node name="AmbienceMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 material = SubResource("ShaderMaterial_e5rr0")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -1978,7 +1996,7 @@ script = ExtResource("35_4io20")
 [node name="CreditsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
+material = SubResource("ShaderMaterial_oo67g")
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_qyod2")
 script = ExtResource("32_jvqx8")
