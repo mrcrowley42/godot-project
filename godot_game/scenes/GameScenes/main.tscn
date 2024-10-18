@@ -1,4 +1,4 @@
-[gd_scene load_steps=121 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=122 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/status_manager.gd" id="2_aqytd"]
@@ -68,6 +68,7 @@
 [ext_resource type="AudioStream" uid="uid://dcet1hpt70t42" path="res://music/perfection.mp3" id="56_0sjdm"]
 [ext_resource type="Theme" uid="uid://dhbawoulpip33" path="res://themes/menu_dropdown.tres" id="56_in74o"]
 [ext_resource type="Script" path="res://scripts/stat_bar.gd" id="57_ani8q"]
+[ext_resource type="PackedScene" uid="uid://or61a20rqt0e" path="res://scenes/UiScenes/ambience_control.tscn" id="57_ccee5"]
 [ext_resource type="Script" path="res://scripts/music_manager.gd" id="57_dawf5"]
 [ext_resource type="AudioStream" uid="uid://dwmn4dqcd6k4i" path="res://music/02 Hollywood Main Theme.mp3" id="58_tbnki"]
 [ext_resource type="AudioStream" uid="uid://dshoi5g671o7m" path="res://music/25 - Pizza & Bowling.mp3" id="59_06aow"]
@@ -1903,7 +1904,7 @@ theme_override_constants/margin_bottom = 16
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer" node_paths=PackedStringArray("ambience_man")]
 layout_mode = 2
-theme_override_constants/separation = 24
+theme_override_constants/separation = 16
 script = ExtResource("53_ubf3f")
 ambience_man = NodePath("../../../../../AmbienceManager")
 
@@ -1943,37 +1944,31 @@ theme = ExtResource("56_in74o")
 text = "  +  "
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 180)
+custom_minimum_size = Vector2(0, 320)
 layout_mode = 2
 theme = ExtResource("46_r0sdd")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="PanelContainer" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("57_ccee5")]
 layout_mode = 2
 
-[node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/AmbienceMenu"]
-position = Vector2(-50, -130)
+[node name="PanelContainer2" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("57_ccee5")]
+layout_mode = 2
 
-[node name="Save" type="Button" parent="UI/OptionsMenu/AmbienceMenu/SaveButtons"]
-offset_left = 90.0
-offset_top = 484.0
-offset_right = 234.0
-offset_bottom = 532.0
-theme = ExtResource("33_1qhmu")
-theme_override_colors/font_hover_color = Color(0.4947, 0.97, 0.4947, 1)
-theme_override_font_sizes/font_size = 18
-text = "Save Settings"
-
-[node name="Cancel" type="Button" parent="UI/OptionsMenu/AmbienceMenu/SaveButtons"]
-texture_filter = 5
-offset_left = 317.0
-offset_top = 484.0
-offset_right = 450.0
-offset_bottom = 532.0
-theme = ExtResource("33_1qhmu")
-theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
-theme_override_font_sizes/font_size = 18
-text = "Cancel"
-script = ExtResource("35_4io20")
+[node name="PanelContainer3" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("57_ccee5")]
+layout_mode = 2
 
 [node name="CreditsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
@@ -2347,8 +2342,6 @@ script = ExtResource("80_83777")
 [connection signal="item_selected" from="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/HBoxContainer/CategoryBtn" to="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer" method="_on_category_btn_item_selected"]
 [connection signal="item_selected" from="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/HBoxContainer/SoundBtn" to="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer" method="_on_sound_btn_item_selected"]
 [connection signal="button_down" from="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/HBoxContainer/AddSoundBtn" to="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer" method="_on_add_sound_btn_button_down"]
-[connection signal="pressed" from="UI/OptionsMenu/AmbienceMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
-[connection signal="button_down" from="UI/OptionsMenu/AmbienceMenu/SaveButtons/Cancel" to="UI/OptionsMenu/AmbienceMenu/SaveButtons/Cancel" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/CreditsMenu/Node2D/CreditsCloseBtn" to="UI/OptionsMenu/CreditsMenu/Node2D/CreditsCloseBtn" method="_on_button_down"]
 [connection signal="visibility_changed" from="UI/OptionsMenu/CreditsMenu/Node2D/HScrollBar" to="UI/OptionsMenu/CreditsMenu/Node2D/HScrollBar" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/NavigationButtons/FoodButton" to="UI/NavigationButtons/FoodButton" method="_on_button_down"]
