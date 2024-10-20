@@ -9,7 +9,7 @@ func _ready() -> void:
 	content.text = fact.fact
 	source.text = source.text % [fact.source]
 
-func _on_cancel_button_down() -> void:
+func _on_back_button_down() -> void:
 	btn_sfx.play()
 	queue_free()
 
