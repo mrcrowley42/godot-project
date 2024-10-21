@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="1_3y1y3"]
 [ext_resource type="Script" path="res://scripts/minigames/memory_game.gd" id="1_y2saq"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="2_4ls5g"]
-[ext_resource type="Script" path="res://scripts/game/egg_opening/confetti.gd" id="5_4pw2p"]
+[ext_resource type="Script" path="res://scripts/main_game_scripts/egg_opening/confetti.gd" id="5_4pw2p"]
 [ext_resource type="Script" path="res://scripts/sfx_man.gd" id="5_nj7bn"]
 
 [sub_resource type="Gradient" id="Gradient_ai7nj"]

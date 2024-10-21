@@ -1,13 +1,13 @@
 [gd_scene load_steps=14 format=3 uid="uid://cx2gycrxks36j"]
 
-[ext_resource type="Script" path="res://scripts/MainGameScripts/grow_up_to_adult.gd" id="1_mprwa"]
+[ext_resource type="Script" path="res://scripts/main_game_scripts/grow_up_to_adult.gd" id="1_mprwa"]
 [ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="2_do0fl"]
 [ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="3_4mu7b"]
 [ext_resource type="Shader" path="res://shaders/voronoi.gdshader" id="4_8as8k"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="5_pek6m"]
 [ext_resource type="Script" path="res://scripts/creature_grow_up.gd" id="6_kvvra"]
 [ext_resource type="Script" path="res://scripts/grow_btn.gd" id="6_rlh6f"]
-[ext_resource type="Script" path="res://scripts/game/egg_opening/confetti.gd" id="8_tffir"]
+[ext_resource type="Script" path="res://scripts/main_game_scripts/egg_opening/confetti.gd" id="8_tffir"]
 [ext_resource type="Script" path="res://scripts/grow_up_continue_btn.gd" id="9_drt4q"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w2jld"]
