@@ -579,7 +579,7 @@ texture = ExtResource("30_kovtb")
 unique_name_in_owner = true
 
 [node name="TransLayer" type="CanvasLayer" parent="UI"]
-layer = 10
+layer = 100
 
 [node name="Transition" type="Sprite2D" parent="UI/TransLayer"]
 position = Vector2(270, 1200)
@@ -1364,7 +1364,6 @@ metadata/_edit_use_anchors_ = true
 [node name="OptionsMenu" type="PanelContainer" parent="UI"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1897,7 +1896,6 @@ bus_name = "Music"
 [node name="AmbienceMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 material = SubResource("ShaderMaterial_e5rr0")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -1993,13 +1991,13 @@ text = "Back"
 script = ExtResource("35_4io20")
 
 [node name="Label" type="Label" parent="UI/OptionsMenu/AmbienceMenu/Buttons"]
-offset_left = 275.0
+offset_left = 309.0
 offset_top = 515.0
 offset_right = 460.0
 offset_bottom = 542.0
 theme = ExtResource("42_c1jtf")
 text = "%s/%s sounds"
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
 
