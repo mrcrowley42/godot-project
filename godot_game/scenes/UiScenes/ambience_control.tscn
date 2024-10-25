@@ -53,7 +53,7 @@ theme_override_constants/separation = 16
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="SoundIconNew" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="CategoryIcon" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(42, 42)
 layout_mode = 2
 icon = ExtResource("2_6ycye")

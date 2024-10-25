@@ -86,8 +86,8 @@ func place_tooltip():
 	
 	# edge overflow
 	if !allow_edge_overflow:
-		tooltip_object.position.x = clamp(tooltip_object.position.x, 0, vp_size.x - (tt_size.x + margin))
-		tooltip_object.position.y = clamp(tooltip_object.position.y, 0, vp_size.y - (tt_size.y + margin))
+		tooltip_object.position.x = clamp(tooltip_object.position.x, margin, vp_size.x - (tt_size.x + margin))
+		tooltip_object.position.y = clamp(tooltip_object.position.y, margin, vp_size.y - (tt_size.y + margin))
 
 
 ## update string & tooltip position
@@ -100,10 +100,8 @@ func on_mouse_entered():
 	if visible and tooltip_string.length() > 0:
 		update_tooltip()
 		Globals.tween(tooltip_object, "modulate", Color(1, 1, 1, 1), 0, .3)
-		#Globals.tween(tooltip_object, "position", og_pos, 0, .3)
 
 
 func on_mouse_exited():
 	if visible:
 		Globals.tween(tooltip_object, "modulate", Color(1, 1, 1, 0), 0, .3)
-		#Globals.tween(tooltip_object, "position", og_pos + BTN_LABEL_OFFSET, 0, .3)
