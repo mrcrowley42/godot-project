@@ -7,6 +7,8 @@ var categories = load("res://resources/ambience_categories.tres").items
 @export var ambience_man: Node
 var current_category
 var current_sound
+const AMBIENCE_CONTROL = preload("res://scenes/UiScenes/ambience_control.tscn")
+
 
 func _ready() -> void:
 	# remove placeholder text	
@@ -40,4 +42,6 @@ func _on_sound_btn_item_selected(index: int) -> void:
 	
 func update_control_list():
 	for sound in ambience_man.current_sounds():
-		print(sound)
+		var sound_control = AMBIENCE_CONTROL.instantiate()
+		sound_control.sound_node = sound
+		sound_list_container.add_child(sound_control)
