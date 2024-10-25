@@ -1,4 +1,4 @@
-[gd_scene load_steps=129 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=131 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
@@ -55,7 +55,7 @@
 [ext_resource type="Texture2D" uid="uid://p0oo42fr5wrp" path="res://icons/status/lunch_dining_24dp_8B1A10_FILL0_wght500_GRAD0_opsz24-svg.svg" id="45_3duvs"]
 [ext_resource type="Shader" path="res://shaders/pattern_checker.gdshader" id="45_bgevw"]
 [ext_resource type="Theme" uid="uid://x6rgwcyh7bnk" path="res://themes/menu_title.tres" id="45_e031c"]
-[ext_resource type="Theme" uid="uid://bv3clfelw5gun" path="res://themes/scroll_container.tres" id="46_r0sdd"]
+[ext_resource type="Theme" uid="uid://bv3clfelw5gun" path="res://themes/container_green.tres" id="46_r0sdd"]
 [ext_resource type="Texture2D" uid="uid://cuaa2uyffvita" path="res://icons/status/droplet-fill.svg" id="47_qik1j"]
 [ext_resource type="Texture2D" uid="uid://d4c1k5m8u1jc0" path="res://UI stuff/Green Palette/green_food_button.png" id="49_a77pc"]
 [ext_resource type="Script" path="res://scripts/cosmetics_preview.gd" id="49_p7hc5"]
@@ -66,6 +66,7 @@
 [ext_resource type="Script" path="res://scripts/ambience_menu.gd" id="53_ubf3f"]
 [ext_resource type="Script" path="res://scripts/setting_button.gd" id="54_5bu15"]
 [ext_resource type="PackedScene" uid="uid://b6wocr0vo5s4v" path="res://scenes/GameScenes/debug_content.tscn" id="55_0rbaa"]
+[ext_resource type="Theme" uid="uid://bbnuk665d61vh" path="res://themes/menu_btn_green.tres" id="55_qqo3v"]
 [ext_resource type="AudioStream" uid="uid://dcet1hpt70t42" path="res://music/perfection.mp3" id="56_0sjdm"]
 [ext_resource type="Theme" uid="uid://dvpqr6ekggufg" path="res://themes/menu_dropdown.tres" id="56_in74o"]
 [ext_resource type="Script" path="res://scripts/stat_bar.gd" id="57_ani8q"]
@@ -289,6 +290,9 @@ shader_parameter/two_col = Color(0.01, 0, 0.06, 1)
 shader_parameter/two_speed = -0.02
 shader_parameter/two_size = 10.0
 shader_parameter/two_opacity = 0.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_a4t3j"]
+font_size = 32
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wd2mi"]
 
@@ -1573,7 +1577,7 @@ theme_override_constants/separation = 16
 
 [node name="Label" type="Label" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("42_c1jtf")
+theme = ExtResource("45_e031c")
 text = "Fact Library"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -1720,86 +1724,89 @@ script = ExtResource("35_4io20")
 [node name="SettingsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 material = SubResource("ShaderMaterial_1s3b6")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
 metadata/_edit_lock_ = true
 
-[node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/SettingsMenu"]
-position = Vector2(-50, -130)
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/SettingsMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 16
 
-[node name="Save" type="Button" parent="UI/OptionsMenu/SettingsMenu/SaveButtons"]
-offset_left = 312.0
-offset_top = 494.0
-offset_right = 456.0
-offset_bottom = 542.0
-theme = ExtResource("33_1qhmu")
-theme_override_colors/font_hover_color = Color(0.4947, 0.97, 0.4947, 1)
-theme_override_font_sizes/font_size = 18
-text = "Save Settings"
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/SettingsMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
 
-[node name="Back" type="Button" parent="UI/OptionsMenu/SettingsMenu/SaveButtons"]
-texture_filter = 5
-custom_minimum_size = Vector2(100, 40)
-offset_left = 73.0
-offset_top = 513.0
-offset_right = 173.0
-offset_bottom = 553.0
-scale = Vector2(0.75, 0.75)
-theme = ExtResource("33_1qhmu")
-theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
-theme_override_font_sizes/font_size = 18
-text = "Back"
-script = ExtResource("35_4io20")
+[node name="Title" type="Button" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("45_e031c")
+text = "Settings"
 
 [node name="MusicControls" type="Node2D" parent="UI/OptionsMenu/SettingsMenu"]
 position = Vector2(102, 26)
 scale = Vector2(0.75, 0.75)
 script = ExtResource("35_8cohh")
 
-[node name="Label" type="Label" parent="UI/OptionsMenu/SettingsMenu/MusicControls"]
-offset_left = 210.0
-offset_top = 250.667
-offset_right = 400.0
-offset_bottom = 307.667
-size_flags_horizontal = 4
+[node name="PanelContainer" type="PanelContainer" parent="UI/OptionsMenu/SettingsMenu/MusicControls"]
+offset_left = -100.0
+offset_top = 275.0
+offset_right = 407.0
+offset_bottom = 428.0
+theme = ExtResource("46_r0sdd")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/SettingsMenu/MusicControls/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/SettingsMenu/MusicControls/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="MusicTitle" type="Label" parent="UI/OptionsMenu/SettingsMenu/MusicControls/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("19_3grg3")
 theme_override_font_sizes/font_size = 48
 text = "Music"
+label_settings = SubResource("LabelSettings_a4t3j")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/OptionsMenu/SettingsMenu/MusicControls"]
-offset_left = 225.0
-offset_top = 325.0
-offset_right = 375.0
-offset_bottom = 386.0
-size_flags_horizontal = 4
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/OptionsMenu/SettingsMenu/MusicControls/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="Button2" type="Button" parent="UI/OptionsMenu/SettingsMenu/MusicControls/HBoxContainer"]
+[node name="left" type="Button" parent="UI/OptionsMenu/SettingsMenu/MusicControls/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(65, 0)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 2
 size_flags_vertical = 4
-theme_override_colors/font_outline_color = Color(0.835294, 0.517647, 0, 0.619608)
-theme_override_constants/outline_size = 3
+theme = ExtResource("33_1qhmu")
 theme_override_font_sizes/font_size = 44
-theme_override_styles/normal = SubResource("StyleBoxFlat_3535b")
 text = "<"
 
-[node name="Button" type="Button" parent="UI/OptionsMenu/SettingsMenu/MusicControls/HBoxContainer"]
+[node name="Label" type="Label" parent="UI/OptionsMenu/SettingsMenu/MusicControls/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "current song playing
+by me"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="right" type="Button" parent="UI/OptionsMenu/SettingsMenu/MusicControls/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(65, 0)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 10
 size_flags_vertical = 4
-theme_override_colors/font_outline_color = Color(0.835294, 0.517647, 0, 0.619608)
-theme_override_constants/outline_size = 3
+theme = ExtResource("33_1qhmu")
 theme_override_font_sizes/font_size = 44
-theme_override_styles/normal = SubResource("StyleBoxFlat_3535b")
 text = ">"
 
 [node name="VolumeControls" type="Node2D" parent="UI/OptionsMenu/SettingsMenu"]
@@ -1815,7 +1822,7 @@ theme_override_constants/h_separation = 5
 theme_override_constants/v_separation = 10
 columns = 3
 
-[node name="Label" type="Label" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2"]
+[node name="Master" type="Label" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2"]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_fonts/font = ExtResource("19_3grg3")
@@ -1834,39 +1841,14 @@ expand_icon = true
 script = ExtResource("37_xf1vk")
 bus_name = "Master"
 
-[node name="VolumeMaster" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2" groups=["settings_data"] instance=ExtResource("38_17bv4")]
+[node name="MasterVolume" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2" groups=["settings_data"] instance=ExtResource("38_17bv4")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 tick_count = 1
 bus_name = "Master"
 
-[node name="Label2" type="Label" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2"]
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_fonts/font = ExtResource("19_3grg3")
-theme_override_font_sizes/font_size = 24
-text = "SFX"
-vertical_alignment = 1
-
-[node name="SFXMuted" type="Button" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2" groups=["settings_data"]]
-layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_wd2mi")
-text = "          "
-icon = ExtResource("36_g2683")
-flat = true
-icon_alignment = 1
-expand_icon = true
-script = ExtResource("37_xf1vk")
-bus_name = "SFX"
-
-[node name="VolumeSfx" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2" groups=["settings_data"] instance=ExtResource("38_17bv4")]
-layout_mode = 2
-value = 0.0
-tick_count = 1
-bus_name = "SFX"
-
-[node name="Label3" type="Label" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2"]
+[node name="Music" type="Label" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2"]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_constants/shadow_outline_size = 5
@@ -1887,15 +1869,70 @@ expand_icon = true
 script = ExtResource("37_xf1vk")
 bus_name = "Music"
 
-[node name="VolumeMusic" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2" groups=["settings_data"] instance=ExtResource("38_17bv4")]
+[node name="MusicVolume" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2" groups=["settings_data"] instance=ExtResource("38_17bv4")]
 layout_mode = 2
 tooltip_text = "Music"
 tick_count = 1
 bus_name = "Music"
 
+[node name="SFX" type="Label" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 24
+text = "SFX"
+vertical_alignment = 1
+
+[node name="SFXMuted" type="Button" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2" groups=["settings_data"]]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wd2mi")
+text = "          "
+icon = ExtResource("36_g2683")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("37_xf1vk")
+bus_name = "SFX"
+
+[node name="SfxVolume" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2" groups=["settings_data"] instance=ExtResource("38_17bv4")]
+layout_mode = 2
+value = 0.0
+tick_count = 1
+bus_name = "SFX"
+
+[node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/SettingsMenu"]
+position = Vector2(-50, -130)
+
+[node name="Save" type="Button" parent="UI/OptionsMenu/SettingsMenu/SaveButtons"]
+custom_minimum_size = Vector2(100, 40)
+offset_left = 319.0
+offset_top = 513.0
+offset_right = 504.0
+offset_bottom = 553.0
+scale = Vector2(0.75, 0.75)
+theme = ExtResource("55_qqo3v")
+theme_override_colors/font_hover_color = Color(0.4947, 0.97, 0.4947, 1)
+theme_override_font_sizes/font_size = 18
+text = "Save Settings"
+
+[node name="Back" type="Button" parent="UI/OptionsMenu/SettingsMenu/SaveButtons"]
+texture_filter = 5
+custom_minimum_size = Vector2(100, 40)
+offset_left = 73.0
+offset_top = 513.0
+offset_right = 173.0
+offset_bottom = 553.0
+scale = Vector2(0.75, 0.75)
+theme = ExtResource("33_1qhmu")
+theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
+theme_override_font_sizes/font_size = 18
+text = "Back"
+script = ExtResource("35_4io20")
+
 [node name="AmbienceMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 material = SubResource("ShaderMaterial_e5rr0")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -2359,13 +2396,13 @@ script = ExtResource("80_83777")
 [connection signal="cosmetic_btn_pressed" from="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems" to="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/PreviewContainer/CreaturePreview" method="_on_cosmetic_items_cosmetic_btn_pressed"]
 [connection signal="visibility_changed" from="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems" to="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/OptionsMenu/CosmeticsMenu/SaveButtons/Back" to="UI/OptionsMenu/CosmeticsMenu/SaveButtons/Back" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MusicControls/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/left" to="UI/OptionsMenu/SettingsMenu/MusicControls" method="_on_back_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MusicControls/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/right" to="UI/OptionsMenu/SettingsMenu/MusicControls" method="_on_forward_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2/MasterMuted" to="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2/MasterMuted" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2/MusicMuted" to="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2/MusicMuted" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2/SFXMuted" to="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2/SFXMuted" method="_on_button_down"]
 [connection signal="pressed" from="UI/OptionsMenu/SettingsMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/SaveButtons/Back" to="UI/OptionsMenu/SettingsMenu/SaveButtons/Back" method="_on_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MusicControls/HBoxContainer/Button2" to="UI/OptionsMenu/SettingsMenu/MusicControls" method="_on_back_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MusicControls/HBoxContainer/Button" to="UI/OptionsMenu/SettingsMenu/MusicControls" method="_on_forward_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2/MasterMuted" to="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2/MasterMuted" method="_on_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2/SFXMuted" to="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2/SFXMuted" method="_on_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2/MusicMuted" to="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2/MusicMuted" method="_on_button_down"]
 [connection signal="item_selected" from="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/HBoxContainer/CategoryBtn" to="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer" method="_on_category_btn_item_selected"]
 [connection signal="item_selected" from="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/HBoxContainer/SoundBtn" to="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer" method="_on_sound_btn_item_selected"]
 [connection signal="button_down" from="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/HBoxContainer/AddSoundBtn" to="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer" method="_on_add_sound_btn_button_down"]

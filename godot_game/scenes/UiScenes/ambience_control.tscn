@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://ckjfqxx8f55r3"]
+[gd_scene load_steps=7 format=3 uid="uid://ckjfqxx8f55r3"]
 
 [ext_resource type="Script" path="res://scripts/ambience_control.gd" id="1_r2qd8"]
 [ext_resource type="Texture2D" uid="uid://wo64brcmlmf8" path="res://images/ambience/forest.png" id="2_6ycye"]
 [ext_resource type="Script" path="res://scripts/base_classses/custom_tooltip_script.gd" id="2_oj86f"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="2_qoy0g"]
+[ext_resource type="Theme" uid="uid://7uy2it30gif0" path="res://themes/menu_value_range_small.tres" id="5_1xa1v"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_27aj0"]
 bg_color = Color(0, 0, 0, 0.501961)
@@ -11,25 +12,6 @@ corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
-
-[sub_resource type="ImageTexture" id="ImageTexture_ftj5d"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r1wje"]
-content_margin_left = 0.0
-content_margin_top = 8.0
-content_margin_right = 0.0
-content_margin_bottom = 8.0
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xql7d"]
-bg_color = Color(0.58381, 0.3318, 0.79, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
 
 [node name="PanelContainer" type="PanelContainer"]
 custom_minimum_size = Vector2(360, 64)
@@ -82,13 +64,7 @@ layout_mode = 2
 [node name="VolumeSfx" type="HSlider" parent="MarginContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 10
-theme = ExtResource("2_qoy0g")
-theme_override_icons/grabber = SubResource("ImageTexture_ftj5d")
-theme_override_icons/grabber_highlight = SubResource("ImageTexture_ftj5d")
-theme_override_icons/grabber_disabled = SubResource("ImageTexture_ftj5d")
-theme_override_styles/slider = SubResource("StyleBoxFlat_r1wje")
-theme_override_styles/grabber_area = SubResource("StyleBoxFlat_xql7d")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_xql7d")
+theme = ExtResource("5_1xa1v")
 max_value = 1.0
 step = 0.01
 value = 0.5

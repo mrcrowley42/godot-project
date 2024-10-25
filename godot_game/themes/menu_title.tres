@@ -1,10 +1,25 @@
-[gd_resource type="Theme" load_steps=4 format=3 uid="uid://x6rgwcyh7bnk"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://x6rgwcyh7bnk"]
 
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="1_xasyt"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ia2bf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_16vbq"]
+bg_color = Color(0.6, 0.6, 0.6, 0.831373)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pyo7d"]
 bg_color = Color(0.6, 0.6, 0.6, 0.831373)
 border_width_left = 3
 border_width_top = 3
@@ -26,3 +41,4 @@ Button/styles/focus = SubResource("StyleBoxEmpty_ia2bf")
 Button/styles/hover = SubResource("StyleBoxFlat_16vbq")
 Button/styles/normal = SubResource("StyleBoxFlat_16vbq")
 Button/styles/pressed = SubResource("StyleBoxFlat_16vbq")
+Label/styles/normal = SubResource("StyleBoxFlat_pyo7d")

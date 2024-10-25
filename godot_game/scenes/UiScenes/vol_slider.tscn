@@ -1,30 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://cbn0dv1k0onpb"]
+[gd_scene load_steps=3 format=3 uid="uid://cbn0dv1k0onpb"]
 
-[ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="1_doqau"]
+[ext_resource type="Theme" uid="uid://b0xcqhw28px6h" path="res://themes/menu_value_range.tres" id="1_q88lf"]
 [ext_resource type="Script" path="res://scripts/volume_slider.gd" id="1_vfrrs"]
 
-[sub_resource type="ImageTexture" id="ImageTexture_ftj5d"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gkck0"]
-content_margin_left = 0.0
-content_margin_top = 20.0
-content_margin_right = 0.0
-content_margin_bottom = 20.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xql7d"]
-bg_color = Color(0.58381, 0.3318, 0.79, 1)
-
 [node name="VolumeSlider" type="HSlider"]
-offset_right = 1110.0
-offset_bottom = 304.0
+offset_right = 289.0
+offset_bottom = 87.0
 mouse_default_cursor_shape = 10
-theme = ExtResource("1_doqau")
-theme_override_icons/grabber = SubResource("ImageTexture_ftj5d")
-theme_override_icons/grabber_highlight = SubResource("ImageTexture_ftj5d")
-theme_override_icons/grabber_disabled = SubResource("ImageTexture_ftj5d")
-theme_override_styles/slider = SubResource("StyleBoxFlat_gkck0")
-theme_override_styles/grabber_area = SubResource("StyleBoxFlat_xql7d")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_xql7d")
+theme = ExtResource("1_q88lf")
 max_value = 1.0
 step = 0.01
 value = 0.5
