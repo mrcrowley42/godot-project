@@ -1,4 +1,4 @@
-[gd_scene load_steps=129 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=128 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
@@ -54,8 +54,8 @@
 [ext_resource type="PackedScene" uid="uid://dyapnl5xgvivn" path="res://scenes/UiScenes/topic_btn.tscn" id="44_y5a0d"]
 [ext_resource type="Texture2D" uid="uid://p0oo42fr5wrp" path="res://icons/status/lunch_dining_24dp_8B1A10_FILL0_wght500_GRAD0_opsz24-svg.svg" id="45_3duvs"]
 [ext_resource type="Shader" path="res://shaders/pattern_checker.gdshader" id="45_bgevw"]
-[ext_resource type="Theme" uid="uid://x6rgwcyh7bnk" path="res://themes/menu_title.tres" id="45_e031c"]
-[ext_resource type="Theme" uid="uid://bv3clfelw5gun" path="res://themes/scroll_container.tres" id="46_r0sdd"]
+[ext_resource type="Theme" uid="uid://cpmafqggr8ryy" path="res://themes/menu_title.tres" id="45_e031c"]
+[ext_resource type="Theme" uid="uid://c6iqo2crlvcwv" path="res://themes/scroll_container.tres" id="46_r0sdd"]
 [ext_resource type="Texture2D" uid="uid://cuaa2uyffvita" path="res://icons/status/droplet-fill.svg" id="47_qik1j"]
 [ext_resource type="Texture2D" uid="uid://d4c1k5m8u1jc0" path="res://UI stuff/Green Palette/green_food_button.png" id="49_a77pc"]
 [ext_resource type="Script" path="res://scripts/cosmetics_preview.gd" id="49_p7hc5"]
@@ -67,9 +67,8 @@
 [ext_resource type="Script" path="res://scripts/setting_button.gd" id="54_5bu15"]
 [ext_resource type="PackedScene" uid="uid://b6wocr0vo5s4v" path="res://scenes/GameScenes/debug_content.tscn" id="55_0rbaa"]
 [ext_resource type="AudioStream" uid="uid://dcet1hpt70t42" path="res://music/perfection.mp3" id="56_0sjdm"]
-[ext_resource type="Theme" uid="uid://dvpqr6ekggufg" path="res://themes/menu_dropdown.tres" id="56_in74o"]
+[ext_resource type="Theme" uid="uid://dhbawoulpip33" path="res://themes/menu_dropdown.tres" id="56_in74o"]
 [ext_resource type="Script" path="res://scripts/stat_bar.gd" id="57_ani8q"]
-[ext_resource type="PackedScene" uid="uid://ckjfqxx8f55r3" path="res://scenes/UiScenes/ambience_control.tscn" id="57_ccee5"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/music_manager.gd" id="57_dawf5"]
 [ext_resource type="Shader" path="res://shaders/pattern_wavy.gdshader" id="57_qy3v8"]
 [ext_resource type="AudioStream" uid="uid://dwmn4dqcd6k4i" path="res://music/02 Hollywood Main Theme.mp3" id="58_tbnki"]
@@ -1953,6 +1952,7 @@ text = "  +  "
 custom_minimum_size = Vector2(0, 240)
 layout_mode = 2
 theme = ExtResource("46_r0sdd")
+horizontal_scroll_mode = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/ScrollContainer"]
 layout_mode = 2
@@ -1961,17 +1961,11 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+[node name="SoundListBox" type="VBoxContainer" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 16
-
-[node name="PanelContainer" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("57_ccee5")]
-layout_mode = 2
-
-[node name="PanelContainer2" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("57_ccee5")]
-layout_mode = 2
 
 [node name="Buttons" type="Node2D" parent="UI/OptionsMenu/AmbienceMenu"]
 position = Vector2(-50, -130)

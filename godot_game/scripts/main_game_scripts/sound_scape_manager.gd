@@ -71,7 +71,8 @@ func load(data) -> void:
 
 ## [DEBUG] Print current soundscape.
 func current_sounds():
-	print(soundscape)
+	return get_children()
+	#print(soundscape)
 
 
 ## Returns a dictionary of file_names to resource_path for each ambient sound.
