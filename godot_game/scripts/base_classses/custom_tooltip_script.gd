@@ -18,6 +18,8 @@ enum DIRECTION {SMART_HORIZONTAL, SMART_VERTICAL, UP, DOWN, LEFT, RIGHT}
 @export var margin: int = 10
 ## allow the tooltip to overflow past the edge of the viewport
 @export var allow_edge_overflow: bool = false
+## use this for if parents have a different scale (is applied after this object's scale)
+@export var optional_hitbox_scale: Vector2 = Vector2(1, 1)
 
 var tooltip_object: Label
 
@@ -50,7 +52,7 @@ func place_tooltip():
 	tooltip_object.position = global_position
 	
 	var tt_size = tooltip_object.size * tooltip_object.scale
-	var this_size = size * scale
+	var this_size = (size * scale) * optional_hitbox_scale
 	var vp_size = get_viewport_rect().size
 	
 	# smart positions
@@ -81,6 +83,11 @@ func place_tooltip():
 	if direction == DIRECTION.RIGHT or smart_dir == DIRECTION.RIGHT:
 		tooltip_object.position.y += -(tt_size.y - this_size.y) * .5
 		tooltip_object.position.x += this_size.x + margin
+	
+	# edge overflow
+	if !allow_edge_overflow:
+		tooltip_object.position.x = clamp(tooltip_object.position.x, 0, vp_size.x - (tt_size.x + margin))
+		tooltip_object.position.y = clamp(tooltip_object.position.y, 0, vp_size.y - (tt_size.y + margin))
 
 
 ## update string & tooltip position

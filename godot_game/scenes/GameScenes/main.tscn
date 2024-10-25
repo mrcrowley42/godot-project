@@ -1,4 +1,4 @@
-[gd_scene load_steps=124 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=129 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://do0i17klbrer7" path="res://icons/arrow-up-square.svg" id="15_8x1u0"]
 [ext_resource type="Script" path="res://scripts/grow_up_btn.gd" id="16_mj2i7"]
 [ext_resource type="Script" path="res://scripts/action_menu_panel.gd" id="17_wsydk"]
+[ext_resource type="Script" path="res://scripts/base_classses/custom_tooltip_script.gd" id="18_2njxs"]
 [ext_resource type="Theme" uid="uid://1dv11a5ar0hg" path="res://themes/action_btn.tres" id="18_v1mb2"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="19_3grg3"]
 [ext_resource type="Texture2D" uid="uid://dckd2hhimpp2x" path="res://icons/cup-straw.svg" id="20_tdidc"]
@@ -176,8 +177,20 @@ interpolation_mode = 1
 offsets = PackedFloat32Array(0, 0.12381, 0.290476, 0.452381, 0.652381, 0.819048, 1)
 colors = PackedColorArray(1, 0, 0, 1, 1, 0.482353, 0.321569, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0.509804, 1, 0.529412, 0, 0.745098, 1, 1, 1, 1, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_p0ahb"]
-font_size = 30
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eh4ru"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cyk1a"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mw1wl"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5qfy2"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p2h23"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xvtbm"]
 
@@ -546,34 +559,22 @@ position = Vector2(45, 44.9999)
 scale = Vector2(1.4375, 1.4375)
 texture = ExtResource("15_8x1u0")
 
-[node name="GUBLabel" type="NinePatchRect" parent="NotificationLayer/NotificationManager/GrowUpBtn"]
+[node name="CustomTooltipButton" type="Button" parent="NotificationLayer/NotificationManager/GrowUpBtn"]
 layout_mode = 0
-offset_left = -392.0
-offset_right = -36.0
+offset_right = 90.0
 offset_bottom = 90.0
-texture = ExtResource("14_fimo1")
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
-
-[node name="Label" type="Label" parent="NotificationLayer/NotificationManager/GrowUpBtn/GUBLabel"]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 340.0
-offset_bottom = 74.0
-text = "Grow up to adult!"
-label_settings = SubResource("LabelSettings_p0ahb")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Sprite2D" type="Sprite2D" parent="NotificationLayer/NotificationManager/GrowUpBtn/GUBLabel"]
-modulate = Color(0.0392157, 0.0784314, 0.0980392, 1)
-position = Vector2(362.771, 46)
-rotation = 3.14159
-scale = Vector2(0.769322, 0.296296)
-texture = ExtResource("30_kovtb")
+mouse_filter = 1
+theme_override_styles/focus = SubResource("StyleBoxFlat_eh4ru")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_cyk1a")
+theme_override_styles/hover = SubResource("StyleBoxFlat_mw1wl")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5qfy2")
+theme_override_styles/normal = SubResource("StyleBoxFlat_p2h23")
+script = ExtResource("18_2njxs")
+tooltip_string = "Grow up to adult!"
+style = 2
+direction = 4
+allow_edge_overflow = true
+optional_hitbox_scale = Vector2(0.5, 0.5)
 
 [node name="UI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
@@ -1364,6 +1365,7 @@ metadata/_edit_use_anchors_ = true
 [node name="OptionsMenu" type="PanelContainer" parent="UI"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1896,6 +1898,7 @@ bus_name = "Music"
 [node name="AmbienceMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 material = SubResource("ShaderMaterial_e5rr0")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
