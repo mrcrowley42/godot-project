@@ -18,7 +18,7 @@ enum DIRECTION {SMART_HORIZONTAL, SMART_VERTICAL, UP, DOWN, LEFT, RIGHT}
 @export var margin: int = 10
 ## allow the tooltip to overflow past the edge of the viewport
 @export var allow_edge_overflow: bool = false
-## use this for if parents have a different scale (is applied after this object's scale)
+## use this for if a parent has a different scale (is applied after this object's scale)
 @export var optional_hitbox_scale: Vector2 = Vector2(1, 1)
 
 var tooltip_object: Label
@@ -68,19 +68,19 @@ func place_tooltip():
 			smart_dir = DIRECTION.UP
 	
 	# static positions
-	if direction == DIRECTION.UP or smart_dir == DIRECTION.UP:
+	if DIRECTION.UP in [direction, smart_dir]:
 		tooltip_object.position.x += -(tt_size.x - this_size.x) * .5
 		tooltip_object.position.y += -tt_size.y - margin
 	
-	if direction == DIRECTION.DOWN or smart_dir == DIRECTION.DOWN:
+	if DIRECTION.DOWN in [direction, smart_dir]:
 		tooltip_object.position.x += -(tt_size.x - this_size.x) * .5
 		tooltip_object.position.y += this_size.y + margin
 	
-	if direction == DIRECTION.LEFT or smart_dir == DIRECTION.LEFT:
+	if DIRECTION.LEFT in [direction, smart_dir]:
 		tooltip_object.position.y += -(tt_size.y - this_size.y) * .5
 		tooltip_object.position.x += -(tt_size.x + margin)
 	
-	if direction == DIRECTION.RIGHT or smart_dir == DIRECTION.RIGHT:
+	if DIRECTION.RIGHT in [direction, smart_dir]:
 		tooltip_object.position.y += -(tt_size.y - this_size.y) * .5
 		tooltip_object.position.x += this_size.x + margin
 	
@@ -93,7 +93,7 @@ func place_tooltip():
 ## update string & tooltip position
 func update_tooltip():
 	tooltip_object.text = tooltip_string  # refresh text
-	place_tooltip()  # string is different size, re-place
+	place_tooltip()
 
 
 func on_mouse_entered():
