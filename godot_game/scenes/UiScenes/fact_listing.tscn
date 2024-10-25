@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/fact_listing.gd" id="1_gtqsy"]
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="2_nyd6t"]
 [ext_resource type="Shader" path="res://shaders/pattern_wavy.gdshader" id="2_tm8bj"]
-[ext_resource type="PackedScene" path="res://scenes/UiScenes/fact_btn.tscn" id="3_omm3u"]
+[ext_resource type="PackedScene" uid="uid://cfto5f3wtfdqt" path="res://scenes/UiScenes/fact_btn.tscn" id="3_omm3u"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="4_ik51a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yoffr"]
