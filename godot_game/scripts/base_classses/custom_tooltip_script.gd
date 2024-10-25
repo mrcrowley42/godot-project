@@ -2,18 +2,22 @@
 class_name CustomTooltipButton extends Button
 
 var THEME_DICT = {
+	THEME.PLAIN: load("res://themes/plain.tres"),
 	THEME.GREY: load("res://themes/menu_btn.tres"),
 	THEME.DARK_GREY: load("res://themes/menu_btn_dark.tres")
 }
 
-enum THEME {GREY, DARK_GREY}
+enum THEME {PLAIN, GREY, DARK_GREY}
 enum DIRECTION {SMART_HORIZONTAL, SMART_VERTICAL, UP, DOWN, LEFT, RIGHT}
 
-@export var tooltip_string: String
+@export_multiline var tooltip_string: String
 @export var style: THEME
 @export var direction: DIRECTION
 @export var tooltip_scale: float = 1
-@export var margin: int = 8
+## margin between button and tooltip
+@export var margin: int = 10
+## allow the tooltip to overflow past the edge of the viewport
+@export var allow_edge_overflow: bool = false
 
 var tooltip_object: Label
 
@@ -47,25 +51,34 @@ func place_tooltip():
 	
 	var tt_size = tooltip_object.size * tooltip_object.scale
 	var this_size = size * scale
+	var vp_size = get_viewport_rect().size
 	
 	# smart positions
+	var smart_dir = null;
 	if direction == DIRECTION.SMART_HORIZONTAL:
-		pass
-		var true_x = global_position.x + (-(tt_size.x - this_size.x) * .5)
+		smart_dir = DIRECTION.RIGHT
+		if global_position.x + (this_size.x * .5) > vp_size.x * .5:
+			smart_dir = DIRECTION.LEFT
+	
 	if direction == DIRECTION.SMART_VERTICAL:
-		pass
+		smart_dir = DIRECTION.DOWN
+		if global_position.y + (this_size.y * .5) > vp_size.y * .5:
+			smart_dir = DIRECTION.UP
 	
 	# static positions
-	if direction == DIRECTION.UP:
+	if direction == DIRECTION.UP or smart_dir == DIRECTION.UP:
 		tooltip_object.position.x += -(tt_size.x - this_size.x) * .5
 		tooltip_object.position.y += -tt_size.y - margin
-	if direction == DIRECTION.DOWN:
+	
+	if direction == DIRECTION.DOWN or smart_dir == DIRECTION.DOWN:
 		tooltip_object.position.x += -(tt_size.x - this_size.x) * .5
 		tooltip_object.position.y += this_size.y + margin
-	if direction == DIRECTION.LEFT:
+	
+	if direction == DIRECTION.LEFT or smart_dir == DIRECTION.LEFT:
 		tooltip_object.position.y += -(tt_size.y - this_size.y) * .5
 		tooltip_object.position.x += -(tt_size.x + margin)
-	if direction == DIRECTION.RIGHT:
+	
+	if direction == DIRECTION.RIGHT or smart_dir == DIRECTION.RIGHT:
 		tooltip_object.position.y += -(tt_size.y - this_size.y) * .5
 		tooltip_object.position.x += this_size.x + margin
 
@@ -77,7 +90,7 @@ func update_tooltip():
 
 
 func on_mouse_entered():
-	if visible:
+	if visible and tooltip_string.length() > 0:
 		update_tooltip()
 		Globals.tween(tooltip_object, "modulate", Color(1, 1, 1, 1), 0, .3)
 		#Globals.tween(tooltip_object, "position", og_pos, 0, .3)

@@ -1,0 +1,18 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://c7p8gepxms8yr"]
+
+[ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="1_ow1ko"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28a4k"]
+bg_color = Color(0, 0, 0, 0.760784)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[resource]
+default_font = ExtResource("1_ow1ko")
+Label/styles/normal = SubResource("StyleBoxFlat_28a4k")

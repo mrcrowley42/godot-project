@@ -53,21 +53,15 @@ theme_override_constants/separation = 16
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="CustomTooltipButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-script = ExtResource("2_oj86f")
-tooltip_string = "ae"
-style = 1
-direction = 5
-
-[node name="SoundIcon" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="SoundIconNew" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(42, 42)
 layout_mode = 2
-tooltip_text = "<Category>"
 icon = ExtResource("2_6ycye")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("2_oj86f")
+tooltip_string = "<category>"
+direction = 3
 
 [node name="SoundLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2

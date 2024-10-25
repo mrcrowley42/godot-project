@@ -1999,7 +1999,6 @@ theme = ExtResource("42_c1jtf")
 text = "%s/%s sounds"
 horizontal_alignment = 1
 vertical_alignment = 1
-clip_text = true
 
 [node name="CreditsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
