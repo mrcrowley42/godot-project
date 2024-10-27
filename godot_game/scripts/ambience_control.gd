@@ -20,3 +20,7 @@ func _on_remove_btn_button_down() -> void:
 
 func _on_volume_sfx_value_changed(value: float) -> void:
 	sound_node.volume_db = linear_to_db(slider.value)
+
+
+func _on_hidden() -> void:
+	queue_free()

@@ -102,5 +102,6 @@ value = 0.5
 scrollable = false
 tick_count = 1
 
+[connection signal="hidden" from="." to="." method="_on_hidden"]
 [connection signal="button_down" from="MarginContainer/VBoxContainer/HBoxContainer/RemoveBtn" to="." method="_on_remove_btn_button_down"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/MarginContainer/VolumeSfx" to="." method="_on_volume_sfx_value_changed"]

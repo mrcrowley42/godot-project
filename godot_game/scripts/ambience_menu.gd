@@ -28,12 +28,14 @@ func update_sound_list(category) -> void:
 func _on_category_btn_item_selected(index: int) -> void:
 	current_category = categories[index]
 	update_sound_list(current_category)
-	update_control_list()
 
 
 func _on_add_sound_btn_button_down() -> void:
 	ambience_man.add_sound_node(current_sound)
 	%BtnClick.play()
+	var sound_control = AMBIENCE_CONTROL.instantiate()
+	sound_control.sound_node = ambience_man.get_child(-1)
+	sound_list_container.add_child(sound_control)
 	DataGlobals.save_settings_data()
 
 
@@ -45,3 +47,10 @@ func update_control_list():
 		var sound_control = AMBIENCE_CONTROL.instantiate()
 		sound_control.sound_node = sound
 		sound_list_container.add_child(sound_control)
+
+
+func _on_visibility_changed() -> void:
+	if self.visible:
+		update_control_list()
+	else:
+		DataGlobals.save_settings_data()
