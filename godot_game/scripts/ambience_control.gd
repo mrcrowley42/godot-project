@@ -11,7 +11,7 @@ func _ready() -> void:
 	if sound_node:
 		label.text = sound_node.sound_name
 		slider.value = db_to_linear(sound_node.volume_db)
-		category_icon.tooltip_string = sound_node.sound_category.category_name
+		category_icon.tooltip_string = "Category: %s" % sound_node.sound_category.category_name
 		category_icon.icon = sound_node.sound_category.image
 
 
