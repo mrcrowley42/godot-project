@@ -4,8 +4,8 @@ extends VBoxContainer
 @onready var sound_list_container = find_child("SoundListBox")
 @onready var sound_btn = find_child("SoundBtn")
 var categories = load("res://resources/ambience_categories.tres").items
-@export var ambience_man: Node
-var current_category
+@export var ambience_man: AmbienceManager
+var current_category: AmbientSoundCategory
 var current_sound
 const AMBIENCE_CONTROL = preload("res://scenes/UiScenes/ambience_control.tscn")
 
@@ -31,7 +31,7 @@ func _on_category_btn_item_selected(index: int) -> void:
 
 
 func _on_add_sound_btn_button_down() -> void:
-	ambience_man.add_sound_node(current_sound)
+	ambience_man.add_sound_node(current_category, current_sound)
 	%BtnClick.play()
 	var sound_control = AMBIENCE_CONTROL.instantiate()
 	sound_control.sound_node = ambience_man.get_child(-1)
