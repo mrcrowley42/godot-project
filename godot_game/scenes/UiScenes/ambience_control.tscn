@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://or61a20rqt0e"]
+[gd_scene load_steps=8 format=3 uid="uid://ckjfqxx8f55r3"]
 
 [ext_resource type="Script" path="res://scripts/ambience_control.gd" id="1_r2qd8"]
 [ext_resource type="Texture2D" uid="uid://wo64brcmlmf8" path="res://images/ambience/forest.png" id="2_6ycye"]
@@ -19,29 +19,16 @@ corner_radius_top_right = 32
 corner_radius_bottom_right = 32
 corner_radius_bottom_left = 32
 
-[sub_resource type="ImageTexture" id="ImageTexture_ftj5d"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r1wje"]
-content_margin_left = 0.0
-content_margin_top = 8.0
-content_margin_right = 0.0
-content_margin_bottom = 8.0
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xql7d"]
-bg_color = Color(0.58381, 0.3318, 0.79, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
 [node name="PanelContainer" type="PanelContainer"]
-custom_minimum_size = Vector2(360, 64)
-offset_right = 369.0
-offset_bottom = 87.0
+custom_minimum_size = Vector2(355, 64)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -184.5
+offset_right = 184.5
+offset_bottom = 106.0
+grow_horizontal = 2
+size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_27aj0")
 script = ExtResource("1_r2qd8")
 
