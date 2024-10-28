@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ckjfqxx8f55r3"]
+[gd_scene load_steps=10 format=3 uid="uid://or61a20rqt0e"]
 
 [ext_resource type="Script" path="res://scripts/ambience_control.gd" id="1_r2qd8"]
 [ext_resource type="Texture2D" uid="uid://wo64brcmlmf8" path="res://images/ambience/forest.png" id="2_6ycye"]
@@ -12,6 +12,31 @@ corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_emd32"]
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="ImageTexture" id="ImageTexture_ftj5d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r1wje"]
+content_margin_left = 0.0
+content_margin_top = 8.0
+content_margin_right = 0.0
+content_margin_bottom = 8.0
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xql7d"]
+bg_color = Color(0.58381, 0.3318, 0.79, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [node name="PanelContainer" type="PanelContainer"]
 custom_minimum_size = Vector2(360, 64)
@@ -54,7 +79,8 @@ text = "Sound Effect Name"
 custom_minimum_size = Vector2(42, 42)
 layout_mode = 2
 size_flags_horizontal = 10
-text = "x"
+theme_override_styles/normal = SubResource("StyleBoxFlat_emd32")
+text = "X"
 icon_alignment = 1
 expand_icon = true
 
@@ -70,3 +96,7 @@ step = 0.01
 value = 0.5
 scrollable = false
 tick_count = 1
+
+[connection signal="hidden" from="." to="." method="_on_hidden"]
+[connection signal="button_down" from="MarginContainer/VBoxContainer/HBoxContainer/RemoveBtn" to="." method="_on_remove_btn_button_down"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/MarginContainer/VolumeSfx" to="." method="_on_volume_sfx_value_changed"]
