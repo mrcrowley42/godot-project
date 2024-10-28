@@ -16,6 +16,8 @@ func _ready() -> void:
 	for category in categories:
 		category_btn.add_icon_item(category.image, category.category_name)
 	category_btn.item_selected.emit(0)
+	
+	%AmbienceMenu.visibility_changed.connect(on_visibility_changed)
 
 
 func update_sound_list(category) -> void:
@@ -48,9 +50,10 @@ func update_control_list():
 		sound_control.sound_node = sound
 		sound_list_container.add_child(sound_control)
 
-
-func _on_visibility_changed() -> void:
-	if self.visible:
-		update_control_list()
-	else:
-		DataGlobals.save_settings_data()
+## save when menu is hidden
+func on_visibility_changed() -> void:
+	if ambience_man.has_loaded:
+		if %AmbienceMenu.visible:
+			update_control_list()
+		else:
+			DataGlobals.save_settings_data()

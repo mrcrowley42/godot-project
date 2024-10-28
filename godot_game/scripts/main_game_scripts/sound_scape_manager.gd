@@ -5,6 +5,7 @@ const SETTING_KEY = "Ambience"
 
 var soundscape = []
 var sound_list = build_sound_map()
+var has_loaded = false
 
 signal finished_loading()
 
@@ -42,6 +43,7 @@ func load_soundscape() -> void:
 		var volume = sound[1]
 		var category = load(ResourceUID.get_id_path(int(sound[2])))
 		add_sound_node(category, file, volume)
+	has_loaded = true
 
 
 ## Create a [param AmbientSoundPlayer] with the passed audio file.
@@ -90,6 +92,7 @@ func build_sound_map() -> Dictionary:
 			var sound_key: String = to_sound_list_key(sound.sound_name)
 			sound_dict[sound_key] = sound
 	return sound_dict
+
 
 func to_sound_list_key(key):
 	return key.replace(" ", "_")
