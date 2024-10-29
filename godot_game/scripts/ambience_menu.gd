@@ -5,14 +5,14 @@ extends VBoxContainer
 @onready var sound_btn = find_child("SoundBtn")
 @onready var count_label: Label = find_child("SoundCountLabel")
 
-var categories = load("res://resources/ambience_categories.tres").items
 @export var ambience_man: AmbienceManager
+
 var current_category: AmbientSoundCategory
 var current_sound
-const AMBIENCE_CONTROL = preload("res://scenes/UiScenes/ambience_control.tscn")
-
 var count_label_tween: Tween
 
+var categories = load("res://resources/ambience_categories.tres").items
+const AMBIENCE_CONTROL = preload("res://scenes/UiScenes/ambience_control.tscn")
 
 func _ready() -> void:
 	# remove placeholder text
@@ -50,7 +50,6 @@ func _on_add_sound_btn_button_down() -> void:
 	%BtnClick.play()
 	var sound_control = AMBIENCE_CONTROL.instantiate()
 	sound_control.sound_node = ambience_man.get_child(-1)
-	
 	sound_list_container.add_child(sound_control)
 	
 	DataGlobals.save_settings_data()
@@ -77,7 +76,7 @@ func on_visibility_changed() -> void:
 
 func _notification(what: int) -> void:
 	if what == Globals.NOTIFICATION_AMBIENT_SOUNDS_REMOVED:
-		update_count_label(1)
+		update_count_label(1)  # because queue_free() takes a while, manually subtract 1
 
 func update_count_label(sub: int = 0):
 	count_label.text = "%s/%s sounds" % [ambience_man.get_sound_count()-sub, Globals.MAX_AMBIENT_SOUNDS]

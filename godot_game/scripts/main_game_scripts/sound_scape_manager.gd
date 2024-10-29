@@ -34,10 +34,12 @@ func _ready() -> void:
 func load_soundscape() -> void:
 	if not soundscape:
 		return
-	# Remove invalid or corrupt file names.
+	
+	# limit sounds count & remove invalid or corrupt sounds
+	soundscape.resize(Globals.MAX_AMBIENT_SOUNDS)
 	soundscape = soundscape.filter(func(x): return sound_list.has(to_sound_list_key(x[0])))
-	# TODO NEED SOME WAY OF PREVENTING DUPLICATES
-	# ALSO CURRENTLY REQUIRES TO PRESS A SAVE BUTTON MAYBE MOVE IT TO SAVE RATHER THAN SETTINGS
+	
+	# add sounds
 	for sound in soundscape:
 		var file = sound_list[to_sound_list_key(sound[0])]
 		var volume = sound[1]
@@ -80,7 +82,6 @@ func load(data) -> void:
 ## [DEBUG] Print current soundscape.
 func current_sounds():
 	return get_children()
-	#print(soundscape)
 
 
 ## Returns a dictionary of file_names to resource_path for each ambient sound.
