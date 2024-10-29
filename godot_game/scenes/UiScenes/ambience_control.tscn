@@ -15,13 +15,14 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v1uuf"]
-bg_color = Color(0.513233, 0.513233, 0.513233, 1)
+bg_color = Color(0.412152, 0.412152, 0.412152, 1)
 corner_radius_top_left = 32
 corner_radius_top_right = 32
 corner_radius_bottom_right = 32
 corner_radius_bottom_left = 32
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_emd32"]
+bg_color = Color(0.466181, 0.466181, 0.466181, 1)
 corner_radius_top_left = 32
 corner_radius_top_right = 32
 corner_radius_bottom_right = 32
@@ -72,9 +73,10 @@ theme = ExtResource("2_qoy0g")
 text = "Sound Effect Name"
 
 [node name="RemoveBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(42, 42)
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 10
+size_flags_vertical = 4
 theme_override_styles/hover = SubResource("StyleBoxFlat_v1uuf")
 theme_override_styles/normal = SubResource("StyleBoxFlat_emd32")
 text = "X"

@@ -1,5 +1,6 @@
 extends Node
 
+# SAVE CONSTANTS
 const SAVE_DATA_GROUP = "save_data"
 const SAVE_DATA_FILE = "res://save_data.save"
 
@@ -10,6 +11,7 @@ const SAVE_SETTINGS_FILE = "res://settings.cfg"
 const DEFAULT_SECTION = "general"
 const AUDIO_SECTION = "audio"
 const UI_SECTION = "user interface"
+const MAX_AMBIENT_SOUNDS = 6
 
 # CUSTOM NOTIFICATIONS
 const NOTIFICATION_MINIGAME_CLOSED = 500
@@ -20,7 +22,6 @@ const NOTIFICATION_CREATURE_IS_LOADED = 503
 const NOTIFICATION_CREATURE_ACCESSORIES_ARE_LOADED = 504
 const NOTIFICATION_AMBIENT_SOUNDS_REMOVED = 505
 
-const MAX_AMBIENT_SOUNDS = 6
 
 signal item_unlocked(details)
 
@@ -29,7 +30,11 @@ signal item_unlocked(details)
 var general_dict: Dictionary = {}
 
 
-# general helper functions
+# ------------------------------
+#    general helper functions
+# ------------------------------
+
+
 func change_to_scene(scene_path: String):
 	await get_tree().process_frame  # important
 	get_tree().change_scene_to_file(scene_path)
@@ -109,7 +114,7 @@ func unlock_theme(theme: UiTheme) -> void:
 	var message = "%s Unlocked!" %[theme.theme_name]
 	item_unlocked.emit(message)
 
-# really want to refactor these functions into one now...
+# TODO: really want to refactor these functions into one now...
 
 ## generic tween function
 func tween(obj, prop, val, delay=0., time=2., _ease=Tween.EASE_OUT):

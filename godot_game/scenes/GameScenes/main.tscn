@@ -1462,7 +1462,6 @@ text = "Credits"
 [node name="ThemeMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 material = SubResource("ShaderMaterial_gyxpl")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -1927,7 +1926,6 @@ bus_name = "Music"
 
 [node name="MusicVolume" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2" groups=["settings_data"] instance=ExtResource("38_17bv4")]
 layout_mode = 2
-tooltip_text = "Music"
 tick_count = 1
 bus_name = "Music"
 
@@ -1988,6 +1986,7 @@ script = ExtResource("35_4io20")
 [node name="AmbienceMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 material = SubResource("ShaderMaterial_e5rr0")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
