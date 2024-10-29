@@ -16,8 +16,9 @@ func _ready() -> void:
 
 
 func _on_remove_btn_button_down() -> void:
-	queue_free()
 	sound_node.queue_free()
+	queue_free()
+	Globals.send_notification(Globals.NOTIFICATION_AMBIENT_SOUNDS_REMOVED)
 
 
 func _on_volume_sfx_value_changed(value: float) -> void:

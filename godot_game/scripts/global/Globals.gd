@@ -18,6 +18,9 @@ const NOTIFICATION_TOTRIS_CLOSED = 501
 const NOFITICATION_GROW_TO_ADULT_SCENE = 502
 const NOTIFICATION_CREATURE_IS_LOADED = 503
 const NOTIFICATION_CREATURE_ACCESSORIES_ARE_LOADED = 504
+const NOTIFICATION_AMBIENT_SOUNDS_REMOVED = 505
+
+const MAX_AMBIENT_SOUNDS = 6
 
 signal item_unlocked(details)
 
@@ -110,7 +113,7 @@ func unlock_theme(theme: UiTheme) -> void:
 
 ## generic tween function
 func tween(obj, prop, val, delay=0., time=2., _ease=Tween.EASE_OUT):
-	var t = get_tree().create_tween()
+	var t = create_tween()
 	t.tween_property(obj, prop, val, time)\
 			.set_trans(Tween.TRANS_EXPO)\
 			.set_ease(_ease)\

@@ -2061,6 +2061,14 @@ size_flags_vertical = 3
 theme_override_constants/separation = 16
 alignment = 1
 
+[node name="SoundCountLabel" type="Label" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("42_c1jtf")
+text = "%s/%s sounds"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Buttons" type="Node2D" parent="UI/OptionsMenu/AmbienceMenu"]
 position = Vector2(-50, -130)
 
@@ -2077,16 +2085,6 @@ theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
 theme_override_font_sizes/font_size = 18
 text = "Back"
 script = ExtResource("35_4io20")
-
-[node name="Label" type="Label" parent="UI/OptionsMenu/AmbienceMenu/Buttons"]
-offset_left = 309.0
-offset_top = 515.0
-offset_right = 460.0
-offset_bottom = 542.0
-theme = ExtResource("42_c1jtf")
-text = "%s/%s sounds"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="CreditsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true

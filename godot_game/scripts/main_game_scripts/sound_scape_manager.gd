@@ -94,5 +94,8 @@ func build_sound_map() -> Dictionary:
 	return sound_dict
 
 
+func get_sound_count():
+	return len(current_sounds())
+
 func to_sound_list_key(key):
 	return key.replace(" ", "_")
