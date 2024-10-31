@@ -1,4 +1,4 @@
-[gd_scene load_steps=135 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=133 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
@@ -37,7 +37,6 @@
 [ext_resource type="Script" path="res://scripts/hidden_menu_panel.gd" id="32_jvqx8"]
 [ext_resource type="Script" path="res://scripts/options_menu.gd" id="32_wbwq3"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="33_1qhmu"]
-[ext_resource type="Script" path="res://scripts/theme_controls.gd" id="34_654l5"]
 [ext_resource type="Script" path="res://scripts/opt_menu_back_btn.gd" id="35_4io20"]
 [ext_resource type="Script" path="res://scripts/music_controls.gd" id="35_8cohh"]
 [ext_resource type="Texture2D" uid="uid://pfr6wdx80m45" path="res://icons/volume-fill.svg" id="36_g2683"]
@@ -55,7 +54,7 @@
 [ext_resource type="Texture2D" uid="uid://p0oo42fr5wrp" path="res://icons/status/lunch_dining_24dp_8B1A10_FILL0_wght500_GRAD0_opsz24-svg.svg" id="45_3duvs"]
 [ext_resource type="Shader" path="res://shaders/pattern_checker.gdshader" id="45_bgevw"]
 [ext_resource type="Theme" uid="uid://x6rgwcyh7bnk" path="res://themes/menu_title.tres" id="45_e031c"]
-[ext_resource type="Theme" uid="uid://bv3clfelw5gun" path="res://themes/container_green.tres" id="46_r0sdd"]
+[ext_resource type="Theme" uid="uid://diinvv5qdrf2v" path="res://themes/container_green.tres" id="46_r0sdd"]
 [ext_resource type="Texture2D" uid="uid://cuaa2uyffvita" path="res://icons/status/droplet-fill.svg" id="47_qik1j"]
 [ext_resource type="Texture2D" uid="uid://d4c1k5m8u1jc0" path="res://UI stuff/Green Palette/green_food_button.png" id="49_a77pc"]
 [ext_resource type="Script" path="res://scripts/cosmetics_preview.gd" id="49_p7hc5"]
@@ -68,7 +67,7 @@
 [ext_resource type="Script" path="res://scripts/setting_button.gd" id="54_5bu15"]
 [ext_resource type="Texture2D" uid="uid://cpo8fgfds86sc" path="res://icons/arrow-counterclockwise.svg" id="54_le3gb"]
 [ext_resource type="PackedScene" uid="uid://b6wocr0vo5s4v" path="res://scenes/GameScenes/debug_content.tscn" id="55_0rbaa"]
-[ext_resource type="Theme" uid="uid://bbnuk665d61vh" path="res://themes/menu_btn_green.tres" id="55_qqo3v"]
+[ext_resource type="Theme" uid="uid://xmrqlvnsr0rg" path="res://themes/menu_btn_green.tres" id="55_qqo3v"]
 [ext_resource type="AudioStream" uid="uid://dcet1hpt70t42" path="res://music/perfection.mp3" id="56_0sjdm"]
 [ext_resource type="Theme" uid="uid://dvpqr6ekggufg" path="res://themes/menu_dropdown.tres" id="56_in74o"]
 [ext_resource type="Script" path="res://scripts/stat_bar.gd" id="57_ani8q"]
@@ -255,14 +254,6 @@ corner_radius_bottom_left = 10
 
 [sub_resource type="Theme" id="Theme_haq74"]
 ScrollContainer/styles/panel = SubResource("StyleBoxFlat_8fh8b")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3535b"]
-bg_color = Color(0.822295, 0.511699, 0.352571, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-corner_detail = 20
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kjclt"]
 shader = ExtResource("50_tajtf")
@@ -1484,29 +1475,25 @@ theme = ExtResource("45_e031c")
 text = "Themes"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 158)
+custom_minimum_size = Vector2(0, 280)
 layout_mode = 2
 theme = SubResource("Theme_haq74")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer/ScrollContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
 [node name="ThemeBtns" type="GridContainer" parent="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer" node_paths=PackedStringArray("theme_manager")]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/h_separation = 10
-theme_override_constants/v_separation = 10
-columns = 5
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 4
 script = ExtResource("37_tokl0")
 theme_manager = NodePath("../../../../../../../UI_Theme_Manager")
-
-[node name="Button" type="Button" parent="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ThemeBtns"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
 
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/ThemeMenu"]
 position = Vector2(-50, -130)
@@ -1524,53 +1511,6 @@ theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
 theme_override_font_sizes/font_size = 18
 text = "Back"
 script = ExtResource("35_4io20")
-
-[node name="ThemeControls" type="Node2D" parent="UI/OptionsMenu/ThemeMenu"]
-position = Vector2(-108, 26)
-scale = Vector2(0.75, 0.75)
-script = ExtResource("34_654l5")
-
-[node name="Label" type="Label" parent="UI/OptionsMenu/ThemeMenu/ThemeControls"]
-offset_left = 210.0
-offset_top = 250.667
-offset_right = 400.0
-offset_bottom = 307.667
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("19_3grg3")
-theme_override_font_sizes/font_size = 48
-text = "Theme"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="vHBoxContainer" type="HBoxContainer" parent="UI/OptionsMenu/ThemeMenu/ThemeControls"]
-offset_left = 225.0
-offset_top = 327.0
-offset_right = 375.0
-offset_bottom = 388.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/separation = 20
-alignment = 1
-
-[node name="Button2" type="Button" parent="UI/OptionsMenu/ThemeMenu/ThemeControls/vHBoxContainer"]
-custom_minimum_size = Vector2(65, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 44
-theme_override_styles/normal = SubResource("StyleBoxFlat_3535b")
-text = "<"
-
-[node name="Button" type="Button" parent="UI/OptionsMenu/ThemeMenu/ThemeControls/vHBoxContainer"]
-custom_minimum_size = Vector2(65, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_colors/font_outline_color = Color(0.835294, 0.517647, 0, 0.619608)
-theme_override_constants/outline_size = 3
-theme_override_font_sizes/font_size = 44
-theme_override_styles/normal = SubResource("StyleBoxFlat_3535b")
-text = ">"
 
 [node name="FactsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
@@ -2057,7 +1997,7 @@ theme_override_constants/margin_bottom = 8
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 16
+theme_override_constants/separation = 12
 alignment = 1
 
 [node name="SoundCountLabel" type="Label" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer"]
@@ -2438,8 +2378,6 @@ script = ExtResource("80_83777")
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer/CreditsBtn" to="UI/OptionsMenu" method="_on_credits_btn_button_down"]
 [connection signal="visibility_changed" from="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ThemeBtns" to="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ThemeBtns" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/OptionsMenu/ThemeMenu/SaveButtons/Back" to="UI/OptionsMenu/ThemeMenu/SaveButtons/Back" method="_on_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/ThemeMenu/ThemeControls/vHBoxContainer/Button2" to="UI/OptionsMenu/ThemeMenu/ThemeControls" method="_on_back_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/ThemeMenu/ThemeControls/vHBoxContainer/Button" to="UI/OptionsMenu/ThemeMenu/ThemeControls" method="_on_forward_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/FactsMenu/Library/SaveButtons/Back" to="UI/OptionsMenu/FactsMenu/Library/SaveButtons/Back" method="_on_button_down"]
 [connection signal="cosmetic_btn_pressed" from="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems" to="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/PreviewContainer/CreaturePreview" method="_on_cosmetic_items_cosmetic_btn_pressed"]
 [connection signal="visibility_changed" from="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems" to="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems" method="_on_visibility_changed"]

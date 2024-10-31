@@ -11,6 +11,7 @@ var themes = preload("res://resources/ui_theme_list.tres").theme_list
 
 ## The current index in the list of themes.
 var i: int
+var current_theme
 
 ## Moves the index of the currently selected theme by [param shift] if a value
 ## is provided, then loads the colours and textures of the current theme.
@@ -49,6 +50,7 @@ func load(data) -> void:
 	update_theme()
 	
 func set_theme(ui_theme):
+	current_theme = ui_theme
 	ui_overlay.texture = ui_theme.ui_overlay
 	bg.material.set("shader_parameter/tint_colour", ui_theme.screen_tint)
 	food_btn.texture_normal = ui_theme.food_btn

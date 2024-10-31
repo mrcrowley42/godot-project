@@ -1,7 +1,8 @@
 extends GridContainer
 
-const BTN_SIZE: Vector2 = Vector2(64, 64)
+const BTN_SIZE: Vector2 = Vector2(80, 80)
 @export var theme_manager: Node
+const btn_theme_group = preload("res://resources/theme_btn_group.tres")
 
 ## Class that describes UI theme button.
 class UiThemeButton extends Button:
@@ -12,20 +13,25 @@ class UiThemeButton extends Button:
 		self.expand_icon = false
 		self.ui_theme = _ui_theme
 		self.text = _ui_theme.theme_name
+		self.toggle_mode = true
 		
 		theme = load("res://themes/menu_btn_dark.tres")
 		
 		var box = StyleBoxFlat.new()
 		box.bg_color = ui_theme.screen_tint
-		box.set_corner_radius_all(50)
-		self.add_theme_constant_override("outline_size", 2)
+		box.set_corner_radius_all(40)
 		self.add_theme_stylebox_override("normal", box)
 		self.add_theme_stylebox_override("hover", box)
-		#self.add_theme_stylebox_override("pressed", box)
 		self.add_theme_stylebox_override("disabled", box)
 		self.add_theme_stylebox_override("focus", box)
-		
-		
+		var box2 = StyleBoxFlat.new()
+		box2.set_corner_radius_all(44)
+		box2.set_border_width_all(4)
+		box2.set_expand_margin_all(4)
+		box2.border_color = Color.from_hsv(0,0,0.2,1)
+		box2.bg_color = ui_theme.screen_tint
+		self.add_theme_stylebox_override("pressed", box2)
+		button_group = btn_theme_group
 		update_locked()
 
 	## Action when button is pressed.
@@ -42,9 +48,14 @@ class UiThemeButton extends Button:
 
 
 func _ready():
-	for item: UiTheme in theme_manager.themes:
-		var theme_btn = UiThemeButton.new(item)
-		add_child(theme_btn)
+	for i in range(5):
+		for item: UiTheme in theme_manager.themes:
+			var theme_btn = UiThemeButton.new(item)
+			add_child(theme_btn)
+	for btn in btn_theme_group.get_buttons():
+		if btn.ui_theme == theme_manager.current_theme:
+			print("f")
+		
 
 
 func update_buttons():
