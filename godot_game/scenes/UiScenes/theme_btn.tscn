@@ -1,24 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://dvphvefsn7acq"]
+[gd_scene load_steps=3 format=3 uid="uid://dvphvefsn7acq"]
 
-[ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="1_wgnrk"]
-[ext_resource type="Script" path="res://scripts/theme_btn.gd" id="2_hecal"]
+[ext_resource type="Theme" uid="uid://duyys0blxefyd" path="res://themes/cosmetic_btn_theme.tres" id="1_worc8"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jv2ux"]
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-corner_radius_top_left = 32
-corner_radius_top_right = 32
-corner_radius_bottom_right = 32
-corner_radius_bottom_left = 32
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u82vf"]
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [node name="Button" type="Button"]
-custom_minimum_size = Vector2(64, 64)
-theme = ExtResource("1_wgnrk")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_jv2ux")
-theme_override_styles/hover = SubResource("StyleBoxFlat_jv2ux")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_jv2ux")
-theme_override_styles/normal = SubResource("StyleBoxFlat_jv2ux")
-text = "x"
-script = ExtResource("2_hecal")
+custom_minimum_size = Vector2(172, 80)
+theme = ExtResource("1_worc8")
+theme_override_styles/normal = SubResource("StyleBoxFlat_u82vf")
+text = "ddddddddd"

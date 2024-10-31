@@ -1,8 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://ckjfqxx8f55r3"]
+[gd_scene load_steps=9 format=3 uid="uid://ckjfqxx8f55r3"]
 
 [ext_resource type="Script" path="res://scripts/ambience_control.gd" id="1_r2qd8"]
 [ext_resource type="Texture2D" uid="uid://wo64brcmlmf8" path="res://images/ambience/forest.png" id="2_6ycye"]
-[ext_resource type="Theme" uid="uid://c7p8gepxms8yr" path="res://themes/plain.tres" id="2_l4erf"]
+[ext_resource type="Theme" uid="uid://dl1wes8p6lqlb" path="res://themes/invisible.tres" id="2_gdv3w"]
 [ext_resource type="Script" path="res://scripts/base_classses/custom_tooltip_script.gd" id="2_oj86f"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="2_qoy0g"]
 [ext_resource type="Theme" uid="uid://7uy2it30gif0" path="res://themes/menu_value_range_small.tres" id="5_1xa1v"]
@@ -14,20 +14,6 @@ corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v1uuf"]
-bg_color = Color(0.412152, 0.412152, 0.412152, 1)
-corner_radius_top_left = 32
-corner_radius_top_right = 32
-corner_radius_bottom_right = 32
-corner_radius_bottom_left = 32
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_emd32"]
-bg_color = Color(0.466181, 0.466181, 0.466181, 1)
-corner_radius_top_left = 32
-corner_radius_top_right = 32
-corner_radius_bottom_right = 32
-corner_radius_bottom_left = 32
 
 [node name="PanelContainer" type="PanelContainer"]
 custom_minimum_size = Vector2(355, 0)
@@ -79,10 +65,9 @@ text = "Sound Effect Name"
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 10
-size_flags_vertical = 4
-theme_override_styles/hover = SubResource("StyleBoxFlat_v1uuf")
-theme_override_styles/normal = SubResource("StyleBoxFlat_emd32")
-text = "X"
+size_flags_vertical = 0
+theme = ExtResource("6_awyvt")
+text = "x"
 icon_alignment = 1
 expand_icon = true
 
