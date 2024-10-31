@@ -1475,23 +1475,23 @@ theme = ExtResource("45_e031c")
 text = "Themes"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 158)
+custom_minimum_size = Vector2(0, 280)
 layout_mode = 2
 theme = SubResource("Theme_haq74")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer/ScrollContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
 [node name="ThemeBtns" type="GridContainer" parent="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer" node_paths=PackedStringArray("theme_manager")]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/h_separation = 10
-theme_override_constants/v_separation = 10
-columns = 5
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 4
 script = ExtResource("37_tokl0")
 theme_manager = NodePath("../../../../../../../UI_Theme_Manager")
 
@@ -1927,7 +1927,6 @@ script = ExtResource("35_4io20")
 [node name="AmbienceMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 material = SubResource("ShaderMaterial_e5rr0")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -1998,7 +1997,7 @@ theme_override_constants/margin_bottom = 8
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 16
+theme_override_constants/separation = 12
 alignment = 1
 
 [node name="Buttons" type="Node2D" parent="UI/OptionsMenu/AmbienceMenu"]
