@@ -54,7 +54,7 @@ func _process(_delta) -> void:
 
 
 func _on_anim_select_item_selected(index) -> void:
-	creature.find_child('Main').animation = $AnimSelect.get_item_text(index)
+	creature.change_animation($AnimSelect.get_item_text(index))
 
 
 func _on_overlay_strength_value_changed(value) -> void:

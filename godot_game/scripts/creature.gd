@@ -186,6 +186,12 @@ func get_current_cosmetics():
 func get_loaded_cosmetics():
 	return %AccessoryManager.unlockables_dict
 
+## changes the animation and retains frame change timing
+func change_animation(anim_name: String):
+	await main_sprite.frame_changed
+	main_sprite.animation = anim_name
+
+
 func save() -> Dictionary:
 	return {
 		"water": water, "food": food, "fun": fun, "hp": hp,
