@@ -37,7 +37,7 @@ func load_soundscape() -> void:
 	
 	# limit sounds count & remove invalid or corrupt sounds
 	soundscape.resize(Globals.MAX_AMBIENT_SOUNDS)
-	soundscape = soundscape.filter(func(x): return sound_list.has(to_sound_list_key(x[0])))
+	soundscape = soundscape.filter(func(x): return x != null && sound_list.has(to_sound_list_key(x[0])))
 	
 	# add sounds
 	for sound in soundscape:

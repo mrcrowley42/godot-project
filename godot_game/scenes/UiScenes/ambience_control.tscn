@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://scripts/base_classses/custom_tooltip_script.gd" id="2_oj86f"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="2_qoy0g"]
 [ext_resource type="Theme" uid="uid://7uy2it30gif0" path="res://themes/menu_value_range_small.tres" id="5_1xa1v"]
-[ext_resource type="Theme" uid="uid://x6rgwcyh7bnk" path="res://themes/menu_title.tres" id="6_awyvt"]
+[ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="6_ijph6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_27aj0"]
 bg_color = Color(0, 0, 0, 0.501961)
@@ -66,7 +66,7 @@ custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 0
-theme = ExtResource("6_awyvt")
+theme = ExtResource("6_ijph6")
 text = "x"
 icon_alignment = 1
 expand_icon = true
