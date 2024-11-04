@@ -122,10 +122,5 @@ func _on_unlock_button_button_down() -> void:
 	facts_menu.propagate_call("update_locked")
 
 
-func _on_button_2_button_down() -> void:
-	var sounds = [load("res://ambient_audio/Birdsong3.mp3"), load("res://ambient_audio/Fire1.mp3"), load("res://ambient_audio/Ocean.mp3")]
-	ambience_man.add_sound_node(sounds.pick_random())
-
-
 func _on_button_3_button_down() -> void:
 	ambience_man.current_sounds()
