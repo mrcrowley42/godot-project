@@ -6,9 +6,10 @@ const btn_theme_group = preload("res://resources/theme_btn_group.tres")
 const btn_theme = preload("res://themes/cosmetic_btn_theme.tres")
 
 ## Class that describes UI theme button.
-class UiThemeButton extends Button:
+class UiThemeButton extends CustomTooltipButton:
 	var ui_theme
 	func _init(_ui_theme: UiTheme):
+		self.direction = DIRECTION.DOWN
 		self.custom_minimum_size = BTN_SIZE
 		self.size = BTN_SIZE
 		self.expand_icon = false
@@ -54,7 +55,7 @@ class UiThemeButton extends Button:
 		var unlocked_items = DataGlobals.load_metadata()['unlocked_themes']
 		var uid = Helpers.uid_str(self.ui_theme)
 		self.disabled = false if self.ui_theme.unlocked else not uid in unlocked_items
-		self.tooltip_text = ui_theme.hint if disabled else ""
+		self.tooltip_string = ui_theme.hint if disabled else ""
 		self.text = "?" if self.disabled else self.ui_theme.theme_name
 
 

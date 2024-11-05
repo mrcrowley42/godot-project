@@ -12,6 +12,7 @@
 [resource]
 script = ExtResource("1_nijfs")
 theme_name = "Pink"
+hint = "pink hint"
 screen_tint = Color(0.901961, 0.67451, 0.768627, 1)
 food_btn = ExtResource("3_313c5")
 food_btn_pressed = ExtResource("4_jfsaj")

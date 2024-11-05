@@ -12,6 +12,7 @@
 [resource]
 script = ExtResource("5_38vrr")
 theme_name = "Orange"
+hint = "orag hint"
 screen_tint = Color(0.835294, 0.576471, 0.439216, 1)
 food_btn = ExtResource("3_jgudd")
 food_btn_pressed = ExtResource("4_qqe1u")
