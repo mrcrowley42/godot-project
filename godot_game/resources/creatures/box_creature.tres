@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CreatureType" load_steps=3 format=3 uid="uid://dwv6t0fmrq612"]
+[gd_resource type="Resource" script_class="CreatureType" load_steps=3 format=3 uid="uid://1jqmujs6o0sf"]
 
 [ext_resource type="Script" path="res://scripts/base_classses/creature_type.gd" id="1_7hvcq"]
 [ext_resource type="Resource" uid="uid://dve11rrnrxakr" path="res://resources/creatures/box_baby.tres" id="1_p4qvh"]
