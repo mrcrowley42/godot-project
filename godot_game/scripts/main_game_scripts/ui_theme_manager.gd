@@ -27,7 +27,7 @@ func save() -> Dictionary:
 
 ## Load theme if one exists in cfg, use green if value can't be parsed.
 func load(data) -> void:
-	var fallback_name = fallback_theme.theme_name.lower()
+	var fallback_name = fallback_theme.theme_name.to_lower()
 	var theme_name = data["Theme"].to_lower() if data.has("Theme") else fallback_name
 	var saved_theme = fallback_theme if not theme_dict.has(theme_name) else theme_dict[theme_name]
 	set_theme(saved_theme)
