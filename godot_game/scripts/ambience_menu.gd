@@ -21,6 +21,7 @@ func _ready() -> void:
 		category_btn.add_icon_item(category.image, category.category_name)
 	category_btn.item_selected.emit(0)
 	
+	update_count_label(0)
 	%AmbienceMenu.visibility_changed.connect(on_visibility_changed)
 
 
