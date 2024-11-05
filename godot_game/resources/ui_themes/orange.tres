@@ -24,4 +24,4 @@ ui_overlay = ExtResource("8_8h4uc")
 unlocked = true
 primary = Color(0.584314, 0.403922, 0.305882, 1)
 bg = Color(0.262745, 0.133333, 0.239216, 1)
-outline = Color(0.262745, 0.133333, 0.239216, 1)
+outline = Color(0.405013, 0.220666, 0.371273, 1)

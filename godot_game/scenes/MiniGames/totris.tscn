@@ -7,7 +7,7 @@
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="5_d7726"]
 [ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="6_fphhh"]
 [ext_resource type="Script" path="res://scripts/sfx_man.gd" id="7_6nelh"]
-[ext_resource type="Theme" uid="uid://c7p8gepxms8yr" path="res://themes/plain.tres" id="7_wi1ws"]
+[ext_resource type="Theme" uid="uid://bsd1dkhc13v47" path="res://themes/plain.tres" id="7_wi1ws"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wbp70"]
 size = Vector2(10, 10)
