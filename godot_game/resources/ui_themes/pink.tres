@@ -20,3 +20,7 @@ act_btn_pressed = ExtResource("2_p2gct")
 setting_btn = ExtResource("6_m72k8")
 setting_btn_pressed = ExtResource("7_rs6af")
 ui_overlay = ExtResource("8_uxdmr")
+unlocked = false
+primary = Color(0.631373, 0.470588, 0.537255, 1)
+bg = Color(0.235294, 0.156863, 0.247059, 1)
+outline = Color(0.176471, 0.109804, 0.188235, 1)

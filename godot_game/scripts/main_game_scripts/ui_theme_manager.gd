@@ -11,7 +11,13 @@ var themes = preload("res://resources/ui_theme_list.tres").theme_list
 
 ## The current index in the list of themes.
 var i: int
-var current_theme
+var current_theme: UiTheme
+
+var theme_dict = Dictionary()
+
+func _ready() -> void:
+	for theme in themes:
+		theme_dict[theme.theme_name] = theme
 
 ## Moves the index of the currently selected theme by [param shift] if a value
 ## is provided, then loads the colours and textures of the current theme.
@@ -41,13 +47,19 @@ func get_current_theme() -> UiTheme:
 
 
 func save() -> Dictionary:
-	return {"section": Globals.UI_SECTION, "Theme": abs(self.i)}
+	if current_theme:
+		return {"section": Globals.UI_SECTION, "Theme": current_theme.theme_name}
+	else:
+		return {}
 
 
 func load(data) -> void:
 	if data.has("Theme"):
-		self.i = int(data["Theme"])
-	update_theme()
+		print(data)
+		print(data["Theme"])
+		set_theme(theme_dict[data["Theme"]])
+		#self.i = int(data["Theme"])
+	#update_theme()
 	
 func set_theme(ui_theme):
 	current_theme = ui_theme

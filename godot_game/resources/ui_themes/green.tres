@@ -21,3 +21,6 @@ setting_btn = ExtResource("6_ygmsn")
 setting_btn_pressed = ExtResource("7_jobtj")
 ui_overlay = ExtResource("8_7u5v2")
 unlocked = true
+primary = Color(0.607843, 0.690196, 0.611765, 1)
+bg = Color(0.0666667, 0.0980392, 0.109804, 1)
+outline = Color(0.0392157, 0.0784314, 0.0980392, 1)

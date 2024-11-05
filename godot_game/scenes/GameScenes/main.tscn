@@ -47,7 +47,6 @@
 [ext_resource type="Texture2D" uid="uid://cawudmxbjamv0" path="res://UI stuff/Green Palette/ui_green.png" id="40_wt18k"]
 [ext_resource type="Texture2D" uid="uid://c702pbhxasm52" path="res://icons/status/heart-fill.svg" id="41_8adaw"]
 [ext_resource type="Script" path="res://scripts/costmetic_row.gd" id="41_pook7"]
-[ext_resource type="PackedScene" uid="uid://dvphvefsn7acq" path="res://scenes/UiScenes/theme_btn.tscn" id="41_shko7"]
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="42_c1jtf"]
 [ext_resource type="Texture2D" uid="uid://d84hj0mtn2hw" path="res://icons/status/mood_24dp_FILL1_wght300_GRAD0_opsz24.svg" id="43_qa2jm"]
 [ext_resource type="Script" path="res://scripts/fact_progress_label.gd" id="44_t23g2"]
@@ -255,6 +254,17 @@ corner_radius_bottom_left = 10
 
 [sub_resource type="Theme" id="Theme_haq74"]
 ScrollContainer/styles/panel = SubResource("StyleBoxFlat_8fh8b")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uqjk3"]
+bg_color = Color(0.117647, 0.129412, 0.152941, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kjclt"]
 shader = ExtResource("50_tajtf")
@@ -1454,7 +1464,6 @@ text = "Credits"
 [node name="ThemeMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 material = SubResource("ShaderMaterial_gyxpl")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -1480,6 +1489,7 @@ text = "Themes"
 custom_minimum_size = Vector2(0, 296)
 layout_mode = 2
 theme = SubResource("Theme_haq74")
+theme_override_styles/panel = SubResource("StyleBoxFlat_uqjk3")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer/ScrollContainer"]
 layout_mode = 2
@@ -1496,9 +1506,6 @@ theme_override_constants/v_separation = 12
 columns = 2
 script = ExtResource("37_tokl0")
 theme_manager = NodePath("../../../../../../../UI_Theme_Manager")
-
-[node name="Button" parent="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ThemeBtns" instance=ExtResource("41_shko7")]
-layout_mode = 2
 
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/ThemeMenu"]
 position = Vector2(-50, -130)
@@ -1931,6 +1938,7 @@ script = ExtResource("35_4io20")
 [node name="AmbienceMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 material = SubResource("ShaderMaterial_e5rr0")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
