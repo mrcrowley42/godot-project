@@ -256,7 +256,7 @@ corner_radius_bottom_left = 10
 ScrollContainer/styles/panel = SubResource("StyleBoxFlat_8fh8b")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uqjk3"]
-bg_color = Color(0.117647, 0.129412, 0.152941, 1)
+bg_color = Color(0.107908, 0.119025, 0.141258, 0.631373)
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
