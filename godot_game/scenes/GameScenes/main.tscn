@@ -309,13 +309,13 @@ shader_parameter/two_speed = -0.02
 shader_parameter/two_size = 10.0
 shader_parameter/two_opacity = 0.0
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wd2mi"]
+
 [sub_resource type="LabelSettings" id="LabelSettings_a4t3j"]
 font_size = 30
 
 [sub_resource type="LabelSettings" id="LabelSettings_2tv6v"]
 font_size = 20
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wd2mi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e5rr0"]
 shader = ExtResource("50_tajtf")
@@ -1464,6 +1464,7 @@ text = "Credits"
 [node name="ThemeMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 material = SubResource("ShaderMaterial_gyxpl")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -1694,7 +1695,6 @@ script = ExtResource("35_4io20")
 [node name="SettingsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 material = SubResource("ShaderMaterial_1s3b6")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -1715,6 +1715,90 @@ theme_override_constants/separation = 24
 layout_mode = 2
 theme = ExtResource("45_e031c")
 text = "Settings"
+
+[node name="GridContainer2" type="GridContainer" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 10
+columns = 3
+
+[node name="Master" type="Label" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 20
+text = "Master"
+vertical_alignment = 1
+
+[node name="MasterMuted" type="Button" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2" groups=["settings_data"]]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wd2mi")
+text = "          "
+icon = ExtResource("36_g2683")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("37_xf1vk")
+bus_name = "Master"
+
+[node name="MasterVolume" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2" groups=["settings_data"] instance=ExtResource("38_17bv4")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+tick_count = 1
+bus_name = "Master"
+
+[node name="Music" type="Label" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 20
+text = "Music
+"
+vertical_alignment = 1
+
+[node name="MusicMuted" type="Button" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2" groups=["settings_data"]]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wd2mi")
+text = "          "
+icon = ExtResource("36_g2683")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("37_xf1vk")
+bus_name = "Music"
+
+[node name="MusicVolume" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2" groups=["settings_data"] instance=ExtResource("38_17bv4")]
+layout_mode = 2
+tick_count = 1
+bus_name = "Music"
+
+[node name="SFX" type="Label" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 20
+text = "SFX"
+vertical_alignment = 1
+
+[node name="SFXMuted" type="Button" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2" groups=["settings_data"]]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wd2mi")
+text = "          "
+icon = ExtResource("36_g2683")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("37_xf1vk")
+bus_name = "SFX"
+
+[node name="SfxVolume" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2" groups=["settings_data"] instance=ExtResource("38_17bv4")]
+layout_mode = 2
+value = 0.0
+tick_count = 1
+bus_name = "SFX"
 
 [node name="MusicControls" type="Node2D" parent="UI/OptionsMenu/SettingsMenu"]
 visible = false
@@ -1815,96 +1899,6 @@ position = Vector2(19, 8)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("54_le3gb")
 centered = false
-
-[node name="VolumeControls" type="Node2D" parent="UI/OptionsMenu/SettingsMenu"]
-position = Vector2(-63, -88)
-
-[node name="GridContainer2" type="GridContainer" parent="UI/OptionsMenu/SettingsMenu/VolumeControls"]
-offset_left = 79.0
-offset_top = 148.0
-offset_right = 482.0
-offset_bottom = 261.0
-size_flags_vertical = 0
-theme_override_constants/h_separation = 5
-theme_override_constants/v_separation = 10
-columns = 3
-
-[node name="Master" type="Label" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2"]
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_fonts/font = ExtResource("19_3grg3")
-theme_override_font_sizes/font_size = 20
-text = "Master"
-vertical_alignment = 1
-
-[node name="MasterMuted" type="Button" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2" groups=["settings_data"]]
-layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_wd2mi")
-text = "          "
-icon = ExtResource("36_g2683")
-flat = true
-icon_alignment = 1
-expand_icon = true
-script = ExtResource("37_xf1vk")
-bus_name = "Master"
-
-[node name="MasterVolume" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2" groups=["settings_data"] instance=ExtResource("38_17bv4")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-tick_count = 1
-bus_name = "Master"
-
-[node name="Music" type="Label" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2"]
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_constants/shadow_outline_size = 5
-theme_override_fonts/font = ExtResource("19_3grg3")
-theme_override_font_sizes/font_size = 20
-text = "Music
-"
-vertical_alignment = 1
-
-[node name="MusicMuted" type="Button" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2" groups=["settings_data"]]
-layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_wd2mi")
-text = "          "
-icon = ExtResource("36_g2683")
-flat = true
-icon_alignment = 1
-expand_icon = true
-script = ExtResource("37_xf1vk")
-bus_name = "Music"
-
-[node name="MusicVolume" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2" groups=["settings_data"] instance=ExtResource("38_17bv4")]
-layout_mode = 2
-tick_count = 1
-bus_name = "Music"
-
-[node name="SFX" type="Label" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2"]
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_fonts/font = ExtResource("19_3grg3")
-theme_override_font_sizes/font_size = 20
-text = "SFX"
-vertical_alignment = 1
-
-[node name="SFXMuted" type="Button" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2" groups=["settings_data"]]
-layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_wd2mi")
-text = "          "
-icon = ExtResource("36_g2683")
-flat = true
-icon_alignment = 1
-expand_icon = true
-script = ExtResource("37_xf1vk")
-bus_name = "SFX"
-
-[node name="SfxVolume" parent="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2" groups=["settings_data"] instance=ExtResource("38_17bv4")]
-layout_mode = 2
-value = 0.0
-tick_count = 1
-bus_name = "SFX"
 
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/SettingsMenu"]
 position = Vector2(-50, -130)
@@ -2394,11 +2388,11 @@ script = ExtResource("80_83777")
 [connection signal="cosmetic_btn_pressed" from="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems" to="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/PreviewContainer/CreaturePreview" method="_on_cosmetic_items_cosmetic_btn_pressed"]
 [connection signal="visibility_changed" from="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems" to="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/OptionsMenu/CosmeticsMenu/SaveButtons/Back" to="UI/OptionsMenu/CosmeticsMenu/SaveButtons/Back" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2/MasterMuted" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2/MasterMuted" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2/MusicMuted" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2/MusicMuted" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2/SFXMuted" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2/SFXMuted" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MusicControls/PanelContainer/MarginContainer/VContainer/currentSong/Left" to="UI/OptionsMenu/SettingsMenu/MusicControls" method="_on_left_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MusicControls/PanelContainer/MarginContainer/VContainer/currentSong/Right" to="UI/OptionsMenu/SettingsMenu/MusicControls" method="_on_right_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2/MasterMuted" to="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2/MasterMuted" method="_on_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2/MusicMuted" to="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2/MusicMuted" method="_on_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2/SFXMuted" to="UI/OptionsMenu/SettingsMenu/VolumeControls/GridContainer2/SFXMuted" method="_on_button_down"]
 [connection signal="pressed" from="UI/OptionsMenu/SettingsMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/SaveButtons/Back" to="UI/OptionsMenu/SettingsMenu/SaveButtons/Back" method="_on_button_down"]
 [connection signal="item_selected" from="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/HBoxContainer/CategoryBtn" to="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer" method="_on_category_btn_item_selected"]
