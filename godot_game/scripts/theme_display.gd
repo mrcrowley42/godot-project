@@ -62,10 +62,7 @@ func _ready():
 	for item: UiTheme in theme_manager.themes:
 		var theme_btn = UiThemeButton.new(item)
 		add_child(theme_btn)
-	for btn in btn_theme_group.get_buttons():
-		if btn.ui_theme == theme_manager.current_theme:
-			print("f")
-		
+	
 
 
 func update_buttons():
