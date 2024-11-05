@@ -2,7 +2,7 @@ class_name UiThemeManager extends ScriptNode
 
 ## List of available UI themes.
 var themes = preload("res://resources/ui_theme_list.tres").theme_list
-
+var fallback_theme = load("res://resources/ui_themes/green.tres")
 @onready var food_btn = %FoodButton
 @onready var act_btn = %ActButton
 @onready var setting_btn = %SettingButton
@@ -12,27 +12,32 @@ var themes = preload("res://resources/ui_theme_list.tres").theme_list
 
 ## The current theme
 var current_theme: UiTheme
-# Stores themes to be retreived like so {theme.theme_name: theme}
+## Stores themes to be retreived like so {theme.theme_name: theme}
 var theme_dict = Dictionary()
 
 
 func _ready() -> void:
 	for theme in themes:
-		theme_dict[theme.theme_name] = theme
+		theme_dict[theme.theme_name.to_lower()] = theme
 
 
 func save() -> Dictionary:
 	return {"section": Globals.UI_SECTION, "Theme": current_theme.theme_name if current_theme else ""}
 
 
+## Load theme if one exists in cfg, use green if value can't be parsed.
 func load(data) -> void:
-	if data.has("Theme"):
-		var saved_theme = theme_dict[data["Theme"]]
-		set_theme(saved_theme)
-		for theme_btn in theme_btns.get_children():
-			if theme_btn.ui_theme.theme_name == saved_theme.theme_name:
-				theme_btn.set_pressed(true)
-				break
+	var fallback_name = fallback_theme.theme_name.lower()
+	var theme_name = data["Theme"].to_lower() if data.has("Theme") else fallback_name
+	var saved_theme = fallback_theme if not theme_dict.has(theme_name) else theme_dict[theme_name]
+	set_theme(saved_theme)
+	# Repairs broken cfg.
+	DataGlobals.save_settings_data()
+	# Preselect button for current theme.
+	for theme_btn in theme_btns.get_children():
+		if theme_btn.ui_theme.theme_name.to_lower() == saved_theme.theme_name.to_lower():
+			theme_btn.set_pressed(true)
+			break
 
 
 ## Updates the UI elements with the appropriate textures and colours, while also
