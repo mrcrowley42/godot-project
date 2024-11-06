@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ResourceList" load_steps=11 format=3 uid="uid://dx5mi23mawwiv"]
+[gd_resource type="Resource" script_class="ResourceList" load_steps=13 format=3 uid="uid://dx5mi23mawwiv"]
 
 [ext_resource type="Resource" uid="uid://du8awqtm0cx1e" path="res://resources/ambient_sounds/categories/category_fire.tres" id="1_e3qts"]
 [ext_resource type="Script" path="res://scripts/base_classses/resource_list.gd" id="1_fqxxw"]
@@ -9,8 +9,10 @@
 [ext_resource type="Resource" uid="uid://cdw0cdyqtlpas" path="res://resources/ambient_sounds/categories/category_night.tres" id="4_hqhvx"]
 [ext_resource type="Resource" uid="uid://cavxwt6vaf655" path="res://resources/ambient_sounds/categories/category_thunder.tres" id="5_1g6ew"]
 [ext_resource type="Resource" uid="uid://bhvw6p7xus60b" path="res://resources/ambient_sounds/categories/category_river.tres" id="7_qp1jg"]
-[ext_resource type="Resource" path="res://resources/ambient_sounds/categories/category_wind.tres" id="9_mql1i"]
+[ext_resource type="Resource" uid="uid://cp1ts6fr03ux2" path="res://resources/ambient_sounds/categories/category_wind.tres" id="9_mql1i"]
+[ext_resource type="Resource" uid="uid://bjmxtvmyj8vt3" path="res://resources/ambient_sounds/categories/category_electrical.tres" id="10_xw2u7"]
+[ext_resource type="Resource" uid="uid://br8bi6f5jlkt6" path="res://resources/ambient_sounds/categories/category_vinyl.tres" id="11_a720f"]
 
 [resource]
 script = ExtResource("1_fqxxw")
-items = Array[Resource]([ExtResource("3_58uk8"), ExtResource("1_e3qts"), ExtResource("3_x6e1a"), ExtResource("4_hqhvx"), ExtResource("4_5g3uw"), ExtResource("2_wvuq5"), ExtResource("7_qp1jg"), ExtResource("5_1g6ew"), ExtResource("9_mql1i")])
+items = Array[Resource]([ExtResource("3_58uk8"), ExtResource("1_e3qts"), ExtResource("3_x6e1a"), ExtResource("4_hqhvx"), ExtResource("4_5g3uw"), ExtResource("2_wvuq5"), ExtResource("7_qp1jg"), ExtResource("5_1g6ew"), ExtResource("9_mql1i"), ExtResource("10_xw2u7"), ExtResource("11_a720f")])

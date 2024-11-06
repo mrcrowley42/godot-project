@@ -29,7 +29,6 @@ class_name EggOpening extends ScriptNode
 @onready var shader_area: ColorRect = find_child("shader")
 @onready var hatch_timer: Timer = find_child("HatchTimer")
 @onready var creature_sprite: AnimatedSprite2D = find_child("Creature")
-@onready var confetti: ScriptNode = find_child("Confetti")
 
 @onready var continue_btn: NinePatchRect = find_child("ContinueBtn")
 @onready var back_btn: NinePatchRect = find_child("BackBtn")
@@ -392,7 +391,7 @@ func finish_hatching(sprite_c: Control):
 	var fire_confetti = func():
 		%SFX.pitch_scale = 1.
 		%SFX.play_sound("yippe")
-		confetti.fire()
+		Globals.fire_confetti(self, Vector2(270, 450))
 
 	finished_hatching = true
 	hatch_timer.stop()

@@ -1,4 +1,4 @@
-extends Node
+class_name Game extends Node
 
 @export var debug_mode: bool
 @export var unlock_fps: bool = false
@@ -9,9 +9,15 @@ var last_saved: float
 @onready var minigame_man: MinigameManager = %MinigameManager
 @onready var debug_window = $DebugWindow
 
+@onready var ui_overlay: Sprite2D = find_child("UI_Overlay")
+@onready var trans_img: Sprite2D = find_child("Transition")
+
 var is_in_transition: bool = false;
 
 func _ready():
+	if debug_mode:
+		print_rich("[color=%s]--- RUNNING IN DEBUG MODE! ---" % Color.AQUA.to_html())
+	
 	if unlock_fps:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 
@@ -37,8 +43,6 @@ func _ready():
 		%Creature.reset_stats()
 
 	# do last
-	var ui_overlay: Sprite2D = find_child("UI_Overlay")
-	var trans_img: Sprite2D = find_child("Transition")
 	set_is_in_trans(true)
 	Globals.perform_opening_transition(trans_img, ui_overlay.position, set_is_in_trans.bind(false))
 
@@ -49,16 +53,17 @@ func set_is_in_trans(value: bool):
 func calc_elapsed_time():
 	var elapsed_time = launch_time - last_saved
 	# please excuse the bad variable names here, this is only a temp thing anyway.
-	var _a = Color(1,0,0)
-	var _b = Color(0,1,0)
-	var max_time = 600  # in seconds
-	var _c = _b.lerp(_a, clampf(elapsed_time/max_time,0,1))
-	_c.v = 1.0
-	_c = _c.lightened(.25)
-	print_rich("[color=%s]%.2f seconds since last played.[/color]" %[_c.to_html() ,elapsed_time])
-	print("%.2f days since last played." %[elapsed_time/86400])
-	var holiday_status = "were" if stat_man.holiday_mode else "were not"
-	print("And you %s on holiday." % [holiday_status])
+	if debug_mode:
+		var _a = Color(1,0,0)
+		var _b = Color(0,1,0)
+		var max_time = 600  # in seconds
+		var _c = _b.lerp(_a, clampf(elapsed_time/max_time,0,1))
+		_c.v = 1.0
+		_c = _c.lightened(.25)
+		print_rich("[color=%s]%.2f seconds since last played.[/color]" %[_c.to_html() ,elapsed_time])
+		print("%.2f days since last played." %[elapsed_time/86400])
+		var holiday_status = "were" if stat_man.holiday_mode else "were not"
+		print("And you %s on holiday." % [holiday_status])
 
 
 func _on_save_pressed():
@@ -80,13 +85,16 @@ func _notification(noti):
 			DataGlobals.save_data()  # important!
 			Globals.general_dict["current_cosmetics"] = %Creature.get_current_cosmetics()
 			Globals.general_dict["loaded_cosmetics"] = %Creature.get_loaded_cosmetics()
-			var ui_overlay: Sprite2D = find_child("UI_Overlay")
-			var trans_img: Sprite2D = find_child("Transition")
 			await Globals.perform_closing_transition(trans_img, ui_overlay.position)
 			Globals.change_to_scene("res://scenes/GameScenes/grow_up_to_adult.tscn")
 
 func _input(event) -> void:
 	# close when [param esc key] is pressed
-	if event.is_action_pressed("ui_cancel"):
+	if debug_mode and event.is_action_pressed("ui_cancel"):
 		Globals.send_notification(NOTIFICATION_WM_CLOSE_REQUEST)
 		get_tree().quit()
+	
+	## fire confetti
+	if debug_mode and (event is InputEventKey) and event.pressed:
+		if event.keycode == KEY_Y:
+			Globals.fire_confetti(self)

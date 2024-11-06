@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AmbientSoundCategory" load_steps=7 format=3 uid="uid://br8bi6f5jlkt6"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/ambient_sound_category.gd" id="1_6ktso"]
+[ext_resource type="Texture2D" uid="uid://bkyvl87k7rv4n" path="res://images/ambience/default.png" id="1_sqyfi"]
+[ext_resource type="Script" path="res://scripts/base_classses/ambient_sound.gd" id="2_ptxjk"]
+[ext_resource type="Resource" uid="uid://drjs4re7jejme" path="res://resources/ambient_sounds/sounds/sound_vinyl_1.tres" id="3_eo8so"]
+[ext_resource type="Resource" uid="uid://brcj0gf1dausm" path="res://resources/ambient_sounds/sounds/sound_vinyl_2.tres" id="4_a61er"]
+[ext_resource type="Resource" uid="uid://d3351m3bt3y7c" path="res://resources/ambient_sounds/sounds/sound_vinyl_3.tres" id="5_gvgvx"]
+
+[resource]
+script = ExtResource("1_6ktso")
+category_name = "Vinyl"
+image = ExtResource("1_sqyfi")
+sound_resources = Array[ExtResource("2_ptxjk")]([ExtResource("3_eo8so"), ExtResource("4_a61er"), ExtResource("5_gvgvx")])
