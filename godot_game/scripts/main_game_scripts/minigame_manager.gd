@@ -10,6 +10,7 @@ class_name MinigameManager extends Node2D
 @onready var clippy_area = %ClippyArea
 @onready var act_menu = %ActivityMenu
 @onready var status_manager = %StatusManager
+@onready var ambience_man = find_parent("Game").find_child("AmbienceManager")
 
 var save_data: Dictionary = {}
 var current_minigame = null;
@@ -21,6 +22,7 @@ var totris_scene_instance: TotrisManager = null
 func load_minigame(pre_loaded=null, instance=null) -> void:
 	assert(pre_loaded != null or instance != null)  # either one or the other
 	if current_minigame == null:
+		ambience_man.fade_out()
 		%BtnClick.play()
 		current_time_scale = status_manager.time_multiplier
 		status_manager.time_multiplier = 0
@@ -38,6 +40,7 @@ func unload_minigame() -> void:
 	%BtnClick.play()
 	current_minigame = null;
 	status_manager.time_multiplier = current_time_scale
+	ambience_man.fade_in()
 	%ActButton.disabled = false
 	%FoodButton.disabled = false
 
