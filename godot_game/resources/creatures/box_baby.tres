@@ -18,7 +18,7 @@ item = ExtResource("3_wvsbt")
 
 [resource]
 script = ExtResource("2_4q0xg")
-max_hp = 500
+max_hp = 505
 max_water = 500
 max_food = 500
 max_fun = 500
