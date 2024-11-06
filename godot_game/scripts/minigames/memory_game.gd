@@ -70,4 +70,4 @@ func choose_card(card):
 		selected_cards.clear()
 
 func _on_close_btn_button_down():
-	close_game()
+	get_tree().root.propagate_notification(Globals.NOTIFICATION_MEMORY_MATCH_CLOSE)
