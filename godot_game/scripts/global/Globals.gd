@@ -130,3 +130,36 @@ func tween(obj, prop, val, delay=0., time=2., _ease=Tween.EASE_OUT):
 			.set_ease(_ease)\
 			.set_delay(delay)
 	return t
+
+## fire confetti, automatically removes iteslf of finish
+func fire_confetti(parent, pos: Vector2 = Vector2(270, 560)):
+	var remove = func(p_node):
+		p_node.queue_free()
+	
+	var c_1 = ConfettiParticle.new(pos + Vector2(-180, 0), .1)
+	var c_2 = ConfettiParticle.new(pos + Vector2(180, 0), -.1)
+	c_1.emitting = true
+	c_2.emitting = true
+	c_1.connect("finished", remove.bind(c_1))
+	c_2.connect("finished", remove.bind(c_2))
+	parent.add_child(c_1)
+	parent.add_child(c_2)
+
+
+class ConfettiParticle extends CPUParticles2D:
+	func _init(pos: Vector2, direc) -> void:
+		amount = 15; lifetime = 2; one_shot = true
+		explosiveness = 1; randomness = 1;
+		direction = Vector2(direc, -1); spread = 6;
+		initial_velocity_min = 500; initial_velocity_max = 900;
+		angular_velocity_min = -100; angular_velocity_max = 100;
+		scale_amount_min = 10; scale_amount_max = 15;
+		
+		var gradient = Gradient.new()
+		gradient.interpolation_mode = Gradient.GRADIENT_INTERPOLATE_CONSTANT;
+		gradient.offsets = PackedFloat32Array([0, .125, .3, .45, .65, .820, 1]);
+		gradient.colors = PackedColorArray([Color.RED, Color.ORANGE, Color.YELLOW, Color.MAGENTA, Color.GREEN_YELLOW, Color.PURPLE, Color.WHITE])
+		color_initial_ramp = gradient
+		
+		hue_variation_min = 1; hue_variation_max = 1;
+		position = pos

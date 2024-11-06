@@ -101,7 +101,7 @@ unique_name_in_owner = true
 script = ExtResource("5_4pw2p")
 
 [node name="ConfetL" type="CPUParticles2D" parent="Confetti"]
-position = Vector2(92, 555)
+position = Vector2(107, 553)
 emitting = false
 amount = 15
 lifetime = 2.0

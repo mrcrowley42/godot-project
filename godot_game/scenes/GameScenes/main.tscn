@@ -1,4 +1,4 @@
-[gd_scene load_steps=134 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=132 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
@@ -9,7 +9,6 @@
 [ext_resource type="Shader" path="res://shaders/background.gdshader" id="7_1pcjq"]
 [ext_resource type="Texture2D" uid="uid://bmwpenw32juko" path="res://UI stuff/Universal/background_light_map.png" id="8_aulml"]
 [ext_resource type="PackedScene" uid="uid://bebjn5n2kjwgb" path="res://scenes/Creatures/creature.tscn" id="9_ulkn4"]
-[ext_resource type="Script" path="res://scripts/Confetti.gd" id="10_tn1o6"]
 [ext_resource type="Theme" uid="uid://dl1wes8p6lqlb" path="res://themes/invisible.tres" id="11_lcq7m"]
 [ext_resource type="Script" path="res://scripts/clippy_area.gd" id="12_n00c6"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/ui_theme_manager.gd" id="13_3i267"]
@@ -172,11 +171,6 @@ shader_parameter/moon_curve_intensity = 2.5
 shader_parameter/m_shadow_dist = 0.05
 shader_parameter/m_shadow_rot = 0.0
 shader_parameter/LIGHT_MAP = ExtResource("8_aulml")
-
-[sub_resource type="Gradient" id="Gradient_asbj7"]
-interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.12381, 0.290476, 0.452381, 0.652381, 0.819048, 1)
-colors = PackedColorArray(1, 0, 0, 1, 1, 0.482353, 0.321569, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0.509804, 1, 0.529412, 0, 0.745098, 1, 1, 1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eh4ru"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -486,51 +480,6 @@ unique_name_in_owner = true
 texture_filter = 1
 position = Vector2(270, 393.5)
 clippy_area = NodePath("../ClippyArea")
-
-[node name="Confetti" type="Node2D" parent="Gameplay"]
-script = ExtResource("10_tn1o6")
-
-[node name="ConfettiParticleL" type="CPUParticles2D" parent="Gameplay/Confetti"]
-unique_name_in_owner = true
-position = Vector2(92, 555)
-emitting = false
-amount = 15
-lifetime = 2.0
-one_shot = true
-explosiveness = 1.0
-randomness = 1.0
-direction = Vector2(0.1, -1)
-spread = 6.0
-initial_velocity_min = 500.0
-initial_velocity_max = 900.0
-angular_velocity_min = -100.0
-angular_velocity_max = 100.0
-scale_amount_min = 10.0
-scale_amount_max = 15.0
-color_initial_ramp = SubResource("Gradient_asbj7")
-hue_variation_min = 1.0
-hue_variation_max = 1.0
-
-[node name="ConfettiParticleR" type="CPUParticles2D" parent="Gameplay/Confetti"]
-unique_name_in_owner = true
-position = Vector2(446, 553)
-emitting = false
-amount = 15
-lifetime = 2.0
-one_shot = true
-explosiveness = 1.0
-randomness = 1.0
-direction = Vector2(-0.1, -1)
-spread = 6.0
-initial_velocity_min = 500.0
-initial_velocity_max = 900.0
-angular_velocity_min = -100.0
-angular_velocity_max = 100.0
-scale_amount_min = 10.0
-scale_amount_max = 15.0
-color_initial_ramp = SubResource("Gradient_asbj7")
-hue_variation_min = 1.0
-hue_variation_max = 1.0
 
 [node name="ClippyArea" type="Button" parent="Gameplay"]
 unique_name_in_owner = true

@@ -20,7 +20,7 @@ func remove(obj) -> void:
 	obj.queue_free()
 
 
-func _input(event) -> void:
-	if (event is InputEventKey) and event.pressed:
-		if event.keycode == KEY_Y:
-			generate_confetti()
+#func _input(event) -> void:
+	#if (event is InputEventKey) and event.pressed:
+		#if event.keycode == KEY_Y:
+			#generate_confetti()
