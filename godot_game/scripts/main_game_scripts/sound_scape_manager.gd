@@ -2,7 +2,7 @@ class_name AmbienceManager extends ScriptNode
 ## Script responsible for controling the ambient soundscape.
 
 const SETTING_KEY = "Ambience"
-
+@onready var ambience_bus_index = AudioServer.get_bus_index("Ambience")
 var soundscape = []
 var sound_list = build_sound_map()
 var has_loaded = false
@@ -15,7 +15,7 @@ class AmbientSoundPlayer extends AudioStreamPlayer:
 	var sound_name: String
 
 	func _init(loop: bool = true) -> void:
-		self.bus = &"Music" # Using Music bus for now.
+		self.bus = &"Ambience" # Using Music bus for now.
 		self.autoplay = true
 		if loop:
 			self.connect("finished", _on_finished)
@@ -98,5 +98,22 @@ func build_sound_map() -> Dictionary:
 func get_sound_count():
 	return len(current_sounds())
 
+
 func to_sound_list_key(key):
 	return key.replace(" ", "_")
+
+
+func fade_out():
+	var t = create_tween()
+	t.tween_method(update_bus_vol, 1.0, 0.0, 1.5)
+	t.play()
+
+
+func fade_in():
+	var t = create_tween()
+	t.tween_method(update_bus_vol, 0.0, 1.0, 1.5)
+	t.play()
+
+
+func update_bus_vol(value: float) -> void:
+	AudioServer.set_bus_volume_db(ambience_bus_index, linear_to_db(value))
