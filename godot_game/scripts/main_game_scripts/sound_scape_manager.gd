@@ -105,13 +105,13 @@ func to_sound_list_key(key):
 
 func fade_out():
 	var t = create_tween()
-	t.tween_method(update_bus_vol, 1.0, 0.0, 3.0)
+	t.tween_method(update_bus_vol, 1.0, 0.0, 1.5)
 	t.play()
 
 
 func fade_in():
 	var t = create_tween()
-	t.tween_method(update_bus_vol, 0.0, 1.0, 3.0)
+	t.tween_method(update_bus_vol, 0.0, 1.0, 1.5)
 	t.play()
 
 
