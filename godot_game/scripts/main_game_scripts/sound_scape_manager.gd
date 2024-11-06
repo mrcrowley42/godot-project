@@ -94,25 +94,26 @@ func build_sound_map() -> Dictionary:
 			sound_dict[sound_key] = sound
 	return sound_dict
 
-func _process(_delta: float) -> void:
-	var bus_index = AudioServer.get_bus_index("Ambience")
-	print(db_to_linear(AudioServer.get_bus_volume_db(bus_index)))
 
 func get_sound_count():
 	return len(current_sounds())
 
+
 func to_sound_list_key(key):
 	return key.replace(" ", "_")
 
+
 func fade_out():
 	var t = create_tween()
-	t.tween_method(update_bus_vol, 1, 0, 3)
+	t.tween_method(update_bus_vol, 1.0, 0.0, 3.0)
 	t.play()
-	
+
+
 func fade_in():
 	var t = create_tween()
-	t.tween_method(update_bus_vol, 0, 1, 3)
+	t.tween_method(update_bus_vol, 0.0, 1.0, 3.0)
 	t.play()
+
 
 func update_bus_vol(value: float) -> void:
 	AudioServer.set_bus_volume_db(ambience_bus_index, linear_to_db(value))
