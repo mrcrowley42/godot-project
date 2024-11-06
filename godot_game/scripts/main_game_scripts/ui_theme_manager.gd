@@ -39,7 +39,6 @@ func load(data) -> void:
 			theme_btn.set_pressed(true)
 			break
 
-
 ## Updates the UI elements with the appropriate textures and colours, while also
 ## keeping track of the currently selected theme.
 func set_theme(ui_theme) -> void:
