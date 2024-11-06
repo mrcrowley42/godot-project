@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://bkynhi7gd36bl"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://bkynhi7gd36bl"]
 
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="1_lj45c"]
 
@@ -51,6 +51,21 @@ expand_margin_top = 5.0
 expand_margin_right = 5.0
 expand_margin_bottom = 5.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m8qe2"]
+bg_color = Color(0.6, 0.6, 0.6, 0.831373)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
 [resource]
 default_font = ExtResource("1_lj45c")
 Button/colors/font_color = Color(0.960784, 0.960784, 0.960784, 0.960784)
@@ -58,3 +73,4 @@ Button/styles/focus = SubResource("StyleBoxEmpty_ia2bf")
 Button/styles/hover = SubResource("StyleBoxFlat_opoua")
 Button/styles/normal = SubResource("StyleBoxFlat_16vbq")
 Button/styles/pressed = SubResource("StyleBoxFlat_4o58n")
+Label/styles/normal = SubResource("StyleBoxFlat_m8qe2")

@@ -1,0 +1,73 @@
+[gd_resource type="SpriteFrames" load_steps=13 format=3 uid="uid://b25wqlmtehml6"]
+
+[ext_resource type="Texture2D" uid="uid://c6qch15up7y80" path="res://images/creature_sprites/box-fella/confused-0.png" id="1_mrhdx"]
+[ext_resource type="Texture2D" uid="uid://cvvyhukcnjaq3" path="res://images/creature_sprites/box-fella/confused-1.png" id="2_chkhi"]
+[ext_resource type="Texture2D" uid="uid://cldd6jugwy0hw" path="res://images/creature_sprites/box-fella/confused-2.png" id="3_6wfnp"]
+[ext_resource type="Texture2D" uid="uid://bh3ssrwo3q46p" path="res://images/creature_sprites/box-fella/happy-0.png" id="4_yk341"]
+[ext_resource type="Texture2D" uid="uid://slsh1d88gfw3" path="res://images/creature_sprites/box-fella/happy-1.png" id="5_ggnly"]
+[ext_resource type="Texture2D" uid="uid://c0ies7h2a7fe4" path="res://images/creature_sprites/box-fella/happy-2.png" id="6_tfr2d"]
+[ext_resource type="Texture2D" uid="uid://be717wsosnlil" path="res://images/creature_sprites/box-fella/joy-0.png" id="7_sqvwg"]
+[ext_resource type="Texture2D" uid="uid://be0ik6png3xt5" path="res://images/creature_sprites/box-fella/joy-1.png" id="8_qtasi"]
+[ext_resource type="Texture2D" uid="uid://cm5af4m8pfqqd" path="res://images/creature_sprites/box-fella/joy-2.png" id="9_yclqa"]
+[ext_resource type="Texture2D" uid="uid://cogbah73j0rau" path="res://images/creature_sprites/box-fella/sad-0.png" id="10_gfuc1"]
+[ext_resource type="Texture2D" uid="uid://cmcnorfjy2t5w" path="res://images/creature_sprites/box-fella/sad-1.png" id="11_4ufu8"]
+[ext_resource type="Texture2D" uid="uid://chyro7gsrvlk" path="res://images/creature_sprites/box-fella/sad-2.png" id="12_jmm4m"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_sqvwg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_qtasi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_yclqa")
+}],
+"loop": true,
+"name": &"chill",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_mrhdx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_chkhi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6wfnp")
+}],
+"loop": true,
+"name": &"confused",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_yk341")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ggnly")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_tfr2d")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_gfuc1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_4ufu8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_jmm4m")
+}],
+"loop": true,
+"name": &"sad",
+"speed": 4.0
+}]

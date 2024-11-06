@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://d0m1upkiiwl2s"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://d0m1upkiiwl2s"]
 
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="1_ieppp"]
 
@@ -48,11 +48,28 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o238x"]
+bg_color = Color(0.275091, 0.275091, 0.27509, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.696886, 0.696886, 0.696886, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+
 [resource]
 default_font = ExtResource("1_ieppp")
-default_font_size = 28
+default_font_size = 16
 Button/styles/disabled = SubResource("StyleBoxFlat_rl3qu")
 Button/styles/focus = SubResource("StyleBoxFlat_xcx6q")
 Button/styles/hover = SubResource("StyleBoxFlat_syfaa")
 Button/styles/normal = SubResource("StyleBoxFlat_rt26j")
 Button/styles/pressed = SubResource("StyleBoxFlat_11noq")
+Label/styles/normal = SubResource("StyleBoxFlat_o238x")

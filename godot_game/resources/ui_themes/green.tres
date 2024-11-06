@@ -12,6 +12,7 @@
 [resource]
 script = ExtResource("5_2fgmx")
 theme_name = "Green"
+hint = "green hint"
 screen_tint = Color(0.870588, 0.984314, 0.87451, 1)
 food_btn = ExtResource("3_xcps5")
 food_btn_pressed = ExtResource("4_mb13j")
@@ -21,3 +22,6 @@ setting_btn = ExtResource("6_ygmsn")
 setting_btn_pressed = ExtResource("7_jobtj")
 ui_overlay = ExtResource("8_7u5v2")
 unlocked = true
+primary = Color(0.607843, 0.690196, 0.611765, 1)
+bg = Color(0.117647, 0.160784, 0.180392, 1)
+outline = Color(0.18565, 0.260056, 0.272862, 1)

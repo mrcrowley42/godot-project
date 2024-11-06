@@ -12,7 +12,8 @@
 [resource]
 script = ExtResource("5_38vrr")
 theme_name = "Orange"
-screen_tint = Color(0.835294, 0.576471, 0.439216, 1)
+hint = "orag hint"
+screen_tint = Color(0.944395, 0.818662, 0.754542, 1)
 food_btn = ExtResource("3_jgudd")
 food_btn_pressed = ExtResource("4_qqe1u")
 act_btn = ExtResource("1_yql4l")
@@ -21,3 +22,6 @@ setting_btn = ExtResource("6_776br")
 setting_btn_pressed = ExtResource("7_l7md0")
 ui_overlay = ExtResource("8_8h4uc")
 unlocked = true
+primary = Color(0.584314, 0.403922, 0.305882, 1)
+bg = Color(0.262745, 0.133333, 0.239216, 1)
+outline = Color(0.405013, 0.220666, 0.371273, 1)

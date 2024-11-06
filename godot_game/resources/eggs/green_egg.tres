@@ -1,17 +1,23 @@
-[gd_resource type="Resource" script_class="EggEntry" load_steps=6 format=3 uid="uid://8qkgq02pnyvq"]
+[gd_resource type="Resource" script_class="EggEntry" load_steps=8 format=3 uid="uid://8qkgq02pnyvq"]
 
 [ext_resource type="Script" path="res://scripts/base_classses/egg_entry.gd" id="1_8ok2j"]
 [ext_resource type="Texture2D" uid="uid://gi4ytib73ibf" path="res://images/egg/egg-green.png" id="1_knhbg"]
 [ext_resource type="Resource" uid="uid://cxtahs454inpc" path="res://resources/creatures/main_creature.tres" id="1_olvu1"]
 [ext_resource type="Script" path="res://scripts/base_classses/egg_creature_entry.gd" id="2_brefb"]
+[ext_resource type="Resource" uid="uid://dwv6t0fmrq612" path="res://resources/creatures/box_creature.tres" id="3_sibil"]
 
 [sub_resource type="Resource" id="Resource_1h8fn"]
 script = ExtResource("2_brefb")
 creature_type = ExtResource("1_olvu1")
+weight = 0
+
+[sub_resource type="Resource" id="Resource_3y0vr"]
+script = ExtResource("2_brefb")
+creature_type = ExtResource("3_sibil")
 weight = 1
 
 [resource]
 script = ExtResource("1_8ok2j")
 name = "Green Egg"
 image = ExtResource("1_knhbg")
-hatches = Array[ExtResource("2_brefb")]([SubResource("Resource_1h8fn")])
+hatches = Array[ExtResource("2_brefb")]([SubResource("Resource_1h8fn"), SubResource("Resource_3y0vr")])

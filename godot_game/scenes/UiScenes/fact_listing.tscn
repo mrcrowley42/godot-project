@@ -1,48 +1,57 @@
-[gd_scene load_steps=6 format=3 uid="uid://da8f6xic1rcdd"]
+[gd_scene load_steps=7 format=3 uid="uid://da8f6xic1rcdd"]
 
 [ext_resource type="Script" path="res://scripts/fact_listing.gd" id="1_gtqsy"]
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="2_nyd6t"]
+[ext_resource type="Shader" path="res://shaders/pattern_wavy.gdshader" id="2_tm8bj"]
 [ext_resource type="PackedScene" uid="uid://cfto5f3wtfdqt" path="res://scenes/UiScenes/fact_btn.tscn" id="3_omm3u"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="4_ik51a"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cnlcg"]
-bg_color = Color(0.26325, 0.195, 0.39, 1)
-expand_margin_left = 24.0
-expand_margin_top = 16.0
-expand_margin_right = 24.0
-expand_margin_bottom = 16.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yoffr"]
+shader = ExtResource("2_tm8bj")
+shader_parameter/bg_col = Color(0.0049428, 2.19822e-06, 0.0464968, 1)
+shader_parameter/double = true
+shader_parameter/size = 8.0
+shader_parameter/one_col = Color(0.0568839, 3.14414e-05, 0.221646, 1)
+shader_parameter/one_speed = 0.02
+shader_parameter/one_opacity = 0.2
+shader_parameter/two_col = Color(0.0588235, 0, 0.223529, 1)
+shader_parameter/two_speed = 0.02
+shader_parameter/two_opacity = 0.2
 
 [node name="List" type="MarginContainer" node_paths=PackedStringArray("heading", "fact_container")]
 offset_right = 434.0
 offset_bottom = 434.0
+script = ExtResource("1_gtqsy")
+heading = NodePath("MarginContainer/VBoxContainer/Category")
+fact_container = NodePath("MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/FactList")
+
+[node name="Panel" type="Panel" parent="."]
+material = SubResource("ShaderMaterial_yoffr")
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 16
-script = ExtResource("1_gtqsy")
-heading = NodePath("VBoxContainer/Category")
-fact_container = NodePath("VBoxContainer/ScrollContainer/MarginContainer/FactList")
 
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_cnlcg")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="Category" type="Label" parent="VBoxContainer"]
+[node name="Category" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_nyd6t")
 text = "Did you know?"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(386, 290)
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
 custom_minimum_size = Vector2(378, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 24
@@ -50,23 +59,24 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
 
-[node name="FactList" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/MarginContainer"]
+[node name="FactList" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 14
 
-[node name="AppearanceBtn" parent="VBoxContainer/ScrollContainer/MarginContainer/FactList" instance=ExtResource("3_omm3u")]
+[node name="AppearanceBtn" parent="MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/FactList" instance=ExtResource("3_omm3u")]
 visible = false
 layout_mode = 2
 
 [node name="SaveButtons" type="Node2D" parent="."]
 position = Vector2(-50, -130)
 
-[node name="Cancel" type="Button" parent="SaveButtons"]
+[node name="Back" type="Button" parent="SaveButtons"]
 texture_filter = 5
-offset_left = 78.0
-offset_top = 503.0
-offset_right = 182.0
-offset_bottom = 551.0
+custom_minimum_size = Vector2(100, 40)
+offset_left = 73.0
+offset_top = 513.0
+offset_right = 173.0
+offset_bottom = 553.0
 scale = Vector2(0.75, 0.75)
 theme = ExtResource("4_ik51a")
 theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
@@ -74,4 +84,4 @@ theme_override_font_sizes/font_size = 18
 text = "Back"
 
 [connection signal="hidden" from="." to="." method="_on_hidden"]
-[connection signal="button_down" from="SaveButtons/Cancel" to="." method="_on_cancel_button_down"]
+[connection signal="button_down" from="SaveButtons/Back" to="." method="_on_back_button_down"]

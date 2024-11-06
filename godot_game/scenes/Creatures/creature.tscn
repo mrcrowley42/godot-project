@@ -1,6 +1,6 @@
 [gd_scene load_steps=27 format=3 uid="uid://bebjn5n2kjwgb"]
 
-[ext_resource type="Script" path="res://scripts/creature_notification_manager.gd" id="2_0vuyd"]
+[ext_resource type="Script" path="res://scripts/main_game_scripts/creature_notification_manager.gd" id="2_0vuyd"]
 [ext_resource type="Script" path="res://scripts/creature.gd" id="2_klgk6"]
 [ext_resource type="Script" path="res://scripts/creature_anim.gd" id="5_oh7gr"]
 [ext_resource type="Texture2D" uid="uid://dnud16me4mso5" path="res://icons/status/sentiment_frustrated_24dp_FFFFFF_FILL1_wght300_GRAD0_opsz24.svg" id="8_cooyl"]
@@ -10,7 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://pgmpt3uti87" path="res://sound_effects/pain3.wav" id="16_2mdbn"]
 [ext_resource type="Script" path="res://scripts/pain.gd" id="16_epyie"]
 [ext_resource type="AudioStream" uid="uid://it0l1d864tp5" path="res://sound_effects/pain4.wav" id="17_addty"]
-[ext_resource type="Script" path="res://scripts/accessory_manager.gd" id="17_dc6c6"]
+[ext_resource type="Script" path="res://scripts/main_game_scripts/accessory_manager.gd" id="17_dc6c6"]
 [ext_resource type="SpriteFrames" uid="uid://cpitoi4php8a2" path="res://resources/cosmetics/propeller_hat_sprite_frames.tres" id="18_nnrph"]
 [ext_resource type="AudioStream" uid="uid://bux02e7112jdt" path="res://sound_effects/pain5.wav" id="18_qdg0m"]
 [ext_resource type="SpriteFrames" uid="uid://blmif1nujgs1a" path="res://resources/cosmetics/standard_glasses_sprite_frames.tres" id="19_uwmsa"]

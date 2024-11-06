@@ -1,0 +1,1 @@
+class_name MemoryGameManager extends Node2D

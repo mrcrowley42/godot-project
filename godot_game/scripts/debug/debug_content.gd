@@ -54,7 +54,7 @@ func _process(_delta) -> void:
 
 
 func _on_anim_select_item_selected(index) -> void:
-	creature.find_child('Main').animation = $AnimSelect.get_item_text(index)
+	creature.change_animation($AnimSelect.get_item_text(index))
 
 
 func _on_overlay_strength_value_changed(value) -> void:
@@ -120,11 +120,6 @@ func _on_unlock_button_button_down() -> void:
 	cosmetic_btns.update_buttons()
 	theme_btns.update_buttons()
 	facts_menu.propagate_call("update_locked")
-
-
-func _on_button_2_button_down() -> void:
-	var sounds = [load("res://ambient_audio/Birdsong3.mp3"), load("res://ambient_audio/Fire1.mp3"), load("res://ambient_audio/Ocean.mp3")]
-	ambience_man.add_sound_node(sounds.pick_random())
 
 
 func _on_button_3_button_down() -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c5dr54dk0502t"]
+[gd_scene load_steps=15 format=3 uid="uid://c5dr54dk0502t"]
 
 [ext_resource type="Script" path="res://totris/Totris.gd" id="1_82aiy"]
 [ext_resource type="Script" path="res://totris/TotrisLogic.gd" id="2_7s788"]
@@ -7,6 +7,7 @@
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="5_d7726"]
 [ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="6_fphhh"]
 [ext_resource type="Script" path="res://scripts/sfx_man.gd" id="7_6nelh"]
+[ext_resource type="Theme" uid="uid://bsd1dkhc13v47" path="res://themes/plain.tres" id="7_wi1ws"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wbp70"]
 size = Vector2(10, 10)
@@ -187,7 +188,7 @@ offset_left = 228.0
 offset_top = 187.0
 offset_right = 312.0
 offset_bottom = 217.0
-theme = ExtResource("5_d7726")
+theme = ExtResource("7_wi1ws")
 text = "Totris"
 label_settings = SubResource("LabelSettings_w4uk7")
 horizontal_alignment = 1
@@ -200,7 +201,7 @@ offset_top = 256.0
 offset_right = 516.0
 offset_bottom = 278.0
 scale = Vector2(0.535, 0.535)
-theme = ExtResource("5_d7726")
+theme = ExtResource("7_wi1ws")
 text = "Best Score: %s"
 label_settings = SubResource("LabelSettings_w4uk7")
 horizontal_alignment = 1
@@ -214,7 +215,7 @@ offset_top = 286.0
 offset_right = 516.0
 offset_bottom = 308.0
 scale = Vector2(0.535, 0.535)
-theme = ExtResource("5_d7726")
+theme = ExtResource("7_wi1ws")
 text = "Best level: %s"
 label_settings = SubResource("LabelSettings_w4uk7")
 horizontal_alignment = 1
@@ -233,6 +234,7 @@ text = "Play
 "
 
 [node name="KillMenu" type="Control" parent="UI/Control/TopOverlay"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 540.0
@@ -250,7 +252,7 @@ offset_left = 180.0
 offset_top = 187.0
 offset_right = 360.0
 offset_bottom = 217.0
-theme = ExtResource("5_d7726")
+theme = ExtResource("7_wi1ws")
 text = "Game Over"
 label_settings = SubResource("LabelSettings_w4uk7")
 horizontal_alignment = 1
@@ -264,7 +266,7 @@ offset_top = 256.0
 offset_right = 516.0
 offset_bottom = 278.0
 scale = Vector2(0.535, 0.535)
-theme = ExtResource("5_d7726")
+theme = ExtResource("7_wi1ws")
 text = "Final Score: %s"
 label_settings = SubResource("LabelSettings_w4uk7")
 horizontal_alignment = 1
@@ -297,7 +299,7 @@ offset_top = 286.0
 offset_right = 516.0
 offset_bottom = 308.0
 scale = Vector2(0.535, 0.535)
-theme = ExtResource("5_d7726")
+theme = ExtResource("7_wi1ws")
 text = "Final level: %s"
 label_settings = SubResource("LabelSettings_w4uk7")
 horizontal_alignment = 1
@@ -465,7 +467,7 @@ offset_top = 84.0
 offset_right = 314.0
 offset_bottom = 152.0
 rotation = 3.14159
-theme = ExtResource("5_d7726")
+theme = ExtResource("7_wi1ws")
 text = "0"
 label_settings = SubResource("LabelSettings_h7scr")
 horizontal_alignment = 1
@@ -501,7 +503,7 @@ offset_top = 84.0
 offset_right = 314.0
 offset_bottom = 152.0
 rotation = 3.14159
-theme = ExtResource("5_d7726")
+theme = ExtResource("7_wi1ws")
 text = "0
 "
 label_settings = SubResource("LabelSettings_h7scr")

@@ -12,7 +12,8 @@
 [resource]
 script = ExtResource("1_nijfs")
 theme_name = "Pink"
-screen_tint = Color(0.901961, 0.67451, 0.768627, 1)
+hint = "pink hint"
+screen_tint = Color(0.922399, 0.736921, 0.811891, 1)
 food_btn = ExtResource("3_313c5")
 food_btn_pressed = ExtResource("4_jfsaj")
 act_btn = ExtResource("1_sskum")
@@ -20,3 +21,7 @@ act_btn_pressed = ExtResource("2_p2gct")
 setting_btn = ExtResource("6_m72k8")
 setting_btn_pressed = ExtResource("7_rs6af")
 ui_overlay = ExtResource("8_uxdmr")
+unlocked = false
+primary = Color(0.631373, 0.470588, 0.537255, 1)
+bg = Color(0.235294, 0.156863, 0.247059, 1)
+outline = Color(0.356863, 0.211765, 0.333333, 1)

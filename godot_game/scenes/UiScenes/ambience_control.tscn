@@ -1,0 +1,89 @@
+[gd_scene load_steps=9 format=3 uid="uid://ckjfqxx8f55r3"]
+
+[ext_resource type="Script" path="res://scripts/ambience_control.gd" id="1_r2qd8"]
+[ext_resource type="Texture2D" uid="uid://wo64brcmlmf8" path="res://images/ambience/forest.png" id="2_6ycye"]
+[ext_resource type="Theme" uid="uid://dl1wes8p6lqlb" path="res://themes/invisible.tres" id="2_gdv3w"]
+[ext_resource type="Script" path="res://scripts/base_classses/custom_tooltip_script.gd" id="2_oj86f"]
+[ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="2_qoy0g"]
+[ext_resource type="Theme" uid="uid://7uy2it30gif0" path="res://themes/menu_value_range_small.tres" id="5_1xa1v"]
+[ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="6_ijph6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_27aj0"]
+bg_color = Color(0, 0, 0, 0.501961)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="PanelContainer" type="PanelContainer"]
+custom_minimum_size = Vector2(355, 0)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -184.5
+offset_right = 184.5
+offset_bottom = 82.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_27aj0")
+script = ExtResource("1_r2qd8")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="CategoryIcon" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+theme = ExtResource("2_gdv3w")
+icon = ExtResource("2_6ycye")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("2_oj86f")
+tooltip_string = "<category>"
+direction = 3
+
+[node name="SoundLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_qoy0g")
+text = "Sound Effect Name"
+
+[node name="RemoveBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 0
+theme = ExtResource("6_ijph6")
+text = "x"
+icon_alignment = 1
+expand_icon = true
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VolumeSfx" type="HSlider" parent="MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 10
+theme = ExtResource("5_1xa1v")
+max_value = 1.0
+step = 0.01
+value = 0.5
+scrollable = false
+tick_count = 1
+
+[connection signal="hidden" from="." to="." method="_on_hidden"]
+[connection signal="button_down" from="MarginContainer/VBoxContainer/HBoxContainer/RemoveBtn" to="." method="_on_remove_btn_button_down"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/MarginContainer/VolumeSfx" to="." method="_on_volume_sfx_value_changed"]

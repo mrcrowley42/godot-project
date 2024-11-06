@@ -96,8 +96,7 @@ func _on_close_btn_button_down():
 		_on_help_btn_button_down()
 		return
 	# close totris
-	get_tree().root.propagate_notification(Globals.NOTIFICATION_TOTRIS_CLOSED)
-	queue_free()  # maybe dont delete? idk it'll do for now
+	get_tree().root.propagate_notification(Globals.NOTIFICATION_TOTRIS_CLOSE)
 
 func _on_menu_button_down():
 	%SFX.play_sound("click")

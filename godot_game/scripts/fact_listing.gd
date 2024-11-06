@@ -10,10 +10,10 @@ var category: Fact.FactCategory
 var facts = load("res://resources/fact_list.tres")
 
 func _ready() -> void:
-	heading.text = Fact.FactCategory.keys()[category]
+	heading.text = "Facts: %s" % Fact.FactCategory.keys()[category]
 
 
-func _on_cancel_button_down() -> void:
+func _on_back_button_down() -> void:
 	btn_sfx.play()
 	queue_free()
 
