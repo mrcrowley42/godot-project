@@ -431,6 +431,9 @@ food_amount = 4.0
 unique_name_in_owner = true
 script = ExtResource("3_fj5ve")
 
+[node name="AmbienceManager" type="Node" parent="." groups=["settings_data"]]
+script = ExtResource("80_83777")
+
 [node name="Gameplay" type="Node2D" parent="."]
 unique_name_in_owner = true
 
@@ -2271,9 +2274,6 @@ stream = ExtResource("68_dnpii")
 volume_db = 8.0
 max_polyphony = 2
 bus = &"SFX"
-
-[node name="AmbienceManager" type="Node" parent="." groups=["settings_data"]]
-script = ExtResource("80_83777")
 
 [connection signal="tree_exiting" from="MinigameManager" to="MinigameManager" method="_on_tree_exiting"]
 [connection signal="timeout" from="Gameplay/Background/bg_update_ticker" to="Gameplay/Background" method="_on_bg_update_ticker_timeout"]

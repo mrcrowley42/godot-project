@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="AmbientSoundCategory" load_steps=5 format=3 uid="uid://bjmxtvmyj8vt3"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/ambient_sound_category.gd" id="1_1j3df"]
+[ext_resource type="Texture2D" uid="uid://bkyvl87k7rv4n" path="res://images/ambience/default.png" id="1_u71lj"]
+[ext_resource type="Script" path="res://scripts/base_classses/ambient_sound.gd" id="2_4ayff"]
+[ext_resource type="Resource" uid="uid://0ralfjhny7pb" path="res://resources/ambient_sounds/sounds/sound_electrical_1.tres" id="3_4rrxv"]
+
+[resource]
+script = ExtResource("1_1j3df")
+category_name = "Electrical"
+image = ExtResource("1_u71lj")
+sound_resources = Array[ExtResource("2_4ayff")]([ExtResource("3_4rrxv")])

@@ -59,7 +59,7 @@ func _on_add_sound_btn_button_down() -> void:
 
 func _on_sound_btn_item_selected(index: int) -> void:
 	current_sound = current_category.sound_resources[index]
-	
+
 func update_control_list():
 	for sound in ambience_man.current_sounds():
 		var sound_control = AMBIENCE_CONTROL.instantiate()

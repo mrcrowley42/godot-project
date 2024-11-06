@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AmbientSound" load_steps=3 format=3 uid="uid://0ralfjhny7pb"]
+
+[ext_resource type="AudioStream" uid="uid://omk4i0g76jy1" path="res://ambient_audio/electricalHum.mp3" id="1_mkin1"]
+[ext_resource type="Script" path="res://scripts/base_classses/ambient_sound.gd" id="1_o5m6i"]
+
+[resource]
+script = ExtResource("1_o5m6i")
+sound_name = "Electrical 1"
+file = ExtResource("1_mkin1")
