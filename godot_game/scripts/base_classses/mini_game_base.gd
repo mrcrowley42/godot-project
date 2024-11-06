@@ -2,5 +2,4 @@
 class_name MiniGameLogic extends Node
 
 func close_game():
-	get_tree().root.propagate_notification(Globals.NOTIFICATION_MINIGAME_CLOSED)
-	find_parent("MiniGame").queue_free()
+	get_tree().root.propagate_notification(Globals.NOTIFICATION_MEMORY_MATCH_CLOSE)

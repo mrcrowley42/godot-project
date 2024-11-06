@@ -1,4 +1,4 @@
-extends Node
+class_name Game extends Node
 
 @export var debug_mode: bool
 @export var unlock_fps: bool = false
@@ -8,6 +8,9 @@ var last_saved: float
 @onready var stat_man: StatusManager = %StatusManager
 @onready var minigame_man: MinigameManager = %MinigameManager
 @onready var debug_window = $DebugWindow
+
+@onready var ui_overlay: Sprite2D = find_child("UI_Overlay")
+@onready var trans_img: Sprite2D = find_child("Transition")
 
 var is_in_transition: bool = false;
 
@@ -37,8 +40,6 @@ func _ready():
 		%Creature.reset_stats()
 
 	# do last
-	var ui_overlay: Sprite2D = find_child("UI_Overlay")
-	var trans_img: Sprite2D = find_child("Transition")
 	set_is_in_trans(true)
 	Globals.perform_opening_transition(trans_img, ui_overlay.position, set_is_in_trans.bind(false))
 
@@ -80,8 +81,6 @@ func _notification(noti):
 			DataGlobals.save_data()  # important!
 			Globals.general_dict["current_cosmetics"] = %Creature.get_current_cosmetics()
 			Globals.general_dict["loaded_cosmetics"] = %Creature.get_loaded_cosmetics()
-			var ui_overlay: Sprite2D = find_child("UI_Overlay")
-			var trans_img: Sprite2D = find_child("Transition")
 			await Globals.perform_closing_transition(trans_img, ui_overlay.position)
 			Globals.change_to_scene("res://scenes/GameScenes/grow_up_to_adult.tscn")
 

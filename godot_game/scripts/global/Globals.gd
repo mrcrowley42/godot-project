@@ -14,8 +14,9 @@ const UI_SECTION = "user interface"
 const MAX_AMBIENT_SOUNDS = 6
 
 # CUSTOM NOTIFICATIONS
-const NOTIFICATION_MINIGAME_CLOSED = 500
-const NOTIFICATION_TOTRIS_CLOSED = 501
+const NOTIFICATION_MINIGAME_CLOSED = 600
+const NOTIFICATION_TOTRIS_CLOSE = 601
+const NOTIFICATION_MEMORY_MATCH_CLOSE = 602
 
 const NOFITICATION_GROW_TO_ADULT_SCENE = 502
 const NOTIFICATION_CREATURE_IS_LOADED = 503
@@ -24,6 +25,9 @@ const NOTIFICATION_AMBIENT_SOUNDS_REMOVED = 505
 
 
 signal item_unlocked(details)
+
+## save incase we need to kill it for another transition
+var transition_tween: Tween = null
 
 ## for use when passing data between scenes
 # please use .erase() after extracting items to keep everything clean
@@ -43,25 +47,27 @@ func send_notification(noti: int):
 	get_tree().root.propagate_notification(noti)
 
 func perform_opening_transition(trans_img: Sprite2D, mid_pos: Vector2, end_func=null):
+	if transition_tween != null and transition_tween.is_running():
+		transition_tween.stop()
+	
 	trans_img.rotation = 0
 	trans_img.position = mid_pos
-	var trans = get_tree().create_tween().tween_property(trans_img, "position", trans_img.position + Vector2(0, 1000), 1.5)\
-		.set_trans(Tween.TRANS_EXPO)\
-		.set_ease(Tween.EASE_OUT)\
-		.set_delay(.3)
-	if end_func:
-		trans.connect("finished", end_func)
+	transition_tween = tween(trans_img, "position", trans_img.position + Vector2(0, 1000), 0.3, 1.5)
+	
+	await get_tree().create_timer(.5).timeout
+	if end_func != null:
+		end_func.call()
 
 func perform_closing_transition(trans_img: Sprite2D, mid_pos: Vector2, end_func=null):
+	if transition_tween != null and transition_tween.is_running():
+		transition_tween.stop()
+	
 	trans_img.rotation = PI
 	trans_img.position.y = -1000
-	get_tree().create_tween().tween_property(trans_img,
-		"position",
-		mid_pos,
-		1.
-	).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	transition_tween = tween(trans_img, "position", mid_pos, .0, 1)
+	
 	await get_tree().create_timer(.5).timeout
-	if end_func:
+	if end_func != null:
 		end_func.call()
 
 

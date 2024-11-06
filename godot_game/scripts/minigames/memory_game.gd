@@ -30,7 +30,7 @@ func _process(_delta):
 	
 	if player_score == 10:
 		if not complete:
-			%Confetti.confet()
+			%Confetti.fire()
 			complete = true
 
 func create_deck() -> Array:
