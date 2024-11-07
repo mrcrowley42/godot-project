@@ -11,7 +11,7 @@ var fallback_theme = load("res://resources/ui_themes/green.tres")
 @onready var theme_btns = %ThemeBtns
 
 ## The current theme
-var current_theme: UiTheme
+var current_theme: UiTheme = fallback_theme
 ## Stores themes to be retreived like so {theme.theme_name: theme}
 var theme_dict = Dictionary()
 

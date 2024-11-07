@@ -7,8 +7,6 @@ var soundscape = []
 var sound_list = build_sound_map()
 var has_loaded = false
 
-signal finished_loading()
-
 ## Custom streamplayer class, that loops audio by default.
 class AmbientSoundPlayer extends AudioStreamPlayer:
 	var sound_category: AmbientSoundCategory
@@ -25,13 +23,9 @@ class AmbientSoundPlayer extends AudioStreamPlayer:
 		self.play()
 
 
-func _ready() -> void:
-	# Once loading is finished then load the scoundscape.
-	finished_loading.connect(load_soundscape)
-
-
 ## Regenerate soundscape from saved settings.
 func load_soundscape() -> void:
+	has_loaded = true
 	if not soundscape:
 		return
 	
@@ -45,8 +39,6 @@ func load_soundscape() -> void:
 		var volume = sound[1]
 		var category = load(ResourceUID.get_id_path(int(sound[2])))
 		add_sound_node(category, file, volume)
-	has_loaded = true
-
 
 ## Create a [param AmbientSoundPlayer] with the passed audio file.
 func add_sound_node(category: AmbientSoundCategory, sound: AmbientSound, volume: float = 0.5) -> void:
@@ -76,13 +68,17 @@ func save() -> Dictionary:
 func load(data) -> void:
 	if data.has(SETTING_KEY):
 		self.soundscape = data[SETTING_KEY]
-	finished_loading.emit()
+	load_soundscape()
 
+func _notification(noti):
+	if noti == Globals.NOTIFICATION_ALL_DATA_IS_LOADED:
+		load_soundscape()
 
-## [DEBUG] Print current soundscape.
 func current_sounds():
 	return get_children()
 
+func get_sound_count():
+	return len(current_sounds())
 
 ## Returns a dictionary of file_names to resource_path for each ambient sound.
 func build_sound_map() -> Dictionary:
@@ -93,10 +89,6 @@ func build_sound_map() -> Dictionary:
 			var sound_key: String = to_sound_list_key(sound.sound_name)
 			sound_dict[sound_key] = sound
 	return sound_dict
-
-
-func get_sound_count():
-	return len(current_sounds())
 
 
 func to_sound_list_key(key):

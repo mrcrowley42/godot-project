@@ -28,29 +28,31 @@ func change_menu(new_menu: Menu):
 	current_menu = new_menu
 	menus[new_menu].show()
 
-func _on_credits_btn_button_down():
-	change_menu(Menu.CREDITS)
-
-func _on_sound_btn_button_down():
-	change_menu(Menu.SETTINGS)
-
 func _on_visibility_changed():
 	## DO WE WANT THIS?
 	if current_menu != null:
 		return_to_main()
 
+func _on_credits_btn_button_down():
+	%BtnClick.play()
+	change_menu(Menu.CREDITS)
 
-func _on_gameplay_settings_btn_button_down():
+func _on_settings_btn_button_down():
+	%BtnClick.play()
+	change_menu(Menu.SETTINGS)
+
+func _on_theme_btn_button_down():
+	%BtnClick.play()
 	change_menu(Menu.THEME)
 
-
 func _on_appearance_btn_button_down():
+	%BtnClick.play()
 	change_menu(Menu.APPEARANCE)
 
-
 func _on_fact_btn_button_down():
+	%BtnClick.play()
 	change_menu(Menu.FACTS)
 
-
 func _on_ambience_btn_button_down():
+	%BtnClick.play()
 	change_menu(Menu.AMBIENCE)

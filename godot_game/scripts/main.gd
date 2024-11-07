@@ -41,7 +41,9 @@ func _ready():
 	if DataGlobals.has_only_metadata():
 		%Creature.setup_creature()
 		%Creature.reset_stats()
-
+	
+	Globals.send_notification(Globals.NOTIFICATION_ALL_DATA_IS_LOADED)
+	
 	# do last
 	set_is_in_trans(true)
 	Globals.perform_opening_transition(trans_img, ui_overlay.position, set_is_in_trans.bind(false))
@@ -77,6 +79,7 @@ func _notification(noti):
 	if noti == NOTIFICATION_WM_CLOSE_REQUEST:
 		minigame_man.finalise_save_data()  # call before saving
 		DataGlobals.save_data()
+		DataGlobals.save_settings_data()
 	
 	# grow up
 	if noti == Globals.NOFITICATION_GROW_TO_ADULT_SCENE and not is_in_transition:

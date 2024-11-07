@@ -22,7 +22,6 @@ func _ready() -> void:
 	category_btn.item_selected.emit(0)
 	
 	update_count_label(0)
-	%AmbienceMenu.visibility_changed.connect(on_visibility_changed)
 
 
 func update_sound_list(category) -> void:
@@ -65,15 +64,7 @@ func update_control_list():
 		var sound_control = AMBIENCE_CONTROL.instantiate()
 		sound_control.sound_node = sound
 		sound_list_container.add_child(sound_control)
-
-## save when menu is hidden
-func on_visibility_changed() -> void:
-	if ambience_man.has_loaded:
-		if %AmbienceMenu.visible:
-			update_control_list()
-			update_count_label()
-		else:
-			DataGlobals.save_settings_data()
+	print(get_children())
 
 func _notification(what: int) -> void:
 	if what == Globals.NOTIFICATION_AMBIENT_SOUNDS_REMOVED:
@@ -81,3 +72,12 @@ func _notification(what: int) -> void:
 
 func update_count_label(sub: int = 0):
 	count_label.text = "%s/%s sounds" % [ambience_man.get_sound_count()-sub, Globals.MAX_AMBIENT_SOUNDS]
+
+
+func _on_ambience_menu_visibility_changed():
+	if ambience_man.has_loaded:
+		if %AmbienceMenu.visible:
+			update_control_list()
+			update_count_label()
+		else:
+			DataGlobals.save_settings_data()

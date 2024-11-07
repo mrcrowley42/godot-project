@@ -427,12 +427,12 @@ unique_name_in_owner = true
 script = ExtResource("2_aqytd")
 food_amount = 4.0
 
+[node name="AmbienceManager" type="Node" parent="." groups=["settings_data"]]
+script = ExtResource("80_83777")
+
 [node name="MinigameManager" type="Node2D" parent="." groups=["save_data"]]
 unique_name_in_owner = true
 script = ExtResource("3_fj5ve")
-
-[node name="AmbienceManager" type="Node" parent="." groups=["settings_data"]]
-script = ExtResource("80_83777")
 
 [node name="Gameplay" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -1103,6 +1103,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="ActivityMenu" type="PanelContainer" parent="UI"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(400, 400)
 anchors_preset = 4
 anchor_top = 0.5
@@ -1340,7 +1341,6 @@ metadata/_edit_use_anchors_ = true
 [node name="OptionsMenu" type="PanelContainer" parent="UI"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1399,7 +1399,7 @@ layout_mode = 2
 theme_override_constants/separation = 14
 alignment = 1
 
-[node name="SoundBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer"]
+[node name="SettingBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1647,6 +1647,7 @@ script = ExtResource("35_4io20")
 [node name="SettingsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 material = SubResource("ShaderMaterial_1s3b6")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -1884,7 +1885,6 @@ script = ExtResource("35_4io20")
 [node name="AmbienceMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 material = SubResource("ShaderMaterial_e5rr0")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -2326,10 +2326,10 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/ActivityMenu/NavigationArrows/RightArrow" to="UI/ActivityMenu/NavigationArrows" method="_on_right_arrow_button_down"]
 [connection signal="visibility_changed" from="UI/OptionsMenu" to="UI/OptionsMenu" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/AppearanceBtn" to="UI/OptionsMenu" method="_on_appearance_btn_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/ThemeBtn" to="UI/OptionsMenu" method="_on_gameplay_settings_btn_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/ThemeBtn" to="UI/OptionsMenu" method="_on_theme_btn_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/FactBtn" to="UI/OptionsMenu" method="_on_fact_btn_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/AmbienceBtn" to="UI/OptionsMenu" method="_on_ambience_btn_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer/SoundBtn" to="UI/OptionsMenu" method="_on_sound_btn_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer/SettingBtn" to="UI/OptionsMenu" method="_on_settings_btn_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer/CreditsBtn" to="UI/OptionsMenu" method="_on_credits_btn_button_down"]
 [connection signal="visibility_changed" from="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ThemeBtns" to="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ThemeBtns" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/OptionsMenu/ThemeMenu/SaveButtons/Back" to="UI/OptionsMenu/ThemeMenu/SaveButtons/Back" method="_on_button_down"]
@@ -2344,6 +2344,7 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MusicControls/PanelContainer/MarginContainer/VContainer/currentSong/Right" to="UI/OptionsMenu/SettingsMenu/MusicControls" method="_on_right_button_down"]
 [connection signal="pressed" from="UI/OptionsMenu/SettingsMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/SaveButtons/Back" to="UI/OptionsMenu/SettingsMenu/SaveButtons/Back" method="_on_button_down"]
+[connection signal="visibility_changed" from="UI/OptionsMenu/AmbienceMenu" to="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer" method="_on_ambience_menu_visibility_changed"]
 [connection signal="item_selected" from="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/HBoxContainer/CategoryBtn" to="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer" method="_on_category_btn_item_selected"]
 [connection signal="item_selected" from="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/HBoxContainer/SoundBtn" to="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer" method="_on_sound_btn_item_selected"]
 [connection signal="button_down" from="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/HBoxContainer/AddSoundBtn" to="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer" method="_on_add_sound_btn_button_down"]
