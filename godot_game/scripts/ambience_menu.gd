@@ -32,6 +32,7 @@ func update_sound_list(category) -> void:
 
 
 func _on_category_btn_item_selected(index: int) -> void:
+	%BtnClick.play()
 	current_category = categories[index]
 	update_sound_list(current_category)
 
@@ -57,6 +58,7 @@ func _on_add_sound_btn_button_down() -> void:
 
 
 func _on_sound_btn_item_selected(index: int) -> void:
+	%BtnClick.play()
 	current_sound = current_category.sound_resources[index]
 
 func update_control_list():
@@ -67,6 +69,7 @@ func update_control_list():
 
 func _notification(what: int) -> void:
 	if what == Globals.NOTIFICATION_AMBIENT_SOUNDS_REMOVED:
+		%BtnClick.play()
 		update_count_label(1)  # because queue_free() takes a while, manually subtract 1
 
 func update_count_label(sub: int = 0):

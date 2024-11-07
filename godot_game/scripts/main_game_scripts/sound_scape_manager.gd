@@ -71,7 +71,7 @@ func load(data) -> void:
 	load_soundscape()
 
 func _notification(noti):
-	if noti == Globals.NOTIFICATION_ALL_DATA_IS_LOADED:
+	if not has_loaded and noti == Globals.NOTIFICATION_ALL_DATA_IS_LOADED:
 		load_soundscape()
 
 func current_sounds():
