@@ -64,7 +64,6 @@ func update_control_list():
 		var sound_control = AMBIENCE_CONTROL.instantiate()
 		sound_control.sound_node = sound
 		sound_list_container.add_child(sound_control)
-	print(get_children())
 
 func _notification(what: int) -> void:
 	if what == Globals.NOTIFICATION_AMBIENT_SOUNDS_REMOVED:
