@@ -6,10 +6,3 @@ class_name CreatureType extends Resource
 @export var xp_required_for_adult: int
 @export var baby: CreatureTypePart
 @export var adult: CreatureTypePart
-var _uid_set = false
-
-func _set_uid(uid: int):
-	if _uid_set:
-		return
-	self.set("uid", uid)
-	_uid_set = true
