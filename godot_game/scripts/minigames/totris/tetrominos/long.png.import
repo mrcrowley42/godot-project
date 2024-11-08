@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1wa15bcar7tn"
-path="res://.godot/imported/skew_b.png-b4f190f3546fb27c84735817b8a935f6.ctex"
+uid="uid://bfhnyln77rve3"
+path="res://.godot/imported/long.png-b1996f95835f3d6b6af56400a3a2e190.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://totris/tetrominos/skew_b.png"
-dest_files=["res://.godot/imported/skew_b.png-b4f190f3546fb27c84735817b8a935f6.ctex"]
+source_file="res://scripts/minigames/totris/tetrominos/long.png"
+dest_files=["res://.godot/imported/long.png-b1996f95835f3d6b6af56400a3a2e190.ctex"]
 
 [params]
 

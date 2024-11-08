@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://3cn1hflukqt1"]
 
-[ext_resource type="Script" path="res://totris/Tetromino.gd" id="1_qheu4"]
-[ext_resource type="Script" path="res://totris/tetBody.gd" id="21_uh3hb"]
+[ext_resource type="Script" path="res://scripts/minigames/totris/Tetromino.gd" id="1_qheu4"]
+[ext_resource type="Script" path="res://scripts/minigames/totris/tetBody.gd" id="21_uh3hb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cm127"]
 size = Vector2(10, 10)

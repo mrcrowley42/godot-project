@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cg7w2o2jy65vy"
-path="res://.godot/imported/singular.png-a95b126c359d94ecc6675c6e7b38a5d5.ctex"
+uid="uid://cqof7tx8ndclv"
+path="res://.godot/imported/l_b.png-731864b7918f02d89bc98ca333903d0f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://totris/tetrominos/singular.png"
-dest_files=["res://.godot/imported/singular.png-a95b126c359d94ecc6675c6e7b38a5d5.ctex"]
+source_file="res://scripts/minigames/totris/tetrominos/l_b.png"
+dest_files=["res://.godot/imported/l_b.png-731864b7918f02d89bc98ca333903d0f.ctex"]
 
 [params]
 

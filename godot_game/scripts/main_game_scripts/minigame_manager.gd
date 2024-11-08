@@ -16,7 +16,7 @@ var save_data: Dictionary = {}
 var current_minigame = null;
 var current_time_scale: float
 var totris_scene_instance: TotrisManager = null
-var memory_match_instance: MemoryGameManager = null
+var memory_match_instance: MemoryGame = null
 
 ## Loads the minigame matching the [param minigame] variable, and places it just
 ## below options menu, but above all other elements.

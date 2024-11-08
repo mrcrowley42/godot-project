@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://c5dr54dk0502t"]
 
-[ext_resource type="Script" path="res://totris/Totris.gd" id="1_82aiy"]
-[ext_resource type="Script" path="res://totris/TotrisLogic.gd" id="2_7s788"]
+[ext_resource type="Script" path="res://scripts/minigames/totris/Totris.gd" id="1_82aiy"]
+[ext_resource type="Script" path="res://scripts/minigames/totris/TotrisLogic.gd" id="2_7s788"]
 [ext_resource type="Texture2D" uid="uid://cgfufcnmd24wf" path="res://UI stuff/Green Palette/ui_green_totris.png" id="2_de7pv"]
 [ext_resource type="Shader" path="res://shaders/grid.gdshader" id="3_udord"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="5_d7726"]
