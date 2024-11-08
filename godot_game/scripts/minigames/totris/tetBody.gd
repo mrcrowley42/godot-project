@@ -4,7 +4,7 @@ class_name TetBody
 
 signal no_collisions
 
-const TEXTURE_PATH = 'res://totris/tetrominos/'
+const TEXTURE_PATH = 'res://scripts/minigames/totris/tetrominos/'
 const TOP = 0
 const BOTTOM = 1
 const LEFT = 2

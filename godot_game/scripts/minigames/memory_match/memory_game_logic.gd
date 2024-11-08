@@ -11,9 +11,9 @@ class Card extends Button:
 	var parent: MemoryGameLogic
 	var value: int
 	
-	func _init(parent, value):
-		self.parent = parent
-		self.value = value
+	func _init(parent_node, card_value):
+		self.parent = parent_node
+		self.value = card_value
 		self.theme = load("res://themes/action_btn.tres")
 		self.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		self.size_flags_vertical = Control.SIZE_EXPAND_FILL

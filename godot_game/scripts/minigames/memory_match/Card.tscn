@@ -4,7 +4,12 @@
 
 [node name="Card" type="Node2D"]
 
-[node name="Button" type="Button" parent="."]
+[node name="CardBack" type="Button" parent="."]
+offset_right = 72.0
+offset_bottom = 72.0
+theme = ExtResource("1_8frxp")
+
+[node name="CardFront" type="Button" parent="."]
 offset_right = 72.0
 offset_bottom = 72.0
 theme = ExtResource("1_8frxp")

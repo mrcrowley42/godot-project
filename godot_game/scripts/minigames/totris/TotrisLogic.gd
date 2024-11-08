@@ -2,7 +2,7 @@ extends MiniGameLogic
 
 class_name TotrisLogic
 
-@onready var base_tet = preload("res://totris/Tetromino.tscn")
+@onready var base_tet = preload("res://scripts/minigames/totris/Tetromino.tscn")
 @onready var t_manager: TotrisManager = get_parent()
 
 @onready var gravity_ticker: Timer = find_child("GravityTicker")
