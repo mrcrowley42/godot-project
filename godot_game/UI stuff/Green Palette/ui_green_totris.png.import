@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbrwrxiefjvqj"
-path="res://.godot/imported/tetris_pieces.png-11fb99603e2ad80d00c55dd53d9abbfa.ctex"
+uid="uid://cgfufcnmd24wf"
+path="res://.godot/imported/ui_green_totris.png-564e9410c834475a6f43e42621119808.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI stuff/Green Palette/tetris_pieces.png"
-dest_files=["res://.godot/imported/tetris_pieces.png-11fb99603e2ad80d00c55dd53d9abbfa.ctex"]
+source_file="res://UI stuff/Green Palette/ui_green_totris.png"
+dest_files=["res://.godot/imported/ui_green_totris.png-564e9410c834475a6f43e42621119808.ctex"]
 
 [params]
 

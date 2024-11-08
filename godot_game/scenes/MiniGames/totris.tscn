@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://totris/Totris.gd" id="1_82aiy"]
 [ext_resource type="Script" path="res://totris/TotrisLogic.gd" id="2_7s788"]
-[ext_resource type="Texture2D" uid="uid://cgfufcnmd24wf" path="res://UI stuff/Green Palette/ui_green_tetris.png" id="2_de7pv"]
+[ext_resource type="Texture2D" uid="uid://cgfufcnmd24wf" path="res://UI stuff/Green Palette/ui_green_totris.png" id="2_de7pv"]
 [ext_resource type="Shader" path="res://shaders/grid.gdshader" id="3_udord"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="5_d7726"]
 [ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="6_fphhh"]
@@ -160,9 +160,9 @@ offset_bottom = 637.0
 color = Color(0, 0, 0, 1)
 
 [node name="TopOverlay" type="CanvasLayer" parent="UI/Control"]
-layer = 12
+layer = 11
 
-[node name="Sprite2D" type="Sprite2D" parent="UI/Control/TopOverlay"]
+[node name="TopCover" type="Sprite2D" parent="UI/Control/TopOverlay"]
 position = Vector2(270, 18)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_de7pv")
@@ -377,19 +377,19 @@ vertical_alignment = 1
 clip_text = true
 
 [node name="CloseBtn" type="Button" parent="UI/Control/TopOverlay"]
-offset_left = 506.0
-offset_top = 17.0
-offset_right = 522.0
-offset_bottom = 38.0
+offset_left = 500.0
+offset_top = 20.0
+offset_right = 516.0
+offset_bottom = 41.0
 focus_mode = 0
 theme = ExtResource("5_d7726")
 text = "X"
 
 [node name="HelpBtn" type="Button" parent="UI/Control/TopOverlay"]
-offset_left = 18.0
-offset_top = 17.0
-offset_right = 34.0
-offset_bottom = 38.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 36.0
+offset_bottom = 41.0
 focus_mode = 0
 theme = ExtResource("5_d7726")
 text = "?"

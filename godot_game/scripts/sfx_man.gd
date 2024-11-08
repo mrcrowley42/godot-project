@@ -8,7 +8,7 @@ var draw = preload("res://sound_effects/confirm.wav")
 var click = preload("res://sound_effects/button_click_fast.mp3")
 var yippe = preload("res://sound_effects/yippee.wav")
 
-# tetris (8 & 16 bit sounds, in desperate need of balancing)
+# tetris (8 & 16 bit sounds)
 var t_place = preload("res://sound_effects/totris_place.wav")
 var t_place_inst = preload("res://sound_effects/totris_place_inst.wav")
 var t_biglinebreak = preload("res://sound_effects/totris_biglinebreak.wav")

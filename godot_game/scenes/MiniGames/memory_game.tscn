@@ -1,51 +1,28 @@
-[gd_scene load_steps=10 format=3 uid="uid://d3e1mocbpq7hp"]
+[gd_scene load_steps=12 format=3 uid="uid://d3e1mocbpq7hp"]
 
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="1_3y1y3"]
 [ext_resource type="Script" path="res://scripts/minigames/memory_game_manager.gd" id="1_ckjye"]
 [ext_resource type="Script" path="res://scripts/minigames/memory_game.gd" id="1_y2saq"]
-[ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="2_4ls5g"]
-[ext_resource type="Texture2D" uid="uid://cawudmxbjamv0" path="res://UI stuff/Green Palette/ui_green.png" id="2_8ebkj"]
+[ext_resource type="Texture2D" uid="uid://cs3dfnulji8oi" path="res://UI stuff/Green Palette/ui_memory.png" id="5_1yvmx"]
+[ext_resource type="Theme" uid="uid://kpqilwsnepqa" path="res://themes/nothing.tres" id="5_4atnw"]
 [ext_resource type="Script" path="res://scripts/sfx_man.gd" id="5_nj7bn"]
+[ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="5_otyuk"]
+[ext_resource type="Texture2D" uid="uid://en8015c4tbgw" path="res://icons/stopwatch.svg" id="6_wjgui"]
+[ext_resource type="Texture2D" uid="uid://bedsc86ugpd5r" path="res://icons/question-square.svg" id="7_ujte2"]
+[ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="9_kvcou"]
 
-[sub_resource type="Gradient" id="Gradient_ai7nj"]
-interpolation_mode = 2
-colors = PackedColorArray(0, 0.576471, 0, 1, 0.0369, 0.329162, 0.41, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_dq5kv"]
-gradient = SubResource("Gradient_ai7nj")
-width = 432
-height = 432
-fill_from = Vector2(0.538462, 0)
-fill_to = Vector2(0, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y1l3x"]
+[sub_resource type="LabelSettings" id="LabelSettings_j03ef"]
+font_size = 24
 
 [node name="MiniGame" type="Node2D"]
 script = ExtResource("1_ckjye")
 
-[node name="BG" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(434, 434)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 53.0
-offset_top = 120.0
-offset_right = 487.0
-offset_bottom = 554.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.168943, 0.379533, 0.446845, 1)
-metadata/_edit_lock_ = true
+[node name="GameLogic" type="Node" parent="."]
+script = ExtResource("1_y2saq")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-modulate = Color(1, 1, 1, 0.439216)
-offset_left = 53.0
-offset_top = 120.0
-offset_right = 485.0
-offset_bottom = 552.0
-texture = SubResource("GradientTexture2D_dq5kv")
+[node name="SFX" type="AudioStreamPlayer" parent="GameLogic"]
+bus = &"SFX"
+script = ExtResource("5_nj7bn")
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 10
@@ -59,55 +36,187 @@ offset_bottom = 40.0
 [node name="UI_Overlay" type="Sprite2D" parent="UI/Control"]
 position = Vector2(270, 337.5)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_8ebkj")
+texture = ExtResource("5_1yvmx")
 
-[node name="GameLogic" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("1_y2saq")
-
-[node name="GameContainer" type="PanelContainer" parent="GameLogic"]
-offset_left = 53.0
-offset_top = 120.0
-offset_right = 487.0
-offset_bottom = 554.0
-theme_override_styles/panel = SubResource("StyleBoxEmpty_y1l3x")
-metadata/_edit_lock_ = true
-
-[node name="MarginContainer" type="MarginContainer" parent="GameLogic/GameContainer"]
+[node name="BG" type="ColorRect" parent="UI/Control"]
+custom_minimum_size = Vector2(434, 434)
 layout_mode = 2
+offset_left = 53.0
+offset_top = 188.0
+offset_right = 487.0
+offset_bottom = 622.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.168943, 0.379533, 0.446845, 1)
+
+[node name="TopOverlay" type="CanvasLayer" parent="UI/Control"]
+layer = 11
+
+[node name="StartMenu" type="Control" parent="UI/Control/TopOverlay"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 53.0
+offset_top = 188.0
+offset_right = 487.0
+offset_bottom = 622.0
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/TopOverlay/StartMenu"]
+layout_mode = 0
+offset_right = 434.0
+offset_bottom = 434.0
+color = Color(0.00784314, 0.0156863, 0.0196078, 0.588235)
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Control/TopOverlay/StartMenu"]
+layout_mode = 0
+offset_right = 434.0
+offset_bottom = 434.0
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 80
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Control/TopOverlay/StartMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="TimedStartBtn" type="Button" parent="UI/Control/TopOverlay/StartMenu/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_otyuk")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/TopOverlay/StartMenu/MarginContainer/HBoxContainer/TimedStartBtn"]
+layout_mode = 0
+offset_top = 20.0
+offset_right = 161.0
+offset_bottom = 253.0
+theme = ExtResource("5_4atnw")
+alignment = 1
+
+[node name="timedTitle" type="Label" parent="UI/Control/TopOverlay/StartMenu/MarginContainer/HBoxContainer/TimedStartBtn/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 20
+text = "Play Timed"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="UI/Control/TopOverlay/StartMenu/MarginContainer/HBoxContainer/TimedStartBtn/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 1
+icon = ExtResource("6_wjgui")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="bestTime" type="Label" parent="UI/Control/TopOverlay/StartMenu/MarginContainer/HBoxContainer/TimedStartBtn/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+mouse_filter = 1
+text = "Best time
+%s"
+horizontal_alignment = 1
+
+[node name="NormalStartBtn" type="Button" parent="UI/Control/TopOverlay/StartMenu/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_otyuk")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/TopOverlay/StartMenu/MarginContainer/HBoxContainer/NormalStartBtn"]
+layout_mode = 0
+offset_top = 20.0
+offset_right = 162.0
+offset_bottom = 253.0
+theme = ExtResource("5_4atnw")
+
+[node name="normalTitle" type="Label" parent="UI/Control/TopOverlay/StartMenu/MarginContainer/HBoxContainer/NormalStartBtn/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 20
+text = "Play Normal"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="UI/Control/TopOverlay/StartMenu/MarginContainer/HBoxContainer/NormalStartBtn/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 1
+icon = ExtResource("7_ujte2")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="bestGuesses" type="Label" parent="UI/Control/TopOverlay/StartMenu/MarginContainer/HBoxContainer/NormalStartBtn/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+mouse_filter = 1
+text = "Lowest Guesses
+%s"
+horizontal_alignment = 1
+
+[node name="HelpMenu" type="Control" parent="UI/Control/TopOverlay"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/Control/TopOverlay/HelpMenu"]
+offset_right = 1080.0
+offset_bottom = 1350.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_kvcou")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="Label" type="Label" parent="UI/Control/TopOverlay/HelpMenu"]
+offset_left = 330.0
+offset_top = 200.0
+offset_right = 443.0
+offset_bottom = 228.0
+theme = ExtResource("1_3y1y3")
+text = "HELP"
+label_settings = SubResource("LabelSettings_j03ef")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="CloseBtn" type="Button" parent="UI/Control/TopOverlay"]
+offset_left = 500.0
+offset_top = 20.0
+offset_right = 516.0
+offset_bottom = 41.0
+theme = ExtResource("1_3y1y3")
+text = "X"
+
+[node name="HelpBtn" type="Button" parent="UI/Control/TopOverlay"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 36.0
+offset_bottom = 41.0
+theme = ExtResource("1_3y1y3")
+text = "?"
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Control"]
+layout_mode = 2
+offset_left = 53.0
+offset_top = 188.0
+offset_right = 487.0
+offset_bottom = 622.0
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 90
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 25
 
-[node name="CardGrid" type="GridContainer" parent="GameLogic/GameContainer/MarginContainer"]
-unique_name_in_owner = true
+[node name="CardGrid" type="GridContainer" parent="UI/Control/MarginContainer"]
 layout_mode = 2
 theme_override_constants/h_separation = 15
 theme_override_constants/v_separation = 15
 columns = 5
 
-[node name="ScoreLabel" type="Label" parent="."]
-unique_name_in_owner = true
-offset_left = 351.0
-offset_top = 141.0
-offset_right = 481.0
-offset_bottom = 188.0
-theme = ExtResource("2_4ls5g")
-text = "Score: %s"
-vertical_alignment = 1
-
-[node name="CloseBtn" type="Button" parent="."]
-offset_left = 78.0
-offset_top = 141.0
-offset_right = 179.0
-offset_bottom = 184.0
-theme = ExtResource("1_3y1y3")
-text = "Close"
-
-[node name="SFX" type="AudioStreamPlayer" parent="."]
-unique_name_in_owner = true
-bus = &"SFX"
-script = ExtResource("5_nj7bn")
-
-[connection signal="button_down" from="CloseBtn" to="GameLogic" method="_on_close_btn_button_down"]
+[connection signal="button_down" from="UI/Control/TopOverlay/CloseBtn" to="." method="_on_close_btn_button_down"]
+[connection signal="button_down" from="UI/Control/TopOverlay/HelpBtn" to="." method="_on_help_btn_button_down"]

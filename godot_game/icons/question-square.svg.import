@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgfufcnmd24wf"
-path="res://.godot/imported/ui_green_tetris.png-e1deb630cc9d4f30a4afa10cd5a5b37a.ctex"
+uid="uid://bedsc86ugpd5r"
+path="res://.godot/imported/question-square.svg-a7a6252a92492dc4d0276b0a1f1ddcfd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI stuff/Green Palette/ui_green_tetris.png"
-dest_files=["res://.godot/imported/ui_green_tetris.png-e1deb630cc9d4f30a4afa10cd5a5b37a.ctex"]
+source_file="res://icons/question-square.svg"
+dest_files=["res://.godot/imported/question-square.svg-a7a6252a92492dc4d0276b0a1f1ddcfd.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=10.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false
