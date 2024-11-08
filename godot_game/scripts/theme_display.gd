@@ -39,7 +39,8 @@ class UiThemeButton extends CustomTooltipButton:
 		
 		box2.bg_color = ui_theme.bg
 		self.add_theme_stylebox_override("pressed", box2)
-		self.add_theme_stylebox_override("focus", box2)
+		
+		#self.add_theme_stylebox_override("focus", box2)
 		button_group = btn_theme_group
 		update_locked()
 
@@ -57,6 +58,9 @@ class UiThemeButton extends CustomTooltipButton:
 		self.disabled = false if self.ui_theme.unlocked else not uid in unlocked_items
 		self.tooltip_string = ui_theme.hint if disabled else ""
 		self.text = "?" if self.disabled else self.ui_theme.theme_name
+		var box = self.get_theme_stylebox("pressed")
+		if not self.disabled:
+			self.add_theme_stylebox_override("focus", box)
 
 
 func _ready():

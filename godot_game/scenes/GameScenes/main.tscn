@@ -1647,7 +1647,6 @@ script = ExtResource("35_4io20")
 [node name="SettingsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 material = SubResource("ShaderMaterial_1s3b6")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -1752,6 +1751,21 @@ layout_mode = 2
 value = 0.0
 tick_count = 1
 bus_name = "SFX"
+
+[node name="ClippyBtn" type="Button" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(160, 52)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("42_c1jtf")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 20
+text = "Clippy Mode"
+script = ExtResource("18_2njxs")
+tooltip_string = "Double-click Creature to exit"
+direction = 3
+margin = 20
 
 [node name="MusicControls" type="Node2D" parent="UI/OptionsMenu/SettingsMenu"]
 visible = false
@@ -1885,6 +1899,7 @@ script = ExtResource("35_4io20")
 [node name="AmbienceMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 material = SubResource("ShaderMaterial_e5rr0")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -2340,6 +2355,7 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2/MasterMuted" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2/MasterMuted" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2/MusicMuted" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2/MusicMuted" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2/SFXMuted" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2/SFXMuted" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/ClippyBtn" to="Gameplay/ClippyArea" method="_on_clippy_btn_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MusicControls/PanelContainer/MarginContainer/VContainer/currentSong/Left" to="UI/OptionsMenu/SettingsMenu/MusicControls" method="_on_left_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MusicControls/PanelContainer/MarginContainer/VContainer/currentSong/Right" to="UI/OptionsMenu/SettingsMenu/MusicControls" method="_on_right_button_down"]
 [connection signal="pressed" from="UI/OptionsMenu/SettingsMenu/SaveButtons/Save" to="." method="_on_save_pressed"]

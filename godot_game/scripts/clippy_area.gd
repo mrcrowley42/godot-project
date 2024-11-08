@@ -110,3 +110,7 @@ func maximise() -> void:
 		creature.scale = start_scale * scale_factor
 	else:
 		window.size = start_size * scale_factor
+
+
+func _on_clippy_btn_button_down() -> void:
+	toggle_clippy_mode()
