@@ -1,28 +1,9 @@
 class_name MemoryGameLogic extends MiniGameLogic
 
-var selected_cards: Array[Card] = []
+var selected_cards: Array[MemoryCard] = []
 var player_score: int = 0
 var possible = Array(range(20))
 var complete: bool = false
-
-
-## Class that describes the cards (buttons) for memory.
-class Card extends Button:
-	var parent: MemoryGameLogic
-	var value: int
-	
-	func _init(parent_node, card_value):
-		self.parent = parent_node
-		self.value = card_value
-		self.theme = load("res://themes/action_btn.tres")
-		self.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		self.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	
-	func _pressed():
-		print("pressed")
-	
-	func flip_card():
-		print("flip")
 
 #func create_deck() -> Array:
 	#var deck: Array = []
