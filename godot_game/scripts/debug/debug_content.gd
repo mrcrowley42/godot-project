@@ -3,7 +3,6 @@ extends Control
 @onready var creature: Creature = %Creature
 @onready var ui = %UI_Theme_Manager
 @onready var stat_man = %StatusManager
-@onready var music_track = %MainMusic
 @onready var minigame_man: MinigameManager = %MinigameManager
 @onready var clippy_area: Button  = %ClippyArea
 @onready var background = %Background

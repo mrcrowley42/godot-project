@@ -1,4 +1,4 @@
-[gd_scene load_steps=132 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=117 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
@@ -37,7 +37,6 @@
 [ext_resource type="Script" path="res://scripts/options_menu.gd" id="32_wbwq3"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="33_1qhmu"]
 [ext_resource type="Script" path="res://scripts/opt_menu_back_btn.gd" id="35_4io20"]
-[ext_resource type="Script" path="res://scripts/music_controls.gd" id="35_8cohh"]
 [ext_resource type="Texture2D" uid="uid://pfr6wdx80m45" path="res://icons/volume-fill.svg" id="36_g2683"]
 [ext_resource type="Script" path="res://scripts/theme_display.gd" id="37_tokl0"]
 [ext_resource type="Script" path="res://scripts/mute_button.gd" id="37_xf1vk"]
@@ -61,27 +60,15 @@
 [ext_resource type="Shader" path="res://shaders/pattern_lines.gdshader" id="50_tajtf"]
 [ext_resource type="Texture2D" uid="uid://drv50ynifh37j" path="res://UI stuff/Green Palette/green_activities_button.png" id="51_7kyvm"]
 [ext_resource type="Texture2D" uid="uid://b5uf4jcvme855" path="res://UI stuff/Green Palette/green_settings_button.png" id="53_hpyyk"]
-[ext_resource type="Texture2D" uid="uid://cla3xqqt1r6wt" path="res://icons/shuffle.svg" id="53_jfg30"]
 [ext_resource type="Script" path="res://scripts/ambience_menu.gd" id="53_ubf3f"]
 [ext_resource type="Script" path="res://scripts/setting_button.gd" id="54_5bu15"]
-[ext_resource type="Texture2D" uid="uid://cpo8fgfds86sc" path="res://icons/arrow-counterclockwise.svg" id="54_le3gb"]
 [ext_resource type="PackedScene" uid="uid://b6wocr0vo5s4v" path="res://scenes/GameScenes/debug_content.tscn" id="55_0rbaa"]
 [ext_resource type="Theme" uid="uid://xmrqlvnsr0rg" path="res://themes/menu_btn_green.tres" id="55_qqo3v"]
-[ext_resource type="AudioStream" uid="uid://dcet1hpt70t42" path="res://music/perfection.mp3" id="56_0sjdm"]
 [ext_resource type="Theme" uid="uid://dvpqr6ekggufg" path="res://themes/menu_dropdown.tres" id="56_in74o"]
 [ext_resource type="Script" path="res://scripts/stat_bar.gd" id="57_ani8q"]
-[ext_resource type="Script" path="res://scripts/main_game_scripts/music_manager.gd" id="57_dawf5"]
 [ext_resource type="Shader" path="res://shaders/pattern_wavy.gdshader" id="57_qy3v8"]
-[ext_resource type="AudioStream" uid="uid://dwmn4dqcd6k4i" path="res://music/02 Hollywood Main Theme.mp3" id="58_tbnki"]
-[ext_resource type="AudioStream" uid="uid://dshoi5g671o7m" path="res://music/25 - Pizza & Bowling.mp3" id="59_06aow"]
-[ext_resource type="AudioStream" uid="uid://dnxx75ndliq7c" path="res://music/Esselfortium - memory=entryrrrr-.mp3" id="60_rpygf"]
-[ext_resource type="AudioStream" uid="uid://b1b1fwlrdpmcp" path="res://music/Heaven Pierce Her - ULTRAKILL- INFINITE HYPERDEATH - 01 The Fire Is Gone (for Piano, Saxophone and Trumpet).mp3" id="61_hukp3"]
-[ext_resource type="AudioStream" uid="uid://8ctfl381pnja" path="res://music/15 Seto's Memory.mp3" id="62_jbqd3"]
-[ext_resource type="AudioStream" uid="uid://ct8aoiuvdre5f" path="res://music/Aquatic Ambience [Restored].mp3" id="63_dqn1u"]
-[ext_resource type="AudioStream" uid="uid://f6qpehtbujr7" path="res://music/11 Fruit On Grass - Garden.mp3" id="64_gu8kv"]
 [ext_resource type="Script" path="res://scripts/sfx_man.gd" id="65_787cd"]
 [ext_resource type="AudioStream" uid="uid://cx28efsxtr7c" path="res://sound_effects/button_click_fast.mp3" id="67_nfa6o"]
-[ext_resource type="AudioStream" uid="uid://dat0sfue6jjr5" path="res://sound_effects/metal-pipe-falling-sound-effect-made-with-Voicemod.mp3" id="68_dnpii"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/popup_manager.gd" id="69_rkm2b"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/sound_scape_manager.gd" id="80_83777"]
 
@@ -304,12 +291,6 @@ shader_parameter/two_size = 10.0
 shader_parameter/two_opacity = 0.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wd2mi"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_a4t3j"]
-font_size = 30
-
-[sub_resource type="LabelSettings" id="LabelSettings_2tv6v"]
-font_size = 20
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e5rr0"]
 shader = ExtResource("50_tajtf")
@@ -1767,106 +1748,6 @@ tooltip_string = "Double-click Creature to exit"
 direction = 3
 margin = 20
 
-[node name="MusicControls" type="Node2D" parent="UI/OptionsMenu/SettingsMenu"]
-visible = false
-position = Vector2(102, 26)
-scale = Vector2(0.75, 0.75)
-script = ExtResource("35_8cohh")
-
-[node name="PanelContainer" type="PanelContainer" parent="UI/OptionsMenu/SettingsMenu/MusicControls"]
-offset_left = -100.0
-offset_top = 245.0
-offset_right = 407.0
-offset_bottom = 419.0
-theme = ExtResource("46_r0sdd")
-
-[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/SettingsMenu/MusicControls/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 8
-
-[node name="VContainer" type="VBoxContainer" parent="UI/OptionsMenu/SettingsMenu/MusicControls/PanelContainer/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 22
-
-[node name="MusicTitle" type="Label" parent="UI/OptionsMenu/SettingsMenu/MusicControls/PanelContainer/MarginContainer/VContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("19_3grg3")
-theme_override_font_sizes/font_size = 48
-text = "Music"
-label_settings = SubResource("LabelSettings_a4t3j")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="currentSong" type="HBoxContainer" parent="UI/OptionsMenu/SettingsMenu/MusicControls/PanelContainer/MarginContainer/VContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_constants/separation = 20
-alignment = 1
-
-[node name="Left" type="Button" parent="UI/OptionsMenu/SettingsMenu/MusicControls/PanelContainer/MarginContainer/VContainer/currentSong"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-theme = ExtResource("33_1qhmu")
-theme_override_font_sizes/font_size = 30
-text = "<"
-script = ExtResource("18_2njxs")
-tooltip_string = "<insert prev song>"
-direction = 3
-margin = 14
-
-[node name="Label" type="Label" parent="UI/OptionsMenu/SettingsMenu/MusicControls/PanelContainer/MarginContainer/VContainer/currentSong"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("19_3grg3")
-text = "current song playing
-by me"
-label_settings = SubResource("LabelSettings_2tv6v")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Right" type="Button" parent="UI/OptionsMenu/SettingsMenu/MusicControls/PanelContainer/MarginContainer/VContainer/currentSong"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-theme = ExtResource("33_1qhmu")
-theme_override_font_sizes/font_size = 30
-text = ">"
-script = ExtResource("18_2njxs")
-tooltip_string = "<insert next song>"
-direction = 3
-margin = 14
-
-[node name="MusicSettings" type="HBoxContainer" parent="UI/OptionsMenu/SettingsMenu/MusicControls/PanelContainer/MarginContainer/VContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 20
-
-[node name="Shuffle" type="Button" parent="UI/OptionsMenu/SettingsMenu/MusicControls/PanelContainer/MarginContainer/VContainer/MusicSettings"]
-custom_minimum_size = Vector2(60, 40)
-layout_mode = 2
-theme = ExtResource("42_c1jtf")
-toggle_mode = true
-
-[node name="Sprite2D" type="Sprite2D" parent="UI/OptionsMenu/SettingsMenu/MusicControls/PanelContainer/MarginContainer/VContainer/MusicSettings/Shuffle"]
-position = Vector2(19, 8)
-scale = Vector2(0.7, 0.7)
-texture = ExtResource("53_jfg30")
-centered = false
-
-[node name="Loop" type="Button" parent="UI/OptionsMenu/SettingsMenu/MusicControls/PanelContainer/MarginContainer/VContainer/MusicSettings"]
-custom_minimum_size = Vector2(60, 35)
-layout_mode = 2
-theme = ExtResource("42_c1jtf")
-toggle_mode = true
-
-[node name="Sprite2D" type="Sprite2D" parent="UI/OptionsMenu/SettingsMenu/MusicControls/PanelContainer/MarginContainer/VContainer/MusicSettings/Loop"]
-position = Vector2(19, 8)
-scale = Vector2(0.7, 0.7)
-texture = ExtResource("54_le3gb")
-centered = false
-
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/SettingsMenu"]
 position = Vector2(-50, -130)
 
@@ -2255,14 +2136,6 @@ unique_name_in_owner = true
 
 [node name="Audio" type="Node" parent="."]
 
-[node name="MainMusic" type="AudioStreamPlayer" parent="Audio" groups=["settings_data"]]
-unique_name_in_owner = true
-stream = ExtResource("56_0sjdm")
-autoplay = true
-bus = &"Music"
-script = ExtResource("57_dawf5")
-music_selection = Array[AudioStreamMP3]([ExtResource("58_tbnki"), ExtResource("59_06aow"), ExtResource("60_rpygf"), ExtResource("61_hukp3"), ExtResource("56_0sjdm"), ExtResource("62_jbqd3"), ExtResource("63_dqn1u"), ExtResource("64_gu8kv")])
-
 [node name="SFX" type="AudioStreamPlayer" parent="Audio"]
 unique_name_in_owner = true
 max_polyphony = 2
@@ -2280,13 +2153,6 @@ bus = &"SFX"
 unique_name_in_owner = true
 stream = ExtResource("67_nfa6o")
 volume_db = -1.0
-max_polyphony = 2
-bus = &"SFX"
-
-[node name="PIPE" type="AudioStreamPlayer" parent="Audio"]
-unique_name_in_owner = true
-stream = ExtResource("68_dnpii")
-volume_db = 8.0
 max_polyphony = 2
 bus = &"SFX"
 
@@ -2356,8 +2222,6 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2/MusicMuted" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2/MusicMuted" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2/SFXMuted" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2/SFXMuted" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/ClippyBtn" to="Gameplay/ClippyArea" method="_on_clippy_btn_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MusicControls/PanelContainer/MarginContainer/VContainer/currentSong/Left" to="UI/OptionsMenu/SettingsMenu/MusicControls" method="_on_left_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MusicControls/PanelContainer/MarginContainer/VContainer/currentSong/Right" to="UI/OptionsMenu/SettingsMenu/MusicControls" method="_on_right_button_down"]
 [connection signal="pressed" from="UI/OptionsMenu/SettingsMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/SaveButtons/Back" to="UI/OptionsMenu/SettingsMenu/SaveButtons/Back" method="_on_button_down"]
 [connection signal="visibility_changed" from="UI/OptionsMenu/AmbienceMenu" to="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer" method="_on_ambience_menu_visibility_changed"]
@@ -2370,4 +2234,3 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/NavigationButtons/FoodButton" to="UI/NavigationButtons/FoodButton" method="_on_button_down"]
 [connection signal="button_down" from="UI/NavigationButtons/ActButton" to="UI/NavigationButtons/ActButton" method="_on_button_down"]
 [connection signal="button_down" from="UI/NavigationButtons/SettingButton" to="UI/NavigationButtons/SettingButton" method="_on_button_down"]
-[connection signal="finished" from="Audio/MainMusic" to="Audio/MainMusic" method="_on_finished"]
