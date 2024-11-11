@@ -6,6 +6,7 @@ class_name MemoryGame extends Node2D
 @onready var top_overlay: CanvasLayer = find_child("TopOverlay")
 @onready var start_menu: Control = find_child("StartMenu")
 @onready var help_menu: Control = find_child("HelpMenu")
+@onready var card_grid: GridContainer = find_child("CardGrid")
 
 @onready var m_logic: MemoryGameLogic = find_child("MemoryGameLogic")
 
@@ -30,10 +31,12 @@ func show_start_menu():
 
 
 func _on_timed_start_btn_button_down() -> void:
-	pass # Replace with function body.
+	start_menu.hide()
+	m_logic.start_timed_game()
 
 func _on_normal_start_btn_button_down() -> void:
-	pass # Replace with function body.
+	start_menu.hide()
+	m_logic.start_normal_game()
 
 func _on_help_btn_button_down() -> void:
 	%SFX.play_sound("click")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b8omc42lpwuae"]
+[gd_scene load_steps=5 format=3 uid="uid://y8ijklpaniyw"]
 
 [ext_resource type="Script" path="res://scripts/minigames/memory_match/memory_card.gd" id="1_7mrcx"]
-[ext_resource type="Theme" uid="uid://cryi3bahjh0kq" path="res://themes/memory_card_back.tres" id="1_wrp5m"]
-[ext_resource type="Theme" uid="uid://b3pocr1dif1xj" path="res://themes/memory_card_front.tres" id="2_rv0qs"]
+[ext_resource type="Theme" uid="uid://dnykmrdu76wkh" path="res://themes/memory_card_back.tres" id="1_wrp5m"]
+[ext_resource type="Theme" uid="uid://eaas0ilvpid" path="res://themes/memory_card_front.tres" id="2_rv0qs"]
+[ext_resource type="Texture2D" uid="uid://b0hidfjq3k3sf" path="res://images/memory_match/memory_square.png" id="4_gacc6"]
 
 [node name="Card" type="Node2D"]
 script = ExtResource("1_7mrcx")
@@ -13,7 +14,10 @@ offset_bottom = 72.0
 theme = ExtResource("1_wrp5m")
 
 [node name="CardFront" type="Button" parent="."]
-visible = false
+texture_filter = 1
 offset_right = 72.0
 offset_bottom = 72.0
 theme = ExtResource("2_rv0qs")
+icon = ExtResource("4_gacc6")
+icon_alignment = 1
+expand_icon = true

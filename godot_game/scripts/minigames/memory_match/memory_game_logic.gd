@@ -1,9 +1,22 @@
 class_name MemoryGameLogic extends MiniGameLogic
 
-var selected_cards: Array[MemoryCard] = []
-var player_score: int = 0
-var possible = Array(range(20))
-var complete: bool = false
+@onready var card_grid: GridContainer = owner.find_child("CardGrid")
+
+
+func start_normal_game():
+	create_game_board()
+
+func start_timed_game():
+	create_game_board()
+
+func create_game_board():
+	var deck: Array = Array(range(10)) + Array(range(10))
+	deck.shuffle()
+	
+	for card_val in deck:
+		var card: MemoryCard = MemoryCard.new()
+		card.init(self, card_val)
+		card_grid.add_child(card)
 
 #func create_deck() -> Array:
 	#var deck: Array = []

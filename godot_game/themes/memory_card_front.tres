@@ -1,52 +1,40 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://b3pocr1dif1xj"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://eaas0ilvpid"]
 
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="1_848ib"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ylq4"]
-bg_color = Color(0.1518, 0.449727, 0.46, 0.631373)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.3596, 0.62, 0.59396, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ne22y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f27tx"]
-bg_color = Color(0.399067, 0.246, 0.82, 1)
+bg_color = Color(0.588179, 0.112821, 0.585286, 1)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
-border_color = Color(0.78416, 0.7308, 0.87, 1)
+border_color = Color(0.917654, 0.623264, 0.904114, 1)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_golou"]
-bg_color = Color(0.453187, 0.3198, 0.82, 1)
+bg_color = Color(0.679777, 0.156359, 0.676215, 1)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
-border_color = Color(0.686208, 0.568435, 0.870858, 1)
+border_color = Color(0.891614, 0.476683, 0.878192, 1)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nemfa"]
-bg_color = Color(0.454902, 0.321569, 0.819608, 1)
+bg_color = Color(0.678431, 0.156863, 0.67451, 1)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
-border_color = Color(0.784314, 0.729412, 0.870588, 1)
+border_color = Color(0.917647, 0.623529, 0.905882, 1)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
@@ -61,7 +49,6 @@ Button/colors/icon_hover_color = Color(1, 1, 1, 1)
 Button/colors/icon_normal_color = Color(0.8928, 0.96, 0.9432, 1)
 Button/colors/icon_pressed_color = Color(0.7138, 0.86, 0.83807, 1)
 Button/constants/icon_max_width = 120
-Button/styles/disabled = SubResource("StyleBoxFlat_8ylq4")
 Button/styles/focus = SubResource("StyleBoxEmpty_ne22y")
 Button/styles/hover = SubResource("StyleBoxFlat_f27tx")
 Button/styles/normal = SubResource("StyleBoxFlat_golou")

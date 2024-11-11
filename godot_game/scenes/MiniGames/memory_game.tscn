@@ -50,12 +50,13 @@ offset_right = 487.0
 offset_bottom = 621.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.168943, 0.379533, 0.446845, 1)
+color = Color(0.171871, 0.344478, 0.599564, 1)
 
 [node name="TopOverlay" type="CanvasLayer" parent="UI/Control"]
 layer = 11
 
 [node name="StartMenu" type="Control" parent="UI/Control/TopOverlay"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 53.0
@@ -120,7 +121,7 @@ layout_mode = 2
 size_flags_vertical = 10
 mouse_filter = 1
 text = "Best time
-%s"
+%s secs"
 horizontal_alignment = 1
 
 [node name="NormalStartBtn" type="Button" parent="UI/Control/TopOverlay/StartMenu/MarginContainer/HBoxContainer"]
@@ -215,7 +216,7 @@ offset_top = 241.0
 offset_right = 487.0
 offset_bottom = 622.0
 theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 90
+theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 25
 
