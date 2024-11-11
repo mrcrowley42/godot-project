@@ -19,9 +19,9 @@ item = ExtResource("3_wvsbt")
 [resource]
 script = ExtResource("2_4q0xg")
 max_hp = 505
-max_water = 500
-max_food = 500
-max_fun = 500
+max_water = 501
+max_food = 499
+max_fun = 502
 sprite_frames = ExtResource("3_hnmtc")
 notification_position = Vector2(-40, -105)
 cosmetic_positions = Array[ExtResource("1_yyhlj")]([SubResource("Resource_1jfam"), SubResource("Resource_p45da")])

@@ -31,11 +31,12 @@ extends Node
 @onready var notif_icon = %Icon
 @onready var STAT = Creature.Stat
 @onready var cooldown_timer = Timer.new()
-@onready var water_threshold = warning_threshold * creature.max_water
-@onready var food_threshold = warning_threshold * creature.max_food
-@onready var fun_threshold = warning_threshold * creature.max_fun
-@onready var hp_threshold = warning_threshold * creature.max_hp
+@onready var water_threshold = 0
+@onready var food_threshold = 0
+@onready var fun_threshold = 0
+@onready var hp_threshold = 0
 @onready var reg_volume = notif_sounds.volume_db
+@onready var pain_threshold = 0
 @onready var stat_files = {STAT.HP: [low_hp, low_hp_img], STAT.WATER: [low_water, low_water_img],
 	STAT.FOOD: [low_food, low_food_img], STAT.FUN: [low_fun, low_fun_img]}
 
@@ -53,8 +54,16 @@ func _ready() -> void:
 func _notification(noti: int) -> void:
 	if noti == Globals.NOTIFICATION_CREATURE_IS_LOADED:
 		notification_bubble.position = creature.creature.notification_position
+		pain_threshold = warning_threshold / 2 * creature.max_hp
+		water_threshold = warning_threshold * creature.max_water
+		food_threshold = warning_threshold * creature.max_food
+		fun_threshold = warning_threshold * creature.max_fun
+		hp_threshold = warning_threshold * creature.max_hp
 
 func _process(_delta) -> void:
+	if creature.hp <= pain_threshold:
+		%STAHP.play_random()
+	
 	notification_bubble.visible = notif_sounds.playing
 	if on_cooldown:
 		return
