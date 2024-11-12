@@ -1794,7 +1794,7 @@ layout_mode = 2
 size_flags_vertical = 1
 theme_override_fonts/font = ExtResource("19_3grg3")
 theme_override_font_sizes/font_size = 20
-text = "Play sfx in clippy-mode"
+text = "Mute SFX in Clippy-Mode"
 vertical_alignment = 1
 
 [node name="SfxClippyBox" type="CheckBox" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer4"]
