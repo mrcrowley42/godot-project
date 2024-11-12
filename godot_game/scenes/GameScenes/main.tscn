@@ -1645,7 +1645,7 @@ theme_override_constants/margin_bottom = 20
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/SettingsMenu/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 24
+theme_override_constants/separation = 20
 
 [node name="Title" type="Button" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -1780,6 +1780,29 @@ grow_vertical = 2
 text = "50"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="GridContainer4" type="GridContainer" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="EnableSfxLabel" type="Label" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer4"]
+custom_minimum_size = Vector2(272, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 20
+text = "Play sfx in clippy-mode"
+vertical_alignment = 1
+
+[node name="SfxClippyBox" type="CheckBox" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer4"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/icon_max_width = 50
 
 [node name="ClippyBtn" type="Button" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(160, 52)
