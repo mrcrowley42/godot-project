@@ -1,4 +1,4 @@
-[gd_scene load_steps=117 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=119 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
@@ -59,9 +59,11 @@
 [ext_resource type="Script" path="res://scripts/nav_button.gd" id="50_0qet7"]
 [ext_resource type="Shader" path="res://shaders/pattern_lines.gdshader" id="50_tajtf"]
 [ext_resource type="Texture2D" uid="uid://drv50ynifh37j" path="res://UI stuff/Green Palette/green_activities_button.png" id="51_7kyvm"]
+[ext_resource type="Theme" uid="uid://b0xcqhw28px6h" path="res://themes/menu_value_range.tres" id="53_buhev"]
 [ext_resource type="Texture2D" uid="uid://b5uf4jcvme855" path="res://UI stuff/Green Palette/green_settings_button.png" id="53_hpyyk"]
 [ext_resource type="Script" path="res://scripts/ambience_menu.gd" id="53_ubf3f"]
 [ext_resource type="Script" path="res://scripts/setting_button.gd" id="54_5bu15"]
+[ext_resource type="Script" path="res://scripts/opacity_slider.gd" id="54_rp5b8"]
 [ext_resource type="PackedScene" uid="uid://b6wocr0vo5s4v" path="res://scenes/GameScenes/debug_content.tscn" id="55_0rbaa"]
 [ext_resource type="Theme" uid="uid://xmrqlvnsr0rg" path="res://themes/menu_btn_green.tres" id="55_qqo3v"]
 [ext_resource type="Theme" uid="uid://dvpqr6ekggufg" path="res://themes/menu_dropdown.tres" id="56_in74o"]
@@ -487,9 +489,10 @@ metadata/_edit_lock_ = true
 [node name="NotificationLayer" type="CanvasLayer" parent="."]
 layer = 0
 
-[node name="NotificationManager" type="Node" parent="NotificationLayer"]
+[node name="NotificationManager" type="Node" parent="NotificationLayer" node_paths=PackedStringArray("clippy_area")]
 unique_name_in_owner = true
 script = ExtResource("69_rkm2b")
+clippy_area = NodePath("../../Gameplay/ClippyArea")
 
 [node name="GrowUpBtn" type="NinePatchRect" parent="NotificationLayer/NotificationManager"]
 anchors_preset = -1
@@ -1635,10 +1638,10 @@ metadata/_edit_lock_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/SettingsMenu"]
 layout_mode = 2
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 16
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/SettingsMenu/MarginContainer"]
 layout_mode = 2
@@ -1732,6 +1735,51 @@ layout_mode = 2
 value = 0.0
 tick_count = 1
 bus_name = "SFX"
+
+[node name="GridContainer3" type="GridContainer" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="OpacityLabel" type="Label" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer3"]
+custom_minimum_size = Vector2(126, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 20
+text = "Clippy Opacity"
+vertical_alignment = 1
+
+[node name="OpacitySlider" type="HSlider" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer3" node_paths=PackedStringArray("clippy_area")]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("53_buhev")
+min_value = 0.3
+max_value = 1.0
+step = 0.01
+value = 0.5
+script = ExtResource("54_rp5b8")
+clippy_area = NodePath("../../../../../../../Gameplay/ClippyArea")
+
+[node name="Value" type="Label" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer3/OpacitySlider"]
+modulate = Color(1, 1, 1, 0.639216)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -9.5
+offset_top = -7.5
+offset_right = 9.5
+offset_bottom = 7.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "50"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ClippyBtn" type="Button" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(160, 52)
@@ -2221,6 +2269,7 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2/MasterMuted" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2/MasterMuted" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2/MusicMuted" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2/MusicMuted" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2/SFXMuted" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2/SFXMuted" method="_on_button_down"]
+[connection signal="value_changed" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer3/OpacitySlider" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer3/OpacitySlider" method="_on_value_changed"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/ClippyBtn" to="Gameplay/ClippyArea" method="_on_clippy_btn_button_down"]
 [connection signal="pressed" from="UI/OptionsMenu/SettingsMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/SaveButtons/Back" to="UI/OptionsMenu/SettingsMenu/SaveButtons/Back" method="_on_button_down"]

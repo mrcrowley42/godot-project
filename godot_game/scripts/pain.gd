@@ -8,7 +8,6 @@ var on_cooldown: bool = false
 
 func play_random() -> void:
 	if not on_cooldown:
-		print("htes")
 		## Play random sound from [param sounds] pool.
 		var audio = sounds.pick_random()
 		self.stream = audio

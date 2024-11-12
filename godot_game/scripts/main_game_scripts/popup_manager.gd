@@ -3,7 +3,7 @@ class_name NotificationManager extends ScriptNode
 
 @onready var toast = preload("res://scenes/UiScenes/basic_notification.tscn")
 @onready var grow_up_btn: NinePatchRect = find_child("GrowUpBtn")
-
+@export var clippy_area: Node
 var child_count: int
 
 func _ready():
@@ -14,6 +14,8 @@ func _ready():
 
 ## Creates a toast notification with the passed string.
 func new_notification(message: String, type: PackedScene=toast) -> void:
+	if clippy_area.clippy:
+		return
 	# Create an instance so we can grab the size of the popup.
 	var toast2 = type.instantiate()
 	# spawn notification in the horizontal centre and just above the top of screen.
