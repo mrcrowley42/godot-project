@@ -13,7 +13,7 @@ extends Button
 @onready var clippy_offset := -self.position
 @onready var ui = %UI
 @onready var bg = %BGCanvasLayer
-
+@onready var notif_layer = find_parent("Game").find_child("NotificationLayer")
 var dragging: bool = false
 var offset = Vector2(0, 0)
 var clippy: bool = false
@@ -64,6 +64,11 @@ func toggle_clippy_mode() -> void:
 	window.always_on_top = clippy
 	ui.visible = !clippy
 	bg.visible = !clippy
+	
+	# Hide notifications already on screen when going into clippy mode
+	for child in notif_layer.get_child(0).get_children():
+		if child is PanelContainer:
+			child.visible = !clippy
 
 	if clippy:
 		# Shrink window size and shift canvas to keep focus on creature.
