@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://y8ijklpaniyw"]
+[gd_scene load_steps=6 format=3 uid="uid://y8ijklpaniyw"]
 
 [ext_resource type="Script" path="res://scripts/minigames/memory_match/memory_card.gd" id="1_7mrcx"]
 [ext_resource type="Theme" uid="uid://dnykmrdu76wkh" path="res://themes/memory_card_back.tres" id="1_wrp5m"]
 [ext_resource type="Theme" uid="uid://eaas0ilvpid" path="res://themes/memory_card_front.tres" id="2_rv0qs"]
+[ext_resource type="Theme" uid="uid://ccdkgien6bc3c" path="res://themes/memory_card_locked.tres" id="3_1xgy6"]
 [ext_resource type="Texture2D" uid="uid://b0hidfjq3k3sf" path="res://images/memory_match/memory_square.png" id="4_gacc6"]
 
 [node name="Card" type="Control"]
@@ -20,6 +21,13 @@ theme = ExtResource("1_wrp5m")
 theme_override_colors/font_color = Color(1, 1, 1, 0.501961)
 theme_override_font_sizes/font_size = 35
 text = "?"
+
+[node name="CardLocked" type="Button" parent="."]
+layout_mode = 0
+offset_right = 72.0
+offset_bottom = 72.0
+pivot_offset = Vector2(36, 36)
+theme = ExtResource("3_1xgy6")
 
 [node name="CardFront" type="Button" parent="."]
 visible = false

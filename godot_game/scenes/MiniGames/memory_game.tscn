@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://d3e1mocbpq7hp"]
+[gd_scene load_steps=16 format=3 uid="uid://d3e1mocbpq7hp"]
 
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="1_3y1y3"]
 [ext_resource type="Script" path="res://scripts/minigames/memory_match/memory_game.gd" id="1_ckjye"]
@@ -7,11 +7,25 @@
 [ext_resource type="Theme" uid="uid://kpqilwsnepqa" path="res://themes/nothing.tres" id="5_4atnw"]
 [ext_resource type="Script" path="res://scripts/sfx_man.gd" id="5_nj7bn"]
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="5_otyuk"]
+[ext_resource type="Shader" path="res://shaders/pattern_checker.gdshader" id="5_ymqga"]
 [ext_resource type="Texture2D" uid="uid://en8015c4tbgw" path="res://icons/stopwatch.svg" id="6_wjgui"]
 [ext_resource type="Texture2D" uid="uid://bedsc86ugpd5r" path="res://icons/question-square.svg" id="7_ujte2"]
 [ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="9_kvcou"]
 [ext_resource type="Theme" uid="uid://bsd1dkhc13v47" path="res://themes/plain.tres" id="11_kn5wa"]
 [ext_resource type="Texture2D" uid="uid://d4t12xgr5bjg" path="res://UI stuff/Green Palette/ui_green_box_inverted.png" id="12_pdrc8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8bfqs"]
+shader = ExtResource("5_ymqga")
+shader_parameter/bg_col = Color(0.448346, 0.238343, 0.540524, 1)
+shader_parameter/shift_one_right = false
+shader_parameter/one_col = Color(0.423065, 0.000124129, 0.423062, 1)
+shader_parameter/one_speed = 0.02
+shader_parameter/one_size = 10.0
+shader_parameter/one_opacity = 0.2
+shader_parameter/two_col = Color(0.01, 0, 0.06, 1)
+shader_parameter/two_speed = -0.02
+shader_parameter/two_size = 10.0
+shader_parameter/two_opacity = 0.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_j03ef"]
 font_size = 24
@@ -42,6 +56,7 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_1yvmx")
 
 [node name="BG" type="ColorRect" parent="UI/Control"]
+material = SubResource("ShaderMaterial_8bfqs")
 custom_minimum_size = Vector2(434, 380)
 layout_mode = 2
 offset_left = 53.0

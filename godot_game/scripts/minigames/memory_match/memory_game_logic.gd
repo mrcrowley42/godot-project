@@ -21,9 +21,9 @@ func start_timed_game():
 ## spawn cards & setup card grid
 func create_game_board():
 	await get_tree().create_timer(.1).timeout
-	#var deck: Array = Array(range(10)) + Array(range(10))
-	var deck = [1, 1, 1, 1, 1, 1 ,1 ,1 ,1, 1,
-				1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+	var deck: Array = Array(range(10)) + Array(range(10))
+	#var deck = [1, 1, 1, 1, 1, 1 ,1 ,1 ,1, 1,
+				#1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 	deck.shuffle()
 	
 	var spawn_timers = [null]
@@ -56,13 +56,11 @@ func create_game_board():
 	card_grid.columns = COLUMNS
 
 func card_flipped(card: MemoryCard):
-	print(card)
 	card_b = card if card_a != null else null
 	card_a = card if card_a == null else card_a
 	
 	# compare values
 	if card_a && card_b:
-		can_interact = false
 		await get_tree().create_timer(.8).timeout
 		if card_a.card_value != card_b.card_value:
 			card_a.flip_card()
@@ -71,7 +69,6 @@ func card_flipped(card: MemoryCard):
 			card_a.lock_card_in()
 			card_b.lock_card_in()
 		card_a = null; card_b = null;
-	can_interact = true
 
 #func create_deck() -> Array:
 	#var deck: Array = []
