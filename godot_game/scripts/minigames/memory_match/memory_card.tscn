@@ -5,15 +5,23 @@
 [ext_resource type="Theme" uid="uid://eaas0ilvpid" path="res://themes/memory_card_front.tres" id="2_rv0qs"]
 [ext_resource type="Texture2D" uid="uid://b0hidfjq3k3sf" path="res://images/memory_match/memory_square.png" id="4_gacc6"]
 
-[node name="Card" type="Node2D"]
+[node name="Card" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+pivot_offset = Vector2(36, 36)
 script = ExtResource("1_7mrcx")
 
 [node name="CardBack" type="Button" parent="."]
 offset_right = 72.0
 offset_bottom = 72.0
+pivot_offset = Vector2(36, 36)
 theme = ExtResource("1_wrp5m")
+theme_override_colors/font_color = Color(1, 1, 1, 0.501961)
+theme_override_font_sizes/font_size = 35
+text = "?"
 
 [node name="CardFront" type="Button" parent="."]
+visible = false
 texture_filter = 1
 offset_right = 72.0
 offset_bottom = 72.0
@@ -21,3 +29,5 @@ theme = ExtResource("2_rv0qs")
 icon = ExtResource("4_gacc6")
 icon_alignment = 1
 expand_icon = true
+
+[connection signal="button_down" from="CardBack" to="." method="_on_card_back_button_down"]

@@ -47,7 +47,7 @@ layout_mode = 2
 offset_left = 53.0
 offset_top = 241.0
 offset_right = 487.0
-offset_bottom = 621.0
+offset_bottom = 622.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.171871, 0.344478, 0.599564, 1)
@@ -215,15 +215,14 @@ offset_left = 53.0
 offset_top = 241.0
 offset_right = 487.0
 offset_bottom = 622.0
-theme_override_constants/margin_left = 25
+theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 25
+theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 25
 
 [node name="CardGrid" type="GridContainer" parent="UI/Control/MarginContainer"]
+layout_direction = 2
 layout_mode = 2
-theme_override_constants/h_separation = 15
-theme_override_constants/v_separation = 15
 columns = 5
 
 [node name="ScoreContainer" type="NinePatchRect" parent="UI/Control"]

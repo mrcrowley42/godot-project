@@ -1,4 +1,4 @@
-class_name MemoryCard extends Node2D
+class_name MemoryCard extends Control
 
 @onready var back: Button = find_child("CardBack")
 @onready var front: Button = find_child("CardFront")
@@ -16,18 +16,47 @@ var VALUE_TO_IMAGE = {
 	9: load("res://images/memory_match/memory_triangle.png"),
 }
 
+const LARGE_SCALE = Vector2(1.1, 1.1)
+
 var parent: MemoryGameLogic
 var card_value: int
+var is_flipped: bool = false
 
 
 func _ready() -> void:
-	visible = false
+	visible = true
+	front.visible = false
+	back.visible = false
 
-func init(parent_node: MemoryGameLogic, value: int):
+func init(parent_node: MemoryGameLogic, value: int, timer: Timer = null):
 	self.parent = parent_node
 	self.card_value = value
-	
 	front.icon = VALUE_TO_IMAGE[value]
+	
+	if timer != null:
+		timer.connect("timeout", place_card)
+	else:
+		place_card()
 
+func place_card():
+	back.visible = true
+	back.scale = LARGE_SCALE
+	Globals.tween(back, "scale", Vector2(1, 1), 0., .3)
+
+## flip card bool & animation
 func flip_card():
-	pass
+	Globals.tween(self, "scale", LARGE_SCALE, 0., .3)
+	
+	await get_tree().create_timer(.1).timeout
+	Globals.tween(self, "scale", Vector2(0, 1), 0., .3)
+	
+	await get_tree().create_timer(.15).timeout
+	back.visible = !back.visible
+	front.visible = !front.visible
+	is_flipped = front.visible
+	Globals.tween(self, "scale", Vector2(1, 1), 0., .3)
+	
+	Globals.tween(self, "scale", Vector2(1, 1), 0., .3)
+
+func _on_card_back_button_down() -> void:
+	flip_card()

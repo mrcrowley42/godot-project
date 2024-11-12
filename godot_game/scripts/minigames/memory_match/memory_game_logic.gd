@@ -1,6 +1,12 @@
 class_name MemoryGameLogic extends MiniGameLogic
 
+@onready var base_mem_card = preload("res://scripts/minigames/memory_match/memory_card.tscn")
 @onready var card_grid: GridContainer = owner.find_child("CardGrid")
+
+const COLUMNS = 5;
+const ROWS = 4;
+
+var card_deck: Array[MemoryCard] = []
 
 
 func start_normal_game():
@@ -9,14 +15,40 @@ func start_normal_game():
 func start_timed_game():
 	create_game_board()
 
+## spawn cards & setup card grid
 func create_game_board():
+	await get_tree().create_timer(.1).timeout
 	var deck: Array = Array(range(10)) + Array(range(10))
 	deck.shuffle()
 	
+	var spawn_timers = [null]
+	for inx in range(7):
+		var t: Timer = Timer.new()
+		t.one_shot = true
+		t.autostart = true
+		t.wait_time = .03 * (inx + 1)
+		add_child(t)
+		spawn_timers.append(t)
+	
+	# spawn cards in
+	var i = 0
+	var on_row = 0
 	for card_val in deck:
-		var card: MemoryCard = MemoryCard.new()
-		card.init(self, card_val)
+		var timer_inx = (i % COLUMNS) + on_row
+		var card: MemoryCard = base_mem_card.instantiate()
 		card_grid.add_child(card)
+		card.init(self, card_val, spawn_timers[timer_inx])
+		card_deck.append(card)
+		i += 1
+		@warning_ignore("integer_division")  # shut up
+		on_row = i / COLUMNS
+	
+	# set spacing of the card grid
+	var card_dim: Vector2 = card_deck[0].front.size
+	var remainder: Vector2 = card_grid.size - Vector2(card_dim.x * COLUMNS, card_dim.y * ROWS)
+	card_grid["theme_override_constants/h_separation"] = card_dim.x + remainder.x / (COLUMNS-1)
+	card_grid["theme_override_constants/v_separation"] = card_dim.y + remainder.y / (ROWS-1)
+	card_grid.columns = COLUMNS
 
 #func create_deck() -> Array:
 	#var deck: Array = []
