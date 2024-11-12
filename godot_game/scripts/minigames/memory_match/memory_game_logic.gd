@@ -19,6 +19,7 @@ var card_a: MemoryCard = null
 var card_b: MemoryCard = null
 
 var is_timed_game: bool = false
+var finished: bool = false
 
 var card_pairs_completed: int = 0
 var guesses_count: int = 0
@@ -27,23 +28,28 @@ var game_start_time: float = 0.
 
 
 func start_normal_game():
-	guesses_count = 0
-	is_timed_game = false
 	create_game_board()
-	update_score_label()
+	setup_values(false)
 
 func start_timed_game():
-	game_time = 0.
-	is_timed_game = true
 	create_game_board()
+	setup_values(true)
+
+func setup_values(is_timed: bool):
+	guesses_count = 0
+	game_time = 0.
+	game_start_time = 0.
+	card_pairs_completed = 0
+	is_timed_game = is_timed
+	finished = false
 	update_score_label()
 
 ## spawn cards & setup card grid
 func create_game_board():
 	await get_tree().create_timer(.15).timeout
-	var deck: Array = Array(range(10)) + Array(range(10))
-	#var deck = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-				#1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+	#var deck: Array = Array(range(10)) + Array(range(10))
+	var deck = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+				1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 	deck.shuffle()
 	
 	var spawn_timers = [null]
@@ -80,6 +86,7 @@ func card_flipped(card: MemoryCard):
 	if game_start_time == 0.:
 		game_start_time = Time.get_unix_time_from_system()
 	
+	# assign selected cards
 	card_b = card if card_a != null else null
 	card_a = card if card_a == null else card_a
 	
@@ -108,11 +115,12 @@ func update_score_label():
 	score_label.text = SCORE_LABEL_TEXT[is_timed_game] % score
 
 func _process(_delta: float) -> void:
-	if is_timed_game && game_start_time > 0.:
+	if !finished && is_timed_game && game_start_time > 0.:
 		game_time = Time.get_unix_time_from_system() - game_start_time
 		update_score_label()
 
 func finish_game():
+	finished = true
 	pass
 
 #func create_deck() -> Array:
