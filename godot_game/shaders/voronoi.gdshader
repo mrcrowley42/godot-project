@@ -23,10 +23,10 @@ float hash12(vec2 p) {
 }
 
 // 轨迹半径
-float rcel(vec2 ip){return mix(.25,.45, hash12(ip+.2));}                                      
+float rcel(vec2 ip){return mix(.25,.45, hash12(ip+.2));}
 
 vec2 cell(vec2 ip) {// 求细胞核位置
-	float ag = 6.28*hash12(ip + 1.23) + 5.*iTime ;//  * mix(.5,1.5,hash12(ip+3.));// 不同转速，有误差, 数字大点差就大了?                  
+	float ag = 6.28*hash12(ip + 1.23) + 5.*iTime ;//  * mix(.5,1.5,hash12(ip+3.));// 不同转速，有误差, 数字大点差就大了?
 	return vec2(cos(ag), sin(ag)) * rcel(ip);
 }
 
@@ -86,7 +86,7 @@ void fragment() {
 	remainder -= floor(remainder);
 	remainder *= vec2(pixel_size);  // revert pixel space
 	remainder /= screenDim;  // revert screen space
-	
+
 	COLOR = voronoi(SCREEN_PIXEL_SIZE, SCREEN_UV - remainder);
 	COLOR.a = opacity;
 }

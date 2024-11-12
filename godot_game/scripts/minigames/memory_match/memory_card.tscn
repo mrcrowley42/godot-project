@@ -12,6 +12,7 @@ pivot_offset = Vector2(36, 36)
 script = ExtResource("1_7mrcx")
 
 [node name="CardBack" type="Button" parent="."]
+layout_mode = 0
 offset_right = 72.0
 offset_bottom = 72.0
 pivot_offset = Vector2(36, 36)
@@ -23,6 +24,7 @@ text = "?"
 [node name="CardFront" type="Button" parent="."]
 visible = false
 texture_filter = 1
+layout_mode = 0
 offset_right = 72.0
 offset_bottom = 72.0
 theme = ExtResource("2_rv0qs")

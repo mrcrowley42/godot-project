@@ -20,14 +20,14 @@ vec2 rotate_point(vec2 pos, float angle){
 
 void fragment() {
 	COLOR = bg_col;
-	
+
 	vec2 rotated = rotate_point(UV, rotation * PI / 180.);
 	vec2 uv1 = rotated + TIME * one_speed;
 	vec2 uv2 = rotated - TIME * two_speed;
-	
+
 	vec2 mod_1 = mod(floor(uv1 * size), 2.);
 	vec2 mod_2 = mod(floor(uv2 * size), 2.);
-	
+
 	COLOR += one_col * (mod_1.x + (mod_2.x * float(double))) * one_opacity;
 	COLOR += two_col * (mod_2.y + (mod_1.y * float(double))) * two_opacity;
 }
