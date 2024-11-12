@@ -2,27 +2,47 @@ class_name MemoryGameLogic extends MiniGameLogic
 
 @onready var base_mem_card = preload("res://scripts/minigames/memory_match/memory_card.tscn")
 @onready var card_grid: GridContainer = owner.find_child("CardGrid")
+@onready var score_label: Label = owner.find_child("ScoreLabel")
 
 const COLUMNS = 5;
 const ROWS = 4;
+
+const SCORE_LABEL_TEXT = {
+	null: "-\n\n-",
+	true: "Time\n\n%.1f",
+	false: "Guesses\n\n%.0f"
+}
 
 var can_interact: bool = true
 var card_deck: Array[MemoryCard] = []
 var card_a: MemoryCard = null
 var card_b: MemoryCard = null
 
+var is_timed_game: bool = false
+
+var card_pairs_completed: int = 0
+var guesses_count: int = 0
+var game_time: float = 0.
+var game_start_time: float = 0.
+
 
 func start_normal_game():
+	guesses_count = 0
+	is_timed_game = false
 	create_game_board()
+	update_score_label()
 
 func start_timed_game():
+	game_time = 0.
+	is_timed_game = true
 	create_game_board()
+	update_score_label()
 
 ## spawn cards & setup card grid
 func create_game_board():
-	await get_tree().create_timer(.1).timeout
+	await get_tree().create_timer(.15).timeout
 	var deck: Array = Array(range(10)) + Array(range(10))
-	#var deck = [1, 1, 1, 1, 1, 1 ,1 ,1 ,1, 1,
+	#var deck = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 				#1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 	deck.shuffle()
 	
@@ -56,19 +76,44 @@ func create_game_board():
 	card_grid.columns = COLUMNS
 
 func card_flipped(card: MemoryCard):
+	# start timer!
+	if game_start_time == 0.:
+		game_start_time = Time.get_unix_time_from_system()
+	
 	card_b = card if card_a != null else null
 	card_a = card if card_a == null else card_a
 	
 	# compare values
 	if card_a && card_b:
 		await get_tree().create_timer(.8).timeout
+		
+		guesses_count += 1
 		if card_a.card_value != card_b.card_value:
 			card_a.flip_card()
 			card_b.flip_card()
 		else:
+			card_pairs_completed += 1
 			card_a.lock_card_in()
 			card_b.lock_card_in()
+		
+		if !is_timed_game:
+			update_score_label()
 		card_a = null; card_b = null;
+		
+		if card_pairs_completed == 10:
+			finish_game()
+
+func update_score_label():
+	var score = game_time if is_timed_game else float(guesses_count)
+	score_label.text = SCORE_LABEL_TEXT[is_timed_game] % score
+
+func _process(_delta: float) -> void:
+	if is_timed_game && game_start_time > 0.:
+		game_time = Time.get_unix_time_from_system() - game_start_time
+		update_score_label()
+
+func finish_game():
+	pass
 
 #func create_deck() -> Array:
 	#var deck: Array = []

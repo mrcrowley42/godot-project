@@ -22,7 +22,7 @@ shader_parameter/one_col = Color(0.423065, 0.000124129, 0.423062, 1)
 shader_parameter/one_speed = 0.02
 shader_parameter/one_size = 10.0
 shader_parameter/one_opacity = 0.2
-shader_parameter/two_col = Color(0.01, 0, 0.06, 1)
+shader_parameter/two_col = Color(0.0208449, 1.92884e-05, 0.101144, 1)
 shader_parameter/two_speed = -0.02
 shader_parameter/two_size = 10.0
 shader_parameter/two_opacity = 0.0
@@ -262,7 +262,7 @@ offset_right = 422.0
 offset_bottom = 198.0
 color = Color(0, 0, 0, 0.313726)
 
-[node name="Label" type="Label" parent="UI/Control/ScoreContainer"]
+[node name="ScoreLabel" type="Label" parent="UI/Control/ScoreContainer"]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 16.0
@@ -270,9 +270,9 @@ offset_right = 422.0
 offset_bottom = 198.0
 theme = ExtResource("5_4atnw")
 theme_override_font_sizes/font_size = 40
-text = "Guesses
+text = "-
 
-%s"
+-"
 horizontal_alignment = 1
 vertical_alignment = 1
 

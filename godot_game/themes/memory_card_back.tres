@@ -14,7 +14,17 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ne22y"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fghyx"]
+bg_color = Color(0.483253, 0.3608, 0.82, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.79489, 0.7482, 0.87, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f27tx"]
 bg_color = Color(0.483253, 0.3608, 0.82, 1)
@@ -62,7 +72,7 @@ Button/colors/icon_normal_color = Color(0.8928, 0.96, 0.9432, 1)
 Button/colors/icon_pressed_color = Color(0.7138, 0.86, 0.83807, 1)
 Button/constants/icon_max_width = 120
 Button/styles/disabled = SubResource("StyleBoxFlat_8ylq4")
-Button/styles/focus = SubResource("StyleBoxEmpty_ne22y")
+Button/styles/focus = SubResource("StyleBoxFlat_fghyx")
 Button/styles/hover = SubResource("StyleBoxFlat_f27tx")
 Button/styles/normal = SubResource("StyleBoxFlat_golou")
 Button/styles/pressed = SubResource("StyleBoxFlat_nemfa")

@@ -1,8 +1,21 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://eaas0ilvpid"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://eaas0ilvpid"]
 
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="1_848ib"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ne22y"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y1efo"]
+bg_color = Color(0.679777, 0.156359, 0.676215, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.891614, 0.476683, 0.878192, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3tuph"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ffsxf"]
 bg_color = Color(0.679777, 0.156359, 0.676215, 1)
@@ -49,7 +62,8 @@ Button/colors/icon_hover_color = Color(1, 1, 1, 1)
 Button/colors/icon_normal_color = Color(0.8928, 0.96, 0.9432, 1)
 Button/colors/icon_pressed_color = Color(0.7138, 0.86, 0.83807, 1)
 Button/constants/icon_max_width = 120
-Button/styles/focus = SubResource("StyleBoxEmpty_ne22y")
+Button/styles/disabled = SubResource("StyleBoxFlat_y1efo")
+Button/styles/focus = SubResource("StyleBoxFlat_3tuph")
 Button/styles/hover = SubResource("StyleBoxFlat_ffsxf")
 Button/styles/normal = SubResource("StyleBoxFlat_golou")
 Button/styles/pressed = SubResource("StyleBoxFlat_vp0vb")
