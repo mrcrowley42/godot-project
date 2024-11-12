@@ -7,6 +7,8 @@ const COLUMNS = 5;
 const ROWS = 4;
 
 var card_deck: Array[MemoryCard] = []
+var card_a: MemoryCard = null
+var card_b: MemoryCard = null
 
 
 func start_normal_game():
@@ -30,7 +32,7 @@ func create_game_board():
 		add_child(t)
 		spawn_timers.append(t)
 	
-	# spawn cards in
+	# spawn cards
 	var i = 0
 	var on_row = 0
 	for card_val in deck:
@@ -49,6 +51,21 @@ func create_game_board():
 	card_grid["theme_override_constants/h_separation"] = card_dim.x + remainder.x / (COLUMNS-1)
 	card_grid["theme_override_constants/v_separation"] = card_dim.y + remainder.y / (ROWS-1)
 	card_grid.columns = COLUMNS
+
+func card_flipped(card: MemoryCard):
+	card_b = card if card_a != null else null
+	card_a = card if card_a == null else card_a
+	
+	# compare values
+	if card_a && card_b:
+		await get_tree().create_timer(.8).timeout
+		if card_a.card_value != card_b.card_value:
+			card_a.flip_card()
+			card_b.flip_card()
+		else:
+			card_a.lock_card_in()
+			card_b.lock_card_in()
+		card_a = null; card_b = null;
 
 #func create_deck() -> Array:
 	#var deck: Array = []

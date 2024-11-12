@@ -56,7 +56,17 @@ func flip_card():
 	is_flipped = front.visible
 	Globals.tween(self, "scale", Vector2(1, 1), 0., .3)
 	
+	
+
+func lock_card_in():
+	Globals.tween(self, "scale", LARGE_SCALE, 0., .3)
+	await get_tree().create_timer(.1).timeout
 	Globals.tween(self, "scale", Vector2(1, 1), 0., .3)
+	await get_tree().create_timer(.1).timeout
+	back.visible = false
+	front.flat = true
 
 func _on_card_back_button_down() -> void:
-	flip_card()
+	if not parent.card_a or not parent.card_b:
+		flip_card()
+		parent.card_flipped(self)
