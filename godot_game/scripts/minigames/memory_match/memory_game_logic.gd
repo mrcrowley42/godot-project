@@ -26,7 +26,7 @@ func create_game_board():
 		var t: Timer = Timer.new()
 		t.one_shot = true
 		t.autostart = true
-		t.wait_time = .03 * (inx + 1)
+		t.wait_time = .04 * (inx + 1)
 		add_child(t)
 		spawn_timers.append(t)
 	

@@ -18,6 +18,8 @@ var current_time_scale: float
 var totris_scene_instance: TotrisManager = null
 var memory_match_instance: MemoryGame = null
 
+var can_interact: bool = true
+
 ## Loads the minigame matching the [param minigame] variable, and places it just
 ## below options menu, but above all other elements.
 func load_minigame(pre_loaded=null, instance=null, do_transition=false) -> void:
@@ -43,6 +45,10 @@ func load_minigame(pre_loaded=null, instance=null, do_transition=false) -> void:
 
 ## Tell game that a minigame is no longer open.
 func unload_minigame(do_transition=false, game_instance=null) -> void:
+	if !can_interact:
+		return
+	
+	can_interact = false
 	%BtnClick.play()
 	
 	if do_transition:
@@ -56,6 +62,7 @@ func unload_minigame(do_transition=false, game_instance=null) -> void:
 	ambience_man.fade_in()
 	%ActButton.disabled = false
 	%FoodButton.disabled = false
+	can_interact = true
 
 
 ## Trigger unloading function when a minigame scene is freed.
