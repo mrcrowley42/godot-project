@@ -23,7 +23,6 @@ theme_override_font_sizes/font_size = 35
 text = "?"
 
 [node name="CardLocked" type="Button" parent="."]
-visible = false
 layout_mode = 0
 offset_right = 72.0
 offset_bottom = 72.0

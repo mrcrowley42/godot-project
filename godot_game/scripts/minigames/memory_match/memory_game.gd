@@ -5,6 +5,7 @@ class_name MemoryGame extends Node2D
 @onready var ui_overlay: CanvasLayer = find_child("UI")
 @onready var top_overlay: CanvasLayer = find_child("TopOverlay")
 @onready var start_menu: Control = find_child("StartMenu")
+@onready var finish_menu: Control = find_child("FinishMenu")
 @onready var help_menu: Control = find_child("HelpMenu")
 @onready var card_grid: GridContainer = find_child("CardGrid")
 
@@ -21,6 +22,7 @@ var lowest_guesses = 0
 func _ready() -> void:
 	show_start_menu()
 	help_menu.hide()
+	finish_menu.hide()
 
 func show_start_menu():
 	start_menu.show()
@@ -29,6 +31,8 @@ func show_start_menu():
 	time_label.text = String(og_time_label_start_text % best_time)
 	guesses_label.text = String(og_guesses_label_start_text % lowest_guesses)
 
+func show_finish_menu():
+	finish_menu.show()
 
 func _on_timed_start_btn_button_down() -> void:
 	start_menu.hide()

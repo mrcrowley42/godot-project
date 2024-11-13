@@ -42,20 +42,26 @@ func init(parent_node: MemoryGameLogic, value: int, timer: Timer = null):
 
 func place_card():
 	back.visible = true
-	back.scale = LARGE_SCALE
-	Globals.tween(back, "scale", Vector2(1, 1), 0., .3)
+	do_pulse()
+
+func do_pulse():
+	scale = LARGE_SCALE
+	Globals.tween(self, "scale", Vector2(1, 1), 0., .3)
 
 ## flip card bool & animation
 func flip_card():
 	is_flipped = !is_flipped
+	await visual_flip()
+	back.visible = !back.visible
+	front.visible = !front.visible
+
+func visual_flip():
 	Globals.tween(self, "scale", LARGE_SCALE, 0., .3)
 	
 	await get_tree().create_timer(.1).timeout
 	Globals.tween(self, "scale", Vector2(0, 1), 0., .3)
 	
 	await get_tree().create_timer(.15).timeout
-	back.visible = !back.visible
-	front.visible = !front.visible
 	Globals.tween(self, "scale", Vector2(1, 1), 0., .3)
 
 func lock_card_in():

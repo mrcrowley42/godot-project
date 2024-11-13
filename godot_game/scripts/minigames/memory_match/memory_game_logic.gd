@@ -53,26 +53,20 @@ func create_game_board():
 	deck.shuffle()
 	
 	var spawn_timers = [null]
-	for inx in range(7):
-		var t: Timer = Timer.new()
-		t.one_shot = true
-		t.autostart = true
-		t.wait_time = .04 * (inx + 1)
-		add_child(t)
-		spawn_timers.append(t)
+	generate_timers(spawn_timers, .04)
 	
 	# spawn cards
 	var i = 0
-	var on_row = 0
+	var row = 0
 	for card_val in deck:
-		var timer_inx = (i % COLUMNS) + on_row
+		var timer_inx = (i % COLUMNS) + row
 		var card: MemoryCard = base_mem_card.instantiate()
 		card_grid.add_child(card)
 		card.init(self, card_val, spawn_timers[timer_inx])
 		card_deck.append(card)
 		i += 1
 		@warning_ignore("integer_division")  # shut up
-		on_row = i / COLUMNS
+		row = i / COLUMNS
 	
 	# set spacing of the card grid
 	var card_dim: Vector2 = card_deck[0].front.size
@@ -80,6 +74,16 @@ func create_game_board():
 	card_grid["theme_override_constants/h_separation"] = card_dim.x + remainder.x / (COLUMNS-1)
 	card_grid["theme_override_constants/v_separation"] = card_dim.y + remainder.y / (ROWS-1)
 	card_grid.columns = COLUMNS
+
+## spawn 7 timers and append to given list
+func generate_timers(lis: Array, time: float):
+	for inx in range(7):
+		var t: Timer = Timer.new()
+		t.one_shot = true
+		t.autostart = true
+		t.wait_time = time * (inx + 1)
+		add_child(t)
+		lis.append(t)
 
 func card_flipped(card: MemoryCard):
 	# start timer!
@@ -121,7 +125,24 @@ func _process(_delta: float) -> void:
 
 func finish_game():
 	finished = true
-	pass
+	
+	await get_tree().create_timer(.8).timeout
+	var pulse_timers = [null]
+	generate_timers(pulse_timers, .08)
+	var i = 0;
+	var row = 0;
+	for card in card_deck:
+		var timer_inx = (i % COLUMNS) + row
+		if (pulse_timers[timer_inx] != null):
+			pulse_timers[timer_inx].connect("timeout", card.visual_flip)
+		else:
+			card.visual_flip()
+		i += 1;
+		@warning_ignore("integer_division")  # shut up
+		row = i / COLUMNS
+	
+	await get_tree().create_timer(1).timeout
+	owner.show_finish_menu()
 
 #func create_deck() -> Array:
 	#var deck: Array = []

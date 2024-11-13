@@ -177,6 +177,37 @@ text = "Lowest Guesses
 %s"
 horizontal_alignment = 1
 
+[node name="FinishMenu" type="Control" parent="UI/Control/TopOverlay"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 53.0
+offset_top = 188.0
+offset_right = 53.0
+offset_bottom = 188.0
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/TopOverlay/FinishMenu"]
+offset_top = 53.0
+offset_right = 434.0
+offset_bottom = 434.0
+color = Color(0.00784314, 0.0156863, 0.0196078, 0.588235)
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Control/TopOverlay/FinishMenu"]
+offset_top = 53.0
+offset_right = 434.0
+offset_bottom = 434.0
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 60
+
+[node name="Label" type="Label" parent="UI/Control/TopOverlay/FinishMenu/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("11_kn5wa")
+text = "You Win!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="HelpMenu" type="Control" parent="UI/Control/TopOverlay"]
 visible = false
 layout_mode = 3
