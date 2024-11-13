@@ -1,7 +1,7 @@
 extends Button
 
-const OPACITY_SETTING = "clippy opacity"
-const MUTE_SETTING = "Mute SFX in Clippy-Mode"
+const OPACITY_SETTING = "ClippyOpacity"
+const MUTE_SETTING = "MuteSFXInClippyMode"
 
 ## Clippy mode and window size functions are stored here.
 @export var scale_factor: float = 2.0
