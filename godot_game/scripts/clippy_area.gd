@@ -18,7 +18,7 @@ var dragging: bool = false
 var offset = Vector2(0, 0)
 var clippy: bool = false
 var clippy_opacity := 0.5
-
+var mute_sfx = false
 signal clippy_closed
 
 func _ready() -> void:
@@ -119,3 +119,20 @@ func maximise() -> void:
 
 func _on_clippy_btn_button_down() -> void:
 	toggle_clippy_mode()
+
+
+func _on_sfx_clippy_box_toggled(toggled_on: bool) -> void:
+	mute_sfx = toggled_on
+
+const OPACITY_SETTING = "clippy opacity"
+const MUTE_SETTING = "Mute SFX in Clippy-Mode"
+
+func save() -> Dictionary:
+	return {"section": Globals.AUDIO_SECTION, OPACITY_SETTING: clippy_opacity
+	, MUTE_SETTING: mute_sfx}
+
+func load(data) -> void:
+	if data.has(OPACITY_SETTING):
+		%OpacitySlider.value = data[OPACITY_SETTING]
+	if data.has(MUTE_SETTING):
+		%SfxClippyBox.button_pressed = data[MUTE_SETTING]

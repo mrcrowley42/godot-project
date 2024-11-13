@@ -21,8 +21,6 @@ extends Node
 @export var notifcation_length: float = 0.0
 ## How low a stat has to be, relative to its maximum value to trigger a notifcation.
 @export_range(0,1, 0.01) var warning_threshold: float = 0.2
-## Whether audio notifcations should be disabled in clippy mode.
-@export var mute_in_clippy :bool = true
 
 @onready var notification_bubble = %NotificationBubble
 @onready var notif_sounds = %LowStatSounds
@@ -63,7 +61,6 @@ func _notification(noti: int) -> void:
 func _process(_delta) -> void:
 	if creature.hp <= pain_threshold:
 		%STAHP.play_random()
-	
 	notification_bubble.visible = notif_sounds.playing
 	if on_cooldown:
 		return
@@ -94,11 +91,8 @@ func done() -> void:
 func queue_warning(sound_file: AudioStream) -> void:
 	if not notif_sounds.playing and not on_cooldown:
 		notif_sounds.stream = sound_file
-		# A little scuffed, can probably do this better.
-		if creature.clippy_area.clippy and mute_in_clippy:
-			notif_sounds.volume_db = -100
-		else:
-			notif_sounds.volume_db = reg_volume
+		if creature.clippy_area.mute_sfx:
+			return
 		notif_sounds.play()
 	on_cooldown = true
 
