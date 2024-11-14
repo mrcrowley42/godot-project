@@ -191,12 +191,14 @@ offset_right = 53.0
 offset_bottom = 188.0
 
 [node name="ColorRect" type="ColorRect" parent="UI/Control/TopOverlay/FinishMenu"]
+layout_mode = 0
 offset_top = 53.0
 offset_right = 434.0
 offset_bottom = 434.0
 color = Color(0.00784314, 0.0156863, 0.0196078, 0.588235)
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/Control/TopOverlay/FinishMenu"]
+layout_mode = 0
 offset_top = 53.0
 offset_right = 434.0
 offset_bottom = 434.0
