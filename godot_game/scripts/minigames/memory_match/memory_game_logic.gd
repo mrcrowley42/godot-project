@@ -28,10 +28,12 @@ var game_start_time: float = 0.
 
 
 func start_normal_game():
+	clear_board()
 	create_game_board()
 	setup_values(false)
 
 func start_timed_game():
+	clear_board()
 	create_game_board()
 	setup_values(true)
 
@@ -42,14 +44,15 @@ func setup_values(is_timed: bool):
 	card_pairs_completed = 0
 	is_timed_game = is_timed
 	finished = false
+	can_interact = true
 	update_score_label()
 
 ## spawn cards & setup card grid
 func create_game_board():
 	await get_tree().create_timer(.15).timeout
-	#var deck: Array = Array(range(10)) + Array(range(10))
-	var deck = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-				1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+	var deck: Array = Array(range(10)) + Array(range(10))
+	#var deck = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+				#1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 	deck.shuffle()
 	
 	var spawn_timers = [null]
@@ -146,38 +149,7 @@ func finish_game():
 	await get_tree().create_timer(1).timeout
 	owner.show_finish_menu(is_timed_game, get_scrore())
 
-#func create_deck() -> Array:
-	#var deck: Array = []
-	#for i in range(10):
-		#for j in range(2):
-			#var card = MemCard.new(str(possible[i]))
-			#deck.append(card)
-	#return deck
-#
-#func _ready():
-	#var deck = create_deck()
-	#deck.shuffle()
-	#for card in deck:
-		#%CardGrid.add_child(card)
-#
-#func choose_card(card):
-	#if selected_cards.size() < 3:
-		#selected_cards.append(card)
-		#card.flip_card()
-		#card.disabled = true
-		#
-	#if selected_cards.size() == 2:
-		#if selected_cards[0].hidden_value == selected_cards[1].hidden_value:
-			#player_score += 1
-			#for item in selected_cards:
-				#item.text = "X"
-				#item.disabled = true
-			#%SFX.play_sound("correct")
-		#else:
-			#await get_tree().create_timer(.45).timeout
-			#for item in selected_cards:
-				#item.flip_card()
-				#item.disabled = false
-			#%SFX.play_sound("wrong")
-			#
-		#selected_cards.clear()
+func clear_board():
+	card_deck.clear()
+	for ch in card_grid.get_children():
+		card_grid.remove_child(ch)

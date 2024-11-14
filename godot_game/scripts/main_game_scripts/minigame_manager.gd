@@ -69,10 +69,12 @@ func unload_minigame(do_transition=false, game_instance=null) -> void:
 func _notification(noti) -> void:
 	if noti == Globals.NOTIFICATION_MINIGAME_CLOSED:
 		unload_minigame()
+	
 	if noti == Globals.NOTIFICATION_TOTRIS_CLOSE:
 		save_totris_data()
 		unload_minigame(true, totris_scene_instance)
 	if noti == Globals.NOTIFICATION_MEMORY_MATCH_CLOSE:
+		save_memory_match_data()
 		unload_minigame(true, memory_match_instance)
 
 
@@ -81,12 +83,17 @@ func finalise_save_data() -> void:
 	if current_minigame != null:
 		if current_minigame == "Totris":
 			save_totris_data()
+		if current_minigame == "MemoryGame":
+			save_memory_match_data()
 		unload_minigame()
 
 
 ## get totris save data before its unloaded
 func save_totris_data() -> void:
 	save_data["totris"] = totris_scene_instance.get_save_data()  # set or override
+
+func save_memory_match_data():
+	save_data["memory_match"] = memory_match_instance.get_save_data()
 
 
 ## Loads Totris scene.
@@ -102,6 +109,8 @@ func _on_totris_button_down() -> void:
 func _on_memory_game_button_down() -> void:
 	if memory_match_instance == null:
 		memory_match_instance = memory_game_scene.instantiate()
+		if save_data.has("memory_match"):
+			memory_match_instance.load_save_data(save_data["memory_match"])  # load data on creation
 	load_minigame(null, memory_match_instance, true)
 
 

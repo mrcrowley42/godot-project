@@ -76,7 +76,6 @@ color = Color(0.171871, 0.344478, 0.599564, 1)
 layer = 11
 
 [node name="StartMenu" type="Control" parent="UI/Control/TopOverlay"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 53.0
@@ -183,6 +182,7 @@ text = "Lowest Guesses
 horizontal_alignment = 1
 
 [node name="FinishMenu" type="Control" parent="UI/Control/TopOverlay"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 53.0
@@ -213,7 +213,7 @@ theme_override_constants/separation = 20
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 2
+size_flags_vertical = 6
 theme = ExtResource("11_kn5wa")
 theme_override_font_sizes/font_size = 20
 text = "You Win!"
@@ -240,12 +240,23 @@ text = "Time:
 label_settings = SubResource("LabelSettings_jrwmh")
 horizontal_alignment = 1
 
+[node name="NewBest" type="RichTextLabel" parent="UI/Control/TopOverlay/FinishMenu/MarginContainer/VBoxContainer"]
+modulate = Color(1, 0.752941, 0.196078, 1)
+clip_contents = false
+layout_mode = 2
+theme = ExtResource("1_3y1y3")
+bbcode_enabled = true
+text = "[center][dropcap]
+[wave amp=30.0 freq=5.0 connected=1]New best![/wave]
+[/dropcap][/center]"
+fit_content = true
+
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/Control/TopOverlay/FinishMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
 theme_override_constants/separation = 80
 
-[node name="Button" type="Button" parent="UI/Control/TopOverlay/FinishMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="retry" type="Button" parent="UI/Control/TopOverlay/FinishMenu/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -254,7 +265,7 @@ text = "Retry"
 icon = ExtResource("12_gljje")
 expand_icon = true
 
-[node name="Button2" type="Button" parent="UI/Control/TopOverlay/FinishMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="menu" type="Button" parent="UI/Control/TopOverlay/FinishMenu/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_horizontal = 2
@@ -364,5 +375,7 @@ vertical_alignment = 1
 
 [connection signal="button_down" from="UI/Control/TopOverlay/StartMenu/MarginContainer/HBoxContainer/TimedStartBtn" to="." method="_on_timed_start_btn_button_down"]
 [connection signal="button_down" from="UI/Control/TopOverlay/StartMenu/MarginContainer/HBoxContainer/NormalStartBtn" to="." method="_on_normal_start_btn_button_down"]
+[connection signal="button_down" from="UI/Control/TopOverlay/FinishMenu/MarginContainer/VBoxContainer/HBoxContainer/retry" to="." method="_on_retry_button_down"]
+[connection signal="button_down" from="UI/Control/TopOverlay/FinishMenu/MarginContainer/VBoxContainer/HBoxContainer/menu" to="." method="_on_menu_button_down"]
 [connection signal="button_down" from="UI/Control/TopOverlay/CloseBtn" to="." method="_on_close_btn_button_down"]
 [connection signal="button_down" from="UI/Control/TopOverlay/HelpBtn" to="." method="_on_help_btn_button_down"]
