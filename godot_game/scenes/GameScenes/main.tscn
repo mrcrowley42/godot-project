@@ -467,7 +467,7 @@ texture_filter = 1
 position = Vector2(270, 393.5)
 clippy_area = NodePath("../ClippyArea")
 
-[node name="ClippyArea" type="Button" parent="Gameplay"]
+[node name="ClippyArea" type="Button" parent="Gameplay" groups=["settings_data"]]
 unique_name_in_owner = true
 editor_description = "The control that allows the window to be dragged while in clippy mode."
 anchors_preset = 8
@@ -1753,6 +1753,7 @@ text = "Clippy Opacity"
 vertical_alignment = 1
 
 [node name="OpacitySlider" type="HSlider" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer3" node_paths=PackedStringArray("clippy_area")]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("53_buhev")
@@ -1794,10 +1795,11 @@ layout_mode = 2
 size_flags_vertical = 1
 theme_override_fonts/font = ExtResource("19_3grg3")
 theme_override_font_sizes/font_size = 20
-text = "Play sfx in clippy-mode"
+text = "Mute SFX in Clippy-Mode"
 vertical_alignment = 1
 
 [node name="SfxClippyBox" type="CheckBox" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer4"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -2293,6 +2295,7 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2/MusicMuted" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2/MusicMuted" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2/SFXMuted" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2/SFXMuted" method="_on_button_down"]
 [connection signal="value_changed" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer3/OpacitySlider" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer3/OpacitySlider" method="_on_value_changed"]
+[connection signal="toggled" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer4/SfxClippyBox" to="Gameplay/ClippyArea" method="_on_sfx_clippy_box_toggled"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/ClippyBtn" to="Gameplay/ClippyArea" method="_on_clippy_btn_button_down"]
 [connection signal="pressed" from="UI/OptionsMenu/SettingsMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/SaveButtons/Back" to="UI/OptionsMenu/SettingsMenu/SaveButtons/Back" method="_on_button_down"]

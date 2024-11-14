@@ -1,7 +1,9 @@
 extends Button
 
-## Clippy mode and window size functions are stored here.
+const OPACITY_SETTING = "ClippyOpacity"
+const MUTE_SETTING = "MuteSFXInClippyMode"
 
+## Clippy mode and window size functions are stored here.
 @export var scale_factor: float = 2.0
 @onready var window: Window = get_window()
 @onready var viewport: Viewport = get_viewport()
@@ -14,10 +16,13 @@ extends Button
 @onready var ui = %UI
 @onready var bg = %BGCanvasLayer
 @onready var notif_layer = find_parent("Game").find_child("NotificationLayer")
+@onready var sfx_bus = AudioServer.get_bus_index("SFX")
+
 var dragging: bool = false
 var offset = Vector2(0, 0)
 var clippy: bool = false
 var clippy_opacity := 0.5
+var mute_sfx = false
 
 signal clippy_closed
 
@@ -65,6 +70,8 @@ func toggle_clippy_mode() -> void:
 	ui.visible = !clippy
 	bg.visible = !clippy
 	
+	AudioServer.set_bus_mute(sfx_bus, clippy)
+
 	# Hide notifications already on screen when going into clippy mode
 	for child in notif_layer.get_child(0).get_children():
 		if child is PanelContainer:
@@ -119,3 +126,20 @@ func maximise() -> void:
 
 func _on_clippy_btn_button_down() -> void:
 	toggle_clippy_mode()
+
+
+func _on_sfx_clippy_box_toggled(toggled_on: bool) -> void:
+	mute_sfx = toggled_on
+
+
+func save() -> Dictionary:
+	return {"section": Globals.AUDIO_SECTION,
+	OPACITY_SETTING: clippy_opacity,
+	MUTE_SETTING: mute_sfx
+	}
+
+func load(data) -> void:
+	if data.has(OPACITY_SETTING):
+		%OpacitySlider.value = data[OPACITY_SETTING]
+	if data.has(MUTE_SETTING):
+		%SfxClippyBox.button_pressed = data[MUTE_SETTING]
