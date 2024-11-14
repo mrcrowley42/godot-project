@@ -552,7 +552,6 @@ unique_name_in_owner = true
 script = ExtResource("13_3i267")
 
 [node name="FoodMenu" type="PanelContainer" parent="UI"]
-unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(400, 400)
 anchors_preset = 4

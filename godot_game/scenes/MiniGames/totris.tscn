@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c5dr54dk0502t"]
+[gd_scene load_steps=17 format=3 uid="uid://c5dr54dk0502t"]
 
 [ext_resource type="Script" path="res://scripts/minigames/totris/Totris.gd" id="1_82aiy"]
 [ext_resource type="Script" path="res://scripts/minigames/totris/TotrisLogic.gd" id="2_7s788"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="6_fphhh"]
 [ext_resource type="Script" path="res://scripts/sfx_man.gd" id="7_6nelh"]
 [ext_resource type="Theme" uid="uid://bsd1dkhc13v47" path="res://themes/plain.tres" id="7_wi1ws"]
+[ext_resource type="Texture2D" uid="uid://b8x8pqf7opf1c" path="res://icons/arrow-clockwise.svg" id="8_5cvoh"]
+[ext_resource type="Texture2D" uid="uid://cobhcf30qgxq2" path="res://icons/list.svg" id="9_ajbov"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wbp70"]
 size = Vector2(10, 10)
@@ -234,7 +236,6 @@ text = "Play
 "
 
 [node name="KillMenu" type="Control" parent="UI/Control/TopOverlay"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 540.0
@@ -334,6 +335,8 @@ offset_bottom = 422.0
 focus_mode = 0
 theme = ExtResource("5_d7726")
 text = "Retry"
+icon = ExtResource("8_5cvoh")
+expand_icon = true
 
 [node name="Menu" type="Button" parent="UI/Control/TopOverlay/KillMenu"]
 layout_mode = 0
@@ -344,6 +347,8 @@ offset_bottom = 483.0
 focus_mode = 0
 theme = ExtResource("5_d7726")
 text = "Menu"
+icon = ExtResource("9_ajbov")
+expand_icon = true
 
 [node name="HelpMenu" type="Control" parent="UI/Control/TopOverlay"]
 visible = false
