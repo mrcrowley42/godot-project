@@ -114,9 +114,11 @@ func card_flipped(card: MemoryCard):
 		if card_pairs_completed == 10:
 			finish_game()
 
+func get_scrore() -> float:
+	return game_time if is_timed_game else float(guesses_count)
+
 func update_score_label():
-	var score = game_time if is_timed_game else float(guesses_count)
-	score_label.text = SCORE_LABEL_TEXT[is_timed_game] % score
+	score_label.text = SCORE_LABEL_TEXT[is_timed_game] % get_scrore()
 
 func _process(_delta: float) -> void:
 	if !finished && is_timed_game && game_start_time > 0.:
@@ -142,7 +144,7 @@ func finish_game():
 		row = i / COLUMNS
 	
 	await get_tree().create_timer(1).timeout
-	owner.show_finish_menu()
+	owner.show_finish_menu(is_timed_game, get_scrore())
 
 #func create_deck() -> Array:
 	#var deck: Array = []

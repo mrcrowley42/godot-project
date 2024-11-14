@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d3e1mocbpq7hp"]
+[gd_scene load_steps=19 format=3 uid="uid://d3e1mocbpq7hp"]
 
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="1_3y1y3"]
 [ext_resource type="Script" path="res://scripts/minigames/memory_match/memory_game.gd" id="1_ckjye"]
@@ -12,7 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://bedsc86ugpd5r" path="res://icons/question-square.svg" id="7_ujte2"]
 [ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="9_kvcou"]
 [ext_resource type="Theme" uid="uid://bsd1dkhc13v47" path="res://themes/plain.tres" id="11_kn5wa"]
+[ext_resource type="Texture2D" uid="uid://b8x8pqf7opf1c" path="res://icons/arrow-clockwise.svg" id="12_gljje"]
 [ext_resource type="Texture2D" uid="uid://d4t12xgr5bjg" path="res://UI stuff/Green Palette/ui_green_box_inverted.png" id="12_pdrc8"]
+[ext_resource type="Texture2D" uid="uid://cobhcf30qgxq2" path="res://icons/list.svg" id="13_nksbq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8bfqs"]
 shader = ExtResource("5_ymqga")
@@ -26,6 +28,9 @@ shader_parameter/two_col = Color(0.0208449, 1.92884e-05, 0.101144, 1)
 shader_parameter/two_speed = -0.02
 shader_parameter/two_size = 10.0
 shader_parameter/two_opacity = 0.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_jrwmh"]
+line_spacing = 16.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_j03ef"]
 font_size = 24
@@ -196,17 +201,67 @@ offset_top = 53.0
 offset_right = 434.0
 offset_bottom = 434.0
 theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 60
+theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = 60
+theme_override_constants/margin_bottom = 40
 
-[node name="Label" type="Label" parent="UI/Control/TopOverlay/FinishMenu/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/TopOverlay/FinishMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="UI/Control/TopOverlay/FinishMenu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 2
 theme = ExtResource("11_kn5wa")
+theme_override_font_sizes/font_size = 20
 text = "You Win!"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="FinalIcon" type="Button" parent="UI/Control/TopOverlay/FinishMenu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("5_4atnw")
+icon = ExtResource("7_ujte2")
+icon_alignment = 1
+expand_icon = true
+
+[node name="FinalScore" type="Label" parent="UI/Control/TopOverlay/FinishMenu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("5_otyuk")
+text = "Time:
+2.00 seconds"
+label_settings = SubResource("LabelSettings_jrwmh")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Control/TopOverlay/FinishMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_constants/separation = 80
+
+[node name="Button" type="Button" parent="UI/Control/TopOverlay/FinishMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+theme = ExtResource("1_3y1y3")
+text = "Retry"
+icon = ExtResource("12_gljje")
+expand_icon = true
+
+[node name="Button2" type="Button" parent="UI/Control/TopOverlay/FinishMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+theme = ExtResource("1_3y1y3")
+text = "Menu"
+icon = ExtResource("13_nksbq")
+expand_icon = true
 
 [node name="HelpMenu" type="Control" parent="UI/Control/TopOverlay"]
 visible = false
