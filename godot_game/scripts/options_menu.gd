@@ -6,11 +6,13 @@ extends PanelContainer
 @onready var cosmetics_menu = %CosmeticsMenu
 @onready var facts_menu = %FactsMenu
 @onready var ambience_menu = %AmbienceMenu
+@onready var creatures_menu = %CreaturesMenu
 
-enum Menu {CREDITS, SETTINGS, THEME, FACTS, APPEARANCE, AMBIENCE}
+enum Menu {CREDITS, SETTINGS, THEME, FACTS, APPEARANCE, AMBIENCE, CREATURES}
 @onready var menus = {Menu.CREDITS: credits, Menu.SETTINGS: settings_menu,
 	Menu.THEME: theme_menu, Menu.FACTS: facts_menu,
-	Menu.APPEARANCE: cosmetics_menu, Menu.AMBIENCE: ambience_menu }
+	Menu.APPEARANCE: cosmetics_menu, Menu.AMBIENCE: ambience_menu,
+	Menu.CREATURES: creatures_menu}
 
 var current_menu
 
@@ -56,3 +58,7 @@ func _on_fact_btn_button_down():
 func _on_ambience_btn_button_down():
 	%BtnClick.play()
 	change_menu(Menu.AMBIENCE)
+
+func _on_creatures_button_down() -> void:
+	%BtnClick.play()
+	change_menu(Menu.CREATURES)

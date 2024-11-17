@@ -1,6 +1,5 @@
 class_name MemoryGame extends Node2D
 
-
 # UI NODES
 @onready var ui_overlay: CanvasLayer = find_child("UI")
 @onready var top_overlay: CanvasLayer = find_child("TopOverlay")
@@ -40,6 +39,7 @@ func _ready() -> void:
 	help_menu.hide()
 	finish_menu.hide()
 
+
 func show_start_menu():
 	start_menu.show()
 	var time_label = start_menu.find_child("bestTime")
@@ -51,6 +51,7 @@ func show_start_menu():
 	var guess = str(lowest_guesses) if lowest_guesses != null else "-"
 	best_time_label.text = og_time_label_start_text % time
 	best_guesses_label.text = og_guesses_label_start_text % guess
+
 
 func show_finish_menu(is_timed: bool, score: float):
 	finish_menu.show()
@@ -67,27 +68,33 @@ func show_finish_menu(is_timed: bool, score: float):
 	if new_lowest_guess:
 		lowest_guesses = int(score)
 
+
 ## data is the same thats returned from get_save_data()
 func load_save_data(data):
 	best_time = data["best_time"]
 	lowest_guesses = data["lowest_guesses"]
 
+
 func get_save_data():
 	return {"best_time": best_time, "lowest_guesses": lowest_guesses}
+
 
 func _on_timed_start_btn_button_down() -> void:
 	start_menu.hide()
 	m_logic.start_timed_game()
 	card_grid.modulate.a = 1.
 
+
 func _on_normal_start_btn_button_down() -> void:
 	start_menu.hide()
 	m_logic.start_normal_game()
 	card_grid.modulate.a = 1.
 
+
 func _on_help_btn_button_down() -> void:
 	%SFX.play_sound("click")
 	help_menu.visible = !help_menu.visible
+
 
 func _on_close_btn_button_down():
 	if help_menu.visible:  # close help menu if its open
@@ -95,10 +102,12 @@ func _on_close_btn_button_down():
 		return
 	get_tree().root.propagate_notification(Globals.NOTIFICATION_MEMORY_MATCH_CLOSE)
 
+
 func _on_retry_button_down() -> void:
 	finish_menu.hide()
 	@warning_ignore("standalone_ternary")
 	_on_timed_start_btn_button_down() if m_logic.is_timed_game else _on_normal_start_btn_button_down()
+
 
 func _on_menu_button_down() -> void:
 	finish_menu.hide()
