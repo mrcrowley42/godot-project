@@ -245,6 +245,11 @@ border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
+border_color = Color(0.8, 0.8, 0.8, 0.294118)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 expand_margin_left = 3.0
 expand_margin_top = 3.0
 expand_margin_right = 3.0
@@ -1342,6 +1347,7 @@ metadata/_edit_lock_ = true
 
 [node name="MainOptMenu" type="MarginContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 40
@@ -1428,6 +1434,7 @@ theme = ExtResource("45_e031c")
 text = "Themes"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer"]
+clip_contents = false
 custom_minimum_size = Vector2(0, 296)
 layout_mode = 2
 theme = SubResource("Theme_haq74")
@@ -1656,7 +1663,7 @@ theme_override_constants/separation = 24
 layout_mode = 2
 theme = ExtResource("45_e031c")
 theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
-text = "Creature Cosmetics"
+text = "Discovered Creatures"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 158)
