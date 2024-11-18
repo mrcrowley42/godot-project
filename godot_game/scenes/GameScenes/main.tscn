@@ -1650,6 +1650,7 @@ theme_override_constants/margin_bottom = 16
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer"]
 layout_mode = 2
+size_flags_vertical = 0
 theme_override_constants/separation = 24
 
 [node name="Button" type="Button" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer"]
@@ -1659,7 +1660,7 @@ theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
 text = "Creature Cosmetics"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 158)
+custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 theme = ExtResource("46_r0sdd")
 
@@ -1674,17 +1675,8 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
-columns = 5
+columns = 3
 script = ExtResource("50_rm732")
-
-[node name="PreviewContainer" type="MarginContainer" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(150, 150)
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="CreaturePreview" type="AnimatedSprite2D" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/PreviewContainer"]
-scale = Vector2(0.15, 0.15)
-script = ExtResource("49_p7hc5")
 
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/CreaturesMenu"]
 position = Vector2(-50, -130)
