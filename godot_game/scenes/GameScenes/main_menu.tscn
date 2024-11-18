@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://ig0eoqdfq5nr"]
+
+[ext_resource type="Script" path="res://scripts/main_game_scripts/main_menu.gd" id="1_lpoqi"]
+[ext_resource type="Texture2D" uid="uid://ywjmlgi3jyuu" path="res://images/omba.png" id="2_k5vrf"]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_lpoqi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(415, 217)
+scale = Vector2(0.345, 0.345)
+texture = ExtResource("2_k5vrf")

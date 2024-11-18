@@ -20,13 +20,13 @@ float grid(vec2 scaledUv) {
 
 void fragment() {
 	COLOR = bg_col;
-	
+
 	vec2 uv1 = UV + TIME * one_speed;
 	vec2 uv2 = UV + TIME * two_speed;
 	if (shift_one_right) {
 		uv1 = vec2(-uv1.y, uv1.x);
 	}
-	
+
 	COLOR += vec4(one_col * grid(uv1 * one_size) * one_opacity);
 	COLOR += vec4(two_col * grid(uv2 * two_size) * two_opacity);
 }
