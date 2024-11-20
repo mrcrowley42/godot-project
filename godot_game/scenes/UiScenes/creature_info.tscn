@@ -70,7 +70,8 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_0yx5w")
 position = Vector2(18, 14)
 scale = Vector2(0.1, 0.1)
 sprite_frames = ExtResource("4_ihk40")
-animation = &"angry"
+animation = &"confused"
+autoplay = "confused"
 centered = false
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
