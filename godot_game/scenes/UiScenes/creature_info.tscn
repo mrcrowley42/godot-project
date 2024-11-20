@@ -8,14 +8,15 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gygio"]
 shader = ExtResource("2_qkvqy")
-shader_parameter/resolution = Vector2(100, 100)
-shader_parameter/bg_color = Color(0.00826691, 0.155751, 0.132046, 1)
-shader_parameter/line_color = Color(0.215062, 0.347037, 0.294002, 1)
+shader_parameter/resolution = Vector2(200, 200)
+shader_parameter/bg_color = Color(0.0882, 0.14, 0.131367, 1)
+shader_parameter/line_color = Color(0.2025, 0.27, 0.243, 1)
 shader_parameter/thickness = 0.5
 shader_parameter/brightness = 1.0
+shader_parameter/scale = 0.75
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0yx5w"]
-bg_color = Color(0.0913, 0.11, 0.10252, 0.92549)
+bg_color = Color(0.0913, 0.11, 0.10252, 0.901961)
 expand_margin_left = 5.0
 expand_margin_top = 5.0
 expand_margin_right = 5.0
