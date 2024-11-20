@@ -7,6 +7,7 @@ extends GridContainer
 #
 #const BTN_SIZE: Vector2 = Vector2(64, 64)
 #
+@onready var creature_info_scene = load("res://scenes/UiScenes/creature_info.tscn")
 #var unlockables = load("res://resources/unlockables.tres")
 #@export var creature: Creature
 #
@@ -27,8 +28,10 @@ class CreatureIcon extends CustomTooltipButton:
 		#update_locked()
 #
 	### Action when button is pressed.
-	#func _pressed():
-		#var parent = find_parent("CosmeticItems")
+	func _pressed():
+		var parent = find_parent("CreaturesMenu")
+		var scene = parent.find_child("Creatures").creature_info_scene.instantiate()
+		parent.add_child(scene)
 		#var creature: Creature = parent.creature
 		#var manager: AccessoryManager = creature.find_child("AccessoryManager")
 		#manager.toggle_cosmetic(self.cosmetic)

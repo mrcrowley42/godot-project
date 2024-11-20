@@ -1,0 +1,86 @@
+[gd_scene load_steps=7 format=3 uid="uid://c2sh8bso4xb3b"]
+
+[ext_resource type="Script" path="res://scenes/UiScenes/creature_info.gd" id="1_vck8f"]
+[ext_resource type="Shader" path="res://shaders/pattern_wavy.gdshader" id="2_dkhfj"]
+[ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="3_3i3tn"]
+[ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="4_mphc8"]
+[ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="5_nb2bl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gygio"]
+shader = ExtResource("2_dkhfj")
+shader_parameter/bg_col = Color(0.0049428, 2.19822e-06, 0.0464968, 1)
+shader_parameter/double = true
+shader_parameter/size = 8.0
+shader_parameter/one_col = Color(0.22, 0.132, 0, 1)
+shader_parameter/one_speed = 0.02
+shader_parameter/one_opacity = 0.2
+shader_parameter/two_col = Color(0.22, 0.077, 0, 1)
+shader_parameter/two_speed = 0.02
+shader_parameter/two_opacity = 0.2
+
+[node name="FactPopup" type="MarginContainer"]
+offset_right = 434.0
+offset_bottom = 434.0
+script = ExtResource("1_vck8f")
+
+[node name="Panel" type="Panel" parent="."]
+material = SubResource("ShaderMaterial_gygio")
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_3i3tn")
+text = "Creature INFO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(386, 150)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+custom_minimum_size = Vector2(378, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 0
+
+[node name="Content" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+custom_minimum_size = Vector2(370, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("4_mphc8")
+theme_override_font_sizes/font_size = 17
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eros lectus, euismod blandit nulla vitae, blandit luctus justo. Proin suscipit rutrum lectus, at ultrices ligula rutrum at. Pellentesque tristique nisi erat, vitae efficitur nibh porta at. Sed rutrum, nisi quis tincidunt euismod, elit lacus aliquam nulla, vel tincidunt ligula ante eget urna. Phasellus posuere sagittis turpis, vel finibus lectus rhoncus et. Maecenas euismod placerat augue eleifend accumsan. Integer eu feugiat erat. Quisque vel ante vitae velit ultricies auctor. Fusce lorem magna, ultricies ut semper non, fringilla eget nisi. "
+autowrap_mode = 3
+
+[node name="SaveButtons" type="Node2D" parent="."]
+position = Vector2(-50, -130)
+
+[node name="Back" type="Button" parent="SaveButtons"]
+texture_filter = 5
+custom_minimum_size = Vector2(100, 40)
+offset_left = 73.0
+offset_top = 513.0
+offset_right = 173.0
+offset_bottom = 553.0
+scale = Vector2(0.75, 0.75)
+theme = ExtResource("5_nb2bl")
+theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
+theme_override_font_sizes/font_size = 18
+text = "Back"
+
+[connection signal="hidden" from="." to="." method="_on_hidden"]
+[connection signal="button_down" from="SaveButtons/Back" to="." method="_on_back_button_down"]
