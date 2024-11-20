@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://c2sh8bso4xb3b"]
+[gd_scene load_steps=10 format=3 uid="uid://c2sh8bso4xb3b"]
 
 [ext_resource type="Script" path="res://scripts/creature_info.gd" id="1_vck8f"]
 [ext_resource type="Shader" path="res://shaders/pattern_animated_grid.gdshader" id="2_qkvqy"]
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="3_3i3tn"]
+[ext_resource type="SpriteFrames" uid="uid://68skicj7tsu2" path="res://resources/creatures/main_creature_adult_sprite_frames.tres" id="4_ihk40"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="4_mphc8"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="5_nb2bl"]
+[ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="5_sg3th"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gygio"]
 shader = ExtResource("2_qkvqy")
@@ -17,10 +19,10 @@ shader_parameter/scale = 0.75
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0yx5w"]
 bg_color = Color(0.0913, 0.11, 0.10252, 0.901961)
-expand_margin_left = 5.0
-expand_margin_top = 5.0
-expand_margin_right = 5.0
-expand_margin_bottom = 5.0
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
 
 [node name="FactPopup" type="MarginContainer"]
 offset_right = 434.0
@@ -38,10 +40,6 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 16
 
-[node name="Panel" type="Panel" parent="MarginContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_0yx5w")
-
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 24
@@ -53,17 +51,59 @@ text = "Creature INFO"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="PreviewContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/HBoxContainer/PreviewContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0yx5w")
+
+[node name="CreaturePreview" type="AnimatedSprite2D" parent="MarginContainer/VBoxContainer/HBoxContainer/PreviewContainer"]
+position = Vector2(18, 14)
+scale = Vector2(0.1, 0.1)
+sprite_frames = ExtResource("4_ihk40")
+animation = &"angry"
+centered = false
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0yx5w")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_sg3th")
+theme_override_font_sizes/font_size = 24
+text = "LITTLE GUY"
+
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(386, 150)
+custom_minimum_size = Vector2(386, 140)
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
 custom_minimum_size = Vector2(378, 0)
 layout_mode = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 0
+theme_override_constants/margin_bottom = 8
+
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0yx5w")
 
 [node name="Content" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
 custom_minimum_size = Vector2(370, 0)
