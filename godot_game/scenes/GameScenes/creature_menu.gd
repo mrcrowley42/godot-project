@@ -13,9 +13,10 @@ extends GridContainer
 #
 ### Class that describes the button object for each cosmetic item.
 class CreatureIcon extends CustomTooltipButton:
-
+	var creature_data
 	func _init(creature: CreatureType):
 		size = Vector2(100,100)
+		creature_data = creature
 		icon = creature.baby.sprite_frames.get_frame_texture("idle",0)
 		#theme = load("res://themes/cosmetic_btn_theme.tres")
 		#custom_minimum_size = BTN_SIZE
@@ -31,6 +32,8 @@ class CreatureIcon extends CustomTooltipButton:
 	func _pressed():
 		var parent = find_parent("CreaturesMenu")
 		var scene = parent.find_child("Creatures").creature_info_scene.instantiate()
+		scene.creature = self.creature_data
+		scene.setup()
 		parent.add_child(scene)
 		#var creature: Creature = parent.creature
 		#var manager: AccessoryManager = creature.find_child("AccessoryManager")

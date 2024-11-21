@@ -33,10 +33,12 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[node name="FactPopup" type="MarginContainer"]
+[node name="FactPopup" type="MarginContainer" node_paths=PackedStringArray("heading", "description")]
 offset_right = 434.0
 offset_bottom = 434.0
 script = ExtResource("1_vck8f")
+heading = NodePath("MarginContainer/VBoxContainer/Label")
+description = NodePath("MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/Content")
 
 [node name="Panel" type="Panel" parent="."]
 material = SubResource("ShaderMaterial_gygio")
@@ -62,7 +64,7 @@ vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 40
+theme_override_constants/separation = 24
 
 [node name="PreviewContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
@@ -75,7 +77,7 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0yx5w")
 
 [node name="CreaturePreview" type="AnimatedSprite2D" parent="MarginContainer/VBoxContainer/HBoxContainer/PreviewContainer"]
-position = Vector2(18, 14)
+position = Vector2(10, 10)
 scale = Vector2(0.1, 0.1)
 sprite_frames = ExtResource("4_ihk40")
 animation = &"confused"
@@ -84,6 +86,7 @@ centered = false
 
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2"]
 layout_mode = 2
@@ -91,7 +94,6 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_0yx5w")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2"]
 layout_mode = 2
-size_flags_horizontal = 3
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
@@ -104,9 +106,8 @@ layout_mode = 2
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_sg3th")
 theme_override_font_sizes/font_size = 24
-text = "LITTLE GUY
-
-Seen: 5 times"
+text = "Hatched: 6
+"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(386, 140)
