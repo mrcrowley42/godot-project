@@ -1,0 +1,125 @@
+[gd_scene load_steps=9 format=3 uid="uid://jt5f8ds3v8yr"]
+
+[ext_resource type="Script" path="res://scripts/creature_info.gd" id="1_f03xm"]
+[ext_resource type="Shader" path="res://shaders/pattern_animated_grid.gdshader" id="2_5dpgm"]
+[ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="3_bsxtk"]
+[ext_resource type="SpriteFrames" uid="uid://68skicj7tsu2" path="res://resources/creatures/main_creature_adult_sprite_frames.tres" id="4_2i6ea"]
+[ext_resource type="Theme" uid="uid://dvpqr6ekggufg" path="res://themes/menu_dropdown.tres" id="7_846fc"]
+[ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="8_l2kok"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gygio"]
+shader = ExtResource("2_5dpgm")
+shader_parameter/resolution = Vector2(200, 200)
+shader_parameter/bg_color = Color(0.0882, 0.14, 0.131367, 1)
+shader_parameter/line_color = Color(0.2025, 0.27, 0.243, 1)
+shader_parameter/thickness = 1.0
+shader_parameter/brightness = 1.0
+shader_parameter/scale = 0.68
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0yx5w"]
+bg_color = Color(0.0913, 0.11, 0.10252, 0.745098)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[node name="FactPopup" type="MarginContainer" node_paths=PackedStringArray("heading", "preview")]
+offset_right = 434.0
+offset_bottom = 434.0
+script = ExtResource("1_f03xm")
+heading = NodePath("MarginContainer/VBoxContainer/Label")
+preview = NodePath("MarginContainer/VBoxContainer/PreviewContainer/CreaturePreview")
+
+[node name="Panel" type="Panel" parent="."]
+material = SubResource("ShaderMaterial_gygio")
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_bsxtk")
+text = "Creature INFO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PreviewContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/PreviewContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0yx5w")
+
+[node name="CreaturePreview" type="AnimatedSprite2D" parent="MarginContainer/VBoxContainer/PreviewContainer"]
+position = Vector2(33, 41)
+scale = Vector2(0.175, 0.175)
+sprite_frames = ExtResource("4_2i6ea")
+animation = &"confused"
+autoplay = "confused"
+centered = false
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="SoundBtn" type="OptionButton" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("7_846fc")
+selected = 0
+item_count = 1
+popup/item_0/text = "EMOTION"
+
+[node name="SoundBtn2" type="OptionButton" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("7_846fc")
+selected = 0
+item_count = 1
+popup/item_0/text = "LIFE STAGE"
+
+[node name="SaveButtons" type="Node2D" parent="."]
+position = Vector2(-50, -130)
+
+[node name="Back" type="Button" parent="SaveButtons"]
+texture_filter = 5
+custom_minimum_size = Vector2(100, 40)
+offset_left = 73.0
+offset_top = 513.0
+offset_right = 173.0
+offset_bottom = 553.0
+scale = Vector2(0.75, 0.75)
+theme = ExtResource("8_l2kok")
+theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
+theme_override_font_sizes/font_size = 18
+text = "Back"
+
+[connection signal="hidden" from="." to="." method="_on_hidden"]
+[connection signal="button_down" from="SaveButtons/Back" to="." method="_on_back_button_down"]

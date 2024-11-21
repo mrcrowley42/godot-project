@@ -33,14 +33,12 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[node name="FactPopup" type="MarginContainer" node_paths=PackedStringArray("heading", "description", "preview", "stat_window")]
+[node name="CreaturePanel" type="MarginContainer" node_paths=PackedStringArray("heading", "preview")]
 offset_right = 434.0
 offset_bottom = 434.0
 script = ExtResource("1_vck8f")
 heading = NodePath("MarginContainer/VBoxContainer/Label")
-description = NodePath("MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/Content")
 preview = NodePath("MarginContainer/VBoxContainer/HBoxContainer/PreviewContainer/CreaturePreview")
-stat_window = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/MarginContainer/Label")
 
 [node name="Panel" type="Panel" parent="."]
 material = SubResource("ShaderMaterial_gygio")
@@ -126,7 +124,7 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0yx5w")
 
 [node name="Content" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
-custom_minimum_size = Vector2(370, 0)
+custom_minimum_size = Vector2(370, 150)
 layout_mode = 2
 size_flags_vertical = 1
 theme = ExtResource("4_mphc8")
@@ -188,4 +186,5 @@ theme_override_font_sizes/font_size = 18
 text = "Back"
 
 [connection signal="hidden" from="." to="." method="_on_hidden"]
+[connection signal="button_down" from="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer2/Button" to="." method="_on_button_button_down"]
 [connection signal="button_down" from="SaveButtons/Back" to="." method="_on_back_button_down"]
