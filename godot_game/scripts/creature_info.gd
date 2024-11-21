@@ -2,7 +2,8 @@ extends MarginContainer
 
 @export var heading: Node
 @export var description: Node
-
+@export var preview: Node
+@export var stat_window: Node
 @onready var btn_sfx = find_parent("Game").find_child("BtnClick")
 
 var creature: CreatureType
@@ -20,7 +21,9 @@ func _on_hidden() -> void:
 func setup():
 	if not creature:
 		return
-		
+
 	heading.text = "%s" % creature.name
 	description.text = "%s" % creature.desc
-		
+	preview.sprite_frames = creature.baby.sprite_frames
+	preview.autoplay = "idle"
+	

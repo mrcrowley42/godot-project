@@ -33,12 +33,14 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[node name="FactPopup" type="MarginContainer" node_paths=PackedStringArray("heading", "description")]
+[node name="FactPopup" type="MarginContainer" node_paths=PackedStringArray("heading", "description", "preview", "stat_window")]
 offset_right = 434.0
 offset_bottom = 434.0
 script = ExtResource("1_vck8f")
 heading = NodePath("MarginContainer/VBoxContainer/Label")
 description = NodePath("MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/Content")
+preview = NodePath("MarginContainer/VBoxContainer/HBoxContainer/PreviewContainer/CreaturePreview")
+stat_window = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/MarginContainer/Label")
 
 [node name="Panel" type="Panel" parent="."]
 material = SubResource("ShaderMaterial_gygio")
@@ -99,11 +101,9 @@ theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/MarginContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/MarginContainer"]
 layout_mode = 2
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer"]
-layout_mode = 2
+size_flags_vertical = 1
 theme_override_fonts/font = ExtResource("5_sg3th")
 theme_override_font_sizes/font_size = 24
 text = "Hatched: 6
