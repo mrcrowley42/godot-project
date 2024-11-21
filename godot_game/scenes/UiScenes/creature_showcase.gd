@@ -1,9 +1,7 @@
 extends MarginContainer
 
 @export var heading: Node
-@export var description: Node
 @export var preview: Node
-@export var stat_window: Node
 @onready var btn_sfx = find_parent("Game").find_child("BtnClick")
 @onready var showcase_scene = load("res://scenes/UiScenes/creature_showcase.tscn")
 var creature: CreatureType
@@ -23,14 +21,11 @@ func setup():
 		return
 
 	heading.text = "%s" % creature.name
-	description.text = "%s" % creature.desc
 	preview.sprite_frames = creature.baby.sprite_frames
 	preview.autoplay = "idle"
-	
 
 
 func _on_button_button_down() -> void:
 	var showcase = showcase_scene.instantiate()
 	showcase.creature = creature
-	showcase.setup()
 	add_child(showcase)

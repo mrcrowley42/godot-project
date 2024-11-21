@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://jt5f8ds3v8yr"]
 
-[ext_resource type="Script" path="res://scripts/creature_info.gd" id="1_f03xm"]
+[ext_resource type="Script" path="res://scenes/UiScenes/creature_showcase.gd" id="1_8yxo1"]
 [ext_resource type="Shader" path="res://shaders/pattern_animated_grid.gdshader" id="2_5dpgm"]
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="3_bsxtk"]
 [ext_resource type="SpriteFrames" uid="uid://68skicj7tsu2" path="res://resources/creatures/main_creature_adult_sprite_frames.tres" id="4_2i6ea"]
@@ -34,7 +34,7 @@ expand_margin_bottom = 2.0
 [node name="FactPopup" type="MarginContainer" node_paths=PackedStringArray("heading", "preview")]
 offset_right = 434.0
 offset_bottom = 434.0
-script = ExtResource("1_f03xm")
+script = ExtResource("1_8yxo1")
 heading = NodePath("MarginContainer/VBoxContainer/Label")
 preview = NodePath("MarginContainer/VBoxContainer/PreviewContainer/CreaturePreview")
 

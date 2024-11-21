@@ -33,12 +33,14 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[node name="CreaturePanel" type="MarginContainer" node_paths=PackedStringArray("heading", "preview")]
+[node name="CreaturePanel" type="MarginContainer" node_paths=PackedStringArray("heading", "description", "preview", "stat_window")]
 offset_right = 434.0
 offset_bottom = 434.0
 script = ExtResource("1_vck8f")
 heading = NodePath("MarginContainer/VBoxContainer/Label")
+description = NodePath("MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/Content")
 preview = NodePath("MarginContainer/VBoxContainer/HBoxContainer/PreviewContainer/CreaturePreview")
+stat_window = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/MarginContainer/Label")
 
 [node name="Panel" type="Panel" parent="."]
 material = SubResource("ShaderMaterial_gygio")
