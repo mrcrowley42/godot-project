@@ -149,49 +149,65 @@ func load_metadata() -> Dictionary:
 
 ## loads data, and passes it to saved nodes. returns metadata
 func load_data() -> Dictionary:
-	if has_save_data():
-		var save_file = FileAccess.open(get_save_data_file(), FileAccess.READ)
+	if !has_save_data():
+		return metadata_last_loaded
 
-		## retrieve metadata
-		metadata_last_loaded = JSON.parse_string(save_file.get_line())
+	# attempt to load
+	var save_file = FileAccess.open(get_save_data_file(), FileAccess.READ)
+	metadata_last_loaded = JSON.parse_string(save_file.get_line())
 
-		while save_file.get_position() < save_file.get_length():
-			var line = save_file.get_line()
-			var parsed_line = JSON.parse_string(line)
+	while save_file.get_position() < save_file.get_length():
+		var line = save_file.get_line()
+		var parsed_line = JSON.parse_string(line)
 
-			# check data has necessary values
-			if PATH not in parsed_line or DATA not in parsed_line:
-				print("ERROR: Missing '%s' or '%s' value for data, skipping" % [PATH, DATA])
-				continue
+		if PATH not in parsed_line or DATA not in parsed_line:
+			print("ERROR: Missing '%s' or '%s' value for data, skipping" % [PATH, DATA])
+			continue
 
-			var node = get_node(parsed_line[PATH])
-			if node and node.has_method(LOAD):
-				var data = parsed_line[DATA]
-				node.call(LOAD, data)
-			else:
-				print("ERROR: Node '%s' is null or doesnt have a %s() function" % [parsed_line[PATH], LOAD])
+		var node_path = parsed_line[PATH]
+		if not has_node(node_path):
+			print("ERROR: Node at path '%s' could not be found, skipping" % node_path)
+			continue
+
+		var node = get_node(node_path)
+		if not node or not node.has_method(LOAD):
+			print("ERROR: Node '%s' is null or doesnt have a %s() function, skipping" % [parsed_line[PATH], LOAD])
+			continue
+
+		# call load function
+		var data = parsed_line[DATA]
+		node.call(LOAD, data)
 	return metadata_last_loaded
 
 
 func load_settings_data():
-	if has_settings_data():
-		var config = ConfigFile.new()
-		config.load(get_settings_file())
+	if !has_settings_data():
+		return
 
-		var settings_nodes = get_tree().get_nodes_in_group(Globals.SAVE_SETTINGS_GROUP)
-		for node in settings_nodes:
-			if !node.has_method(SAVE) or !node.has_method(LOAD): # object doesnt have save() func
-				print("Node '%s' doesnt have a %s() or a %s() function/s" % [node.name, SAVE, LOAD])
+	var config = ConfigFile.new()
+	config.load(get_settings_file())
+
+	var settings_nodes = get_tree().get_nodes_in_group(Globals.SAVE_SETTINGS_GROUP)
+	for node in settings_nodes:
+		if !node.has_method(SAVE) or !node.has_method(LOAD): # object doesnt have save() func
+			print("Node '%s' doesnt have a %s() or a %s() function/s" % [node.name, SAVE, LOAD])
+			continue
+
+		var data_to_send = {}
+		var data: Dictionary = node.call(SAVE)
+		var section = data[SECTION] if data.has(SECTION) else Globals.DEFAULT_SECTION
+
+		data.erase(SECTION)  # don't need it anymore
+		if not config.has_section(section):
+			print("No section '%s' exists in current setting, skipping node '%s'" % [section, node])
+			continue
+
+		for key in data.keys():
+			if not config.has_section_key(section, key):
+				print("No key '%s' in section '%s' present in current settings" % [key, section])
 				continue
-
-			var data_to_send = {}
-			var data = node.call(SAVE)
-			var section = data[SECTION] if data.has(SECTION) else Globals.DEFAULT_SECTION
-
-			for key in data.keys():
-				if key != SECTION and config.has_section(section) and config.has_section_key(section, key):
-					data_to_send[key] = config.get_value(section, key)
-			node.call(LOAD, data_to_send)
+			data_to_send[key] = config.get_value(section, key)
+		node.call(LOAD, data_to_send)
 
 
 ## --------------

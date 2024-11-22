@@ -42,7 +42,7 @@ func _on_button_button_down() -> void:
 	add_child(showcase)
 
 
-func _on_stage_btn_item_selected(index: int) -> void:
+func _on_stage_btn_item_selected(_index: int) -> void:
 	pass # Replace with function body.
 
 

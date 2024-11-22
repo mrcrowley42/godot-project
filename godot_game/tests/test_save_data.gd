@@ -35,21 +35,25 @@ func remove_test_settings_data():
 ## a node to use for saving
 class TestNode extends Node2D:
 	var data_to_save = {"some_data": [54, 1, 2]}
+	var setting_data_to_save = {"section": "SomeSection", "some_data": 12345}
+
 	var data_loaded = null
-	
+	var use_setting_data = false
+
 	func _init(settings_group=false) -> void:
 		if settings_group:
 			add_to_group("settings_data")
 		else:
 			add_to_group("save_data")
+
 	func save():
-		return data_to_save
+		return setting_data_to_save if use_setting_data else data_to_save
 	func load(data):
 		data_loaded = data
 
-## ------------
-##    TESTS
-## ------------
+## -----------------
+##    DATA TESTS
+## -----------------
 
 ## Test the games' save data file is not used for tests
 func test_save_data_file_is_segregated():
@@ -171,6 +175,10 @@ func test_load_node_data():
 	assert_same(str(first_line), str(DataGlobals.metadata_last_loaded))
 	assert_eq(str(node.data_loaded), str(node.data_to_save))
 
+## -----------------
+##   SETTING TESTS
+## -----------------
+
 ## test settings data is saved
 func test_save_settings_data():
 	setup_test_environment()
@@ -193,6 +201,31 @@ func test_save_settings_data():
 	var key = node.data_to_save.keys()[0]
 	assert_same(third_line, "%s=%s" % [key, str(node.data_to_save[key])])
 
+## test settings data is saved with sections
+func test_save_settings_data_sections():
+	setup_test_environment()
+	
+	var node := TestNode.new(true)
+	node.use_setting_data = true
+	add_child(node)
+	
+	assert_false(DataGlobals.has_settings_data())
+	DataGlobals.save_settings_data()
+	assert_true(DataGlobals.has_settings_data())
+	
+	var expected = node.setting_data_to_save
+	var settings_file := FileAccess.open(DataGlobals.get_settings_file(), FileAccess.READ)
+	var first_line = settings_file.get_line()
+	assert_eq(first_line.replace('[', '').replace(']', ''), expected["section"])
+	
+	var second_line = settings_file.get_line()
+	assert_eq(second_line, "")
+	
+	var third_line = settings_file.get_line()
+	var key = expected.keys()[1]
+	assert_same(third_line, "%s=%s" % [key, str(expected[key])])
+
+
 ## test settings data is loaded
 func test_load_settings_data():
 	setup_test_environment()
@@ -206,3 +239,18 @@ func test_load_settings_data():
 	DataGlobals.load_settings_data()
 	
 	assert_eq(node.data_loaded, node.data_to_save)
+
+## test settings data is loaded with a section
+func test_load_settings_data_section():
+	setup_test_environment()
+	
+	var node := TestNode.new(true)
+	node.use_setting_data = true
+	add_child(node)
+	assert_eq(node.data_loaded, null)
+	
+	DataGlobals.save_settings_data()
+	assert_true(DataGlobals.has_settings_data())
+	DataGlobals.load_settings_data()
+	
+	assert_eq(node.data_loaded, node.setting_data_to_save)
