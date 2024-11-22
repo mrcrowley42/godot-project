@@ -31,12 +31,14 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[node name="FactPopup" type="MarginContainer" node_paths=PackedStringArray("heading", "preview")]
+[node name="FactPopup" type="MarginContainer" node_paths=PackedStringArray("heading", "preview", "emote_btn", "lifestage_btn")]
 offset_right = 434.0
 offset_bottom = 434.0
 script = ExtResource("1_8yxo1")
 heading = NodePath("MarginContainer/VBoxContainer/Label")
 preview = NodePath("MarginContainer/VBoxContainer/PreviewContainer/CreaturePreview")
+emote_btn = NodePath("MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/EmoteBtn")
+lifestage_btn = NodePath("MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/StageBtn")
 
 [node name="Panel" type="Panel" parent="."]
 material = SubResource("ShaderMaterial_gygio")
@@ -87,7 +89,8 @@ layout_mode = 2
 theme_override_constants/separation = 24
 alignment = 1
 
-[node name="SoundBtn" type="OptionButton" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="EmoteBtn" type="OptionButton" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -96,7 +99,8 @@ selected = 0
 item_count = 1
 popup/item_0/text = "EMOTION"
 
-[node name="SoundBtn2" type="OptionButton" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="StageBtn" type="OptionButton" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -122,4 +126,6 @@ theme_override_font_sizes/font_size = 18
 text = "Back"
 
 [connection signal="hidden" from="." to="." method="_on_hidden"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/EmoteBtn" to="." method="_on_emote_btn_item_selected"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/StageBtn" to="." method="_on_stage_btn_item_selected"]
 [connection signal="button_down" from="SaveButtons/Back" to="." method="_on_back_button_down"]
