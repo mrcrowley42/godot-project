@@ -51,9 +51,10 @@ func has_only_metadata() -> bool:
 ## takes into account the metadata to override and to add
 func generate_metadata_to_save() -> Dictionary:
 	var get_if_exists = func(key: String, fallback, check_for_override: bool = false):
-		if check_for_override and metadata_to_override.has(key):
+		var already_has_key = metadata_to_override.has(key)
+		if check_for_override and already_has_key:
 			return metadata_to_override[key]  # old value is to be overridden, return new value
-		return metadata_last_loaded[key] if metadata_last_loaded.has(key) else fallback
+		return metadata_last_loaded[key] if already_has_key else fallback
 
 	var get_and_check_for_addition = func(key: String, fallback):
 		var val = get_if_exists.call(key, fallback)
@@ -61,11 +62,21 @@ func generate_metadata_to_save() -> Dictionary:
 			val += metadata_to_add[key]  # generically (and unsafely) add to old value
 		return val
 
+	var do_discovered_creatures = func():
+		var val: Array = get_if_exists.call(CREATURES_DISCOVERED, [])
+		if metadata_to_add.has(CREATURES_DISCOVERED):
+			val.append({
+				"uid": metadata_to_add[CREATURES_DISCOVERED],
+				"highest_stage_reached": 0,
+				"times_hatched": 1
+			})
+		return val
+
 	# give these values the custom function they require
 	return {
 		LAST_SAVED: Time.get_unix_time_from_system(),
 		CURRENT_CREATURE: str(get_if_exists.call(CURRENT_CREATURE, null, true)),
-		CREATURES_DISCOVERED: get_and_check_for_addition.call(CREATURES_DISCOVERED, []),
+		CREATURES_DISCOVERED: do_discovered_creatures.call(),
 		UNLOCKED_COSMETICS: get_and_check_for_addition.call(UNLOCKED_COSMETICS, []),
 		UNLOCKED_FACTS: get_and_check_for_addition.call(UNLOCKED_FACTS, []),
 		UNLOCKED_THEMES: get_and_check_for_addition.call(UNLOCKED_THEMES, [])
