@@ -15,8 +15,10 @@ extends GridContainer
 class CreatureIcon extends CustomTooltipButton:
 	var creature_data
 	func _init(creature: CreatureType):
-		size = Vector2(100,100)
+		size = Vector2(440,64)
 		creature_data = creature
+		text = creature.name
+		theme = load("res://themes/cosmetic_btn_theme.tres")
 		icon = creature.baby.sprite_frames.get_frame_texture("idle",0)
 		#theme = load("res://themes/cosmetic_btn_theme.tres")
 		#custom_minimum_size = BTN_SIZE

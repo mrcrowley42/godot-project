@@ -66,14 +66,14 @@ vertical_alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_vertical = 3
 
 [node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/PreviewContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0yx5w")
 
 [node name="CreaturePreview" type="AnimatedSprite2D" parent="MarginContainer/VBoxContainer/PreviewContainer"]
-position = Vector2(33, 41)
+position = Vector2(79, 44)
 scale = Vector2(0.175, 0.175)
 sprite_frames = ExtResource("4_2i6ea")
 animation = &"confused"
