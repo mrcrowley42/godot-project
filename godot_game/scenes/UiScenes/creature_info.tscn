@@ -20,14 +20,14 @@ shader_parameter/scale = 0.68
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0yx5w"]
 bg_color = Color(0.0913, 0.11, 0.10252, 0.745098)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 expand_margin_left = 2.0
 expand_margin_top = 2.0
 expand_margin_right = 2.0
@@ -66,7 +66,7 @@ vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 24
+theme_override_constants/separation = 20
 
 [node name="PreviewContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
@@ -95,10 +95,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_0yx5w")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2"]
 layout_mode = 2
-theme_override_constants/margin_left = 6
-theme_override_constants/margin_top = 6
-theme_override_constants/margin_right = 6
-theme_override_constants/margin_bottom = 6
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/MarginContainer"]
 layout_mode = 2
@@ -122,13 +122,12 @@ layout_mode = 2
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/ScrollContainer"]
 custom_minimum_size = Vector2(378, 0)
 layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 12
 
 [node name="Content" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer2/ScrollContainer/MarginContainer"]
-custom_minimum_size = Vector2(370, 150)
 layout_mode = 2
 size_flags_vertical = 1
 theme = ExtResource("4_mphc8")

@@ -58,8 +58,9 @@ func _on_stage_btn_item_selected(_index: int) -> void:
 		for anim_name in preview.sprite_frames.get_animation_names():
 			emote_btn.add_item(anim_name)
 	elif _index == 2:
-		preview.sprite_frames = creature.adult.sprite_frames
-		preview.play()
+		if creature.adult:
+			preview.sprite_frames = creature.adult.sprite_frames
+			preview.play()
 		#preview.autoplay = "idle"
 	
 		emote_btn.clear()

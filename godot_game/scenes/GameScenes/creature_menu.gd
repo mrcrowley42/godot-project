@@ -1,35 +1,27 @@
 extends GridContainer
 
 @onready var creature_list = load("res://resources/creature_list.tres")
-
-#@warning_ignore("unused_signal")  # shut up
-#signal cosmetic_btn_pressed
-#
-#const BTN_SIZE: Vector2 = Vector2(64, 64)
-#
 @onready var creature_info_scene = load("res://scenes/UiScenes/creature_info.tscn")
-#var unlockables = load("res://resources/unlockables.tres")
-#@export var creature: Creature
-#
-### Class that describes the button object for each cosmetic item.
+const BTN_SIZE = Vector2(340,64)
+
+### Class that describes the button object for each creature.
 class CreatureIcon extends CustomTooltipButton:
 	var creature_data
 	func _init(creature: CreatureType):
-		size = Vector2(440,64)
+		size = BTN_SIZE
 		creature_data = creature
-		text = creature.name
 		theme = load("res://themes/cosmetic_btn_theme.tres")
 		icon = creature.baby.sprite_frames.get_frame_texture("idle",0)
-		#theme = load("res://themes/cosmetic_btn_theme.tres")
-		#custom_minimum_size = BTN_SIZE
-		#toggle_mode = true
-		#icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		#size = BTN_SIZE
-		#expand_icon = false
+		custom_minimum_size = BTN_SIZE
+		icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		expand_icon = false
 		add_theme_constant_override("icon_max_width", 100)
-		#cosmetic = unlockable
-		#update_locked()
-#
+		update_locked()
+	
+	func has_encountered(creature_type) -> bool:
+		var uid = Helpers.uid_str(creature_type)
+		return uid in DataGlobals.load_metadata()[DataGlobals.CREATURES_DISCOVERED]
+	
 	### Action when button is pressed.
 	func _pressed():
 		var parent = find_parent("CreaturesMenu")
@@ -37,19 +29,10 @@ class CreatureIcon extends CustomTooltipButton:
 		scene.creature = self.creature_data
 		scene.setup()
 		parent.add_child(scene)
-		#var creature: Creature = parent.creature
-		#var manager: AccessoryManager = creature.find_child("AccessoryManager")
-		#manager.toggle_cosmetic(self.cosmetic)
-		#parent.cosmetic_btn_pressed.emit()
-#
-	#func update_locked():
-		#var unlocked_items = DataGlobals.load_metadata()['unlocked_cosmetics']
-		#var uid = Helpers.uid_str(self.cosmetic)
-		#self.disabled = false if self.cosmetic.unlocked else not uid in unlocked_items
-		#self.tooltip_string = ("Locked: " + cosmetic.hint) if disabled else cosmetic.desc
-		#self.direction = DIRECTION.DOWN
-		#self.margin = 14
-		#self.text = "?" if self.disabled else ""
+
+	func update_locked():
+		self.disabled = !has_encountered(self.creature_data)
+		text = self.creature_data.name if not self.disabled else "???"
 		#icon = null if self.disabled else cosmetic.thumbnail
 
 func _ready():
@@ -57,21 +40,6 @@ func _ready():
 		for creature in creature_list.items:
 			var btn = CreatureIcon.new(creature)
 			add_child(btn)
-		
-	
-	#creature.accessory_manager.cosmetics_loaded.connect(update_toggle)
-	#for item: CosmeticItem in unlockables.unlockables:
-		#var item_btn = UnlockableIcon.new(item)
-		#add_child(item_btn)
 
-#func update_buttons():
-	#propagate_call("update_locked")
-#
-#func update_toggle():
-	#var loaded = creature.accessory_manager.current_cosmetics
-	#for child in get_children():
-		#if child.cosmetic.name in loaded:
-			#child.set_pressed_no_signal(true)
-#
 #func _on_visibility_changed():
 	#$"../..".scroll_vertical = 0

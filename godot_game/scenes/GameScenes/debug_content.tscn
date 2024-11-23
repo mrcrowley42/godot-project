@@ -167,15 +167,6 @@ offset_bottom = 477.0
 theme = ExtResource("2_5bhpe")
 text = "Screen Tint Strength"
 
-[node name="Label5" type="Label" parent="."]
-layout_mode = 0
-offset_left = 27.0
-offset_top = 157.0
-offset_right = 195.0
-offset_bottom = 184.0
-theme = ExtResource("2_5bhpe")
-text = "Current Track:"
-
 [node name="dayLabel" type="Label" parent="."]
 layout_mode = 0
 offset_left = 258.0
@@ -347,6 +338,19 @@ theme_override_colors/font_color = Color(1, 1, 0.905882, 1)
 theme_override_fonts/font = ExtResource("9_y33yi")
 theme_override_font_sizes/font_size = 24
 text = "UNLOCK ALL"
+
+[node name="DiscoverBtn" type="Button" parent="."]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 169.0
+offset_right = 276.0
+offset_bottom = 233.0
+scale = Vector2(0.8, 0.8)
+theme = ExtResource("8_lqg4h")
+theme_override_colors/font_color = Color(1, 1, 0.905882, 1)
+theme_override_fonts/font = ExtResource("9_y33yi")
+theme_override_font_sizes/font_size = 24
+text = "Discover All"
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
@@ -539,6 +543,7 @@ text = "Print Sounds"
 [connection signal="value_changed" from="HSlider2" to="." method="_on_h_slider_2_value_changed"]
 [connection signal="button_down" from="NotifBtn" to="." method="_on_notif_btn_button_down"]
 [connection signal="button_down" from="UnlockButton" to="." method="_on_unlock_button_button_down"]
+[connection signal="button_down" from="DiscoverBtn" to="." method="_on_discover_btn_button_down"]
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="item_selected" from="AnimSelect" to="." method="_on_anim_select_item_selected"]
 [connection signal="button_down" from="WindowSizeControls/HBoxContainer/MinimiseButton" to="WindowSizeControls" method="_on_min_down"]
