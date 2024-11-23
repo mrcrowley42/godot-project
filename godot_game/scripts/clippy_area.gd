@@ -91,6 +91,7 @@ func toggle_clippy_mode() -> void:
 		window.size = start_size
 		window.canvas_transform = start_transform
 		creature.find_child("Sprites").self_modulate = Color(1,1,1,1)
+		
 
 	# THIS IS SO DUMB!!!
 	# Linux has needs a delay to activate borderless, so this delay is needed
@@ -100,6 +101,7 @@ func toggle_clippy_mode() -> void:
 			await get_tree().process_frame
 			await get_tree().process_frame
 		window.borderless = clippy
+	normalise()
 	#print(window.position) # TODO REMOVE THIS PRINT AFTER CHECKING THERE IS NO WINDOW DRIFT!
 
 

@@ -25,12 +25,18 @@ func setup():
 	if not creature:
 		return
 	heading.text = "%s" % creature.name
-	preview.sprite_frames = creature.baby.sprite_frames
+	## TODO edit this when the ability to track states has been added.
+	if creature.adult:
+		preview.sprite_frames = creature.adult.sprite_frames
+	else:
+		preview.sprite_frames = creature.baby.sprite_frames
 	preview.autoplay = "idle"
 	
 	#emote_btn.remove_item(0)
-	for anim_name in creature.baby.sprite_frames.get_animation_names():
+	for anim_name in preview.sprite_frames.get_animation_names():
 		emote_btn.add_item(anim_name)
+	
+	
 	
 	update_animation("idle")
 	#category_btn.item_selected.emit(0)
@@ -43,7 +49,23 @@ func _on_button_button_down() -> void:
 
 
 func _on_stage_btn_item_selected(_index: int) -> void:
-	pass # Replace with function body.
+	if _index == 1: # Baby
+		preview.sprite_frames = creature.baby.sprite_frames
+		preview.play()
+		#preview.autoplay = "idle"
+	
+		emote_btn.clear()
+		for anim_name in preview.sprite_frames.get_animation_names():
+			emote_btn.add_item(anim_name)
+	elif _index == 2:
+		preview.sprite_frames = creature.adult.sprite_frames
+		preview.play()
+		#preview.autoplay = "idle"
+	
+		emote_btn.clear()
+		for anim_name in preview.sprite_frames.get_animation_names():
+			emote_btn.add_item(anim_name)
+		
 
 
 func _on_emote_btn_item_selected(index: int) -> void:

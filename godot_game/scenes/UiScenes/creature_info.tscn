@@ -38,7 +38,7 @@ offset_right = 434.0
 offset_bottom = 434.0
 script = ExtResource("1_vck8f")
 heading = NodePath("MarginContainer/VBoxContainer/Label")
-description = NodePath("MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/Content")
+description = NodePath("MarginContainer/VBoxContainer/MarginContainer2/ScrollContainer/MarginContainer/Content")
 preview = NodePath("MarginContainer/VBoxContainer/HBoxContainer/PreviewContainer/CreaturePreview")
 stat_window = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/MarginContainer/Label")
 
@@ -79,12 +79,11 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0yx5w")
 
 [node name="CreaturePreview" type="AnimatedSprite2D" parent="MarginContainer/VBoxContainer/HBoxContainer/PreviewContainer"]
-position = Vector2(10, 10)
+position = Vector2(76, 76)
 scale = Vector2(0.1, 0.1)
 sprite_frames = ExtResource("4_ihk40")
-animation = &"confused"
+animation = &"angry"
 autoplay = "confused"
-centered = false
 
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -109,11 +108,18 @@ theme_override_font_sizes/font_size = 24
 text = "Hatched: 6
 "
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0yx5w")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/MarginContainer2"]
 custom_minimum_size = Vector2(386, 140)
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/ScrollContainer"]
 custom_minimum_size = Vector2(378, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 8
@@ -121,11 +127,7 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_0yx5w")
-
-[node name="Content" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+[node name="Content" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer2/ScrollContainer/MarginContainer"]
 custom_minimum_size = Vector2(370, 150)
 layout_mode = 2
 size_flags_vertical = 1
