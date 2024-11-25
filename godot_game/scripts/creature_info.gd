@@ -26,7 +26,6 @@ func setup():
 	description.text = "%s" % creature.desc
 	preview.sprite_frames = creature.baby.sprite_frames
 	preview.autoplay = "idle"
-	
 
 
 func _on_button_button_down() -> void:

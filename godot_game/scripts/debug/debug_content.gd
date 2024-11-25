@@ -123,3 +123,13 @@ func _on_unlock_button_button_down() -> void:
 
 func _on_button_3_button_down() -> void:
 	ambience_man.current_sounds()
+
+
+func _on_discover_btn_button_down() -> void:
+	var discovered = DataGlobals.load_metadata()[DataGlobals.CREATURES_DISCOVERED]
+	for creature_type in load("res://resources/creature_list.tres").items:
+		var uid = Helpers.uid_str(creature_type)
+		if uid not in discovered:
+			DataGlobals.metadata_to_add[DataGlobals.CREATURES_DISCOVERED] = [uid]
+	DataGlobals.save_only_metadata()
+	game.find_child("Creatures").propagate_call("update_locked")
