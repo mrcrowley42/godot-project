@@ -17,10 +17,6 @@ const LOAD = "load"
 
 ## storage of the metadata that was last loaded from the save file
 var metadata_last_loaded: Dictionary = {}
-## metadata to be overriden on next save (override the current metadata for something new)
-var metadata_to_override: Dictionary = {}
-## metadata to be added to on next save (e.g. to be appended to a list)
-var metadata_to_add: Dictionary = {}
 
 func get_save_data_file():
 	return TEST_SAVE_FILE if use_test_file else Globals.SAVE_DATA_FILE
@@ -48,39 +44,77 @@ func has_only_metadata() -> bool:
 ##    SAVING
 ## --------------
 
-## takes into account the metadata to override and to add
-func generate_metadata_to_save() -> Dictionary:
-	var get_if_exists = func(key: String, fallback, check_for_override: bool = false):
-		var already_has_key = metadata_to_override.has(key)
-		if check_for_override and already_has_key:
-			return metadata_to_override[key]  # old value is to be overridden, return new value
-		return metadata_last_loaded[key] if already_has_key else fallback
+## set / override a value in the metadata
+func set_metadata_value(metadata_key: String, value):
+	if is_instance_of(value, TYPE_INT) or is_instance_of(value, TYPE_FLOAT):
+		value = str(value)
+	
+	metadata_last_loaded[metadata_key] = value
+	save_only_metadata()
 
-	var get_and_check_for_addition = func(key: String, fallback):
-		var val = get_if_exists.call(key, fallback)
-		if metadata_to_add.has(key):
-			val += metadata_to_add[key]  # generically (and unsafely) add to old value
-		return val
+## add / append to a value in the metadata
+func add_to_metadata_value(metadata_key: String, value):
+	var new_val = get_metadata_value(metadata_key)
+	
+	# add
+	if is_instance_of(new_val, TYPE_INT) or is_instance_of(new_val, TYPE_FLOAT):
+		assert(is_instance_of(value, TYPE_INT) or is_instance_of(value, TYPE_FLOAT))
+		new_val += value
+	
+	# append
+	if is_instance_of(new_val, TYPE_ARRAY):
+		new_val.append(value)
+	
+	metadata_last_loaded[metadata_key] = new_val
+	save_only_metadata()
 
-	var do_discovered_creatures = func():
-		var val: Array = get_if_exists.call(CREATURES_DISCOVERED, [])
-		if metadata_to_add.has(CREATURES_DISCOVERED):
-			val.append({
-				"uid": metadata_to_add[CREATURES_DISCOVERED],
-				"highest_stage_reached": 0,
-				"times_hatched": 1
-			})
-		return val
+## modify a dict in the metadata, action: 0=set, 1=add
+## paths contain the keys to be used to navigate the dictionary value at metadata_key in the metadata
+func modify_metadata_value(metadata_key: String, paths: Array[String], action: int, value):
+	assert(metadata_last_loaded.has(metadata_key), "'%s' should already exist in metadata" % metadata_key)
+	var dict: Dictionary = metadata_last_loaded[metadata_key]  # pointer
+	
+	assert(len(paths) != 0, "just use set_metadata_value() lmao")
+	assert(action == 0 || action == 1, "action must be either 0 (set) or 1 (add to)")
+	
+	var last_path = paths.pop_back()
+	for key in paths:
+		assert(dict.has(key))
+		dict = dict[key]
+	
+	if action == 0:
+		dict[last_path] = value
+	else:
+		if is_instance_of(dict[last_path], TYPE_ARRAY):
+			dict[last_path].append(value)  # append
+		elif is_instance_of(dict[last_path], TYPE_INT) or is_instance_of(dict[last_path], TYPE_FLOAT):
+			dict[last_path] += value  # add
+		else:
+			printerr("the value of metadata %s [%s, %s] is not valid for modification" % [metadata_key, paths, last_path])
+	save_only_metadata()
 
-	# give these values the custom function they require
+## get value from last loaded or default if it doesn't have it
+func get_metadata_value(metadata_key: String):
+	var value = get_default_metadata()[metadata_key]
+	if metadata_last_loaded.has(metadata_key):
+		value = metadata_last_loaded[metadata_key]
+	return value
+
+func get_default_metadata() -> Dictionary:
 	return {
 		LAST_SAVED: Time.get_unix_time_from_system(),
-		CURRENT_CREATURE: str(get_if_exists.call(CURRENT_CREATURE, null, true)),
-		CREATURES_DISCOVERED: do_discovered_creatures.call(),
-		UNLOCKED_COSMETICS: get_and_check_for_addition.call(UNLOCKED_COSMETICS, []),
-		UNLOCKED_FACTS: get_and_check_for_addition.call(UNLOCKED_FACTS, []),
-		UNLOCKED_THEMES: get_and_check_for_addition.call(UNLOCKED_THEMES, [])
+		CURRENT_CREATURE: null,
+		CREATURES_DISCOVERED: [],
+		UNLOCKED_COSMETICS: [],
+		UNLOCKED_FACTS: [],
+		UNLOCKED_THEMES: []
 	}
+
+## takes into account the metadata to override and to add
+func generate_metadata_to_save() -> Dictionary:
+	var new_metadata = metadata_last_loaded.duplicate(true)  # deepcopy
+	new_metadata[LAST_SAVED] = Time.get_unix_time_from_system()
+	return new_metadata
 
 # save file structure:
 # line 1  = metadata
@@ -89,8 +123,7 @@ func save_data():
 	var save_file = FileAccess.open(get_save_data_file(), FileAccess.WRITE)
 	var save_nodes = get_tree().get_nodes_in_group(Globals.SAVE_DATA_GROUP)
 	var all_data = [generate_metadata_to_save()]  # metadata is first
-	metadata_to_override.clear()
-	metadata_to_add.clear()
+	metadata_last_loaded = all_data[0]
 
 	# save node data
 	for node in save_nodes:
@@ -115,11 +148,9 @@ func save_only_metadata():
 	# replace existing metadata with new
 	var new_metadata = generate_metadata_to_save()
 	metadata_last_loaded = new_metadata
-	metadata_to_override.clear()
-	metadata_to_add.clear()
 
 	var all_lines = [new_metadata]
-	if file_existed:  # get the reat of the file
+	if file_existed:  # get the rest of the file
 		while save_file.get_position() < save_file.get_length():
 			all_lines.append(save_file.get_line())
 
@@ -234,5 +265,3 @@ func setup_test_environ():
 	
 	# clear potentially set values
 	metadata_last_loaded.clear()
-	metadata_to_add.clear()
-	metadata_to_override.clear()
