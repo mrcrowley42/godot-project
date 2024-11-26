@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/creature_info.gd" id="1_vck8f"]
 [ext_resource type="Shader" path="res://shaders/pattern_animated_grid.gdshader" id="2_qkvqy"]
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="3_3i3tn"]
-[ext_resource type="SpriteFrames" uid="uid://68skicj7tsu2" path="res://resources/creatures/main_creature_adult_sprite_frames.tres" id="4_ihk40"]
+[ext_resource type="SpriteFrames" uid="uid://bc8bjaln2o3sf" path="res://resources/creatures/blanket_baby_sprite_frames.tres" id="4_5j2jk"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="4_mphc8"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="5_nb2bl"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="5_sg3th"]
@@ -81,9 +81,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_0yx5w")
 [node name="CreaturePreview" type="AnimatedSprite2D" parent="MarginContainer/VBoxContainer/HBoxContainer/PreviewContainer"]
 position = Vector2(76, 76)
 scale = Vector2(0.1, 0.1)
-sprite_frames = ExtResource("4_ihk40")
-animation = &"angry"
-autoplay = "confused"
+sprite_frames = ExtResource("4_5j2jk")
+animation = &"confused"
+autoplay = "idle"
+frame_progress = 0.816056
 
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
