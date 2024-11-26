@@ -1,0 +1,73 @@
+[gd_resource type="SpriteFrames" load_steps=13 format=3 uid="uid://bc8bjaln2o3sf"]
+
+[ext_resource type="Texture2D" uid="uid://dahawereyh615" path="res://images/creature_sprites/blanket/blanket baby-confused-0.png" id="1_e7xdw"]
+[ext_resource type="Texture2D" uid="uid://dxnbx845fvjfn" path="res://images/creature_sprites/blanket/blanket baby-confused-1.png" id="2_rtq0k"]
+[ext_resource type="Texture2D" uid="uid://dpaus8pben40t" path="res://images/creature_sprites/blanket/blanket baby-confused-2.png" id="3_6epew"]
+[ext_resource type="Texture2D" uid="uid://1rtb2kt1ncxa" path="res://images/creature_sprites/blanket/blanket-baby-idle-0.png" id="4_1rnum"]
+[ext_resource type="Texture2D" uid="uid://bsjg8ega7n3ng" path="res://images/creature_sprites/blanket/blanket-baby-idle-1.png" id="5_gaqde"]
+[ext_resource type="Texture2D" uid="uid://c2yg6p4q7s5hk" path="res://images/creature_sprites/blanket/blanket-baby-idle-2.png" id="6_0fiuv"]
+[ext_resource type="Texture2D" uid="uid://b1q7usy7c32hu" path="res://images/creature_sprites/blanket/blanket baby-joy-0.png" id="7_akova"]
+[ext_resource type="Texture2D" uid="uid://br3imsl7fmsue" path="res://images/creature_sprites/blanket/blanket baby-joy-1.png" id="8_ieq8p"]
+[ext_resource type="Texture2D" uid="uid://43c5dss8bdgm" path="res://images/creature_sprites/blanket/blanket baby-joy-2.png" id="9_7ytuc"]
+[ext_resource type="Texture2D" uid="uid://cyp8c6w3t64ca" path="res://images/creature_sprites/blanket/blanket baby-sad-0.png" id="10_108lp"]
+[ext_resource type="Texture2D" uid="uid://bn6ne1ao8hd6q" path="res://images/creature_sprites/blanket/blanket baby-sad-1.png" id="11_wui76"]
+[ext_resource type="Texture2D" uid="uid://d4jdqfmrqgnuk" path="res://images/creature_sprites/blanket/blanket baby-sad-2.png" id="12_sue6y"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_e7xdw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_rtq0k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6epew")
+}],
+"loop": true,
+"name": &"confused",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_1rnum")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_gaqde")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_0fiuv")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_akova")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ieq8p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_7ytuc")
+}],
+"loop": true,
+"name": &"joy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_108lp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_wui76")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_sue6y")
+}],
+"loop": true,
+"name": &"sad",
+"speed": 5.0
+}]

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CreatureType" load_steps=3 format=3 uid="uid://dmgqdvkbx0e0g"]
+
+[ext_resource type="Resource" uid="uid://b3jgjyt1jrvei" path="res://resources/creatures/blanket-baby.tres" id="1_s1of6"]
+[ext_resource type="Script" path="res://scripts/base_classses/creature_type.gd" id="1_xe24w"]
+
+[resource]
+script = ExtResource("1_xe24w")
+name = "Blanket guy"
+desc = "Likes their blankets"
+xp_required_for_adult = 800
+baby = ExtResource("1_s1of6")
