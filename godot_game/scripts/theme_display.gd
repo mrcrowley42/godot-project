@@ -53,7 +53,7 @@ class UiThemeButton extends CustomTooltipButton:
 		DataGlobals.save_settings_data()
 
 	func update_locked():
-		var unlocked_items = DataGlobals.load_metadata()['unlocked_themes']
+		var unlocked_items = DataGlobals.get_metadata_value(DataGlobals.UNLOCKED_THEMES)
 		var uid = Helpers.uid_str(self.ui_theme)
 		self.disabled = false if self.ui_theme.unlocked else not uid in unlocked_items
 		self.tooltip_string = ui_theme.hint if disabled else ""

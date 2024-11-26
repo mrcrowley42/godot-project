@@ -20,7 +20,7 @@ class CreatureIcon extends CustomTooltipButton:
 	
 	func has_encountered(creature_type) -> bool:
 		var uid = Helpers.uid_str(creature_type)
-		return uid in DataGlobals.load_metadata()[DataGlobals.CREATURES_DISCOVERED]
+		return uid in DataGlobals.get_metadata_value(DataGlobals.CREATURES_DISCOVERED)
 	
 	### Action when button is pressed.
 	func _pressed():

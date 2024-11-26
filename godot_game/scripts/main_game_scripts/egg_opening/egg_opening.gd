@@ -71,12 +71,13 @@ var scale_addition: Vector2 = Vector2(0, 0)
 
 func _ready():
 	DataGlobals.load_metadata()
-	if skip_scene or DataGlobals.has_save_data():
-		if !DataGlobals.has_only_metadata():
-			load_main_scene()
+	var current_creature = DataGlobals.get_metadata_value(DataGlobals.CURRENT_CREATURE)
+	if skip_scene or DataGlobals.has_save_data() and current_creature != null:
+		if DataGlobals.has_only_metadata():
+			instant_open_to_continue_screen()
 			return
 		else:
-			instant_open_to_continue_screen()
+			load_main_scene()
 			return
 
 	# setup
@@ -270,7 +271,7 @@ func set_egg_desc(i: int = -1):
 		var uid = ResourceLoader.get_resource_uid(creature_entry.creature_type.resource_path)
 		if is_creature_known(uid):
 			var texture = creature_entry.creature_type.baby.sprite_frames.get_frame_texture("idle", 0).resource_path
-			hatches_list.append("[img=25]%s[/img]" % texture)
+			hatches_list.append("[img=30]%s[/img]" % texture)
 		else:
 			hatches_list.append("?")
 	egg_desc.text = EGG_FORMAT_STRING % [egg.name, ", ".join(hatches_list)]
@@ -279,8 +280,7 @@ func set_creature_desc(creature: CreatureType):
 	egg_desc.text = "[center][u]%s![/u]\n[font top=6 s=15]%s" % [creature.name, creature.desc]
 
 func is_creature_known(creature_type_uid: int) -> bool:
-	var metadata = DataGlobals.metadata_last_loaded
-	return metadata.has(DataGlobals.CREATURES_DISCOVERED) and creature_type_uid in metadata[DataGlobals.CREATURES_DISCOVERED]
+	return DataGlobals.get_metadata_value(DataGlobals.CREATURES_DISCOVERED).has(str(creature_type_uid))
 
 ## when one egg is selected from placed eggs
 func select_egg(egg: EggEntry, inx: int):
@@ -420,11 +420,10 @@ func finish_hatching(sprite_c: Control):
 	set_creature_desc(creature_hatched)
 
 	# save data
-	var uid = ResourceLoader.get_resource_uid(creature_hatched.resource_path)
+	var uid_str: String = Helpers.uid_str(creature_hatched)
 
-	DataGlobals.metadata_to_add[DataGlobals.CREATURES_DISCOVERED] = [str(uid)]
-	DataGlobals.metadata_to_override[DataGlobals.CURRENT_CREATURE] = uid
-	DataGlobals.save_only_metadata()  # SAVE!
+	DataGlobals.add_to_creatures_discovered(uid_str)
+	DataGlobals.set_metadata_value(DataGlobals.CURRENT_CREATURE, uid_str)
 
 ## randomly pick a creature to hatch from the selected egg
 func pick_creature_to_hatch() -> CreatureType:
@@ -446,7 +445,7 @@ func pick_creature_to_hatch() -> CreatureType:
 ## for when first loading in and continue button wasn't pressed before game was closed last
 func instant_open_to_continue_screen():
 	do_opening_transition()
-	var uid = int(DataGlobals.metadata_last_loaded[DataGlobals.CURRENT_CREATURE])
+	var uid = int(DataGlobals.get_metadata_value(DataGlobals.CURRENT_CREATURE))
 	var creature_hatched: CreatureType = load(ResourceUID.get_id_path(uid))
 
 	# setup display

@@ -15,8 +15,14 @@ const DATA = "data"
 const SAVE = "save"
 const LOAD = "load"
 
+# actions
+const ACTION_SET = 0
+const ACTION_ADD = 1
+const ACTION_APPEND = 2
+
 ## storage of the metadata that was last loaded from the save file
-var metadata_last_loaded: Dictionary = {}
+var _current_metadata: Dictionary = {}
+var _should_save_metadata: bool = false
 
 func get_save_data_file():
 	return TEST_SAVE_FILE if use_test_file else Globals.SAVE_DATA_FILE
@@ -37,8 +43,30 @@ func has_settings_data() -> bool:
 func has_only_metadata() -> bool:
 	if has_save_data():
 		var save_file = FileAccess.open(get_save_data_file(), FileAccess.READ)
-		return save_file.get_length() == len(save_file.get_line())  # only one line in save file
+		save_file.get_line()
+		return len(save_file.get_line()) == 0  # second line is empty
 	return false
+
+## get value from last loaded (or the default if it doesn't exist in metadata)
+func get_metadata_value(metadata_key: String):
+	var value = get_default_metadata()[metadata_key]
+	if _current_metadata.has(metadata_key):
+		value = _current_metadata[metadata_key]
+	return value
+
+func get_default_metadata() -> Dictionary:
+	return {
+		LAST_SAVED: Time.get_unix_time_from_system(),
+		CURRENT_CREATURE: null,
+		CREATURES_DISCOVERED: {},
+		UNLOCKED_COSMETICS: [],
+		UNLOCKED_FACTS: [],
+		UNLOCKED_THEMES: []
+	}
+
+## deepcopy of the metadata last loaded
+func get_current_metadata_dc() -> Dictionary:
+	return _current_metadata.duplicate(true)
 
 ## --------------
 ##    SAVING
@@ -49,72 +77,70 @@ func set_metadata_value(metadata_key: String, value):
 	if is_instance_of(value, TYPE_INT) or is_instance_of(value, TYPE_FLOAT):
 		value = str(value)
 	
-	metadata_last_loaded[metadata_key] = value
-	save_only_metadata()
+	_current_metadata[metadata_key] = value
+	_should_save_metadata = true
 
-## add / append to a value in the metadata
-func add_to_metadata_value(metadata_key: String, value):
+## add to a value in the metadata
+func add_to_metadata_value(metadata_key: String, value, convert_to_num: bool = true):
 	var new_val = get_metadata_value(metadata_key)
+	assert(is_instance_of(new_val, TYPE_INT) or is_instance_of(new_val, TYPE_FLOAT) or is_instance_of(new_val, TYPE_STRING))
+	assert(is_instance_of(value, TYPE_INT) or is_instance_of(value, TYPE_FLOAT) or is_instance_of(value, TYPE_STRING))
+	
+	# convert from string to float or int
+	if convert_to_num and is_instance_of(new_val, TYPE_STRING):
+		@warning_ignore("incompatible_ternary")  # bruh i know
+		new_val = float(new_val) if new_val.contains(".") else int(new_val)
 	
 	# add
-	if is_instance_of(new_val, TYPE_INT) or is_instance_of(new_val, TYPE_FLOAT):
-		assert(is_instance_of(value, TYPE_INT) or is_instance_of(value, TYPE_FLOAT))
-		new_val += value
+	new_val += value
+	if convert_to_num:
+		new_val = str(new_val)  # back to a string
 	
-	# append
-	if is_instance_of(new_val, TYPE_ARRAY):
-		new_val.append(value)
-	
-	metadata_last_loaded[metadata_key] = new_val
-	save_only_metadata()
+	_current_metadata[metadata_key] = new_val
+	_should_save_metadata = true
 
-## modify a dict in the metadata, action: 0=set, 1=add
+## append to a (list) value in the metadata
+func append_to_metadata_value(metadata_key: String, value):
+	var new_val = get_metadata_value(metadata_key)
+	assert(is_instance_of(new_val, TYPE_ARRAY))
+	new_val.append(value)
+	
+	_current_metadata[metadata_key] = new_val
+	_should_save_metadata = true
+
+## modify a dict in the metadata, action: 0=set, 1=add, 2=append
 ## paths contain the keys to be used to navigate the dictionary value at metadata_key in the metadata
-func modify_metadata_value(metadata_key: String, paths: Array[String], action: int, value):
-	assert(metadata_last_loaded.has(metadata_key), "'%s' should already exist in metadata" % metadata_key)
-	var dict: Dictionary = metadata_last_loaded[metadata_key]  # pointer
-	
+func modify_metadata_value(metadata_key: String, paths: Array, action: int, value):
 	assert(len(paths) != 0, "just use set_metadata_value() lmao")
-	assert(action == 0 || action == 1, "action must be either 0 (set) or 1 (add to)")
+	if not _current_metadata.has(metadata_key):
+		_current_metadata[metadata_key] = get_metadata_value(metadata_key)
 	
-	var last_path = paths.pop_back()
+	var ptr = _current_metadata[metadata_key]  # pointer
+	var last_key = paths.pop_back()
 	for key in paths:
-		assert(dict.has(key))
-		dict = dict[key]
+		ptr = ptr[key]
 	
-	if action == 0:
-		dict[last_path] = value
+	if action == ACTION_SET:
+		ptr[last_key] = value
+	elif action == ACTION_ADD:
+		assert(is_instance_of(ptr[last_key], TYPE_INT) or is_instance_of(ptr[last_key], TYPE_FLOAT) or is_instance_of(ptr[last_key], TYPE_STRING))
+		ptr[last_key] += value  # add
+	elif action == ACTION_APPEND:
+		assert(is_instance_of(ptr[last_key], TYPE_ARRAY))
+		ptr[last_key].append(value)  # append
 	else:
-		if is_instance_of(dict[last_path], TYPE_ARRAY):
-			dict[last_path].append(value)  # append
-		elif is_instance_of(dict[last_path], TYPE_INT) or is_instance_of(dict[last_path], TYPE_FLOAT):
-			dict[last_path] += value  # add
-		else:
-			printerr("the value of metadata %s [%s, %s] is not valid for modification" % [metadata_key, paths, last_path])
-	save_only_metadata()
-
-## get value from last loaded or default if it doesn't have it
-func get_metadata_value(metadata_key: String):
-	var value = get_default_metadata()[metadata_key]
-	if metadata_last_loaded.has(metadata_key):
-		value = metadata_last_loaded[metadata_key]
-	return value
-
-func get_default_metadata() -> Dictionary:
-	return {
-		LAST_SAVED: Time.get_unix_time_from_system(),
-		CURRENT_CREATURE: null,
-		CREATURES_DISCOVERED: [],
-		UNLOCKED_COSMETICS: [],
-		UNLOCKED_FACTS: [],
-		UNLOCKED_THEMES: []
-	}
+		print("ERROR: invalid action '%s' when attempting to modify metadata" % action)
+	_should_save_metadata = true
 
 ## takes into account the metadata to override and to add
 func generate_metadata_to_save() -> Dictionary:
-	var new_metadata = metadata_last_loaded.duplicate(true)  # deepcopy
-	new_metadata[LAST_SAVED] = Time.get_unix_time_from_system()
-	return new_metadata
+	var all_metadata: Dictionary = get_default_metadata()
+	
+	for key in all_metadata.keys():
+		all_metadata[key] = get_metadata_value(key)
+	
+	all_metadata[LAST_SAVED] = Time.get_unix_time_from_system()
+	return all_metadata
 
 # save file structure:
 # line 1  = metadata
@@ -123,7 +149,7 @@ func save_data():
 	var save_file = FileAccess.open(get_save_data_file(), FileAccess.WRITE)
 	var save_nodes = get_tree().get_nodes_in_group(Globals.SAVE_DATA_GROUP)
 	var all_data = [generate_metadata_to_save()]  # metadata is first
-	metadata_last_loaded = all_data[0]
+	_current_metadata = all_data[0]
 
 	# save node data
 	for node in save_nodes:
@@ -147,7 +173,7 @@ func save_only_metadata():
 
 	# replace existing metadata with new
 	var new_metadata = generate_metadata_to_save()
-	metadata_last_loaded = new_metadata
+	_current_metadata = new_metadata
 
 	var all_lines = [new_metadata]
 	if file_existed:  # get the rest of the file
@@ -184,19 +210,27 @@ func save_settings_data():
 
 ## loads only the metadata line from save (if it exists)
 func load_metadata() -> Dictionary:
+	if _should_save_metadata:
+		printerr("Cannot load as changes to metadata have not been saved")
+		return get_current_metadata_dc()
+	
 	if has_save_data():
 		var save_file = FileAccess.open(get_save_data_file(), FileAccess.READ)
-		metadata_last_loaded = JSON.parse_string(save_file.get_line())
-	return metadata_last_loaded
+		_current_metadata = JSON.parse_string(save_file.get_line())
+	return get_current_metadata_dc()
 
 ## loads data, and passes it to saved nodes. returns metadata
 func load_data() -> Dictionary:
+	if _should_save_metadata:
+		printerr("Cannot load as changes to metadata have not been saved")
+		return get_current_metadata_dc()
+	
 	if !has_save_data():
-		return metadata_last_loaded
+		return get_current_metadata_dc()
 
 	# attempt to load
 	var save_file = FileAccess.open(get_save_data_file(), FileAccess.READ)
-	metadata_last_loaded = JSON.parse_string(save_file.get_line())
+	_current_metadata = JSON.parse_string(save_file.get_line())
 
 	while save_file.get_position() < save_file.get_length():
 		var line = save_file.get_line()
@@ -219,7 +253,7 @@ func load_data() -> Dictionary:
 		# call load function
 		var data = parsed_line[DATA]
 		node.call(LOAD, data)
-	return metadata_last_loaded
+	return get_current_metadata_dc()
 
 
 func load_settings_data():
@@ -252,6 +286,31 @@ func load_settings_data():
 		node.call(LOAD, data_to_send)
 
 
+## ------------
+##    OTHER
+## ------------
+
+## add a newly discovered creature, or add 1 to "times_hatched" if already discovered
+func add_to_creatures_discovered(uid: String):
+	if get_metadata_value(CREATURES_DISCOVERED).has(uid):
+		# add 1 to times hatched
+		modify_metadata_value(CREATURES_DISCOVERED, [uid, "num_times_hatched"], ACTION_ADD, 1)
+	else:
+		# add new creature discovered
+		var dict = {
+			"uid": uid,
+			"max_stage_reached": 0,
+			"num_times_hatched": 1
+		}
+		modify_metadata_value(CREATURES_DISCOVERED, [uid], ACTION_SET, dict)
+
+func _process(_delta: float) -> void:
+	# save metadata here so the file only needs to be written to once in a frame
+	# no matter the number of metadata changes that occurred this frame
+	if _should_save_metadata:
+		_should_save_metadata = false
+		save_only_metadata()
+
 ## --------------
 ##    TESTING
 ## --------------
@@ -264,4 +323,4 @@ func setup_test_environ():
 	use_test_file = true
 	
 	# clear potentially set values
-	metadata_last_loaded.clear()
+	_current_metadata.clear()

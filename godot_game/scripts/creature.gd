@@ -61,7 +61,7 @@ func _ready() -> void:
 	finished_loading.connect(setup_creature)
 
 func setup_creature():
-	var uid = int(DataGlobals.metadata_last_loaded[DataGlobals.CURRENT_CREATURE])
+	var uid = int(DataGlobals.get_metadata_value(DataGlobals.CURRENT_CREATURE))
 	creature_type = load(ResourceUID.get_id_path(uid))
 	creature = creature_type.baby if life_stage == LifeStage.CHILD else creature_type.adult
 	setup_default_values()

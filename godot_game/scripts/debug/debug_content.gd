@@ -130,6 +130,5 @@ func _on_discover_btn_button_down() -> void:
 	for creature_type in load("res://resources/creature_list.tres").items:
 		var uid = Helpers.uid_str(creature_type)
 		if uid not in discovered:
-			DataGlobals.metadata_to_add[DataGlobals.CREATURES_DISCOVERED] = [uid]
-	DataGlobals.save_only_metadata()
+			DataGlobals.add_to_creatures_discovered(uid)
 	game.find_child("Creatures").propagate_call("update_locked")

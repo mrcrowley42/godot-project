@@ -32,7 +32,7 @@ class UnlockableIcon extends CustomTooltipButton:
 		parent.cosmetic_btn_pressed.emit()
 
 	func update_locked():
-		var unlocked_items = DataGlobals.load_metadata()['unlocked_cosmetics']
+		var unlocked_items = DataGlobals.get_metadata_value(DataGlobals.UNLOCKED_COSMETICS)
 		var uid = Helpers.uid_str(self.cosmetic)
 		self.disabled = false if self.cosmetic.unlocked else not uid in unlocked_items
 		self.tooltip_string = ("Locked: " + cosmetic.hint) if disabled else cosmetic.desc
