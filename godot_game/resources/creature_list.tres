@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="ResourceList" load_steps=4 format=3 uid="uid://c5dxhbbrhclqe"]
+[gd_resource type="Resource" script_class="ResourceList" load_steps=5 format=3 uid="uid://c5dxhbbrhclqe"]
 
 [ext_resource type="Resource" uid="uid://cxtahs454inpc" path="res://resources/creatures/main_creature.tres" id="1_4e3wl"]
 [ext_resource type="Script" path="res://scripts/base_classses/resource_list.gd" id="1_cdmm4"]
 [ext_resource type="Resource" uid="uid://dwv6t0fmrq612" path="res://resources/creatures/box_creature.tres" id="2_rfg8g"]
+[ext_resource type="Resource" uid="uid://dmgqdvkbx0e0g" path="res://resources/creatures/blanket.tres" id="3_tmnwi"]
 
 [resource]
 script = ExtResource("1_cdmm4")
-items = Array[Resource]([ExtResource("1_4e3wl"), ExtResource("2_rfg8g")])
+items = Array[Resource]([ExtResource("1_4e3wl"), ExtResource("2_rfg8g"), ExtResource("3_tmnwi")])
