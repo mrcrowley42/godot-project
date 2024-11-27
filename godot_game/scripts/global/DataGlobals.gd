@@ -20,15 +20,17 @@ const ACTION_SET = 0
 const ACTION_ADD = 1
 const ACTION_APPEND = 2
 
-## storage of the metadata that was last loaded from the save file
+const AUTOSAVE_SECONDS = 60
+
+## (private) storage of the metadata that was last loaded from the save file
 var _current_metadata: Dictionary = {}
 var _should_save_metadata: bool = false
 
 func get_save_data_file():
-	return TEST_SAVE_FILE if use_test_file else Globals.SAVE_DATA_FILE
+	return Testing.TEST_SAVE_FILE if Testing.is_test_environ else Globals.SAVE_DATA_FILE
 
 func get_settings_file():
-	return TEST_SETTINGS_FILE if use_test_file else Globals.SAVE_SETTINGS_FILE
+	return Testing.TEST_SETTINGS_FILE if Testing.is_test_environ else Globals.SAVE_SETTINGS_FILE
 
 func has_save_data() -> bool:
 	if FileAccess.file_exists(get_save_data_file()):
@@ -52,12 +54,17 @@ func get_metadata_value(metadata_key: String):
 	var value = get_default_metadata()[metadata_key]
 	if _current_metadata.has(metadata_key):
 		value = _current_metadata[metadata_key]
+	
+	if value == null:
+		printerr("Replacing <null> value with empty string. Please don't use <null> in save data")
+		value = ""
 	return value
 
 func get_default_metadata() -> Dictionary:
+	## IMPORTANT: dont use null values, only use empty strings
 	return {
 		LAST_SAVED: Time.get_unix_time_from_system(),
-		CURRENT_CREATURE: null,
+		CURRENT_CREATURE: "",
 		CREATURES_DISCOVERED: {},
 		UNLOCKED_COSMETICS: [],
 		UNLOCKED_FACTS: [],
@@ -129,7 +136,7 @@ func modify_metadata_value(metadata_key: String, paths: Array, action: int, valu
 		assert(is_instance_of(ptr[last_key], TYPE_ARRAY))
 		ptr[last_key].append(value)  # append
 	else:
-		print("ERROR: invalid action '%s' when attempting to modify metadata" % action)
+		printerr("Invalid action '%s' when attempting to modify metadata" % action)
 	_should_save_metadata = true
 
 ## takes into account the metadata to override and to add
@@ -154,7 +161,7 @@ func save_data():
 	# save node data
 	for node in save_nodes:
 		if !node.has_method(SAVE): # object doesnt have save() func
-			print("Node '%s' doesnt have a %s() function" % [node.name, SAVE])
+			printerr("Node '%s' doesnt have a %s() function" % [node.name, SAVE])
 			continue
 
 		var node_data = {
@@ -167,6 +174,7 @@ func save_data():
 
 ## changes only the first line (the metadata line) in save file, everything else remains unchanged
 func save_only_metadata():
+	_should_save_metadata = false
 	var file_existed = has_save_data()
 	var save_file = FileAccess.open(get_save_data_file(), FileAccess.READ)
 	if file_existed: save_file.get_line()  # remove old metadata
@@ -189,12 +197,12 @@ func save_settings_data():
 
 	for node in settings_nodes:
 		if !node.has_method(SAVE): # object doesnt have save() func
-			print("Node '%s' doesnt have a %s() function" % [node.name, SAVE])
+			printerr("Node '%s' doesnt have a %s() function" % [node.name, SAVE])
 			continue
 
 		var data = node.call(SAVE)
 		if typeof(data) != TYPE_DICTIONARY:
-			print("Node '%s' save data is not of type dictionary (data: '%s'). Skipping" % [node.name, data])
+			printerr("Node '%s' save data is not of type dictionary (data: '%s'). Skipping" % [node.name, data])
 			return
 		var section = data[SECTION] if data.has(SECTION) else Globals.DEFAULT_SECTION
 
@@ -203,6 +211,17 @@ func save_settings_data():
 				config.set_value(section, key, data[key])
 
 		config.save(get_settings_file())
+
+## save everything every n seconds
+func setup_auto_save(timer_parent):
+	var timer: Timer = Timer.new()
+	timer.name = "autosave_timer"
+	timer.autostart = true
+	timer.one_shot = false
+	timer.wait_time = AUTOSAVE_SECONDS
+	timer.timeout.connect(save_data)
+	timer_parent.add_child(timer)
+	print_rich("[color=light_blue]Autosave started for every %s seconds" % AUTOSAVE_SECONDS)
 
 ## --------------
 ##    LOADING
@@ -232,27 +251,34 @@ func load_data() -> Dictionary:
 	var save_file = FileAccess.open(get_save_data_file(), FileAccess.READ)
 	_current_metadata = JSON.parse_string(save_file.get_line())
 
+	var data_skipped = []
 	while save_file.get_position() < save_file.get_length():
 		var line = save_file.get_line()
 		var parsed_line = JSON.parse_string(line)
 
 		if PATH not in parsed_line or DATA not in parsed_line:
-			print("ERROR: Missing '%s' or '%s' value for data, skipping" % [PATH, DATA])
+			printerr("Missing '%s' or '%s' value for data, skipping" % [PATH, DATA])
 			continue
+
+		var data = parsed_line[DATA]
 
 		var node_path = parsed_line[PATH]
 		if not has_node(node_path):
-			print("ERROR: Node at path '%s' could not be found, skipping" % node_path)
+			printerr("Node at path '%s' could not be found, skipping" % node_path)
+			data_skipped.append(data)
 			continue
 
-		var node = get_node(node_path)
-		if not node or not node.has_method(LOAD):
-			print("ERROR: Node '%s' is null or doesnt have a %s() function, skipping" % [parsed_line[PATH], LOAD])
+		var node: Node = get_node(node_path)
+		if not node.has_method(LOAD):
+			printerr("Node '%s' at '%s' doesnt have a %s() function, skipping" % [node, node_path, LOAD])
+			data_skipped.append(data)
 			continue
 
 		# call load function
-		var data = parsed_line[DATA]
 		node.call(LOAD, data)
+
+	if len(data_skipped) > 0:
+		printerr("Some data was not loaded! %s line/s were missed" % len(data_skipped))
 	return get_current_metadata_dc()
 
 
@@ -266,7 +292,7 @@ func load_settings_data():
 	var settings_nodes = get_tree().get_nodes_in_group(Globals.SAVE_SETTINGS_GROUP)
 	for node in settings_nodes:
 		if !node.has_method(SAVE) or !node.has_method(LOAD): # object doesnt have save() func
-			print("Node '%s' doesnt have a %s() or a %s() function/s" % [node.name, SAVE, LOAD])
+			printerr("Node '%s' doesnt have a %s() or a %s() function/s" % [node.name, SAVE, LOAD])
 			continue
 
 		var data_to_send = {}
@@ -275,12 +301,12 @@ func load_settings_data():
 
 		data.erase(SECTION)  # don't need it anymore
 		if not config.has_section(section):
-			print("No section '%s' exists in current setting, skipping node '%s'" % [section, node])
+			printerr("No section '%s' exists in current setting, skipping node '%s'" % [section, node])
 			continue
 
 		for key in data.keys():
 			if not config.has_section_key(section, key):
-				print("No key '%s' in section '%s' present in current settings" % [key, section])
+				printerr("No key '%s' in section '%s' present in current settings" % [key, section])
 				continue
 			data_to_send[key] = config.get_value(section, key)
 		node.call(LOAD, data_to_send)
@@ -304,23 +330,12 @@ func add_to_creatures_discovered(uid: String):
 		}
 		modify_metadata_value(CREATURES_DISCOVERED, [uid], ACTION_SET, dict)
 
+func set_new_highest_life_stage(uid: String, life_stage: int):
+	var current_highest = get_metadata_value(CREATURES_DISCOVERED)[uid]["max_stage_reached"]
+	modify_metadata_value(CREATURES_DISCOVERED, [uid, "max_stage_reached"], ACTION_SET, max(current_highest, life_stage))
+
 func _process(_delta: float) -> void:
 	# save metadata here so the file only needs to be written to once in a frame
 	# no matter the number of metadata changes that occurred this frame
 	if _should_save_metadata:
-		_should_save_metadata = false
 		save_only_metadata()
-
-## --------------
-##    TESTING
-## --------------
-
-var use_test_file: bool = false
-const TEST_SAVE_FILE = "res://tests/save_data_test.save"
-const TEST_SETTINGS_FILE = "res://tests/settings_test.cfg"
-
-func setup_test_environ():
-	use_test_file = true
-	
-	# clear potentially set values
-	_current_metadata.clear()

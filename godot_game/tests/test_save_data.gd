@@ -1,146 +1,124 @@
 extends GutTest
 
-
-## --------------
-##   "FIXTURES"
-## --------------
-
-## Must be called at the beginning of tests
-func setup_test_environment():
-	remove_test_save_data()
-	remove_test_settings_data()
-	DataGlobals.setup_test_environ()
-	assert_eq(DataGlobals.get_save_data_file(), DataGlobals.TEST_SAVE_FILE)
-	assert_eq(DataGlobals.get_settings_file(), DataGlobals.TEST_SETTINGS_FILE)
-	
-	# remove all children
-	for child in get_children():
-		remove_child(child)
-	assert_eq(get_children(), [])
-
-## Deletes save data file
-func remove_test_save_data():
-	if FileAccess.file_exists(DataGlobals.TEST_SAVE_FILE):
-		var d = DirAccess.open("res://")
-		d.remove(DataGlobals.TEST_SAVE_FILE)
-	assert_false(FileAccess.file_exists(DataGlobals.TEST_SAVE_FILE))
-
-## Deletes settings file
-func remove_test_settings_data():
-	if FileAccess.file_exists(DataGlobals.TEST_SETTINGS_FILE):
-		var d = DirAccess.open("res://")
-		d.remove(DataGlobals.TEST_SETTINGS_FILE)
-	assert_false(FileAccess.file_exists(DataGlobals.TEST_SETTINGS_FILE))
-
-## a node to use for saving
-class TestNode extends Node2D:
-	var data_to_save = {"some_data": [54, 1, 2]}
-	var setting_data_to_save = {"section": "SomeSection", "some_data": 12345}
-
-	var data_loaded = null
-	var use_setting_data = false
-
-	func _init(settings_group=false) -> void:
-		if settings_group:
-			add_to_group("settings_data")
-		else:
-			add_to_group("save_data")
-
-	func save():
-		return setting_data_to_save if use_setting_data else data_to_save
-	func load(data):
-		data_loaded = data
-
-## -----------------
-##    DATA TESTS
-## -----------------
-
-## Test the games' save data file is not used for tests
-func test_save_data_file_is_segregated():
-	assert_false(DataGlobals.use_test_file)
-	assert_eq(DataGlobals.get_save_data_file(), Globals.SAVE_DATA_FILE)
-	
-	# setup test environment
-	setup_test_environment()
-	assert_true(DataGlobals.use_test_file)
-	assert_eq(DataGlobals.get_save_data_file(), DataGlobals.TEST_SAVE_FILE)
-	assert_false(FileAccess.file_exists(DataGlobals.TEST_SAVE_FILE))
-	
-	# create save data file
-	DataGlobals.save_only_metadata()
-	assert_true(FileAccess.file_exists(DataGlobals.TEST_SAVE_FILE))
-	
-	remove_test_save_data()
-	assert_false(FileAccess.file_exists(DataGlobals.TEST_SAVE_FILE))
+## ---------------
+##    METADATA
+## ---------------
 
 ## test metadata_only saves only metadata
 func test_save_metadata_only():
-	setup_test_environment()
+	Testing.setup_test_environment(self)
 	
 	assert_false(DataGlobals.has_save_data())
-	assert_eq(DataGlobals.metadata_last_loaded, {})
+	assert_eq(DataGlobals.get_current_metadata_dc(), {})
 	
 	# save metadata
 	DataGlobals.save_only_metadata()
-	var expected = DataGlobals.metadata_last_loaded
+	var expected = DataGlobals.get_default_metadata()
+	expected[DataGlobals.LAST_SAVED] = 0
 	assert_true(DataGlobals.has_save_data())
 	assert_true(DataGlobals.has_only_metadata())
 	
 	# read and compare
 	var save_file := FileAccess.open(DataGlobals.get_save_data_file(), FileAccess.READ)
 	var first_line = JSON.parse_string(save_file.get_line())
+	first_line[DataGlobals.LAST_SAVED] = 0
 	assert_same(str(first_line), str(expected))
 
-## test metadata is overridden when set in the override dict
-func test_metadata_to_override():
-	setup_test_environment()
+func test_metadata_set():
+	Testing.setup_test_environment(self)
+	assert_eq("", DataGlobals.get_metadata_value(DataGlobals.CURRENT_CREATURE))
+	
+	var uid = "123"
+	DataGlobals.set_metadata_value(DataGlobals.CURRENT_CREATURE, uid)
+	assert_eq(uid, DataGlobals.get_metadata_value(DataGlobals.CURRENT_CREATURE))
 	
 	DataGlobals.save_only_metadata()
-	var old = DataGlobals.metadata_last_loaded
-	assert_eq(old[DataGlobals.CURRENT_CREATURE], str(null))
-	
-	# override
-	DataGlobals.metadata_to_override[DataGlobals.CURRENT_CREATURE] = "creature1"
-	DataGlobals.save_only_metadata()
-	var new = DataGlobals.metadata_last_loaded
-	assert_eq(new[DataGlobals.CURRENT_CREATURE], "creature1")
-	
-	# override again
-	DataGlobals.metadata_to_override[DataGlobals.CURRENT_CREATURE] = "creature2"
-	DataGlobals.save_only_metadata()
-	var newer = DataGlobals.metadata_last_loaded
-	assert_eq(newer[DataGlobals.CURRENT_CREATURE], "creature2")
-	
-	# check override is retained
-	DataGlobals.save_only_metadata()
-	var retained = DataGlobals.metadata_last_loaded
-	assert_eq(retained[DataGlobals.CURRENT_CREATURE], "creature2")
+	DataGlobals.load_metadata()
+	assert_eq(uid, DataGlobals.get_metadata_value(DataGlobals.CURRENT_CREATURE))
 
-## test metadata is add to when set in the add dict
-func test_metadata_to_add():
-	setup_test_environment()
+func test_metadata_add():
+	Testing.setup_test_environment(self)
+	assert_eq("", DataGlobals.get_metadata_value(DataGlobals.CURRENT_CREATURE))
+	
+	DataGlobals.set_metadata_value(DataGlobals.CURRENT_CREATURE, 1)
+	var value = DataGlobals.get_metadata_value(DataGlobals.CURRENT_CREATURE)
+	assert_typeof(value, TYPE_STRING)
+	assert_eq(1, int(value))
+	
+	DataGlobals.add_to_metadata_value(DataGlobals.CURRENT_CREATURE, 2)
+	var new_value = DataGlobals.get_metadata_value(DataGlobals.CURRENT_CREATURE)
+	assert_typeof(new_value, TYPE_STRING)
+	assert_eq(3, int(new_value))
 	
 	DataGlobals.save_only_metadata()
-	var old = DataGlobals.metadata_last_loaded
-	assert_eq(old[DataGlobals.CREATURES_DISCOVERED], [])
+	DataGlobals.load_metadata()
+	assert_eq("3", DataGlobals.get_metadata_value(DataGlobals.CURRENT_CREATURE))
+
+func test_metadata_append():
+	Testing.setup_test_environment(self)
+	assert_eq([], DataGlobals.get_metadata_value(DataGlobals.UNLOCKED_THEMES))
 	
-	# set first item
-	DataGlobals.metadata_to_add[DataGlobals.CREATURES_DISCOVERED] = ["creature1"]
-	DataGlobals.save_only_metadata()
-	var new = DataGlobals.metadata_last_loaded
-	assert_eq(new[DataGlobals.CREATURES_DISCOVERED], ["creature1"])
+	DataGlobals.append_to_metadata_value(DataGlobals.UNLOCKED_THEMES, "theme1")
+	assert_eq(["theme1"], DataGlobals.get_metadata_value(DataGlobals.UNLOCKED_THEMES))
 	
-	# append second & third item
-	DataGlobals.metadata_to_add[DataGlobals.CREATURES_DISCOVERED] = ["creature2", "creature3"]
+	DataGlobals.append_to_metadata_value(DataGlobals.UNLOCKED_THEMES, "theme2")
+	DataGlobals.append_to_metadata_value(DataGlobals.UNLOCKED_THEMES, "theme3")
+	assert_eq(["theme1", "theme2", "theme3"], DataGlobals.get_metadata_value(DataGlobals.UNLOCKED_THEMES))
+	
 	DataGlobals.save_only_metadata()
-	var newer = DataGlobals.metadata_last_loaded
-	assert_eq(newer[DataGlobals.CREATURES_DISCOVERED], ["creature1", "creature2", "creature3"])
+	DataGlobals.load_metadata()
+	assert_eq(["theme1", "theme2", "theme3"], DataGlobals.get_metadata_value(DataGlobals.UNLOCKED_THEMES))
+
+func test_metadata_modify():
+	Testing.setup_test_environment(self)
+	assert_eq({}, DataGlobals.get_metadata_value(DataGlobals.CREATURES_DISCOVERED))
+	
+	# set
+	var uid = "123"
+	var val = {"data": 1}
+	var expected = {uid: val.duplicate(true)}
+	DataGlobals.modify_metadata_value(DataGlobals.CREATURES_DISCOVERED, [uid], DataGlobals.ACTION_SET, val)
+	assert_eq(str(expected), str(DataGlobals.get_metadata_value(DataGlobals.CREATURES_DISCOVERED)))
+	
+	# add
+	var addition = 2
+	DataGlobals.modify_metadata_value(DataGlobals.CREATURES_DISCOVERED, [uid, "data"], DataGlobals.ACTION_ADD, addition)
+	expected[uid]["data"] += addition
+	assert_eq(str(expected), str(DataGlobals.get_metadata_value(DataGlobals.CREATURES_DISCOVERED)))
+	
+	# append
+	DataGlobals.modify_metadata_value(DataGlobals.CREATURES_DISCOVERED, [uid, "list"], DataGlobals.ACTION_SET, [])
+	expected[uid]["list"] = []
+	assert_eq(str(expected), str(DataGlobals.get_metadata_value(DataGlobals.CREATURES_DISCOVERED)))
+	
+	var one = "item1"
+	DataGlobals.modify_metadata_value(DataGlobals.CREATURES_DISCOVERED, [uid, "list"], DataGlobals.ACTION_APPEND, one)
+	expected[uid]["list"].append(one)
+	assert_eq(str(expected), str(DataGlobals.get_metadata_value(DataGlobals.CREATURES_DISCOVERED)))
+	
+	var two = "two"
+	var three = "three"
+	DataGlobals.modify_metadata_value(DataGlobals.CREATURES_DISCOVERED, [uid, "list"], DataGlobals.ACTION_APPEND, two)
+	DataGlobals.modify_metadata_value(DataGlobals.CREATURES_DISCOVERED, [uid, "list"], DataGlobals.ACTION_APPEND, three)
+	expected[uid]["list"].append(two)
+	expected[uid]["list"].append(three)
+	assert_eq(str(expected), str(DataGlobals.get_metadata_value(DataGlobals.CREATURES_DISCOVERED)))
+	
+	# save to file & load from file & recheck
+	DataGlobals.save_only_metadata()
+	DataGlobals.load_metadata()
+	assert_eq(str(expected), str(DataGlobals.get_metadata_value(DataGlobals.CREATURES_DISCOVERED)))
+
+
+## ----------------
+##    SAVE DATA
+## ----------------
 
 ## test nodes with save group are saved
 func test_save_node_data():
-	setup_test_environment()
+	Testing.setup_test_environment(self)
 	
-	var node := TestNode.new()
+	var node := Testing.TestNode.new()
 	add_child(node)
 	
 	assert_false(DataGlobals.has_save_data())
@@ -159,9 +137,9 @@ func test_save_node_data():
 
 ## test data saved is loaded to the nodes
 func test_load_node_data():
-	setup_test_environment()
+	Testing.setup_test_environment(self)
 	
-	var node := TestNode.new()
+	var node := Testing.TestNode.new()
 	add_child(node)
 	assert_eq(node.data_loaded, null)
 	
@@ -172,85 +150,5 @@ func test_load_node_data():
 	
 	var save_file := FileAccess.open(DataGlobals.get_save_data_file(), FileAccess.READ)
 	var first_line = JSON.parse_string(save_file.get_line())
-	assert_same(str(first_line), str(DataGlobals.metadata_last_loaded))
+	assert_same(str(first_line), str(DataGlobals.get_current_metadata_dc()))
 	assert_eq(str(node.data_loaded), str(node.data_to_save))
-
-## -----------------
-##   SETTING TESTS
-## -----------------
-
-## test settings data is saved
-func test_save_settings_data():
-	setup_test_environment()
-	
-	var node := TestNode.new(true)
-	add_child(node)
-	
-	assert_false(DataGlobals.has_settings_data())
-	DataGlobals.save_settings_data()
-	assert_true(DataGlobals.has_settings_data())
-	
-	var settings_file := FileAccess.open(DataGlobals.get_settings_file(), FileAccess.READ)
-	var first_line = settings_file.get_line()
-	assert_eq(first_line, "[general]")
-	
-	var second_line = settings_file.get_line()
-	assert_eq(second_line, "")
-	
-	var third_line = settings_file.get_line()
-	var key = node.data_to_save.keys()[0]
-	assert_same(third_line, "%s=%s" % [key, str(node.data_to_save[key])])
-
-## test settings data is saved with sections
-func test_save_settings_data_sections():
-	setup_test_environment()
-	
-	var node := TestNode.new(true)
-	node.use_setting_data = true
-	add_child(node)
-	
-	assert_false(DataGlobals.has_settings_data())
-	DataGlobals.save_settings_data()
-	assert_true(DataGlobals.has_settings_data())
-	
-	var expected = node.setting_data_to_save
-	var settings_file := FileAccess.open(DataGlobals.get_settings_file(), FileAccess.READ)
-	var first_line = settings_file.get_line()
-	assert_eq(first_line.replace('[', '').replace(']', ''), expected["section"])
-	
-	var second_line = settings_file.get_line()
-	assert_eq(second_line, "")
-	
-	var third_line = settings_file.get_line()
-	var key = expected.keys()[1]
-	assert_same(third_line, "%s=%s" % [key, str(expected[key])])
-
-
-## test settings data is loaded
-func test_load_settings_data():
-	setup_test_environment()
-	
-	var node := TestNode.new(true)
-	add_child(node)
-	assert_eq(node.data_loaded, null)
-	
-	DataGlobals.save_settings_data()
-	assert_true(DataGlobals.has_settings_data())
-	DataGlobals.load_settings_data()
-	
-	assert_eq(node.data_loaded, node.data_to_save)
-
-## test settings data is loaded with a section
-func test_load_settings_data_section():
-	setup_test_environment()
-	
-	var node := TestNode.new(true)
-	node.use_setting_data = true
-	add_child(node)
-	assert_eq(node.data_loaded, null)
-	
-	DataGlobals.save_settings_data()
-	assert_true(DataGlobals.has_settings_data())
-	DataGlobals.load_settings_data()
-	
-	assert_eq(node.data_loaded, node.setting_data_to_save)

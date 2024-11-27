@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cx2gycrxks36j"]
+[gd_scene load_steps=12 format=3 uid="uid://cx2gycrxks36j"]
 
 [ext_resource type="Script" path="res://scripts/main_game_scripts/grow_up_to_adult.gd" id="1_mprwa"]
 [ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="2_do0fl"]
@@ -7,7 +7,6 @@
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="5_pek6m"]
 [ext_resource type="Script" path="res://scripts/creature_grow_up.gd" id="6_kvvra"]
 [ext_resource type="Script" path="res://scripts/grow_btn.gd" id="6_rlh6f"]
-[ext_resource type="Script" path="res://scripts/main_game_scripts/egg_opening/confetti.gd" id="8_tffir"]
 [ext_resource type="Script" path="res://scripts/grow_up_continue_btn.gd" id="9_drt4q"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w2jld"]
@@ -16,16 +15,11 @@ shader_parameter/color = Vector4(0, 0, 0, 1)
 shader_parameter/pixel_size = 5.0
 shader_parameter/scale = 0.6
 shader_parameter/speed = 0.05
-shader_parameter/layer = 1.0
+shader_parameter/brightness = 1.0
 shader_parameter/opacity = 0.15
 
 [sub_resource type="LabelSettings" id="LabelSettings_di502"]
 font_size = 32
-
-[sub_resource type="Gradient" id="Gradient_7ctxo"]
-interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.12381, 0.290476, 0.452381, 0.652381, 0.819048, 1)
-colors = PackedColorArray(1, 0, 0, 1, 1, 0.482353, 0.321569, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0.509804, 1, 0.529412, 0, 0.745098, 1, 1, 1, 1, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_0wk48"]
 font_size = 32
@@ -228,52 +222,9 @@ scale = Vector2(0.225, 0.225)
 [node name="Adult" type="AnimatedSprite2D" parent="UI/Creature"]
 scale = Vector2(0.225, 0.225)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="UI"]
-layer = 10
-
-[node name="Confetti" type="Node2D" parent="UI/CanvasLayer"]
+[node name="ConfettiLayer" type="CanvasLayer" parent="UI"]
 unique_name_in_owner = true
-script = ExtResource("8_tffir")
-
-[node name="ConfetL" type="CPUParticles2D" parent="UI/CanvasLayer/Confetti"]
-position = Vector2(92, 430)
-emitting = false
-amount = 20
-lifetime = 2.0
-one_shot = true
-explosiveness = 1.0
-randomness = 1.0
-direction = Vector2(0.1, -1)
-spread = 6.0
-initial_velocity_min = 400.0
-initial_velocity_max = 850.0
-angular_velocity_min = -100.0
-angular_velocity_max = 100.0
-scale_amount_min = 10.0
-scale_amount_max = 15.0
-color_initial_ramp = SubResource("Gradient_7ctxo")
-hue_variation_min = 1.0
-hue_variation_max = 1.0
-
-[node name="ConfetR" type="CPUParticles2D" parent="UI/CanvasLayer/Confetti"]
-position = Vector2(446, 430)
-emitting = false
-amount = 20
-lifetime = 2.0
-one_shot = true
-explosiveness = 1.0
-randomness = 1.0
-direction = Vector2(-0.1, -1)
-spread = 6.0
-initial_velocity_min = 400.0
-initial_velocity_max = 850.0
-angular_velocity_min = -100.0
-angular_velocity_max = 100.0
-scale_amount_min = 10.0
-scale_amount_max = 15.0
-color_initial_ramp = SubResource("Gradient_7ctxo")
-hue_variation_min = 1.0
-hue_variation_max = 1.0
+layer = 10
 
 [node name="ContinueBtn" type="NinePatchRect" parent="UI"]
 visible = false

@@ -47,6 +47,7 @@ func _ready():
 	# do last
 	set_is_in_trans(true)
 	Globals.perform_opening_transition(trans_img, ui_overlay.position, set_is_in_trans.bind(false))
+	DataGlobals.setup_auto_save(self)
 
 func set_is_in_trans(value: bool):
 	is_in_transition = value

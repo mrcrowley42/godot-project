@@ -23,6 +23,7 @@ buses/default_bus_layout="res://resources/default_bus_layout.tres"
 
 Globals="*res://scripts/global/Globals.gd"
 DataGlobals="*res://scripts/global/DataGlobals.gd"
+Testing="*res://tests/Testing_config.gd"
 
 [display]
 

@@ -12,7 +12,7 @@ func _ready() -> void:
 
 func finish_grow_up():
 	%FastTimer.stop()
-	%Confetti.fire()
+	Globals.fire_confetti(%ConfettiLayer, Vector2(270, 440))
 	
 	continue_btn.visible = true
 	continue_btn.modulate = Color(1, 1, 1, 0)
