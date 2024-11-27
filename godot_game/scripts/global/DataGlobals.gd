@@ -132,7 +132,7 @@ func modify_metadata_value(metadata_key: String, paths: Array, action: int, valu
 		assert(is_instance_of(ptr[last_key], TYPE_ARRAY))
 		ptr[last_key].append(value)  # append
 	else:
-		print("ERROR: invalid action '%s' when attempting to modify metadata" % action)
+		printerr("Invalid action '%s' when attempting to modify metadata" % action)
 	_should_save_metadata = true
 
 ## takes into account the metadata to override and to add
@@ -157,7 +157,7 @@ func save_data():
 	# save node data
 	for node in save_nodes:
 		if !node.has_method(SAVE): # object doesnt have save() func
-			print("Node '%s' doesnt have a %s() function" % [node.name, SAVE])
+			printerr("Node '%s' doesnt have a %s() function" % [node.name, SAVE])
 			continue
 
 		var node_data = {
@@ -193,12 +193,12 @@ func save_settings_data():
 
 	for node in settings_nodes:
 		if !node.has_method(SAVE): # object doesnt have save() func
-			print("Node '%s' doesnt have a %s() function" % [node.name, SAVE])
+			printerr("Node '%s' doesnt have a %s() function" % [node.name, SAVE])
 			continue
 
 		var data = node.call(SAVE)
 		if typeof(data) != TYPE_DICTIONARY:
-			print("Node '%s' save data is not of type dictionary (data: '%s'). Skipping" % [node.name, data])
+			printerr("Node '%s' save data is not of type dictionary (data: '%s'). Skipping" % [node.name, data])
 			return
 		var section = data[SECTION] if data.has(SECTION) else Globals.DEFAULT_SECTION
 
@@ -251,17 +251,17 @@ func load_data() -> Dictionary:
 		var parsed_line = JSON.parse_string(line)
 
 		if PATH not in parsed_line or DATA not in parsed_line:
-			print("ERROR: Missing '%s' or '%s' value for data, skipping" % [PATH, DATA])
+			printerr("Missing '%s' or '%s' value for data, skipping" % [PATH, DATA])
 			continue
 
 		var node_path = parsed_line[PATH]
 		if not has_node(node_path):
-			print("ERROR: Node at path '%s' could not be found, skipping" % node_path)
+			printerr("Node at path '%s' could not be found, skipping" % node_path)
 			continue
 
 		var node = get_node(node_path)
 		if not node or not node.has_method(LOAD):
-			print("ERROR: Node '%s' is null or doesnt have a %s() function, skipping" % [parsed_line[PATH], LOAD])
+			printerr("Node '%s' is null or doesnt have a %s() function, skipping" % [parsed_line[PATH], LOAD])
 			continue
 
 		# call load function
@@ -280,7 +280,7 @@ func load_settings_data():
 	var settings_nodes = get_tree().get_nodes_in_group(Globals.SAVE_SETTINGS_GROUP)
 	for node in settings_nodes:
 		if !node.has_method(SAVE) or !node.has_method(LOAD): # object doesnt have save() func
-			print("Node '%s' doesnt have a %s() or a %s() function/s" % [node.name, SAVE, LOAD])
+			printerr("Node '%s' doesnt have a %s() or a %s() function/s" % [node.name, SAVE, LOAD])
 			continue
 
 		var data_to_send = {}
@@ -289,12 +289,12 @@ func load_settings_data():
 
 		data.erase(SECTION)  # don't need it anymore
 		if not config.has_section(section):
-			print("No section '%s' exists in current setting, skipping node '%s'" % [section, node])
+			printerr("No section '%s' exists in current setting, skipping node '%s'" % [section, node])
 			continue
 
 		for key in data.keys():
 			if not config.has_section_key(section, key):
-				print("No key '%s' in section '%s' present in current settings" % [key, section])
+				printerr("No key '%s' in section '%s' present in current settings" % [key, section])
 				continue
 			data_to_send[key] = config.get_value(section, key)
 		node.call(LOAD, data_to_send)

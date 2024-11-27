@@ -187,7 +187,7 @@ func get_loaded_cosmetics():
 ## changes the animation and retains frame change timing
 func change_animation(anim_name: String):
 	if not main_sprite.sprite_frames.has_animation(anim_name):
-		print_rich("[color=red]current creature has no animation: " + anim_name)
+		printerr("current creature has no animation: " + anim_name)
 		return
 	
 	await main_sprite.frame_changed

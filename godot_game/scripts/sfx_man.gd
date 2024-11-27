@@ -31,7 +31,7 @@ var lookup= {
 
 func play_sound(sound_name):
 	if !lookup.has(sound_name):
-		print_rich("[color=red]The sound '" + sound_name + "' does not exist in the SFX loopup!")
+		printerr("The sound '" + sound_name + "' does not exist in the SFX loopup!")
 		return
 	stream = lookup[sound_name]
 	play()
