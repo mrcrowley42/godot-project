@@ -54,6 +54,10 @@ func get_metadata_value(metadata_key: String):
 	var value = get_default_metadata()[metadata_key]
 	if _current_metadata.has(metadata_key):
 		value = _current_metadata[metadata_key]
+	
+	if value == null:
+		printerr("Replacing <null> value with empty string. Please don't use <null> in save data")
+		value = ""
 	return value
 
 func get_default_metadata() -> Dictionary:
@@ -217,6 +221,7 @@ func setup_auto_save(timer_parent):
 	timer.wait_time = AUTOSAVE_SECONDS
 	timer.timeout.connect(save_data)
 	timer_parent.add_child(timer)
+	print_rich("[color=light_blue]Autosave started for every %s seconds" % AUTOSAVE_SECONDS)
 
 ## --------------
 ##    LOADING
@@ -246,6 +251,7 @@ func load_data() -> Dictionary:
 	var save_file = FileAccess.open(get_save_data_file(), FileAccess.READ)
 	_current_metadata = JSON.parse_string(save_file.get_line())
 
+	var data_skipped = []
 	while save_file.get_position() < save_file.get_length():
 		var line = save_file.get_line()
 		var parsed_line = JSON.parse_string(line)
@@ -254,19 +260,25 @@ func load_data() -> Dictionary:
 			printerr("Missing '%s' or '%s' value for data, skipping" % [PATH, DATA])
 			continue
 
+		var data = parsed_line[DATA]
+
 		var node_path = parsed_line[PATH]
 		if not has_node(node_path):
 			printerr("Node at path '%s' could not be found, skipping" % node_path)
+			data_skipped.append(data)
 			continue
 
-		var node = get_node(node_path)
-		if not node or not node.has_method(LOAD):
-			printerr("Node '%s' is null or doesnt have a %s() function, skipping" % [parsed_line[PATH], LOAD])
+		var node: Node = get_node(node_path)
+		if not node.has_method(LOAD):
+			printerr("Node '%s' at '%s' doesnt have a %s() function, skipping" % [node, node_path, LOAD])
+			data_skipped.append(data)
 			continue
 
 		# call load function
-		var data = parsed_line[DATA]
 		node.call(LOAD, data)
+
+	if len(data_skipped) > 0:
+		printerr("Some data was not loaded! %s line/s were missed" % len(data_skipped))
 	return get_current_metadata_dc()
 
 
