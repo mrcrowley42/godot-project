@@ -1,4 +1,4 @@
-class_name TestingConfig extends GutTest
+extends GutTest
 
 var is_test_environ: bool = false
 

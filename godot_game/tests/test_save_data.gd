@@ -24,50 +24,78 @@ func test_save_metadata_only():
 	first_line[DataGlobals.LAST_SAVED] = 0
 	assert_same(str(first_line), str(expected))
 
-## test metadata is overridden when set in the override dict
-#func test_metadata_to_override():
-	#Testing.setup_test_environment(self)
-	#
-	#DataGlobals.save_only_metadata()
-	#var old = DataGlobals.get_current_metadata_dc()
-	#assert_eq(old[DataGlobals.CURRENT_CREATURE], str(null))
-	#
-	## override
-	#DataGlobals.metadata_to_override[DataGlobals.CURRENT_CREATURE] = "creature1"
-	#DataGlobals.save_only_metadata()
-	#var new = DataGlobals.metadata_last_loaded
-	#assert_eq(new[DataGlobals.CURRENT_CREATURE], "creature1")
-	#
-	## override again
-	#DataGlobals.metadata_to_override[DataGlobals.CURRENT_CREATURE] = "creature2"
-	#DataGlobals.save_only_metadata()
-	#var newer = DataGlobals.metadata_last_loaded
-	#assert_eq(newer[DataGlobals.CURRENT_CREATURE], "creature2")
-	#
-	## check override is retained
-	#DataGlobals.save_only_metadata()
-	#var retained = DataGlobals.metadata_last_loaded
-	#assert_eq(retained[DataGlobals.CURRENT_CREATURE], "creature2")
-#
-### test metadata is add to when set in the add dict
-#func test_metadata_to_add():
-	#Testing.setup_test_environment(self)
-	#
-	#DataGlobals.save_only_metadata()
-	#var old = DataGlobals.metadata_last_loaded
-	#assert_eq(old[DataGlobals.CREATURES_DISCOVERED], [])
-	#
-	## set first item
-	#DataGlobals.metadata_to_add[DataGlobals.CREATURES_DISCOVERED] = ["creature1"]
-	#DataGlobals.save_only_metadata()
-	#var new = DataGlobals.metadata_last_loaded
-	#assert_eq(new[DataGlobals.CREATURES_DISCOVERED], ["creature1"])
-	#
-	## append second & third item
-	#DataGlobals.metadata_to_add[DataGlobals.CREATURES_DISCOVERED] = ["creature2", "creature3"]
-	#DataGlobals.save_only_metadata()
-	#var newer = DataGlobals.metadata_last_loaded
-	#assert_eq(newer[DataGlobals.CREATURES_DISCOVERED], ["creature1", "creature2", "creature3"])
+func test_metadata_set():
+	Testing.setup_test_environment(self)
+	assert_eq("", DataGlobals.get_metadata_value(DataGlobals.CURRENT_CREATURE))
+	
+	var uid = "123"
+	DataGlobals.set_metadata_value(DataGlobals.CURRENT_CREATURE, uid)
+	assert_eq(uid, DataGlobals.get_metadata_value(DataGlobals.CURRENT_CREATURE))
+
+func test_metadata_add():
+	Testing.setup_test_environment(self)
+	assert_eq("", DataGlobals.get_metadata_value(DataGlobals.CURRENT_CREATURE))
+	
+	DataGlobals.set_metadata_value(DataGlobals.CURRENT_CREATURE, 1)
+	var value = DataGlobals.get_metadata_value(DataGlobals.CURRENT_CREATURE)
+	assert_typeof(value, TYPE_STRING)
+	assert_eq(1, int(value))
+	
+	DataGlobals.add_to_metadata_value(DataGlobals.CURRENT_CREATURE, 2)
+	var new_value = DataGlobals.get_metadata_value(DataGlobals.CURRENT_CREATURE)
+	assert_typeof(new_value, TYPE_STRING)
+	assert_eq(3, int(new_value))
+
+func test_metadata_append():
+	Testing.setup_test_environment(self)
+	assert_eq([], DataGlobals.get_metadata_value(DataGlobals.UNLOCKED_THEMES))
+	
+	DataGlobals.append_to_metadata_value(DataGlobals.UNLOCKED_THEMES, "theme1")
+	assert_eq(["theme1"], DataGlobals.get_metadata_value(DataGlobals.UNLOCKED_THEMES))
+	
+	DataGlobals.append_to_metadata_value(DataGlobals.UNLOCKED_THEMES, "theme2")
+	DataGlobals.append_to_metadata_value(DataGlobals.UNLOCKED_THEMES, "theme3")
+	assert_eq(["theme1", "theme2", "theme3"], DataGlobals.get_metadata_value(DataGlobals.UNLOCKED_THEMES))
+
+func test_metadata_modify():
+	Testing.setup_test_environment(self)
+	assert_eq({}, DataGlobals.get_metadata_value(DataGlobals.CREATURES_DISCOVERED))
+	
+	# set
+	var uid = "123"
+	var val = {"data": 1}
+	var expected = {uid: val.duplicate(true)}
+	DataGlobals.modify_metadata_value(DataGlobals.CREATURES_DISCOVERED, [uid], DataGlobals.ACTION_SET, val)
+	assert_eq(str(expected), str(DataGlobals.get_metadata_value(DataGlobals.CREATURES_DISCOVERED)))
+	
+	# add
+	var addition = 2
+	DataGlobals.modify_metadata_value(DataGlobals.CREATURES_DISCOVERED, [uid, "data"], DataGlobals.ACTION_ADD, addition)
+	expected[uid]["data"] += addition
+	assert_eq(str(expected), str(DataGlobals.get_metadata_value(DataGlobals.CREATURES_DISCOVERED)))
+	
+	# append
+	DataGlobals.modify_metadata_value(DataGlobals.CREATURES_DISCOVERED, [uid, "list"], DataGlobals.ACTION_SET, [])
+	expected[uid]["list"] = []
+	assert_eq(str(expected), str(DataGlobals.get_metadata_value(DataGlobals.CREATURES_DISCOVERED)))
+	
+	var one = "item1"
+	DataGlobals.modify_metadata_value(DataGlobals.CREATURES_DISCOVERED, [uid, "list"], DataGlobals.ACTION_APPEND, one)
+	expected[uid]["list"].append(one)
+	assert_eq(str(expected), str(DataGlobals.get_metadata_value(DataGlobals.CREATURES_DISCOVERED)))
+	
+	var two = "two"
+	var three = "three"
+	DataGlobals.modify_metadata_value(DataGlobals.CREATURES_DISCOVERED, [uid, "list"], DataGlobals.ACTION_APPEND, two)
+	DataGlobals.modify_metadata_value(DataGlobals.CREATURES_DISCOVERED, [uid, "list"], DataGlobals.ACTION_APPEND, three)
+	expected[uid]["list"].append(two)
+	expected[uid]["list"].append(three)
+	assert_eq(str(expected), str(DataGlobals.get_metadata_value(DataGlobals.CREATURES_DISCOVERED)))
+	
+	# save to file & load from file & recheck
+	DataGlobals.save_only_metadata()
+	DataGlobals.load_metadata()
+	assert_eq(str(expected), str(DataGlobals.get_metadata_value(DataGlobals.CREATURES_DISCOVERED)))
 
 
 ## ----------------
