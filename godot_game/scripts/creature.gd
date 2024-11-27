@@ -195,7 +195,7 @@ func change_animation(anim_name: String):
 
 func grow_up_one_stage():
 	xp = 0
-	life_stage += 1
+	life_stage = LifeStage.get(life_stage + 1)
 	is_ready_to_grow_up = false
 	DataGlobals.set_new_highest_life_stage(Helpers.uid_str(creature_type), life_stage)
 

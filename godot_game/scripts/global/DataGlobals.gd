@@ -20,6 +20,8 @@ const ACTION_SET = 0
 const ACTION_ADD = 1
 const ACTION_APPEND = 2
 
+const AUTOSAVE_SECONDS = 60
+
 ## (private) storage of the metadata that was last loaded from the save file
 var _current_metadata: Dictionary = {}
 var _should_save_metadata: bool = false
@@ -205,6 +207,16 @@ func save_settings_data():
 				config.set_value(section, key, data[key])
 
 		config.save(get_settings_file())
+
+## save everything every n seconds
+func setup_auto_save(timer_parent):
+	var timer: Timer = Timer.new()
+	timer.name = "autosave_timer"
+	timer.autostart = true
+	timer.one_shot = false
+	timer.wait_time = AUTOSAVE_SECONDS
+	timer.timeout.connect(save_data)
+	timer_parent.add_child(timer)
 
 ## --------------
 ##    LOADING
