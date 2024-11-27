@@ -15,7 +15,7 @@ var current_cosmetics: Array
 var loaded_cosmetics: Dictionary
 
 func _ready() -> void:
-	var uid = int(DataGlobals.metadata_last_loaded[DataGlobals.CURRENT_CREATURE])
+	var uid = int(DataGlobals.get_metadata_value(DataGlobals.CURRENT_CREATURE))
 	creature_type = load(ResourceUID.get_id_path(uid))
 	creature = creature_type.baby
 	

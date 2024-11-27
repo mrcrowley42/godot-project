@@ -20,7 +20,7 @@ const ACTION_SET = 0
 const ACTION_ADD = 1
 const ACTION_APPEND = 2
 
-## storage of the metadata that was last loaded from the save file
+## (private) storage of the metadata that was last loaded from the save file
 var _current_metadata: Dictionary = {}
 var _should_save_metadata: bool = false
 
@@ -305,6 +305,10 @@ func add_to_creatures_discovered(uid: String):
 			"num_times_hatched": 1
 		}
 		modify_metadata_value(CREATURES_DISCOVERED, [uid], ACTION_SET, dict)
+
+func set_new_highest_life_stage(uid: String, life_stage: int):
+	var current_highest = get_metadata_value(CREATURES_DISCOVERED)[uid]["max_stage_reached"]
+	modify_metadata_value(CREATURES_DISCOVERED, [uid, "max_stage_reached"], ACTION_SET, max(current_highest, life_stage))
 
 func _process(_delta: float) -> void:
 	# save metadata here so the file only needs to be written to once in a frame

@@ -31,6 +31,10 @@ func test_metadata_set():
 	var uid = "123"
 	DataGlobals.set_metadata_value(DataGlobals.CURRENT_CREATURE, uid)
 	assert_eq(uid, DataGlobals.get_metadata_value(DataGlobals.CURRENT_CREATURE))
+	
+	DataGlobals.save_only_metadata()
+	DataGlobals.load_metadata()
+	assert_eq(uid, DataGlobals.get_metadata_value(DataGlobals.CURRENT_CREATURE))
 
 func test_metadata_add():
 	Testing.setup_test_environment(self)
@@ -45,6 +49,10 @@ func test_metadata_add():
 	var new_value = DataGlobals.get_metadata_value(DataGlobals.CURRENT_CREATURE)
 	assert_typeof(new_value, TYPE_STRING)
 	assert_eq(3, int(new_value))
+	
+	DataGlobals.save_only_metadata()
+	DataGlobals.load_metadata()
+	assert_eq("3", DataGlobals.get_metadata_value(DataGlobals.CURRENT_CREATURE))
 
 func test_metadata_append():
 	Testing.setup_test_environment(self)
@@ -55,6 +63,10 @@ func test_metadata_append():
 	
 	DataGlobals.append_to_metadata_value(DataGlobals.UNLOCKED_THEMES, "theme2")
 	DataGlobals.append_to_metadata_value(DataGlobals.UNLOCKED_THEMES, "theme3")
+	assert_eq(["theme1", "theme2", "theme3"], DataGlobals.get_metadata_value(DataGlobals.UNLOCKED_THEMES))
+	
+	DataGlobals.save_only_metadata()
+	DataGlobals.load_metadata()
 	assert_eq(["theme1", "theme2", "theme3"], DataGlobals.get_metadata_value(DataGlobals.UNLOCKED_THEMES))
 
 func test_metadata_modify():
