@@ -25,10 +25,10 @@ var _current_metadata: Dictionary = {}
 var _should_save_metadata: bool = false
 
 func get_save_data_file():
-	return TEST_SAVE_FILE if use_test_file else Globals.SAVE_DATA_FILE
+	return Testing.TEST_SAVE_FILE if Testing.is_test_environ else Globals.SAVE_DATA_FILE
 
 func get_settings_file():
-	return TEST_SETTINGS_FILE if use_test_file else Globals.SAVE_SETTINGS_FILE
+	return Testing.TEST_SETTINGS_FILE if Testing.is_test_environ else Globals.SAVE_SETTINGS_FILE
 
 func has_save_data() -> bool:
 	if FileAccess.file_exists(get_save_data_file()):
@@ -55,9 +55,10 @@ func get_metadata_value(metadata_key: String):
 	return value
 
 func get_default_metadata() -> Dictionary:
+	## IMPORTANT: dont use null values, only use empty strings
 	return {
 		LAST_SAVED: Time.get_unix_time_from_system(),
-		CURRENT_CREATURE: null,
+		CURRENT_CREATURE: "",
 		CREATURES_DISCOVERED: {},
 		UNLOCKED_COSMETICS: [],
 		UNLOCKED_FACTS: [],
@@ -167,6 +168,7 @@ func save_data():
 
 ## changes only the first line (the metadata line) in save file, everything else remains unchanged
 func save_only_metadata():
+	_should_save_metadata = false
 	var file_existed = has_save_data()
 	var save_file = FileAccess.open(get_save_data_file(), FileAccess.READ)
 	if file_existed: save_file.get_line()  # remove old metadata
@@ -308,19 +310,4 @@ func _process(_delta: float) -> void:
 	# save metadata here so the file only needs to be written to once in a frame
 	# no matter the number of metadata changes that occurred this frame
 	if _should_save_metadata:
-		_should_save_metadata = false
 		save_only_metadata()
-
-## --------------
-##    TESTING
-## --------------
-
-var use_test_file: bool = false
-const TEST_SAVE_FILE = "res://tests/save_data_test.save"
-const TEST_SETTINGS_FILE = "res://tests/settings_test.cfg"
-
-func setup_test_environ():
-	use_test_file = true
-	
-	# clear potentially set values
-	_current_metadata.clear()

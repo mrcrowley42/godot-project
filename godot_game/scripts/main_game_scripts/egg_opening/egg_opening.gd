@@ -72,7 +72,7 @@ var scale_addition: Vector2 = Vector2(0, 0)
 func _ready():
 	DataGlobals.load_metadata()
 	var current_creature = DataGlobals.get_metadata_value(DataGlobals.CURRENT_CREATURE)
-	if skip_scene or DataGlobals.has_save_data() and current_creature != null:
+	if (skip_scene or DataGlobals.has_save_data()) and len(current_creature) != 0:
 		if DataGlobals.has_only_metadata():
 			instant_open_to_continue_screen()
 			return
