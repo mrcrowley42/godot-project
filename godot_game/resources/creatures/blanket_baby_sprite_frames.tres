@@ -27,7 +27,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"confused",
-"speed": 5.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -55,7 +55,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"joy",
-"speed": 5.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -69,5 +69,5 @@ animations = [{
 }],
 "loop": true,
 "name": &"sad",
-"speed": 5.0
+"speed": 4.0
 }]

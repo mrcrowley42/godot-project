@@ -1,0 +1,29 @@
+[gd_resource type="SpriteFrames" load_steps=2 format=3 uid="uid://b70ipckuifg3v"]
+
+[ext_resource type="Texture2D" uid="uid://7m4jvy4gmcxo" path="res://images/creature_sprites/box-fella/adult-idle-0.png" id="1_mc4ck"]
+
+[resource]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"confused",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_mc4ck")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"joy",
+"speed": 4.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"sad",
+"speed": 4.0
+}]
