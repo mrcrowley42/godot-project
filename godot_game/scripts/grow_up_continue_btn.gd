@@ -5,7 +5,7 @@ extends NinePatchRect
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event.is_pressed() and visible:
-		Globals.general_dict["is_now_adult"] = true
+		Globals.general_dict["grow_creature_up"] = true
 		Globals.perform_closing_transition(
 			parent.trans_img, 
 			parent.mid_pos,

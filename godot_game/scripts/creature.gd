@@ -50,24 +50,28 @@ signal water_changed()
 signal fun_changed()
 signal xp_changed()
 signal ready_to_grow_up()
-signal finished_loading()
 
 ## Map of shorthand strings to corresponding damage function
 var stats: Dictionary = {Stat.HP: damage_hp, Stat.FUN: damage_fun,
 	Stat.WATER: damage_water, Stat.FOOD: damage_food}
 
-
-func _ready() -> void:
-	finished_loading.connect(setup_creature)
-
 func setup_creature():
 	var uid = int(DataGlobals.get_metadata_value(DataGlobals.CURRENT_CREATURE))
 	creature_type = load(ResourceUID.get_id_path(uid))
+	
+	# should grow up?
+	if Globals.general_dict.has("grow_creature_up"):
+		Globals.general_dict.erase("grow_creature_up")
+		grow_up_one_stage()
+	
 	creature = creature_type.baby if life_stage == LifeStage.CHILD else creature_type.adult
 	setup_default_values()
 	setup_main_sprite()
 	Globals.send_notification(Globals.NOTIFICATION_CREATURE_IS_LOADED)
 	apply_dmg_tint()
+	
+	if is_ready_to_grow_up and life_stage < LifeStage.ADULT:
+		ready_to_grow_up.emit()
 
 ## Update the [param sprite_frames] of the current creature based on the current [param life_stage]
 func setup_main_sprite() -> void:
@@ -174,12 +178,6 @@ func damage_water(amount) -> void:
 
 	water_changed.emit()
 
-
-func set_to_adult():
-	life_stage = LifeStage.ADULT
-	is_ready_to_grow_up = false
-	setup_creature()
-
 func get_current_cosmetics():
 	return %AccessoryManager.current_cosmetics
 
@@ -189,11 +187,17 @@ func get_loaded_cosmetics():
 ## changes the animation and retains frame change timing
 func change_animation(anim_name: String):
 	if not main_sprite.sprite_frames.has_animation(anim_name):
-		print_rich("[color=red]current creature has no animation: " + anim_name)
+		printerr("current creature has no animation: " + anim_name)
 		return
 	
 	await main_sprite.frame_changed
 	main_sprite.animation = anim_name
+
+func grow_up_one_stage():
+	xp = 0
+	life_stage = LifeStage.get(life_stage + 1)
+	is_ready_to_grow_up = false
+	DataGlobals.set_new_highest_life_stage(Helpers.uid_str(creature_type), life_stage)
 
 
 func save() -> Dictionary:
@@ -215,13 +219,6 @@ func load(data) -> void:
 			var signal_name = property + "_changed"
 			if self.has_signal(signal_name):
 				self[signal_name].emit()
-	
-	if Globals.general_dict.has("is_now_adult"):
-		Globals.general_dict.erase("is_now_adult")
-		life_stage = LifeStage.ADULT
-
-	if is_ready_to_grow_up and life_stage == LifeStage.CHILD:
-		ready_to_grow_up.emit()
 
 	apply_dmg_tint()
-	finished_loading.emit()
+	setup_creature()  # do last
