@@ -1,10 +1,24 @@
-[gd_resource type="SpriteFrames" load_steps=2 format=3 uid="uid://b70ipckuifg3v"]
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://b70ipckuifg3v"]
 
 [ext_resource type="Texture2D" uid="uid://7m4jvy4gmcxo" path="res://images/creature_sprites/box-fella/adult-idle-0.png" id="1_mc4ck"]
+[ext_resource type="Texture2D" uid="uid://be265qe8u4gx8" path="res://images/creature_sprites/box-fella/box-adult-confused-0.png" id="1_pl685"]
+[ext_resource type="Texture2D" uid="uid://5uggot73b7oe" path="res://images/creature_sprites/box-fella/box-adult-confused-1.png" id="2_x11dd"]
+[ext_resource type="Texture2D" uid="uid://bdpjm8f17chub" path="res://images/creature_sprites/box-fella/box-adult-confused-2.png" id="3_8no4q"]
+[ext_resource type="Texture2D" uid="uid://dffesicr0vmtf" path="res://images/creature_sprites/box-fella/adult-idle-1.png" id="5_owkc6"]
+[ext_resource type="Texture2D" uid="uid://dokb1msitvfbq" path="res://images/creature_sprites/box-fella/adult-idle-2.png" id="6_2vgxc"]
 
 [resource]
 animations = [{
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_pl685")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_x11dd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_8no4q")
+}],
 "loop": true,
 "name": &"confused",
 "speed": 4.0
@@ -12,6 +26,12 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_mc4ck")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_owkc6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_2vgxc")
 }],
 "loop": true,
 "name": &"idle",
