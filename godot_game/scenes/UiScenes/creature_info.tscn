@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://c2sh8bso4xb3b"]
+[gd_scene load_steps=13 format=3 uid="uid://dal3mlp3chphg"]
 
 [ext_resource type="Script" path="res://scripts/creature_info.gd" id="1_vck8f"]
 [ext_resource type="Shader" path="res://shaders/pattern_animated_grid.gdshader" id="2_qkvqy"]
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="3_3i3tn"]
 [ext_resource type="SpriteFrames" path="res://resources/creatures/blanket_baby_sprite_frames.tres" id="4_5j2jk"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="4_mphc8"]
+[ext_resource type="Shader" path="res://shaders/outline.gdshader" id="4_ra6rw"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="5_nb2bl"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="5_sg3th"]
 [ext_resource type="Theme" uid="uid://dvpqr6ekggufg" path="res://themes/menu_dropdown.tres" id="7_dkqjy"]
@@ -32,6 +33,11 @@ expand_margin_left = 2.0
 expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8hlt5"]
+shader = ExtResource("4_ra6rw")
+shader_parameter/outline_thickness = 1.69
+shader_parameter/outline_colour = Color(0.156863, 1, 0.631373, 0.352941)
 
 [node name="CreaturePanel" type="MarginContainer" node_paths=PackedStringArray("heading", "description", "preview", "stat_window")]
 offset_right = 434.0
@@ -79,6 +85,7 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0yx5w")
 
 [node name="CreaturePreview" type="AnimatedSprite2D" parent="MarginContainer/VBoxContainer/HBoxContainer/PreviewContainer"]
+material = SubResource("ShaderMaterial_8hlt5")
 position = Vector2(76, 76)
 scale = Vector2(0.1, 0.1)
 sprite_frames = ExtResource("4_5j2jk")
