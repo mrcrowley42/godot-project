@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://jt5f8ds3v8yr"]
+[gd_scene load_steps=11 format=3 uid="uid://jt5f8ds3v8yr"]
 
 [ext_resource type="Script" path="res://scenes/UiScenes/creature_showcase.gd" id="1_8yxo1"]
 [ext_resource type="Shader" path="res://shaders/pattern_animated_grid.gdshader" id="2_5dpgm"]
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="3_bsxtk"]
 [ext_resource type="SpriteFrames" uid="uid://68skicj7tsu2" path="res://resources/creatures/main_creature_adult_sprite_frames.tres" id="4_2i6ea"]
+[ext_resource type="Shader" path="res://shaders/outline.gdshader" id="4_gbshu"]
 [ext_resource type="Theme" uid="uid://dvpqr6ekggufg" path="res://themes/menu_dropdown.tres" id="7_846fc"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="8_l2kok"]
 
@@ -30,6 +31,11 @@ expand_margin_left = 2.0
 expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s2k6h"]
+shader = ExtResource("4_gbshu")
+shader_parameter/outline_thickness = 1.69
+shader_parameter/outline_colour = Color(0.156863, 1, 0.631373, 0.352941)
 
 [node name="FactPopup" type="MarginContainer" node_paths=PackedStringArray("heading", "preview", "emote_btn", "lifestage_btn")]
 offset_right = 434.0
@@ -73,6 +79,7 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0yx5w")
 
 [node name="CreaturePreview" type="AnimatedSprite2D" parent="MarginContainer/VBoxContainer/PreviewContainer"]
+material = SubResource("ShaderMaterial_s2k6h")
 position = Vector2(190, 155)
 scale = Vector2(0.175, 0.175)
 sprite_frames = ExtResource("4_2i6ea")
