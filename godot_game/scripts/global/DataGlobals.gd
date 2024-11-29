@@ -236,10 +236,6 @@ func setup_auto_save(timer_parent):
 ## --------------
 
 func build_save_uid_node_atlas():
-	if len(save_uid_node_atlas.keys()) > 0:
-		printerr("Save uid node atlas has already been built! Aborting")
-		return
-	
 	var save_nodes = get_tree().get_nodes_in_group(Globals.SAVE_DATA_GROUP)
 	for node in save_nodes:
 		if !Globals.has_function(node, GET_SAVE_UID):
