@@ -124,10 +124,11 @@ func _on_zen_mode_button_down() -> void:
 	load_minigame(zen_mode_scene, null)
 
 
-## save data
+func get_save_uid() -> int:
+	return DataGlobals.SAVE_MINIDATE_MAGAGER_UID
+
 func save() -> Dictionary:
 	return save_data
-
 
 func load(data) -> void:
 	save_data = data

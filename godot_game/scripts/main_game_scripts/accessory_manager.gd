@@ -82,9 +82,11 @@ func toggle_cosmetic(cosmetic: CosmeticItem) -> void:
 				break
 
 
+func get_save_uid() -> int:
+	return DataGlobals.SAVE_ACCESSORY_MANAGER_UID
+
 func save() -> Dictionary:
 	return {"current_cosmetics": current_cosmetics}
-
 
 func load(data) -> void:
 	if data.has("current_cosmetics"):
