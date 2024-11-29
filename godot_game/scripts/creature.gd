@@ -200,13 +200,15 @@ func grow_up_one_stage():
 	DataGlobals.set_new_highest_life_stage(Helpers.uid_str(creature_type), life_stage)
 
 
+func get_save_uid() -> int:
+	return DataGlobals.SAVE_CREATURE_UID
+
 func save() -> Dictionary:
 	return {
 		"water": water, "food": food, "fun": fun, "hp": hp,
 		"xp": xp, "is_ready_to_grow_up": is_ready_to_grow_up,
 		"life_stage": life_stage
 	}
-
 
 func load(data) -> void:
 	var prop_list = ["water", "fun", "food", "hp", "xp", 

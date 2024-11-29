@@ -1,6 +1,15 @@
 extends Node
 
-# metadata items
+## node save UIDs (DO NOT CHANGE THESE! but you can add new ones if u want)
+const SAVE_STATUS_MANAGER_UID = 0
+const SAVE_MINIDATE_MAGAGER_UID = 1
+const SAVE_CREATURE_UID = 2
+const SAVE_ACCESSORY_MANAGER_UID = 3
+
+## key: save_uid, value: node
+var save_uid_node_atlas = {}
+
+## metadata items
 const LAST_SAVED = "last_saved"
 const CURRENT_CREATURE = "current_creature"
 const CREATURES_DISCOVERED = "creatures_discovered"
@@ -8,14 +17,15 @@ const UNLOCKED_COSMETICS = "unlocked_cosmetics"
 const UNLOCKED_FACTS = "unlocked_facts"
 const UNLOCKED_THEMES = "unlocked_themes"
 
-# other
+## other
 const SECTION = "section"
-const PATH = "path"
+const SAVE_UID = "save_uid"
+const GET_SAVE_UID = "get_save_uid"
 const DATA = "data"
 const SAVE = "save"
 const LOAD = "load"
 
-# actions
+## actions
 const ACTION_SET = 0
 const ACTION_ADD = 1
 const ACTION_APPEND = 2
@@ -160,12 +170,11 @@ func save_data():
 
 	# save node data
 	for node in save_nodes:
-		if !node.has_method(SAVE): # object doesnt have save() func
-			printerr("Node '%s' doesnt have a %s() function" % [node.name, SAVE])
+		if !Globals.has_function(node, SAVE) or !Globals.has_function(node, GET_SAVE_UID):
 			continue
 
 		var node_data = {
-			PATH: node.get_path(),
+			SAVE_UID: node.call(GET_SAVE_UID),
 			DATA: node.call(SAVE)
 		}
 		all_data.append(JSON.stringify(node_data))
@@ -196,8 +205,7 @@ func save_settings_data():
 	var settings_nodes = get_tree().get_nodes_in_group(Globals.SAVE_SETTINGS_GROUP)
 
 	for node in settings_nodes:
-		if !node.has_method(SAVE): # object doesnt have save() func
-			printerr("Node '%s' doesnt have a %s() function" % [node.name, SAVE])
+		if !Globals.has_function(node, SAVE):
 			continue
 
 		var data = node.call(SAVE)
@@ -227,6 +235,18 @@ func setup_auto_save(timer_parent):
 ##    LOADING
 ## --------------
 
+func build_save_uid_node_atlas():
+	if len(save_uid_node_atlas.keys()) > 0:
+		printerr("Save uid node atlas has already been built! Aborting")
+		return
+	
+	var save_nodes = get_tree().get_nodes_in_group(Globals.SAVE_DATA_GROUP)
+	for node in save_nodes:
+		if !Globals.has_function(node, GET_SAVE_UID):
+			return
+		
+		save_uid_node_atlas[node.call(GET_SAVE_UID)] = node
+
 ## loads only the metadata line from save (if it exists)
 func load_metadata() -> Dictionary:
 	if _should_save_metadata:
@@ -240,10 +260,12 @@ func load_metadata() -> Dictionary:
 
 ## loads data, and passes it to saved nodes. returns metadata
 func load_data() -> Dictionary:
+	build_save_uid_node_atlas()
+
 	if _should_save_metadata:
 		printerr("Cannot load as changes to metadata have not been saved")
 		return get_current_metadata_dc()
-	
+
 	if !has_save_data():
 		return get_current_metadata_dc()
 
@@ -256,21 +278,20 @@ func load_data() -> Dictionary:
 		var line = save_file.get_line()
 		var parsed_line = JSON.parse_string(line)
 
-		if PATH not in parsed_line or DATA not in parsed_line:
-			printerr("Missing '%s' or '%s' value for data, skipping" % [PATH, DATA])
+		if SAVE_UID not in parsed_line or DATA not in parsed_line:
+			printerr("'%s' or '%s' value in save data is missing! skipping" % [SAVE_UID, DATA])
 			continue
 
 		var data = parsed_line[DATA]
+		var save_uid: int = int(parsed_line[SAVE_UID])
 
-		var node_path = parsed_line[PATH]
-		if not has_node(node_path):
-			printerr("Node at path '%s' could not be found, skipping" % node_path)
+		if !save_uid_node_atlas.has(save_uid):
+			printerr("Node with save uid of '%s' could not be found, skipping" % save_uid)
 			data_skipped.append(data)
 			continue
 
-		var node: Node = get_node(node_path)
-		if not node.has_method(LOAD):
-			printerr("Node '%s' at '%s' doesnt have a %s() function, skipping" % [node, node_path, LOAD])
+		var node: Node = save_uid_node_atlas[save_uid]
+		if not Globals.has_function(node, LOAD):
 			data_skipped.append(data)
 			continue
 
@@ -291,8 +312,7 @@ func load_settings_data():
 
 	var settings_nodes = get_tree().get_nodes_in_group(Globals.SAVE_SETTINGS_GROUP)
 	for node in settings_nodes:
-		if !node.has_method(SAVE) or !node.has_method(LOAD): # object doesnt have save() func
-			printerr("Node '%s' doesnt have a %s() or a %s() function/s" % [node.name, SAVE, LOAD])
+		if !Globals.has_function(node, SAVE) or !Globals.has_function(node, LOAD):
 			continue
 
 		var data_to_send = {}

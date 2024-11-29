@@ -55,6 +55,9 @@ class TestNode extends Node2D:
 		else:
 			add_to_group("save_data")
 
+	func get_save_uid() -> int:
+		return 0
+
 	func save():
 		return setting_data_to_save if use_setting_data else data_to_save
 	func load(data):

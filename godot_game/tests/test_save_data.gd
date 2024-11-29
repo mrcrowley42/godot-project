@@ -132,7 +132,7 @@ func test_save_node_data():
 	assert_same(str(first_line), str(DataGlobals.load_metadata()))
 	
 	var second_line = JSON.parse_string(save_file.get_line())
-	assert_eq(second_line[DataGlobals.PATH], str(node.get_path()))
+	assert_eq(second_line[DataGlobals.SAVE_UID], node.get_save_uid())
 	assert_eq(str(second_line[DataGlobals.DATA]), str(node.data_to_save))
 
 ## test data saved is loaded to the nodes

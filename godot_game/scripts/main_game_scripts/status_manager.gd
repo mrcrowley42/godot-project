@@ -54,9 +54,11 @@ func fun_timeout() -> void:
 	creature.dmg(fun_amount * time_multiplier, Creature.Stat.FUN)
 
 
+func get_save_uid() -> int:
+	return DataGlobals.SAVE_STATUS_MANAGER_UID
+
 func save() -> Dictionary:
 	return {"holiday_mode": holiday_mode}
-
 
 func load(data):
 	if data.has("holiday_mode"):
