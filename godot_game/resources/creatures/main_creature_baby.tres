@@ -25,5 +25,5 @@ max_fun = 1000
 sprite_frames = ExtResource("5_802xt")
 notification_position = Vector2(-30, -120)
 cosmetic_positions = Array[ExtResource("1_n52fl")]([SubResource("Resource_4vd6u"), SubResource("Resource_8dggf")])
-likes = Array[int]([])
-dislikes = Array[int]([])
+likes = Array[int]([0])
+dislikes = null

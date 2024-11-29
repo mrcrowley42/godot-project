@@ -4,7 +4,6 @@
 class_name Creature extends Node2D
 
 # ENUMS
-enum FoodItem {NEUTRAL, TOAST, CHIPS, FRUIT}
 enum LifeStage {CHILD, ADULT}
 enum Stat {HP, WATER, FOOD, FUN}
 
@@ -39,9 +38,12 @@ var lock_xp: bool = false
 var xp: float = 0
 var is_ready_to_grow_up: bool = false
 var life_stage: LifeStage
-var likes: Array
-var dislikes: Array
 var creature_name: String
+
+var food_likes: Array[FoodItem.FoodType]
+var food_dislikes: Array[FoodItem.FoodType]
+var drink_likes: Array[DrinkItem.DrinkType]
+var drink_dislikes: Array[DrinkItem.DrinkType]
 
 # SIGNALS
 signal hp_changed()
@@ -85,8 +87,11 @@ func setup_default_values():
 	max_fun = creature.max_fun
 	max_water = creature.max_water
 
-	likes = creature.likes
-	dislikes = creature.dislikes
+	food_likes = creature.food_likes
+	food_dislikes = creature.food_dislikes
+	drink_likes = creature.drink_likes
+	drink_dislikes = creature.drink_dislikes
+	
 	creature_name = creature_type.name
 	xp_required = creature_type.xp_required_for_adult
 	
@@ -136,30 +141,43 @@ func apply_dmg_tint() -> void:
 	main_sprite.modulate.r = clampf(1 - (1 - hp / max_hp) + dying_colour.r, 0, 1)
 
 
-func damage_hp(amount: float) -> void:
-	var temp_hp = hp
-	self.hp = clampf(self.hp - amount, 0, max_hp)
-	if hp <= 0:
-		call_deferred("game_over")
-	if hp - temp_hp > 0:
-		add_xp(hp - temp_hp * xp_mulitplier)
+func add_hp(amount: float, multiplier: float = 1.0):
+	assert(amount > 0)
+	hp = min(hp + amount, max_hp)
+	add_xp(amount * multiplier)
+	apply_dmg_tint()
+	hp_changed.emit()
 
+func damage_hp(amount: float) -> void:
+	assert(amount > 0)  # positive only
+	if hp - amount <= 0:
+		call_deferred("game_over")
+	
+	hp = max(hp - amount, 0)
 	apply_dmg_tint()
 	hp_changed.emit()
 
 
-func damage_food(amount, kind: FoodItem = FoodItem.NEUTRAL) -> void:
+func consume_food(food_item: FoodItem):
 	var preference_multi := 1.0
-	if kind in likes: preference_multi = like_multiplier
-	elif kind in dislikes: preference_multi = dislike_multiplier
+	if food_item.type in food_likes: preference_multi = like_multiplier
+	elif food_item.type in food_dislikes: preference_multi = dislike_multiplier
+	add_food(food_item.amount, preference_multi)
 
-	var temp_food = food
-	self.food = clampf(self.food - amount, 0, max_food)
-	if food - temp_food > 0:
-		add_xp((food - temp_food) * xp_mulitplier * preference_multi)
-
+func add_food(amount: float, multiplier: float = 1.0):
+	assert(amount > 0)
+	food = min(food + amount, max_food)
+	add_xp(amount * multiplier)
 	food_changed.emit()
 
+func damage_food(amount) -> void:
+	assert(amount > 0)
+	food = max(food - amount, 0)
+	food_changed.emit()
+
+
+func add_fun(amount: float, multiplier: float = 1.0):
+	pass
 
 func damage_fun(amount) -> void:
 	var temp_fun = fun
@@ -170,9 +188,15 @@ func damage_fun(amount) -> void:
 	fun_changed.emit()
 
 
-func damage_water(amount) -> void:
+func consume_drink(drink_item: DrinkItem):
+	pass
+
+func add_water(amount: float, multiplier: float = 1.0):
+	pass
+
+func damage_water(drink: DrinkItem) -> void:
 	var temp_water = water
-	self.water = clampf(self.water - amount, 0, max_water)
+	self.water = clampf(self.water - drink.amount, 0, max_water)
 	if water - temp_water > 0:
 		add_xp(water - temp_water * xp_mulitplier)
 
@@ -195,7 +219,7 @@ func change_animation(anim_name: String):
 
 func grow_up_one_stage():
 	xp = 0
-	life_stage += 1
+	life_stage = LifeStage.ADULT  # TODO: change this to add 1 instead of just assigning ADULT
 	is_ready_to_grow_up = false
 	DataGlobals.set_new_highest_life_stage(Helpers.uid_str(creature_type), life_stage)
 

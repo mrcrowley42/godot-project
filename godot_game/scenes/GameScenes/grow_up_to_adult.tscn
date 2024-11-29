@@ -30,7 +30,7 @@ script = ExtResource("1_mprwa")
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="TransLayer" type="CanvasLayer" parent="UI"]
-layer = 10
+layer = 20
 
 [node name="Transition" type="Sprite2D" parent="UI/TransLayer"]
 position = Vector2(270, 1200)

@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://do0i17klbrer7" path="res://icons/arrow-up-square.svg" id="15_8x1u0"]
 [ext_resource type="Script" path="res://scripts/grow_up_btn.gd" id="16_mj2i7"]
 [ext_resource type="Script" path="res://scripts/action_menu_panel.gd" id="17_wsydk"]
-[ext_resource type="Script" path="res://scripts/base_classses/custom_tooltip_script.gd" id="18_2njxs"]
+[ext_resource type="Script" path="res://scripts/utility/custom_tooltip_script.gd" id="18_2njxs"]
 [ext_resource type="Theme" uid="uid://1dv11a5ar0hg" path="res://themes/action_btn.tres" id="18_v1mb2"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="19_3grg3"]
 [ext_resource type="Texture2D" uid="uid://dckd2hhimpp2x" path="res://icons/cup-straw.svg" id="20_tdidc"]

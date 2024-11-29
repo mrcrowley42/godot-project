@@ -1,8 +1,8 @@
-[gd_resource type="Resource" script_class="CreatureTypePart" load_steps=4 format=3 uid="uid://bt05ukbd0itlx"]
+[gd_resource type="Resource" script_class="CreatureTypePart" load_steps=4 format=3 uid="uid://c6bogi1y7uk6v"]
 
 [ext_resource type="Script" path="res://scripts/base_classses/cosmetic_position.gd" id="1_puklj"]
 [ext_resource type="Script" path="res://scripts/base_classses/creature_type_part.gd" id="2_3cqod"]
-[ext_resource type="SpriteFrames" uid="uid://b70ipckuifg3v" path="res://resources/creatures/box_adult_sprite_frames.tres" id="3_s1beh"]
+[ext_resource type="SpriteFrames" uid="uid://hwolbvnn76v3" path="res://resources/creatures/box_adult_sprite_frames.tres" id="3_s1beh"]
 
 [resource]
 script = ExtResource("2_3cqod")
