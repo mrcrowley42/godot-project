@@ -1682,7 +1682,7 @@ theme_override_constants/margin_bottom = 10
 [node name="Creatures" type="GridContainer" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/h_separation = 0
-theme_override_constants/v_separation = 12
+theme_override_constants/v_separation = 18
 script = ExtResource("50_rm732")
 
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/CreaturesMenu"]
