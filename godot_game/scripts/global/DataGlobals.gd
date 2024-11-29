@@ -170,13 +170,8 @@ func save_data():
 
 	# save node data
 	for node in save_nodes:
-		if !node.has_method(SAVE): # object doesnt have save() func
-			printerr("Node '%s' doesnt have a %s() function" % [node.name, SAVE])
+		if !Globals.has_function(node, SAVE) or !Globals.has_function(node, GET_SAVE_UID):
 			continue
-
-		if !node.has_method(GET_SAVE_UID):
-			printerr("Node '%s' doesnt have a %s() function" % [node.name, GET_SAVE_UID])
-			return
 
 		var node_data = {
 			SAVE_UID: node.call(GET_SAVE_UID),
@@ -210,8 +205,7 @@ func save_settings_data():
 	var settings_nodes = get_tree().get_nodes_in_group(Globals.SAVE_SETTINGS_GROUP)
 
 	for node in settings_nodes:
-		if !node.has_method(SAVE): # object doesnt have save() func
-			printerr("Node '%s' doesnt have a %s() function" % [node.name, SAVE])
+		if !Globals.has_function(node, SAVE):
 			continue
 
 		var data = node.call(SAVE)
@@ -248,8 +242,7 @@ func build_save_uid_node_atlas():
 	
 	var save_nodes = get_tree().get_nodes_in_group(Globals.SAVE_DATA_GROUP)
 	for node in save_nodes:
-		if !node.has_method(GET_SAVE_UID):
-			printerr("Node '%s' doesnt have a %s() function!" % [node.name, GET_SAVE_UID])
+		if !Globals.has_function(node, GET_SAVE_UID):
 			return
 		
 		save_uid_node_atlas[node.call(GET_SAVE_UID)] = node
@@ -298,8 +291,7 @@ func load_data() -> Dictionary:
 			continue
 
 		var node: Node = save_uid_node_atlas[save_uid]
-		if not node.has_method(LOAD):
-			printerr("Node '%s' with uid '%s' doesnt have a %s() function, skipping" % [node, save_uid, LOAD])
+		if not Globals.has_function(node, LOAD):
 			data_skipped.append(data)
 			continue
 
@@ -320,8 +312,7 @@ func load_settings_data():
 
 	var settings_nodes = get_tree().get_nodes_in_group(Globals.SAVE_SETTINGS_GROUP)
 	for node in settings_nodes:
-		if !node.has_method(SAVE) or !node.has_method(LOAD): # object doesnt have save() func
-			printerr("Node '%s' doesnt have a %s() or a %s() function/s" % [node.name, SAVE, LOAD])
+		if !Globals.has_function(node, SAVE) or !Globals.has_function(node, LOAD):
 			continue
 
 		var data_to_send = {}

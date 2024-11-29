@@ -129,6 +129,12 @@ func tween(obj, prop, val, delay=0., time=2., _ease=Tween.EASE_OUT):
 			.set_delay(delay)
 	return t
 
+func has_function(node: Node, method: String) -> bool:
+	if not node.has_method(method):
+		printerr("Node '%s' at path '%s' does not have '%s()' function" % [node, node.get_path(), method])
+		return false
+	return true
+
 ## fire confetti, automatically removes iteslf of finish
 func fire_confetti(parent, pos: Vector2 = Vector2(270, 560)):
 	var remove = func(p_node):
