@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://b70ipckuifg3v"]
+[gd_resource type="SpriteFrames" load_steps=13 format=3 uid="uid://b70ipckuifg3v"]
 
 [ext_resource type="Texture2D" uid="uid://7m4jvy4gmcxo" path="res://images/creature_sprites/box-fella/adult-idle-0.png" id="1_mc4ck"]
 [ext_resource type="Texture2D" uid="uid://be265qe8u4gx8" path="res://images/creature_sprites/box-fella/box-adult-confused-0.png" id="1_pl685"]
@@ -6,6 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://bdpjm8f17chub" path="res://images/creature_sprites/box-fella/box-adult-confused-2.png" id="3_8no4q"]
 [ext_resource type="Texture2D" uid="uid://dffesicr0vmtf" path="res://images/creature_sprites/box-fella/adult-idle-1.png" id="5_owkc6"]
 [ext_resource type="Texture2D" uid="uid://dokb1msitvfbq" path="res://images/creature_sprites/box-fella/adult-idle-2.png" id="6_2vgxc"]
+[ext_resource type="Texture2D" uid="uid://yqqslo7ngv" path="res://images/creature_sprites/box-fella/adult-joy-0.png" id="7_7nmcl"]
+[ext_resource type="Texture2D" uid="uid://dkh22s3oifuk6" path="res://images/creature_sprites/box-fella/adult-joy-1.png" id="8_5o4cr"]
+[ext_resource type="Texture2D" uid="uid://b7lao8iuuvs4p" path="res://images/creature_sprites/box-fella/adult-joy-2.png" id="9_fitjb"]
+[ext_resource type="Texture2D" uid="uid://cmgbu2iwftbad" path="res://images/creature_sprites/box-fella/box-adult-sad-0.png" id="10_amv5v"]
+[ext_resource type="Texture2D" uid="uid://dlkdob6wf77pk" path="res://images/creature_sprites/box-fella/box-adult-sad-1.png" id="11_sdnn1"]
+[ext_resource type="Texture2D" uid="uid://txa8o6ejhfvy" path="res://images/creature_sprites/box-fella/box-adult-sad-2.png" id="12_r2wmw"]
 
 [resource]
 animations = [{
@@ -37,12 +43,30 @@ animations = [{
 "name": &"idle",
 "speed": 4.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_7nmcl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_5o4cr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_fitjb")
+}],
 "loop": true,
 "name": &"joy",
 "speed": 4.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_amv5v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_sdnn1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_r2wmw")
+}],
 "loop": true,
 "name": &"sad",
 "speed": 4.0
