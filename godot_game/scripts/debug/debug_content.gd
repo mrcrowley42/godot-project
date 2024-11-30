@@ -131,4 +131,5 @@ func _on_discover_btn_button_down() -> void:
 		var uid = Helpers.uid_str(creature_type)
 		if uid not in discovered:
 			DataGlobals.add_to_creatures_discovered(uid)
+		DataGlobals.set_new_highest_life_stage(uid, 1)
 	game.find_child("Creatures").propagate_call("update_locked")
