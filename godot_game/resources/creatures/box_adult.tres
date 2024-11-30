@@ -1,8 +1,20 @@
-[gd_resource type="Resource" script_class="CreatureTypePart" load_steps=4 format=3 uid="uid://bt05ukbd0itlx"]
+[gd_resource type="Resource" script_class="CreatureTypePart" load_steps=8 format=3 uid="uid://bt05ukbd0itlx"]
 
 [ext_resource type="Script" path="res://scripts/base_classses/cosmetic_position.gd" id="1_puklj"]
 [ext_resource type="Script" path="res://scripts/base_classses/creature_type_part.gd" id="2_3cqod"]
+[ext_resource type="Resource" uid="uid://boatniuf6yx3d" path="res://resources/cosmetics/propeller_hat.tres" id="2_yy1fk"]
+[ext_resource type="Resource" uid="uid://c0gf34lgpdkmh" path="res://resources/cosmetics/standard_glasses.tres" id="3_o4ow7"]
 [ext_resource type="SpriteFrames" uid="uid://b70ipckuifg3v" path="res://resources/creatures/box_adult_sprite_frames.tres" id="3_s1beh"]
+
+[sub_resource type="Resource" id="Resource_2q62l"]
+script = ExtResource("1_puklj")
+position = Vector2(-13, -155)
+item = ExtResource("2_yy1fk")
+
+[sub_resource type="Resource" id="Resource_u36e3"]
+script = ExtResource("1_puklj")
+position = Vector2(-13, -90)
+item = ExtResource("3_o4ow7")
 
 [resource]
 script = ExtResource("2_3cqod")
@@ -12,6 +24,6 @@ max_food = 900
 max_fun = 800
 sprite_frames = ExtResource("3_s1beh")
 notification_position = Vector2(0, 0)
-cosmetic_positions = Array[ExtResource("1_puklj")]([])
+cosmetic_positions = Array[ExtResource("1_puklj")]([SubResource("Resource_2q62l"), SubResource("Resource_u36e3")])
 likes = Array[int]([])
 dislikes = Array[int]([])
