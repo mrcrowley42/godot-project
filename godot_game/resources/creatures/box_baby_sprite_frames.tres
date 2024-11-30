@@ -1,8 +1,11 @@
-[gd_resource type="SpriteFrames" load_steps=13 format=3 uid="uid://b25wqlmtehml6"]
+[gd_resource type="SpriteFrames" load_steps=16 format=3 uid="uid://b25wqlmtehml6"]
 
 [ext_resource type="Texture2D" uid="uid://c6qch15up7y80" path="res://images/creature_sprites/box-fella/confused-0.png" id="1_mrhdx"]
+[ext_resource type="Texture2D" uid="uid://df4g44ilpv4xt" path="res://images/creature_sprites/box-fella/angry-0.png" id="1_vhebl"]
+[ext_resource type="Texture2D" uid="uid://crlupqtusv3l6" path="res://images/creature_sprites/box-fella/angry-1.png" id="2_2gyhp"]
 [ext_resource type="Texture2D" uid="uid://cvvyhukcnjaq3" path="res://images/creature_sprites/box-fella/confused-1.png" id="2_chkhi"]
 [ext_resource type="Texture2D" uid="uid://cldd6jugwy0hw" path="res://images/creature_sprites/box-fella/confused-2.png" id="3_6wfnp"]
+[ext_resource type="Texture2D" uid="uid://d3kewbuhqhmi4" path="res://images/creature_sprites/box-fella/angry-2.png" id="3_ynpti"]
 [ext_resource type="Texture2D" uid="uid://bh3ssrwo3q46p" path="res://images/creature_sprites/box-fella/happy-0.png" id="4_yk341"]
 [ext_resource type="Texture2D" uid="uid://slsh1d88gfw3" path="res://images/creature_sprites/box-fella/happy-1.png" id="5_ggnly"]
 [ext_resource type="Texture2D" uid="uid://c0ies7h2a7fe4" path="res://images/creature_sprites/box-fella/happy-2.png" id="6_tfr2d"]
@@ -15,6 +18,20 @@
 
 [resource]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_vhebl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_2gyhp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ynpti")
+}],
+"loop": true,
+"name": &"angry",
+"speed": 4.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("7_sqvwg")
