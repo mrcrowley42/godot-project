@@ -277,7 +277,6 @@ icon = ExtResource("13_nksbq")
 expand_icon = true
 
 [node name="HelpMenu" type="Control" parent="UI/Control/TopOverlay"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -296,16 +295,19 @@ patch_margin_bottom = 16
 
 [node name="Label" type="Label" parent="UI/Control/TopOverlay/HelpMenu"]
 layout_mode = 0
-offset_left = 330.0
-offset_top = 200.0
-offset_right = 443.0
-offset_bottom = 228.0
+offset_left = 54.0
+offset_top = 76.0
+offset_right = 491.0
+offset_bottom = 629.0
 theme = ExtResource("1_3y1y3")
-text = "HELP"
+text = "TIMED MODE:
+
+NORMAL MODE:
+
+CONTROLS:
+CLICK THE SQUARES IDK"
 label_settings = SubResource("LabelSettings_j03ef")
-horizontal_alignment = 1
-vertical_alignment = 1
-clip_text = true
+autowrap_mode = 2
 
 [node name="CloseBtn" type="Button" parent="UI/Control/TopOverlay"]
 offset_left = 500.0

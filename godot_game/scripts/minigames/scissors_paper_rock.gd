@@ -1,6 +1,6 @@
 extends MiniGameLogic
 @onready var og_text = %ScoreLabel.text
-
+@export var help_menu: Node
 var creature_score: int = 0
 var player_score: int = 0
 var choices = ['rock', 'paper', 'scissors']
@@ -47,3 +47,7 @@ func _on_rock_btn_button_down():
 	
 func _on_close_btn_button_down():
 	close_game()
+
+
+func _on_help_btn_button_down() -> void:
+	help_menu.show()

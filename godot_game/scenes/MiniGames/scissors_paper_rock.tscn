@@ -26,7 +26,16 @@ grow_vertical = 2
 color = Color(0.504611, 0.314187, 0.196612, 1)
 metadata/_edit_lock_ = true
 
+[node name="HelpBtn" type="Button" parent="BG"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 36.0
+offset_bottom = 41.0
+theme = ExtResource("1_sqv3p")
+text = "?"
+
 [node name="GameContainer" type="PanelContainer" parent="."]
+visible = false
 offset_left = 53.0
 offset_top = 120.0
 offset_right = 487.0
@@ -98,8 +107,9 @@ text = "Make your choice
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="GameLogic" type="Node" parent="."]
+[node name="GameLogic" type="Node" parent="." node_paths=PackedStringArray("help_menu")]
 script = ExtResource("3_7jb5j")
+help_menu = NodePath("../HelpMenu")
 
 [node name="ScoreLabel" type="Label" parent="."]
 unique_name_in_owner = true
@@ -113,19 +123,47 @@ Player:   %s
 Creature: %s"
 
 [node name="CloseBtn" type="Button" parent="."]
-offset_left = 78.0
-offset_top = 144.0
-offset_right = 179.0
-offset_bottom = 187.0
+offset_left = 407.0
+offset_top = 130.0
+offset_right = 481.0
+offset_bottom = 151.0
 theme = ExtResource("1_sqv3p")
 text = "Close"
+
+[node name="HelpMenu" type="PanelContainer" parent="."]
+offset_left = 53.0
+offset_top = 120.0
+offset_right = 487.0
+offset_bottom = 554.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_3wt50")
+metadata/_edit_lock_ = true
+
+[node name="Panel" type="Panel" parent="HelpMenu"]
+layout_mode = 2
+
+[node name="Node2D" type="Node2D" parent="HelpMenu"]
+
+[node name="CloseBtn" type="Button" parent="HelpMenu/Node2D"]
+offset_left = 291.0
+offset_top = 25.0
+offset_right = 411.0
+offset_bottom = 88.0
+theme = ExtResource("1_sqv3p")
+text = "Close"
+
+[node name="Label" type="Label" parent="HelpMenu"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "ITS SCISSORS PAPER ROCK"
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 bus = &"SFX"
 script = ExtResource("5_2p5xq")
 
+[connection signal="button_down" from="BG/HelpBtn" to="GameLogic" method="_on_help_btn_button_down"]
 [connection signal="button_down" from="GameContainer/Node2D/Buttons/ScissorsBtn" to="GameLogic" method="_on_scissors_btn_button_down"]
 [connection signal="button_down" from="GameContainer/Node2D/Buttons/PaperBtn" to="GameLogic" method="_on_paper_btn_button_down"]
 [connection signal="button_down" from="GameContainer/Node2D/Buttons/RockBtn" to="GameLogic" method="_on_rock_btn_button_down"]
 [connection signal="button_down" from="CloseBtn" to="GameLogic" method="_on_close_btn_button_down"]
+[connection signal="button_down" from="HelpMenu/Node2D/CloseBtn" to="GameLogic" method="_on_close_btn_button_down"]
