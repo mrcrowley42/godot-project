@@ -116,7 +116,7 @@ func _on_memory_game_button_down() -> void:
 
 ## Loads scissors-paper-rock scene.
 func _on_scissors_paper_rock_button_down() -> void:
-	load_minigame(sprock_scene, null)
+	load_minigame(sprock_scene, null, true)
 
 
 ## Loads Relaxation scene.
