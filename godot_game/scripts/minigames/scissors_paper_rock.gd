@@ -1,12 +1,18 @@
 extends MiniGameLogic
 @onready var og_text = %ScoreLabel.text
+@export var box_sprite: Sprite2D
 @export var help_menu: Node
 var creature_score: int = 0
 var player_score: int = 0
 var choices = ['rock', 'paper', 'scissors']
-
+@onready var closed = load("res://images/scissors-paper-rock/box_closed.png")
+@onready var opened = load("res://images/scissors-paper-rock/box_opened.png")
+var queued = false
 func _process(_delta):
 	%ScoreLabel.text = og_text % [player_score, creature_score]
+
+func _ready() -> void:
+	%CreatureChoice.text = ""
 
 func win():
 	player_score += 1
@@ -17,8 +23,16 @@ func lose():
 	creature_score += 1
 	%GameStatus.text = 'Defeat\nCreature wins'
 	%SFX.play_sound("wrong")
-	
+
+func enable():
+	queued = false
+
 func play(user_choice):
+	if queued:
+		return
+	queued = true
+	reset_scene()
+	await get_tree().create_timer(1).timeout
 	var creature_choice = choices.pick_random()
 	%CreatureChoice.text = str('Creature chose ' + creature_choice)
 #
@@ -35,6 +49,14 @@ func play(user_choice):
 		win()
 		
 	else: lose()
+	box_sprite.texture = opened
+	queued = false
+
+func reset_scene():
+	box_sprite.texture = closed
+	%GameStatus.text = ""
+	%CreatureChoice.text = ""
+
 
 func _on_scissors_btn_button_down():
 	play("scissors")
@@ -47,7 +69,6 @@ func _on_rock_btn_button_down():
 	
 func _on_close_btn_button_down():
 	close_game()
-
 
 func _on_help_btn_button_down() -> void:
 	help_menu.show()

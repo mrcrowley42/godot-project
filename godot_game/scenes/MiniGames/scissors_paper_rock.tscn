@@ -32,6 +32,16 @@ shader_parameter/two_opacity = 0.0
 
 [node name="MiniGame" type="Node2D"]
 
+[node name="GameLogic" type="Node" parent="." node_paths=PackedStringArray("box_sprite", "help_menu")]
+script = ExtResource("3_7jb5j")
+box_sprite = NodePath("../Gameplay/GameContainer/Box")
+help_menu = NodePath("../Gameplay/HelpMenu")
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+bus = &"SFX"
+script = ExtResource("5_2p5xq")
+
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 10
 
@@ -58,30 +68,31 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.171871, 0.344478, 0.599564, 1)
 
-[node name="ColorRect" type="ColorRect" parent="UI/Control"]
+[node name="Overlay" type="ColorRect" parent="UI/Control"]
+layout_mode = 0
 offset_left = 53.0
 offset_top = 241.0
 offset_right = 487.0
 offset_bottom = 622.0
 color = Color(0.00784314, 0.0156863, 0.0196078, 0.588235)
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/Control"]
-layout_mode = 2
-offset_left = 53.0
-offset_top = 241.0
-offset_right = 487.0
-offset_bottom = 622.0
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 25
+[node name="ScoreLabel" type="Label" parent="UI/Control"]
+unique_name_in_owner = true
+offset_left = 313.0
+offset_top = 75.0
+offset_right = 457.0
+offset_bottom = 162.0
+theme = ExtResource("3_2jjfn")
+text = "Score:
+Player:   %s
+Creature: %s"
 
 [node name="ScoreContainer" type="NinePatchRect" parent="UI/Control"]
 layout_mode = 0
 offset_left = 45.0
-offset_top = 87.0
+offset_top = 63.0
 offset_right = 483.0
-offset_bottom = 301.0
+offset_bottom = 277.0
 scale = Vector2(0.5, 0.5)
 theme = ExtResource("3_63uno")
 texture = ExtResource("4_bk1ls")
@@ -112,48 +123,25 @@ text = "-
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SFX" type="AudioStreamPlayer" parent="."]
-unique_name_in_owner = true
-bus = &"SFX"
-script = ExtResource("5_2p5xq")
-
-[node name="Game" type="CanvasLayer" parent="."]
+[node name="Gameplay" type="CanvasLayer" parent="."]
 layer = 11
 
-[node name="BG" type="ColorRect" parent="Game"]
-visible = false
-custom_minimum_size = Vector2(434, 434)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -217.0
-offset_top = -217.5
-offset_right = 217.0
-offset_bottom = 216.5
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.504611, 0.314187, 0.196612, 1)
-metadata/_edit_lock_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Game"]
-position = Vector2(273, 276)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("1_g0ux3")
-
-[node name="GameContainer" type="PanelContainer" parent="Game"]
+[node name="GameContainer" type="PanelContainer" parent="Gameplay"]
 offset_left = 53.0
 offset_top = 241.0
 offset_right = 487.0
 offset_bottom = 622.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_3wt50")
-metadata/_edit_lock_ = true
 
-[node name="Node2D" type="Node2D" parent="Game/GameContainer"]
+[node name="Box" type="Sprite2D" parent="Gameplay/GameContainer"]
+position = Vector2(220, 35)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_g0ux3")
+
+[node name="Node2D" type="Node2D" parent="Gameplay/GameContainer"]
 position = Vector2(0, -40)
 
-[node name="CreatureChoice" type="Label" parent="Game/GameContainer/Node2D"]
+[node name="CreatureChoice" type="Label" parent="Gameplay/GameContainer/Node2D"]
 unique_name_in_owner = true
 offset_top = 139.0
 offset_right = 434.0
@@ -161,11 +149,25 @@ offset_bottom = 161.0
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("2_egqjh")
 theme_override_font_sizes/font_size = 24
+text = " RESULT OF GAME"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Buttons" type="HBoxContainer" parent="Game/GameContainer/Node2D"]
+[node name="GameStatus" type="Label" parent="Gameplay/GameContainer/Node2D"]
+unique_name_in_owner = true
+offset_top = 202.0
+offset_right = 434.0
+offset_bottom = 272.0
+theme_override_constants/line_spacing = 12
+theme_override_fonts/font = ExtResource("2_egqjh")
+theme_override_font_sizes/font_size = 32
+text = "Make your choice
+ "
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Buttons" type="HBoxContainer" parent="Gameplay/GameContainer/Node2D"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -180,7 +182,7 @@ grow_vertical = 2
 theme_override_constants/separation = 30
 metadata/_edit_use_anchors_ = true
 
-[node name="ScissorsBtn" type="Button" parent="Game/GameContainer/Node2D/Buttons"]
+[node name="ScissorsBtn" type="Button" parent="Gameplay/GameContainer/Node2D/Buttons"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -192,7 +194,7 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="PaperBtn" type="Button" parent="Game/GameContainer/Node2D/Buttons"]
+[node name="PaperBtn" type="Button" parent="Gameplay/GameContainer/Node2D/Buttons"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -204,7 +206,7 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="RockBtn" type="Button" parent="Game/GameContainer/Node2D/Buttons"]
+[node name="RockBtn" type="Button" parent="Gameplay/GameContainer/Node2D/Buttons"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -216,38 +218,7 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="Node2D2" type="Node2D" parent="Game/GameContainer"]
-position = Vector2(0, -40)
-
-[node name="GameStatus" type="Label" parent="Game/GameContainer/Node2D2"]
-unique_name_in_owner = true
-offset_top = 202.0
-offset_right = 434.0
-offset_bottom = 272.0
-theme_override_constants/line_spacing = 12
-theme_override_fonts/font = ExtResource("2_egqjh")
-theme_override_font_sizes/font_size = 32
-text = "Make your choice
- "
-horizontal_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="GameLogic" type="Node" parent="Game" node_paths=PackedStringArray("help_menu")]
-script = ExtResource("3_7jb5j")
-help_menu = NodePath("../HelpMenu")
-
-[node name="ScoreLabel" type="Label" parent="Game"]
-unique_name_in_owner = true
-offset_left = 313.0
-offset_top = 99.0
-offset_right = 457.0
-offset_bottom = 186.0
-theme = ExtResource("3_2jjfn")
-text = "Score:
-Player:   %s
-Creature: %s"
-
-[node name="CloseBtn" type="Button" parent="Game"]
+[node name="CloseBtn" type="Button" parent="Gameplay"]
 offset_left = 500.0
 offset_top = 20.0
 offset_right = 516.0
@@ -255,7 +226,7 @@ offset_bottom = 41.0
 theme = ExtResource("1_sqv3p")
 text = "X"
 
-[node name="HelpBtn" type="Button" parent="Game"]
+[node name="HelpBtn" type="Button" parent="Gameplay"]
 offset_left = 20.0
 offset_top = 20.0
 offset_right = 36.0
@@ -263,7 +234,7 @@ offset_bottom = 41.0
 theme = ExtResource("1_sqv3p")
 text = "?"
 
-[node name="HelpMenu" type="PanelContainer" parent="Game"]
+[node name="HelpMenu" type="PanelContainer" parent="Gameplay"]
 visible = false
 offset_left = 53.0
 offset_top = 120.0
@@ -272,12 +243,12 @@ offset_bottom = 554.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_3wt50")
 metadata/_edit_lock_ = true
 
-[node name="Panel" type="Panel" parent="Game/HelpMenu"]
+[node name="Panel" type="Panel" parent="Gameplay/HelpMenu"]
 layout_mode = 2
 
-[node name="Node2D" type="Node2D" parent="Game/HelpMenu"]
+[node name="Node2D" type="Node2D" parent="Gameplay/HelpMenu"]
 
-[node name="CloseRules" type="Button" parent="Game/HelpMenu/Node2D"]
+[node name="CloseRules" type="Button" parent="Gameplay/HelpMenu/Node2D"]
 offset_left = 291.0
 offset_top = 25.0
 offset_right = 411.0
@@ -285,7 +256,7 @@ offset_bottom = 88.0
 theme = ExtResource("1_sqv3p")
 text = "Close"
 
-[node name="Label" type="Label" parent="Game/HelpMenu"]
+[node name="Label" type="Label" parent="Gameplay/HelpMenu"]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Rules:
@@ -295,9 +266,9 @@ Rock beats Scissors
 
 Compete against the creature to earn points"
 
-[connection signal="button_down" from="Game/GameContainer/Node2D/Buttons/ScissorsBtn" to="Game/GameLogic" method="_on_scissors_btn_button_down"]
-[connection signal="button_down" from="Game/GameContainer/Node2D/Buttons/PaperBtn" to="Game/GameLogic" method="_on_paper_btn_button_down"]
-[connection signal="button_down" from="Game/GameContainer/Node2D/Buttons/RockBtn" to="Game/GameLogic" method="_on_rock_btn_button_down"]
-[connection signal="button_down" from="Game/CloseBtn" to="Game/GameLogic" method="_on_close_btn_button_down"]
-[connection signal="button_down" from="Game/HelpBtn" to="Game/GameLogic" method="_on_help_btn_button_down"]
-[connection signal="button_down" from="Game/HelpMenu/Node2D/CloseRules" to="Game/GameLogic" method="_on_close_rules_button_down"]
+[connection signal="button_down" from="Gameplay/GameContainer/Node2D/Buttons/ScissorsBtn" to="GameLogic" method="_on_scissors_btn_button_down"]
+[connection signal="button_down" from="Gameplay/GameContainer/Node2D/Buttons/PaperBtn" to="GameLogic" method="_on_paper_btn_button_down"]
+[connection signal="button_down" from="Gameplay/GameContainer/Node2D/Buttons/RockBtn" to="GameLogic" method="_on_rock_btn_button_down"]
+[connection signal="button_down" from="Gameplay/CloseBtn" to="GameLogic" method="_on_close_btn_button_down"]
+[connection signal="button_down" from="Gameplay/HelpBtn" to="GameLogic" method="_on_help_btn_button_down"]
+[connection signal="button_down" from="Gameplay/HelpMenu/Node2D/CloseRules" to="GameLogic" method="_on_close_rules_button_down"]
