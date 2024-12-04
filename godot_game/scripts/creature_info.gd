@@ -26,6 +26,10 @@ func setup():
 	description.text = "%s" % creature.desc
 	preview.sprite_frames = creature.baby.sprite_frames
 	preview.autoplay = "idle"
+	var uid = Helpers.uid_str(creature)
+	var encountered = DataGlobals.get_metadata_value(DataGlobals.CREATURES_DISCOVERED)
+	var num_hatched = encountered[uid]['num_times_hatched']
+	stat_window.text = stat_window.text % [num_hatched]
 
 
 func _on_button_button_down() -> void:

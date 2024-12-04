@@ -351,7 +351,6 @@ icon = ExtResource("9_ajbov")
 expand_icon = true
 
 [node name="HelpMenu" type="Control" parent="UI/Control/TopOverlay"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 540.0
@@ -370,16 +369,26 @@ patch_margin_bottom = 16
 
 [node name="Label" type="Label" parent="UI/Control/TopOverlay/HelpMenu"]
 layout_mode = 0
-offset_left = 77.0
-offset_top = 412.0
-offset_right = 190.0
-offset_bottom = 434.0
+offset_left = 35.0
+offset_top = 40.0
+offset_right = 497.0
+offset_bottom = 818.0
 theme = ExtResource("5_d7726")
-text = "HELP"
+theme_override_font_sizes/font_size = 15
+text = "CONTROLS:
+A - Move the blocks to the left.
+D - to move the blocks to the right.
+Use S to make the blocks fall faster.
+Use Q to rotate the blocks left.
+Use E to rotate the blocks right.
+
+
+6. The goal of the game is to connect the falling blocks together inside the grid for as long as you can. As you place more and more blocks the pace at which the blocks fall will get faster and faster. You lose if the blocks reach the top of the grid.
+
+8. If a row in the grid is completely filled with blocks that row will disappear freeing up space on the grid and increasing your score.
+9. Continue playing the game trying to get the highest score you can, until the blocks reach the top of the grid and the game ends."
 label_settings = SubResource("LabelSettings_w4uk7")
-horizontal_alignment = 1
-vertical_alignment = 1
-clip_text = true
+autowrap_mode = 3
 
 [node name="CloseBtn" type="Button" parent="UI/Control/TopOverlay"]
 offset_left = 500.0

@@ -84,6 +84,7 @@ func toggle_clippy_mode() -> void:
 		window.size = self.size
 		window.canvas_transform = Transform2D(0, -self.position)
 		creature.find_child("Sprites").self_modulate = Color(1,1,1,clippy_opacity)
+		minimise()
 	else:
 		# Revert changes
 		window.position += Vector2i(clippy_offset) # + Vector2i(2,0) # Why it wants to move 2 pixels I don't know might be mac specific problem?
@@ -101,7 +102,8 @@ func toggle_clippy_mode() -> void:
 			await get_tree().process_frame
 			await get_tree().process_frame
 		window.borderless = clippy
-	normalise()
+	if not clippy:
+		normalise()
 	#print(window.position) # TODO REMOVE THIS PRINT AFTER CHECKING THERE IS NO WINDOW DRIFT!
 
 

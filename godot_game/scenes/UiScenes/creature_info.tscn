@@ -113,7 +113,7 @@ layout_mode = 2
 size_flags_vertical = 1
 theme_override_fonts/font = ExtResource("5_sg3th")
 theme_override_font_sizes/font_size = 24
-text = "Hatched: 6
+text = "Hatched: %s
 "
 
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer"]

@@ -57,7 +57,7 @@
 [ext_resource type="Texture2D" uid="uid://d4c1k5m8u1jc0" path="res://UI stuff/Green Palette/green_food_button.png" id="49_a77pc"]
 [ext_resource type="Script" path="res://scripts/cosmetics_preview.gd" id="49_p7hc5"]
 [ext_resource type="Script" path="res://scripts/nav_button.gd" id="50_0qet7"]
-[ext_resource type="Script" path="res://scenes/GameScenes/creature_menu.gd" id="50_rm732"]
+[ext_resource type="Script" path="res://scripts/creature_menu.gd" id="50_rm732"]
 [ext_resource type="Shader" path="res://shaders/pattern_lines.gdshader" id="50_tajtf"]
 [ext_resource type="Texture2D" uid="uid://drv50ynifh37j" path="res://UI stuff/Green Palette/green_activities_button.png" id="51_7kyvm"]
 [ext_resource type="Theme" uid="uid://b0xcqhw28px6h" path="res://themes/menu_value_range.tres" id="53_buhev"]
@@ -1683,7 +1683,7 @@ theme_override_constants/margin_bottom = 10
 [node name="Creatures" type="GridContainer" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/h_separation = 0
-theme_override_constants/v_separation = 12
+theme_override_constants/v_separation = 18
 script = ExtResource("50_rm732")
 
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/CreaturesMenu"]

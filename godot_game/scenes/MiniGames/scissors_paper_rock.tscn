@@ -1,42 +1,147 @@
-[gd_scene load_steps=7 format=3 uid="uid://dnfq7jawtfv5q"]
+[gd_scene load_steps=17 format=3 uid="uid://dnfq7jawtfv5q"]
 
+[ext_resource type="Texture2D" uid="uid://oilx4u2i6jiq" path="res://images/scissors-paper-rock/box_closed.png" id="1_g0ux3"]
+[ext_resource type="Texture2D" uid="uid://cs3dfnulji8oi" path="res://UI stuff/Green Palette/ui_memory.png" id="1_javod"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="1_sqv3p"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="2_egqjh"]
+[ext_resource type="Shader" path="res://shaders/pattern_checker.gdshader" id="2_yay6w"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="3_2jjfn"]
 [ext_resource type="Script" path="res://scripts/minigames/scissors_paper_rock.gd" id="3_7jb5j"]
+[ext_resource type="Theme" uid="uid://bsd1dkhc13v47" path="res://themes/plain.tres" id="3_63uno"]
+[ext_resource type="Texture2D" uid="uid://ctj6mmgfjdpiv" path="res://images/scissors-paper-rock/scissors.png" id="3_oahic"]
+[ext_resource type="Texture2D" uid="uid://07vyptp6eqgi" path="res://images/scissors-paper-rock/paper.png" id="4_0d63p"]
+[ext_resource type="Texture2D" uid="uid://d4t12xgr5bjg" path="res://UI stuff/Green Palette/ui_green_box_inverted.png" id="4_bk1ls"]
 [ext_resource type="Script" path="res://scripts/sfx_man.gd" id="5_2p5xq"]
+[ext_resource type="Texture2D" uid="uid://b4lkyv4k3neva" path="res://images/scissors-paper-rock/rock.png" id="5_1083d"]
+[ext_resource type="Theme" uid="uid://kpqilwsnepqa" path="res://themes/nothing.tres" id="5_lleth"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3cprs"]
+shader = ExtResource("2_yay6w")
+shader_parameter/bg_col = Color(0.448346, 0.238343, 0.540524, 1)
+shader_parameter/shift_one_right = false
+shader_parameter/one_col = Color(0.423065, 0.000124129, 0.423062, 1)
+shader_parameter/one_speed = 0.02
+shader_parameter/one_size = 10.0
+shader_parameter/one_opacity = 0.2
+shader_parameter/two_col = Color(0.0208449, 1.92884e-05, 0.101144, 1)
+shader_parameter/two_speed = -0.02
+shader_parameter/two_size = 10.0
+shader_parameter/two_opacity = 0.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3wt50"]
 
 [node name="MiniGame" type="Node2D"]
 
-[node name="BG" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(434, 434)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+[node name="GameLogic" type="Node" parent="." node_paths=PackedStringArray("box_sprite", "help_menu")]
+script = ExtResource("3_7jb5j")
+box_sprite = NodePath("../Gameplay/GameContainer/Box")
+help_menu = NodePath("../Gameplay/HelpMenu")
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+bus = &"SFX"
+script = ExtResource("5_2p5xq")
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="UI_Overlay" type="Sprite2D" parent="UI/Control"]
+position = Vector2(270, 337.5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_javod")
+
+[node name="BG" type="ColorRect" parent="UI/Control"]
+material = SubResource("ShaderMaterial_3cprs")
+custom_minimum_size = Vector2(434, 380)
+layout_mode = 2
 offset_left = 53.0
-offset_top = 120.0
+offset_top = 241.0
 offset_right = 487.0
-offset_bottom = 554.0
+offset_bottom = 622.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.504611, 0.314187, 0.196612, 1)
-metadata/_edit_lock_ = true
+color = Color(0.171871, 0.344478, 0.599564, 1)
 
-[node name="GameContainer" type="PanelContainer" parent="."]
+[node name="Overlay" type="ColorRect" parent="UI/Control"]
+layout_mode = 0
 offset_left = 53.0
-offset_top = 120.0
+offset_top = 241.0
 offset_right = 487.0
-offset_bottom = 554.0
+offset_bottom = 622.0
+color = Color(0.00784314, 0.0156863, 0.0196078, 0.588235)
+
+[node name="ScoreLabel" type="Label" parent="UI/Control"]
+unique_name_in_owner = true
+offset_left = 313.0
+offset_top = 75.0
+offset_right = 457.0
+offset_bottom = 162.0
+theme = ExtResource("3_2jjfn")
+text = "Score:
+Player:   %s
+Creature: %s"
+
+[node name="ScoreContainer" type="NinePatchRect" parent="UI/Control"]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 63.0
+offset_right = 483.0
+offset_bottom = 277.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("3_63uno")
+texture = ExtResource("4_bk1ls")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/ScoreContainer"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 422.0
+offset_bottom = 198.0
+color = Color(0, 0, 0, 0.313726)
+
+[node name="ScoreLabel" type="Label" parent="UI/Control/ScoreContainer"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 422.0
+offset_bottom = 198.0
+theme = ExtResource("5_lleth")
+theme_override_font_sizes/font_size = 40
+text = "-
+
+-"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Gameplay" type="CanvasLayer" parent="."]
+layer = 11
+
+[node name="GameContainer" type="PanelContainer" parent="Gameplay"]
+offset_left = 53.0
+offset_top = 241.0
+offset_right = 487.0
+offset_bottom = 622.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_3wt50")
-metadata/_edit_lock_ = true
 
-[node name="Node2D" type="Node2D" parent="GameContainer"]
+[node name="Box" type="Sprite2D" parent="Gameplay/GameContainer"]
+position = Vector2(220, 35)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_g0ux3")
 
-[node name="CreatureChoice" type="Label" parent="GameContainer/Node2D"]
+[node name="Node2D" type="Node2D" parent="Gameplay/GameContainer"]
+position = Vector2(0, -40)
+
+[node name="CreatureChoice" type="Label" parent="Gameplay/GameContainer/Node2D"]
 unique_name_in_owner = true
 offset_top = 139.0
 offset_right = 434.0
@@ -44,48 +149,12 @@ offset_bottom = 161.0
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("2_egqjh")
 theme_override_font_sizes/font_size = 24
+text = " RESULT OF GAME"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Buttons" type="HBoxContainer" parent="GameContainer/Node2D"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 36.0
-offset_top = 318.0
-offset_right = 396.0
-offset_bottom = 394.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 30
-
-[node name="ScissorsBtn" type="Button" parent="GameContainer/Node2D/Buttons"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("1_sqv3p")
-text = "Scissors"
-
-[node name="PaperBtn" type="Button" parent="GameContainer/Node2D/Buttons"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("1_sqv3p")
-text = "Paper"
-
-[node name="RockBtn" type="Button" parent="GameContainer/Node2D/Buttons"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("1_sqv3p")
-text = "Rock"
-
-[node name="Node2D2" type="Node2D" parent="GameContainer"]
-
-[node name="GameStatus" type="Label" parent="GameContainer/Node2D2"]
+[node name="GameStatus" type="Label" parent="Gameplay/GameContainer/Node2D"]
 unique_name_in_owner = true
 offset_top = 202.0
 offset_right = 434.0
@@ -98,34 +167,108 @@ text = "Make your choice
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="GameLogic" type="Node" parent="."]
-script = ExtResource("3_7jb5j")
+[node name="Buttons" type="HBoxContainer" parent="Gameplay/GameContainer/Node2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 36.0
+offset_top = 318.0
+offset_right = 396.0
+offset_bottom = 394.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+metadata/_edit_use_anchors_ = true
 
-[node name="ScoreLabel" type="Label" parent="."]
-unique_name_in_owner = true
-offset_left = 318.0
-offset_top = 148.0
-offset_right = 462.0
-offset_bottom = 235.0
-theme = ExtResource("3_2jjfn")
-text = "Score:
-Player:   %s
-Creature: %s"
+[node name="ScissorsBtn" type="Button" parent="Gameplay/GameContainer/Node2D/Buttons"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_sqv3p")
+theme_override_constants/outline_size = 3
+text = "Scissors"
+icon = ExtResource("3_oahic")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
 
-[node name="CloseBtn" type="Button" parent="."]
-offset_left = 78.0
-offset_top = 144.0
-offset_right = 179.0
-offset_bottom = 187.0
+[node name="PaperBtn" type="Button" parent="Gameplay/GameContainer/Node2D/Buttons"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_sqv3p")
+theme_override_constants/outline_size = 3
+text = "Paper"
+icon = ExtResource("4_0d63p")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="RockBtn" type="Button" parent="Gameplay/GameContainer/Node2D/Buttons"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_sqv3p")
+theme_override_constants/outline_size = 3
+text = "Rock"
+icon = ExtResource("5_1083d")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="CloseBtn" type="Button" parent="Gameplay"]
+offset_left = 500.0
+offset_top = 20.0
+offset_right = 516.0
+offset_bottom = 41.0
+theme = ExtResource("1_sqv3p")
+text = "X"
+
+[node name="HelpBtn" type="Button" parent="Gameplay"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 36.0
+offset_bottom = 41.0
+theme = ExtResource("1_sqv3p")
+text = "?"
+
+[node name="HelpMenu" type="PanelContainer" parent="Gameplay"]
+visible = false
+offset_left = 53.0
+offset_top = 120.0
+offset_right = 487.0
+offset_bottom = 554.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_3wt50")
+metadata/_edit_lock_ = true
+
+[node name="Panel" type="Panel" parent="Gameplay/HelpMenu"]
+layout_mode = 2
+
+[node name="Node2D" type="Node2D" parent="Gameplay/HelpMenu"]
+
+[node name="CloseRules" type="Button" parent="Gameplay/HelpMenu/Node2D"]
+offset_left = 291.0
+offset_top = 25.0
+offset_right = 411.0
+offset_bottom = 88.0
 theme = ExtResource("1_sqv3p")
 text = "Close"
 
-[node name="SFX" type="AudioStreamPlayer" parent="."]
-unique_name_in_owner = true
-bus = &"SFX"
-script = ExtResource("5_2p5xq")
+[node name="Label" type="Label" parent="Gameplay/HelpMenu"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Rules:
+Scissors beat Paper
+Paper beats Rock
+Rock beats Scissors
 
-[connection signal="button_down" from="GameContainer/Node2D/Buttons/ScissorsBtn" to="GameLogic" method="_on_scissors_btn_button_down"]
-[connection signal="button_down" from="GameContainer/Node2D/Buttons/PaperBtn" to="GameLogic" method="_on_paper_btn_button_down"]
-[connection signal="button_down" from="GameContainer/Node2D/Buttons/RockBtn" to="GameLogic" method="_on_rock_btn_button_down"]
-[connection signal="button_down" from="CloseBtn" to="GameLogic" method="_on_close_btn_button_down"]
+Compete against the creature to earn points"
+
+[connection signal="button_down" from="Gameplay/GameContainer/Node2D/Buttons/ScissorsBtn" to="GameLogic" method="_on_scissors_btn_button_down"]
+[connection signal="button_down" from="Gameplay/GameContainer/Node2D/Buttons/PaperBtn" to="GameLogic" method="_on_paper_btn_button_down"]
+[connection signal="button_down" from="Gameplay/GameContainer/Node2D/Buttons/RockBtn" to="GameLogic" method="_on_rock_btn_button_down"]
+[connection signal="button_down" from="Gameplay/CloseBtn" to="GameLogic" method="_on_close_btn_button_down"]
+[connection signal="button_down" from="Gameplay/HelpBtn" to="GameLogic" method="_on_help_btn_button_down"]
+[connection signal="button_down" from="Gameplay/HelpMenu/Node2D/CloseRules" to="GameLogic" method="_on_close_rules_button_down"]

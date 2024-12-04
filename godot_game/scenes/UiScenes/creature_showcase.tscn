@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://jt5f8ds3v8yr"]
 
-[ext_resource type="Script" path="res://scenes/UiScenes/creature_showcase.gd" id="1_8yxo1"]
+[ext_resource type="Script" path="res://scripts/creature_showcase.gd" id="1_8yxo1"]
 [ext_resource type="Shader" path="res://shaders/pattern_animated_grid.gdshader" id="2_5dpgm"]
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="3_bsxtk"]
 [ext_resource type="SpriteFrames" uid="uid://68skicj7tsu2" path="res://resources/creatures/main_creature_adult_sprite_frames.tres" id="4_2i6ea"]
@@ -112,12 +112,8 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("7_846fc")
 selected = 0
-item_count = 3
+item_count = 1
 popup/item_0/text = "LIFE STAGE"
-popup/item_1/text = "Baby"
-popup/item_1/id = 1
-popup/item_2/text = "Adult"
-popup/item_2/id = 2
 
 [node name="SaveButtons" type="Node2D" parent="."]
 position = Vector2(-50, -130)
