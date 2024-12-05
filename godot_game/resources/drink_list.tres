@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DrinkList" load_steps=4 format=3 uid="uid://cqfhcx2y843se"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/drink_item.gd" id="1_u254d"]
+[ext_resource type="Script" path="res://scripts/base_classses/drink_list.gd" id="2_8jf40"]
+[ext_resource type="Resource" uid="uid://ca7h0lwonsbn1" path="res://resources/consumables/drinks/water.tres" id="2_jy30q"]
+
+[resource]
+script = ExtResource("2_8jf40")
+items = Array[ExtResource("1_u254d")]([ExtResource("2_jy30q")])

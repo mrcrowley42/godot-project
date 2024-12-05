@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="DrinkItem" load_steps=2 format=3 uid="uid://ca7h0lwonsbn1"]
+[gd_resource type="Resource" script_class="DrinkItem" load_steps=3 format=3 uid="uid://ca7h0lwonsbn1"]
 
 [ext_resource type="Script" path="res://scripts/base_classses/drink_item.gd" id="1_50y6n"]
+[ext_resource type="Texture2D" uid="uid://bi0pimblbclrq" path="res://images/drink/water.png" id="1_gu7mq"]
 
 [resource]
 script = ExtResource("1_50y6n")
 name = "Water"
 type = 0
-amount = 0
+amount = 200
+image = ExtResource("1_gu7mq")

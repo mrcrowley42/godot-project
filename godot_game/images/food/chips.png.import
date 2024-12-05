@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3ubootqh0517"
-path="res://.godot/imported/pixel_egg.png-4c4ed9cb93094e100b43c518122adea6.ctex"
+uid="uid://d0ob7pe2h0ga8"
+path="res://.godot/imported/chips.png-2141677e87c37643333758dc6f2be41a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://placeholder/pixel_egg.png"
-dest_files=["res://.godot/imported/pixel_egg.png-4c4ed9cb93094e100b43c518122adea6.ctex"]
+source_file="res://images/food/chips.png"
+dest_files=["res://.godot/imported/chips.png-2141677e87c37643333758dc6f2be41a.ctex"]
 
 [params]
 
