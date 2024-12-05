@@ -32,10 +32,11 @@ shader_parameter/two_opacity = 0.0
 
 [node name="MiniGame" type="Node2D"]
 
-[node name="GameLogic" type="Node" parent="." node_paths=PackedStringArray("box_sprite", "help_menu")]
+[node name="GameLogic" type="Node" parent="." node_paths=PackedStringArray("box_sprite", "help_menu", "creature_choice_sprite")]
 script = ExtResource("3_7jb5j")
 box_sprite = NodePath("../Gameplay/GameContainer/Box")
 help_menu = NodePath("../Gameplay/HelpMenu")
+creature_choice_sprite = NodePath("../Gameplay/GameContainer/Sprite2D")
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
@@ -78,6 +79,7 @@ color = Color(0.00784314, 0.0156863, 0.0196078, 0.588235)
 
 [node name="ScoreLabel" type="Label" parent="UI/Control"]
 unique_name_in_owner = true
+layout_mode = 0
 offset_left = 313.0
 offset_top = 75.0
 offset_right = 457.0
@@ -127,6 +129,7 @@ vertical_alignment = 1
 layer = 11
 
 [node name="GameContainer" type="PanelContainer" parent="Gameplay"]
+clip_contents = true
 offset_left = 53.0
 offset_top = 241.0
 offset_right = 487.0
@@ -134,9 +137,14 @@ offset_bottom = 622.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_3wt50")
 
 [node name="Box" type="Sprite2D" parent="Gameplay/GameContainer"]
-position = Vector2(220, 35)
+position = Vector2(220, 123)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_g0ux3")
+
+[node name="Sprite2D" type="Sprite2D" parent="Gameplay/GameContainer"]
+position = Vector2(220, 43)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_oahic")
 
 [node name="Node2D" type="Node2D" parent="Gameplay/GameContainer"]
 position = Vector2(0, -40)
@@ -147,6 +155,7 @@ offset_top = 139.0
 offset_right = 434.0
 offset_bottom = 161.0
 size_flags_horizontal = 3
+theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("2_egqjh")
 theme_override_font_sizes/font_size = 24
 text = " RESULT OF GAME"
@@ -160,6 +169,7 @@ offset_top = 202.0
 offset_right = 434.0
 offset_bottom = 272.0
 theme_override_constants/line_spacing = 12
+theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("2_egqjh")
 theme_override_font_sizes/font_size = 32
 text = "Make your choice
