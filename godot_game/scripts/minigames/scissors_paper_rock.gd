@@ -2,17 +2,25 @@ extends MiniGameLogic
 @onready var og_text = %ScoreLabel.text
 @export var box_sprite: Sprite2D
 @export var help_menu: Node
+@export var creature_choice_sprite: Sprite2D
 var creature_score: int = 0
 var player_score: int = 0
 var choices = ['rock', 'paper', 'scissors']
 @onready var closed = load("res://images/scissors-paper-rock/box_closed.png")
 @onready var opened = load("res://images/scissors-paper-rock/box_opened.png")
+
+var choice_2_sprite = {
+	'rock': load("res://images/scissors-paper-rock/rock.png"),
+	'scissors': load("res://images/scissors-paper-rock/scissors.png"),
+	'paper': load("res://images/scissors-paper-rock/paper.png")}
+
 var queued = false
 func _process(_delta):
 	%ScoreLabel.text = og_text % [player_score, creature_score]
 
 func _ready() -> void:
 	%CreatureChoice.text = ""
+	creature_choice_sprite.texture = null
 
 func win():
 	player_score += 1
@@ -34,6 +42,7 @@ func play(user_choice):
 	reset_scene()
 	await get_tree().create_timer(1).timeout
 	var creature_choice = choices.pick_random()
+	creature_choice_sprite.texture = choice_2_sprite[creature_choice]
 	%CreatureChoice.text = str('Creature chose ' + creature_choice)
 #
 	if creature_choice == user_choice:
@@ -54,6 +63,7 @@ func play(user_choice):
 
 func reset_scene():
 	box_sprite.texture = closed
+	creature_choice_sprite.texture = null
 	%GameStatus.text = ""
 	%CreatureChoice.text = ""
 
