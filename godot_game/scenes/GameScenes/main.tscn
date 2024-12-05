@@ -543,7 +543,7 @@ position = Vector2(270, 1200)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("14_k2ios")
 
-[node name="FoodMenu" type="PanelContainer" parent="UI"]
+[node name="FoodMenu" type="PanelContainer" parent="UI" node_paths=PackedStringArray("nav_arrows")]
 custom_minimum_size = Vector2(400, 400)
 anchors_preset = 4
 anchor_top = 0.5
@@ -556,6 +556,7 @@ grow_vertical = 2
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxEmpty_xvtbm")
 script = ExtResource("21_aqbs2")
+nav_arrows = NodePath("NavigationArrows")
 
 [node name="Background" type="PanelContainer" parent="UI/FoodMenu"]
 custom_minimum_size = Vector2(400, 400)
@@ -597,6 +598,7 @@ text = "Chips"
 icon = ExtResource("23_peos6")
 autowrap_mode = 3
 clip_text = true
+script = ExtResource("18_2njxs")
 
 [node name="DrinkCont" type="GridContainer" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer"]
 layout_mode = 2
@@ -616,6 +618,7 @@ text = "Water"
 icon = ExtResource("23_wh1i0")
 autowrap_mode = 3
 clip_text = true
+script = ExtResource("18_2njxs")
 
 [node name="NavigationArrows" type="Node2D" parent="UI/FoodMenu" node_paths=PackedStringArray("target_menu", "left_arrow", "right_arrow")]
 script = ExtResource("27_imll8")

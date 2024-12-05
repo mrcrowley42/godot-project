@@ -1,5 +1,7 @@
 extends ActionMenu
 
+@export var nav_arrows: NavigationArrows;
+
 var example_screen: MarginContainer
 @onready var food_screens: HBoxContainer = find_child("FoodScreens")
 
@@ -8,12 +10,16 @@ var drink_list: DrinkList = load("res://resources/drink_list.tres")
 
 
 func _ready() -> void:
-	super._ready()
+	super._ready()  # do last
 	var ex = find_child("ExampleScreen")
 	example_screen = ex.duplicate()
 	ex.queue_free()
 	
 	setup_food_and_drink_buttons()
+	
+	## wait for queue_free to execute
+	await get_tree().process_frame
+	nav_arrows.calc_screen_count()
 
 class ConsumablesScreen:
 	var parent: HBoxContainer
@@ -21,8 +27,8 @@ class ConsumablesScreen:
 	var food_grid: GridContainer
 	var drink_grid: GridContainer
 	
-	var food_btn: Button
-	var drink_btn: Button
+	var food_btn: CustomTooltipButton
+	var drink_btn: CustomTooltipButton
 	
 	var food_count = 0
 	var drink_count = 0
@@ -31,7 +37,6 @@ class ConsumablesScreen:
 		self.parent = prnt
 		
 		var margin := example.duplicate()
-		print(margin.get_children())
 		self.food_grid = margin.get_child(0).get_child(0)
 		self.drink_grid = margin.get_child(0).get_child(1)
 		
@@ -73,9 +78,13 @@ func setup_food_and_drink_buttons():
 	for food_item in food_list.items:
 		if all_screens[food_on_screen].is_food_full():
 			food_on_screen += 1
+			if len(all_screens) <= food_on_screen:
+				all_screens.append(ConsumablesScreen.new(food_screens, example_screen))
 		all_screens[food_on_screen].add_food(food_item)
 	
 	for drink_item in drink_list.items:
 		if all_screens[drink_on_screen].is_drink_full():
 			drink_on_screen += 1
+			if len(all_screens) <= drink_on_screen:
+				all_screens.append(ConsumablesScreen.new(food_screens, example_screen))
 		all_screens[drink_on_screen].add_drink(drink_item)

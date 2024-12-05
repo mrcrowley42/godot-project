@@ -1,4 +1,4 @@
-extends Node2D
+class_name NavigationArrows extends Node2D
 @export var target_menu: Node
 @export var left_arrow: Node
 @export var right_arrow: Node
@@ -8,6 +8,11 @@ const xoffset: int = 400
 @onready var screen_count := len(target_menu.get_children())
 @onready var menu_positions := range(screen_count).map(func(n): return init_pos.x - (n * xoffset))
 @onready var index = 0
+
+## in case more screens are added after onready
+func calc_screen_count():
+	screen_count = len(target_menu.get_children())
+	menu_positions = range(screen_count).map(func(n): return init_pos.x - (n * xoffset))
 
 func shift_screen(offset:int) -> void:
 	index = Helpers.wrap_index(menu_positions, index, offset)
