@@ -1,8 +1,11 @@
-[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://bd2n23rxu0e7l"]
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://bd2n23rxu0e7l"]
 
 [ext_resource type="Texture2D" uid="uid://g0fug1mblpix" path="res://images/creature_sprites/blanket/adult-teddy-idle-0.png" id="1_p7lm4"]
 [ext_resource type="Texture2D" uid="uid://dn5kth7ppmivf" path="res://images/creature_sprites/blanket/adult-teddy-idle-1.png" id="2_crvfl"]
 [ext_resource type="Texture2D" uid="uid://dxsl41s04desk" path="res://images/creature_sprites/blanket/adult-teddy-idle-2.png" id="3_12so8"]
+[ext_resource type="Texture2D" uid="uid://ddk3repiajjro" path="res://images/creature_sprites/blanket/adult-teddy-joy-0.png" id="4_u2vvx"]
+[ext_resource type="Texture2D" uid="uid://bl5iliayxysvi" path="res://images/creature_sprites/blanket/adult-teddy-joy-1.png" id="5_i1ogw"]
+[ext_resource type="Texture2D" uid="uid://dimmmkjr3ijpf" path="res://images/creature_sprites/blanket/adult-teddy-joy-2.png" id="6_nu6dc"]
 
 [resource]
 animations = [{
@@ -18,5 +21,19 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_u2vvx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_i1ogw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_nu6dc")
+}],
+"loop": true,
+"name": &"joy",
 "speed": 4.0
 }]
