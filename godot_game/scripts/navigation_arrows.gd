@@ -11,8 +11,7 @@ const xoffset: int = 400
 
 func shift_screen(offset:int) -> void:
 	index = Helpers.wrap_index(menu_positions, index, offset)
-	var tween = create_tween().set_ease(Tween.EASE_OUT_IN)
-	tween.tween_property( target_menu, "position", Vector2(menu_positions[index], init_pos.y), .167)
+	Globals.tween(target_menu, "position", Vector2(menu_positions[index], init_pos.y), 0., .167)
 
 
 func _on_left_arrow_button_down() -> void:
@@ -33,3 +32,10 @@ func _on_visibility_changed():
 	index = 0
 	left_arrow.hide()
 	right_arrow.show()
+
+
+func _input(event: InputEvent) -> void:
+	if left_arrow.visible and event.is_action_pressed("arrow_left"):
+		_on_left_arrow_button_down()
+	elif right_arrow.visible and event.is_action_pressed("arrow_right"):
+		_on_right_arrow_button_down()

@@ -54,8 +54,12 @@ signal xp_changed()
 signal ready_to_grow_up()
 
 ## Map of shorthand strings to corresponding damage function
-var stats: Dictionary = {Stat.HP: damage_hp, Stat.FUN: damage_fun,
+var stats_dmg: Dictionary = {Stat.HP: damage_hp, Stat.FUN: damage_fun,
 	Stat.WATER: damage_water, Stat.FOOD: damage_food}
+
+## Map of shorthand strings to corresponding heal function
+var stats_heal: Dictionary = {Stat.HP: add_hp, Stat.FUN: add_fun,
+	Stat.WATER: add_water, Stat.FOOD: add_food}
 
 func setup_creature():
 	var uid = int(DataGlobals.get_metadata_value(DataGlobals.CURRENT_CREATURE))
@@ -117,16 +121,20 @@ func add_xp(amount: float) -> void:
 ## Sets the Creatures current stats to their maximum value.
 func reset_stats() -> void:
 	lock_xp = true
-	dmg(-max_hp, Stat.HP)
-	dmg(-max_food, Stat.FOOD)
-	dmg(-max_water, Stat.WATER)
-	dmg(-max_fun, Stat.FUN)
+	heal(max_hp, Stat.HP)
+	heal(max_food, Stat.FOOD)
+	heal(max_water, Stat.WATER)
+	heal(max_fun, Stat.FUN)
 	lock_xp = false
 
 
-## Generialised function to damage/heal the Creature (use a negative value to heal)
+## function to heal a stat
+func heal(amount: float, stat: Stat) -> void:
+	stats_heal[stat].call(amount)
+
+## Generialised function to damage the Creature
 func dmg(amount: float, stat: Stat) -> void:
-	stats[stat].call(amount)
+	stats_dmg[stat].call(amount)
 
 
 ## Change to game over scene.
@@ -142,14 +150,14 @@ func apply_dmg_tint() -> void:
 
 
 func add_hp(amount: float, multiplier: float = 1.0):
-	assert(amount > 0)
+	assert(amount >= 0)
 	hp = min(hp + amount, max_hp)
 	add_xp(amount * multiplier)
 	apply_dmg_tint()
 	hp_changed.emit()
 
 func damage_hp(amount: float) -> void:
-	assert(amount > 0)  # positive only
+	assert(amount >= 0)  # positive only
 	if hp - amount <= 0:
 		call_deferred("game_over")
 	
@@ -165,41 +173,44 @@ func consume_food(food_item: FoodItem):
 	add_food(food_item.amount, preference_multi)
 
 func add_food(amount: float, multiplier: float = 1.0):
-	assert(amount > 0)
+	assert(amount >= 0)
 	food = min(food + amount, max_food)
 	add_xp(amount * multiplier)
 	food_changed.emit()
 
 func damage_food(amount) -> void:
-	assert(amount > 0)
+	assert(amount >= 0)
 	food = max(food - amount, 0)
 	food_changed.emit()
 
 
 func add_fun(amount: float, multiplier: float = 1.0):
-	pass
+	assert(amount >= 0)
+	fun = min(fun + amount, max_fun)
+	add_xp(amount * multiplier)
+	fun_changed.emit()
 
 func damage_fun(amount) -> void:
-	var temp_fun = fun
-	self.fun = clampf(self.fun - amount, 0, max_fun)
-	if fun - temp_fun > 0:
-		add_xp(fun - temp_fun * xp_mulitplier)
-
+	assert(amount >= 0)
+	food = max(food - amount, 0)
 	fun_changed.emit()
 
 
 func consume_drink(drink_item: DrinkItem):
-	pass
+	var preference_multi := 1.0
+	if drink_item.type in drink_likes: preference_multi = like_multiplier
+	elif drink_item.type in drink_dislikes: preference_multi = dislike_multiplier
+	add_water(drink_item.amount, preference_multi)
 
 func add_water(amount: float, multiplier: float = 1.0):
-	pass
+	assert(amount >= 0)
+	water = min(water + amount, max_water)
+	add_xp(amount * multiplier)
+	water_changed.emit()
 
-func damage_water(drink: DrinkItem) -> void:
-	var temp_water = water
-	self.water = clampf(self.water - drink.amount, 0, max_water)
-	if water - temp_water > 0:
-		add_xp(water - temp_water * xp_mulitplier)
-
+func damage_water(amount) -> void:
+	assert(amount >= 0)
+	water = max(water - amount, 0)
 	water_changed.emit()
 
 func get_current_cosmetics():
