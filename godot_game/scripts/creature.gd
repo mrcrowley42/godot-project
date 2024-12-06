@@ -6,6 +6,7 @@ class_name Creature extends Node2D
 # ENUMS
 enum LifeStage {CHILD, ADULT}
 enum Stat {HP, WATER, FOOD, FUN}
+enum Preference {LIKES, NEUTRAL, DISLIKES}
 
 const dislike_multiplier: float = 0.5
 const like_multiplier: float = 2.0
@@ -151,7 +152,7 @@ func apply_dmg_tint() -> void:
 
 func add_hp(amount: float, multiplier: float = 1.0):
 	assert(amount >= 0)
-	hp = min(hp + amount, max_hp)
+	hp = min(hp + (amount * multiplier), max_hp)
 	add_xp(amount * multiplier)
 	apply_dmg_tint()
 	hp_changed.emit()
@@ -166,27 +167,9 @@ func damage_hp(amount: float) -> void:
 	hp_changed.emit()
 
 
-func consume_food(food_item: FoodItem):
-	var preference_multi := 1.0
-	if food_item.type in food_likes: preference_multi = like_multiplier
-	elif food_item.type in food_dislikes: preference_multi = dislike_multiplier
-	add_food(food_item.amount, preference_multi)
-
-func add_food(amount: float, multiplier: float = 1.0):
-	assert(amount >= 0)
-	food = min(food + amount, max_food)
-	add_xp(amount * multiplier)
-	food_changed.emit()
-
-func damage_food(amount) -> void:
-	assert(amount >= 0)
-	food = max(food - amount, 0)
-	food_changed.emit()
-
-
 func add_fun(amount: float, multiplier: float = 1.0):
 	assert(amount >= 0)
-	fun = min(fun + amount, max_fun)
+	fun = min(fun + (amount * multiplier), max_fun)
 	add_xp(amount * multiplier)
 	fun_changed.emit()
 
@@ -196,15 +179,45 @@ func damage_fun(amount) -> void:
 	fun_changed.emit()
 
 
+func get_food_preference(food_item: FoodItem) -> Preference:
+	if food_item.type in food_likes: return Preference.LIKES
+	elif food_item.type in food_dislikes: return Preference.DISLIKES
+	return Preference.NEUTRAL
+
+func consume_food(food_item: FoodItem):
+	var preference_multi := 1.0
+	var pref: Preference = get_food_preference(food_item)
+	if pref == Preference.LIKES: preference_multi = like_multiplier
+	elif pref == Preference.DISLIKES: preference_multi = dislike_multiplier
+	add_food(food_item.amount, preference_multi)
+
+func add_food(amount: float, multiplier: float = 1.0):
+	assert(amount >= 0)
+	food = min(food + (amount * multiplier), max_food)
+	add_xp(amount * multiplier)
+	food_changed.emit()
+
+func damage_food(amount) -> void:
+	assert(amount >= 0)
+	food = max(food - amount, 0)
+	food_changed.emit()
+
+
+func get_drink_preference(drink_item: DrinkItem) -> Preference:
+	if drink_item.type in drink_likes: return Preference.LIKES
+	elif drink_item.type in drink_dislikes: return Preference.DISLIKES
+	return Preference.NEUTRAL
+
 func consume_drink(drink_item: DrinkItem):
 	var preference_multi := 1.0
-	if drink_item.type in drink_likes: preference_multi = like_multiplier
-	elif drink_item.type in drink_dislikes: preference_multi = dislike_multiplier
+	var pref: Preference = get_drink_preference(drink_item)
+	if pref == Preference.LIKES: preference_multi = like_multiplier
+	elif pref == Preference.DISLIKES: preference_multi = dislike_multiplier
 	add_water(drink_item.amount, preference_multi)
 
 func add_water(amount: float, multiplier: float = 1.0):
 	assert(amount >= 0)
-	water = min(water + amount, max_water)
+	water = min(water + (amount * multiplier), max_water)
 	add_xp(amount * multiplier)
 	water_changed.emit()
 

@@ -1,9 +1,10 @@
-[gd_scene load_steps=117 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=120 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/minigame_manager.gd" id="3_fj5ve"]
 [ext_resource type="Script" path="res://scripts/background.gd" id="4_j8clb"]
+[ext_resource type="Script" path="res://scripts/main_game_scripts/consumables_manager.gd" id="5_yr5ap"]
 [ext_resource type="Shader" path="res://shaders/multiply_colour.gdshader" id="5_yth5i"]
 [ext_resource type="Texture2D" uid="uid://cdbor7hjfbusn" path="res://UI stuff/Universal/background.png" id="6_oihh8"]
 [ext_resource type="Shader" path="res://shaders/background.gdshader" id="7_1pcjq"]
@@ -25,6 +26,8 @@
 [ext_resource type="Theme" uid="uid://g32pmukhe4yn" path="res://themes/food_btn.tres" id="22_uv5vx"]
 [ext_resource type="Texture2D" uid="uid://d0ob7pe2h0ga8" path="res://images/food/chips.png" id="23_peos6"]
 [ext_resource type="Texture2D" uid="uid://bi0pimblbclrq" path="res://images/drink/water.png" id="23_wh1i0"]
+[ext_resource type="Texture2D" uid="uid://rgai51krxd6w" path="res://icons/star-fill.svg" id="24_vdri4"]
+[ext_resource type="Texture2D" uid="uid://intj5idhf1tf" path="res://icons/hand-thumbs-down-fill.svg" id="25_t2eb7"]
 [ext_resource type="Texture2D" uid="uid://cx2q4cedbcgn" path="res://images/rock-paper-scissors.png" id="26_0ku4r"]
 [ext_resource type="Texture2D" uid="uid://d3f8r28w20i4e" path="res://icons/crossword_48dp_FILL0_wght400_GRAD0_opsz48.svg" id="27_2hcht"]
 [ext_resource type="Script" path="res://scripts/navigation_arrows.gd" id="27_imll8"]
@@ -403,7 +406,18 @@ script = ExtResource("2_aqytd")
 food_amount = 4.0
 
 [node name="AmbienceManager" type="Node" parent="." groups=["settings_data"]]
+unique_name_in_owner = true
 script = ExtResource("80_83777")
+
+[node name="UI_Theme_Manager" type="Node" parent="." groups=["settings_data"]]
+unique_name_in_owner = true
+script = ExtResource("13_3i267")
+
+[node name="ConsumablesManager" type="Node" parent="." node_paths=PackedStringArray("creature", "food_menu") groups=["save_data"]]
+unique_name_in_owner = true
+script = ExtResource("5_yr5ap")
+creature = NodePath("../Gameplay/Creature")
+food_menu = NodePath("../UI/FoodMenu")
 
 [node name="MinigameManager" type="Node2D" parent="." groups=["save_data"]]
 unique_name_in_owner = true
@@ -531,10 +545,6 @@ optional_hitbox_scale = Vector2(0.5, 0.5)
 [node name="UI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 
-[node name="UI_Theme_Manager" type="Node" parent="UI" groups=["settings_data"]]
-unique_name_in_owner = true
-script = ExtResource("13_3i267")
-
 [node name="TransLayer" type="CanvasLayer" parent="UI"]
 layer = 100
 
@@ -599,6 +609,22 @@ icon = ExtResource("23_peos6")
 autowrap_mode = 3
 clip_text = true
 script = ExtResource("18_2njxs")
+style = 2
+direction = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer/FoodCont/FoodBtn"]
+visible = false
+modulate = Color(1, 1, 0.364706, 1)
+position = Vector2(6, 6)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("24_vdri4")
+
+[node name="Sprite2D2" type="Sprite2D" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer/FoodCont/FoodBtn"]
+visible = false
+modulate = Color(1, 0.38, 0.38, 1)
+position = Vector2(6, 6)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("25_t2eb7")
 
 [node name="DrinkCont" type="GridContainer" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer"]
 layout_mode = 2
@@ -619,6 +645,22 @@ icon = ExtResource("23_wh1i0")
 autowrap_mode = 3
 clip_text = true
 script = ExtResource("18_2njxs")
+style = 2
+direction = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer/DrinkCont/DrinkBtn"]
+visible = false
+modulate = Color(1, 1, 0.364706, 1)
+position = Vector2(6, 6)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("24_vdri4")
+
+[node name="Sprite2D2" type="Sprite2D" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer/DrinkCont/DrinkBtn"]
+visible = false
+modulate = Color(1, 0.38, 0.38, 1)
+position = Vector2(6, 6)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("25_t2eb7")
 
 [node name="NavigationArrows" type="Node2D" parent="UI/FoodMenu" node_paths=PackedStringArray("target_menu", "left_arrow", "right_arrow")]
 script = ExtResource("27_imll8")
@@ -1030,7 +1072,7 @@ theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 12
 columns = 2
 script = ExtResource("37_tokl0")
-theme_manager = NodePath("../../../../../../../UI_Theme_Manager")
+theme_manager = NodePath("../../../../../../../../UI_Theme_Manager")
 
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/ThemeMenu"]
 position = Vector2(-50, -130)

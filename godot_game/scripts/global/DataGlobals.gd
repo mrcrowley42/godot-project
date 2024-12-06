@@ -5,6 +5,7 @@ const SAVE_STATUS_MANAGER_UID = 0
 const SAVE_MINIDATE_MAGAGER_UID = 1
 const SAVE_CREATURE_UID = 2
 const SAVE_ACCESSORY_MANAGER_UID = 3
+const SAVE_CONSUMABLES_MANAGER_UID = 4
 
 ## key: save_uid, value: node
 var save_uid_node_atlas = {}

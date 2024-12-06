@@ -7,5 +7,5 @@
 script = ExtResource("1_nknbo")
 name = "Chips"
 type = 2
-amount = 80
+amount = 100
 image = ExtResource("1_utck8")

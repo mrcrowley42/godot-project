@@ -36,7 +36,11 @@ func _on_right_arrow_button_down() -> void:
 func _on_visibility_changed():
 	index = 0
 	left_arrow.hide()
-	right_arrow.show()
+	
+	if screen_count < 2:
+		right_arrow.hide()
+	else:
+		right_arrow.show()
 
 
 func _input(event: InputEvent) -> void:
