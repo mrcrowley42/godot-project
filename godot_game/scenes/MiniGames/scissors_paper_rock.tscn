@@ -1,11 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://dnfq7jawtfv5q"]
+[gd_scene load_steps=16 format=3 uid="uid://dnfq7jawtfv5q"]
 
 [ext_resource type="Texture2D" uid="uid://oilx4u2i6jiq" path="res://images/scissors-paper-rock/box_closed.png" id="1_g0ux3"]
 [ext_resource type="Texture2D" uid="uid://cs3dfnulji8oi" path="res://UI stuff/Green Palette/ui_memory.png" id="1_javod"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="1_sqv3p"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="2_egqjh"]
 [ext_resource type="Shader" path="res://shaders/pattern_checker.gdshader" id="2_yay6w"]
-[ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="3_2jjfn"]
 [ext_resource type="Script" path="res://scripts/minigames/scissors_paper_rock.gd" id="3_7jb5j"]
 [ext_resource type="Theme" uid="uid://bsd1dkhc13v47" path="res://themes/plain.tres" id="3_63uno"]
 [ext_resource type="Texture2D" uid="uid://ctj6mmgfjdpiv" path="res://images/scissors-paper-rock/scissors.png" id="3_oahic"]
@@ -77,18 +76,6 @@ offset_right = 487.0
 offset_bottom = 622.0
 color = Color(0.00784314, 0.0156863, 0.0196078, 0.588235)
 
-[node name="ScoreLabel" type="Label" parent="UI/Control"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 313.0
-offset_top = 75.0
-offset_right = 457.0
-offset_bottom = 162.0
-theme = ExtResource("3_2jjfn")
-text = "Score:
-Player:   %s
-Creature: %s"
-
 [node name="ScoreContainer" type="NinePatchRect" parent="UI/Control"]
 layout_mode = 0
 offset_left = 45.0
@@ -112,6 +99,7 @@ offset_bottom = 198.0
 color = Color(0, 0, 0, 0.313726)
 
 [node name="ScoreLabel" type="Label" parent="UI/Control/ScoreContainer"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 16.0
 offset_top = 16.0
@@ -119,9 +107,9 @@ offset_right = 422.0
 offset_bottom = 198.0
 theme = ExtResource("5_lleth")
 theme_override_font_sizes/font_size = 40
-text = "-
-
--"
+text = "Score:
+Player:   %s
+Creature: %s"
 horizontal_alignment = 1
 vertical_alignment = 1
 
