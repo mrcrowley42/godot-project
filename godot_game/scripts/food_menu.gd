@@ -105,7 +105,7 @@ func setup_food_and_drink_buttons():
 		all_buttons[Helpers.uid_str(drink_item)] = btn
 
 func update_item_btn(uid: String, creature: Creature):
-	var item: Resource = load(ResourceUID.get_id_path(int(uid)))
+	var item: Resource = Helpers.load_uid_str(uid)
 	var button: CustomTooltipButton = all_buttons[uid]
 	
 	var mult = -1

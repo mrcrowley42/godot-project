@@ -10,7 +10,13 @@ static func wrap_index(list: Array, current_index: int, offset: int) -> int:
 
 ## Returns the uid of a resource as a string.
 static func uid_str(resource: Resource) -> String:
-	return str(ResourceLoader.get_resource_uid(resource.resource_path))
+	return str(uid_int(resource))
 
 static func uid_int(resource: Resource) -> int:
 	return int(ResourceLoader.get_resource_uid(resource.resource_path))
+
+static func load_uid_str(uid: String) -> Resource:
+	return load_uid_int(int(uid))
+
+static func load_uid_int(uid: int) -> Resource:
+	return load(ResourceUID.get_id_path(uid))

@@ -3,7 +3,7 @@ class_name ConsumablesManager extends ScriptNode
 @export var creature: Creature
 @export var food_menu: FoodMenu
 
-var consumables_tried: Array = []
+var consumables_tried: Array
 
 
 func consume_food(food_item: FoodItem):

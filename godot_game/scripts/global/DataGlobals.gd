@@ -269,8 +269,10 @@ func load_data() -> Dictionary:
 	# attempt to load
 	var save_file = FileAccess.open(get_save_data_file(), FileAccess.READ)
 	_current_metadata = JSON.parse_string(save_file.get_line())
-
+	
+	var save_nodes = get_tree().get_nodes_in_group(Globals.SAVE_DATA_GROUP)
 	var data_skipped = []
+	
 	while save_file.get_position() < save_file.get_length():
 		var line = save_file.get_line()
 		var parsed_line = JSON.parse_string(line)
@@ -288,6 +290,7 @@ func load_data() -> Dictionary:
 			continue
 
 		var node: Node = save_uid_node_atlas[save_uid]
+		save_nodes.erase(node)
 		if not Globals.has_function(node, LOAD):
 			data_skipped.append(data)
 			continue
@@ -295,6 +298,21 @@ func load_data() -> Dictionary:
 		# call load function
 		node.call(LOAD, data)
 
+	## check for nodes that missed being loaded
+	# attempts to call load data with data returned from the save function
+	if len(save_nodes) > 0:
+		printerr("%s Nodes were not loaded: '%s'.\nAttempting to fix..." % [len(save_nodes), save_nodes])
+		
+		for node in save_nodes:
+			if not Globals.has_function(node, LOAD) or not Globals.has_function(node, SAVE):
+				continue
+			save_nodes.erase(node)
+			node.call(LOAD, node.call(SAVE))
+	
+	## final error message
+	if len(save_nodes) > 0:
+		printerr("--- VERY BIG WARNING ---\n%s Nodes are MISSING from the save file and COULD NOT be loaded:\n%s\n--- VERY BIG WARNING ---" % [len(save_nodes), save_nodes])
+	
 	if len(data_skipped) > 0:
 		printerr("Some data was not loaded! %s line/s were missed" % len(data_skipped))
 	return get_current_metadata_dc()
