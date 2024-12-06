@@ -152,8 +152,9 @@ func apply_dmg_tint() -> void:
 
 func add_hp(amount: float, multiplier: float = 1.0):
 	assert(amount >= 0)
+	var old_hp = hp
 	hp = min(hp + (amount * multiplier), max_hp)
-	add_xp(amount * multiplier)
+	add_xp(hp - old_hp)
 	apply_dmg_tint()
 	hp_changed.emit()
 
@@ -169,8 +170,9 @@ func damage_hp(amount: float) -> void:
 
 func add_fun(amount: float, multiplier: float = 1.0):
 	assert(amount >= 0)
+	var old_fun = fun
 	fun = min(fun + (amount * multiplier), max_fun)
-	add_xp(amount * multiplier)
+	add_xp(fun - old_fun)
 	fun_changed.emit()
 
 func damage_fun(amount) -> void:
@@ -193,8 +195,9 @@ func consume_food(food_item: FoodItem):
 
 func add_food(amount: float, multiplier: float = 1.0):
 	assert(amount >= 0)
+	var old_food = food
 	food = min(food + (amount * multiplier), max_food)
-	add_xp(amount * multiplier)
+	add_xp(food - old_food)
 	food_changed.emit()
 
 func damage_food(amount) -> void:
@@ -217,8 +220,9 @@ func consume_drink(drink_item: DrinkItem):
 
 func add_water(amount: float, multiplier: float = 1.0):
 	assert(amount >= 0)
+	var old_water = water
 	water = min(water + (amount * multiplier), max_water)
-	add_xp(amount * multiplier)
+	add_xp(water - old_water)
 	water_changed.emit()
 
 func damage_water(amount) -> void:
