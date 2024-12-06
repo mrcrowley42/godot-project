@@ -283,13 +283,17 @@ func load_data() -> Dictionary:
 
 		var data = parsed_line[DATA]
 		var save_uid: int = int(parsed_line[SAVE_UID])
-
 		if !save_uid_node_atlas.has(save_uid):
 			printerr("Node with save uid of '%s' could not be found, skipping" % save_uid)
 			data_skipped.append(data)
 			continue
 
 		var node: Node = save_uid_node_atlas[save_uid]
+		if node not in save_nodes:
+			printerr("Node '%s' is not in '%s' group, skipping" % [node, Globals.SAVE_DATA_GROUP])
+			data_skipped.append(data)
+			continue
+		
 		save_nodes.erase(node)
 		if not Globals.has_function(node, LOAD):
 			data_skipped.append(data)
