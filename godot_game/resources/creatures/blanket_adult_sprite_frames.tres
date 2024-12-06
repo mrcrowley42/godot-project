@@ -1,14 +1,51 @@
-[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://bd2n23rxu0e7l"]
+[gd_resource type="SpriteFrames" load_steps=16 format=3 uid="uid://bd2n23rxu0e7l"]
 
+[ext_resource type="Texture2D" uid="uid://chyog8ltutkxr" path="res://images/creature_sprites/blanket/adult-teddy-confused-0.png" id="1_guwht"]
 [ext_resource type="Texture2D" uid="uid://g0fug1mblpix" path="res://images/creature_sprites/blanket/adult-teddy-idle-0.png" id="1_p7lm4"]
+[ext_resource type="Texture2D" uid="uid://cy6ja6wso1ix1" path="res://images/creature_sprites/blanket/adult-teddy-angry-0.png" id="1_vjvov"]
+[ext_resource type="Texture2D" uid="uid://0h4l5dxwayi" path="res://images/creature_sprites/blanket/adult-teddy-angry-1.png" id="2_8j1mn"]
 [ext_resource type="Texture2D" uid="uid://dn5kth7ppmivf" path="res://images/creature_sprites/blanket/adult-teddy-idle-1.png" id="2_crvfl"]
+[ext_resource type="Texture2D" uid="uid://ytkcg80btydg" path="res://images/creature_sprites/blanket/adult-teddy-confused-1.png" id="2_oq3gq"]
 [ext_resource type="Texture2D" uid="uid://dxsl41s04desk" path="res://images/creature_sprites/blanket/adult-teddy-idle-2.png" id="3_12so8"]
+[ext_resource type="Texture2D" uid="uid://c1hce707alwq" path="res://images/creature_sprites/blanket/adult-teddy-angry-2.png" id="3_i14co"]
+[ext_resource type="Texture2D" uid="uid://cjcpems76ef22" path="res://images/creature_sprites/blanket/adult-teddy-confused-2.png" id="3_jqinc"]
 [ext_resource type="Texture2D" uid="uid://ddk3repiajjro" path="res://images/creature_sprites/blanket/adult-teddy-joy-0.png" id="4_u2vvx"]
 [ext_resource type="Texture2D" uid="uid://bl5iliayxysvi" path="res://images/creature_sprites/blanket/adult-teddy-joy-1.png" id="5_i1ogw"]
 [ext_resource type="Texture2D" uid="uid://dimmmkjr3ijpf" path="res://images/creature_sprites/blanket/adult-teddy-joy-2.png" id="6_nu6dc"]
+[ext_resource type="Texture2D" uid="uid://dwqwcwlvs4ke8" path="res://images/creature_sprites/blanket/adult-teddy-sad-0.png" id="10_3yux7"]
+[ext_resource type="Texture2D" uid="uid://y6raxr0w6xv1" path="res://images/creature_sprites/blanket/adult-teddy-sad-1.png" id="11_01fx1"]
+[ext_resource type="Texture2D" uid="uid://br8c4xnobohb2" path="res://images/creature_sprites/blanket/adult-teddy-sad-2.png" id="12_vbk33"]
 
 [resource]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_vjvov")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_8j1mn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_i14co")
+}],
+"loop": true,
+"name": &"angry",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_guwht")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_oq3gq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_jqinc")
+}],
+"loop": true,
+"name": &"confused",
+"speed": 4.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_p7lm4")
@@ -35,5 +72,19 @@ animations = [{
 }],
 "loop": true,
 "name": &"joy",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_3yux7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_01fx1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_vbk33")
+}],
+"loop": true,
+"name": &"sad",
 "speed": 4.0
 }]
