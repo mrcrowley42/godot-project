@@ -304,7 +304,8 @@ func load_data() -> Dictionary:
 
 	## check for nodes that missed being loaded
 	# attempts to call load data with data returned from the save function
-	if len(save_nodes) > 0:
+	var only_metadata = has_only_metadata()
+	if not only_metadata and len(save_nodes) > 0:
 		printerr("%s Nodes were not loaded: '%s'.\nAttempting to fix..." % [len(save_nodes), save_nodes])
 		
 		for node in save_nodes:
@@ -314,7 +315,7 @@ func load_data() -> Dictionary:
 			node.call(LOAD, node.call(SAVE))
 	
 	## final error message
-	if len(save_nodes) > 0:
+	if not only_metadata and len(save_nodes) > 0:
 		printerr("--- VERY BIG WARNING ---\n%s Nodes are MISSING from the save file and COULD NOT be loaded:\n%s\n--- VERY BIG WARNING ---" % [len(save_nodes), save_nodes])
 	
 	if len(data_skipped) > 0:
