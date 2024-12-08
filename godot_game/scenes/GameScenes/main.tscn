@@ -1,4 +1,4 @@
-[gd_scene load_steps=120 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=121 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
@@ -22,8 +22,8 @@
 [ext_resource type="Theme" uid="uid://1dv11a5ar0hg" path="res://themes/action_btn.tres" id="18_v1mb2"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="19_3grg3"]
 [ext_resource type="Script" path="res://scripts/food_menu.gd" id="21_aqbs2"]
-[ext_resource type="Theme" uid="uid://c5xyoxv1bfx47" path="res://themes/drink_btn.tres" id="22_1d1mc"]
-[ext_resource type="Theme" uid="uid://g32pmukhe4yn" path="res://themes/food_btn.tres" id="22_uv5vx"]
+[ext_resource type="Theme" uid="uid://biqbc3bkufocu" path="res://themes/drink_btn.tres" id="22_1d1mc"]
+[ext_resource type="Theme" uid="uid://dq4gv2q2fc0v8" path="res://themes/food_btn.tres" id="22_uv5vx"]
 [ext_resource type="Texture2D" uid="uid://d0ob7pe2h0ga8" path="res://images/food/chips.png" id="23_peos6"]
 [ext_resource type="Texture2D" uid="uid://bi0pimblbclrq" path="res://images/drink/water.png" id="23_wh1i0"]
 [ext_resource type="Texture2D" uid="uid://rgai51krxd6w" path="res://icons/star-fill.svg" id="24_vdri4"]
@@ -61,6 +61,7 @@
 [ext_resource type="Script" path="res://scripts/nav_button.gd" id="50_0qet7"]
 [ext_resource type="Shader" path="res://shaders/pattern_lines.gdshader" id="50_tajtf"]
 [ext_resource type="Texture2D" uid="uid://drv50ynifh37j" path="res://UI stuff/Green Palette/green_activities_button.png" id="51_7kyvm"]
+[ext_resource type="Script" path="res://scripts/creature_menu.gd" id="51_hdtdw"]
 [ext_resource type="Theme" uid="uid://b0xcqhw28px6h" path="res://themes/menu_value_range.tres" id="53_buhev"]
 [ext_resource type="Texture2D" uid="uid://b5uf4jcvme855" path="res://UI stuff/Green Palette/green_settings_button.png" id="53_hpyyk"]
 [ext_resource type="Script" path="res://scripts/ambience_menu.gd" id="53_ubf3f"]
@@ -947,7 +948,6 @@ metadata/_edit_use_anchors_ = true
 [node name="OptionsMenu" type="PanelContainer" parent="UI"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1261,7 +1261,6 @@ script = ExtResource("35_4io20")
 [node name="CreaturesMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 material = SubResource("ShaderMaterial_357to")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -1301,6 +1300,7 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 12
+script = ExtResource("51_hdtdw")
 
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/CreaturesMenu"]
 position = Vector2(-50, -130)
@@ -1322,6 +1322,7 @@ script = ExtResource("35_4io20")
 [node name="SettingsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 material = SubResource("ShaderMaterial_1s3b6")
 layout_mode = 2
 script = ExtResource("32_jvqx8")

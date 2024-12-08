@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/base_classses/creature_type_part.gd" id="2_3cqod"]
 [ext_resource type="Resource" uid="uid://boatniuf6yx3d" path="res://resources/cosmetics/propeller_hat.tres" id="2_yy1fk"]
 [ext_resource type="Resource" uid="uid://c0gf34lgpdkmh" path="res://resources/cosmetics/standard_glasses.tres" id="3_o4ow7"]
-[ext_resource type="SpriteFrames" uid="uid://hwolbvnn76v3" path="res://resources/creatures/box_adult_sprite_frames.tres" id="3_s1beh"]
+[ext_resource type="SpriteFrames" uid="uid://b70ipckuifg3v" path="res://resources/creatures/box_adult_sprite_frames.tres" id="3_s1beh"]
 
 [sub_resource type="Resource" id="Resource_2q62l"]
 script = ExtResource("1_puklj")
