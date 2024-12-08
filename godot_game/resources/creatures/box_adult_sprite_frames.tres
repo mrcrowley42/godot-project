@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=16 format=3 uid="uid://b70ipckuifg3v"]
+[gd_resource type="SpriteFrames" load_steps=16 format=3 uid="uid://hwolbvnn76v3"]
 
 [ext_resource type="Texture2D" uid="uid://b4skp3d5v52c7" path="res://images/creature_sprites/box-fella/adult-angy-0.png" id="1_a5adh"]
 [ext_resource type="Texture2D" uid="uid://7m4jvy4gmcxo" path="res://images/creature_sprites/box-fella/adult-idle-0.png" id="1_mc4ck"]

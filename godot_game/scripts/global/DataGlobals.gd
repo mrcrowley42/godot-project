@@ -5,6 +5,7 @@ const SAVE_STATUS_MANAGER_UID = 0
 const SAVE_MINIDATE_MAGAGER_UID = 1
 const SAVE_CREATURE_UID = 2
 const SAVE_ACCESSORY_MANAGER_UID = 3
+const SAVE_CONSUMABLES_MANAGER_UID = 4
 
 ## key: save_uid, value: node
 var save_uid_node_atlas = {}
@@ -268,8 +269,10 @@ func load_data() -> Dictionary:
 	# attempt to load
 	var save_file = FileAccess.open(get_save_data_file(), FileAccess.READ)
 	_current_metadata = JSON.parse_string(save_file.get_line())
-
+	
+	var save_nodes = get_tree().get_nodes_in_group(Globals.SAVE_DATA_GROUP)
 	var data_skipped = []
+	
 	while save_file.get_position() < save_file.get_length():
 		var line = save_file.get_line()
 		var parsed_line = JSON.parse_string(line)
@@ -280,13 +283,18 @@ func load_data() -> Dictionary:
 
 		var data = parsed_line[DATA]
 		var save_uid: int = int(parsed_line[SAVE_UID])
-
 		if !save_uid_node_atlas.has(save_uid):
 			printerr("Node with save uid of '%s' could not be found, skipping" % save_uid)
 			data_skipped.append(data)
 			continue
 
 		var node: Node = save_uid_node_atlas[save_uid]
+		if node not in save_nodes:
+			printerr("Node '%s' is not in '%s' group, skipping" % [node, Globals.SAVE_DATA_GROUP])
+			data_skipped.append(data)
+			continue
+		
+		save_nodes.erase(node)
 		if not Globals.has_function(node, LOAD):
 			data_skipped.append(data)
 			continue
@@ -294,6 +302,21 @@ func load_data() -> Dictionary:
 		# call load function
 		node.call(LOAD, data)
 
+	## check for nodes that missed being loaded
+	# attempts to call load data with data returned from the save function
+	if len(save_nodes) > 0:
+		printerr("%s Nodes were not loaded: '%s'.\nAttempting to fix..." % [len(save_nodes), save_nodes])
+		
+		for node in save_nodes:
+			if not Globals.has_function(node, LOAD) or not Globals.has_function(node, SAVE):
+				continue
+			save_nodes.erase(node)
+			node.call(LOAD, node.call(SAVE))
+	
+	## final error message
+	if len(save_nodes) > 0:
+		printerr("--- VERY BIG WARNING ---\n%s Nodes are MISSING from the save file and COULD NOT be loaded:\n%s\n--- VERY BIG WARNING ---" % [len(save_nodes), save_nodes])
+	
 	if len(data_skipped) > 0:
 		printerr("Some data was not loaded! %s line/s were missed" % len(data_skipped))
 	return get_current_metadata_dc()

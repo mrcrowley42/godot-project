@@ -9,5 +9,7 @@ class_name CreatureTypePart extends Resource
 @export var notification_position: Vector2
 @export var cosmetic_positions: Array[CosmeticPosition]
 @export_group("Preferences")
-@export var likes: Array[Creature.FoodItem]
-@export var dislikes: Array[Creature.FoodItem]
+@export var food_likes: Array[FoodItem.FoodType]
+@export var food_dislikes: Array[FoodItem.FoodType]
+@export var drink_likes: Array[DrinkItem.DrinkType]
+@export var drink_dislikes: Array[DrinkItem.DrinkType]

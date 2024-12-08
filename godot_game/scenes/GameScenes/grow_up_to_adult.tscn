@@ -224,7 +224,7 @@ scale = Vector2(0.225, 0.225)
 
 [node name="ConfettiLayer" type="CanvasLayer" parent="UI"]
 unique_name_in_owner = true
-layer = 10
+layer = 5
 
 [node name="ContinueBtn" type="NinePatchRect" parent="UI"]
 visible = false

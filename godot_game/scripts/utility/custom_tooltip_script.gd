@@ -105,3 +105,8 @@ func on_mouse_entered():
 func on_mouse_exited():
 	if visible:
 		Globals.tween(tooltip_object, "modulate", Color(1, 1, 1, 0), 0, .3)
+
+
+func set_tooltip_string(new_string: String):
+	tooltip_string = new_string
+	update_tooltip()

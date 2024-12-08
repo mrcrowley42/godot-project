@@ -1,4 +1,4 @@
-extends PanelContainer
+class_name ActionMenu extends PanelContainer
 
 var just_closed: bool = false
 
