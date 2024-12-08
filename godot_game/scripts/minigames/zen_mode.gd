@@ -9,11 +9,25 @@ var og_state: String
 func _ready():
 	og_state = creature.find_child('Main').animation
 	creature.find_child('Main').animation = "chill"
-	stat_man.time_multiplier = -1.0
-	
+	stat_man.time_multiplier = 0
+	new_timer(stat_man.fun_rate, add_fun)
+
+func add_fun():
+	creature.add_fun(.5)
+
 func _exit_tree():
 	# Return animation state to what is was before entering the scene.
 	creature.find_child('Main').animation = og_state
 
 func _on_close_btn_button_down():
 	close_game()
+
+
+## Creates a new timer that loops [param rate] times per second,
+## and executes the [param timeout_func] at the end of each loop.
+func new_timer(rate: float, timeout_func: Callable) -> void:
+	var timer = Timer.new()
+	timer.wait_time = 1 / rate
+	timer.autostart = true
+	timer.timeout.connect(timeout_func)
+	add_child(timer)
