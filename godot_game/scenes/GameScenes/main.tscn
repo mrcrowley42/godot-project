@@ -1,4 +1,4 @@
-[gd_scene load_steps=122 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=124 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
@@ -190,6 +190,10 @@ corner_radius_bottom_right = 32
 corner_radius_bottom_left = 32
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x7tdf"]
+shader = ExtResource("23_hwmvn")
+shader_parameter/percent = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_usa40"]
 shader = ExtResource("23_hwmvn")
 shader_parameter/percent = 1.0
 
@@ -660,8 +664,8 @@ theme = ExtResource("22_1d1mc")
 theme_override_font_sizes/font_size = 20
 text = "Water"
 icon = ExtResource("23_wh1i0")
+flat = true
 autowrap_mode = 3
-clip_text = true
 script = ExtResource("18_2njxs")
 style = 2
 direction = 3
@@ -679,6 +683,15 @@ modulate = Color(1, 0.38, 0.38, 1)
 position = Vector2(6, 6)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("25_t2eb7")
+
+[node name="Button" type="Button" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer/DrinkCont/DrinkBtn"]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_usa40")
+custom_minimum_size = Vector2(180, 60)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+mouse_filter = 2
 
 [node name="NavigationArrows" type="Node2D" parent="UI/FoodMenu" node_paths=PackedStringArray("target_menu", "left_arrow", "right_arrow")]
 script = ExtResource("27_imll8")
@@ -965,6 +978,7 @@ metadata/_edit_use_anchors_ = true
 [node name="OptionsMenu" type="PanelContainer" parent="UI"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

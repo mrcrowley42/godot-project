@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://biqbc3bkufocu"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://c5xyoxv1bfx47"]
 
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="1_j5c5l"]
 
@@ -55,7 +55,7 @@ corner_radius_bottom_left = 16
 [resource]
 default_font = ExtResource("1_j5c5l")
 default_font_size = 28
-Button/colors/font_disabled_color = Color(0.418, 0.95, 0.7638, 1)
+Button/colors/font_disabled_color = Color(0.855431, 0.994735, 0.933672, 0.760784)
 Button/colors/icon_focus_color = Color(0.8, 0.929412, 0.898039, 1)
 Button/colors/icon_hover_color = Color(1, 1, 1, 1)
 Button/colors/icon_normal_color = Color(0.8928, 0.96, 0.9432, 1)

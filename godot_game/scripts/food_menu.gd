@@ -153,7 +153,17 @@ func consume_item(item: Resource):
 func _process(delta: float) -> void:
 	super._process(delta)
 	if btns_on_cooldown.size() > 0:
+		var curr_time = Time.get_unix_time_from_system()
 		for uid in btns_on_cooldown.keys():
 			var btn: CustomTooltipButton = all_buttons[uid]
 			var item: Resource = all_items[uid]
+			
+			var cooldown = item.cooldown
 			var started = btns_on_cooldown[uid]
+			
+			var child = btn.get_child(2)
+			var perc = (curr_time - started) / cooldown
+			child.material.set("shader_parameter/percent", perc)
+			if perc >= 1:
+				btn.disabled = false
+				btns_on_cooldown.erase(uid)
