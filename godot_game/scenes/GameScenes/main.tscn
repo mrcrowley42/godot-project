@@ -1,4 +1,4 @@
-[gd_scene load_steps=124 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=121 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
@@ -24,7 +24,6 @@
 [ext_resource type="Script" path="res://scripts/food_menu.gd" id="21_aqbs2"]
 [ext_resource type="Theme" uid="uid://c5xyoxv1bfx47" path="res://themes/drink_btn.tres" id="22_1d1mc"]
 [ext_resource type="Theme" uid="uid://g32pmukhe4yn" path="res://themes/food_btn.tres" id="22_uv5vx"]
-[ext_resource type="Shader" path="res://shaders/consumable_cooldown.gdshader" id="23_hwmvn"]
 [ext_resource type="Texture2D" uid="uid://d0ob7pe2h0ga8" path="res://images/food/chips.png" id="23_peos6"]
 [ext_resource type="Texture2D" uid="uid://bi0pimblbclrq" path="res://images/drink/water.png" id="23_wh1i0"]
 [ext_resource type="Texture2D" uid="uid://rgai51krxd6w" path="res://icons/star-fill.svg" id="24_vdri4"]
@@ -188,14 +187,6 @@ corner_radius_top_left = 32
 corner_radius_top_right = 32
 corner_radius_bottom_right = 32
 corner_radius_bottom_left = 32
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_x7tdf"]
-shader = ExtResource("23_hwmvn")
-shader_parameter/percent = 1.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_usa40"]
-shader = ExtResource("23_hwmvn")
-shader_parameter/percent = 1.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b3sax"]
 
@@ -640,8 +631,7 @@ texture = ExtResource("25_t2eb7")
 
 [node name="BG" type="Button" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer/FoodCont/FoodBtn"]
 show_behind_parent = true
-material = SubResource("ShaderMaterial_x7tdf")
-custom_minimum_size = Vector2(180, 60)
+custom_minimum_size = Vector2(170, 60)
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
@@ -686,8 +676,7 @@ texture = ExtResource("25_t2eb7")
 
 [node name="Button" type="Button" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer/DrinkCont/DrinkBtn"]
 show_behind_parent = true
-material = SubResource("ShaderMaterial_usa40")
-custom_minimum_size = Vector2(180, 60)
+custom_minimum_size = Vector2(170, 60)
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="FoodItem" load_steps=3 format=3 uid="uid://cxqnbqh3g2xvf"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/food_item.gd" id="1_62dk6"]
+[ext_resource type="Texture2D" uid="uid://dc3x0wvu8jd3s" path="res://images/food/croisant.png" id="1_ncvas"]
+
+[resource]
+script = ExtResource("1_62dk6")
+name = "Croisant"
+type = 1
+amount = 130
+cooldown = 10
+image = ExtResource("1_ncvas")

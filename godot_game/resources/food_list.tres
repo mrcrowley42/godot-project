@@ -1,9 +1,15 @@
-[gd_resource type="Resource" script_class="FoodList" load_steps=4 format=3 uid="uid://kgwet30vluw3"]
+[gd_resource type="Resource" script_class="FoodList" load_steps=10 format=3 uid="uid://kgwet30vluw3"]
 
 [ext_resource type="Script" path="res://scripts/base_classses/food_item.gd" id="1_xr18h"]
 [ext_resource type="Script" path="res://scripts/base_classses/food_list.gd" id="2_n38hs"]
 [ext_resource type="Resource" uid="uid://ciblhnokjc8hb" path="res://resources/consumables/food/chips.tres" id="2_p1oea"]
+[ext_resource type="Resource" uid="uid://bk7bd4x5c11qg" path="res://resources/consumables/food/chicken_wing.tres" id="2_xlcv3"]
+[ext_resource type="Resource" uid="uid://ccphpv0urnqih" path="res://resources/consumables/food/cookie.tres" id="4_4auyk"]
+[ext_resource type="Resource" uid="uid://cxqnbqh3g2xvf" path="res://resources/consumables/food/croisant.tres" id="5_fgh82"]
+[ext_resource type="Resource" uid="uid://cytg04ss26ldl" path="res://resources/consumables/food/fruit_salad.tres" id="6_fessv"]
+[ext_resource type="Resource" uid="uid://dhbrgvnsmwrlb" path="res://resources/consumables/food/sandwich.tres" id="7_2a0sf"]
+[ext_resource type="Resource" uid="uid://bk3wvbgmx1qc2" path="res://resources/consumables/food/toast.tres" id="8_gao7h"]
 
 [resource]
 script = ExtResource("2_n38hs")
-items = Array[ExtResource("1_xr18h")]([ExtResource("2_p1oea")])
+items = Array[ExtResource("1_xr18h")]([ExtResource("2_xlcv3"), ExtResource("2_p1oea"), ExtResource("4_4auyk"), ExtResource("5_fgh82"), ExtResource("6_fessv"), ExtResource("7_2a0sf"), ExtResource("8_gao7h")])

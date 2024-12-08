@@ -12,6 +12,7 @@ const STRING_KNOWN_MODIFIED = "amount: %s (x%s)"
 
 var food_list: FoodList = load("res://resources/food_list.tres")
 var drink_list: DrinkList = load("res://resources/drink_list.tres")
+var btn_shader = load("res://shaders/consumable_cooldown.gdshader")
 
 var all_screens: Array[ConsumablesScreen] = []
 var all_items: Dictionary = {}  # key: uid, value: item (Resource)
@@ -57,21 +58,29 @@ class ConsumablesScreen:
 		drink_grid.remove_child(drink_btn)
 		parent.add_child(margin)
 	
-	func add_food(food: FoodItem, consume_func: Callable) -> CustomTooltipButton:
+	func add_food(food: FoodItem, consume_func: Callable, shader) -> CustomTooltipButton:
 		var new_btn: CustomTooltipButton = food_btn.duplicate()
 		new_btn.text = food.name
 		new_btn.icon = food.image
 		new_btn.tooltip_string = STRING_UNKNOWN
+		
+		var shader_child = new_btn.get_child(2)
+		shader_child.material = ShaderMaterial.new()
+		shader_child.material.shader = shader
 		new_btn.connect("button_down", consume_func.bind(food))
 		food_grid.add_child(new_btn)
 		food_count += 1
 		return new_btn
 	
-	func add_drink(drink: DrinkItem, consume_func: Callable) -> CustomTooltipButton:
+	func add_drink(drink: DrinkItem, consume_func: Callable, shader) -> CustomTooltipButton:
 		var new_btn: CustomTooltipButton = drink_btn.duplicate()
 		new_btn.text = drink.name
 		new_btn.icon = drink.image
 		new_btn.tooltip_string = STRING_UNKNOWN
+		
+		var shader_child = new_btn.get_child(2)
+		shader_child.material = ShaderMaterial.new()
+		shader_child.material.shader = shader
 		new_btn.connect("button_down", consume_func.bind(drink))
 		drink_grid.add_child(new_btn)
 		drink_count += 1
@@ -95,7 +104,7 @@ func setup_food_and_drink_buttons():
 			food_on_screen += 1
 			if len(all_screens) <= food_on_screen:
 				all_screens.append(ConsumablesScreen.new(food_screens, example_screen))
-		var btn = all_screens[food_on_screen].add_food(food_item, consume_item)
+		var btn = all_screens[food_on_screen].add_food(food_item, consume_item, btn_shader)
 		
 		var uid = Helpers.uid_str(food_item)
 		all_buttons[uid] = btn
@@ -106,7 +115,7 @@ func setup_food_and_drink_buttons():
 			drink_on_screen += 1
 			if len(all_screens) <= drink_on_screen:
 				all_screens.append(ConsumablesScreen.new(food_screens, example_screen))
-		var btn = all_screens[drink_on_screen].add_drink(drink_item, consume_item)
+		var btn = all_screens[drink_on_screen].add_drink(drink_item, consume_item, btn_shader)
 		
 		var uid = Helpers.uid_str(drink_item)
 		all_buttons[uid] = btn
