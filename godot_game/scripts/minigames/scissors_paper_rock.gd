@@ -83,6 +83,5 @@ func _on_close_btn_button_down():
 func _on_help_btn_button_down() -> void:
 	help_menu.show()
 
-
 func _on_close_rules_button_down() -> void:
 	help_menu.hide()
