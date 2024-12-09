@@ -159,6 +159,7 @@ func consume_item(item: Resource):
 	else:
 		%ConsumablesManager.consume_drink(item)
 
+## progress the cooldowns
 func _process(delta: float) -> void:
 	super._process(delta)
 	if btns_on_cooldown.size() > 0:

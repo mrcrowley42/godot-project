@@ -7,6 +7,6 @@
 script = ExtResource("1_7cpwl")
 name = "Sandwich"
 type = 1
-amount = 150
+amount = 140
 cooldown = 12
 image = ExtResource("1_wnfl4")

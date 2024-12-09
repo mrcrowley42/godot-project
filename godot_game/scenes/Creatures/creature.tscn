@@ -147,4 +147,3 @@ stretch_mode = 5
 
 [connection signal="finished" from="Notifcations/STAHP" to="Notifcations/STAHP" method="_on_finished"]
 [connection signal="finished" from="Notifcations/LowStatSounds" to="Notifcations" method="_on_low_stat_sounds_finished"]
-[connection signal="animation_changed" from="Sprites/Main" to="Sprites/Main" method="_on_animation_changed"]
