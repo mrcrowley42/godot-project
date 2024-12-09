@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="FoodItem" load_steps=3 format=3 uid="uid://bk7bd4x5c11qg"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/food_item.gd" id="1_g5iac"]
+[ext_resource type="Texture2D" uid="uid://b4r4d4wlp61n1" path="res://images/food/chicken_wing.png" id="1_h4yox"]
+
+[resource]
+script = ExtResource("1_g5iac")
+name = "Chicken Wing"
+type = 2
+amount = 100
+cooldown = 8
+image = ExtResource("1_h4yox")

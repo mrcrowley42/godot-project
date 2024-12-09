@@ -8,4 +8,5 @@ script = ExtResource("1_50y6n")
 name = "Water"
 type = 0
 amount = 120
+cooldown = 8
 image = ExtResource("1_gu7mq")

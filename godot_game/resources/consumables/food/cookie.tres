@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="FoodItem" load_steps=3 format=3 uid="uid://ccphpv0urnqih"]
+
+[ext_resource type="Texture2D" uid="uid://cientm7cgho3" path="res://images/food/cookie.png" id="1_y6wjk"]
+[ext_resource type="Script" path="res://scripts/base_classses/food_item.gd" id="1_ymat8"]
+
+[resource]
+script = ExtResource("1_ymat8")
+name = "Cookie"
+type = 5
+amount = 75
+cooldown = 3
+image = ExtResource("1_y6wjk")

@@ -22,8 +22,8 @@
 [ext_resource type="Theme" uid="uid://1dv11a5ar0hg" path="res://themes/action_btn.tres" id="18_v1mb2"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="19_3grg3"]
 [ext_resource type="Script" path="res://scripts/food_menu.gd" id="21_aqbs2"]
-[ext_resource type="Theme" uid="uid://biqbc3bkufocu" path="res://themes/drink_btn.tres" id="22_1d1mc"]
-[ext_resource type="Theme" uid="uid://dq4gv2q2fc0v8" path="res://themes/food_btn.tres" id="22_uv5vx"]
+[ext_resource type="Theme" uid="uid://c5xyoxv1bfx47" path="res://themes/drink_btn.tres" id="22_1d1mc"]
+[ext_resource type="Theme" uid="uid://g32pmukhe4yn" path="res://themes/food_btn.tres" id="22_uv5vx"]
 [ext_resource type="Texture2D" uid="uid://d0ob7pe2h0ga8" path="res://images/food/chips.png" id="23_peos6"]
 [ext_resource type="Texture2D" uid="uid://bi0pimblbclrq" path="res://images/drink/water.png" id="23_wh1i0"]
 [ext_resource type="Texture2D" uid="uid://rgai51krxd6w" path="res://icons/star-fill.svg" id="24_vdri4"]
@@ -600,6 +600,7 @@ columns = 2
 
 [node name="FoodBtn" type="Button" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer/FoodCont"]
 texture_filter = 1
+clip_contents = true
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -607,6 +608,7 @@ theme = ExtResource("22_uv5vx")
 theme_override_font_sizes/font_size = 20
 text = "Chips"
 icon = ExtResource("23_peos6")
+flat = true
 autowrap_mode = 3
 clip_text = true
 script = ExtResource("18_2njxs")
@@ -627,6 +629,15 @@ position = Vector2(6, 6)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("25_t2eb7")
 
+[node name="BG" type="Button" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer/FoodCont/FoodBtn"]
+show_behind_parent = true
+custom_minimum_size = Vector2(170, 60)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+mouse_filter = 2
+disabled = true
+
 [node name="DrinkCont" type="GridContainer" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -643,8 +654,8 @@ theme = ExtResource("22_1d1mc")
 theme_override_font_sizes/font_size = 20
 text = "Water"
 icon = ExtResource("23_wh1i0")
+flat = true
 autowrap_mode = 3
-clip_text = true
 script = ExtResource("18_2njxs")
 style = 2
 direction = 3
@@ -662,6 +673,14 @@ modulate = Color(1, 0.38, 0.38, 1)
 position = Vector2(6, 6)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("25_t2eb7")
+
+[node name="Button" type="Button" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer/DrinkCont/DrinkBtn"]
+show_behind_parent = true
+custom_minimum_size = Vector2(170, 60)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+mouse_filter = 2
 
 [node name="NavigationArrows" type="Node2D" parent="UI/FoodMenu" node_paths=PackedStringArray("target_menu", "left_arrow", "right_arrow")]
 script = ExtResource("27_imll8")
@@ -948,6 +967,7 @@ metadata/_edit_use_anchors_ = true
 [node name="OptionsMenu" type="PanelContainer" parent="UI"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

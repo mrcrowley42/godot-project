@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://oom8t15mujx5"]
+[gd_scene load_steps=8 format=3 uid="uid://xfya77c4fxmo"]
 
 [ext_resource type="Script" path="res://scripts/creature_listing.gd" id="1_4arri"]
 [ext_resource type="Theme" uid="uid://dl1wes8p6lqlb" path="res://themes/invisible.tres" id="2_so7yg"]
@@ -56,6 +56,5 @@ theme = ExtResource("2_so7yg")
 icon = ExtResource("3_g8mpq")
 icon_alignment = 1
 expand_icon = true
-script = ExtResource("4_kk6lx")
 
 [connection signal="button_down" from="." to="." method="_on_button_down"]

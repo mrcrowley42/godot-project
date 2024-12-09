@@ -97,7 +97,7 @@ func update_tooltip():
 
 
 func on_mouse_entered():
-	if visible and tooltip_string.length() > 0:
+	if !disabled and visible and tooltip_string.length() > 0:
 		update_tooltip()
 		Globals.tween(tooltip_object, "modulate", Color(1, 1, 1, 1), 0, .3)
 
