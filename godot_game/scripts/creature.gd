@@ -177,7 +177,7 @@ func add_fun(amount: float, multiplier: float = 1.0):
 
 func damage_fun(amount) -> void:
 	assert(amount >= 0)
-	food = max(food - amount, 0)
+	fun = max(fun - amount, 0)
 	fun_changed.emit()
 
 
