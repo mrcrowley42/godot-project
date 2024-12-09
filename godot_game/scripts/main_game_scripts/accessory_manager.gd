@@ -47,7 +47,7 @@ func set_ready():
 func place_all_cosmetics():
 	# Build dictionary for each cosmetic items appropriate position for the current creature
 	for item in find_parent("Creature").creature.cosmetic_positions:
-		position_dict[item.item] = item.position
+		position_dict[item.item] = item
 		
 	#for item in find_parent("Creature").creature.cosmetic_positions:
 		
@@ -62,7 +62,8 @@ func place_all_cosmetics():
 func place_cosmetic(cosmetic: CosmeticItem):
 	var new_sprite = CosmeticSprite.new(cosmetic)
 	new_sprite.name = cosmetic.name
-	new_sprite.position = position_dict[cosmetic]
+	new_sprite.position = position_dict[cosmetic].position
+	new_sprite.scale = default_scale * position_dict[cosmetic].scale
 	#new_sprite.scale = default_scale * scale_dict[cosmetic]
 	add_child(new_sprite, true)
 	# Should maintain sync with main sprite
