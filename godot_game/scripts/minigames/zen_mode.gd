@@ -8,8 +8,10 @@ var og_state: String
 
 func _ready():
 	og_state = creature.find_child('Main').animation
-	creature.find_child('Main').animation = "chill"
-	stat_man.time_multiplier = 0
+	if "chill" in creature.creature.sprite_frames.get_animation_names():
+		creature.find_child('Main').animation = "chill"
+	
+	stat_man.time_multiplier = 0.25
 	new_timer(stat_man.fun_rate, add_fun)
 
 func add_fun():

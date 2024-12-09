@@ -34,6 +34,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("4_u2vvx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_i1ogw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_nu6dc")
+}],
+"loop": true,
+"name": &"chill",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("1_guwht")
 }, {
 "duration": 1.0,
@@ -58,20 +72,6 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 4.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("4_u2vvx")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_i1ogw")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_nu6dc")
-}],
-"loop": true,
-"name": &"joy",
 "speed": 4.0
 }, {
 "frames": [{
