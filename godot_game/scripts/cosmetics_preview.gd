@@ -18,7 +18,7 @@ func update_cosmetics():
 		var new_sprite = AnimatedSprite2D.new()
 		new_sprite.sprite_frames = cosmetic.sprite
 		new_sprite.name = cosmetic.name
-		new_sprite.position = acc_man.position_dict[cosmetic] * (1 / .225)
+		new_sprite.position = acc_man.position_dict[cosmetic].position * (1 / .225)
 		add_child.call_deferred(new_sprite, true)
 		
 		# Should maintain sync with main sprite
