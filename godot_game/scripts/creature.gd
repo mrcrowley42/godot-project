@@ -14,7 +14,7 @@ const like_multiplier: float = 2.0
 
 ## A Reference to the main sprite so it can be manipulated
 @onready var accessory_manager: AccessoryManager = find_child("AccessoryManager")
-@onready var main_sprite = %Main
+@onready var main_sprite: MainSprite = %Main
 @export var dying_colour: Color;
 @export var clippy_area: Node
 @export var xp_mulitplier: float = 1.0
@@ -189,8 +189,12 @@ func get_food_preference(food_item: FoodItem) -> Preference:
 func consume_food(food_item: FoodItem):
 	var preference_multi := 1.0
 	var pref: Preference = get_food_preference(food_item)
-	if pref == Preference.LIKES: preference_multi = like_multiplier
-	elif pref == Preference.DISLIKES: preference_multi = dislike_multiplier
+	if pref == Preference.LIKES: 
+		preference_multi = like_multiplier
+		main_sprite.do_movement(main_sprite.Movement.HAPPY_BOUNCE)
+	elif pref == Preference.DISLIKES: 
+		preference_multi = dislike_multiplier
+		main_sprite.do_movement(main_sprite.Movement.CONFUSED_SHAKE)
 	add_food(food_item.amount, preference_multi)
 
 func add_food(amount: float, multiplier: float = 1.0):
@@ -214,8 +218,12 @@ func get_drink_preference(drink_item: DrinkItem) -> Preference:
 func consume_drink(drink_item: DrinkItem):
 	var preference_multi := 1.0
 	var pref: Preference = get_drink_preference(drink_item)
-	if pref == Preference.LIKES: preference_multi = like_multiplier
-	elif pref == Preference.DISLIKES: preference_multi = dislike_multiplier
+	if pref == Preference.LIKES: 
+		preference_multi = like_multiplier
+		main_sprite.do_movement(main_sprite.Movement.HAPPY_BOUNCE)
+	elif pref == Preference.DISLIKES: 
+		preference_multi = dislike_multiplier
+		main_sprite.do_movement(main_sprite.Movement.CONFUSED_SHAKE)
 	add_water(drink_item.amount, preference_multi)
 
 func add_water(amount: float, multiplier: float = 1.0):
@@ -238,12 +246,7 @@ func get_loaded_cosmetics():
 
 ## changes the animation and retains frame change timing
 func change_animation(anim_name: String):
-	if not main_sprite.sprite_frames.has_animation(anim_name):
-		printerr("current creature has no animation: " + anim_name)
-		return
-	
-	await main_sprite.frame_changed
-	main_sprite.animation = anim_name
+	main_sprite.change_animation(anim_name)
 
 func grow_up_one_stage():
 	xp = 0

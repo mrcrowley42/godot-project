@@ -532,6 +532,15 @@ offset_bottom = 207.0
 theme = ExtResource("8_lqg4h")
 text = "Print Sounds"
 
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 482.0
+offset_right = 74.0
+offset_bottom = 503.0
+theme = ExtResource("8_lqg4h")
+text = "xp!"
+
 [connection signal="drag_ended" from="dayprog/slider" to="dayprog" method="_on_day_progress_drag_ended"]
 [connection signal="drag_started" from="dayprog/slider" to="dayprog" method="_on_day_progress_drag_started"]
 [connection signal="pressed" from="dayprog/progressing" to="dayprog" method="_on_progressing_pressed"]
@@ -556,3 +565,4 @@ text = "Print Sounds"
 [connection signal="button_down" from="WipeAllBtn" to="." method="_on_wipe_btn_button_down"]
 [connection signal="button_down" from="WipeNodesBtn" to="." method="_on_wipe_nodes_btn_button_down"]
 [connection signal="button_down" from="Button3" to="." method="_on_button_3_button_down"]
+[connection signal="button_down" from="Button2" to="." method="_on_button_2_button_down"]

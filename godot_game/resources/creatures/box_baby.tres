@@ -10,11 +10,13 @@
 script = ExtResource("1_yyhlj")
 position = Vector2(-12, -70)
 item = ExtResource("2_ylql5")
+scale = 1.0
 
 [sub_resource type="Resource" id="Resource_p45da"]
 script = ExtResource("1_yyhlj")
 position = Vector2(-12, -3)
 item = ExtResource("3_wvsbt")
+scale = 1.0
 
 [resource]
 script = ExtResource("2_4q0xg")
@@ -26,6 +28,6 @@ sprite_frames = ExtResource("3_hnmtc")
 notification_position = Vector2(-40, -105)
 cosmetic_positions = Array[ExtResource("1_yyhlj")]([SubResource("Resource_1jfam"), SubResource("Resource_p45da")])
 food_likes = Array[int]([])
-food_dislikes = Array[int]([])
-drink_likes = Array[int]([])
+food_dislikes = Array[int]([2])
+drink_likes = Array[int]([0])
 drink_dislikes = Array[int]([])

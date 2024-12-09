@@ -133,3 +133,7 @@ func _on_discover_btn_button_down() -> void:
 			DataGlobals.add_to_creatures_discovered(uid)
 		DataGlobals.set_new_highest_life_stage(uid, 1)
 	game.find_child("Creatures").propagate_call("update_locked")
+
+
+func _on_button_2_button_down() -> void:
+	creature.add_xp(10_000)

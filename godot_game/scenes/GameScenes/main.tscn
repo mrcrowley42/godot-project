@@ -600,7 +600,6 @@ columns = 2
 
 [node name="FoodBtn" type="Button" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer/FoodCont"]
 texture_filter = 1
-clip_contents = true
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 3
