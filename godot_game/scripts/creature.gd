@@ -192,6 +192,7 @@ func consume_food(food_item: FoodItem):
 	if pref == Preference.LIKES: 
 		preference_multi = like_multiplier
 		main_sprite.do_movement(main_sprite.Movement.HAPPY_BOUNCE)
+		add_fun(20)
 	elif pref == Preference.DISLIKES: 
 		preference_multi = dislike_multiplier
 		main_sprite.do_movement(main_sprite.Movement.CONFUSED_SHAKE)
@@ -221,6 +222,7 @@ func consume_drink(drink_item: DrinkItem):
 	if pref == Preference.LIKES: 
 		preference_multi = like_multiplier
 		main_sprite.do_movement(main_sprite.Movement.HAPPY_BOUNCE)
+		add_fun(20)
 	elif pref == Preference.DISLIKES: 
 		preference_multi = dislike_multiplier
 		main_sprite.do_movement(main_sprite.Movement.CONFUSED_SHAKE)
