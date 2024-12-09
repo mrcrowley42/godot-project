@@ -628,14 +628,13 @@ position = Vector2(6, 6)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("25_t2eb7")
 
-[node name="BG" type="Button" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer/FoodCont/FoodBtn"]
+[node name="Button" type="Button" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer/FoodCont/FoodBtn"]
 show_behind_parent = true
 custom_minimum_size = Vector2(170, 60)
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
 mouse_filter = 2
-disabled = true
 
 [node name="DrinkCont" type="GridContainer" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer"]
 layout_mode = 2

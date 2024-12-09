@@ -29,7 +29,7 @@ corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_golou"]
-bg_color = Color(0.341176, 0.564706, 0.415686, 0.741176)
+bg_color = Color(0.341176, 0.564706, 0.415686, 0.72549)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
