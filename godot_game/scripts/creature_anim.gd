@@ -4,7 +4,7 @@ class_name MainSprite extends AnimatedSprite2D
 
 enum Movement {NOTHING, HAPPY_BOUNCE, CONFUSED_SHAKE}
 
-var amount_dict = {Movement.HAPPY_BOUNCE: 40, Movement.CONFUSED_SHAKE: 20}
+var amount_dict = {Movement.HAPPY_BOUNCE: 30, Movement.CONFUSED_SHAKE: 15}
 
 var current_movement: Movement = Movement.NOTHING
 var movement_queue: Movement = Movement.NOTHING
