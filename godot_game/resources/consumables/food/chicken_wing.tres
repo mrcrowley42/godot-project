@@ -8,5 +8,6 @@ script = ExtResource("1_g5iac")
 name = "Chicken Wing"
 type = 2
 amount = 100
+override_auto_cooldown = false
 cooldown = 8
 image = ExtResource("1_h4yox")

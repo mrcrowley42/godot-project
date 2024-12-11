@@ -286,6 +286,7 @@ func do_movement(movement: Movement):
 		movement_queue = movement
 		return
 	
+	# attempt to use joy animation, otherwise use chill animation
 	if movement == Movement.HAPPY_BOUNCE and not await change_animation("joy"):
 		await change_animation("chill")
 	if movement == Movement.CONFUSED_SHAKE:
