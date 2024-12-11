@@ -10,11 +10,13 @@
 script = ExtResource("1_uur3s")
 position = Vector2(-19, 37)
 item = ExtResource("2_5cjmi")
+scale = 1.0
 
 [sub_resource type="Resource" id="Resource_kyalv"]
 script = ExtResource("1_uur3s")
 position = Vector2(-2, 94)
 item = ExtResource("3_yc5d4")
+scale = 1.0
 
 [resource]
 script = ExtResource("2_kycvr")
