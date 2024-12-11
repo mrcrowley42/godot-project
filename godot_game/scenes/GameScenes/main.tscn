@@ -600,16 +600,14 @@ columns = 2
 
 [node name="FoodBtn" type="Button" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer/FoodCont"]
 texture_filter = 1
-custom_minimum_size = Vector2(0, 60)
+custom_minimum_size = Vector2(170, 60)
 layout_mode = 2
-size_flags_horizontal = 3
 theme = ExtResource("22_uv5vx")
 theme_override_font_sizes/font_size = 20
 text = "Chips"
 icon = ExtResource("23_peos6")
 flat = true
 autowrap_mode = 3
-clip_text = true
 script = ExtResource("18_2njxs")
 style = 2
 direction = 3
@@ -645,15 +643,14 @@ columns = 2
 
 [node name="DrinkBtn" type="Button" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer/DrinkCont"]
 texture_filter = 1
-custom_minimum_size = Vector2(0, 60)
+custom_minimum_size = Vector2(170, 60)
 layout_mode = 2
-size_flags_horizontal = 3
 theme = ExtResource("22_1d1mc")
 theme_override_font_sizes/font_size = 20
-text = "Water"
+text = "Chocolate milkshake"
 icon = ExtResource("23_wh1i0")
 flat = true
-autowrap_mode = 3
+autowrap_mode = 2
 script = ExtResource("18_2njxs")
 style = 2
 direction = 3
