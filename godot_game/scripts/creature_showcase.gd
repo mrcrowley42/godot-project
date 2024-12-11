@@ -29,7 +29,7 @@ func setup():
 	heading.text = "%s" % creature.name
 	add_life_stages()
 	## TODO edit this when the ability to track states has been added.
-	if creature.adult:
+	if creature.adult and get_highest_stage() > 0 :
 		preview.sprite_frames = creature.adult.sprite_frames
 	else:
 		preview.sprite_frames = creature.baby.sprite_frames
