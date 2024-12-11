@@ -151,7 +151,7 @@ func consume_item(item: Resource):
 		return
 	else:
 		btns_on_cooldown[uid] = {
-			'cooldown': item.cooldown if item.override_auto_cooldown else item.amount * .2,
+			'cooldown': item.cooldown if item.override_auto_cooldown else item.amount * .3,
 			'start_time': Time.get_unix_time_from_system()
 		}
 	all_buttons[uid].disabled = true

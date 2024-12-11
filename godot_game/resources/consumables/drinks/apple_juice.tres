@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="DrinkItem" load_steps=3 format=3 uid="uid://efmgy2280mr"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/drink_item.gd" id="1_154rl"]
+[ext_resource type="Texture2D" uid="uid://ck485r2x6gnn5" path="res://images/drink/apple_juice.png" id="1_nrb6j"]
+
+[resource]
+script = ExtResource("1_154rl")
+name = "Apple juice"
+type = 3
+amount = 80
+override_auto_cooldown = false
+cooldown = 30
+image = ExtResource("1_nrb6j")
