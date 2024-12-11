@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/base_classses/drink_item.gd" id="1_u254d"]
 [ext_resource type="Script" path="res://scripts/base_classses/drink_list.gd" id="2_8jf40"]
 [ext_resource type="Resource" uid="uid://ca7h0lwonsbn1" path="res://resources/consumables/drinks/water.tres" id="2_jy30q"]
-[ext_resource type="Resource" uid="uid://co8p51i4ctt0u" path="res://resources/consumables/drinks/lcl.tres" id="3_6sbpc"]
+[ext_resource type="Resource" uid="uid://co8p51i4ctt0u" path="res://resources/consumables/drinks/orange_soda.tres" id="3_6sbpc"]
 [ext_resource type="Resource" uid="uid://j8ybsq2qsd82" path="res://resources/consumables/drinks/lemonade.tres" id="4_ijeqs"]
 [ext_resource type="Resource" uid="uid://d3j74rl7grp24" path="res://resources/consumables/drinks/milk_shake.tres" id="5_nead5"]
 
