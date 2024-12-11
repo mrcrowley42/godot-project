@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DrinkList" load_steps=10 format=3 uid="uid://cqfhcx2y843se"]
+[gd_resource type="Resource" script_class="DrinkList" load_steps=12 format=3 uid="uid://cqfhcx2y843se"]
 
 [ext_resource type="Script" path="res://scripts/base_classses/drink_item.gd" id="1_u254d"]
 [ext_resource type="Script" path="res://scripts/base_classses/drink_list.gd" id="2_8jf40"]
@@ -9,7 +9,9 @@
 [ext_resource type="Resource" uid="uid://d11e7ksv75mxi" path="res://resources/consumables/drinks/choc_milkshake.tres" id="6_0g44x"]
 [ext_resource type="Resource" uid="uid://efmgy2280mr" path="res://resources/consumables/drinks/apple_juice.tres" id="7_nhio3"]
 [ext_resource type="Resource" uid="uid://sgf3g3ykisgd" path="res://resources/consumables/drinks/orange_juice.tres" id="8_q5yhy"]
+[ext_resource type="Resource" uid="uid://cr5so03smgtyl" path="res://resources/consumables/drinks/coffee.tres" id="9_e25m3"]
+[ext_resource type="Resource" uid="uid://b12s45mocynj0" path="res://resources/consumables/drinks/soda_water.tres" id="10_lwkcr"]
 
 [resource]
 script = ExtResource("2_8jf40")
-items = Array[ExtResource("1_u254d")]([ExtResource("2_jy30q"), ExtResource("3_6sbpc"), ExtResource("4_ijeqs"), ExtResource("5_nead5"), ExtResource("6_0g44x"), ExtResource("7_nhio3"), ExtResource("8_q5yhy")])
+items = Array[ExtResource("1_u254d")]([ExtResource("2_jy30q"), ExtResource("3_6sbpc"), ExtResource("4_ijeqs"), ExtResource("5_nead5"), ExtResource("6_0g44x"), ExtResource("7_nhio3"), ExtResource("8_q5yhy"), ExtResource("9_e25m3"), ExtResource("10_lwkcr")])

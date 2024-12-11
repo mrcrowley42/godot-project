@@ -1,6 +1,6 @@
 class_name DrinkItem extends Resource
 
-enum DrinkType {NEUTRAL, SOFT_DRINK, SHAKE, FRUIT_JIUCE, CAFFINE}
+enum DrinkType {NEUTRAL, SOFT_DRINK, SHAKE, FRUIT_JIUCE, CAFFINE, NUCLEAR_ACID}
 
 @export var name: String
 @export var type: DrinkType
