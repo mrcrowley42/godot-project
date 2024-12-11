@@ -150,7 +150,10 @@ func consume_item(item: Resource):
 	if uid in btns_on_cooldown.keys():
 		return
 	else:
-		btns_on_cooldown[uid] = Time.get_unix_time_from_system()
+		btns_on_cooldown[uid] = {
+			'cooldown': item.cooldown if item.override_auto_cooldown else item.amount * .2,
+			'start_time': Time.get_unix_time_from_system()
+		}
 	all_buttons[uid].disabled = true
 	
 	# consume
@@ -166,10 +169,8 @@ func _process(delta: float) -> void:
 		var curr_time = Time.get_unix_time_from_system()
 		for uid in btns_on_cooldown.keys():
 			var btn: CustomTooltipButton = all_buttons[uid]
-			var item: Resource = all_items[uid]
-			
-			var cooldown = item.cooldown
-			var started = btns_on_cooldown[uid]
+			var cooldown = btns_on_cooldown[uid]['cooldown']
+			var started = btns_on_cooldown[uid]['start_time']
 			
 			var child = btn.get_child(2)
 			var perc = (curr_time - started) / cooldown

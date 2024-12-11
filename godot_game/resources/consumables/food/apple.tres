@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="FoodItem" load_steps=3 format=3 uid="uid://mvs3fbejl16t"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/food_item.gd" id="1_l6vnc"]
+[ext_resource type="Texture2D" uid="uid://b1faix8r6d3mv" path="res://images/food/apple.png" id="1_o3da1"]
+
+[resource]
+script = ExtResource("1_l6vnc")
+name = "Apple"
+type = 3
+amount = 60
+override_auto_cooldown = false
+cooldown = 30
+image = ExtResource("1_o3da1")

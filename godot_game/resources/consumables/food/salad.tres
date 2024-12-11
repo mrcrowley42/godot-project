@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="FoodItem" load_steps=3 format=3 uid="uid://cstubs0rx4wac"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/food_item.gd" id="1_65veb"]
+[ext_resource type="Texture2D" uid="uid://diglrgyt80dmb" path="res://images/food/salad.png" id="1_77733"]
+
+[resource]
+script = ExtResource("1_65veb")
+name = "Salad"
+type = 4
+amount = 100
+override_auto_cooldown = false
+cooldown = 30
+image = ExtResource("1_77733")

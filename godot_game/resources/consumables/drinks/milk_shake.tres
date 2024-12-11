@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="DrinkItem" load_steps=3 format=3 uid="uid://d3j74rl7grp24"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/drink_item.gd" id="1_j3kr1"]
+[ext_resource type="Texture2D" uid="uid://c2y3df4e2fn37" path="res://images/drink/milkshake.png" id="1_q0jss"]
+
+[resource]
+script = ExtResource("1_j3kr1")
+name = "Milkshake"
+type = 2
+amount = 110
+override_auto_cooldown = false
+cooldown = 30
+image = ExtResource("1_q0jss")

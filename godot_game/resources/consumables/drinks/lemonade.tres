@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="DrinkItem" load_steps=3 format=3 uid="uid://j8ybsq2qsd82"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/drink_item.gd" id="1_exaic"]
+[ext_resource type="Texture2D" uid="uid://bbtqkn48byf04" path="res://images/drink/lemonade.png" id="1_kw3j6"]
+
+[resource]
+script = ExtResource("1_exaic")
+name = "Lemonade"
+type = 1
+amount = 100
+override_auto_cooldown = false
+cooldown = 30
+image = ExtResource("1_kw3j6")
