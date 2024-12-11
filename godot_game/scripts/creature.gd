@@ -46,6 +46,8 @@ var food_dislikes: Array[FoodItem.FoodType]
 var drink_likes: Array[DrinkItem.DrinkType]
 var drink_dislikes: Array[DrinkItem.DrinkType]
 
+var og_pos: Vector2
+
 # SIGNALS
 signal hp_changed()
 signal food_changed()
@@ -63,6 +65,7 @@ var stats_heal: Dictionary = {Stat.HP: add_hp, Stat.FUN: add_fun,
 	Stat.WATER: add_water, Stat.FOOD: add_food}
 
 func setup_creature():
+	og_pos = position
 	var uid = int(DataGlobals.get_metadata_value(DataGlobals.CURRENT_CREATURE))
 	creature_type = load(ResourceUID.get_id_path(uid))
 	
@@ -191,11 +194,11 @@ func consume_food(food_item: FoodItem):
 	var pref: Preference = get_food_preference(food_item)
 	if pref == Preference.LIKES: 
 		preference_multi = like_multiplier
-		main_sprite.do_movement(main_sprite.Movement.HAPPY_BOUNCE)
+		do_movement(Movement.HAPPY_BOUNCE)
 		add_fun(20)
 	elif pref == Preference.DISLIKES: 
 		preference_multi = dislike_multiplier
-		main_sprite.do_movement(main_sprite.Movement.CONFUSED_SHAKE)
+		do_movement(Movement.CONFUSED_SHAKE)
 	add_food(food_item.amount, preference_multi)
 
 func add_food(amount: float, multiplier: float = 1.0):
@@ -221,11 +224,11 @@ func consume_drink(drink_item: DrinkItem):
 	var pref: Preference = get_drink_preference(drink_item)
 	if pref == Preference.LIKES: 
 		preference_multi = like_multiplier
-		main_sprite.do_movement(main_sprite.Movement.HAPPY_BOUNCE)
+		do_movement(Movement.HAPPY_BOUNCE)
 		add_fun(20)
 	elif pref == Preference.DISLIKES: 
 		preference_multi = dislike_multiplier
-		main_sprite.do_movement(main_sprite.Movement.CONFUSED_SHAKE)
+		do_movement(Movement.CONFUSED_SHAKE)
 	add_water(drink_item.amount, preference_multi)
 
 func add_water(amount: float, multiplier: float = 1.0):
@@ -248,7 +251,15 @@ func get_loaded_cosmetics():
 
 ## changes the animation and retains frame change timing
 func change_animation(anim_name: String):
-	main_sprite.change_animation(anim_name)
+	if not main_sprite.sprite_frames.has_animation(anim_name):
+		printerr("current creature has no animation: " + anim_name)
+		return false
+	if anim_name == main_sprite.animation:
+		return true
+	
+	await main_sprite.frame_changed
+	main_sprite.animation = anim_name
+	return true
 
 func grow_up_one_stage():
 	xp = 0
@@ -256,6 +267,61 @@ func grow_up_one_stage():
 	is_ready_to_grow_up = false
 	DataGlobals.set_new_highest_life_stage(Helpers.uid_str(creature_type), life_stage)
 
+# -----------
+#  MOVEMENT
+# -----------
+
+enum Movement {NOTHING, HAPPY_BOUNCE, CONFUSED_SHAKE}
+
+var amount_dict = {Movement.HAPPY_BOUNCE: 30, Movement.CONFUSED_SHAKE: 15}
+
+var current_movement: Movement = Movement.NOTHING
+var movement_queue: Movement = Movement.NOTHING
+var movement_start: float = 0
+
+const MOVEMENT_TIME: float = 1;
+
+func do_movement(movement: Movement):
+	if current_movement != Movement.NOTHING:
+		movement_queue = movement
+		return
+	
+	if movement == Movement.HAPPY_BOUNCE and not await change_animation("joy"):
+		await change_animation("chill")
+	if movement == Movement.CONFUSED_SHAKE:
+		await change_animation("confused")
+	
+	current_movement = movement
+	movement_start = Time.get_unix_time_from_system()
+
+func end_movement():
+	position = og_pos
+	current_movement = Movement.NOTHING
+	if movement_queue != Movement.NOTHING:
+		do_movement(movement_queue)
+	else:
+		change_animation("idle")
+	movement_queue = Movement.NOTHING
+
+func _process(_delta: float) -> void:
+	if current_movement != Movement.NOTHING:
+		var t = Time.get_unix_time_from_system() - movement_start
+		
+		if t >= MOVEMENT_TIME:
+			end_movement()
+			return
+		
+		var inv_percent = 1-(t / MOVEMENT_TIME)
+		if current_movement == Movement.HAPPY_BOUNCE:
+			position.y = og_pos.y + (-abs(sin(t * 8)) * amount_dict[current_movement]) * inv_percent
+		
+		if current_movement == Movement.CONFUSED_SHAKE:
+			position.x = og_pos.x + (sin(t * 14) * amount_dict[current_movement]) * inv_percent
+
+
+# -------
+#  SAVE
+# -------
 
 func get_save_uid() -> int:
 	return DataGlobals.SAVE_CREATURE_UID
