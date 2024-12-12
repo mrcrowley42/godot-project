@@ -20,7 +20,7 @@ func _process(_delta):
 
 func _ready() -> void:
 	%CreatureChoice.text = ""
-	creature_choice_sprite.texture = null
+	#creature_choice_sprite.texture = null
 
 func win():
 	player_score += 1
@@ -43,8 +43,11 @@ func play(user_choice):
 	await get_tree().create_timer(1).timeout
 	var creature_choice = choices.pick_random()
 	creature_choice_sprite.texture = choice_2_sprite[creature_choice]
+	
+	var anim_player: AnimationPlayer = creature_choice_sprite.find_child('Player')
+	anim_player.play("reveal")
+	await get_tree().create_timer(.125).timeout
 	%CreatureChoice.text = str('Creature chose ' + creature_choice)
-#
 	if creature_choice == user_choice:
 		%GameStatus.text = 'Draw\nNeither wins'
 		%SFX.play_sound("draw")
