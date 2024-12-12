@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dnfq7jawtfv5q"]
+[gd_scene load_steps=21 format=3 uid="uid://dnfq7jawtfv5q"]
 
 [ext_resource type="Texture2D" uid="uid://oilx4u2i6jiq" path="res://images/scissors-paper-rock/box_closed.png" id="1_g0ux3"]
 [ext_resource type="Texture2D" uid="uid://cs3dfnulji8oi" path="res://UI stuff/Green Palette/ui_memory.png" id="1_javod"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://scripts/sfx_man.gd" id="5_2p5xq"]
 [ext_resource type="Texture2D" uid="uid://b4lkyv4k3neva" path="res://images/scissors-paper-rock/rock.png" id="5_1083d"]
 [ext_resource type="Theme" uid="uid://kpqilwsnepqa" path="res://themes/nothing.tres" id="5_lleth"]
+[ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="14_jejs6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3cprs"]
 shader = ExtResource("2_yay6w")
@@ -64,6 +65,9 @@ _data = {
 "RESET": SubResource("Animation_06rv1"),
 "reveal": SubResource("Animation_gppb7")
 }
+
+[sub_resource type="LabelSettings" id="LabelSettings_8ugkm"]
+font_size = 24
 
 [node name="MiniGame" type="Node2D"]
 
@@ -262,6 +266,40 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
+[node name="HelpMenu" type="Control" parent="Gameplay"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Gameplay/HelpMenu"]
+layout_mode = 0
+offset_right = 1080.0
+offset_bottom = 1350.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("14_jejs6")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="Label" type="Label" parent="Gameplay/HelpMenu"]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 76.0
+offset_right = 491.0
+offset_bottom = 629.0
+theme = ExtResource("1_sqv3p")
+text = "TIMED MODE:
+
+NORMAL MODE:
+
+CONTROLS:
+CLICK THE SQUARES IDK"
+label_settings = SubResource("LabelSettings_8ugkm")
+autowrap_mode = 2
+
 [node name="CloseBtn" type="Button" parent="Gameplay"]
 offset_left = 500.0
 offset_top = 20.0
@@ -278,41 +316,8 @@ offset_bottom = 41.0
 theme = ExtResource("1_sqv3p")
 text = "?"
 
-[node name="HelpMenu" type="PanelContainer" parent="Gameplay"]
-visible = false
-offset_left = 53.0
-offset_top = 120.0
-offset_right = 487.0
-offset_bottom = 554.0
-theme_override_styles/panel = SubResource("StyleBoxEmpty_3wt50")
-metadata/_edit_lock_ = true
-
-[node name="Panel" type="Panel" parent="Gameplay/HelpMenu"]
-layout_mode = 2
-
-[node name="Node2D" type="Node2D" parent="Gameplay/HelpMenu"]
-
-[node name="CloseRules" type="Button" parent="Gameplay/HelpMenu/Node2D"]
-offset_left = 291.0
-offset_top = 25.0
-offset_right = 411.0
-offset_bottom = 88.0
-theme = ExtResource("1_sqv3p")
-text = "Close"
-
-[node name="Label" type="Label" parent="Gameplay/HelpMenu"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "Rules:
-Scissors beat Paper
-Paper beats Rock
-Rock beats Scissors
-
-Compete against the creature to earn points"
-
 [connection signal="button_down" from="Gameplay/GameContainer/Node2D/Buttons/ScissorsBtn" to="GameLogic" method="_on_scissors_btn_button_down"]
 [connection signal="button_down" from="Gameplay/GameContainer/Node2D/Buttons/PaperBtn" to="GameLogic" method="_on_paper_btn_button_down"]
 [connection signal="button_down" from="Gameplay/GameContainer/Node2D/Buttons/RockBtn" to="GameLogic" method="_on_rock_btn_button_down"]
 [connection signal="button_down" from="Gameplay/CloseBtn" to="GameLogic" method="_on_close_btn_button_down"]
 [connection signal="button_down" from="Gameplay/HelpBtn" to="GameLogic" method="_on_help_btn_button_down"]
-[connection signal="button_down" from="Gameplay/HelpMenu/Node2D/CloseRules" to="GameLogic" method="_on_close_rules_button_down"]

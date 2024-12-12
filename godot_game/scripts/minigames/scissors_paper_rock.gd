@@ -81,10 +81,11 @@ func _on_rock_btn_button_down():
 	play("rock")
 	
 func _on_close_btn_button_down():
+	if help_menu.visible:  # close help menu if its open
+		_on_help_btn_button_down()
+		return
 	close_game()
 
 func _on_help_btn_button_down() -> void:
-	help_menu.show()
-
-func _on_close_rules_button_down() -> void:
-	help_menu.hide()
+	%SFX.play_sound("click")
+	help_menu.visible = !help_menu.visible
