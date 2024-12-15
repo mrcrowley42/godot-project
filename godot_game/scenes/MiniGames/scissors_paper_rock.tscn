@@ -73,9 +73,9 @@ font_size = 24
 
 [node name="GameLogic" type="Node" parent="." node_paths=PackedStringArray("box_sprite", "help_menu", "creature_choice_sprite")]
 script = ExtResource("3_7jb5j")
-box_sprite = NodePath("../Gameplay/GameContainer/Box")
+box_sprite = NodePath("../Gameplay/GameContainer/Node2D2/Node2D2/Box")
 help_menu = NodePath("../Gameplay/HelpMenu")
-creature_choice_sprite = NodePath("../Gameplay/GameContainer/Sprite2D")
+creature_choice_sprite = NodePath("../Gameplay/GameContainer/Node2D2/Node2D2/Sprite2D")
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
@@ -164,36 +164,41 @@ offset_right = 487.0
 offset_bottom = 622.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_3wt50")
 
-[node name="Box" type="Sprite2D" parent="Gameplay/GameContainer"]
+[node name="Node2D2" type="Node2D" parent="Gameplay/GameContainer"]
+
+[node name="Node2D2" type="Node2D" parent="Gameplay/GameContainer/Node2D2"]
+position = Vector2(0, 20)
+
+[node name="Box" type="Sprite2D" parent="Gameplay/GameContainer/Node2D2/Node2D2"]
 position = Vector2(220, 123)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_g0ux3")
 
-[node name="Sprite2D" type="Sprite2D" parent="Gameplay/GameContainer"]
+[node name="Sprite2D" type="Sprite2D" parent="Gameplay/GameContainer/Node2D2/Node2D2"]
 position = Vector2(220, 162)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_oahic")
 
-[node name="Player" type="AnimationPlayer" parent="Gameplay/GameContainer/Sprite2D"]
+[node name="Player" type="AnimationPlayer" parent="Gameplay/GameContainer/Node2D2/Node2D2/Sprite2D"]
 libraries = {
 "": SubResource("AnimationLibrary_4exax")
 }
 
-[node name="FrontBox" type="Sprite2D" parent="Gameplay/GameContainer"]
+[node name="FrontBox" type="Sprite2D" parent="Gameplay/GameContainer/Node2D2/Node2D2"]
 position = Vector2(220, 123)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_g0ux3")
 
-[node name="Node2D" type="Node2D" parent="Gameplay/GameContainer"]
+[node name="Node2D" type="Node2D" parent="Gameplay/GameContainer/Node2D2"]
 position = Vector2(0, -40)
 
-[node name="CreatureChoice" type="Label" parent="Gameplay/GameContainer/Node2D"]
+[node name="CreatureChoice" type="Label" parent="Gameplay/GameContainer/Node2D2/Node2D"]
 unique_name_in_owner = true
-offset_top = 139.0
+offset_top = 131.0
 offset_right = 434.0
-offset_bottom = 161.0
+offset_bottom = 153.0
 size_flags_horizontal = 3
-theme_override_constants/outline_size = 3
+theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("2_egqjh")
 theme_override_font_sizes/font_size = 24
 text = " RESULT OF GAME"
@@ -201,13 +206,13 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="GameStatus" type="Label" parent="Gameplay/GameContainer/Node2D"]
+[node name="GameStatus" type="Label" parent="Gameplay/GameContainer/Node2D2/Node2D"]
 unique_name_in_owner = true
 offset_top = 202.0
 offset_right = 434.0
 offset_bottom = 272.0
 theme_override_constants/line_spacing = 12
-theme_override_constants/outline_size = 3
+theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("2_egqjh")
 theme_override_font_sizes/font_size = 32
 text = "Make your choice
@@ -215,7 +220,7 @@ text = "Make your choice
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Buttons" type="HBoxContainer" parent="Gameplay/GameContainer/Node2D"]
+[node name="Buttons" type="HBoxContainer" parent="Gameplay/GameContainer/Node2D2/Node2D"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -230,7 +235,7 @@ grow_vertical = 2
 theme_override_constants/separation = 30
 metadata/_edit_use_anchors_ = true
 
-[node name="ScissorsBtn" type="Button" parent="Gameplay/GameContainer/Node2D/Buttons"]
+[node name="ScissorsBtn" type="Button" parent="Gameplay/GameContainer/Node2D2/Node2D/Buttons"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -242,7 +247,7 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="PaperBtn" type="Button" parent="Gameplay/GameContainer/Node2D/Buttons"]
+[node name="PaperBtn" type="Button" parent="Gameplay/GameContainer/Node2D2/Node2D/Buttons"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -254,7 +259,7 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="RockBtn" type="Button" parent="Gameplay/GameContainer/Node2D/Buttons"]
+[node name="RockBtn" type="Button" parent="Gameplay/GameContainer/Node2D2/Node2D/Buttons"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -316,8 +321,8 @@ offset_bottom = 41.0
 theme = ExtResource("1_sqv3p")
 text = "?"
 
-[connection signal="button_down" from="Gameplay/GameContainer/Node2D/Buttons/ScissorsBtn" to="GameLogic" method="_on_scissors_btn_button_down"]
-[connection signal="button_down" from="Gameplay/GameContainer/Node2D/Buttons/PaperBtn" to="GameLogic" method="_on_paper_btn_button_down"]
-[connection signal="button_down" from="Gameplay/GameContainer/Node2D/Buttons/RockBtn" to="GameLogic" method="_on_rock_btn_button_down"]
+[connection signal="button_down" from="Gameplay/GameContainer/Node2D2/Node2D/Buttons/ScissorsBtn" to="GameLogic" method="_on_scissors_btn_button_down"]
+[connection signal="button_down" from="Gameplay/GameContainer/Node2D2/Node2D/Buttons/PaperBtn" to="GameLogic" method="_on_paper_btn_button_down"]
+[connection signal="button_down" from="Gameplay/GameContainer/Node2D2/Node2D/Buttons/RockBtn" to="GameLogic" method="_on_rock_btn_button_down"]
 [connection signal="button_down" from="Gameplay/CloseBtn" to="GameLogic" method="_on_close_btn_button_down"]
 [connection signal="button_down" from="Gameplay/HelpBtn" to="GameLogic" method="_on_help_btn_button_down"]
