@@ -20,7 +20,7 @@ func _process(_delta):
 
 func _ready() -> void:
 	%CreatureChoice.text = ""
-	creature_choice_sprite.texture = null
+	#creature_choice_sprite.texture = null
 
 func win():
 	player_score += 1
@@ -43,8 +43,11 @@ func play(user_choice):
 	await get_tree().create_timer(1).timeout
 	var creature_choice = choices.pick_random()
 	creature_choice_sprite.texture = choice_2_sprite[creature_choice]
+	
+	var anim_player: AnimationPlayer = creature_choice_sprite.find_child('Player')
+	anim_player.play("reveal")
+	await get_tree().create_timer(.125).timeout
 	%CreatureChoice.text = str('Creature chose ' + creature_choice)
-#
 	if creature_choice == user_choice:
 		%GameStatus.text = 'Draw\nNeither wins'
 		%SFX.play_sound("draw")
@@ -78,10 +81,11 @@ func _on_rock_btn_button_down():
 	play("rock")
 	
 func _on_close_btn_button_down():
+	if help_menu.visible:  # close help menu if its open
+		_on_help_btn_button_down()
+		return
 	close_game()
 
 func _on_help_btn_button_down() -> void:
-	help_menu.show()
-
-func _on_close_rules_button_down() -> void:
-	help_menu.hide()
+	%SFX.play_sound("click")
+	help_menu.visible = !help_menu.visible

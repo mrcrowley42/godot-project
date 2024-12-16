@@ -48,6 +48,10 @@ func _ready() -> void:
 	cooldown_timer.autostart = false
 	cooldown_timer.name = "CooldownTimer"
 	add_child(cooldown_timer)
+	creature.hp_changed.connect(check_status)
+	creature.food_changed.connect(check_status)
+	creature.water_changed.connect(check_status)
+	creature.fun_changed.connect(check_status)
 
 func _notification(noti: int) -> void:
 	if noti == Globals.NOTIFICATION_CREATURE_IS_LOADED:
@@ -62,8 +66,10 @@ func _process(_delta) -> void:
 	if creature.hp <= pain_threshold:
 		%STAHP.play_random()
 	notification_bubble.visible = notif_sounds.playing
+	
 	if on_cooldown:
 		return
+	
 	var low_stats = []
 	# This looks bad, but it's to catch multiple stats being low at a time.
 	if creature.water <= water_threshold:
@@ -77,9 +83,9 @@ func _process(_delta) -> void:
 
 	if low_stats.is_empty():
 		return
-
 	var picked_stat = low_stats.pick_random()
 	queue_warning(stat_files[picked_stat][0])
+	check_status()
 	notif_icon.texture = stat_files[picked_stat][1]
 
 

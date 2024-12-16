@@ -266,6 +266,7 @@ func change_animation(anim_name: String):
 
 func grow_up_one_stage():
 	xp = 0
+	#life_stage = clampi(life_stage + 1,0, 2)
 	life_stage = LifeStage.ADULT  # TODO: change this to add 1 instead of just assigning ADULT
 	is_ready_to_grow_up = false
 	DataGlobals.set_new_highest_life_stage(Helpers.uid_str(creature_type), life_stage)
