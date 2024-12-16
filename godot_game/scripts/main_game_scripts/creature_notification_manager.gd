@@ -123,7 +123,7 @@ func get_emotion():
 func check_status():
 	var anim = get_emotion()
 	# wait manually to make sure creature movements are correctly accounted for
-	@warning_ignore("redundant_await")
+	@warning_ignore("redundant_await")  # its not redundant bruh
 	await creature.main_sprite.frame_changed
 	if anim and creature.current_movement == creature.Movement.NOTHING:
 		creature.force_change_animation(anim)
