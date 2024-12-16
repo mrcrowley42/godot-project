@@ -272,7 +272,6 @@ vertical_icon_alignment = 0
 expand_icon = true
 
 [node name="HelpMenu" type="Control" parent="Gameplay"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -296,12 +295,14 @@ offset_top = 76.0
 offset_right = 491.0
 offset_bottom = 629.0
 theme = ExtResource("1_sqv3p")
-text = "TIMED MODE:
+text = "
+Compete against your creature in Scissors-Paper-Rock.
 
-NORMAL MODE:
+Rules:
 
-CONTROLS:
-CLICK THE SQUARES IDK"
+* Scissors beat Paper
+* Paper beats Rock
+* Rock beats Scissors"
 label_settings = SubResource("LabelSettings_8ugkm")
 autowrap_mode = 2
 
