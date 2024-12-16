@@ -101,3 +101,24 @@ func queue_warning(sound_file: AudioStream) -> void:
 func _on_low_stat_sounds_finished() -> void:
 	on_cooldown = true
 	cooldown_timer.start()
+
+func get_emotion():
+	if creature.hp <= hp_threshold:
+		return 'sad'
+	if creature.water <= water_threshold:
+		return 'confused'
+	if creature.food <= food_threshold:
+		return 'confused'
+	if creature.fun <= fun_threshold:
+		return 'angry'
+	
+	return 'idle'
+
+func check_status():
+	var anim = get_emotion()
+	# wait manually to make sure creature movements are correctly accounted for
+	@warning_ignore("redundant_await")
+	await creature.main_sprite.frame
+	if anim and creature.current_movement == creature.Movement.NOTHING:
+		creature.force_change_animation(anim)
+	

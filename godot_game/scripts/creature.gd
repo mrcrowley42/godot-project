@@ -249,17 +249,20 @@ func get_current_cosmetics():
 func get_loaded_cosmetics():
 	return %AccessoryManager.unlockables_dict
 
-## changes the animation and retains frame change timing
-func change_animation(anim_name: String):
+## change the animation without waiting for the frame change
+func force_change_animation(anim_name: String):
 	if not main_sprite.sprite_frames.has_animation(anim_name):
 		printerr("current creature has no animation: " + anim_name)
 		return false
 	if anim_name == main_sprite.animation:
 		return true
-	
-	await main_sprite.frame_changed
 	main_sprite.animation = anim_name
 	return true
+
+## changes the animation and retains frame change timing
+func change_animation(anim_name: String):
+	await main_sprite.frame_changed
+	return force_change_animation(anim_name)
 
 func grow_up_one_stage():
 	xp = 0
@@ -286,14 +289,15 @@ func do_movement(movement: Movement):
 		movement_queue = movement
 		return
 	
-	# attempt to use joy animation, otherwise use chill animation
-	if movement == Movement.HAPPY_BOUNCE and not await change_animation("joy"):
-		await change_animation("chill")
-	if movement == Movement.CONFUSED_SHAKE:
-		await change_animation("confused")
-	
+	await main_sprite.frame_changed
 	current_movement = movement
 	movement_start = Time.get_unix_time_from_system()
+	
+	# attempt to use joy animation, otherwise use chill animation
+	if movement == Movement.HAPPY_BOUNCE and not force_change_animation("joy"):
+		force_change_animation("chill")
+	if movement == Movement.CONFUSED_SHAKE:
+		force_change_animation("confused")
 
 func end_movement():
 	position = og_pos
@@ -301,13 +305,12 @@ func end_movement():
 	if movement_queue != Movement.NOTHING:
 		do_movement(movement_queue)
 	else:
-		change_animation("idle")
+		%Notifcations.check_status()
 	movement_queue = Movement.NOTHING
 
 func _process(_delta: float) -> void:
 	if current_movement != Movement.NOTHING:
 		var t = Time.get_unix_time_from_system() - movement_start
-		
 		if t >= MOVEMENT_TIME:
 			end_movement()
 			return
