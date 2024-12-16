@@ -272,6 +272,7 @@ vertical_icon_alignment = 0
 expand_icon = true
 
 [node name="HelpMenu" type="Control" parent="Gameplay"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0

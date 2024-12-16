@@ -20,7 +20,6 @@ func consume_item(item: Resource):
 		consumables_tried.append(uid)
 		food_menu.update_item_btn(uid, creature)
 
-
 func get_save_uid():
 	return DataGlobals.SAVE_CONSUMABLES_MANAGER_UID
 
