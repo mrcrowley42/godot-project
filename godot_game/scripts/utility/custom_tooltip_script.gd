@@ -93,6 +93,11 @@ func place_tooltip():
 ## update string & tooltip position
 func update_tooltip():
 	tooltip_object.text = tooltip_string  # refresh text
+	
+	if disabled:
+		on_mouse_exited()
+		return
+	
 	place_tooltip()
 
 

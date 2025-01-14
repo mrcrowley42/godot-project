@@ -146,7 +146,7 @@ func update_item_btn(uid: String, creature: Creature):
 func consume_item(item: Resource):
 	var uid: String = Helpers.uid_str(item)
 	
-	# cooldown
+	# on cooldown, skip
 	if uid in btns_on_cooldown.keys():
 		return
 	else:
@@ -154,7 +154,9 @@ func consume_item(item: Resource):
 			'cooldown': item.cooldown if item.override_auto_cooldown else item.amount * .3,
 			'start_time': Time.get_unix_time_from_system()
 		}
-	all_buttons[uid].disabled = true
+	var btn: CustomTooltipButton = all_buttons[uid]
+	btn.disabled = true
+	btn.update_tooltip()
 	
 	# consume
 	if is_instance_of(item, FoodItem):
