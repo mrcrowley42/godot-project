@@ -9,5 +9,5 @@ name = "Grape Juice"
 type = 3
 amount = 80
 override_auto_cooldown = false
-cooldown = 30
+overridden_cooldown = 30
 image = ExtResource("1_6fmo7")

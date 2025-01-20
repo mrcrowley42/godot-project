@@ -9,5 +9,5 @@ name = "Hot chocolate"
 type = 2
 amount = 140
 override_auto_cooldown = false
-cooldown = 30
+overridden_cooldown = 30
 image = ExtResource("1_q3rw3")
