@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="DrinkItem" load_steps=3 format=3 uid="uid://4bvxkimhp6h2"]
 
 [ext_resource type="Script" path="res://scripts/base_classses/drink_item.gd" id="1_cb7br"]
-[ext_resource type="Texture2D" uid="uid://bbir633f0mwsl" path="res://images/drink/tea.png" id="1_i7uid"]
+[ext_resource type="Texture2D" uid="uid://dflapuuyakex7" path="res://images/drink/teapot.png" id="1_vh20x"]
 
 [resource]
 script = ExtResource("1_cb7br")
@@ -10,4 +10,4 @@ type = 4
 amount = 80
 override_auto_cooldown = false
 overridden_cooldown = 30
-image = ExtResource("1_i7uid")
+image = ExtResource("1_vh20x")
