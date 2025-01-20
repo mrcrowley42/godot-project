@@ -92,7 +92,7 @@ func _on_close_btn_button_down():
 	if help_menu.visible:  # close help menu if its open
 		_on_help_btn_button_down()
 		return
-	close_game()
+	Globals.send_notification(Globals.NOTIFICATION_SPROCK_CLOSED)
 
 func _on_help_btn_button_down() -> void:
 	%SFX.play_sound("click")
