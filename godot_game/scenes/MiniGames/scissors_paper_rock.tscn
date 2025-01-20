@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dnfq7jawtfv5q"]
+[gd_scene load_steps=23 format=3 uid="uid://dnfq7jawtfv5q"]
 
 [ext_resource type="Texture2D" uid="uid://oilx4u2i6jiq" path="res://images/scissors-paper-rock/box_closed.png" id="1_g0ux3"]
 [ext_resource type="Texture2D" uid="uid://cs3dfnulji8oi" path="res://UI stuff/Green Palette/ui_memory.png" id="1_javod"]
@@ -13,7 +13,9 @@
 [ext_resource type="Script" path="res://scripts/sfx_man.gd" id="5_2p5xq"]
 [ext_resource type="Texture2D" uid="uid://b4lkyv4k3neva" path="res://images/scissors-paper-rock/rock.png" id="5_1083d"]
 [ext_resource type="Theme" uid="uid://kpqilwsnepqa" path="res://themes/nothing.tres" id="5_lleth"]
+[ext_resource type="Script" path="res://scenes/MiniGames/minigamecreature.gd" id="11_rt8pm"]
 [ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="14_jejs6"]
+[ext_resource type="SpriteFrames" uid="uid://68skicj7tsu2" path="res://resources/creatures/main_creature_adult_sprite_frames.tres" id="15_0x7x6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3cprs"]
 shader = ExtResource("2_yay6w")
@@ -71,11 +73,12 @@ font_size = 24
 
 [node name="MiniGame" type="Node2D"]
 
-[node name="GameLogic" type="Node" parent="." node_paths=PackedStringArray("box_sprite", "help_menu", "creature_choice_sprite")]
+[node name="GameLogic" type="Node" parent="." node_paths=PackedStringArray("box_sprite", "help_menu", "creature_choice_sprite", "creature_prev")]
 script = ExtResource("3_7jb5j")
 box_sprite = NodePath("../Gameplay/GameContainer/Node2D2/Node2D2/Box")
 help_menu = NodePath("../Gameplay/HelpMenu")
 creature_choice_sprite = NodePath("../Gameplay/GameContainer/Node2D2/Node2D2/Sprite2D")
+creature_prev = NodePath("../Gameplay/GameContainer/Node2D/creaturePrev")
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
@@ -163,6 +166,16 @@ offset_top = 241.0
 offset_right = 487.0
 offset_bottom = 622.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_3wt50")
+
+[node name="Node2D" type="Node2D" parent="Gameplay/GameContainer"]
+position = Vector2(367, 59)
+
+[node name="creaturePrev" type="AnimatedSprite2D" parent="Gameplay/GameContainer/Node2D"]
+position = Vector2(-11, 33)
+scale = Vector2(0.106481, 0.105556)
+sprite_frames = ExtResource("15_0x7x6")
+animation = &"angry"
+script = ExtResource("11_rt8pm")
 
 [node name="Node2D2" type="Node2D" parent="Gameplay/GameContainer"]
 
