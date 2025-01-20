@@ -1,6 +1,6 @@
 class_name DrinkItem extends Resource
 
-enum DrinkType {NEUTRAL, SOFT_DRINK, SHAKE, FRUIT_JIUCE, CAFFINE, NUCLEAR_ACID}
+enum DrinkType {NEUTRAL, SOFT_DRINK, SHAKE_OR_SWEET, FRUIT_JUICE, CAFFINE, NUCLEAR_ACID}
 
 @export var name: String
 @export var type: DrinkType
@@ -8,5 +8,5 @@ enum DrinkType {NEUTRAL, SOFT_DRINK, SHAKE, FRUIT_JIUCE, CAFFINE, NUCLEAR_ACID}
 ## override automatically generated cooldown
 @export var override_auto_cooldown: bool = false
 ## in seconds
-@export var cooldown: int = 30
+@export var overridden_cooldown: int = 30
 @export var image: CompressedTexture2D

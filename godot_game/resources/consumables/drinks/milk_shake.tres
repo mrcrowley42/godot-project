@@ -9,5 +9,5 @@ name = "Milkshake"
 type = 2
 amount = 110
 override_auto_cooldown = false
-cooldown = 30
+overridden_cooldown = 30
 image = ExtResource("1_q0jss")

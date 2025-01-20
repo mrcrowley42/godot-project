@@ -1,6 +1,7 @@
 class_name FoodMenu extends ActionMenu
 
 @export var nav_arrows: NavigationArrows;
+@export var food_menu_open_button: TextureButton
 
 
 @onready var food_screens: HBoxContainer = find_child("FoodScreens")
@@ -31,6 +32,9 @@ func _ready() -> void:
 	## wait for queue_free to execute
 	await get_tree().process_frame
 	nav_arrows.calc_screen_count()
+	
+	nav_arrows.page_changed.connect(page_changed)
+	food_menu_open_button.connect('openned_menu', reset_buttons)
 
 class ConsumablesScreen:
 	var parent: HBoxContainer
@@ -107,7 +111,7 @@ func setup_food_and_drink_buttons():
 		var btn = all_screens[food_on_screen].add_food(food_item, consume_item, btn_shader)
 		
 		var uid = Helpers.uid_str(food_item)
-		all_buttons[uid] = btn
+		all_buttons[uid] = {'btn': btn, 'page': food_on_screen}
 		all_items[uid] = food_item
 	
 	for drink_item in drink_list.items:
@@ -118,12 +122,12 @@ func setup_food_and_drink_buttons():
 		var btn = all_screens[drink_on_screen].add_drink(drink_item, consume_item, btn_shader)
 		
 		var uid = Helpers.uid_str(drink_item)
-		all_buttons[uid] = btn
+		all_buttons[uid] = {'btn': btn, 'page': drink_on_screen}
 		all_items[uid] = drink_item
 
 func update_item_btn(uid: String, creature: Creature):
 	var item: Resource = all_items[uid]
-	var button: CustomTooltipButton = all_buttons[uid]
+	var button: CustomTooltipButton = all_buttons[uid]['btn']
 	
 	var mult = -1
 	var is_food = is_instance_of(item, FoodItem)
@@ -151,10 +155,10 @@ func consume_item(item: Resource):
 		return
 	else:
 		btns_on_cooldown[uid] = {
-			'cooldown': item.cooldown if item.override_auto_cooldown else item.amount * .3,
+			'cooldown': item.cooldown if item.override_auto_cooldown else item.amount * .4,
 			'start_time': Time.get_unix_time_from_system()
 		}
-	var btn: CustomTooltipButton = all_buttons[uid]
+	var btn: CustomTooltipButton = all_buttons[uid]['btn']
 	btn.disabled = true
 	btn.update_tooltip()
 	
@@ -164,13 +168,25 @@ func consume_item(item: Resource):
 	else:
 		%ConsumablesManager.consume_drink(item)
 
+
+func page_changed(page_num):
+	for uid in all_buttons.keys():
+		var btn: CustomTooltipButton = all_buttons[uid]['btn']
+		var page = all_buttons[uid]['page']
+		btn.disabled = page != page_num
+		btn.update_tooltip()
+
+func reset_buttons():
+	page_changed(0)
+
+
 ## progress the cooldowns
 func _process(delta: float) -> void:
 	super._process(delta)
 	if btns_on_cooldown.size() > 0:
 		var curr_time = Time.get_unix_time_from_system()
 		for uid in btns_on_cooldown.keys():
-			var btn: CustomTooltipButton = all_buttons[uid]
+			var btn: CustomTooltipButton = all_buttons[uid]['btn']
 			var cooldown = btns_on_cooldown[uid]['cooldown']
 			var started = btns_on_cooldown[uid]['start_time']
 			

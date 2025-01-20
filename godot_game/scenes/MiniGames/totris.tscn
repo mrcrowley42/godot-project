@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c5dr54dk0502t"]
+[gd_scene load_steps=20 format=3 uid="uid://c5dr54dk0502t"]
 
 [ext_resource type="Script" path="res://scripts/minigames/totris/Totris.gd" id="1_82aiy"]
 [ext_resource type="Script" path="res://scripts/minigames/totris/TotrisLogic.gd" id="2_7s788"]
@@ -10,6 +10,9 @@
 [ext_resource type="Theme" uid="uid://bsd1dkhc13v47" path="res://themes/plain.tres" id="7_wi1ws"]
 [ext_resource type="Texture2D" uid="uid://b8x8pqf7opf1c" path="res://icons/arrow-clockwise.svg" id="8_5cvoh"]
 [ext_resource type="Texture2D" uid="uid://cobhcf30qgxq2" path="res://icons/list.svg" id="9_ajbov"]
+[ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="11_4eqyv"]
+[ext_resource type="Theme" uid="uid://kpqilwsnepqa" path="res://themes/nothing.tres" id="12_1kw8j"]
+[ext_resource type="Texture2D" uid="uid://bnu0kom0k8y1k" path="res://images/totris_diagram.png" id="13_rfp2v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wbp70"]
 size = Vector2(10, 10)
@@ -367,28 +370,63 @@ patch_margin_top = 16
 patch_margin_right = 16
 patch_margin_bottom = 16
 
-[node name="Label" type="Label" parent="UI/Control/TopOverlay/HelpMenu"]
+[node name="bg" type="Label" parent="UI/Control/TopOverlay/HelpMenu"]
 layout_mode = 0
 offset_left = 35.0
-offset_top = 40.0
-offset_right = 497.0
-offset_bottom = 818.0
-theme = ExtResource("5_d7726")
-theme_override_font_sizes/font_size = 15
-text = "CONTROLS:
-A - Move the blocks to the left.
-D - to move the blocks to the right.
-Use S to make the blocks fall faster.
-Use Q to rotate the blocks left.
-Use E to rotate the blocks right.
-
-
-6. The goal of the game is to connect the falling blocks together inside the grid for as long as you can. As you place more and more blocks the pace at which the blocks fall will get faster and faster. You lose if the blocks reach the top of the grid.
-
-8. If a row in the grid is completely filled with blocks that row will disappear freeing up space on the grid and increasing your score.
-9. Continue playing the game trying to get the highest score you can, until the blocks reach the top of the grid and the game ends."
+offset_top = 70.0
+offset_right = 500.0
+offset_bottom = 620.0
+theme = ExtResource("11_4eqyv")
 label_settings = SubResource("LabelSettings_w4uk7")
 autowrap_mode = 3
+text_overrun_behavior = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/TopOverlay/HelpMenu"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 70.0
+offset_right = 500.0
+offset_bottom = 620.0
+alignment = 1
+
+[node name="Button" type="Button" parent="UI/Control/TopOverlay/HelpMenu/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 3
+icon = ExtResource("13_rfp2v")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Control/TopOverlay/HelpMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 50
+
+[node name="Label" type="Label" parent="UI/Control/TopOverlay/HelpMenu/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("12_1kw8j")
+text = "space - instant drop
+
+Complete lines to score points and increase your level.
+
+The higher your score, the better!"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="UI/Control/TopOverlay/HelpMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 20
+
+[node name="Label" type="Label" parent="UI/Control/TopOverlay/HelpMenu/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme = ExtResource("12_1kw8j")
+theme_override_colors/font_color = Color(0.666569, 0.666569, 0.666569, 1)
+theme_override_font_sizes/font_size = 14
+text = "(The W, A, S, D keys can alse be used if you want)"
+horizontal_alignment = 1
 
 [node name="CloseBtn" type="Button" parent="UI/Control/TopOverlay"]
 offset_left = 500.0

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="DrinkItem" load_steps=3 format=3 uid="uid://dre4n33nh6amp"]
+
+[ext_resource type="Texture2D" uid="uid://bw6ehvv5o2433" path="res://images/drink/hot_choc.png" id="1_q3rw3"]
+[ext_resource type="Script" path="res://scripts/base_classses/drink_item.gd" id="1_tqulu"]
+
+[resource]
+script = ExtResource("1_tqulu")
+name = "Hot chocolate"
+type = 2
+amount = 140
+override_auto_cooldown = false
+cooldown = 30
+image = ExtResource("1_q3rw3")

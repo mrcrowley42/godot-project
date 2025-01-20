@@ -20,6 +20,8 @@ enum DIRECTION {SMART_HORIZONTAL, SMART_VERTICAL, UP, DOWN, LEFT, RIGHT}
 @export var allow_edge_overflow: bool = false
 ## use this for if a parent has a different scale (is applied after this object's scale)
 @export var optional_hitbox_scale: Vector2 = Vector2(1, 1)
+## disable / enable tooltip
+@export var tooltip_disabled: bool = false
 
 var tooltip_object: Label
 
@@ -94,7 +96,7 @@ func place_tooltip():
 func update_tooltip():
 	tooltip_object.text = tooltip_string  # refresh text
 	
-	if disabled:
+	if disabled or tooltip_disabled or !visible:
 		on_mouse_exited()
 		return
 	
@@ -102,7 +104,7 @@ func update_tooltip():
 
 
 func on_mouse_entered():
-	if !disabled and visible and tooltip_string.length() > 0:
+	if !disabled and visible and !tooltip_disabled and tooltip_string.length() > 0:
 		update_tooltip()
 		Globals.tween(tooltip_object, "modulate", Color(1, 1, 1, 1), 0, .3)
 

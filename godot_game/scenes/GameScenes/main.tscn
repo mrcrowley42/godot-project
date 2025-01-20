@@ -554,7 +554,7 @@ position = Vector2(270, 1200)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("14_k2ios")
 
-[node name="FoodMenu" type="PanelContainer" parent="UI" node_paths=PackedStringArray("nav_arrows")]
+[node name="FoodMenu" type="PanelContainer" parent="UI" node_paths=PackedStringArray("nav_arrows", "food_menu_open_button")]
 custom_minimum_size = Vector2(400, 400)
 anchors_preset = 4
 anchor_top = 0.5
@@ -568,6 +568,7 @@ mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxEmpty_xvtbm")
 script = ExtResource("21_aqbs2")
 nav_arrows = NodePath("NavigationArrows")
+food_menu_open_button = NodePath("../NavigationButtons/FoodButton")
 
 [node name="Background" type="PanelContainer" parent="UI/FoodMenu"]
 custom_minimum_size = Vector2(400, 400)

@@ -9,5 +9,5 @@ name = "Chocolate milkshake"
 type = 2
 amount = 100
 override_auto_cooldown = false
-cooldown = 30
+overridden_cooldown = 30
 image = ExtResource("1_4cn51")

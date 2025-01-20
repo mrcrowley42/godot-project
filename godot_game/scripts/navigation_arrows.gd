@@ -7,7 +7,11 @@ const xoffset: int = 400
 @onready var init_pos = target_menu.position
 @onready var screen_count := len(target_menu.get_children())
 @onready var menu_positions := range(screen_count).map(func(n): return init_pos.x - (n * xoffset))
+## current page
 @onready var index = 0
+
+## 1 parameter, index is passed
+signal page_changed
 
 ## in case more screens are added after onready
 func calc_screen_count():
@@ -17,6 +21,7 @@ func calc_screen_count():
 func shift_screen(offset:int) -> void:
 	index = Helpers.wrap_index(menu_positions, index, offset)
 	Globals.tween(target_menu, "position", Vector2(menu_positions[index], init_pos.y), 0., .167)
+	page_changed.emit(index)
 
 
 func _on_left_arrow_button_down() -> void:

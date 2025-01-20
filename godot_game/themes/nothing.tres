@@ -1,4 +1,6 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://kpqilwsnepqa"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://kpqilwsnepqa"]
+
+[ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="1_lwso2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rhrrv"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -16,6 +18,8 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [resource]
+default_font = ExtResource("1_lwso2")
+default_font_size = 16
 Button/styles/focus = SubResource("StyleBoxFlat_rhrrv")
 Button/styles/hover = SubResource("StyleBoxFlat_onjiw")
 Button/styles/normal = SubResource("StyleBoxFlat_hey7n")
