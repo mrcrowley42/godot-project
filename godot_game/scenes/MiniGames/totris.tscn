@@ -434,11 +434,12 @@ theme_override_constants/margin_bottom = 50
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 theme = ExtResource("12_1kw8j")
-text = "space - instant drop
+text = "Complete lines to score points and increase your level.
 
-Complete lines to score points and increase your level.
+The higher your score, the better!
 
-The higher your score, the better!"
+space - instant drop
+"
 horizontal_alignment = 1
 autowrap_mode = 2
 

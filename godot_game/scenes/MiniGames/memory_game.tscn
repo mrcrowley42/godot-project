@@ -278,6 +278,7 @@ icon = ExtResource("13_nksbq")
 expand_icon = true
 
 [node name="HelpMenu" type="Control" parent="UI/Control/TopOverlay"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
