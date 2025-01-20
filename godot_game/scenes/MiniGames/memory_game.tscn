@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://d3e1mocbpq7hp"]
+[gd_scene load_steps=20 format=3 uid="uid://d3e1mocbpq7hp"]
 
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="1_3y1y3"]
 [ext_resource type="Script" path="res://scripts/minigames/memory_match/memory_game.gd" id="1_ckjye"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://b8x8pqf7opf1c" path="res://icons/arrow-clockwise.svg" id="12_gljje"]
 [ext_resource type="Texture2D" uid="uid://d4t12xgr5bjg" path="res://UI stuff/Green Palette/ui_green_box_inverted.png" id="12_pdrc8"]
 [ext_resource type="Texture2D" uid="uid://cobhcf30qgxq2" path="res://icons/list.svg" id="13_nksbq"]
+[ext_resource type="Texture2D" uid="uid://cpwhygwlw7v40" path="res://images/memory_match_diagram.png" id="15_ss6qo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8bfqs"]
 shader = ExtResource("5_ymqga")
@@ -277,7 +278,6 @@ icon = ExtResource("13_nksbq")
 expand_icon = true
 
 [node name="HelpMenu" type="Control" parent="UI/Control/TopOverlay"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -294,21 +294,52 @@ patch_margin_top = 16
 patch_margin_right = 16
 patch_margin_bottom = 16
 
-[node name="Label" type="Label" parent="UI/Control/TopOverlay/HelpMenu"]
+[node name="labelBg" type="Label" parent="UI/Control/TopOverlay/HelpMenu"]
 layout_mode = 0
-offset_left = 54.0
-offset_top = 76.0
-offset_right = 491.0
-offset_bottom = 629.0
-theme = ExtResource("1_3y1y3")
-text = "TIMED MODE:
-
-NORMAL MODE:
-
-CONTROLS:
-CLICK THE SQUARES IDK"
+offset_left = 35.0
+offset_top = 100.0
+offset_right = 500.0
+offset_bottom = 580.0
+theme = ExtResource("5_otyuk")
 label_settings = SubResource("LabelSettings_j03ef")
 autowrap_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/TopOverlay/HelpMenu"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 100.0
+offset_right = 500.0
+offset_bottom = 580.0
+
+[node name="Img" type="Button" parent="UI/Control/TopOverlay/HelpMenu/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+icon = ExtResource("15_ss6qo")
+flat = true
+expand_icon = true
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Control/TopOverlay/HelpMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="Label" type="Label" parent="UI/Control/TopOverlay/HelpMenu/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme = ExtResource("5_4atnw")
+text = "Click on the cards to turn them over and match the same two shapes / colours.
+
+NORMAL: Complete the board in as few guesses as possible
+
+TIMED: Just go as fast as you can!
+
+"
+horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="CloseBtn" type="Button" parent="UI/Control/TopOverlay"]
 offset_left = 500.0

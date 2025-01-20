@@ -59,6 +59,6 @@ func _on_ambience_btn_button_down():
 	%BtnClick.play()
 	change_menu(Menu.AMBIENCE)
 
-func _on_creatures_button_down() -> void:
+func _on_creatures_btn_button_down():
 	%BtnClick.play()
 	change_menu(Menu.CREATURES)

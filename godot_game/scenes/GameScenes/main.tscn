@@ -1,4 +1,4 @@
-[gd_scene load_steps=121 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=122 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
@@ -44,6 +44,7 @@
 [ext_resource type="Script" path="res://scripts/mute_button.gd" id="37_xf1vk"]
 [ext_resource type="PackedScene" uid="uid://cbn0dv1k0onpb" path="res://scenes/UiScenes/vol_slider.tscn" id="38_17bv4"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="39_8ebm3"]
+[ext_resource type="Texture2D" uid="uid://c030mrpd3uusw" path="res://icons/list-ul.svg" id="39_wryle"]
 [ext_resource type="Texture2D" uid="uid://cawudmxbjamv0" path="res://UI stuff/Green Palette/ui_green.png" id="40_wt18k"]
 [ext_resource type="Texture2D" uid="uid://c702pbhxasm52" path="res://icons/status/heart-fill.svg" id="41_8adaw"]
 [ext_resource type="Script" path="res://scripts/costmetic_row.gd" id="41_pook7"]
@@ -555,6 +556,7 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("14_k2ios")
 
 [node name="FoodMenu" type="PanelContainer" parent="UI" node_paths=PackedStringArray("nav_arrows", "food_menu_open_button")]
+visible = false
 custom_minimum_size = Vector2(400, 400)
 anchors_preset = 4
 anchor_top = 0.5
@@ -963,7 +965,6 @@ metadata/_edit_use_anchors_ = true
 [node name="OptionsMenu" type="PanelContainer" parent="UI"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -981,7 +982,6 @@ metadata/_edit_lock_ = true
 
 [node name="MainOptMenu" type="MarginContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 40
@@ -998,12 +998,6 @@ custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme = ExtResource("18_v1mb2")
 text = "Cosmetics"
-
-[node name="CreaturesBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer"]
-custom_minimum_size = Vector2(0, 60)
-layout_mode = 2
-theme = ExtResource("18_v1mb2")
-text = "Creatures"
 
 [node name="ThemeBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
@@ -1028,15 +1022,23 @@ layout_mode = 2
 theme_override_constants/separation = 14
 alignment = 1
 
+[node name="CreaturesBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("33_1qhmu")
+icon = ExtResource("39_wryle")
+icon_alignment = 1
+
 [node name="SettingBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(0, 60)
+custom_minimum_size = Vector2(150, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("18_v1mb2")
 text = "Settings"
 
 [node name="CreditsBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(0, 60)
+custom_minimum_size = Vector2(130, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("18_v1mb2")
@@ -1277,6 +1279,7 @@ script = ExtResource("35_4io20")
 [node name="CreaturesMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 material = SubResource("ShaderMaterial_357to")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -1963,10 +1966,10 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/ActivityMenu/NavigationArrows/RightArrow" to="UI/ActivityMenu/NavigationArrows" method="_on_right_arrow_button_down"]
 [connection signal="visibility_changed" from="UI/OptionsMenu" to="UI/OptionsMenu" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/AppearanceBtn" to="UI/OptionsMenu" method="_on_appearance_btn_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/CreaturesBtn" to="UI/OptionsMenu" method="_on_creatures_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/ThemeBtn" to="UI/OptionsMenu" method="_on_theme_btn_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/FactBtn" to="UI/OptionsMenu" method="_on_fact_btn_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/AmbienceBtn" to="UI/OptionsMenu" method="_on_ambience_btn_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer/CreaturesBtn" to="UI/OptionsMenu" method="_on_creatures_btn_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer/SettingBtn" to="UI/OptionsMenu" method="_on_settings_btn_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer/CreditsBtn" to="UI/OptionsMenu" method="_on_credits_btn_button_down"]
 [connection signal="visibility_changed" from="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ThemeBtns" to="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ThemeBtns" method="_on_visibility_changed"]
