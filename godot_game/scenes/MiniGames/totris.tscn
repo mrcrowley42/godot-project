@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c5dr54dk0502t"]
+[gd_scene load_steps=21 format=3 uid="uid://c5dr54dk0502t"]
 
 [ext_resource type="Script" path="res://scripts/minigames/totris/Totris.gd" id="1_82aiy"]
 [ext_resource type="Script" path="res://scripts/minigames/totris/TotrisLogic.gd" id="2_7s788"]
@@ -10,6 +10,7 @@
 [ext_resource type="Theme" uid="uid://bsd1dkhc13v47" path="res://themes/plain.tres" id="7_wi1ws"]
 [ext_resource type="Texture2D" uid="uid://b8x8pqf7opf1c" path="res://icons/arrow-clockwise.svg" id="8_5cvoh"]
 [ext_resource type="Texture2D" uid="uid://cobhcf30qgxq2" path="res://icons/list.svg" id="9_ajbov"]
+[ext_resource type="Script" path="res://scripts/totris_help_menu.gd" id="10_agwqq"]
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="11_4eqyv"]
 [ext_resource type="Theme" uid="uid://kpqilwsnepqa" path="res://themes/nothing.tres" id="12_1kw8j"]
 [ext_resource type="Texture2D" uid="uid://bnu0kom0k8y1k" path="res://images/totris_diagram.png" id="13_rfp2v"]
@@ -175,7 +176,6 @@ region_enabled = true
 region_rect = Rect2(0, 0, 1080, 75)
 
 [node name="StartMenu" type="Control" parent="UI/Control/TopOverlay"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 540.0
@@ -239,6 +239,7 @@ text = "Play
 "
 
 [node name="KillMenu" type="Control" parent="UI/Control/TopOverlay"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 540.0
@@ -353,11 +354,15 @@ text = "Menu"
 icon = ExtResource("9_ajbov")
 expand_icon = true
 
-[node name="HelpMenu" type="Control" parent="UI/Control/TopOverlay"]
+[node name="HelpMenu" type="Control" parent="UI/Control/TopOverlay" node_paths=PackedStringArray("simple_menu", "adv_menu", "adv_toggle_btn")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 540.0
 offset_bottom = 675.0
+script = ExtResource("10_agwqq")
+simple_menu = NodePath("simpleMenu")
+adv_menu = NodePath("advMenu")
+adv_toggle_btn = NodePath("AdvancedToggle")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="UI/Control/TopOverlay/HelpMenu"]
 layout_mode = 0
@@ -370,27 +375,45 @@ patch_margin_top = 16
 patch_margin_right = 16
 patch_margin_bottom = 16
 
-[node name="bg" type="Label" parent="UI/Control/TopOverlay/HelpMenu"]
+[node name="labelBg" type="Label" parent="UI/Control/TopOverlay/HelpMenu"]
 layout_mode = 0
 offset_left = 35.0
 offset_top = 70.0
 offset_right = 500.0
 offset_bottom = 620.0
-mouse_filter = 0
+mouse_filter = 1
 theme = ExtResource("11_4eqyv")
 label_settings = SubResource("LabelSettings_w4uk7")
 autowrap_mode = 3
 text_overrun_behavior = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/TopOverlay/HelpMenu"]
+[node name="AdvancedToggle" type="Button" parent="UI/Control/TopOverlay/HelpMenu"]
+layout_mode = 2
+offset_left = 47.0
+offset_top = 83.0
+offset_right = 97.0
+offset_bottom = 113.0
+scale = Vector2(0.8, 0.8)
+theme = ExtResource("5_d7726")
+toggle_mode = true
+text = "Adv."
+
+[node name="simpleMenu" type="Control" parent="UI/Control/TopOverlay/HelpMenu"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/TopOverlay/HelpMenu/simpleMenu"]
 layout_mode = 0
 offset_left = 35.0
 offset_top = 70.0
 offset_right = 500.0
 offset_bottom = 620.0
+mouse_filter = 2
 alignment = 1
 
-[node name="Button" type="Button" parent="UI/Control/TopOverlay/HelpMenu/VBoxContainer"]
+[node name="Img" type="Button" parent="UI/Control/TopOverlay/HelpMenu/simpleMenu/VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 size_flags_vertical = 3
@@ -400,14 +423,15 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/Control/TopOverlay/HelpMenu/VBoxContainer"]
+[node name="TopMargin" type="MarginContainer" parent="UI/Control/TopOverlay/HelpMenu/simpleMenu/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 50
 
-[node name="Label" type="Label" parent="UI/Control/TopOverlay/HelpMenu/VBoxContainer/MarginContainer"]
+[node name="Label" type="Label" parent="UI/Control/TopOverlay/HelpMenu/simpleMenu/VBoxContainer/TopMargin"]
+custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 theme = ExtResource("12_1kw8j")
 text = "space - instant drop
@@ -418,17 +442,55 @@ The higher your score, the better!"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="UI/Control/TopOverlay/HelpMenu/VBoxContainer"]
+[node name="BtmMargin" type="MarginContainer" parent="UI/Control/TopOverlay/HelpMenu/simpleMenu/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_bottom = 20
 
-[node name="Label" type="Label" parent="UI/Control/TopOverlay/HelpMenu/VBoxContainer/MarginContainer2"]
+[node name="Label" type="Label" parent="UI/Control/TopOverlay/HelpMenu/simpleMenu/VBoxContainer/BtmMargin"]
 layout_mode = 2
 theme = ExtResource("12_1kw8j")
 theme_override_colors/font_color = Color(0.666569, 0.666569, 0.666569, 1)
 theme_override_font_sizes/font_size = 14
 text = "(The W, A, S, D keys can alse be used if you want)"
 horizontal_alignment = 1
+
+[node name="advMenu" type="Control" parent="UI/Control/TopOverlay/HelpMenu"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Control/TopOverlay/HelpMenu/advMenu"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 71.0
+offset_right = 500.0
+offset_bottom = 620.0
+mouse_filter = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="Label" type="Label" parent="UI/Control/TopOverlay/HelpMenu/advMenu/MarginContainer"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme = ExtResource("12_1kw8j")
+theme_override_font_sizes/font_size = 15
+text = "ROTATION: Along with W and UP, Q and E can be used for more specific rotation.
+
+HOLD: Left-CTRL and C can be used to hold a piece (can only be done once per piece). Held piece is displayed in the top right box.
+
+QUEUE: The next two pieces are visible in the right box. Top is 1st and bottom is 2nd in the queue.
+
+LEVEL: Level increases when a \"lines completed\" threshold is reached (threshold is increased with each level, capping at 6).
+With each level, drop speed is also increased with a cap.
+A small progress bar for the next level can be seen just beneath the level number (also levels are accumulated).
+
+VARIANT: Some pieces spawn as a \"Variant\", identifiable by their shine. When broken, each square of a Variant provides a large score boost.
+They only spawn if level is higher than 0."
+autowrap_mode = 3
 
 [node name="CloseBtn" type="Button" parent="UI/Control/TopOverlay"]
 offset_left = 500.0
@@ -579,5 +641,7 @@ color = Color(0.133995, 0.176871, 0.198271, 1)
 [connection signal="button_down" from="UI/Control/TopOverlay/StartMenu/Play" to="." method="_on_play_button_down"]
 [connection signal="button_down" from="UI/Control/TopOverlay/KillMenu/Retry" to="." method="_on_play_button_down"]
 [connection signal="button_down" from="UI/Control/TopOverlay/KillMenu/Menu" to="." method="_on_menu_button_down"]
+[connection signal="visibility_changed" from="UI/Control/TopOverlay/HelpMenu" to="UI/Control/TopOverlay/HelpMenu" method="_on_visibility_changed"]
+[connection signal="button_down" from="UI/Control/TopOverlay/HelpMenu/AdvancedToggle" to="UI/Control/TopOverlay/HelpMenu" method="_on_advanced_toggle_button_down"]
 [connection signal="button_down" from="UI/Control/TopOverlay/CloseBtn" to="." method="_on_close_btn_button_down"]
 [connection signal="button_down" from="UI/Control/TopOverlay/HelpBtn" to="." method="_on_help_btn_button_down"]
