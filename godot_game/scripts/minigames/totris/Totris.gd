@@ -27,6 +27,10 @@ var best_level = 0
 
 @export var ui_overlay_sprite: Sprite2D
 @export var score_ui_sprite: NinePatchRect
+@export var level_ui_sprite: NinePatchRect
+@export var hold_ui_sprite: NinePatchRect
+@export var next_ui_sprite: NinePatchRect
+@export var ui_cover_sprite: Sprite2D
 
 func show_start_menu():
 	start_menu.show()
@@ -40,7 +44,11 @@ func _ready():
 	var ui_theme = find_parent("Game").find_child("UI_Theme_Manager").current_theme
 	show_start_menu()
 	ui_overlay_sprite.texture = ui_theme.totris_ui
-	#score_ui_sprite.texture = ui_theme.box_inverted
+	ui_cover_sprite.texture = ui_theme.totris_ui
+	score_ui_sprite.texture = ui_theme.box
+	level_ui_sprite.texture = ui_theme.box
+	next_ui_sprite.texture = ui_theme.box
+	hold_ui_sprite.texture = ui_theme.box
 	kill_menu.hide()
 	help_menu.hide()
 

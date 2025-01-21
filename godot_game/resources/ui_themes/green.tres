@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="UiTheme" load_steps=12 format=3 uid="uid://bxhuu3qk52v3w"]
+[gd_resource type="Resource" script_class="UiTheme" load_steps=13 format=3 uid="uid://bxhuu3qk52v3w"]
 
 [ext_resource type="Texture2D" uid="uid://drv50ynifh37j" path="res://UI stuff/Green Palette/green_activities_button.png" id="1_2lx8c"]
 [ext_resource type="Texture2D" uid="uid://bsxiyobfp4dmq" path="res://UI stuff/Green Palette/green_activities_button_pressed.png" id="2_scgym"]
 [ext_resource type="Texture2D" uid="uid://d4t12xgr5bjg" path="res://UI stuff/Green Palette/ui_green_box_inverted.png" id="3_lxf55"]
+[ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="3_ptebi"]
 [ext_resource type="Texture2D" uid="uid://d4c1k5m8u1jc0" path="res://UI stuff/Green Palette/green_food_button.png" id="3_xcps5"]
 [ext_resource type="Texture2D" uid="uid://ca2xeau74c5jp" path="res://UI stuff/Green Palette/green_food_button_pressed.png" id="4_mb13j"]
 [ext_resource type="Script" path="res://scripts/base_classses/ui_theme_class.gd" id="5_2fgmx"]
@@ -27,6 +28,7 @@ ui_overlay = ExtResource("8_7u5v2")
 memory_ui = ExtResource("5_uurcf")
 totris_ui = ExtResource("10_6c60y")
 box_inverted = ExtResource("3_lxf55")
+box = ExtResource("3_ptebi")
 unlocked = true
 primary = Color(0.607843, 0.690196, 0.611765, 1)
 bg = Color(0.117647, 0.160784, 0.180392, 1)
