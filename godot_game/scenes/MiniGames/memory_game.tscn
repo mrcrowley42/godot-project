@@ -36,8 +36,10 @@ line_spacing = 16.0
 [sub_resource type="LabelSettings" id="LabelSettings_j03ef"]
 font_size = 24
 
-[node name="MemoryGame" type="Node2D"]
+[node name="MemoryGame" type="Node2D" node_paths=PackedStringArray("ui_overlay_sprite", "score_ui_sprite")]
 script = ExtResource("1_ckjye")
+ui_overlay_sprite = NodePath("UI/Control/UI_Overlay")
+score_ui_sprite = NodePath("UI/Control/ScoreContainer")
 
 [node name="MemoryGameLogic" type="Node" parent="."]
 script = ExtResource("1_y2saq")

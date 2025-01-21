@@ -19,6 +19,9 @@ class_name MemoryGame extends Node2D
 @onready var og_time_label_start_text = best_time_label.text
 @onready var og_guesses_label_start_text = best_guesses_label.text
 
+@export var ui_overlay_sprite: Sprite2D
+@export var score_ui_sprite: NinePatchRect
+
 const FINAL_SCORE_LABEL_TEXT = {
 	null: "-\n-",
 	true: "Time:\n%.2f seconds",
@@ -35,7 +38,10 @@ var lowest_guesses = null
 
 
 func _ready() -> void:
+	var ui_theme = find_parent("Game").find_child("UI_Theme_Manager").current_theme
 	show_start_menu()
+	ui_overlay_sprite.texture = ui_theme.memory_ui
+	score_ui_sprite.texture = ui_theme.box_inverted
 	help_menu.hide()
 	finish_menu.hide()
 

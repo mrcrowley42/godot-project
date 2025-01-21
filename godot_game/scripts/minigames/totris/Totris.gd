@@ -25,6 +25,8 @@ class_name TotrisManager
 var best_score = 0
 var best_level = 0
 
+@export var ui_overlay_sprite: Sprite2D
+@export var score_ui_sprite: NinePatchRect
 
 func show_start_menu():
 	start_menu.show()
@@ -35,6 +37,10 @@ func show_start_menu():
 
 func _ready():
 	show_start_menu()
+	var ui_theme = find_parent("Game").find_child("UI_Theme_Manager").current_theme
+	show_start_menu()
+	ui_overlay_sprite.texture = ui_theme.totris_ui
+	#score_ui_sprite.texture = ui_theme.box_inverted
 	kill_menu.hide()
 	help_menu.hide()
 

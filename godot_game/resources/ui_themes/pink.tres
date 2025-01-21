@@ -1,13 +1,16 @@
-[gd_resource type="Resource" script_class="UiTheme" load_steps=9 format=3 uid="uid://clen0bplq0q5d"]
+[gd_resource type="Resource" script_class="UiTheme" load_steps=12 format=3 uid="uid://clen0bplq0q5d"]
 
 [ext_resource type="Script" path="res://scripts/base_classses/ui_theme_class.gd" id="1_nijfs"]
 [ext_resource type="Texture2D" uid="uid://b8y8c6h2qmqds" path="res://UI stuff/Pink Palette/pink_activities_button.png" id="1_sskum"]
 [ext_resource type="Texture2D" uid="uid://04kj5y6r82xs" path="res://UI stuff/Pink Palette/pink_activities_button_pressed.png" id="2_p2gct"]
+[ext_resource type="Texture2D" uid="uid://b2pvvhvsn5vdt" path="res://UI stuff/Pink Palette/ui_box_inverted_pink.png" id="3_47qe3"]
 [ext_resource type="Texture2D" uid="uid://jj1g1lm51rt4" path="res://UI stuff/Pink Palette/pink_food_button.png" id="3_313c5"]
 [ext_resource type="Texture2D" uid="uid://bl02s4hr8b46y" path="res://UI stuff/Pink Palette/pink_food_button_pressed.png" id="4_jfsaj"]
 [ext_resource type="Texture2D" uid="uid://lb88b636818q" path="res://UI stuff/Pink Palette/pink_settings_button.png" id="6_m72k8"]
+[ext_resource type="Texture2D" uid="uid://cykmrkm8g48w8" path="res://UI stuff/Pink Palette/ui_memory_pink.png" id="6_rrod6"]
 [ext_resource type="Texture2D" uid="uid://bx4ye3sqamjrt" path="res://UI stuff/Pink Palette/pink_settings_button_pressed.png" id="7_rs6af"]
 [ext_resource type="Texture2D" uid="uid://dm0iwje4s7uu8" path="res://UI stuff/Pink Palette/ui_pink.png" id="8_uxdmr"]
+[ext_resource type="Texture2D" uid="uid://bkg6ncosws5hu" path="res://UI stuff/Pink Palette/ui_pink_totris.png" id="10_7mwbl"]
 
 [resource]
 script = ExtResource("1_nijfs")
@@ -21,6 +24,9 @@ act_btn_pressed = ExtResource("2_p2gct")
 setting_btn = ExtResource("6_m72k8")
 setting_btn_pressed = ExtResource("7_rs6af")
 ui_overlay = ExtResource("8_uxdmr")
+memory_ui = ExtResource("6_rrod6")
+totris_ui = ExtResource("10_7mwbl")
+box_inverted = ExtResource("3_47qe3")
 unlocked = false
 primary = Color(0.631373, 0.470588, 0.537255, 1)
 bg = Color(0.235294, 0.156863, 0.247059, 1)
