@@ -12,6 +12,7 @@ var choices = ['rock', 'paper', 'scissors']
 
 @export var ui_overlay_sprite: Sprite2D
 @export var score_ui_sprite: NinePatchRect
+@export var help_bg_sprite: NinePatchRect
 
 var choice_2_sprite = {
 	'rock': load("res://images/scissors-paper-rock/rock.png"),
@@ -27,6 +28,7 @@ func _ready() -> void:
 	var ui_theme = find_parent("Game").find_child("UI_Theme_Manager").current_theme
 	ui_overlay_sprite.texture = ui_theme.memory_ui
 	score_ui_sprite.texture = ui_theme.box_inverted
+	help_bg_sprite.texture = ui_theme.box
 	%CreatureChoice.text = ""
 	#creature_choice_sprite.texture = null
 

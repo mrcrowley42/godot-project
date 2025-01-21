@@ -31,6 +31,7 @@ var best_level = 0
 @export var hold_ui_sprite: NinePatchRect
 @export var next_ui_sprite: NinePatchRect
 @export var ui_cover_sprite: Sprite2D
+@export var help_bg_sprite: NinePatchRect
 
 func show_start_menu():
 	start_menu.show()
@@ -49,6 +50,7 @@ func _ready():
 	level_ui_sprite.texture = ui_theme.box
 	next_ui_sprite.texture = ui_theme.box
 	hold_ui_sprite.texture = ui_theme.box
+	help_bg_sprite.texture = ui_theme.box
 	kill_menu.hide()
 	help_menu.hide()
 
