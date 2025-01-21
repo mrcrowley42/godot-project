@@ -47,6 +47,7 @@ var drink_likes: Array[DrinkItem.DrinkType]
 var drink_dislikes: Array[DrinkItem.DrinkType]
 
 var og_pos: Vector2
+var zen: bool = false
 
 # SIGNALS
 signal hp_changed()

@@ -109,6 +109,9 @@ func _on_low_stat_sounds_finished() -> void:
 	cooldown_timer.start()
 
 func get_emotion():
+	if creature.zen:
+		return "chill" if creature.main_sprite.sprite_frames.has_animation("chill") else "joy"
+	
 	if creature.hp <= hp_threshold:
 		return 'sad'
 	if creature.water <= water_threshold:
