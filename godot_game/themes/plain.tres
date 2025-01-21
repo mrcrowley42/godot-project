@@ -3,7 +3,7 @@
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="1_ow1ko"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rvew5"]
-bg_color = Color(0.117647, 0.117647, 0.117647, 1)
+bg_color = Color(0, 0, 0, 0.690196)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
@@ -17,14 +17,14 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_to2vb"]
-bg_color = Color(0.133333, 0.133333, 0.133333, 0.690196)
+bg_color = Color(0, 0, 0, 0.690196)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7y8iy"]
-bg_color = Color(0.117647, 0.117647, 0.117647, 1)
+bg_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5

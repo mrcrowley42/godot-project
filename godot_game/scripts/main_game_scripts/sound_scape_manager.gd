@@ -7,6 +7,8 @@ var soundscape = []
 var sound_list = build_sound_map()
 var has_loaded = false
 
+var is_faded_out = false
+
 ## Custom streamplayer class, that loops audio by default.
 class AmbientSoundPlayer extends AudioStreamPlayer:
 	var sound_category: AmbientSoundCategory
@@ -96,12 +98,14 @@ func to_sound_list_key(key):
 
 
 func fade_out():
+	is_faded_out = true
 	var t = create_tween()
 	t.tween_method(update_bus_vol, 1.0, 0.0, 1.5)
 	t.play()
 
 
 func fade_in():
+	is_faded_out = false
 	var t = create_tween()
 	t.tween_method(update_bus_vol, 0.0, 1.0, 1.5)
 	t.play()

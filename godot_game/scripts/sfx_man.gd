@@ -22,16 +22,16 @@ var egg_crack_3 = preload("res://sound_effects/egg-crack-3.wav")
 
 var card_flip_1 = preload("res://sound_effects/card_flip_1.mp3")
 
-var lookup= {
-		"draw": draw, "correct": correct, "confirm": confirm, "pop": pop, "wrong": wrong, "click": click, "yippe": yippe,
-		"t_place": t_place, "t_place_inst": t_place_inst, "t_biglinebreak": t_biglinebreak, "t_linebreak": t_linebreak, "t_no": t_no,
-		"egg_crack_1": egg_crack_1, "egg_crack_2": egg_crack_2, "egg_crack_3": egg_crack_3,
-		"card_flip": card_flip_1,
-	}
+var lookup = {
+	"draw": draw, "correct": correct, "confirm": confirm, "pop": pop, "wrong": wrong, "click": click, "yippe": yippe,
+	"t_place": t_place, "t_place_inst": t_place_inst, "t_biglinebreak": t_biglinebreak, "t_linebreak": t_linebreak, "t_no": t_no,
+	"egg_crack_1": egg_crack_1, "egg_crack_2": egg_crack_2, "egg_crack_3": egg_crack_3,
+	"card_flip": card_flip_1,
+}
 
 func play_sound(sound_name):
 	if !lookup.has(sound_name):
-		printerr("The sound '" + sound_name + "' does not exist in the SFX loopup!")
+		printerr("The sound '" + sound_name + "' does not exist in the SFX lookup!")
 		return
 	stream = lookup[sound_name]
 	play()

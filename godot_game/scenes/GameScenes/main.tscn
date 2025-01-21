@@ -1,4 +1,4 @@
-[gd_scene load_steps=123 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=125 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
@@ -71,7 +71,9 @@
 [ext_resource type="Script" path="res://scripts/setting_button.gd" id="54_5bu15"]
 [ext_resource type="Script" path="res://scripts/opacity_slider.gd" id="54_rp5b8"]
 [ext_resource type="PackedScene" uid="uid://b6wocr0vo5s4v" path="res://scenes/GameScenes/debug_content.tscn" id="55_0rbaa"]
+[ext_resource type="Script" path="res://scripts/settings_page_navigation.gd" id="55_ctwh0"]
 [ext_resource type="Theme" uid="uid://dvpqr6ekggufg" path="res://themes/menu_dropdown.tres" id="56_in74o"]
+[ext_resource type="Theme" uid="uid://bsd1dkhc13v47" path="res://themes/plain.tres" id="56_m6x7j"]
 [ext_resource type="Script" path="res://scripts/stat_bar.gd" id="57_ani8q"]
 [ext_resource type="Shader" path="res://shaders/pattern_wavy.gdshader" id="57_qy3v8"]
 [ext_resource type="Script" path="res://scripts/sfx_man.gd" id="65_787cd"]
@@ -476,7 +478,7 @@ texture_filter = 1
 position = Vector2(270, 393.5)
 clippy_area = NodePath("../ClippyArea")
 
-[node name="ClippyArea" type="Button" parent="Gameplay" groups=["settings_data"]]
+[node name="ClippyArea" type="Button" parent="Gameplay" node_paths=PackedStringArray("ambience_manager") groups=["settings_data"]]
 unique_name_in_owner = true
 editor_description = "The control that allows the window to be dragged while in clippy mode."
 anchors_preset = 8
@@ -493,6 +495,7 @@ grow_vertical = 2
 mouse_default_cursor_shape = 6
 theme = ExtResource("11_lcq7m")
 script = ExtResource("12_n00c6")
+ambience_manager = NodePath("../../AmbienceManager")
 metadata/_edit_lock_ = true
 
 [node name="NotificationLayer" type="CanvasLayer" parent="."]
@@ -1345,7 +1348,6 @@ script = ExtResource("35_4io20")
 [node name="SettingsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 material = SubResource("ShaderMaterial_1s3b6")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -1358,23 +1360,80 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/SettingsMenu/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/SettingsMenu/MarginContainer" node_paths=PackedStringArray("page_label", "left_btn", "right_btn", "pages_parent_node")]
 layout_mode = 2
 theme_override_constants/separation = 20
+script = ExtResource("55_ctwh0")
+page_label = NodePath("Navigation/PageLabel")
+left_btn = NodePath("Navigation/Left")
+right_btn = NodePath("Navigation/Right")
+pages_parent_node = NodePath("pages")
 
 [node name="Title" type="Button" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("45_e031c")
 text = "Settings"
 
-[node name="GridContainer2" type="GridContainer" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer"]
+[node name="Navigation" type="HBoxContainer" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="Left" type="Button" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/Navigation"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme = ExtResource("56_m6x7j")
+text = "<"
+
+[node name="PageLabel" type="Label" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/Navigation"]
+custom_minimum_size = Vector2(150, 20)
+layout_mode = 2
+theme = ExtResource("56_m6x7j")
+text = "page"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Right" type="Button" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/Navigation"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme = ExtResource("56_m6x7j")
+text = ">"
+
+[node name="pages" type="Control" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="General" type="Control" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages"]
+anchors_preset = 0
+offset_right = 393.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/General"]
+layout_mode = 0
+offset_right = 391.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/General/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("56_m6x7j")
+text = "there's nothing here yet!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Audio" type="Control" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages"]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+offset_right = 394.0
+
+[node name="AudioContainer" type="GridContainer" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio"]
+layout_mode = 2
+offset_right = 394.0
+offset_bottom = 113.0
 size_flags_vertical = 0
 theme_override_constants/h_separation = 5
 theme_override_constants/v_separation = 10
 columns = 3
 
-[node name="Master" type="Label" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2"]
+[node name="Master" type="Label" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer"]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_fonts/font = ExtResource("19_3grg3")
@@ -1382,7 +1441,7 @@ theme_override_font_sizes/font_size = 20
 text = "Master"
 vertical_alignment = 1
 
-[node name="MasterMuted" type="Button" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2" groups=["settings_data"]]
+[node name="MasterMuted" type="Button" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer" groups=["settings_data"]]
 layout_mode = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_wd2mi")
 text = "          "
@@ -1393,24 +1452,24 @@ expand_icon = true
 script = ExtResource("37_xf1vk")
 bus_name = "Master"
 
-[node name="MasterVolume" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2" groups=["settings_data"] instance=ExtResource("38_17bv4")]
+[node name="MasterVolume" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer" groups=["settings_data"] instance=ExtResource("38_17bv4")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 tick_count = 1
 bus_name = "Master"
 
-[node name="Music" type="Label" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2"]
+[node name="Music" type="Label" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer"]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_constants/shadow_outline_size = 5
 theme_override_fonts/font = ExtResource("19_3grg3")
 theme_override_font_sizes/font_size = 20
-text = "Music
+text = "Ambience
 "
 vertical_alignment = 1
 
-[node name="MusicMuted" type="Button" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2" groups=["settings_data"]]
+[node name="MusicMuted" type="Button" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer" groups=["settings_data"]]
 layout_mode = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_wd2mi")
 text = "          "
@@ -1421,12 +1480,12 @@ expand_icon = true
 script = ExtResource("37_xf1vk")
 bus_name = "Music"
 
-[node name="MusicVolume" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2" groups=["settings_data"] instance=ExtResource("38_17bv4")]
+[node name="MusicVolume" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer" groups=["settings_data"] instance=ExtResource("38_17bv4")]
 layout_mode = 2
 tick_count = 1
 bus_name = "Music"
 
-[node name="SFX" type="Label" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2"]
+[node name="SFX" type="Label" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer"]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_fonts/font = ExtResource("19_3grg3")
@@ -1434,7 +1493,7 @@ theme_override_font_sizes/font_size = 20
 text = "SFX"
 vertical_alignment = 1
 
-[node name="SFXMuted" type="Button" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2" groups=["settings_data"]]
+[node name="SFXMuted" type="Button" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer" groups=["settings_data"]]
 layout_mode = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_wd2mi")
 text = "          "
@@ -1445,20 +1504,32 @@ expand_icon = true
 script = ExtResource("37_xf1vk")
 bus_name = "SFX"
 
-[node name="SfxVolume" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2" groups=["settings_data"] instance=ExtResource("38_17bv4")]
+[node name="SfxVolume" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer" groups=["settings_data"] instance=ExtResource("38_17bv4")]
 layout_mode = 2
 value = 0.0
 tick_count = 1
 bus_name = "SFX"
 
-[node name="GridContainer3" type="GridContainer" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer"]
+[node name="Clippy" type="Control" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages"]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+offset_right = 394.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Clippy"]
+layout_mode = 0
+offset_right = 393.0
+offset_bottom = 114.0
+theme_override_constants/separation = 10
+
+[node name="GridContainer3" type="GridContainer" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Clippy/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/h_separation = 15
 theme_override_constants/v_separation = 10
 columns = 2
 
-[node name="OpacityLabel" type="Label" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer3"]
+[node name="OpacityLabel" type="Label" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Clippy/VBoxContainer/GridContainer3"]
 custom_minimum_size = Vector2(126, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -1467,7 +1538,7 @@ theme_override_font_sizes/font_size = 20
 text = "Clippy Opacity"
 vertical_alignment = 1
 
-[node name="OpacitySlider" type="HSlider" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer3" node_paths=PackedStringArray("clippy_area")]
+[node name="OpacitySlider" type="HSlider" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Clippy/VBoxContainer/GridContainer3" node_paths=PackedStringArray("clippy_area")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1477,9 +1548,9 @@ max_value = 1.0
 step = 0.01
 value = 0.5
 script = ExtResource("54_rp5b8")
-clippy_area = NodePath("../../../../../../../Gameplay/ClippyArea")
+clippy_area = NodePath("../../../../../../../../../../Gameplay/ClippyArea")
 
-[node name="Value" type="Label" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer3/OpacitySlider"]
+[node name="Value" type="Label" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Clippy/VBoxContainer/GridContainer3/OpacitySlider"]
 modulate = Color(1, 1, 1, 0.639216)
 layout_mode = 1
 anchors_preset = 8
@@ -1497,14 +1568,14 @@ text = "50"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GridContainer4" type="GridContainer" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer"]
+[node name="GridContainer4" type="GridContainer" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Clippy/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_constants/h_separation = 15
+theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 10
 columns = 2
 
-[node name="EnableSfxLabel" type="Label" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer4"]
+[node name="EnableSfxLabel" type="Label" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Clippy/VBoxContainer/GridContainer4"]
 custom_minimum_size = Vector2(272, 0)
 layout_mode = 2
 size_flags_vertical = 1
@@ -1513,15 +1584,29 @@ theme_override_font_sizes/font_size = 20
 text = "Mute SFX in Clippy-Mode"
 vertical_alignment = 1
 
-[node name="SfxClippyBox" type="CheckBox" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer4"]
+[node name="SfxClippyBox" type="CheckBox" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Clippy/VBoxContainer/GridContainer4"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-theme_override_constants/icon_max_width = 50
+theme = ExtResource("42_c1jtf")
 
-[node name="ClippyBtn" type="Button" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer"]
+[node name="EnableAmbLabel" type="Label" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Clippy/VBoxContainer/GridContainer4"]
+custom_minimum_size = Vector2(272, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 20
+text = "Mute Ambience in Clippy-Mode"
+vertical_alignment = 1
+
+[node name="AmbClippyBox" type="CheckBox" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Clippy/VBoxContainer/GridContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("42_c1jtf")
+
+[node name="ClippyBtn" type="Button" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Clippy/VBoxContainer"]
 custom_minimum_size = Vector2(160, 52)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -1530,10 +1615,25 @@ theme = ExtResource("42_c1jtf")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("19_3grg3")
 theme_override_font_sizes/font_size = 20
-text = "Clippy Mode"
+text = " Enter Clippy Mode "
 script = ExtResource("18_2njxs")
 tooltip_string = "Double-click Creature to exit"
 direction = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Clippy/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 35
+
+[node name="Label" type="Label" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Clippy/VBoxContainer/MarginContainer"]
+modulate = Color(1, 1, 1, 0.45098)
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme = ExtResource("56_m6x7j")
+theme_override_font_sizes/font_size = 14
+text = "note: the transparent background may not work on your device"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="ControlButtons" type="Node2D" parent="UI/OptionsMenu/SettingsMenu"]
 position = Vector2(-50, -130)
@@ -1982,12 +2082,13 @@ bus = &"SFX"
 [connection signal="visibility_changed" from="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems" to="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/CosmeticItems" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/OptionsMenu/CosmeticsMenu/SaveButtons/Back" to="UI/OptionsMenu/CosmeticsMenu/SaveButtons/Back" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/CreaturesMenu/SaveButtons/Back" to="UI/OptionsMenu/CreaturesMenu/SaveButtons/Back" method="_on_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2/MasterMuted" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2/MasterMuted" method="_on_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2/MusicMuted" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2/MusicMuted" method="_on_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2/SFXMuted" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer2/SFXMuted" method="_on_button_down"]
-[connection signal="value_changed" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer3/OpacitySlider" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer3/OpacitySlider" method="_on_value_changed"]
-[connection signal="toggled" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer4/SfxClippyBox" to="Gameplay/ClippyArea" method="_on_sfx_clippy_box_toggled"]
-[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/ClippyBtn" to="Gameplay/ClippyArea" method="_on_clippy_btn_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer/MasterMuted" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer/MasterMuted" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer/MusicMuted" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer/MusicMuted" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer/SFXMuted" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer/SFXMuted" method="_on_button_down"]
+[connection signal="value_changed" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Clippy/VBoxContainer/GridContainer3/OpacitySlider" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Clippy/VBoxContainer/GridContainer3/OpacitySlider" method="_on_value_changed"]
+[connection signal="toggled" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Clippy/VBoxContainer/GridContainer4/SfxClippyBox" to="Gameplay/ClippyArea" method="_on_sfx_clippy_box_toggled"]
+[connection signal="toggled" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Clippy/VBoxContainer/GridContainer4/AmbClippyBox" to="Gameplay/ClippyArea" method="_on_amb_clippy_box_toggled"]
+[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Clippy/VBoxContainer/ClippyBtn" to="Gameplay/ClippyArea" method="_on_clippy_btn_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/ControlButtons/Back" to="UI/OptionsMenu/SettingsMenu/ControlButtons/Back" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/ControlButtons/CreditsBtn" to="UI/OptionsMenu" method="_on_credits_btn_button_down"]
 [connection signal="visibility_changed" from="UI/OptionsMenu/AmbienceMenu" to="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer" method="_on_ambience_menu_visibility_changed"]

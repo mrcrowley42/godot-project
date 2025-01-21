@@ -2,9 +2,12 @@ extends Button
 
 const OPACITY_SETTING = "ClippyOpacity"
 const MUTE_SETTING = "MuteSFXInClippyMode"
+const MUTE_AMBIENCE_SETTING = "MuteAmbInClippyMode"
 
 ## Clippy mode and window size functions are stored here.
 @export var scale_factor: float = 2.0
+@export var ambience_manager: AmbienceManager
+
 @onready var window: Window = get_window()
 @onready var viewport: Viewport = get_viewport()
 @onready var creature: Creature = %Creature
@@ -23,6 +26,7 @@ var offset = Vector2(0, 0)
 var clippy: bool = false
 var clippy_opacity := 0.5
 var mute_sfx = false
+var mute_ambience = false
 
 signal clippy_closed
 
@@ -79,6 +83,9 @@ func toggle_clippy_mode() -> void:
 
 	if clippy:
 		# Shrink window size and shift canvas to keep focus on creature.
+		if mute_ambience:
+			ambience_manager.fade_out()
+		
 		window.content_scale_mode = 0 as Window.ContentScaleMode
 		window.position -= Vector2i(clippy_offset)
 		window.size = self.size
@@ -87,6 +94,9 @@ func toggle_clippy_mode() -> void:
 		minimise()
 	else:
 		# Revert changes
+		if ambience_manager.is_faded_out:
+			ambience_manager.fade_in()
+		
 		window.position += Vector2i(clippy_offset) # + Vector2i(2,0) # Why it wants to move 2 pixels I don't know might be mac specific problem?
 		window.content_scale_mode = default_stretch_mode as Window.ContentScaleMode
 		window.size = start_size
@@ -135,11 +145,15 @@ func _on_clippy_btn_button_down() -> void:
 func _on_sfx_clippy_box_toggled(toggled_on: bool) -> void:
 	mute_sfx = toggled_on
 
+func _on_amb_clippy_box_toggled(toggled_on: bool):
+	mute_ambience = toggled_on
+
 
 func save() -> Dictionary:
 	return {"section": Globals.AUDIO_SECTION,
 	OPACITY_SETTING: clippy_opacity,
-	MUTE_SETTING: mute_sfx
+	MUTE_SETTING: mute_sfx,
+	MUTE_AMBIENCE_SETTING: mute_ambience
 	}
 
 func load(data) -> void:
@@ -147,3 +161,5 @@ func load(data) -> void:
 		%OpacitySlider.value = data[OPACITY_SETTING]
 	if data.has(MUTE_SETTING):
 		%SfxClippyBox.button_pressed = data[MUTE_SETTING]
+	if data.has(MUTE_AMBIENCE_SETTING):
+		%AmbClippyBox.button_pressed = data[MUTE_AMBIENCE_SETTING]
