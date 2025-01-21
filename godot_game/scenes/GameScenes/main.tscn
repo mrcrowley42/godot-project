@@ -1416,6 +1416,7 @@ text = ">"
 layout_mode = 2
 
 [node name="General" type="Control" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages"]
+visible = false
 anchors_preset = 0
 offset_right = 393.0
 
@@ -1524,7 +1525,6 @@ tick_count = 1
 bus_name = "SFX"
 
 [node name="Clippy" type="Control" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages"]
-visible = false
 layout_mode = 2
 anchors_preset = 0
 offset_right = 394.0
