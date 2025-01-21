@@ -10,6 +10,9 @@ var choices = ['rock', 'paper', 'scissors']
 @onready var closed = load("res://images/scissors-paper-rock/box_closed.png")
 @onready var opened = load("res://images/scissors-paper-rock/box_opened.png")
 
+@export var ui_overlay_sprite: Sprite2D
+@export var score_ui_sprite: NinePatchRect
+
 var choice_2_sprite = {
 	'rock': load("res://images/scissors-paper-rock/rock.png"),
 	'scissors': load("res://images/scissors-paper-rock/scissors.png"),
@@ -21,6 +24,9 @@ func _process(_delta):
 
 func _ready() -> void:
 	creature_prev.gen_preview()
+	var ui_theme = find_parent("Game").find_child("UI_Theme_Manager").current_theme
+	ui_overlay_sprite.texture = ui_theme.memory_ui
+	score_ui_sprite.texture = ui_theme.box_inverted
 	%CreatureChoice.text = ""
 	#creature_choice_sprite.texture = null
 

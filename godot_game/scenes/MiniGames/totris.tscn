@@ -46,8 +46,9 @@ line_spacing = 4.0
 font_size = 40
 font_color = Color(0.271203, 0.341779, 0.377135, 1)
 
-[node name="Totris" type="Node2D"]
+[node name="Totris" type="Node2D" node_paths=PackedStringArray("ui_overlay_sprite")]
 script = ExtResource("1_82aiy")
+ui_overlay_sprite = NodePath("UI/Control/UI_Overlay")
 
 [node name="TotrisLogic" type="Node" parent="."]
 script = ExtResource("2_7s788")
@@ -355,6 +356,7 @@ icon = ExtResource("9_ajbov")
 expand_icon = true
 
 [node name="HelpMenu" type="Control" parent="UI/Control/TopOverlay" node_paths=PackedStringArray("simple_menu", "adv_menu", "adv_toggle_btn")]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 540.0
