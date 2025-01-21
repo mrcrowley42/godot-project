@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="FoodItem" load_steps=3 format=3 uid="uid://bodnjvi1yrx32"]
+
+[ext_resource type="Texture2D" uid="uid://cplruopcehsti" path="res://images/food/burger.png" id="1_tbmj5"]
+[ext_resource type="Script" path="res://scripts/base_classses/food_item.gd" id="1_wweax"]
+
+[resource]
+script = ExtResource("1_wweax")
+name = "Burger"
+type = 7
+amount = 160
+override_auto_cooldown = false
+overridden_cooldown = 30
+image = ExtResource("1_tbmj5")

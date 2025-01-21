@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="FoodList" load_steps=13 format=3 uid="uid://kgwet30vluw3"]
+[gd_resource type="Resource" script_class="FoodList" load_steps=15 format=3 uid="uid://kgwet30vluw3"]
 
 [ext_resource type="Script" path="res://scripts/base_classses/food_item.gd" id="1_xr18h"]
 [ext_resource type="Script" path="res://scripts/base_classses/food_list.gd" id="2_n38hs"]
@@ -12,7 +12,9 @@
 [ext_resource type="Resource" uid="uid://mvs3fbejl16t" path="res://resources/consumables/food/apple.tres" id="9_uffem"]
 [ext_resource type="Resource" uid="uid://cstubs0rx4wac" path="res://resources/consumables/food/salad.tres" id="10_bompx"]
 [ext_resource type="Resource" uid="uid://i1rlua1we2ru" path="res://resources/consumables/food/soup.tres" id="11_uqujw"]
+[ext_resource type="Resource" uid="uid://bodnjvi1yrx32" path="res://resources/consumables/food/burger.tres" id="12_mjx7j"]
+[ext_resource type="Resource" uid="uid://b2u55xe20rit5" path="res://resources/consumables/food/meat_pie.tres" id="13_5qbsg"]
 
 [resource]
 script = ExtResource("2_n38hs")
-items = Array[ExtResource("1_xr18h")]([ExtResource("4_4auyk"), ExtResource("5_fgh82"), ExtResource("6_fessv"), ExtResource("7_2a0sf"), ExtResource("2_p1oea"), ExtResource("2_xlcv3"), ExtResource("8_gao7h"), ExtResource("9_uffem"), ExtResource("10_bompx"), ExtResource("11_uqujw")])
+items = Array[ExtResource("1_xr18h")]([ExtResource("4_4auyk"), ExtResource("5_fgh82"), ExtResource("6_fessv"), ExtResource("7_2a0sf"), ExtResource("2_p1oea"), ExtResource("2_xlcv3"), ExtResource("8_gao7h"), ExtResource("9_uffem"), ExtResource("10_bompx"), ExtResource("11_uqujw"), ExtResource("12_mjx7j"), ExtResource("13_5qbsg")])
