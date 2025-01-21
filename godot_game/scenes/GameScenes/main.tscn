@@ -1,4 +1,4 @@
-[gd_scene load_steps=125 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=126 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
@@ -278,6 +278,19 @@ shader_parameter/two_col = Color(0.0196078, 0.0745098, 0.0352941, 1)
 shader_parameter/two_speed = -0.02
 shader_parameter/two_size = 10.0
 shader_parameter/two_opacity = 0.3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vkesy"]
+shader = ExtResource("50_tajtf")
+shader_parameter/bg_col = Color(0.0552561, 5.64032e-10, 0.00120181, 1)
+shader_parameter/rotation = 0.0
+shader_parameter/double = true
+shader_parameter/size = 5.0
+shader_parameter/one_col = Color(0.124145, 0.0220387, 0.0199852, 1)
+shader_parameter/one_speed = 0.02
+shader_parameter/one_opacity = 0.2
+shader_parameter/two_col = Color(0, 0, 0, 1)
+shader_parameter/two_speed = 0.02
+shader_parameter/two_opacity = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1s3b6"]
 shader = ExtResource("45_bgevw")
@@ -1287,7 +1300,7 @@ script = ExtResource("35_4io20")
 unique_name_in_owner = true
 process_mode = 3
 visible = false
-material = SubResource("ShaderMaterial_357to")
+material = SubResource("ShaderMaterial_vkesy")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
 metadata/_edit_lock_ = true
