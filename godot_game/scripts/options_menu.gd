@@ -25,6 +25,10 @@ func return_to_main():
 		current_menu = null
 	main_menu.show()
 
+func return_to_settings():
+	return_to_main()
+	change_menu(Menu.SETTINGS)
+
 func change_menu(new_menu: Menu):
 	main_menu.hide()
 	current_menu = new_menu

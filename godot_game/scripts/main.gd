@@ -46,8 +46,11 @@ func _ready():
 	
 	# do last
 	set_is_in_trans(true)
-	Globals.perform_opening_transition(trans_img, ui_overlay.position, set_is_in_trans.bind(false))
+	do_opening_trans()
 	DataGlobals.setup_auto_save(self)
+
+func do_opening_trans():
+	Globals.perform_opening_transition(trans_img, ui_overlay.position, set_is_in_trans.bind(false))
 
 func set_is_in_trans(value: bool):
 	is_in_transition = value
@@ -68,11 +71,6 @@ func calc_elapsed_time():
 		var holiday_status = "were" if stat_man.holiday_mode else "were not"
 		print("And you %s on holiday." % [holiday_status])
 
-
-func _on_save_pressed():
-	%BtnClick.play()
-	%SFX.play_sound("correct")
-	DataGlobals.save_settings_data()
 
 ## finilise & save data before closure
 func _notification(noti):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=122 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=123 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
@@ -44,9 +44,11 @@
 [ext_resource type="Script" path="res://scripts/mute_button.gd" id="37_xf1vk"]
 [ext_resource type="PackedScene" uid="uid://cbn0dv1k0onpb" path="res://scenes/UiScenes/vol_slider.tscn" id="38_17bv4"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="39_8ebm3"]
-[ext_resource type="Texture2D" uid="uid://c030mrpd3uusw" path="res://icons/list-ul.svg" id="39_wryle"]
+[ext_resource type="Texture2D" uid="uid://c0q2pb82gd5mb" path="res://icons/list-check.svg" id="39_j7m1h"]
+[ext_resource type="Texture2D" uid="uid://ds2ci8c6rq5o7" path="res://icons/settings_small.svg" id="40_j1ufi"]
 [ext_resource type="Texture2D" uid="uid://cawudmxbjamv0" path="res://UI stuff/Green Palette/ui_green.png" id="40_wt18k"]
 [ext_resource type="Texture2D" uid="uid://c702pbhxasm52" path="res://icons/status/heart-fill.svg" id="41_8adaw"]
+[ext_resource type="Script" path="res://scripts/main_game_scripts/main_menu_btn.gd" id="41_eeoik"]
 [ext_resource type="Script" path="res://scripts/costmetic_row.gd" id="41_pook7"]
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="42_c1jtf"]
 [ext_resource type="Texture2D" uid="uid://d84hj0mtn2hw" path="res://icons/status/mood_24dp_FILL1_wght300_GRAD0_opsz24.svg" id="43_qa2jm"]
@@ -69,7 +71,6 @@
 [ext_resource type="Script" path="res://scripts/setting_button.gd" id="54_5bu15"]
 [ext_resource type="Script" path="res://scripts/opacity_slider.gd" id="54_rp5b8"]
 [ext_resource type="PackedScene" uid="uid://b6wocr0vo5s4v" path="res://scenes/GameScenes/debug_content.tscn" id="55_0rbaa"]
-[ext_resource type="Theme" uid="uid://xmrqlvnsr0rg" path="res://themes/menu_btn_green.tres" id="55_qqo3v"]
 [ext_resource type="Theme" uid="uid://dvpqr6ekggufg" path="res://themes/menu_dropdown.tres" id="56_in74o"]
 [ext_resource type="Script" path="res://scripts/stat_bar.gd" id="57_ani8q"]
 [ext_resource type="Shader" path="res://shaders/pattern_wavy.gdshader" id="57_qy3v8"]
@@ -1019,30 +1020,33 @@ text = "Ambient Sounds"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 14
+theme_override_constants/separation = 20
 alignment = 1
 
 [node name="CreaturesBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("33_1qhmu")
-icon = ExtResource("39_wryle")
+icon = ExtResource("39_j7m1h")
 icon_alignment = 1
 
 [node name="SettingBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(150, 60)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("18_v1mb2")
-text = "Settings"
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("33_1qhmu")
+icon = ExtResource("40_j1ufi")
+icon_alignment = 1
+expand_icon = true
 
-[node name="CreditsBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(130, 60)
+[node name="MainMenuBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("18_v1mb2")
-text = "Credits"
+theme = ExtResource("33_1qhmu")
+text = "Quit to title"
+script = ExtResource("41_eeoik")
 
 [node name="ThemeMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
@@ -1531,22 +1535,10 @@ script = ExtResource("18_2njxs")
 tooltip_string = "Double-click Creature to exit"
 direction = 3
 
-[node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/SettingsMenu"]
+[node name="ControlButtons" type="Node2D" parent="UI/OptionsMenu/SettingsMenu"]
 position = Vector2(-50, -130)
 
-[node name="Save" type="Button" parent="UI/OptionsMenu/SettingsMenu/SaveButtons"]
-custom_minimum_size = Vector2(100, 40)
-offset_left = 319.0
-offset_top = 513.0
-offset_right = 504.0
-offset_bottom = 553.0
-scale = Vector2(0.75, 0.75)
-theme = ExtResource("55_qqo3v")
-theme_override_colors/font_hover_color = Color(0.4947, 0.97, 0.4947, 1)
-theme_override_font_sizes/font_size = 18
-text = "Save Settings"
-
-[node name="Back" type="Button" parent="UI/OptionsMenu/SettingsMenu/SaveButtons"]
+[node name="Back" type="Button" parent="UI/OptionsMenu/SettingsMenu/ControlButtons"]
 texture_filter = 5
 custom_minimum_size = Vector2(100, 40)
 offset_left = 73.0
@@ -1559,6 +1551,17 @@ theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
 theme_override_font_sizes/font_size = 18
 text = "Back"
 script = ExtResource("35_4io20")
+
+[node name="CreditsBtn" type="Button" parent="UI/OptionsMenu/SettingsMenu/ControlButtons"]
+offset_left = 381.0
+offset_top = 513.0
+offset_right = 481.0
+offset_bottom = 553.0
+scale = Vector2(0.75, 0.75)
+size_flags_horizontal = 3
+theme = ExtResource("33_1qhmu")
+theme_override_font_sizes/font_size = 18
+text = "Credits"
 
 [node name="AmbienceMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
@@ -1971,7 +1974,7 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/AmbienceBtn" to="UI/OptionsMenu" method="_on_ambience_btn_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer/CreaturesBtn" to="UI/OptionsMenu" method="_on_creatures_btn_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer/SettingBtn" to="UI/OptionsMenu" method="_on_settings_btn_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer/CreditsBtn" to="UI/OptionsMenu" method="_on_credits_btn_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer/MainMenuBtn" to="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer/MainMenuBtn" method="_on_button_down"]
 [connection signal="visibility_changed" from="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ThemeBtns" to="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ThemeBtns" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/OptionsMenu/ThemeMenu/SaveButtons/Back" to="UI/OptionsMenu/ThemeMenu/SaveButtons/Back" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/FactsMenu/Library/SaveButtons/Back" to="UI/OptionsMenu/FactsMenu/Library/SaveButtons/Back" method="_on_button_down"]
@@ -1985,15 +1988,15 @@ bus = &"SFX"
 [connection signal="value_changed" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer3/OpacitySlider" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer3/OpacitySlider" method="_on_value_changed"]
 [connection signal="toggled" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/GridContainer4/SfxClippyBox" to="Gameplay/ClippyArea" method="_on_sfx_clippy_box_toggled"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/ClippyBtn" to="Gameplay/ClippyArea" method="_on_clippy_btn_button_down"]
-[connection signal="pressed" from="UI/OptionsMenu/SettingsMenu/SaveButtons/Save" to="." method="_on_save_pressed"]
-[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/SaveButtons/Back" to="UI/OptionsMenu/SettingsMenu/SaveButtons/Back" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/ControlButtons/Back" to="UI/OptionsMenu/SettingsMenu/ControlButtons/Back" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/ControlButtons/CreditsBtn" to="UI/OptionsMenu" method="_on_credits_btn_button_down"]
 [connection signal="visibility_changed" from="UI/OptionsMenu/AmbienceMenu" to="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer" method="_on_ambience_menu_visibility_changed"]
 [connection signal="item_selected" from="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/HBoxContainer/CategoryBtn" to="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer" method="_on_category_btn_item_selected"]
 [connection signal="item_selected" from="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/HBoxContainer/SoundBtn" to="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer" method="_on_sound_btn_item_selected"]
 [connection signal="button_down" from="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/HBoxContainer/AddSoundBtn" to="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer" method="_on_add_sound_btn_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/AmbienceMenu/Buttons/Back" to="UI/OptionsMenu/AmbienceMenu/Buttons/Back" method="_on_button_down"]
 [connection signal="visibility_changed" from="UI/OptionsMenu/CreditsMenu/Node2D/HScrollBar" to="UI/OptionsMenu/CreditsMenu/Node2D/HScrollBar" method="_on_visibility_changed"]
-[connection signal="button_down" from="UI/OptionsMenu/CreditsMenu/SaveButtons/Back" to="UI/OptionsMenu/CreditsMenu/SaveButtons/Back" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/CreditsMenu/SaveButtons/Back" to="UI/OptionsMenu/CreditsMenu/SaveButtons/Back" method="_on_button_down" binds= [true]]
 [connection signal="button_down" from="UI/NavigationButtons/FoodButton" to="UI/NavigationButtons/FoodButton" method="_on_button_down"]
 [connection signal="button_down" from="UI/NavigationButtons/ActButton" to="UI/NavigationButtons/ActButton" method="_on_button_down"]
 [connection signal="button_down" from="UI/NavigationButtons/SettingButton" to="UI/NavigationButtons/SettingButton" method="_on_button_down"]

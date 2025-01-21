@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="FoodItem" load_steps=3 format=3 uid="uid://b2u55xe20rit5"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/food_item.gd" id="1_ddjyw"]
+[ext_resource type="Texture2D" uid="uid://bkxhbb2sddcob" path="res://images/food/meat_pie.png" id="1_m6361"]
+
+[resource]
+script = ExtResource("1_ddjyw")
+name = "Meat Pie"
+type = 7
+amount = 150
+override_auto_cooldown = false
+overridden_cooldown = 30
+image = ExtResource("1_m6361")
