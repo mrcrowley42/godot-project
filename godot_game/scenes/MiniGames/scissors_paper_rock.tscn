@@ -1,5 +1,6 @@
-[gd_scene load_steps=25 format=3 uid="uid://dnfq7jawtfv5q"]
+[gd_scene load_steps=26 format=3 uid="uid://dnfq7jawtfv5q"]
 
+[ext_resource type="Script" path="res://scripts/scissors_paper_rock_root.gd" id="1_esr3m"]
 [ext_resource type="Texture2D" uid="uid://oilx4u2i6jiq" path="res://images/scissors-paper-rock/box_closed.png" id="1_g0ux3"]
 [ext_resource type="Texture2D" uid="uid://cs3dfnulji8oi" path="res://UI stuff/Green Palette/ui_memory.png" id="1_javod"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="1_sqv3p"]
@@ -74,6 +75,7 @@ _data = {
 font_size = 24
 
 [node name="MiniGame" type="Node2D"]
+script = ExtResource("1_esr3m")
 
 [node name="GameLogic" type="Node" parent="." node_paths=PackedStringArray("box_sprite", "help_menu", "creature_choice_sprite", "creature_prev")]
 script = ExtResource("3_7jb5j")
@@ -286,15 +288,8 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="HelpBtn" type="Button" parent="Gameplay"]
-offset_left = 20.0
-offset_top = 20.0
-offset_right = 36.0
-offset_bottom = 41.0
-theme = ExtResource("1_sqv3p")
-text = "?"
-
 [node name="HelpMenu" type="Control" parent="Gameplay"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 
@@ -353,6 +348,14 @@ Paper beats Rock
 Rock beats Scissors"
 horizontal_alignment = 1
 autowrap_mode = 3
+
+[node name="HelpBtn" type="Button" parent="Gameplay"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 36.0
+offset_bottom = 41.0
+theme = ExtResource("1_sqv3p")
+text = "?"
 
 [node name="CloseBtn" type="Button" parent="Gameplay"]
 offset_left = 500.0

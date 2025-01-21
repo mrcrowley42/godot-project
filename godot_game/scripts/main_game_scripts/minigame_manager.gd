@@ -15,8 +15,10 @@ class_name MinigameManager extends Node2D
 var save_data: Dictionary = {}
 var current_minigame = null;
 var current_time_scale: float
+
 var totris_scene_instance: TotrisManager = null
 var memory_match_instance: MemoryGame = null
+var sprock_instance: SprGame = null
 
 var can_interact: bool = true
 
@@ -76,6 +78,8 @@ func _notification(noti) -> void:
 	if noti == Globals.NOTIFICATION_MEMORY_MATCH_CLOSE:
 		save_memory_match_data()
 		unload_minigame(true, memory_match_instance)
+	if noti == Globals.NOTIFICATION_SPROCK_CLOSED:
+		unload_minigame(true, sprock_instance)
 
 
 ## called when the game is about to close and data hasn't been saved to file yet
@@ -98,25 +102,30 @@ func save_memory_match_data():
 
 ## Loads Totris scene.
 func _on_totris_button_down() -> void:
-	if totris_scene_instance == null:
-		totris_scene_instance = totris_scene.instantiate()
-		if save_data.has("totris"):
-			totris_scene_instance.load_save_data(save_data["totris"])  # load data on creation
+	if totris_scene_instance != null:
+		return
+	totris_scene_instance = totris_scene.instantiate()
+	if save_data.has("totris"):
+		totris_scene_instance.load_save_data(save_data["totris"])  # load data on creation
 	load_minigame(null, totris_scene_instance, true)
 
 
 ## Loads Memory scene.
 func _on_memory_game_button_down() -> void:
-	if memory_match_instance == null:
-		memory_match_instance = memory_game_scene.instantiate()
-		if save_data.has("memory_match"):
-			memory_match_instance.load_save_data(save_data["memory_match"])  # load data on creation
+	if memory_match_instance != null:
+		return
+	memory_match_instance = memory_game_scene.instantiate()
+	if save_data.has("memory_match"):
+		memory_match_instance.load_save_data(save_data["memory_match"])  # load data on creation
 	load_minigame(null, memory_match_instance, true)
 
 
 ## Loads scissors-paper-rock scene.
 func _on_scissors_paper_rock_button_down() -> void:
-	load_minigame(sprock_scene, null, true)
+	if sprock_instance != null:
+		return
+	sprock_instance = sprock_scene.instantiate()
+	load_minigame(null, sprock_instance, true)
 
 
 ## Loads Relaxation scene.
