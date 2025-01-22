@@ -29,7 +29,6 @@ func new_timer(rate: float, timeout_func: Callable) -> void:
 	timer.timeout.connect(timeout_func)
 	add_child(timer)
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	new_timer(hp_rate, hp_timeout)
@@ -38,29 +37,24 @@ func _ready() -> void:
 	new_timer(fun_rate, fun_timeout)
 
 
+func toggle_holiday_mode():
+	holiday_mode = !holiday_mode
+	DataGlobals.set_metadata_value(true, DataGlobals.HOLIDAY_MODE, holiday_mode)
+
+func _notification(what):
+	if what == Globals.NOTIFICATION_ALL_DATA_IS_LOADED:
+		holiday_mode = DataGlobals.get_metadata_value(true, DataGlobals.HOLIDAY_MODE)
+	finished_loading.emit()
+
+
 func hp_timeout() -> void:
 	creature.dmg(hp_amount * time_multiplier, Creature.Stat.HP)
-
 
 func water_timeout() -> void:
 	creature.dmg(water_amount * time_multiplier, Creature.Stat.WATER)
 
-
 func food_timeout() -> void:
 	creature.dmg(food_amount * time_multiplier, Creature.Stat.FOOD)
 
-
 func fun_timeout() -> void:
 	creature.dmg(fun_amount * time_multiplier, Creature.Stat.FUN)
-
-
-func get_save_uid() -> int:
-	return DataGlobals.SAVE_STATUS_MANAGER_UID
-
-func save() -> Dictionary:
-	return {"holiday_mode": holiday_mode}
-
-func load(data):
-	if data.has("holiday_mode"):
-		holiday_mode = data["holiday_mode"]
-	finished_loading.emit()

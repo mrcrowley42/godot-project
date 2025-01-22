@@ -4,17 +4,15 @@ extends Node
 const VERSION = "1.0.0"
 
 ## node save UIDs (DO NOT CHANGE THESE! but you can add new ones if u want)
-const SAVE_STATUS_MANAGER_UID = 0
-const SAVE_MINIDATE_MAGAGER_UID = 1
-const SAVE_CREATURE_UID = 2
-const SAVE_ACCESSORY_MANAGER_UID = 3
-const SAVE_CONSUMABLES_MANAGER_UID = 4
+const SAVE_CREATURE_UID = 0
+const SAVE_ACCESSORY_MANAGER_UID = 1
+const SAVE_CONSUMABLES_MANAGER_UID = 2
 
 ## key: save_uid, value: node
 var save_uid_node_atlas = {}
 
 ## global metadata items
-const VERSION_GLOBAL = "version_global"
+const VERSION_GLOBAL = "version"
 const LAST_SAVED_GLOBAL = "last_saved_global"
 const CURRENT_CREATURE = "current_creature"
 const CREATURES_DISCOVERED = "creatures_discovered"
@@ -283,6 +281,7 @@ func save_only_global_metadata():
 	save_file = FileAccess.open(get_save_data_file(), FileAccess.WRITE)
 	save_file.store_string("\n".join(all_lines))
 
+## saves only the creature's updated metadata, its node data is not updated
 func save_only_creature_metadata(creature_id_override = -1):
 	_should_save_creature_metadata = false
 	
@@ -299,7 +298,7 @@ func save_only_creature_metadata(creature_id_override = -1):
 		var line = save_file.get_line()
 		var parsed_line: Array = JSON.parse_string(line)
 		var creature_metadata = parsed_line.pop_front()
-		
+
 		if creature_metadata[CREATURE_ID] == creature_id_to_save:
 			line = [generate_creature_metadata_to_save(creature_id_to_save), parsed_line]
 		all_lines.append(line)
