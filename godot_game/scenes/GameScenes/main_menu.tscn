@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://ig0eoqdfq5nr"]
+[gd_scene load_steps=3 format=3 uid="uid://dunvo70ey34fm"]
 
 [ext_resource type="Script" path="res://scripts/main_game_scripts/main_menu.gd" id="1_lpoqi"]
 [ext_resource type="Texture2D" uid="uid://ywjmlgi3jyuu" path="res://images/omba.png" id="2_k5vrf"]
