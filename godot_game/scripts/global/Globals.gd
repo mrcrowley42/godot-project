@@ -1,5 +1,9 @@
 extends Node
 
+## update this on update (please)
+const VERSION = "1.0.0"
+const BUILD = "BETA"
+
 # SAVE CONSTANTS
 const SAVE_DATA_GROUP = "save_data"
 const SAVE_DATA_FILE = "res://save_data.save"

@@ -1,8 +1,5 @@
 extends Node
 
-## update this on update
-const VERSION = "1.0.0"
-
 ## node save UIDs (DO NOT CHANGE THESE! but you can add new ones if u want)
 const SAVE_CREATURE_UID = 0
 const SAVE_ACCESSORY_MANAGER_UID = 1
@@ -13,6 +10,7 @@ var save_uid_node_atlas = {}
 
 ## global metadata items
 const VERSION_GLOBAL = "version"
+const BUILD_GLOBAL = "build"
 const LAST_SAVED_GLOBAL = "last_saved_global"
 const CURRENT_CREATURE = "current_creature"
 const CREATURES_DISCOVERED = "creatures_discovered"
@@ -96,7 +94,8 @@ func get_metadata_value(global: bool, metadata_key: String):
 func get_default_global_metadata() -> Dictionary:
 	## IMPORTANT: dont use null values, only use empty strings
 	return {
-		VERSION_GLOBAL: VERSION,
+		VERSION_GLOBAL: Globals.VERSION,
+		BUILD_GLOBAL: Globals.BUILD,
 		LAST_SAVED_GLOBAL: Time.get_unix_time_from_system(),
 		CURRENT_CREATURE: -1,
 		CREATURES_DISCOVERED: {},
@@ -209,7 +208,10 @@ func generate_global_metadata_to_save() -> Dictionary:
 	var all_metadata: Dictionary = get_default_global_metadata()
 	for key in all_metadata.keys():
 		all_metadata[key] = get_metadata_value(true, key)
-	all_metadata[VERSION_GLOBAL] = VERSION
+	
+	# update some values
+	all_metadata[VERSION_GLOBAL] = Globals.VERSION
+	all_metadata[BUILD_GLOBAL] = Globals.BUILD
 	all_metadata[LAST_SAVED_GLOBAL] = Time.get_unix_time_from_system()
 	return all_metadata
 
@@ -217,6 +219,8 @@ func generate_creature_metadata_to_save(creature_id_override = -1) -> Dictionary
 	var all_metadata: Dictionary = get_default_creature_metadata()
 	for key in all_metadata.keys():
 		all_metadata[key] = get_metadata_value(false, key)
+	
+	# update some values
 	if creature_id_override > -1:
 		all_metadata[CREATURE_ID] = creature_id_override
 	all_metadata[CREATURE_LAST_SAVED] = Time.get_unix_time_from_system()
