@@ -1,5 +1,8 @@
 extends Node
 
+## update this on update
+const VERSION = "1.0.0"
+
 ## node save UIDs (DO NOT CHANGE THESE! but you can add new ones if u want)
 const SAVE_STATUS_MANAGER_UID = 0
 const SAVE_MINIDATE_MAGAGER_UID = 1
@@ -11,19 +14,24 @@ const SAVE_CONSUMABLES_MANAGER_UID = 4
 var save_uid_node_atlas = {}
 
 ## global metadata items
-const LAST_SAVED = "last_saved"
+const VERSION_GLOBAL = "version_global"
+const LAST_SAVED_GLOBAL = "last_saved_global"
 const CURRENT_CREATURE = "current_creature"
 const CREATURES_DISCOVERED = "creatures_discovered"
 const HOLIDAY_MODE = "holiday_mode"
 const UNLOCKED_COSMETICS = "unlocked_cosmetics"
 const UNLOCKED_FACTS = "unlocked_facts"
 const UNLOCKED_THEMES = "unlocked_themes"
+const UNLOCKED_ACHIEVEMENTS = "unlocked_achievements"
 const MINIGAME_DATA = "minigame_data"
 const ID_INCREMENTAL = "id_incremental"
 
-## relative metadata items
-const ID = "id"
+## creature-relative metadata items
+const CREATURE_ID = "creature_id"
 const CREATURE_TYPE_UID = "creature_type_uid"
+const CREATURE_NAME = "creature_name"
+const CREATURE_HATCH_TIME = "creature_hatch_time"
+const CREATURE_LAST_SAVED = "creature_last_saved"
 
 ## other
 const SECTION = "section"
@@ -44,8 +52,11 @@ const AUTOSAVE_SECONDS = 60
 var _current_global_metadata: Dictionary = {}
 var _should_save_global_metadata: bool = false
 
-var _every_creature_data: Dictionary = {}  # key: id, value: line of data
-var _current_relative_metadata: Dictionary = {}
+var _every_creature_node_data: Dictionary = {}  # key: id, value: node data list
+var _every_creature_metadata: Dictionary = {}  # key: id, value: metadata
+var _current_creature_metadata: Dictionary = {}
+var _should_save_creature_metadata: bool = false
+var _current_creature_node_data: Array[Dictionary] = []  # list of node data
 
 func get_save_data_file():
 	return Testing.TEST_SAVE_FILE if Testing.is_test_environ else Globals.SAVE_DATA_FILE
@@ -53,6 +64,7 @@ func get_save_data_file():
 func get_settings_file():
 	return Testing.TEST_SETTINGS_FILE if Testing.is_test_environ else Globals.SAVE_SETTINGS_FILE
 
+## has any save data incliding global metadata in the file
 func has_save_data() -> bool:
 	if FileAccess.file_exists(get_save_data_file()):
 		var save_file = FileAccess.open(get_save_data_file(), FileAccess.READ)
@@ -71,63 +83,68 @@ func has_only_global_metadata() -> bool:
 	return false
 
 ## get value from last loaded (or the default if it doesn't exist in global metadata)
-func get_global_metadata_value(metadata_key: String):
-	var value = get_default_global_metadata()[metadata_key]
-	if _current_global_metadata.has(metadata_key):
+func get_metadata_value(global: bool, metadata_key: String):
+	var value = get_default_global_metadata()[metadata_key] if global else get_default_creature_metadata()[metadata_key]
+	if global and _current_global_metadata.has(metadata_key):
 		value = _current_global_metadata[metadata_key]
+	elif !global and _current_creature_metadata.has(metadata_key):
+		value = _current_creature_metadata[metadata_key]
 	
 	if value == null:
 		printerr("Replacing <null> value with empty string. Please don't use <null> in save data")
 		value = ""
 	return value
 
-## get value from last loaded (or the default if it doesn't exist in relative metadata)
-func get_relative_metadata_value(metadata_key: String):
-	var value = get_default_relative_metadata()[metadata_key]
-	if _current_relative_metadata.has(metadata_key):
-		value = _current_relative_metadata[metadata_key]
-	return value
-
 func get_default_global_metadata() -> Dictionary:
 	## IMPORTANT: dont use null values, only use empty strings
 	return {
-		LAST_SAVED: Time.get_unix_time_from_system(),
+		VERSION_GLOBAL: VERSION,
+		LAST_SAVED_GLOBAL: Time.get_unix_time_from_system(),
 		CURRENT_CREATURE: -1,
 		CREATURES_DISCOVERED: {},
 		HOLIDAY_MODE: false,
 		UNLOCKED_COSMETICS: [],
 		UNLOCKED_FACTS: [],
 		UNLOCKED_THEMES: [],
+		UNLOCKED_ACHIEVEMENTS: [],
 		MINIGAME_DATA: {},
 		ID_INCREMENTAL: 0
 	}
 
-func get_default_relative_metadata() -> Dictionary:
+func get_default_creature_metadata() -> Dictionary:
 	## IMPORTANT: dont use null values, only use empty strings
 	return {
-		ID: -1,
-		CREATURE_TYPE_UID: ""
+		CREATURE_ID: -1,
+		CREATURE_TYPE_UID: "",
+		CREATURE_NAME: "",
+		CREATURE_HATCH_TIME: -1,
+		CREATURE_LAST_SAVED: -1
 	}
 
 ## deepcopy of the metadata last loaded
-func get_current_global_metadata_dc() -> Dictionary:
-	return _current_global_metadata.duplicate(true)
+func get_current_metadata_dc(global: bool) -> Dictionary:
+	return _current_global_metadata.duplicate(true) if global else _current_creature_metadata.duplicate(true)
+
 
 ## --------------
 ##    SAVING
 ## --------------
 
 ## set / override a value in the metadata
-func set_global_metadata_value(metadata_key: String, value):
+func set_metadata_value(global: bool, metadata_key: String, value):
 	if is_instance_of(value, TYPE_INT) or is_instance_of(value, TYPE_FLOAT):
 		value = str(value)
 	
-	_current_global_metadata[metadata_key] = value
-	_should_save_global_metadata = true
+	if global:
+		_current_global_metadata[metadata_key] = value
+		_should_save_global_metadata = true
+	else:
+		_current_creature_metadata[metadata_key] = value
+		_should_save_creature_metadata = true
 
 ## add to a value in the metadata
-func add_to_global_metadata_value(metadata_key: String, value, convert_to_num: bool = true):
-	var new_val = get_global_metadata_value(metadata_key)
+func add_to_metadata_value(global: bool, metadata_key: String, value, convert_to_num: bool = true, subtract: bool = false):
+	var new_val = get_metadata_value(global, metadata_key)
 	assert(is_instance_of(new_val, TYPE_INT) or is_instance_of(new_val, TYPE_FLOAT) or is_instance_of(new_val, TYPE_STRING))
 	assert(is_instance_of(value, TYPE_INT) or is_instance_of(value, TYPE_FLOAT) or is_instance_of(value, TYPE_STRING))
 	
@@ -136,31 +153,41 @@ func add_to_global_metadata_value(metadata_key: String, value, convert_to_num: b
 		@warning_ignore("incompatible_ternary")  # bruh i know
 		new_val = float(new_val) if new_val.contains(".") else int(new_val)
 	
-	# add
-	new_val += value
+	# perform operation
+	new_val += -value if subtract else value
 	if convert_to_num:
 		new_val = str(new_val)  # back to a string
 	
-	_current_global_metadata[metadata_key] = new_val
-	_should_save_global_metadata = true
+	if global:
+		_current_global_metadata[metadata_key] = new_val
+		_should_save_global_metadata = true
+	else:
+		_current_creature_metadata[metadata_key] = new_val
+		_should_save_creature_metadata = true
 
 ## append to a (list) value in the metadata
-func append_to_global_metadata_value(metadata_key: String, value):
-	var new_val = get_global_metadata_value(metadata_key)
+func append_to_metadata_value(global: bool, metadata_key: String, value):
+	var new_val = get_metadata_value(global, metadata_key)
 	assert(is_instance_of(new_val, TYPE_ARRAY))
 	new_val.append(value)
 	
-	_current_global_metadata[metadata_key] = new_val
-	_should_save_global_metadata = true
+	if global:
+		_current_global_metadata[metadata_key] = new_val
+		_should_save_global_metadata = true
+	else:
+		_current_creature_metadata[metadata_key] = new_val
+		_should_save_creature_metadata = true
 
 ## modify a dict in the metadata, action: 0=set, 1=add, 2=append
 ## paths contain the keys to be used to navigate the dictionary value at metadata_key in the metadata
-func modify_global_metadata_value(metadata_key: String, paths: Array, action: int, value):
+func modify_metadata_value(global: bool, metadata_key: String, paths: Array, action: int, value):
 	assert(len(paths) != 0, "just use set_metadata_value() lmao")
-	if not _current_global_metadata.has(metadata_key):
-		_current_global_metadata[metadata_key] = get_global_metadata_value(metadata_key)
+	if global and not _current_global_metadata.has(metadata_key):
+		_current_global_metadata[metadata_key] = get_metadata_value(global, metadata_key)
+	elif not global and not _current_creature_metadata.has(metadata_key):
+		_current_creature_metadata[metadata_key] = get_metadata_value(global, metadata_key)
 	
-	var ptr = _current_global_metadata[metadata_key]  # pointer
+	var ptr = _current_global_metadata[metadata_key] if global else _current_creature_metadata[metadata_key]
 	var last_key = paths.pop_back()
 	for key in paths:
 		ptr = ptr[key]
@@ -175,35 +202,56 @@ func modify_global_metadata_value(metadata_key: String, paths: Array, action: in
 		ptr[last_key].append(value)  # append
 	else:
 		printerr("Invalid action '%s' when attempting to modify metadata" % action)
-	_should_save_global_metadata = true
+	
+	_should_save_global_metadata = _should_save_global_metadata or global
+	_should_save_creature_metadata = _should_save_creature_metadata or not global
 
 ## takes into account the metadata to override and to add
 func generate_global_metadata_to_save() -> Dictionary:
 	var all_metadata: Dictionary = get_default_global_metadata()
-	
 	for key in all_metadata.keys():
-		all_metadata[key] = get_global_metadata_value(key)
-	
-	all_metadata[LAST_SAVED] = Time.get_unix_time_from_system()
+		all_metadata[key] = get_metadata_value(true, key)
+	all_metadata[VERSION_GLOBAL] = VERSION
+	all_metadata[LAST_SAVED_GLOBAL] = Time.get_unix_time_from_system()
+	return all_metadata
+
+func generate_creature_metadata_to_save(creature_id_override = -1) -> Dictionary:
+	var all_metadata: Dictionary = get_default_creature_metadata()
+	for key in all_metadata.keys():
+		all_metadata[key] = get_metadata_value(false, key)
+	if creature_id_override > -1:
+		all_metadata[CREATURE_ID] = creature_id_override
+	all_metadata[CREATURE_LAST_SAVED] = Time.get_unix_time_from_system()
 	return all_metadata
 
 # save file structure:
 # line 1  = global_metadata
-# line 2+ = [relative_metadata, node_data, node_data, node_data, ...]  (each creature is assigned its own line)
-func save_data():
+# line 2+ = [creature_metadata, node_data, node_data, node_data, ...]  (each creature is assigned its own line)
+func save_data(creature_id_override = -1):
 	var save_file = FileAccess.open(get_save_data_file(), FileAccess.WRITE)
 	var save_nodes = get_tree().get_nodes_in_group(Globals.SAVE_DATA_GROUP)
 	var all_data = [generate_global_metadata_to_save()]  # metadata is first
 	_current_global_metadata = all_data[0]
+	var creature_id_to_save = get_metadata_value(true, CURRENT_CREATURE) if creature_id_override < 0 else creature_id_override
 	
-	var current_creature_id = get_global_metadata_value(CURRENT_CREATURE)
-
+	var final_save = func():
+		save_file.store_string("\n".join(all_data))
+	
+	# no current creature, exit early
+	if creature_id_to_save < 0:
+		final_save.call()
+		return
+	
 	# save every creature data & update current creature node data
-	for id_key in _every_creature_data.keys():
-		var creature_data = _every_creature_data[id_key]
+	for creature_id in _every_creature_metadata.keys():
+		var creature_metadata = _every_creature_metadata[creature_id]
+		var creature_node_data: Array = _every_creature_node_data[creature_id]
 		
-		if id_key == current_creature_id:
-			creature_data = [creature_data[0]]  # relative metadata first
+		# update only the creature to save
+		if creature_id == creature_id_to_save:
+			creature_metadata = generate_creature_metadata_to_save(creature_id)
+			creature_node_data.clear()
+			
 			for node in save_nodes:
 				if !Globals.has_function(node, SAVE) or !Globals.has_function(node, GET_SAVE_UID):
 					continue
@@ -212,12 +260,12 @@ func save_data():
 					SAVE_UID: node.call(GET_SAVE_UID),
 					DATA: node.call(SAVE)
 				}
-				creature_data.append(JSON.stringify(node_data))
-		all_data.append(creature_data)
-	save_file.store_string("\n".join(all_data))
+				creature_node_data.append(JSON.stringify(node_data))  # append new node data
+		all_data.append([creature_metadata, creature_node_data])  # creature metadata first
+	final_save.call()
 
 ## changes only the first line (the metadata line) in save file, everything else remains unchanged
-func save_only_metadata():
+func save_only_global_metadata():
 	_should_save_global_metadata = false
 	var file_existed = has_save_data()
 	var save_file = FileAccess.open(get_save_data_file(), FileAccess.READ)
@@ -232,6 +280,30 @@ func save_only_metadata():
 		while save_file.get_position() < save_file.get_length():
 			all_lines.append(save_file.get_line())
 
+	save_file = FileAccess.open(get_save_data_file(), FileAccess.WRITE)
+	save_file.store_string("\n".join(all_lines))
+
+func save_only_creature_metadata(creature_id_override = -1):
+	_should_save_creature_metadata = false
+	
+	if not has_save_data():
+		printerr("you idiot, save some dam metadata first >:( , aborting")
+		return
+	
+	var creature_id_to_save = get_metadata_value(true, CURRENT_CREATURE) if creature_id_override < 0 else creature_id_override
+	var save_file = FileAccess.open(get_save_data_file(), FileAccess.READ)
+	var global_metadata = save_file.get_line()
+	var all_lines = [global_metadata]
+	
+	while save_file.get_position() < save_file.get_length():
+		var line = save_file.get_line()
+		var parsed_line: Array = JSON.parse_string(line)
+		var creature_metadata = parsed_line.pop_front()
+		
+		if creature_metadata[CREATURE_ID] == creature_id_to_save:
+			line = [generate_creature_metadata_to_save(creature_id_to_save), parsed_line]
+		all_lines.append(line)
+	
 	save_file = FileAccess.open(get_save_data_file(), FileAccess.WRITE)
 	save_file.store_string("\n".join(all_lines))
 
@@ -252,7 +324,6 @@ func save_settings_data():
 		for key in data.keys():
 			if key != SECTION:
 				config.set_value(section, key, data[key])
-
 		config.save(get_settings_file())
 
 ## save everything every n seconds
@@ -270,35 +341,99 @@ func setup_auto_save(timer_parent):
 ##    LOADING
 ## --------------
 
+# build node atlas with all nodes in SAVE_DATA_GROUP
 func build_save_uid_node_atlas():
 	var save_nodes = get_tree().get_nodes_in_group(Globals.SAVE_DATA_GROUP)
 	for node in save_nodes:
 		if !Globals.has_function(node, GET_SAVE_UID):
 			return
-		
 		save_uid_node_atlas[node.call(GET_SAVE_UID)] = node
 
 ## loads only the metadata line from save (if it exists)
-func load_metadata() -> Dictionary:
+func load_global_metadata() -> Dictionary:
 	if _should_save_global_metadata:
-		printerr("Cannot load metadata from file as there are unsaved changes to the metadata")
-		return get_current_global_metadata_dc()
+		printerr("Cannot load global metadata from file as there are unsaved changes to the metadata")
+		return get_current_metadata_dc(true)
 	
 	if has_save_data():
 		var save_file = FileAccess.open(get_save_data_file(), FileAccess.READ)
 		_current_global_metadata = JSON.parse_string(save_file.get_line())
-	return get_current_global_metadata_dc()
+	return get_current_metadata_dc(true)
+
+## loads creature metadata and node data
+func load_creature_data(creature_id_override: int = -1):
+	if _should_save_creature_metadata:
+		printerr("Cannot load creature metadata from file as there are unsaved changes to the metadata")
+		return
+	
+	var creature_id = get_metadata_value(true, CURRENT_CREATURE) if creature_id_override < 0 else creature_id_override
+	if creature_id < 0:
+		printerr("current creature is not set")
+		return
+	
+	## put default metadata and an empty node data list
+	if not _every_creature_metadata.has(creature_id):
+		printerr("no data for creature %s exists, using default data" % creature_id)
+		_every_creature_metadata[creature_id] = generate_creature_metadata_to_save(creature_id)
+		_every_creature_node_data[creature_id] = []
+	
+	## load the node data
+	var save_nodes = get_tree().get_nodes_in_group(Globals.SAVE_DATA_GROUP)
+	var node_data_skipped = []
+	for node_data in _every_creature_node_data[creature_id]:
+		if SAVE_UID not in node_data or DATA not in node_data:
+			printerr("'%s' or '%s' value in save data is missing! skipping" % [SAVE_UID, DATA])
+			continue
+
+		var data = node_data[DATA]
+		var save_uid: int = int(node_data[SAVE_UID])
+		if !save_uid_node_atlas.has(save_uid):
+			printerr("Node with save uid of '%s' could not be found, skipping" % save_uid)
+			node_data_skipped.append(data)
+			continue
+
+		var node: Node = save_uid_node_atlas[save_uid]
+		if node not in save_nodes:
+			printerr("Node '%s' is not in '%s' group, skipping" % [node, Globals.SAVE_DATA_GROUP])
+			node_data_skipped.append(data)
+			continue
+
+		save_nodes.erase(node)
+		if not Globals.has_function(node, LOAD):
+			node_data_skipped.append(data)
+			continue
+		node.call(LOAD, data)
+	
+	## check for nodes that missed being loaded
+	# attempts to call load data with data returned from the save function
+	var has_no_node_data = len(_every_creature_node_data[creature_id]) == 0
+	if not has_no_node_data and len(save_nodes) > 0:
+		printerr("%s Nodes for creature '%s' were not loaded: '%s'.\nAttempting to fix..." % [len(save_nodes), creature_id, save_nodes])
+		
+		for node in save_nodes:
+			if not Globals.has_function(node, LOAD) or not Globals.has_function(node, SAVE):
+				continue
+			save_nodes.erase(node)
+			node.call(LOAD, node.call(SAVE))  # load the nodes default save data
+	
+	## final error message
+	if not has_no_node_data and len(save_nodes) > 0:
+		printerr("--- VERY BIG WARNING ---\n%s Node data for creature '%s' is MISSING from the save file and COULD NOT be loaded:\n%s\n--- VERY BIG WARNING ---" % [len(save_nodes), creature_id, save_nodes])
+	
+	if len(node_data_skipped) > 0:
+		printerr("Some data for creature '%s' was not loaded! %s nodes/s were missed" % [creature_id, len(node_data_skipped)])
+	return
 
 ## loads data, and passes it to saved nodes. returns metadata
 func load_data() -> Dictionary:
 	build_save_uid_node_atlas()
 
 	if _should_save_global_metadata:
-		printerr("Cannot load metadata from file as there are unsaved changes to the metadata")
-		return get_current_global_metadata_dc()
+		printerr("Cannot load global metadata from file as there are unsaved changes to the metadata")
+		return get_current_metadata_dc(true)
 
 	if !has_save_data():
-		return get_current_global_metadata_dc()
+		return get_current_metadata_dc(true)
 
 	# attempt to load
 	var save_file = FileAccess.open(get_save_data_file(), FileAccess.READ)
@@ -311,54 +446,12 @@ func load_data() -> Dictionary:
 	while save_file.get_position() < save_file.get_length():
 		var line = save_file.get_line()
 		var parsed_line: Array = JSON.parse_string(line)
-		var relative_metadata = parsed_line.pop_front()
+		var creature_metadata = parsed_line.pop_front()
 		
-		if this is the current creature, load node data otherwise skip
-		for node_data in parsed_line:
-		if SAVE_UID not in parsed_line or DATA not in parsed_line:
-			printerr("'%s' or '%s' value in save data is missing! skipping" % [SAVE_UID, DATA])
-			continue
-
-		var data = parsed_line[DATA]
-		var save_uid: int = int(parsed_line[SAVE_UID])
-		if !save_uid_node_atlas.has(save_uid):
-			printerr("Node with save uid of '%s' could not be found, skipping" % save_uid)
-			data_skipped.append(data)
-			continue
-
-		var node: Node = save_uid_node_atlas[save_uid]
-		if node not in save_nodes:
-			printerr("Node '%s' is not in '%s' group, skipping" % [node, Globals.SAVE_DATA_GROUP])
-			data_skipped.append(data)
-			continue
-		
-		save_nodes.erase(node)
-		if not Globals.has_function(node, LOAD):
-			data_skipped.append(data)
-			continue
-
-		# call load function
-		node.call(LOAD, data)
-
-	## check for nodes that missed being loaded
-	# attempts to call load data with data returned from the save function
-	var only_metadata = has_only_metadata()
-	if not only_metadata and len(save_nodes) > 0:
-		printerr("%s Nodes were not loaded: '%s'.\nAttempting to fix..." % [len(save_nodes), save_nodes])
-		
-		for node in save_nodes:
-			if not Globals.has_function(node, LOAD) or not Globals.has_function(node, SAVE):
-				continue
-			save_nodes.erase(node)
-			node.call(LOAD, node.call(SAVE))
-	
-	## final error message
-	if not only_metadata and len(save_nodes) > 0:
-		printerr("--- VERY BIG WARNING ---\n%s Nodes are MISSING from the save file and COULD NOT be loaded:\n%s\n--- VERY BIG WARNING ---" % [len(save_nodes), save_nodes])
-	
-	if len(data_skipped) > 0:
-		printerr("Some data was not loaded! %s line/s were missed" % len(data_skipped))
-	return get_current_metadata_dc()
+		var creature_id = creature_metadata[CREATURE_ID]
+		_every_creature_metadata[creature_id] = creature_metadata
+		_every_creature_node_data[creature_id] = parsed_line
+	return get_current_metadata_dc(true)
 
 
 func load_settings_data():
@@ -396,9 +489,9 @@ func load_settings_data():
 
 ## add a newly discovered creature, or add 1 to "times_hatched" if already discovered
 func add_to_creatures_discovered(uid: String):
-	if get_metadata_value(CREATURES_DISCOVERED).has(uid):
+	if get_metadata_value(true, CREATURES_DISCOVERED).has(uid):
 		# add 1 to times hatched
-		modify_metadata_value(CREATURES_DISCOVERED, [uid, "num_times_hatched"], ACTION_ADD, 1)
+		modify_metadata_value(true, CREATURES_DISCOVERED, [uid, "num_times_hatched"], ACTION_ADD, 1)
 	else:
 		# add new creature discovered
 		var dict = {
@@ -406,14 +499,16 @@ func add_to_creatures_discovered(uid: String):
 			"max_stage_reached": 0,
 			"num_times_hatched": 1
 		}
-		modify_metadata_value(CREATURES_DISCOVERED, [uid], ACTION_SET, dict)
+		modify_metadata_value(true, CREATURES_DISCOVERED, [uid], ACTION_SET, dict)
 
 func set_new_highest_life_stage(uid: String, life_stage: int):
-	var current_highest = get_metadata_value(CREATURES_DISCOVERED)[uid]["max_stage_reached"]
-	modify_metadata_value(CREATURES_DISCOVERED, [uid, "max_stage_reached"], ACTION_SET, max(current_highest, life_stage))
+	var current_highest = get_metadata_value(true, CREATURES_DISCOVERED)[uid]["max_stage_reached"]
+	modify_metadata_value(true, CREATURES_DISCOVERED, [uid, "max_stage_reached"], ACTION_SET, max(current_highest, life_stage))
 
 func _process(_delta: float) -> void:
 	# save metadata here so the file only needs to be written to once in a frame
 	# no matter the number of metadata changes that occurred this frame
-	if _should_save_metadata:
-		save_only_metadata()
+	if _should_save_global_metadata:
+		save_only_global_metadata()
+	if _should_save_creature_metadata:
+		save_only_creature_metadata()
