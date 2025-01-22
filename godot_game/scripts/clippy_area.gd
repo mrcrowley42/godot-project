@@ -19,6 +19,9 @@ const MUTE_AMBIENCE_SETTING = "MuteAmbInClippyMode"
 @onready var ui = %UI
 @onready var bg = %BGCanvasLayer
 @onready var notif_layer = find_parent("Game").find_child("NotificationLayer")
+@onready var options_menu = find_parent("Game").find_child("OptionsMenu")
+@onready var activity_menu = find_parent("Game").find_child("ActivityMenu")
+@onready var food_menu = find_parent("Game").find_child("FoodMenu")
 @onready var sfx_bus = AudioServer.get_bus_index("SFX")
 
 var dragging: bool = false
@@ -102,6 +105,9 @@ func toggle_clippy_mode() -> void:
 		window.size = start_size
 		window.canvas_transform = start_transform
 		creature.find_child("Sprites").self_modulate = Color(1,1,1,1)
+		food_menu.hide()
+		activity_menu.hide()
+		options_menu.hide()
 		
 
 	# THIS IS SO DUMB!!!
