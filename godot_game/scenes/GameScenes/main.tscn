@@ -1034,12 +1034,16 @@ layout_mode = 2
 theme = ExtResource("18_v1mb2")
 text = "Ambient Sounds"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="CreaturesBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer"]
+[node name="CreaturesBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -1048,7 +1052,7 @@ theme = ExtResource("33_1qhmu")
 icon = ExtResource("39_j7m1h")
 icon_alignment = 1
 
-[node name="SettingBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer"]
+[node name="SettingBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -1058,7 +1062,7 @@ icon = ExtResource("40_j1ufi")
 icon_alignment = 1
 expand_icon = true
 
-[node name="MainMenuBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer"]
+[node name="MainMenuBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("33_1qhmu")
 text = "Quit to title"
@@ -1361,6 +1365,7 @@ script = ExtResource("35_4io20")
 [node name="SettingsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 material = SubResource("ShaderMaterial_1s3b6")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -2085,9 +2090,9 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/ThemeBtn" to="UI/OptionsMenu" method="_on_theme_btn_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/FactBtn" to="UI/OptionsMenu" method="_on_fact_btn_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/AmbienceBtn" to="UI/OptionsMenu" method="_on_ambience_btn_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer/CreaturesBtn" to="UI/OptionsMenu" method="_on_creatures_btn_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer/SettingBtn" to="UI/OptionsMenu" method="_on_settings_btn_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer/MainMenuBtn" to="UI/OptionsMenu/MainOptMenu/VBoxContainer/HBoxContainer/MainMenuBtn" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/MarginContainer/HBoxContainer/CreaturesBtn" to="UI/OptionsMenu" method="_on_creatures_btn_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/MarginContainer/HBoxContainer/SettingBtn" to="UI/OptionsMenu" method="_on_settings_btn_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/MarginContainer/HBoxContainer/MainMenuBtn" to="UI/OptionsMenu/MainOptMenu/VBoxContainer/MarginContainer/HBoxContainer/MainMenuBtn" method="_on_button_down"]
 [connection signal="visibility_changed" from="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ThemeBtns" to="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ThemeBtns" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/OptionsMenu/ThemeMenu/SaveButtons/Back" to="UI/OptionsMenu/ThemeMenu/SaveButtons/Back" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/FactsMenu/Library/SaveButtons/Back" to="UI/OptionsMenu/FactsMenu/Library/SaveButtons/Back" method="_on_button_down"]
