@@ -44,7 +44,7 @@ font_size = 24
 [sub_resource type="LabelSettings" id="LabelSettings_h7scr"]
 line_spacing = 4.0
 font_size = 40
-font_color = Color(0.271203, 0.341779, 0.377135, 1)
+font_color = Color(0.64, 0.64, 0.64, 1)
 
 [node name="Totris" type="Node2D" node_paths=PackedStringArray("ui_overlay_sprite", "score_ui_sprite", "level_ui_sprite", "hold_ui_sprite", "next_ui_sprite", "ui_cover_sprite", "help_bg_sprite")]
 script = ExtResource("1_82aiy")

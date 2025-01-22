@@ -51,6 +51,7 @@ func _ready():
 	next_ui_sprite.texture = ui_theme.box
 	hold_ui_sprite.texture = ui_theme.box
 	help_bg_sprite.texture = ui_theme.box
+	grid_bg.material.set("shader_parameter/outlineColor", ui_theme.outline)
 	kill_menu.hide()
 	help_menu.hide()
 

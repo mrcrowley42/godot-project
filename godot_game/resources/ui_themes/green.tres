@@ -32,4 +32,4 @@ box = ExtResource("3_ptebi")
 unlocked = true
 primary = Color(0.607843, 0.690196, 0.611765, 1)
 bg = Color(0.117647, 0.160784, 0.180392, 1)
-outline = Color(0.18565, 0.260056, 0.272862, 1)
+outline = Color(0.215686, 0.282353, 0.305882, 1)
