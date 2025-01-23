@@ -40,11 +40,10 @@ func setup():
 
 func get_highest_stage() -> int:
 	var uid = Helpers.uid_str(creature)
-	var encountered = DataGlobals.get_metadata_value(DataGlobals.CREATURES_DISCOVERED)
+	var encountered = DataGlobals.get_global_metadata_value(DataGlobals.CREATURES_DISCOVERED)
 	return encountered[uid]['max_stage_reached']
 
 func add_life_stages() -> void:
-	
 	lifestage_btn.clear()
 	lifestage_btn.add_item("LIFE STAGE")
 	lifestage_btn.set_item_disabled(0, true)

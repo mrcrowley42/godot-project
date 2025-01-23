@@ -4,7 +4,7 @@ extends Button
 var fact_to_display: Fact = load("res://resources/facts/example_fact.tres")
 
 func update_locked():
-	var unlocked_items = DataGlobals.load_metadata()['unlocked_facts']
+	var unlocked_items = DataGlobals.get_global_metadata_value(DataGlobals.UNLOCKED_FACTS)
 	var uid = str(ResourceLoader.get_resource_uid(self.fact_to_display.resource_path))
 	var is_unlocked = true if self.fact_to_display.unlocked else uid in unlocked_items
 	self.disabled = !is_unlocked
