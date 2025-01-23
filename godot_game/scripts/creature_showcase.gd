@@ -70,6 +70,9 @@ func _on_stage_btn_item_selected(_index: int) -> void:
 			preview.sprite_frames = creature.adult.sprite_frames
 			preview.play()
 			add_animation_names()
+	
+	## reset emotion back to idle
+	update_animation(emote_btn.get_item_text(emote_btn.selected))
 
 
 func add_animation_names() -> void:

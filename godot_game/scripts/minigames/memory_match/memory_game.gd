@@ -82,14 +82,14 @@ func load_save_data(data):
 	best_time = data["best_time"]
 	lowest_guesses = data["lowest_guesses"]
 	
-	if is_instance_of(best_time, TYPE_STRING) and best_time == "":
+	if best_time < 0:
 		best_time = null
-	if is_instance_of(lowest_guesses, TYPE_STRING) and lowest_guesses == "":
+	if lowest_guesses < 0:
 		lowest_guesses = null
 
 
 func get_save_data():
-	return {"best_time": best_time if best_time != null else "", "lowest_guesses": lowest_guesses if lowest_guesses != null else ""}
+	return {"best_time": best_time if best_time != null else -1, "lowest_guesses": lowest_guesses if lowest_guesses != null else -1}
 
 
 func _on_timed_start_btn_button_down() -> void:
