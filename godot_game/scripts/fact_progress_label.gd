@@ -7,7 +7,7 @@ func _ready() -> void:
 
 func update_text(_null=null):
 	var base_text = ""
-	var unlocked_facts = DataGlobals.get_metadata_value(DataGlobals.UNLOCKED_FACTS)
+	var unlocked_facts = DataGlobals.get_global_metadata_value(DataGlobals.UNLOCKED_FACTS)
 	var fact_list = load("res://resources/fact_list.tres").facts
 	
 	for category in Fact.FactCategory.values():

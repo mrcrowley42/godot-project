@@ -67,7 +67,7 @@ var stats_heal: Dictionary = {Stat.HP: add_hp, Stat.FUN: add_fun,
 
 func setup_creature():
 	og_pos = position
-	var uid = int(DataGlobals.get_metadata_value(DataGlobals.CURRENT_CREATURE))
+	var uid = int(DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_TYPE_UID))
 	creature_type = load(ResourceUID.get_id_path(uid))
 	
 	# should grow up?

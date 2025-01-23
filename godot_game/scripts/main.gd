@@ -3,7 +3,6 @@ class_name Game extends Node
 @export var debug_mode: bool
 @export var unlock_fps: bool = false
 
-var last_saved: float
 @onready var launch_time: float = Time.get_unix_time_from_system()
 @onready var stat_man: StatusManager = %StatusManager
 @onready var minigame_man: MinigameManager = %MinigameManager
@@ -26,9 +25,9 @@ func _ready():
 	if !DataGlobals.has_save_data():
 		DataGlobals.save_only_metadata()
 
-	# load in data
-	var metadata = DataGlobals.load_data()
-	last_saved = metadata[DataGlobals.LAST_SAVED] if metadata.has(DataGlobals.LAST_SAVED) else launch_time
+	## load in all the data
+	DataGlobals.load_data()
+	DataGlobals.load_creature_data()
 	DataGlobals.load_settings_data()
 	calc_elapsed_time()
 
@@ -37,8 +36,8 @@ func _ready():
 	if not debug_mode:
 		debug_window.process_mode = Node.PROCESS_MODE_DISABLED
 	
-	# force this function to run since load() isn't called
-	if DataGlobals.has_only_metadata():
+	# force this function to run since load() wasn't called
+	if DataGlobals.has_only_creature_metadata():
 		%Creature.setup_creature()
 		%Creature.reset_stats()
 	
@@ -57,7 +56,7 @@ func set_is_in_trans(value: bool):
 
 ## temp print to console
 func calc_elapsed_time():
-	var elapsed_time = launch_time - last_saved
+	var elapsed_time = launch_time - DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_LAST_SAVED)
 	# please excuse the bad variable names here, this is only a temp thing anyway.
 	if debug_mode:
 		var _a = Color(1,0,0)

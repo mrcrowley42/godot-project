@@ -79,10 +79,15 @@ func show_finish_menu(is_timed: bool, score: float):
 func load_save_data(data):
 	best_time = data["best_time"]
 	lowest_guesses = data["lowest_guesses"]
+	
+	if is_instance_of(best_time, TYPE_STRING) and best_time == "":
+		best_time = null
+	if is_instance_of(lowest_guesses, TYPE_STRING) and lowest_guesses == "":
+		lowest_guesses = null
 
 
 func get_save_data():
-	return {"best_time": best_time, "lowest_guesses": lowest_guesses}
+	return {"best_time": best_time if best_time != null else "", "lowest_guesses": lowest_guesses if lowest_guesses != null else ""}
 
 
 func _on_timed_start_btn_button_down() -> void:

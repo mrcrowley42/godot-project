@@ -43,7 +43,7 @@ func toggle_holiday_mode():
 
 func _notification(what):
 	if what == Globals.NOTIFICATION_ALL_DATA_IS_LOADED:
-		holiday_mode = DataGlobals.get_metadata_value(true, DataGlobals.HOLIDAY_MODE)
+		holiday_mode = DataGlobals.get_global_metadata_value(DataGlobals.HOLIDAY_MODE)
 	finished_loading.emit()
 
 

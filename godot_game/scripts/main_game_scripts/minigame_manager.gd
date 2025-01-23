@@ -70,7 +70,7 @@ func unload_minigame(do_transition=false, game_instance=null) -> void:
 ## Trigger unloading function when a minigame scene is freed.
 func _notification(noti) -> void:
 	if noti == Globals.NOTIFICATION_ALL_DATA_IS_LOADED:
-		save_data = DataGlobals.get_metadata_value(true, DataGlobals.MINIGAME_DATA)
+		save_data = DataGlobals.get_global_metadata_value(DataGlobals.MINIGAME_DATA)
 	
 	if noti == Globals.NOTIFICATION_MINIGAME_CLOSED:
 		unload_minigame()

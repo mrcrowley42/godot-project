@@ -70,10 +70,10 @@ var selected_egg_inx = null  # int
 var scale_addition: Vector2 = Vector2(0, 0)
 
 func _ready():
-	DataGlobals.load_metadata()
-	var current_creature = DataGlobals.get_metadata_value(DataGlobals.CURRENT_CREATURE)
-	if (skip_scene or DataGlobals.has_save_data()) and len(current_creature) != 0:
-		if DataGlobals.has_only_metadata():
+	DataGlobals.load_data()
+	var current_creature = DataGlobals.get_creature_id()
+	if (skip_scene or DataGlobals.has_save_data()) and current_creature != -1:
+		if DataGlobals.has_only_creature_metadata():
 			instant_open_to_continue_screen()
 			return
 		else:
@@ -280,7 +280,7 @@ func set_creature_desc(creature: CreatureType):
 	egg_desc.text = "[center][u]%s![/u]\n[font top=6 s=15]%s" % [creature.name, creature.desc]
 
 func is_creature_known(creature_type_uid: int) -> bool:
-	return DataGlobals.get_metadata_value(DataGlobals.CREATURES_DISCOVERED).has(str(creature_type_uid))
+	return DataGlobals.get_global_metadata_value(DataGlobals.CREATURES_DISCOVERED).has(str(creature_type_uid))
 
 ## when one egg is selected from placed eggs
 func select_egg(egg: EggEntry, inx: int):
@@ -423,7 +423,9 @@ func finish_hatching(sprite_c: Control):
 	var uid_str: String = Helpers.uid_str(creature_hatched)
 
 	DataGlobals.add_to_creatures_discovered(uid_str)
-	DataGlobals.set_metadata_value(DataGlobals.CURRENT_CREATURE, uid_str)
+	var creature_id = DataGlobals.create_new_creature(uid_str, creature_hatched.name)
+	DataGlobals.set_metadata_value(true, DataGlobals.CURRENT_CREATURE, creature_id)
+	DataGlobals.save_data()
 
 ## randomly pick a creature to hatch from the selected egg
 func pick_creature_to_hatch() -> CreatureType:
@@ -445,7 +447,7 @@ func pick_creature_to_hatch() -> CreatureType:
 ## for when first loading in and continue button wasn't pressed before game was closed last
 func instant_open_to_continue_screen():
 	do_opening_transition()
-	var uid = int(DataGlobals.get_metadata_value(DataGlobals.CURRENT_CREATURE))
+	var uid = int(DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_TYPE_UID))
 	var creature_hatched: CreatureType = load(ResourceUID.get_id_path(uid))
 
 	# setup display

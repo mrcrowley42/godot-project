@@ -31,7 +31,7 @@ func _ready() -> void:
 
 func _notification(noti: int) -> void:
 	if noti == Globals.NOTIFICATION_CREATURE_IS_LOADED:
-		if DataGlobals.has_only_metadata():
+		if DataGlobals.has_only_creature_metadata():
 			place_all_cosmetics()
 		else:
 			set_ready()
