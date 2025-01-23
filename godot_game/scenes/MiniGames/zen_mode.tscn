@@ -1,7 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://drotl04h8ywfe"]
+[gd_scene load_steps=7 format=3 uid="uid://drotl04h8ywfe"]
 
+[ext_resource type="Shader" path="res://shaders/zen_mode.gdshader" id="1_5e7kv"]
 [ext_resource type="Script" path="res://scripts/minigames/zen_mode.gd" id="1_kb7c0"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="2_s7g67"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m5uvw"]
+shader = ExtResource("1_5e7kv")
+shader_parameter/color_behind = Color(0.7, 1, 1, 1)
+shader_parameter/color = Color(0.6, 0.75, 1, 1)
+shader_parameter/fade_length = 0.8
+shader_parameter/intensity = 0.4
 
 [sub_resource type="Gradient" id="Gradient_5hppj"]
 offsets = PackedFloat32Array(0, 0.91623)
@@ -11,13 +19,14 @@ colors = PackedColorArray(0.529412, 0.576471, 1, 1, 0.0352941, 0.329412, 1, 0)
 gradient = SubResource("Gradient_5hppj")
 width = 432
 height = 432
-fill_from = Vector2(0, 0.166667)
+fill_from = Vector2(0, 0.150997)
 fill_to = Vector2(0, 1)
 
 [node name="MiniGame" type="Node2D"]
 
 [node name="TextureRect" type="TextureRect" parent="."]
 modulate = Color(1, 1, 1, 0.388235)
+material = SubResource("ShaderMaterial_m5uvw")
 offset_left = 53.0
 offset_top = 120.0
 offset_right = 485.0
@@ -29,10 +38,10 @@ unique_name_in_owner = true
 script = ExtResource("1_kb7c0")
 
 [node name="CloseBtn" type="Button" parent="."]
-offset_left = 78.0
-offset_top = 141.0
-offset_right = 179.0
-offset_bottom = 184.0
+offset_left = 67.0
+offset_top = 135.0
+offset_right = 147.0
+offset_bottom = 165.0
 theme = ExtResource("2_s7g67")
 text = "Stop"
 

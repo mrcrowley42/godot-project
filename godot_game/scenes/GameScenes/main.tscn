@@ -744,7 +744,6 @@ metadata/_edit_use_anchors_ = true
 
 [node name="ActivityMenu" type="PanelContainer" parent="UI"]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(400, 400)
 anchors_preset = 4
 anchor_top = 0.5
@@ -982,6 +981,7 @@ metadata/_edit_use_anchors_ = true
 [node name="OptionsMenu" type="PanelContainer" parent="UI"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
