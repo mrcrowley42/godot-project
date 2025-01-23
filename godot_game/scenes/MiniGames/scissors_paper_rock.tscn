@@ -77,7 +77,7 @@ font_size = 24
 [node name="MiniGame" type="Node2D"]
 script = ExtResource("1_esr3m")
 
-[node name="GameLogic" type="Node" parent="." node_paths=PackedStringArray("box_sprite", "help_menu", "creature_choice_sprite", "creature_prev", "ui_overlay_sprite", "score_ui_sprite")]
+[node name="GameLogic" type="Node" parent="." node_paths=PackedStringArray("box_sprite", "help_menu", "creature_choice_sprite", "creature_prev", "ui_overlay_sprite", "score_ui_sprite", "help_bg_sprite")]
 script = ExtResource("3_7jb5j")
 box_sprite = NodePath("../Gameplay/GameContainer/Node2D2/Node2D2/Box")
 help_menu = NodePath("../Gameplay/HelpMenu")
@@ -85,6 +85,7 @@ creature_choice_sprite = NodePath("../Gameplay/GameContainer/Node2D2/Node2D2/Spr
 creature_prev = NodePath("../Gameplay/GameContainer/Node2D/creaturePrev")
 ui_overlay_sprite = NodePath("../UI/Control/UI_Overlay")
 score_ui_sprite = NodePath("../UI/Control/ScoreContainer")
+help_bg_sprite = NodePath("../Gameplay/HelpMenu/NinePatchRect")
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true

@@ -21,6 +21,7 @@ class_name MemoryGame extends Node2D
 
 @export var ui_overlay_sprite: Sprite2D
 @export var score_ui_sprite: NinePatchRect
+@export var help_bg_sprite: NinePatchRect
 
 const FINAL_SCORE_LABEL_TEXT = {
 	null: "-\n-",
@@ -42,6 +43,7 @@ func _ready() -> void:
 	show_start_menu()
 	ui_overlay_sprite.texture = ui_theme.memory_ui
 	score_ui_sprite.texture = ui_theme.box_inverted
+	help_bg_sprite.texture = ui_theme.box
 	help_menu.hide()
 	finish_menu.hide()
 

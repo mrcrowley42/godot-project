@@ -50,6 +50,8 @@ func add_life_stages() -> void:
 	lifestage_btn.set_item_disabled(0, true)
 	for i in range(0, get_highest_stage() + 1):
 		lifestage_btn.add_item(stages[i])
+	
+	lifestage_btn.select(get_highest_stage()+1)
 
 
 func _on_button_button_down() -> void:
@@ -72,12 +74,17 @@ func _on_stage_btn_item_selected(_index: int) -> void:
 
 
 func add_animation_names() -> void:
+	var btn_dict = {}
 	emote_btn.clear()
 	emote_btn.add_item("EMOTION")
 	emote_btn.set_item_disabled(0, true)
+	var i = 1
 	for anim_name in preview.sprite_frames.get_animation_names():
+		btn_dict[anim_name] = i
+		i += 1
 		emote_btn.add_item(anim_name.capitalize())
-
+	
+	emote_btn.select(btn_dict['idle'])
 
 func _on_emote_btn_item_selected(index: int) -> void:
 	if index == 0:
