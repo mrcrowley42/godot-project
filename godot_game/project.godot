@@ -25,6 +25,10 @@ Globals="*res://scripts/global/Globals.gd"
 DataGlobals="*res://scripts/global/DataGlobals.gd"
 Testing="*res://tests/Testing_config.gd"
 
+[debug]
+
+file_logging/enable_file_logging=true
+
 [display]
 
 window/size/viewport_width=540
