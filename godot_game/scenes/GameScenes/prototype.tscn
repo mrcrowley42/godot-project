@@ -98,7 +98,7 @@ script/source = "extends Button
 @onready var creature = %Creature
 
 func _on_button_down():
-	%BtnClick.play()
+	#%BtnClick.play()
 	creature.dmg(300, 'mp')
 "
 
@@ -119,7 +119,7 @@ script/source = "extends Button
 @onready var creature = %Creature
 
 func _on_button_down():
-	%BtnClick.play()
+	#%BtnClick.play()
 	%PIPE.play()
 	creature.dmg(300, 'hp')
 "
@@ -135,7 +135,7 @@ script/source = "extends Button
 
 
 func _on_button_up():
-	%BtnClick.play()
+	#%BtnClick.play()
 	%OptionsMenu.visible = !%OptionsMenu.visible
 "
 
