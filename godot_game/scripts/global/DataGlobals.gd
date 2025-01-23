@@ -271,6 +271,7 @@ func save_data(creature_id_override: int = -1):
 		creature_data.append_array(creature_node_data)
 		all_data.append(JSON.stringify(creature_data))
 	save_file.store_string("\n".join(all_data))
+	print("all data saved to file (updated creature '%s')" % creature_id_to_save)
 
 ## changes only the first line (the metadata line) in save file, everything else remains unchanged
 func save_only_global_metadata():
@@ -290,6 +291,7 @@ func save_only_global_metadata():
 
 	save_file = FileAccess.open(get_save_data_file(), FileAccess.WRITE)
 	save_file.store_string("\n".join(all_lines))
+	print("global metadata saved to file")
 
 ## saves only the creature's updated metadata, its node data is not updated
 func save_only_creature_metadata(creature_id_override = -1):
@@ -317,6 +319,7 @@ func save_only_creature_metadata(creature_id_override = -1):
 	
 	save_file = FileAccess.open(get_save_data_file(), FileAccess.WRITE)
 	save_file.store_string("\n".join(all_lines))
+	print("Creature '%s' metadata saved (did not update node data)" % creature_id_to_save)
 
 ## create a new creature in memory, does not save to file, call save_data yourself (returns its new id)
 func create_new_creature(type_uid: String, initial_creature_name: String) -> int:
@@ -330,6 +333,7 @@ func create_new_creature(type_uid: String, initial_creature_name: String) -> int
 	
 	_every_creature_metadata[creature_id] = new_creature_metadata
 	_every_creature_node_data[creature_id] = []
+	print("new creature '%s' created, did not save." % creature_id)
 	return creature_id
 
 func save_settings_data():
@@ -350,6 +354,7 @@ func save_settings_data():
 			if key != SECTION:
 				config.set_value(section, key, data[key])
 		config.save(get_settings_file())
+	print("settings data saved to file")
 
 ## save everything every n seconds
 func setup_auto_save(timer_parent):
@@ -360,7 +365,7 @@ func setup_auto_save(timer_parent):
 	timer.wait_time = AUTOSAVE_SECONDS
 	timer.timeout.connect(save_data)
 	timer_parent.add_child(timer)
-	print_rich("[color=light_blue]Autosave started for every %s seconds" % AUTOSAVE_SECONDS)
+	print("--- Autosave started for every %s seconds ---" % AUTOSAVE_SECONDS)
 
 ## --------------
 ##    LOADING
@@ -373,6 +378,7 @@ func build_save_uid_node_atlas():
 		if !Globals.has_function(node, GET_SAVE_UID):
 			return
 		save_uid_node_atlas[node.call(GET_SAVE_UID)] = node
+	print("node uid atlas built")
 
 ## loads only the metadata line from save (if it exists)
 func load_global_metadata() -> Dictionary:
@@ -383,6 +389,7 @@ func load_global_metadata() -> Dictionary:
 	if has_save_data():
 		var save_file = FileAccess.open(get_save_data_file(), FileAccess.READ)
 		_current_global_metadata = JSON.parse_string(save_file.get_line())
+	print("global metadata has been loaded from file")
 	return get_global_metadata_dc()
 
 ## loads creature metadata and node data
@@ -447,7 +454,7 @@ func load_creature_data(creature_id_override: int = -1):
 	
 	if len(node_data_skipped) > 0:
 		printerr("Some data for creature '%s' was not loaded! %s nodes/s were missed" % [creature_id, len(node_data_skipped)])
-	print_debug("Creature '%s' metadata & node data has been loaded" % creature_id)
+	print("Creature '%s' metadata & node data has been loaded from file" % creature_id)
 
 ## loads data, and passes it to saved nodes. returns metadata
 func load_data() -> Dictionary:
@@ -473,7 +480,7 @@ func load_data() -> Dictionary:
 		var creature_id: int = int(creature_metadata[CREATURE_ID])  ## this type assignment is VERY IMPORTANT!!!
 		_every_creature_metadata[creature_id] = creature_metadata
 		_every_creature_node_data[creature_id] = parsed_line if len(parsed_line) != 0 else []
-	print_debug("all save data has been loaded")
+	print("all save data has been loaded from file")
 	return get_global_metadata_dc()
 
 
@@ -504,6 +511,7 @@ func load_settings_data():
 				continue
 			data_to_send[key] = config.get_value(section, key)
 		node.call(LOAD, data_to_send)
+	print("settings data loaded from file")
 
 
 ## ------------
@@ -515,6 +523,7 @@ func add_to_creatures_discovered(uid: String):
 	if get_global_metadata_value(CREATURES_DISCOVERED).has(uid):
 		# add 1 to times hatched
 		modify_metadata_value(true, CREATURES_DISCOVERED, [uid, "num_times_hatched"], ACTION_ADD, 1)
+		print("hatched another '%s' creature" % uid)
 	else:
 		# add new creature discovered
 		var dict = {
@@ -523,6 +532,7 @@ func add_to_creatures_discovered(uid: String):
 			"num_times_hatched": 1
 		}
 		modify_metadata_value(true, CREATURES_DISCOVERED, [uid], ACTION_SET, dict)
+		print("new creature discovered '%s'" % uid)
 
 func set_new_highest_life_stage(uid: String, life_stage: int):
 	var current_highest = get_global_metadata_value(CREATURES_DISCOVERED)[uid]["max_stage_reached"]

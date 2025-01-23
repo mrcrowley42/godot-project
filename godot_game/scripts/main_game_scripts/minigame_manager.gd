@@ -26,6 +26,7 @@ var can_interact: bool = true
 ## below options menu, but above all other elements.
 func load_minigame(pre_loaded=null, instance=null, do_transition=false) -> void:
 	assert(pre_loaded != null or instance != null)  # either one or the other
+	
 	if current_minigame == null:
 		ambience_man.fade_out()
 		%BtnClick.play()
@@ -41,6 +42,7 @@ func load_minigame(pre_loaded=null, instance=null, do_transition=false) -> void:
 		find_parent("Game").find_child("UI").add_child(game)
 		find_parent("Game").find_child("UI").move_child(game, 0)
 		current_minigame = pre_loaded.resource_path if pre_loaded != null else game.name
+		print("loading minigame '%s'" % current_minigame)
 		%ActButton.disabled = true
 		%FoodButton.disabled = true
 
@@ -50,6 +52,7 @@ func unload_minigame(do_transition=false, game_instance=null) -> void:
 	if !can_interact:
 		return
 	
+	print("unloading minigame '%s'" % current_minigame)
 	can_interact = false
 	%BtnClick.play()
 	
@@ -94,6 +97,7 @@ func finalise_save_data() -> void:
 			save_memory_match_data()
 		unload_minigame()
 	DataGlobals.set_metadata_value(true, DataGlobals.MINIGAME_DATA, save_data)
+	print("minigame save data has been finalised")
 
 
 ## get totris save data before its unloaded

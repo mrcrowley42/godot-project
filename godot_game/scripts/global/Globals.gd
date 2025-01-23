@@ -46,10 +46,12 @@ var general_dict: Dictionary = {}
 
 
 func change_to_scene(scene_path: String):
+	print("changing to scene '%s'" % scene_path)
 	await get_tree().process_frame  # important
 	get_tree().change_scene_to_file(scene_path)
 
 func send_notification(noti: int):
+	print("pushing notification '%s'" % noti)
 	get_tree().root.propagate_notification(noti)
 
 func perform_opening_transition(trans_img: Sprite2D, mid_pos: Vector2, end_func=null):
@@ -91,6 +93,7 @@ func unlock_fact(fact: Fact) -> void:
 	# Display notification
 	var message = "%s Unlocked!" %[fact.title]
 	item_unlocked.emit(message)
+	print("fact unlocked '%s', uid: '%s'" % [fact.title, fact_uid])
 
 
 ## Unlocks the passed [param cosmetic] resource
@@ -107,6 +110,7 @@ func unlock_cosmetic(cosmetic: CosmeticItem) -> void:
 	# Display notification
 	var message = "%s Unlocked!" %[cosmetic.name]
 	item_unlocked.emit(message)
+	print("cosmetic unlocked '%s', uid: '%s'" % [cosmetic.name, cosmetic_uid])
 
 ## Unlocks the passed [param cosmetic] resource
 func unlock_theme(theme: UiTheme) -> void:
@@ -122,6 +126,7 @@ func unlock_theme(theme: UiTheme) -> void:
 	# Display notification
 	var message = "%s Unlocked!" %[theme.theme_name]
 	item_unlocked.emit(message)
+	print("theme unlocked '%s', uid: '%s'" % [theme.theme_name, theme_uid])
 
 # TODO: really want to refactor these functions into one now...
 

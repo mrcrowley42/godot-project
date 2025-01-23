@@ -31,3 +31,4 @@ func new_notification(message: String, type: PackedScene=toast) -> void:
 	notif.message = message
 	notif.position = start_pos
 	add_child(notif)
+	print("ui notification displayed  '%s'" % notif.message)

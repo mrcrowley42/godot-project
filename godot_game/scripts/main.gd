@@ -14,8 +14,7 @@ class_name Game extends Node
 var is_in_transition: bool = false;
 
 func _ready():
-	if debug_mode:
-		print_rich("[color=%s]--- RUNNING IN DEBUG MODE! ---" % Color.AQUA.to_html())
+	print("--- RUNNING MAIN.GD IN %s MODE! ---" % "DEBUG" if debug_mode else "NORMAL")
 	
 	if unlock_fps:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
@@ -41,6 +40,7 @@ func _ready():
 		%Creature.setup_creature()
 		%Creature.reset_stats()
 	
+	print("pushing 'all data is loaded' notification")
 	Globals.send_notification(Globals.NOTIFICATION_ALL_DATA_IS_LOADED)
 	
 	# do last
@@ -54,30 +54,23 @@ func do_opening_trans():
 func set_is_in_trans(value: bool):
 	is_in_transition = value
 
-## temp print to console
+## debug prints
 func calc_elapsed_time():
 	var elapsed_time = launch_time - DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_LAST_SAVED)
-	# please excuse the bad variable names here, this is only a temp thing anyway.
 	if debug_mode:
-		var _a = Color(1,0,0)
-		var _b = Color(0,1,0)
-		var max_time = 600  # in seconds
-		var _c = _b.lerp(_a, clampf(elapsed_time/max_time,0,1))
-		_c.v = 1.0
-		_c = _c.lightened(.25)
-		print_rich("[color=%s]%.2f seconds since last played.[/color]" %[_c.to_html() ,elapsed_time])
-		print("%.2f days since last played." %[elapsed_time/86400])
-		var holiday_status = "were" if stat_man.holiday_mode else "were not"
-		print("And you %s on holiday." % [holiday_status])
+		var vars = [elapsed_time, elapsed_time/86400, "were" if stat_man.holiday_mode else "were not"]
+		print("%.2f seconds (%.2f days) since last played. You %s on holiday" % vars)
 
 
 ## finilise & save data before closure
 func _notification(noti):
 	# close game
 	if noti == NOTIFICATION_WM_CLOSE_REQUEST:
+		print("--- Close notification recieved, attempting safe close ---")
 		minigame_man.finalise_save_data()  # call before saving
 		DataGlobals.save_data()
 		DataGlobals.save_settings_data()
+		print("exiting...")
 	
 	# grow up
 	if noti == Globals.NOFITICATION_GROW_TO_ADULT_SCENE and not is_in_transition:

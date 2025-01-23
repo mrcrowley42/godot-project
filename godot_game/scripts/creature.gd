@@ -83,6 +83,7 @@ func setup_creature():
 	
 	if is_ready_to_grow_up and life_stage < LifeStage.ADULT:
 		ready_to_grow_up.emit()
+	print("creature has been setup")
 
 ## Update the [param sprite_frames] of the current creature based on the current [param life_stage]
 func setup_main_sprite() -> void:

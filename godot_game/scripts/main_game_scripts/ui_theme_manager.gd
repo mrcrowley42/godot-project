@@ -31,8 +31,6 @@ func load(data) -> void:
 	var theme_name = data["Theme"].to_lower() if data.has("Theme") else fallback_name
 	var saved_theme = fallback_theme if not theme_dict.has(theme_name) else theme_dict[theme_name]
 	set_theme(saved_theme)
-	# Repairs broken cfg.
-	DataGlobals.save_settings_data()
 	# Preselect button for current theme.
 	for theme_btn in theme_btns.get_children():
 		if theme_btn.ui_theme.theme_name.to_lower() == saved_theme.theme_name.to_lower():
