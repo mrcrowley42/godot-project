@@ -105,10 +105,6 @@ func toggle_clippy_mode() -> void:
 		window.size = start_size
 		window.canvas_transform = start_transform
 		creature.find_child("Sprites").self_modulate = Color(1,1,1,1)
-		food_menu.hide()
-		activity_menu.hide()
-		options_menu.hide()
-		
 
 	# THIS IS SO DUMB!!!
 	# Linux has needs a delay to activate borderless, so this delay is needed
@@ -121,6 +117,10 @@ func toggle_clippy_mode() -> void:
 	if not clippy:
 		normalise()
 	#print(window.position) # TODO REMOVE THIS PRINT AFTER CHECKING THERE IS NO WINDOW DRIFT!
+	
+	food_menu.hide()
+	activity_menu.hide()
+	options_menu.hide()
 
 
 func minimise() -> void:
