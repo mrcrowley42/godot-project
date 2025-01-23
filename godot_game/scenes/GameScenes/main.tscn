@@ -520,6 +520,7 @@ script = ExtResource("69_rkm2b")
 clippy_area = NodePath("../../Gameplay/ClippyArea")
 
 [node name="GrowUpBtn" type="NinePatchRect" parent="NotificationLayer/NotificationManager"]
+unique_name_in_owner = true
 anchors_preset = -1
 anchor_left = -0.00925926
 anchor_top = -0.00740741

@@ -3,7 +3,7 @@ shader_type canvas_item;
 uniform vec4 color_behind: source_color = vec4(.7, 1, 1, 1);
 uniform vec4 color: source_color = vec4(.6, .75, 1, 1);
 uniform float fade_length: hint_range(0.0, 1.0, 0.05) = .8;
-uniform float intensity: hint_range(0.0, 10.0, 0.1) = .4;
+uniform float intensity: hint_range(0.0, 10.0, 0.1) = .3;
 
 void fragment() {
 	float y = (UV.y + (1.-fade_length));

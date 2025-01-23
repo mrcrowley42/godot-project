@@ -9,7 +9,7 @@ shader = ExtResource("1_5e7kv")
 shader_parameter/color_behind = Color(0.7, 1, 1, 1)
 shader_parameter/color = Color(0.6, 0.75, 1, 1)
 shader_parameter/fade_length = 0.8
-shader_parameter/intensity = 0.4
+shader_parameter/intensity = 0.3
 
 [sub_resource type="Gradient" id="Gradient_5hppj"]
 offsets = PackedFloat32Array(0, 0.91623)

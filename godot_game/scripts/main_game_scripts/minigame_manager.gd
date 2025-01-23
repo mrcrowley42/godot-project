@@ -22,6 +22,8 @@ var sprock_instance: SprGame = null
 
 var can_interact: bool = true
 
+const DISABLED_VISIBILITY = .4
+
 ## Loads the minigame matching the [param minigame] variable, and places it just
 ## below options menu, but above all other elements.
 func load_minigame(pre_loaded=null, instance=null, do_transition=false) -> void:
@@ -45,6 +47,9 @@ func load_minigame(pre_loaded=null, instance=null, do_transition=false) -> void:
 		print("loading minigame '%s'" % current_minigame)
 		%ActButton.disabled = true
 		%FoodButton.disabled = true
+		%ActButton.modulate.a = DISABLED_VISIBILITY
+		%FoodButton.modulate.a = DISABLED_VISIBILITY
+		%GrowUpBtn.modulate.a = DISABLED_VISIBILITY
 
 
 ## Tell game that a minigame is no longer open.
@@ -67,6 +72,9 @@ func unload_minigame(do_transition=false, game_instance=null) -> void:
 	ambience_man.fade_in()
 	%ActButton.disabled = false
 	%FoodButton.disabled = false
+	%ActButton.modulate.a = 1.
+	%FoodButton.modulate.a = 1.
+	%GrowUpBtn.modulate.a = 1.
 	can_interact = true
 
 
