@@ -69,6 +69,9 @@ func unload_minigame(do_transition=false, game_instance=null) -> void:
 
 ## Trigger unloading function when a minigame scene is freed.
 func _notification(noti) -> void:
+	if noti == Globals.NOTIFICATION_ALL_DATA_IS_LOADED:
+		save_data = DataGlobals.get_global_metadata_value(DataGlobals.MINIGAME_DATA)
+	
 	if noti == Globals.NOTIFICATION_MINIGAME_CLOSED:
 		unload_minigame()
 	
@@ -90,6 +93,7 @@ func finalise_save_data() -> void:
 		if current_minigame == "MemoryGame":
 			save_memory_match_data()
 		unload_minigame()
+	DataGlobals.set_metadata_value(true, DataGlobals.MINIGAME_DATA, save_data)
 
 
 ## get totris save data before its unloaded
@@ -131,17 +135,6 @@ func _on_scissors_paper_rock_button_down() -> void:
 ## Loads Relaxation scene.
 func _on_zen_mode_button_down() -> void:
 	load_minigame(zen_mode_scene, null)
-
-
-func get_save_uid() -> int:
-	return DataGlobals.SAVE_MINIDATE_MAGAGER_UID
-
-func save() -> Dictionary:
-	return save_data
-
-func load(data) -> void:
-	save_data = data
-
 
 func _on_tree_exiting() -> void:
 	# Ensure that before changing scene, if clippy mode is active it is toggled off.

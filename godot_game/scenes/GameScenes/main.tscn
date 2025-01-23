@@ -418,7 +418,7 @@ debug_mode = true
 metadata/_edit_vertical_guides_ = [532.0, 8.0, 45.0, 53.0, 487.0, 495.0]
 metadata/_edit_horizontal_guides_ = [8.0, 667.0, 112.0, 111.0, 554.0, 562.0]
 
-[node name="StatusManager" type="Node2D" parent="." groups=["save_data"]]
+[node name="StatusManager" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("2_aqytd")
 food_amount = 4.0
@@ -437,7 +437,7 @@ script = ExtResource("5_yr5ap")
 creature = NodePath("../Gameplay/Creature")
 food_menu = NodePath("../UI/FoodMenu")
 
-[node name="MinigameManager" type="Node2D" parent="." groups=["save_data"]]
+[node name="MinigameManager" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("3_fj5ve")
 

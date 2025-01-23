@@ -8,7 +8,7 @@ func _ready() -> void:
 
 func has_encountered(creature_type) -> bool:
 	var uid = Helpers.uid_str(creature_type)
-	return uid in DataGlobals.get_metadata_value(DataGlobals.CREATURES_DISCOVERED)
+	return uid in DataGlobals.get_global_metadata_value(DataGlobals.CREATURES_DISCOVERED)
 
 
 func update_locked():

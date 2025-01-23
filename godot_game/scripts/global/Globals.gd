@@ -1,5 +1,9 @@
 extends Node
 
+## update this on update (please)
+const VERSION = "1.0.0"
+const BUILD = "BETA"
+
 # SAVE CONSTANTS
 const SAVE_DATA_GROUP = "save_data"
 const SAVE_DATA_FILE = "res://save_data.save"
@@ -79,11 +83,11 @@ func unlock_fact(fact: Fact) -> void:
 	if fact.unlocked:
 		return
 	var fact_uid = Helpers.uid_str(fact)
-	var unlocked_facts = DataGlobals.get_metadata_value(DataGlobals.UNLOCKED_FACTS)
+	var unlocked_facts = DataGlobals.get_global_metadata_value(DataGlobals.UNLOCKED_FACTS)
 	if fact_uid in unlocked_facts:
 		return
 	# If item isn't unlocked, add it to unlocked list.
-	DataGlobals.append_to_metadata_value(DataGlobals.UNLOCKED_FACTS, fact_uid)
+	DataGlobals.append_to_metadata_value(true, DataGlobals.UNLOCKED_FACTS, fact_uid)
 	# Display notification
 	var message = "%s Unlocked!" %[fact.title]
 	item_unlocked.emit(message)
@@ -95,11 +99,11 @@ func unlock_cosmetic(cosmetic: CosmeticItem) -> void:
 	if cosmetic.unlocked:
 		return
 	var cosmetic_uid = Helpers.uid_str(cosmetic)
-	var unlocked_cosmetics = DataGlobals.get_metadata_value(DataGlobals.UNLOCKED_COSMETICS)
+	var unlocked_cosmetics = DataGlobals.get_global_metadata_value(DataGlobals.UNLOCKED_COSMETICS)
 	if cosmetic_uid in unlocked_cosmetics:
 		return
 	# If item isn't unlocked, add it to unlocked list.
-	DataGlobals.append_to_metadata_value(DataGlobals.UNLOCKED_COSMETICS, cosmetic_uid)
+	DataGlobals.append_to_metadata_value(true, DataGlobals.UNLOCKED_COSMETICS, cosmetic_uid)
 	# Display notification
 	var message = "%s Unlocked!" %[cosmetic.name]
 	item_unlocked.emit(message)
@@ -110,11 +114,11 @@ func unlock_theme(theme: UiTheme) -> void:
 	if theme.unlocked:
 		return
 	var theme_uid = Helpers.uid_str(theme)
-	var unlocked_themes = DataGlobals.get_metadata_value(DataGlobals.UNLOCKED_THEMES)
+	var unlocked_themes = DataGlobals.get_global_metadata_value(DataGlobals.UNLOCKED_THEMES)
 	if theme_uid in unlocked_themes:
 		return
 	# If item isn't unlocked, add it to unlocked list.
-	DataGlobals.append_to_metadata_value(DataGlobals.UNLOCKED_THEMES, theme_uid)
+	DataGlobals.append_to_metadata_value(true, DataGlobals.UNLOCKED_THEMES, theme_uid)
 	# Display notification
 	var message = "%s Unlocked!" %[theme.theme_name]
 	item_unlocked.emit(message)
