@@ -31,7 +31,7 @@ scale = Vector2(0.80599, 0.771338)
 texture = ExtResource("2_k5vrf")
 
 [node name="CanvasGroup2" type="CanvasGroup" parent="."]
-self_modulate = Color(1, 1, 1, 0.647059)
+self_modulate = Color(1, 1, 1, 0.623529)
 rotation = 3.14159
 
 [node name="ColorRect" type="ColorRect" parent="CanvasGroup2"]
@@ -57,7 +57,7 @@ theme_override_constants/margin_bottom = 40
 
 [node name="MarginContainer" type="MarginContainer" parent="MenuList"]
 layout_mode = 2
-theme_override_constants/margin_top = 200
+theme_override_constants/margin_top = 170
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MenuList/MarginContainer"]
 layout_mode = 2
@@ -124,12 +124,12 @@ expand_icon = true
 [node name="MainMenuBtn" type="Button" parent="MenuList/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("4_22rev")
-text = "Quit"
+text = "WIPE SAVE DATA"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_top = 86.0
+offset_top = 70.0
 offset_right = 540.0
-offset_bottom = 214.0
+offset_bottom = 198.0
 theme_override_colors/font_outline_color = Color(1, 1, 1, 0.572549)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
