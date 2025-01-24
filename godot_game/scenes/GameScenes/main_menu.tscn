@@ -1,12 +1,141 @@
-[gd_scene load_steps=3 format=3 uid="uid://ig0eoqdfq5nr"]
+[gd_scene load_steps=10 format=3 uid="uid://dunvo70ey34fm"]
 
 [ext_resource type="Script" path="res://scripts/main_game_scripts/main_menu.gd" id="1_lpoqi"]
+[ext_resource type="Shader" path="res://shaders/pattern_lines.gdshader" id="2_f1u7v"]
 [ext_resource type="Texture2D" uid="uid://ywjmlgi3jyuu" path="res://images/omba.png" id="2_k5vrf"]
+[ext_resource type="Theme" uid="uid://1dv11a5ar0hg" path="res://themes/action_btn.tres" id="3_4iri0"]
+[ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="4_22rev"]
+[ext_resource type="Texture2D" uid="uid://c0q2pb82gd5mb" path="res://icons/list-check.svg" id="5_tq23t"]
+[ext_resource type="Texture2D" uid="uid://ds2ci8c6rq5o7" path="res://icons/settings_small.svg" id="6_d6euh"]
+[ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="8_1gx8s"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gpy1m"]
+shader = ExtResource("2_f1u7v")
+shader_parameter/bg_col = Color(0.451915, 0.120798, 0.125837, 1)
+shader_parameter/rotation = 90.0
+shader_parameter/double = false
+shader_parameter/size = 20.0
+shader_parameter/one_col = Color(0, 0.814968, 0.841388, 1)
+shader_parameter/one_speed = 0.1
+shader_parameter/one_opacity = 0.0
+shader_parameter/two_col = Color(0.483708, 0.0867813, 0.125563, 1)
+shader_parameter/two_speed = 0.05
+shader_parameter/two_opacity = 1.0
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_lpoqi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(415, 217)
-scale = Vector2(0.345, 0.345)
+position = Vector2(263.5, 360)
+scale = Vector2(0.80599, 0.771338)
 texture = ExtResource("2_k5vrf")
+
+[node name="CanvasGroup2" type="CanvasGroup" parent="."]
+self_modulate = Color(1, 1, 1, 0.647059)
+rotation = 3.14159
+
+[node name="ColorRect" type="ColorRect" parent="CanvasGroup2"]
+material = SubResource("ShaderMaterial_gpy1m")
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -540.0
+offset_top = -675.0
+grow_horizontal = 0
+grow_vertical = 0
+color = Color(0.038967, 0.122809, 0.12806, 1)
+
+[node name="MenuList" type="MarginContainer" parent="."]
+offset_right = 540.0
+offset_bottom = 675.0
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 40
+
+[node name="MarginContainer" type="MarginContainer" parent="MenuList"]
+layout_mode = 2
+theme_override_constants/margin_top = 200
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuList/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="NewGameBtn" type="Button" parent="MenuList/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme = ExtResource("3_4iri0")
+text = "New Game"
+
+[node name="ContinueBtn" type="Button" parent="MenuList/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme = ExtResource("3_4iri0")
+text = "Continue"
+
+[node name="LoadBtn" type="Button" parent="MenuList/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme = ExtResource("3_4iri0")
+text = "Load Save"
+
+[node name="SettingsBtn" type="Button" parent="MenuList/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme = ExtResource("3_4iri0")
+text = "Settings"
+
+[node name="QuitBtn" type="Button" parent="MenuList/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme = ExtResource("3_4iri0")
+text = "Quit"
+
+[node name="MarginContainer" type="MarginContainer" parent="MenuList/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuList/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="CreaturesBtn" type="Button" parent="MenuList/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("4_22rev")
+icon = ExtResource("5_tq23t")
+icon_alignment = 1
+
+[node name="SettingBtn" type="Button" parent="MenuList/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("4_22rev")
+icon = ExtResource("6_d6euh")
+icon_alignment = 1
+expand_icon = true
+
+[node name="MainMenuBtn" type="Button" parent="MenuList/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_22rev")
+text = "Quit"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_top = 86.0
+offset_right = 540.0
+offset_bottom = 214.0
+theme_override_colors/font_outline_color = Color(1, 1, 1, 0.572549)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_outline_size = 25
+theme_override_fonts/normal_font = ExtResource("8_1gx8s")
+bbcode_enabled = true
+text = "[font_size=100px][center][wave amp=50.0 freq=5.0 connected=1][rainbow freq=0.7 sat=0.8 val=0.9]YIPPEE[/rainbow][/wave][/center][/font_size]"
