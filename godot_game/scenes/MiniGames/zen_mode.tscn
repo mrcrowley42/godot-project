@@ -11,12 +11,12 @@ shader_parameter/color = Color(0.6, 0.75, 1, 1)
 shader_parameter/fade_length = 0.8
 shader_parameter/intensity = 0.3
 
-[sub_resource type="Gradient" id="Gradient_5hppj"]
+[sub_resource type="Gradient" id="Gradient_5pdyq"]
 offsets = PackedFloat32Array(0, 0.91623)
 colors = PackedColorArray(0.529412, 0.576471, 1, 1, 0.0352941, 0.329412, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_dq5kv"]
-gradient = SubResource("Gradient_5hppj")
+gradient = SubResource("Gradient_5pdyq")
 width = 432
 height = 432
 fill_from = Vector2(0, 0.150997)
