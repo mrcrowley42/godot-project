@@ -15,4 +15,5 @@ func _ready() -> void:
 
 
 func _on_hidden() -> void:
-	queue_free()
+	pass
+	#queue_free()

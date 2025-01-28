@@ -20,11 +20,11 @@ func _ready() -> void:
 
 func _on_back_button_down() -> void:
 	#btn_sfx.play()
-	queue_free()
+	self.hide()
 
 
 func _on_hidden() -> void:
-	queue_free()
+	self.hide()
 
 
 func add_facts() -> void:
