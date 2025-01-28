@@ -1,11 +1,28 @@
 extends Button
 
 @export var category: Fact.FactCategory
-@onready var fact_listing_scene = preload("res://scenes/UiScenes/fact_listing.tscn")
-@onready var fact_menu = %FactsMenu
+@export var title_label: Label
+@export var icon_btn: Button
+@export var count_label: Label
 
-func _ready() -> void:
-	text = Fact.FactCategory.keys()[category]
+@onready var fact_listing_scene = preload("res://scenes/UiScenes/fact_listing.tscn")
+
+var og_text
+var fact_menu: PanelContainer
+
+func setup(new_category, the_fact_menu):
+	og_text = count_label.text
+	fact_menu = the_fact_menu
+	category = Fact.FactCategory.get(new_category)
+	title_label.text = Fact.FactCategory.keys()[category]
+	
+	Globals.item_unlocked.connect(update_text)
+	update_text()
+
+
+func update_text(_null=null):
+	var progress = Globals.get_fact_category_progress(category)
+	count_label.text = og_text % progress
 
 
 ## When clicked add fact listing scene populated with facts matching this buttons category.

@@ -9,3 +9,4 @@ category = 0
 source = "The internet"
 fact = "Fact info go here"
 unlocked = true
+hint = ""

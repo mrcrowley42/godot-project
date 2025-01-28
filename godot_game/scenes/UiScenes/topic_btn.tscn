@@ -1,15 +1,60 @@
-[gd_scene load_steps=3 format=3 uid="uid://dyapnl5xgvivn"]
+[gd_scene load_steps=5 format=3 uid="uid://dyapnl5xgvivn"]
 
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="1_e3xoi"]
 [ext_resource type="Script" path="res://scripts/fact_topic_btn.gd" id="2_5a1jf"]
+[ext_resource type="Theme" uid="uid://kpqilwsnepqa" path="res://themes/nothing.tres" id="3_hle85"]
+[ext_resource type="Texture2D" uid="uid://cb2n1foy2vmqe" path="res://images/ambience/ambience_electrical.png" id="4_7ql67"]
 
-[node name="Button" type="Button"]
+[node name="Button" type="Button" node_paths=PackedStringArray("title_label", "icon_btn", "count_label")]
 custom_minimum_size = Vector2(112, 192)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("1_e3xoi")
 theme_override_font_sizes/font_size = 20
-text = "Topic 1"
 script = ExtResource("2_5a1jf")
+title_label = NodePath("MarginContainer/VBoxContainer/Label")
+icon_btn = NodePath("MarginContainer/VBoxContainer/Icon")
+count_label = NodePath("MarginContainer/VBoxContainer/Count")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 112.0
+offset_bottom = 192.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("3_hle85")
+theme_override_font_sizes/font_size = 18
+text = "Topic"
+horizontal_alignment = 1
+
+[node name="Icon" type="Button" parent="MarginContainer/VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 1
+icon = ExtResource("4_7ql67")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Count" type="Label" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("3_hle85")
+theme_override_font_sizes/font_size = 13
+text = "%s/%s Unlocked"
+horizontal_alignment = 1
+autowrap_mode = 2
 
 [connection signal="button_down" from="." to="." method="_on_button_down"]

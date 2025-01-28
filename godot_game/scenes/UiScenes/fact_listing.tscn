@@ -6,15 +6,15 @@
 [ext_resource type="PackedScene" uid="uid://cfto5f3wtfdqt" path="res://scenes/UiScenes/fact_btn.tscn" id="3_omm3u"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="4_ik51a"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yoffr"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3at6s"]
 shader = ExtResource("2_tm8bj")
-shader_parameter/bg_col = Color(0.0049428, 2.19822e-06, 0.0464968, 1)
+shader_parameter/bg_col = Color(0.0840127, 0.0140531, 0.0804271, 1)
 shader_parameter/double = true
-shader_parameter/size = 8.0
-shader_parameter/one_col = Color(0.0568839, 3.14414e-05, 0.221646, 1)
+shader_parameter/size = 10.0
+shader_parameter/one_col = Color(0.198488, 0.0107199, 0.177253, 1)
 shader_parameter/one_speed = 0.02
 shader_parameter/one_opacity = 0.2
-shader_parameter/two_col = Color(0.0588235, 0, 0.223529, 1)
+shader_parameter/two_col = Color(0.2, 0.0117647, 0.176471, 1)
 shader_parameter/two_speed = 0.02
 shader_parameter/two_opacity = 0.2
 
@@ -26,7 +26,7 @@ heading = NodePath("MarginContainer/VBoxContainer/Category")
 fact_container = NodePath("MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/FactList")
 
 [node name="Panel" type="Panel" parent="."]
-material = SubResource("ShaderMaterial_yoffr")
+material = SubResource("ShaderMaterial_3at6s")
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]

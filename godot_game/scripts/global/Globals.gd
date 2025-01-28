@@ -28,6 +28,21 @@ const NOTIFICATION_CREATURE_IS_LOADED = 503
 const NOTIFICATION_CREATURE_ACCESSORIES_ARE_LOADED = 504
 const NOTIFICATION_AMBIENT_SOUNDS_REMOVED = 505
 const NOTIFICATION_ALL_DATA_IS_LOADED = 506
+const NOTIFICATION_QUIT_TO_MAIN_MENU = 507
+
+const NOTI_LOOKUP = {
+	NOTIFICATION_MINIGAME_CLOSED: "NOTIFICATION_MINIGAME_CLOSED",
+	NOTIFICATION_TOTRIS_CLOSE: "NOTIFICATION_TOTRIS_CLOSE",
+	NOTIFICATION_MEMORY_MATCH_CLOSE: "NOTIFICATION_MEMORY_MATCH_CLOSE",
+	NOTIFICATION_SPROCK_CLOSED: "NOTIFICATION_SPROCK_CLOSED",
+	
+	NOFITICATION_GROW_TO_ADULT_SCENE: "NOFITICATION_GROW_TO_ADULT_SCENE",
+	NOTIFICATION_CREATURE_IS_LOADED: "NOTIFICATION_CREATURE_IS_LOADED",
+	NOTIFICATION_CREATURE_ACCESSORIES_ARE_LOADED: "NOTIFICATION_CREATURE_ACCESSORIES_ARE_LOADED",
+	NOTIFICATION_AMBIENT_SOUNDS_REMOVED: "NOTIFICATION_AMBIENT_SOUNDS_REMOVED",
+	NOTIFICATION_ALL_DATA_IS_LOADED: "NOTIFICATION_ALL_DATA_IS_LOADED",
+	NOTIFICATION_QUIT_TO_MAIN_MENU: "NOTIFICATION_QUIT_TO_MAIN_MENU"
+}
 
 
 signal item_unlocked(details)
@@ -51,7 +66,7 @@ func change_to_scene(scene_path: String):
 	get_tree().change_scene_to_file(scene_path)
 
 func send_notification(noti: int):
-	print("pushing notification '%s'" % noti)
+	print("pushing notification '%s', '%s'" % [noti, NOTI_LOOKUP[noti] if NOTI_LOOKUP.has(noti) else "UNKNOWN"])
 	get_tree().root.propagate_notification(noti)
 
 func perform_opening_transition(trans_img: Sprite2D, mid_pos: Vector2, end_func=null):
@@ -144,6 +159,14 @@ func has_function(node: Node, method: String) -> bool:
 		printerr("Node '%s' at path '%s' does not have '%s()' function" % [node, node.get_path(), method])
 		return false
 	return true
+
+## return tuple 0: unlocked count, 1: total count
+func get_fact_category_progress(category) -> Array[int]:
+	var unlocked_facts = DataGlobals.get_global_metadata_value(DataGlobals.UNLOCKED_FACTS)
+	var fact_list = load("res://resources/fact_list.tres").facts
+	var facts = fact_list.filter(func(x): return x.category == category)
+	var unlocked = facts.filter(func(x): return Helpers.uid_str(x) in unlocked_facts or x.unlocked)
+	return [len(unlocked), len(facts)]
 
 ## fire confetti, automatically removes iteslf of finish
 func fire_confetti(parent, pos: Vector2 = Vector2(270, 560)):
