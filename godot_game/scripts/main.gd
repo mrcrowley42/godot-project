@@ -74,7 +74,7 @@ func _notification(noti):
 			await Globals.perform_closing_transition(trans_img, ui_overlay.position)
 			Globals.change_to_scene("res://scenes/GameScenes/main_menu.tscn")
 		else:
-			print("exiting...")
+			print("closing game from main game...")
 		return
 	
 	# grow up

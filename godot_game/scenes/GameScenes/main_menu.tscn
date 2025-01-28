@@ -9,7 +9,7 @@
 [ext_resource type="Theme" uid="uid://be46f5clp5lhj" path="res://themes/action_btn_main_menu.tres" id="5_yrm4f"]
 [ext_resource type="Texture2D" uid="uid://ds2ci8c6rq5o7" path="res://icons/settings_small.svg" id="6_d6euh"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="8_1gx8s"]
-[ext_resource type="PackedScene" path="res://scenes/UiScenes/save_listing_menu.tscn" id="9_t1d8l"]
+[ext_resource type="PackedScene" uid="uid://dhngdrs10j15h" path="res://scenes/UiScenes/save_listing_menu.tscn" id="9_t1d8l"]
 [ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="11_oc74i"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gpy1m"]
@@ -45,6 +45,10 @@ offset_bottom = 675.0
 grow_horizontal = 0
 grow_vertical = 0
 texture = ExtResource("3_kva7r")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, -20)
+scale = Vector2(1e-05, 1e-05)
 
 [node name="CanvasGroup2" type="CanvasGroup" parent="."]
 self_modulate = Color(1, 1, 1, 0.623529)

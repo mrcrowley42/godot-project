@@ -26,6 +26,7 @@ func set_is_in_trans(value: bool):
 
 func _on_quit_btn_button_down() -> void:
 	if not is_in_transition:
+		print("closing game from main menu...")
 		get_tree().quit()
 
 
