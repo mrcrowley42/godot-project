@@ -95,7 +95,7 @@ text = "Continue"
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme = ExtResource("5_yrm4f")
-text = "Load Save"
+text = "Load Creature"
 
 [node name="SettingsBtn" type="Button" parent="MenuList/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
@@ -137,7 +137,7 @@ icon = ExtResource("6_d6euh")
 icon_alignment = 1
 expand_icon = true
 
-[node name="MainMenuBtn" type="Button" parent="MenuList/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="WipeBtn" type="Button" parent="MenuList/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("4_22rev")
 text = "WIPE SAVE DATA"
