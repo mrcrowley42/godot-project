@@ -41,11 +41,13 @@ class UnlockableIcon extends CustomTooltipButton:
 		self.text = "?" if self.disabled else ""
 		icon = null if self.disabled else cosmetic.thumbnail
 
-func _ready():
-	creature.accessory_manager.cosmetics_loaded.connect(update_toggle)
-	for item: CosmeticItem in unlockables.unlockables:
-		var item_btn = UnlockableIcon.new(item)
-		add_child(item_btn)
+
+func _notification(what: int) -> void:
+	if what == Globals.NOTIFICATION_ALL_DATA_IS_LOADED:
+		creature.accessory_manager.cosmetics_loaded.connect(update_toggle)
+		for item: CosmeticItem in unlockables.unlockables:
+			var item_btn = UnlockableIcon.new(item)
+			add_child.call_deferred(item_btn)
 
 func update_buttons():
 	propagate_call("update_locked")

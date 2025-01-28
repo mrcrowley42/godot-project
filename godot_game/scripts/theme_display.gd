@@ -63,12 +63,11 @@ class UiThemeButton extends CustomTooltipButton:
 			self.add_theme_stylebox_override("focus", box)
 
 
-func _ready():
-	for item: UiTheme in theme_manager.themes:
-		var theme_btn = UiThemeButton.new(item)
-		add_child(theme_btn)
-	
-
+func _notification(what: int) -> void:
+	if what == Globals.NOTIFICATION_ALL_DATA_IS_LOADED:
+		for item: UiTheme in theme_manager.themes:
+			var theme_btn = UiThemeButton.new(item)
+			add_child.call_deferred(theme_btn)
 
 func update_buttons():
 	propagate_call("update_locked")
