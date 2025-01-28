@@ -1,12 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cfto5f3wtfdqt"]
+[gd_scene load_steps=2 format=3 uid="uid://cfto5f3wtfdqt"]
 
 [ext_resource type="Theme" uid="uid://1dv11a5ar0hg" path="res://themes/action_btn.tres" id="1_uiybw"]
-[ext_resource type="Script" path="res://scripts/fact-btn.gd" id="2_1t51s"]
 
 [node name="FactLink" type="Button"]
 custom_minimum_size = Vector2(0, 60)
+size_flags_horizontal = 3
 theme = ExtResource("1_uiybw")
-text = "Fact 1"
-script = ExtResource("2_1t51s")
-
-[connection signal="button_down" from="." to="." method="_on_button_down"]
+text = "1"
