@@ -1,15 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://dunvo70ey34fm"]
+[gd_scene load_steps=13 format=3 uid="uid://ig0eoqdfq5nr"]
 
 [ext_resource type="Script" path="res://scripts/main_game_scripts/main_menu.gd" id="1_lpoqi"]
 [ext_resource type="Shader" path="res://shaders/pattern_lines.gdshader" id="2_f1u7v"]
 [ext_resource type="Texture2D" uid="uid://ywjmlgi3jyuu" path="res://images/omba.png" id="2_k5vrf"]
-[ext_resource type="Texture2D" uid="uid://cmu73fglotayl" path="res://themes/main_menu_grad.tres" id="3_kva7r"]
+[ext_resource type="Texture2D" uid="uid://bew6qy27ohhib" path="res://themes/main_menu_grad.tres" id="3_kva7r"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="4_22rev"]
 [ext_resource type="Texture2D" uid="uid://c0q2pb82gd5mb" path="res://icons/list-check.svg" id="5_tq23t"]
-[ext_resource type="Theme" uid="uid://cbwmony3pd57c" path="res://themes/action_btn_main_menu.tres" id="5_yrm4f"]
+[ext_resource type="Theme" uid="uid://be46f5clp5lhj" path="res://themes/action_btn_main_menu.tres" id="5_yrm4f"]
 [ext_resource type="Texture2D" uid="uid://ds2ci8c6rq5o7" path="res://icons/settings_small.svg" id="6_d6euh"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="8_1gx8s"]
-[ext_resource type="PackedScene" uid="uid://dhngdrs10j15h" path="res://scenes/UiScenes/save_listing_menu.tscn" id="9_t1d8l"]
+[ext_resource type="PackedScene" path="res://scenes/UiScenes/save_listing_menu.tscn" id="9_t1d8l"]
+[ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="11_oc74i"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gpy1m"]
 shader = ExtResource("2_f1u7v")
@@ -33,7 +34,7 @@ position = Vector2(263.5, 360)
 scale = Vector2(0.80599, 0.771338)
 texture = ExtResource("2_k5vrf")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="BgGradient" type="TextureRect" parent="."]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -161,6 +162,14 @@ theme_override_constants/shadow_outline_size = 25
 theme_override_fonts/normal_font = ExtResource("8_1gx8s")
 bbcode_enabled = true
 text = "[font_size=100px][center][wave amp=50.0 freq=6.0 connected=1][rainbow freq=0.7 sat=0.7 val=0.96]YIPPEE[/rainbow][/wave][/center][/font_size]"
+
+[node name="TransLayer" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="Transition" type="Sprite2D" parent="TransLayer"]
+position = Vector2(270, 1200)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_oc74i")
 
 [connection signal="button_down" from="MenuList/MarginContainer/VBoxContainer/NewGameBtn" to="." method="_on_new_game_btn_button_down"]
 [connection signal="button_down" from="MenuList/MarginContainer/VBoxContainer/ContinueBtn" to="." method="_on_continue_btn_button_down"]

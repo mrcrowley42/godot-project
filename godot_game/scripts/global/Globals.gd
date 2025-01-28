@@ -160,6 +160,14 @@ func has_function(node: Node, method: String) -> bool:
 		return false
 	return true
 
+## return tuple 0: unlocked count, 1: total count
+func get_fact_category_progress(category) -> Array[int]:
+	var unlocked_facts = DataGlobals.get_global_metadata_value(DataGlobals.UNLOCKED_FACTS)
+	var fact_list = load("res://resources/fact_list.tres").facts
+	var facts = fact_list.filter(func(x): return x.category == category)
+	var unlocked = facts.filter(func(x): return Helpers.uid_str(x) in unlocked_facts or x.unlocked)
+	return [len(unlocked), len(facts)]
+
 ## fire confetti, automatically removes iteslf of finish
 func fire_confetti(parent, pos: Vector2 = Vector2(270, 560)):
 	var remove = func(p_node):

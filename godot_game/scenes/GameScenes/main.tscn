@@ -1,4 +1,4 @@
-[gd_scene load_steps=128 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=127 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
@@ -60,9 +60,8 @@
 [ext_resource type="Theme" uid="uid://diinvv5qdrf2v" path="res://themes/container_green.tres" id="46_r0sdd"]
 [ext_resource type="Texture2D" uid="uid://cuaa2uyffvita" path="res://icons/status/droplet-fill.svg" id="47_qik1j"]
 [ext_resource type="Texture2D" uid="uid://d4c1k5m8u1jc0" path="res://UI stuff/Green Palette/green_food_button.png" id="49_a77pc"]
-[ext_resource type="Theme" uid="uid://kpqilwsnepqa" path="res://themes/nothing.tres" id="49_mgl65"]
-[ext_resource type="Texture2D" uid="uid://cb2n1foy2vmqe" path="res://images/ambience/ambience_electrical.png" id="49_mhitb"]
 [ext_resource type="Script" path="res://scripts/cosmetics_preview.gd" id="49_p7hc5"]
+[ext_resource type="Script" path="res://scripts/fact_list_builder.gd" id="49_wkh8q"]
 [ext_resource type="Script" path="res://scripts/nav_button.gd" id="50_0qet7"]
 [ext_resource type="Shader" path="res://shaders/pattern_lines.gdshader" id="50_tajtf"]
 [ext_resource type="Texture2D" uid="uid://drv50ynifh37j" path="res://UI stuff/Green Palette/green_activities_button.png" id="51_7kyvm"]
@@ -1153,7 +1152,7 @@ theme_override_constants/margin_bottom = 16
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/FactsMenu/Library"]
 layout_mode = 2
-theme_override_constants/separation = 16
+theme_override_constants/separation = 50
 
 [node name="Label" type="Label" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer"]
 layout_mode = 2
@@ -1165,77 +1164,40 @@ vertical_alignment = 1
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer"]
 custom_minimum_size = Vector2(0, 240)
 layout_mode = 2
+theme = ExtResource("46_r0sdd")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer/ScrollContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 0
 size_flags_vertical = 6
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer/ScrollContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer/ScrollContainer/MarginContainer" node_paths=PackedStringArray("fact_menu")]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 12
 alignment = 1
+script = ExtResource("49_wkh8q")
+fact_menu = NodePath("../../../../..")
 
 [node name="Button" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer" instance=ExtResource("44_y5a0d")]
 layout_mode = 2
-text = ""
-
-[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer/Button"]
-layout_mode = 0
-offset_right = 112.0
-offset_bottom = 192.0
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer/Button/MarginContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer/Button/MarginContainer/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 1
-theme = ExtResource("49_mgl65")
-text = "Topic 1"
-horizontal_alignment = 1
-
-[node name="Icon" type="Button" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer/Button/MarginContainer/VBoxContainer"]
-texture_filter = 1
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-mouse_filter = 1
-icon = ExtResource("49_mhitb")
-flat = true
-icon_alignment = 1
-expand_icon = true
-
-[node name="Count" type="Label" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer/Button/MarginContainer/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 1
-theme = ExtResource("49_mgl65")
-theme_override_font_sizes/font_size = 12
-text = "%s/%s Unlocked"
-horizontal_alignment = 1
-autowrap_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 8
+size_flags_horizontal = 8
+size_flags_vertical = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
 
 [node name="FactProgressLabel" type="Label" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer/MarginContainer"]
 layout_mode = 2
-theme = ExtResource("39_8ebm3")
-text = "Fun: 2/2
-Trivia: 2/15
-Etc: 3/16"
+size_flags_horizontal = 8
+size_flags_vertical = 10
+theme = ExtResource("42_c1jtf")
+text = "% complete"
 horizontal_alignment = 2
 script = ExtResource("44_t23g2")
 
