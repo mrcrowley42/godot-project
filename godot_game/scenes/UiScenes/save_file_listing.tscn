@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=3 uid="uid://qx7ey4e0sik6"]
+
+[ext_resource type="Script" path="res://scenes/UiScenes/save_file_listing.gd" id="1_0q2oy"]
+[ext_resource type="Theme" uid="uid://dl1wes8p6lqlb" path="res://themes/invisible.tres" id="2_h15lg"]
+[ext_resource type="Texture2D" uid="uid://wo64brcmlmf8" path="res://images/ambience/forest.png" id="3_fkbr3"]
+[ext_resource type="Script" path="res://scripts/utility/custom_tooltip_script.gd" id="4_yxib2"]
+[ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="5_bh6hp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_27aj0"]
+bg_color = Color(0, 0, 0, 0.501961)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="PanelContainer" type="Button"]
+custom_minimum_size = Vector2(355, 138)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -184.5
+offset_right = 184.5
+offset_bottom = 133.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_27aj0")
+script = ExtResource("1_0q2oy")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+offset_right = 369.0
+offset_bottom = 133.0
+size_flags_vertical = 0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+size_flags_stretch_ratio = 3.0
+theme_override_constants/separation = 8
+
+[node name="SoundLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_bh6hp")
+text = "Creature Name"
+
+[node name="DateLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_bh6hp")
+text = "Date:"
+
+[node name="IDKLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_bh6hp")
+text = "Something else IDK"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="CreatureIcon" type="Button" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme = ExtResource("2_h15lg")
+icon = ExtResource("3_fkbr3")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_yxib2")
+tooltip_string = "<category>"
+direction = 3
+
+[connection signal="hidden" from="." to="." method="_on_hidden"]
