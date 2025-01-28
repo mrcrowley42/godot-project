@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=128 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
@@ -60,6 +60,8 @@
 [ext_resource type="Theme" uid="uid://diinvv5qdrf2v" path="res://themes/container_green.tres" id="46_r0sdd"]
 [ext_resource type="Texture2D" uid="uid://cuaa2uyffvita" path="res://icons/status/droplet-fill.svg" id="47_qik1j"]
 [ext_resource type="Texture2D" uid="uid://d4c1k5m8u1jc0" path="res://UI stuff/Green Palette/green_food_button.png" id="49_a77pc"]
+[ext_resource type="Theme" uid="uid://kpqilwsnepqa" path="res://themes/nothing.tres" id="49_mgl65"]
+[ext_resource type="Texture2D" uid="uid://cb2n1foy2vmqe" path="res://images/ambience/ambience_electrical.png" id="49_mhitb"]
 [ext_resource type="Script" path="res://scripts/cosmetics_preview.gd" id="49_p7hc5"]
 [ext_resource type="Script" path="res://scripts/nav_button.gd" id="50_0qet7"]
 [ext_resource type="Shader" path="res://shaders/pattern_lines.gdshader" id="50_tajtf"]
@@ -250,17 +252,16 @@ expand_margin_right = 3.0
 expand_margin_bottom = 3.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kjclt"]
-shader = ExtResource("50_tajtf")
-shader_parameter/bg_col = Color(0.00847231, 0.0424884, 0.0430594, 1)
-shader_parameter/rotation = 90.0
+shader = ExtResource("57_qy3v8")
+shader_parameter/bg_col = Color(0.0840127, 0.0140531, 0.0804271, 1)
 shader_parameter/double = true
-shader_parameter/size = 8.0
-shader_parameter/one_col = Color(0.042462, 0.10514, 0.0989875, 1)
+shader_parameter/size = 10.0
+shader_parameter/one_col = Color(0.198488, 0.0107199, 0.177253, 1)
 shader_parameter/one_speed = 0.02
-shader_parameter/one_opacity = 0.15
-shader_parameter/two_col = Color(0.0431373, 0.105882, 0.0980392, 1)
+shader_parameter/one_opacity = 0.2
+shader_parameter/two_col = Color(0.2, 0.0117647, 0.176471, 1)
 shader_parameter/two_speed = 0.02
-shader_parameter/two_opacity = 0.15
+shader_parameter/two_opacity = 0.2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cuoxy"]
 bg_color = Color(0.195766, 0.142776, 0.185097, 1)
@@ -745,6 +746,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="ActivityMenu" type="PanelContainer" parent="UI"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(400, 400)
 anchors_preset = 4
 anchor_top = 0.5
@@ -982,7 +984,6 @@ metadata/_edit_use_anchors_ = true
 [node name="OptionsMenu" type="PanelContainer" parent="UI"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1137,7 +1138,6 @@ script = ExtResource("35_4io20")
 [node name="FactsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 material = SubResource("ShaderMaterial_kjclt")
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_cuoxy")
@@ -1158,7 +1158,7 @@ theme_override_constants/separation = 16
 [node name="Label" type="Label" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("45_e031c")
-text = "Fact Library"
+text = "Fact Book"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -1182,17 +1182,46 @@ alignment = 1
 
 [node name="Button" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer" instance=ExtResource("44_y5a0d")]
 layout_mode = 2
+text = ""
 
-[node name="Button2" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer" instance=ExtResource("44_y5a0d")]
-layout_mode = 2
-category = 1
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer/Button"]
+layout_mode = 0
+offset_right = 112.0
+offset_bottom = 192.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
 
-[node name="Button3" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer" instance=ExtResource("44_y5a0d")]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer/Button/MarginContainer"]
 layout_mode = 2
-category = 2
+alignment = 1
 
-[node name="Button4" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer" instance=ExtResource("44_y5a0d")]
+[node name="Label" type="Label" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer/Button/MarginContainer/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("49_mgl65")
+text = "Topic 1"
+horizontal_alignment = 1
+
+[node name="Icon" type="Button" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer/Button/MarginContainer/VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 1
+icon = ExtResource("49_mhitb")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Count" type="Label" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer/Button/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("49_mgl65")
+theme_override_font_sizes/font_size = 12
+text = "%s/%s Unlocked"
+horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/FactsMenu/Library/VBoxContainer"]
 layout_mode = 2
@@ -1422,7 +1451,6 @@ text = ">"
 layout_mode = 2
 
 [node name="General" type="Control" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages"]
-visible = false
 anchors_preset = 0
 offset_right = 393.0
 
@@ -1531,6 +1559,7 @@ tick_count = 1
 bus_name = "SFX"
 
 [node name="Clippy" type="Control" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages"]
+visible = false
 layout_mode = 2
 anchors_preset = 0
 offset_right = 394.0

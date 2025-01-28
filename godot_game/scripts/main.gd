@@ -40,7 +40,6 @@ func _ready():
 		%Creature.setup_creature()
 		%Creature.reset_stats()
 	
-	print("pushing 'all data is loaded' notification")
 	Globals.send_notification(Globals.NOTIFICATION_ALL_DATA_IS_LOADED)
 	
 	# do last
@@ -65,12 +64,18 @@ func calc_elapsed_time():
 ## finilise & save data before closure
 func _notification(noti):
 	# close game
-	if noti == NOTIFICATION_WM_CLOSE_REQUEST:
-		print("--- Close notification recieved, attempting safe close ---")
+	if noti == NOTIFICATION_WM_CLOSE_REQUEST or noti == Globals.NOTIFICATION_QUIT_TO_MAIN_MENU:
+		print("--- Quit notification recieved, attempting safe close of main ---")
 		minigame_man.finalise_save_data()  # call before saving
 		DataGlobals.save_data()
 		DataGlobals.save_settings_data()
-		print("exiting...")
+		if noti == Globals.NOTIFICATION_QUIT_TO_MAIN_MENU:
+			print("exiting to main menu...")
+			await Globals.perform_closing_transition(trans_img, ui_overlay.position)
+			Globals.change_to_scene("res://scenes/GameScenes/main_menu.tscn")
+		else:
+			print("exiting...")
+		return
 	
 	# grow up
 	if noti == Globals.NOFITICATION_GROW_TO_ADULT_SCENE and not is_in_transition:
