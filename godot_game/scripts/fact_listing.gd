@@ -47,13 +47,14 @@ func show_fact(fact: Fact=null, unlocked: bool=true):
 	fact_body_label.text = fact.fact
 	source_label.text = "Source: " + fact.source
 
-func fact_btn_pressed(btn: Button, fact: Fact, unlocked: bool):
+func fact_btn_pressed(btn: Button, fact: Fact):
 	# no fact
 	if btn.button_pressed:
 		show_fact()
 		return
 	
 	# display fact
+	var unlocked = is_unlocked(fact)
 	show_fact(fact, unlocked)
 	for button in all_buttons:
 		if button != btn:
@@ -75,11 +76,10 @@ func add_facts() -> void:
 	for fact in facts.facts:
 		if fact.category == category:
 			var btn: Button = fact_btn_scene.instantiate()
-			var unlocked = is_unlocked(fact)
-			btn.text = str(i) if unlocked else "???"
+			btn.text = str(i) if is_unlocked(fact) else "???"
 			btn.toggle_mode = true
 			btn.button_pressed = false
 			i += 1
 			fact_container.add_child(btn)
-			btn.connect("button_down", fact_btn_pressed.bind(btn, fact, unlocked))
+			btn.connect("button_down", fact_btn_pressed.bind(btn, fact))
 			all_buttons.append(btn)

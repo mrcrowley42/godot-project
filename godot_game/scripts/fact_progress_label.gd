@@ -2,10 +2,12 @@ extends Label
 
 var og_text = ""
 
-func _ready() -> void:
-	og_text = text
-	Globals.item_unlocked.connect(update_text)
-	update_text()
+
+func _notification(what: int) -> void:
+	if what == Globals.NOTIFICATION_ALL_DATA_IS_LOADED:
+		og_text = text
+		Globals.item_unlocked.connect(update_text)
+		update_text()
 
 
 func update_text(_null=null):
