@@ -143,10 +143,9 @@ theme = ExtResource("4_22rev")
 text = "WIPE SAVE DATA"
 
 [node name="LoadMenu" parent="." instance=ExtResource("9_t1d8l")]
-visible = false
-offset_left = 55.0
+offset_left = 37.0
 offset_top = 199.0
-offset_right = 489.0
+offset_right = 502.0
 offset_bottom = 633.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
