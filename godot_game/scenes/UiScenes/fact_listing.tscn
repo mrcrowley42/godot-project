@@ -21,14 +21,15 @@ shader_parameter/two_col = Color(0.2, 0.0117647, 0.176471, 1)
 shader_parameter/two_speed = 0.02
 shader_parameter/two_opacity = 0.2
 
-[node name="List" type="MarginContainer" node_paths=PackedStringArray("heading", "fact_container", "fact_title_label", "fact_body_label")]
+[node name="List" type="MarginContainer" node_paths=PackedStringArray("heading", "fact_container", "fact_title_label", "fact_body_label", "source_label")]
 offset_right = 434.0
 offset_bottom = 434.0
 script = ExtResource("1_gtqsy")
 heading = NodePath("MarginContainer/VBoxContainer/Category")
 fact_container = NodePath("MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/FactListContainer/FactContainer")
 fact_title_label = NodePath("MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TheFactContainer/VBoxContainer/fact_title")
-fact_body_label = NodePath("MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TheFactContainer/VBoxContainer/PanelContainer/ScrollContainer/fact_body")
+fact_body_label = NodePath("MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TheFactContainer/VBoxContainer/PanelContainer/MarginContainer/ScrollContainer/fact_body")
+source_label = NodePath("MarginContainer/VBoxContainer/MarginContainer/SourceLabel")
 
 [node name="Panel" type="Panel" parent="."]
 material = SubResource("ShaderMaterial_3at6s")
@@ -78,7 +79,7 @@ theme_override_constants/separation = 10
 
 [node name="FactLink" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/FactListContainer/FactContainer" instance=ExtResource("3_omm3u")]
 layout_mode = 2
-text = "???"
+text = "bruh"
 
 [node name="TheFactContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
@@ -96,7 +97,7 @@ theme_override_constants/separation = 20
 [node name="fact_title" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TheFactContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("7_lmege")
-text = "Select a fact!"
+text = "bruh?"
 horizontal_alignment = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TheFactContainer/VBoxContainer"]
@@ -104,17 +105,38 @@ layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("7_lmege")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TheFactContainer/VBoxContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TheFactContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TheFactContainer/VBoxContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("5_wceav")
 
-[node name="fact_body" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TheFactContainer/VBoxContainer/PanelContainer/ScrollContainer"]
+[node name="fact_body" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/TheFactContainer/VBoxContainer/PanelContainer/MarginContainer/ScrollContainer"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("5_wceav")
+text = "BRUH!"
+autowrap_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+
+[node name="SourceLabel" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer"]
+modulate = Color(1, 1, 1, 0.470588)
+layout_mode = 2
+theme = ExtResource("5_wceav")
+theme_override_font_sizes/font_size = 14
+text = "source: idk"
+horizontal_alignment = 2
 autowrap_mode = 2
 
 [node name="SaveButtons" type="Node2D" parent="."]
