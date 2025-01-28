@@ -1,5 +1,6 @@
 class_name MainMenu extends ScriptNode
 
+@onready var load_menu = find_child("LoadMenu")
 
 func _ready() -> void:
 	pass # Replace with function body.
@@ -18,5 +19,5 @@ func _on_new_game_btn_button_down() -> void:
 
 
 func _on_load_btn_button_down() -> void:
-	# SHOW POPUP OF AVAILABLE SAVES
-	pass # Replace with function body.
+	load_menu.show()
+	#pass # Replace with function body.

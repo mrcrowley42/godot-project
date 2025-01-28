@@ -14,7 +14,7 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [node name="PanelContainer" type="Button"]
-custom_minimum_size = Vector2(355, 0)
+custom_minimum_size = Vector2(355, 138)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
