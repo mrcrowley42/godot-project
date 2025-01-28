@@ -1,16 +1,18 @@
-[gd_scene load_steps=13 format=3 uid="uid://ig0eoqdfq5nr"]
+[gd_scene load_steps=16 format=3 uid="uid://dunvo70ey34fm"]
 
 [ext_resource type="Script" path="res://scripts/main_game_scripts/main_menu.gd" id="1_lpoqi"]
 [ext_resource type="Shader" path="res://shaders/pattern_lines.gdshader" id="2_f1u7v"]
 [ext_resource type="Texture2D" uid="uid://ywjmlgi3jyuu" path="res://images/omba.png" id="2_k5vrf"]
-[ext_resource type="Texture2D" uid="uid://bew6qy27ohhib" path="res://themes/main_menu_grad.tres" id="3_kva7r"]
+[ext_resource type="Texture2D" uid="uid://cmu73fglotayl" path="res://themes/main_menu_grad.tres" id="3_kva7r"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="4_22rev"]
 [ext_resource type="Texture2D" uid="uid://c0q2pb82gd5mb" path="res://icons/list-check.svg" id="5_tq23t"]
-[ext_resource type="Theme" uid="uid://be46f5clp5lhj" path="res://themes/action_btn_main_menu.tres" id="5_yrm4f"]
+[ext_resource type="Theme" uid="uid://cbwmony3pd57c" path="res://themes/action_btn_main_menu.tres" id="5_yrm4f"]
 [ext_resource type="Texture2D" uid="uid://ds2ci8c6rq5o7" path="res://icons/settings_small.svg" id="6_d6euh"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="8_1gx8s"]
-[ext_resource type="PackedScene" uid="uid://dhngdrs10j15h" path="res://scenes/UiScenes/save_listing_menu.tscn" id="9_t1d8l"]
+[ext_resource type="Script" path="res://scenes/GameScenes/load_save_menu.gd" id="9_1nm66"]
+[ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="10_46g4q"]
 [ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="11_oc74i"]
+[ext_resource type="PackedScene" uid="uid://qx7ey4e0sik6" path="res://scenes/UiScenes/save_file_listing.tscn" id="11_x6m8b"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gpy1m"]
 shader = ExtResource("2_f1u7v")
@@ -24,6 +26,21 @@ shader_parameter/one_opacity = 0.0
 shader_parameter/two_col = Color(0.48, 0.1104, 0.14736, 1)
 shader_parameter/two_speed = 0.06
 shader_parameter/two_opacity = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l5ron"]
+bg_color = Color(0.3264, 0.33728, 0.34, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.8, 0.8, 0.8, 0.533333)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.54902)
+shadow_size = 8
+shadow_offset = Vector2(0, 8)
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_lpoqi")
@@ -146,11 +163,98 @@ layout_mode = 2
 theme = ExtResource("4_22rev")
 text = "WIPE SAVE DATA"
 
-[node name="LoadMenu" parent="." instance=ExtResource("9_t1d8l")]
-offset_left = 37.0
-offset_top = 199.0
-offset_right = 502.0
-offset_bottom = 633.0
+[node name="LoadMenu" type="MarginContainer" parent="." node_paths=PackedStringArray("heading", "item_container")]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 50.0
+offset_top = 210.0
+offset_right = 490.0
+offset_bottom = 635.0
+grow_horizontal = 2
+script = ExtResource("9_1nm66")
+heading = NodePath("MarginContainer/VBoxContainer/Title")
+item_container = NodePath("MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SaveList")
+
+[node name="Panel" type="Panel" parent="LoadMenu"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_l5ron")
+
+[node name="MarginContainer" type="MarginContainer" parent="LoadMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LoadMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="LoadMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("10_46g4q")
+text = "Saves"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="LoadMenu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(386, 290)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="LoadMenu/MarginContainer/VBoxContainer/ScrollContainer"]
+custom_minimum_size = Vector2(378, 0)
+layout_mode = 2
+theme_override_constants/margin_left = -2
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 24
+
+[node name="SaveList" type="VBoxContainer" parent="LoadMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="PanelContainer" parent="LoadMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SaveList" instance=ExtResource("11_x6m8b")]
+visible = false
+layout_mode = 2
+
+[node name="PanelContainer2" parent="LoadMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SaveList" instance=ExtResource("11_x6m8b")]
+visible = false
+layout_mode = 2
+
+[node name="PanelContainer3" parent="LoadMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SaveList" instance=ExtResource("11_x6m8b")]
+visible = false
+layout_mode = 2
+
+[node name="SaveMenuBtns" type="Node2D" parent="LoadMenu"]
+position = Vector2(-50, -130)
+
+[node name="Back" type="Button" parent="LoadMenu/SaveMenuBtns"]
+texture_filter = 5
+custom_minimum_size = Vector2(100, 40)
+offset_left = 73.0
+offset_top = 502.0
+offset_right = 173.0
+offset_bottom = 542.0
+scale = Vector2(0.75, 0.75)
+theme = ExtResource("4_22rev")
+theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
+theme_override_font_sizes/font_size = 18
+text = "Back"
+
+[node name="LoadBtn" type="Button" parent="LoadMenu/SaveMenuBtns"]
+texture_filter = 5
+custom_minimum_size = Vector2(100, 40)
+offset_left = 385.0
+offset_top = 502.0
+offset_right = 485.0
+offset_bottom = 542.0
+scale = Vector2(0.75, 0.75)
+theme = ExtResource("4_22rev")
+theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
+theme_override_font_sizes/font_size = 18
+text = "Load"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_top = 70.0
@@ -178,3 +282,6 @@ texture = ExtResource("11_oc74i")
 [connection signal="button_down" from="MenuList/MarginContainer/VBoxContainer/ContinueBtn" to="." method="_on_continue_btn_button_down"]
 [connection signal="button_down" from="MenuList/MarginContainer/VBoxContainer/LoadBtn" to="." method="_on_load_btn_button_down"]
 [connection signal="button_down" from="MenuList/MarginContainer/VBoxContainer/QuitBtn" to="." method="_on_quit_btn_button_down"]
+[connection signal="hidden" from="LoadMenu" to="LoadMenu" method="_on_hidden"]
+[connection signal="button_down" from="LoadMenu/SaveMenuBtns/Back" to="LoadMenu" method="_on_back_button_down"]
+[connection signal="button_down" from="LoadMenu/SaveMenuBtns/LoadBtn" to="." method="_on_load_save_btn_button_down"]

@@ -13,12 +13,11 @@ corner_radius_bottom_left = 12
 shadow_size = 15
 shadow_offset = Vector2(0, 5)
 
-[node name="List" type="MarginContainer" node_paths=PackedStringArray("heading", "fact_container")]
+[node name="List" type="MarginContainer" node_paths=PackedStringArray("heading")]
 offset_right = 484.0
 offset_bottom = 434.0
 script = ExtResource("1_pfvmi")
 heading = NodePath("MarginContainer/VBoxContainer/Category")
-fact_container = NodePath("MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/FactList")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 2

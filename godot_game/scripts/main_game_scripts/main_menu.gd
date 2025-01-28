@@ -46,3 +46,7 @@ func _on_load_btn_button_down() -> void:
 	if not is_in_transition:
 		load_menu.show()
 	#pass # Replace with function body.
+
+
+func _on_load_save_btn_button_down() -> void:
+	pass # Replace with function body.
