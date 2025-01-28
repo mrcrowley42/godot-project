@@ -12,6 +12,11 @@ func _ready() -> void:
 	center_pos = bg_gradient.size / 2
 	do_opening_trans()
 
+func grab_saves():
+	# TODO PARSE SAVES LISTED IN THE SAVE FILE INTO ENTRIES THAT CAN BE
+	# USED BY A SAVE FILE LISTING
+	pass
+
 
 func do_opening_trans():
 	Globals.perform_opening_transition(trans_img, center_pos, set_is_in_trans.bind(false))
@@ -48,4 +53,5 @@ func _on_load_btn_button_down() -> void:
 
 
 func _on_load_save_btn_button_down() -> void:
+	# TODO LOAD CURRENTLY SELECTED GAME FILE AND MARK IT AS THE CURRENT ONE.
 	pass # Replace with function body.
