@@ -21,6 +21,8 @@ uniform bool debug_mode = false;
 uniform vec4 upper_colour : source_color = vec4(1., .5, .4, 1);
 uniform vec4 lower_colour : source_color = vec4(.0, .4, 1., 1);
 uniform vec4 ray_colour : source_color = vec4(1, 1, 1, 1);
+uniform vec4 theme_tint : source_color = vec4(1, 1, 1, 1);
+uniform float theme_tint_intensity : hint_range(0.0, 1.0, 0.2) = .2;
 uniform sampler2D LIGHT_MAP;
 
 uniform float bg_strength : hint_range(.0, 1.) = .5;
@@ -188,7 +190,8 @@ void fragment() {
 
 		if (final_length > EPSILON) {  // confirmed a ray
 			float ray_debug_on = 1. * float(debug_mode);
-			COLOR = vec4(ray_colour.rgb, (ray_length - final_length) * ray_strength + ray_debug_on);  // debug sets alpha to 1
+			vec3 final_ray_color = (ray_colour.rgb * (1. - theme_tint_intensity)) + (theme_tint.rgb * theme_tint_intensity);
+			COLOR = vec4(final_ray_color, (ray_length - final_length) * ray_strength + ray_debug_on);  // debug sets alpha to 1
 
 			// FADE EDGE
 			if (fade_ray_edge) {

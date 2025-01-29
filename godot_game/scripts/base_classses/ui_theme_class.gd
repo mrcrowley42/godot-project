@@ -3,6 +3,8 @@ class_name UiTheme extends Resource
 @export var theme_name: String
 @export var hint: String
 @export var screen_tint: Color
+## how much the screen tint will affect the bg sun rays
+@export var screen_tint_ray_intensity: float
 @export var food_btn: Texture2D
 @export var food_btn_pressed: Texture2D
 @export var act_btn: Texture2D
