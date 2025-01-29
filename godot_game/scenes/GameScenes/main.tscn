@@ -1,4 +1,4 @@
-[gd_scene load_steps=127 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=126 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
@@ -82,7 +82,6 @@
 [ext_resource type="Script" path="res://scripts/sfx_man.gd" id="65_787cd"]
 [ext_resource type="AudioStream" uid="uid://cx28efsxtr7c" path="res://sound_effects/button_click_fast.mp3" id="67_nfa6o"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/popup_manager.gd" id="69_rkm2b"]
-[ext_resource type="PackedScene" uid="uid://ckjfqxx8f55r3" path="res://scenes/UiScenes/ambience_control.tscn" id="69_x7ygu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/sound_scape_manager.gd" id="80_83777"]
 
 [sub_resource type="Gradient" id="Gradient_jl3ct"]
@@ -1044,6 +1043,7 @@ script = ExtResource("41_eeoik")
 [node name="ThemeMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 material = SubResource("ShaderMaterial_gyxpl")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -1343,7 +1343,6 @@ script = ExtResource("35_4io20")
 [node name="SettingsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 material = SubResource("ShaderMaterial_1s3b6")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -1739,15 +1738,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 12
 alignment = 1
-
-[node name="PanelContainer" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/SoundListBox" instance=ExtResource("69_x7ygu")]
-layout_mode = 2
-
-[node name="PanelContainer2" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/SoundListBox" instance=ExtResource("69_x7ygu")]
-layout_mode = 2
-
-[node name="PanelContainer3" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/SoundListBox" instance=ExtResource("69_x7ygu")]
-layout_mode = 2
 
 [node name="SoundCountLabel" type="Label" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
