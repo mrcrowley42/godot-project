@@ -148,6 +148,7 @@ shader_parameter/upper_colour = Color(1, 0.5, 0.4, 1)
 shader_parameter/lower_colour = Color(0, 0.4, 1, 1)
 shader_parameter/ray_colour = Color(1, 1, 1, 1)
 shader_parameter/theme_tint = Color(1, 1, 1, 1)
+shader_parameter/theme_tint_intensity = 0.2
 shader_parameter/bg_strength = 0.5
 shader_parameter/bg_fade = 0.0
 shader_parameter/fade_ray_edge = true

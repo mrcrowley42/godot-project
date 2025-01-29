@@ -67,6 +67,10 @@ func update_light_shader() -> void:
 
 	shader_rect.material.set("shader_parameter/m_shadow_dist", MOON_PHASE_VALUES[moon_phase][0])
 	shader_rect.material.set("shader_parameter/m_shadow_rot", MOON_PHASE_VALUES[moon_phase][1])
+	
+	if %UI_Theme_Manager:
+		shader_rect.material.set("shader_parameter/theme_tint", %UI_Theme_Manager.current_theme.screen_tint)
+		shader_rect.material.set("shader_parameter/theme_tint_intensity", %UI_Theme_Manager.current_theme.screen_tint_ray_intensity)
 
 	# udpate background tint
 	var sample_perc = bg_time_tint_curve.sample(day_percent)
