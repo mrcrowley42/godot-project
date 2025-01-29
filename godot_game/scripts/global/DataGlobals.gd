@@ -131,6 +131,9 @@ func get_default_creature_metadata() -> Dictionary:
 func get_creature_id(creature_id_override: int = -1) -> int:
 	return creature_id_override if creature_id_override != -1 else int(get_global_metadata_value(CURRENT_CREATURE))
 
+func get_all_creature_ids() -> Array:
+	return _every_creature_metadata.keys()
+
 ## deepcopy of the metadata last loaded
 func get_global_metadata_dc() -> Dictionary:
 	return _current_global_metadata.duplicate(true)
