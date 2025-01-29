@@ -1044,7 +1044,6 @@ script = ExtResource("41_eeoik")
 [node name="ThemeMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 material = SubResource("ShaderMaterial_gyxpl")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -1111,6 +1110,7 @@ script = ExtResource("35_4io20")
 [node name="FactsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 material = SubResource("ShaderMaterial_kjclt")
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_cuoxy")
@@ -1301,19 +1301,23 @@ theme = ExtResource("45_e031c")
 theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
 text = "Discovered Creatures"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 300)
+[node name="PanelContainer" type="PanelContainer" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("46_r0sdd")
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/PanelContainer"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+theme = ExtResource("49_mgl65")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Creatures" type="GridContainer" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+[node name="Creatures" type="GridContainer" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 12

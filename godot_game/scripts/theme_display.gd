@@ -8,7 +8,7 @@ const btn_theme = preload("res://themes/cosmetic_btn_theme.tres")
 ## Class that describes UI theme button.
 class UiThemeButton extends CustomTooltipButton:
 	var ui_theme
-	func _init(_ui_theme: UiTheme):
+	func _init(_ui_theme: UiTheme, selected: bool):
 		self.direction = DIRECTION.DOWN
 		self.custom_minimum_size = BTN_SIZE
 		self.size = BTN_SIZE
@@ -17,11 +17,13 @@ class UiThemeButton extends CustomTooltipButton:
 		self.text = _ui_theme.theme_name
 		self.toggle_mode = true
 		self.text = ui_theme.theme_name
+		self.button_pressed = selected
 		theme = load("res://themes/menu_btn_dark.tres")
 		add_theme_font_size_override("font_size", 20)
 		add_theme_color_override("font_color", ui_theme.primary)
 		add_theme_color_override("font_pressed_color", ui_theme.screen_tint)
 		add_theme_color_override("font_hover_color", ui_theme.screen_tint)
+		
 		
 		var box = StyleBoxFlat.new()
 		box.bg_color = ui_theme.bg
@@ -66,7 +68,7 @@ class UiThemeButton extends CustomTooltipButton:
 func _notification(what: int) -> void:
 	if what == Globals.NOTIFICATION_ALL_DATA_IS_LOADED:
 		for item: UiTheme in theme_manager.themes:
-			var theme_btn = UiThemeButton.new(item)
+			var theme_btn = UiThemeButton.new(item, %UI_Theme_Manager.current_theme == item)
 			add_child.call_deferred(theme_btn)
 
 func update_buttons():
