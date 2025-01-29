@@ -8,6 +8,7 @@ extends MarginContainer
 func _ready() -> void:
 	for i in range(4):
 		var new_listing: Button = save_listing_scene.instantiate()
+		#new_listing.save_file = ????
 		new_listing.button_group = btn_group
 		item_container.add_child(new_listing)
 	#heading.text = "Facts: %s" % Fact.FactCategory.keys()[category]

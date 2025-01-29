@@ -1,13 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://ig0eoqdfq5nr"]
+[gd_scene load_steps=14 format=3 uid="uid://dunvo70ey34fm"]
 
 [ext_resource type="Script" path="res://scripts/main_game_scripts/main_menu.gd" id="1_lpoqi"]
 [ext_resource type="Shader" path="res://shaders/pattern_lines.gdshader" id="2_f1u7v"]
 [ext_resource type="Texture2D" uid="uid://ywjmlgi3jyuu" path="res://images/omba.png" id="2_k5vrf"]
-[ext_resource type="Texture2D" uid="uid://bew6qy27ohhib" path="res://themes/main_menu_grad.tres" id="3_kva7r"]
+[ext_resource type="Texture2D" uid="uid://cmu73fglotayl" path="res://themes/main_menu_grad.tres" id="3_kva7r"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="4_22rev"]
-[ext_resource type="Texture2D" uid="uid://c0q2pb82gd5mb" path="res://icons/list-check.svg" id="5_tq23t"]
-[ext_resource type="Theme" uid="uid://be46f5clp5lhj" path="res://themes/action_btn_main_menu.tres" id="5_yrm4f"]
-[ext_resource type="Texture2D" uid="uid://ds2ci8c6rq5o7" path="res://icons/settings_small.svg" id="6_d6euh"]
+[ext_resource type="Theme" uid="uid://cbwmony3pd57c" path="res://themes/action_btn_main_menu.tres" id="5_yrm4f"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="8_1gx8s"]
 [ext_resource type="Script" path="res://scenes/GameScenes/load_save_menu.gd" id="9_1nm66"]
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="10_46g4q"]
@@ -94,7 +92,7 @@ theme_override_constants/margin_bottom = 40
 
 [node name="MarginContainer" type="MarginContainer" parent="MenuList"]
 layout_mode = 2
-theme_override_constants/margin_top = 170
+theme_override_constants/margin_top = 200
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MenuList/MarginContainer"]
 layout_mode = 2
@@ -130,41 +128,7 @@ layout_mode = 2
 theme = ExtResource("5_yrm4f")
 text = "Quit"
 
-[node name="MarginContainer" type="MarginContainer" parent="MenuList/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_top = 6
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MenuList/MarginContainer/VBoxContainer/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 20
-alignment = 1
-
-[node name="CreaturesBtn" type="Button" parent="MenuList/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("4_22rev")
-icon = ExtResource("5_tq23t")
-icon_alignment = 1
-
-[node name="SettingBtn" type="Button" parent="MenuList/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("4_22rev")
-icon = ExtResource("6_d6euh")
-icon_alignment = 1
-expand_icon = true
-
-[node name="WipeBtn" type="Button" parent="MenuList/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
-layout_mode = 2
-theme = ExtResource("4_22rev")
-text = "WIPE SAVE DATA"
-
 [node name="LoadMenu" type="MarginContainer" parent="." node_paths=PackedStringArray("heading", "item_container")]
-visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
