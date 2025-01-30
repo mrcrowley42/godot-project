@@ -129,6 +129,7 @@ theme = ExtResource("5_yrm4f")
 text = "Quit"
 
 [node name="LoadMenu" type="MarginContainer" parent="." node_paths=PackedStringArray("heading", "item_container")]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5

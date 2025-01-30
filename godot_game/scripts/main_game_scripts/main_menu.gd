@@ -13,6 +13,10 @@ func _ready() -> void:
 
 
 func grab_saves():
+	var creature_save_ids = DataGlobals.get_all_creature_ids()
+	for save_id in creature_save_ids:
+		var save_info = {}
+		save_info['last_played'] = DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_LAST_SAVED, save_id)
 	var saves = "no"
 	# TODO PARSE SAVES LISTED IN THE SAVE FILE INTO ENTRIES THAT CAN BE
 	# USED BY A SAVE FILE LISTING
