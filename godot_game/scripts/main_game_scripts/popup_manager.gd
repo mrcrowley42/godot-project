@@ -1,34 +1,42 @@
 @icon("res://icons/class-icons/bell-fill.svg")
 class_name NotificationManager extends ScriptNode
 
-@onready var toast = preload("res://scenes/UiScenes/basic_notification.tscn")
+@onready var basic_toast = preload("res://scenes/UiScenes/notification_basic.tscn")
+@onready var adv_toast = preload("res://scenes/UiScenes/notification_adv.tscn")
 @onready var grow_up_btn: NinePatchRect = find_child("GrowUpBtn")
+
 @export var clippy_area: Node
+
 var child_count: int
 
-func _ready():
-	Globals.item_unlocked.connect(new_notification)
-	grow_up_btn.position.y += grow_up_btn.size.y * grow_up_btn.scale.y * 2.
-	%Creature.ready_to_grow_up.connect(grow_up_btn.show_grow_up_btn)
-	child_count = get_child_count()
+func _notification(what: int) -> void:
+	if what == Globals.NOTIFICATION_ALL_DATA_IS_LOADED:
+		Globals.item_unlocked.connect(new_basic_notification)
+		grow_up_btn.position.y += grow_up_btn.size.y * grow_up_btn.scale.y * 2.
+		%Creature.ready_to_grow_up.connect(grow_up_btn.show_grow_up_btn)
+		child_count = get_child_count()
 
-## Creates a toast notification with the passed string.
-func new_notification(message: String, type: PackedScene=toast) -> void:
+
+func new_basic_notification(message: String):
 	if clippy_area.clippy:
 		return
-	# Create an instance so we can grab the size of the popup.
-	var toast2 = type.instantiate()
-	# spawn notification in the horizontal centre and just above the top of screen.
-	var start_pos = Vector2((540-toast2.size.x)/2,-toast2.size.y+112)
-
-	# Checks every second that the node has no children before executing
-	# Seems to queue consecutive calls ¯\_(ツ)_/¯
+	
+	# waits until no other notifications are in the ui (a queue ¯\_(ツ)_/¯)
 	while get_child_count() != child_count:
 		await get_tree().create_timer(1).timeout
 		if get_child_count() == child_count:
 			continue
-	var notif = toast.instantiate()
+	
+	var toast_size: Vector2 = basic_toast.instantiate().size
+	var start_pos = Vector2((540-toast_size.x)/2,-toast_size.y+112)
+	
+	
+	var notif = basic_toast.instantiate()
 	notif.message = message
 	notif.position = start_pos
 	add_child(notif)
-	print("ui notification displayed  '%s'" % notif.message)
+	print("ui basic notification displayed  '%s'" % notif.message)
+
+
+func new_adv_notification():
+	print("ui adv notification displayed")

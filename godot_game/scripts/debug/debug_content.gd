@@ -7,7 +7,7 @@ extends Control
 @onready var clippy_area: Button  = %ClippyArea
 @onready var background = %Background
 @onready var screen_tint = %BG
-@onready var notif_man = %NotificationManager
+@onready var notif_man: NotificationManager = %NotificationManager
 @onready var cosmetic_btns = %CosmeticItems
 @onready var theme_btns = %ThemeBtns
 @onready var facts_menu = %FactsMenu
@@ -86,7 +86,12 @@ func _on_check_box_toggled(toggled_on) -> void:
 
 func _on_notif_btn_button_down() -> void:
 	var msg = example_messages.pick_random()
-	notif_man.new_notification(msg)
+	notif_man.new_basic_notification(msg)
+
+
+func _on_notif_btn_2_button_down() -> void:
+	var msg = example_messages.pick_random()
+	notif_man.new_adv_notification()
 
 
 func _on_wipe_btn_button_down() -> void:

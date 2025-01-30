@@ -1,17 +1,17 @@
 [gd_scene load_steps=5 format=3 uid="uid://dvngmgfihp65d"]
 
-[ext_resource type="Theme" uid="uid://ca5xmkorrsmso" path="res://themes/toast_theme.tres" id="1_aoig4"]
-[ext_resource type="Script" path="res://scripts/notification.gd" id="1_xvh73"]
-[ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="2_4drbk"]
-[ext_resource type="AudioStream" uid="uid://ddfo6jw06fpja" path="res://sound_effects/correct.wav" id="3_2lai8"]
+[ext_resource type="Theme" uid="uid://ca5xmkorrsmso" path="res://themes/toast_theme.tres" id="1_p5757"]
+[ext_resource type="Script" path="res://scripts/notification.gd" id="2_0s1l5"]
+[ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="3_0m637"]
+[ext_resource type="AudioStream" uid="uid://ddfo6jw06fpja" path="res://sound_effects/correct.wav" id="4_cv0ce"]
 
 [node name="Notification" type="PanelContainer"]
 offset_right = 340.0
 offset_bottom = 64.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme = ExtResource("1_aoig4")
-script = ExtResource("1_xvh73")
+theme = ExtResource("1_p5757")
+script = ExtResource("2_0s1l5")
 ease_type = 1
 transition_type = 5
 animation_length = 0.4
@@ -31,7 +31,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(0.185, 0.21425, 0.25, 1)
-theme_override_fonts/font = ExtResource("2_4drbk")
+theme_override_fonts/font = ExtResource("3_0m637")
 theme_override_font_sizes/font_size = 20
 text = "ACHIEVEMENT UNLOCKED!"
 horizontal_alignment = 1
@@ -39,5 +39,5 @@ vertical_alignment = 1
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("3_2lai8")
+stream = ExtResource("4_cv0ce")
 bus = &"SFX"

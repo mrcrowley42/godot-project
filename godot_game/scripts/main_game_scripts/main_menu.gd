@@ -1,5 +1,7 @@
 class_name MainMenu extends ScriptNode
 
+@export var auto_continue: bool
+
 @onready var load_menu = find_child("LoadMenu")
 @onready var bg_gradient: TextureRect = find_child("BgGradient")
 @onready var trans_img: Sprite2D = find_child("Transition")
@@ -8,6 +10,10 @@ var center_pos
 var is_in_transition = true
 
 func _ready() -> void:
+	if auto_continue:
+		Globals.change_to_scene("res://scenes/GameScenes/main.tscn")
+		return
+	
 	center_pos = bg_gradient.size / 2
 	do_opening_trans()
 
