@@ -42,7 +42,6 @@ shadow_offset = Vector2(0, 8)
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_lpoqi")
-auto_continue = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false

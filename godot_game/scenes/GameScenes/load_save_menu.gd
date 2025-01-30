@@ -6,6 +6,7 @@ extends MarginContainer
 #@onready var btn_sfx = find_parent("Game").find_child("BtnClick")
 @onready var btn_group = load("res://resources/save_file_group.tres")
 func _ready() -> void:
+	visible = false
 	for i in range(4):
 		var new_listing: Button = save_listing_scene.instantiate()
 		#new_listing.save_file = ????
