@@ -46,7 +46,7 @@ size_flags_vertical = 0
 size_flags_stretch_ratio = 3.0
 theme_override_constants/separation = 8
 
-[node name="SoundLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="NameLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("5_bh6hp")
 text = "Creature Name"

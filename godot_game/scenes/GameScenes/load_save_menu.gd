@@ -32,8 +32,8 @@ func add_saves() -> void:
 		#new_listing.save_file = ????
 		new_listing.button_group = btn_group
 		## TODO: i commented the following two lines casue it was crashing lol - bryce
-		#new_listing.save = save
-		#item_container.add_child(new_listing)
+		new_listing.save_file = save
+		item_container.add_child(new_listing)
 		
 	#for i in range(4):
 		#var new_listing: Button = save_listing_scene.instantiate()
