@@ -5,27 +5,32 @@ class_name MainMenu extends ScriptNode
 @onready var load_menu = find_child("LoadMenu")
 @onready var bg_gradient: TextureRect = find_child("BgGradient")
 @onready var trans_img: Sprite2D = find_child("Transition")
-
+@onready var new_game_btn = find_child("NewGameBtn")
 var center_pos
 var is_in_transition = true
 
 func _ready() -> void:
+	
 	if auto_continue:
 		Globals.change_to_scene("res://scenes/GameScenes/main.tscn")
 		return
 	
 	center_pos = bg_gradient.size / 2
+	# if save file
+	#new_game_btn.hide()
 	do_opening_trans()
 
 
 func grab_saves():
 	var creature_save_ids = DataGlobals.get_all_creature_ids()
+	print(creature_save_ids)
+	var saves = []
 	for save_id in creature_save_ids:
 		var save_info = {}
 		save_info['last_played'] = DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_LAST_SAVED, save_id)
-	var saves = "no"
-	# TODO PARSE SAVES LISTED IN THE SAVE FILE INTO ENTRIES THAT CAN BE
-	# USED BY A SAVE FILE LISTING
+		save_info['creature_name'] = DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_NAME, save_id)
+		saves.append(save_info)
+	print(saves)
 	return saves
 
 
@@ -68,3 +73,8 @@ func _on_load_btn_button_down() -> void:
 func _on_load_save_btn_button_down() -> void:
 	# TODO LOAD CURRENTLY SELECTED GAME FILE AND MARK IT AS THE CURRENT ONE.
 	pass # Replace with function body.
+
+
+func load():
+	# ADD THE AUTO CONTINUE LOAD SETTING HERE, AND ADD IT TO GENERAL?
+	pass
