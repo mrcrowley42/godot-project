@@ -27,7 +27,7 @@ func grab_saves():
 	var saves = []
 	for save_id in creature_save_ids:
 		var save_info = {}
-		save_info['last_played'] = DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_LAST_SAVED, save_id)
+		save_info['last_saved'] = DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_LAST_SAVED, save_id)
 		save_info['creature_name'] = DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_NAME, save_id)
 		saves.append(save_info)
 	return saves
