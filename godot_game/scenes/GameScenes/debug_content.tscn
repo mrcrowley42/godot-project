@@ -554,6 +554,14 @@ offset_bottom = 478.0
 theme = ExtResource("8_lqg4h")
 text = "xp!"
 
+[node name="Button4" type="Button" parent="."]
+layout_mode = 0
+offset_left = 254.0
+offset_top = 166.0
+offset_right = 365.0
+offset_bottom = 216.0
+text = "SCREENSHOT"
+
 [connection signal="drag_ended" from="dayprog/slider" to="dayprog" method="_on_day_progress_drag_ended"]
 [connection signal="drag_started" from="dayprog/slider" to="dayprog" method="_on_day_progress_drag_started"]
 [connection signal="pressed" from="dayprog/progressing" to="dayprog" method="_on_progressing_pressed"]
@@ -580,3 +588,4 @@ text = "xp!"
 [connection signal="button_down" from="WipeNodesBtn" to="." method="_on_wipe_nodes_btn_button_down"]
 [connection signal="button_down" from="Button3" to="." method="_on_button_3_button_down"]
 [connection signal="button_down" from="Button2" to="." method="_on_button_2_button_down"]
+[connection signal="button_down" from="Button4" to="." method="_on_button_4_button_down"]

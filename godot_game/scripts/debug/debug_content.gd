@@ -142,3 +142,9 @@ func _on_discover_btn_button_down() -> void:
 
 func _on_button_2_button_down() -> void:
 	creature.add_xp(10_000)
+
+
+func _on_button_4_button_down() -> void:
+	var capture = creature.get_viewport().get_texture().get_image()
+	var filename = "image.png"
+	capture.save_png(filename)
