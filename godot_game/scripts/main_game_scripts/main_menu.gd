@@ -10,11 +10,12 @@ var center_pos
 var is_in_transition = true
 
 func _ready() -> void:
-	
 	if auto_continue:
 		Globals.change_to_scene("res://scenes/GameScenes/main.tscn")
 		return
 	
+	DataGlobals.load_data()
+	Globals.send_notification(Globals.NOTIFICATION_ALL_DATA_IS_LOADED)
 	center_pos = bg_gradient.size / 2
 	# if save file
 	#new_game_btn.hide()
