@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ig0eoqdfq5nr"]
+[gd_scene load_steps=17 format=3 uid="uid://ig0eoqdfq5nr"]
 
 [ext_resource type="Script" path="res://scripts/main_game_scripts/main_menu.gd" id="1_lpoqi"]
 [ext_resource type="Shader" path="res://shaders/pattern_lines.gdshader" id="2_f1u7v"]
@@ -10,7 +10,10 @@
 [ext_resource type="Script" path="res://scenes/GameScenes/load_save_menu.gd" id="9_1nm66"]
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="10_46g4q"]
 [ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="11_oc74i"]
-[ext_resource type="PackedScene" path="res://scenes/UiScenes/save_file_listing.tscn" id="11_x6m8b"]
+[ext_resource type="PackedScene" uid="uid://qx7ey4e0sik6" path="res://scenes/UiScenes/save_file_listing.tscn" id="11_x6m8b"]
+[ext_resource type="AudioStream" uid="uid://bc4fnsjag56a3" path="res://music/Moa's Song - Aether OST (Emile van Krieken).mp3" id="12_etynx"]
+[ext_resource type="Script" path="res://scripts/main_game_scripts/egg_opening/egg_scene_music.gd" id="13_ge5c2"]
+[ext_resource type="Script" path="res://scripts/sfx_man.gd" id="17_h3jq1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gpy1m"]
 shader = ExtResource("2_f1u7v")
@@ -244,6 +247,19 @@ position = Vector2(270, 1200)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("11_oc74i")
 
+[node name="Music" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("12_etynx")
+autoplay = true
+bus = &"Music"
+script = ExtResource("13_ge5c2")
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+max_polyphony = 6
+bus = &"SFX"
+script = ExtResource("17_h3jq1")
+
 [connection signal="button_down" from="MenuList/MarginContainer/VBoxContainer/NewGameBtn" to="." method="_on_new_game_btn_button_down"]
 [connection signal="button_down" from="MenuList/MarginContainer/VBoxContainer/ContinueBtn" to="." method="_on_continue_btn_button_down"]
 [connection signal="button_down" from="MenuList/MarginContainer/VBoxContainer/LoadBtn" to="." method="_on_load_btn_button_down"]
@@ -251,3 +267,4 @@ texture = ExtResource("11_oc74i")
 [connection signal="hidden" from="LoadMenu" to="LoadMenu" method="_on_hidden"]
 [connection signal="button_down" from="LoadMenu/SaveMenuBtns/Back" to="LoadMenu" method="_on_back_button_down"]
 [connection signal="button_down" from="LoadMenu/SaveMenuBtns/LoadBtn" to="." method="_on_load_save_btn_button_down"]
+[connection signal="finished" from="Music" to="Music" method="_on_finished"]
