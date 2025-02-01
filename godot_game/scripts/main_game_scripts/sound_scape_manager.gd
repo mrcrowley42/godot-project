@@ -9,6 +9,10 @@ var has_loaded = false
 
 var is_faded_out = false
 
+func _ready():
+	AudioServer.set_bus_volume_db(ambience_bus_index, linear_to_db(0.0))
+	fade_in()
+
 ## Custom streamplayer class, that loops audio by default.
 class AmbientSoundPlayer extends AudioStreamPlayer:
 	var sound_category: AmbientSoundCategory
