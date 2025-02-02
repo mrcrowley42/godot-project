@@ -90,7 +90,6 @@ func _on_notif_btn_button_down() -> void:
 
 
 func _on_notif_btn_2_button_down() -> void:
-	var msg = example_messages.pick_random()
 	notif_man.new_adv_notification()
 
 

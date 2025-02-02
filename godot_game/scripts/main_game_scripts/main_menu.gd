@@ -76,7 +76,7 @@ func _on_load_save_btn_button_down() -> void:
 	pass # Replace with function body.
 
 func fade_out_music():
-	var t = Globals.tween(%Music, "volume_db", -100, 0., 1., Tween.EaseType.EASE_IN_OUT)
+	Globals.tween(%Music, "volume_db", -100, 0., 1., Tween.EaseType.EASE_IN_OUT)
 
 func load():
 	# ADD THE AUTO CONTINUE LOAD SETTING HERE, AND ADD IT TO GENERAL?

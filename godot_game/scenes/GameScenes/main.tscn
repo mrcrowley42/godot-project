@@ -410,9 +410,10 @@ script = ExtResource("5_yr5ap")
 creature = NodePath("../Gameplay/Creature")
 food_menu = NodePath("../UI/FoodMenu")
 
-[node name="MinigameManager" type="Node2D" parent="."]
+[node name="MinigameManager" type="Node2D" parent="." node_paths=PackedStringArray("minigame_layer")]
 unique_name_in_owner = true
 script = ExtResource("3_fj5ve")
+minigame_layer = NodePath("../UI/MinigameLayer")
 
 [node name="Gameplay" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -487,10 +488,12 @@ metadata/_edit_lock_ = true
 [node name="NotificationLayer" type="CanvasLayer" parent="."]
 layer = 0
 
-[node name="NotificationManager" type="Node" parent="NotificationLayer" node_paths=PackedStringArray("clippy_area")]
+[node name="NotificationManager" type="Node" parent="NotificationLayer" node_paths=PackedStringArray("clippy_area", "noti_pos", "noti_parent")]
 unique_name_in_owner = true
 script = ExtResource("69_rkm2b")
 clippy_area = NodePath("../../Gameplay/ClippyArea")
+noti_pos = NodePath("NotiPos")
+noti_parent = NodePath("AdvNotiLayer")
 
 [node name="GrowUpBtn" type="NinePatchRect" parent="NotificationLayer/NotificationManager"]
 unique_name_in_owner = true
@@ -535,6 +538,17 @@ style = 2
 direction = 4
 optional_hitbox_scale = Vector2(0.5, 0.5)
 
+[node name="NotiPos" type="Control" parent="NotificationLayer/NotificationManager"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 527.0
+offset_top = 660.0
+offset_right = 527.0
+offset_bottom = 660.0
+
+[node name="AdvNotiLayer" type="CanvasLayer" parent="NotificationLayer/NotificationManager"]
+layer = 2
+
 [node name="UI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 
@@ -545,6 +559,9 @@ layer = 100
 position = Vector2(270, 1200)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("14_k2ios")
+
+[node name="MinigameLayer" type="CanvasLayer" parent="UI"]
+layer = 5
 
 [node name="FoodMenu" type="PanelContainer" parent="UI" node_paths=PackedStringArray("nav_arrows", "food_menu_open_button")]
 visible = false

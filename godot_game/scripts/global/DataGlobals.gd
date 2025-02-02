@@ -381,7 +381,7 @@ func build_save_uid_node_atlas():
 		if !Globals.has_function(node, GET_SAVE_UID):
 			return
 		save_uid_node_atlas[node.call(GET_SAVE_UID)] = node
-	print("node uid atlas built")
+	print("node uid atlas built with %s nodes" % len(save_nodes))
 
 ## loads only the metadata line from save (if it exists)
 func load_global_metadata() -> Dictionary:
