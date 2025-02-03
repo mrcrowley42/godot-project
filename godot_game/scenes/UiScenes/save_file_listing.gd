@@ -7,13 +7,13 @@ var save_file: Dictionary
 
 
 func _ready() -> void:
+	var tz = Time.get_time_zone_from_system()
 	if save_file:
 		name_label.text = save_file.creature_name
-		var time_dict = Time.get_datetime_dict_from_unix_time(save_file.last_saved)
+		var time_dict = Time.get_datetime_dict_from_unix_time(save_file.last_saved + (tz['bias'] * 60))
 		var lp_date = str(time_dict['day']) + "/" + str(time_dict['month']) + "/" + str(time_dict['year'])
-		var lp_time = "- 12:13pm"
+		var lp_time = " - " + str(time_dict['hour']) + ":" + str(time_dict["minute"]) + ":" + str(time_dict["second"])
 		date_label.text = lp_date + lp_time
-		 
 		#category_icon.tooltip_string = "Category: %s" % sound_node.sound_category.category_name
 		#creature_icon.icon = save_file.icon
 
