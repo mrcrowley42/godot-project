@@ -75,4 +75,5 @@ script = ExtResource("4_yxib2")
 tooltip_string = "<category>"
 direction = 3
 
+[connection signal="button_down" from="." to="." method="_on_button_down"]
 [connection signal="hidden" from="." to="." method="_on_hidden"]

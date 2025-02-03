@@ -7,6 +7,7 @@ extends MarginContainer
 #@onready var btn_sfx = find_parent("Game").find_child("BtnClick")
 @onready var btn_group = load("res://resources/save_file_group.tres")
 
+var current_save_id = null
 
 func _ready() -> void:
 	visible = false
@@ -33,6 +34,8 @@ func add_saves() -> void:
 		new_listing.button_group = btn_group
 		## TODO: i commented the following two lines casue it was crashing lol - bryce
 		new_listing.save_file = save
+		new_listing.parent_menu = self
+		#new_listing.button_down.connect(set_save_id(save.id))
 		item_container.add_child(new_listing)
 		
 	#for i in range(4):
