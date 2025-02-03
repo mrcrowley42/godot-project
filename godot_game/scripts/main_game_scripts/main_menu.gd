@@ -24,14 +24,12 @@ func _ready() -> void:
 
 func grab_saves():
 	var creature_save_ids = DataGlobals.get_all_creature_ids()
-	print(creature_save_ids)
 	var saves = []
 	for save_id in creature_save_ids:
 		var save_info = {}
 		save_info['last_saved'] = DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_LAST_SAVED, save_id)
 		save_info['creature_name'] = DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_NAME, save_id)
 		saves.append(save_info)
-	print(saves)
 	return saves
 
 

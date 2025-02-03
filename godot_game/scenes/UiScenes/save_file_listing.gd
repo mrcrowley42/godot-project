@@ -9,7 +9,11 @@ var save_file: Dictionary
 func _ready() -> void:
 	if save_file:
 		name_label.text = save_file.creature_name
-		date_label.text = str(save_file.last_saved)
+		var time_dict = Time.get_datetime_dict_from_unix_time(save_file.last_saved)
+		var lp_date = str(time_dict['day']) + "/" + str(time_dict['month']) + "/" + str(time_dict['year'])
+		var lp_time = "- 12:13pm"
+		date_label.text = lp_date + lp_time
+		 
 		#category_icon.tooltip_string = "Category: %s" % sound_node.sound_category.category_name
 		#creature_icon.icon = save_file.icon
 
