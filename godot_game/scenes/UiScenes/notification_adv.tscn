@@ -1,31 +1,31 @@
-[gd_scene load_steps=5 format=3 uid="uid://dccq6plraqgrp"]
+[gd_scene load_steps=6 format=3 uid="uid://dccq6plraqgrp"]
 
 [ext_resource type="Script" path="res://scripts/notification_adv.gd" id="1_krqqa"]
 [ext_resource type="Theme" uid="uid://c3n7lbqhq11so" path="res://themes/toast_adv.tres" id="1_q6vqh"]
 [ext_resource type="Texture2D" uid="uid://cb2n1foy2vmqe" path="res://images/ambience/ambience_electrical.png" id="3_fuvdj"]
 [ext_resource type="Theme" uid="uid://kpqilwsnepqa" path="res://themes/nothing.tres" id="4_4trqf"]
+[ext_resource type="Texture2D" uid="uid://bg75u6gpirh2d" path="res://icons/x.svg" id="5_m3wmm"]
 
 [node name="NotificationAdv" type="PanelContainer" node_paths=PackedStringArray("button", "label")]
-offset_right = 150.0
-offset_bottom = 32.0
+offset_right = 112.0
+offset_bottom = 36.0
 theme = ExtResource("1_q6vqh")
 script = ExtResource("1_krqqa")
-margin = Vector2(20, 10)
-lifetime = 10
 button = NodePath("MarginContainer/HBoxContainer/Button")
 label = NodePath("MarginContainer/HBoxContainer/Label")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
-theme_override_constants/margin_right = 10
+theme_override_constants/margin_right = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
 [node name="Button" type="Button" parent="MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_horizontal = 0
+theme = ExtResource("4_4trqf")
 icon = ExtResource("3_fuvdj")
 flat = true
 expand_icon = true
@@ -36,3 +36,16 @@ size_flags_horizontal = 3
 theme = ExtResource("4_4trqf")
 text = "bruh"
 horizontal_alignment = 1
+
+[node name="Button2" type="Button" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 10
+mouse_default_cursor_shape = 2
+theme = ExtResource("4_4trqf")
+icon = ExtResource("5_m3wmm")
+flat = true
+icon_alignment = 2
+expand_icon = true
+
+[connection signal="button_down" from="MarginContainer/HBoxContainer/Button2" to="." method="_on_button_2_button_down"]

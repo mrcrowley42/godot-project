@@ -52,6 +52,13 @@ func _ready():
 	hold_ui_sprite.texture = ui_theme.box
 	help_bg_sprite.texture = ui_theme.box
 	grid_bg.material.set("shader_parameter/outlineColor", ui_theme.outline)
+	var mul = .3
+	var color: Color = ui_theme.outline * mul
+	var bevel_col: Color = ui_theme.bg * mul
+	color.a = 1.
+	bevel_col.a = 1.
+	grid_bg.material.set("shader_parameter/color", color)
+	grid_bg.material.set("shader_parameter/bevelColor", bevel_col)
 	kill_menu.hide()
 	help_menu.hide()
 

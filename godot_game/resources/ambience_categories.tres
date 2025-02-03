@@ -15,4 +15,4 @@
 
 [resource]
 script = ExtResource("1_fqxxw")
-items = Array[Resource]([ExtResource("3_58uk8"), ExtResource("1_e3qts"), ExtResource("3_x6e1a"), ExtResource("4_hqhvx"), ExtResource("4_5g3uw"), ExtResource("2_wvuq5"), ExtResource("7_qp1jg"), ExtResource("5_1g6ew"), ExtResource("9_mql1i"), ExtResource("10_xw2u7"), ExtResource("11_a720f")])
+items = Array[Resource]([ExtResource("3_x6e1a"), ExtResource("4_hqhvx"), ExtResource("3_58uk8"), ExtResource("1_e3qts"), ExtResource("4_5g3uw"), ExtResource("7_qp1jg"), ExtResource("2_wvuq5"), ExtResource("5_1g6ew"), ExtResource("9_mql1i"), ExtResource("10_xw2u7"), ExtResource("11_a720f")])

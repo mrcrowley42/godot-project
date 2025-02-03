@@ -54,12 +54,14 @@ func _on_quit_btn_button_down() -> void:
 
 func _on_continue_btn_button_down() -> void:
 	if not is_in_transition:
+		fade_out_music()
 		await do_closing_trans()
 		Globals.change_to_scene("res://scenes/GameScenes/main.tscn")
 
 
 func _on_new_game_btn_button_down() -> void:
 	if not is_in_transition:
+		fade_out_music()
 		await do_closing_trans()
 		Globals.change_to_scene("res://scenes/GameScenes/egg_opening.tscn")
 
@@ -73,6 +75,8 @@ func _on_load_save_btn_button_down() -> void:
 	# TODO LOAD CURRENTLY SELECTED GAME FILE AND MARK IT AS THE CURRENT ONE.
 	pass # Replace with function body.
 
+func fade_out_music():
+	Globals.tween(%Music, "volume_db", -100, 0., 1., Tween.EaseType.EASE_IN_OUT)
 
 func load():
 	# ADD THE AUTO CONTINUE LOAD SETTING HERE, AND ADD IT TO GENERAL?

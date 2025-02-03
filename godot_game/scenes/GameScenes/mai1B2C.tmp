@@ -410,10 +410,9 @@ script = ExtResource("5_yr5ap")
 creature = NodePath("../Gameplay/Creature")
 food_menu = NodePath("../UI/FoodMenu")
 
-[node name="MinigameManager" type="Node2D" parent="." node_paths=PackedStringArray("minigame_layer")]
+[node name="MinigameManager" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("3_fj5ve")
-minigame_layer = NodePath("../UI/MinigameLayer")
 
 [node name="Gameplay" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -488,12 +487,10 @@ metadata/_edit_lock_ = true
 [node name="NotificationLayer" type="CanvasLayer" parent="."]
 layer = 0
 
-[node name="NotificationManager" type="Node" parent="NotificationLayer" node_paths=PackedStringArray("clippy_area", "noti_pos", "noti_parent")]
+[node name="NotificationManager" type="Node" parent="NotificationLayer" node_paths=PackedStringArray("clippy_area")]
 unique_name_in_owner = true
 script = ExtResource("69_rkm2b")
 clippy_area = NodePath("../../Gameplay/ClippyArea")
-noti_pos = NodePath("NotiPos")
-noti_parent = NodePath("AdvNotiLayer")
 
 [node name="GrowUpBtn" type="NinePatchRect" parent="NotificationLayer/NotificationManager"]
 unique_name_in_owner = true
@@ -538,17 +535,6 @@ style = 2
 direction = 4
 optional_hitbox_scale = Vector2(0.5, 0.5)
 
-[node name="NotiPos" type="Control" parent="NotificationLayer/NotificationManager"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 527.0
-offset_top = 660.0
-offset_right = 527.0
-offset_bottom = 660.0
-
-[node name="AdvNotiLayer" type="CanvasLayer" parent="NotificationLayer/NotificationManager"]
-layer = 2
-
 [node name="UI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 
@@ -559,9 +545,6 @@ layer = 100
 position = Vector2(270, 1200)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("14_k2ios")
-
-[node name="MinigameLayer" type="CanvasLayer" parent="UI"]
-layer = 5
 
 [node name="FoodMenu" type="PanelContainer" parent="UI" node_paths=PackedStringArray("nav_arrows", "food_menu_open_button")]
 visible = false
@@ -1218,7 +1201,6 @@ script = ExtResource("35_4io20")
 [node name="CosmeticsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 material = SubResource("ShaderMaterial_357to")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -1800,6 +1782,7 @@ offset_left = 10.0
 offset_top = 10.0
 offset_right = 424.0
 offset_bottom = 367.0
+scroll_vertical = 580
 script = SubResource("GDScript_1bafj")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/CreditsMenu/Node2D/HScrollBar"]
@@ -2095,8 +2078,8 @@ bus = &"SFX"
 [connection signal="visibility_changed" from="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/ThemeBtns" to="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/ThemeBtns" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/OptionsMenu/ThemeMenu/SaveButtons/Back" to="UI/OptionsMenu/ThemeMenu/SaveButtons/Back" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/FactsMenu/Library/SaveButtons/Back" to="UI/OptionsMenu/FactsMenu/Library/SaveButtons/Back" method="_on_button_down"]
-[connection signal="visibility_changed" from="UI/OptionsMenu/CosmeticsMenu" to="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/CosmeticItems" method="_on_cosmetics_menu_visibility_changed"]
 [connection signal="cosmetic_btn_pressed" from="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/CosmeticItems" to="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/PreviewContainer/CreaturePreview" method="_on_cosmetic_items_cosmetic_btn_pressed"]
+[connection signal="visibility_changed" from="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/CosmeticItems" to="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/CosmeticItems" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/OptionsMenu/CosmeticsMenu/SaveButtons/Back" to="UI/OptionsMenu/CosmeticsMenu/SaveButtons/Back" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/CreaturesMenu/SaveButtons/Back" to="UI/OptionsMenu/CreaturesMenu/SaveButtons/Back" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer/MasterMuted" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer/MasterMuted" method="_on_button_down"]

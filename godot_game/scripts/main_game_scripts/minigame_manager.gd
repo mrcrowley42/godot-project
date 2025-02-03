@@ -12,6 +12,8 @@ class_name MinigameManager extends Node2D
 @onready var status_manager = %StatusManager
 @onready var ambience_man = find_parent("Game").find_child("AmbienceManager")
 
+@export var minigame_layer: CanvasLayer
+
 var save_data: Dictionary = {}
 var current_minigame = null;
 var current_time_scale: float
@@ -28,28 +30,29 @@ const DISABLED_VISIBILITY = .4
 ## below options menu, but above all other elements.
 func load_minigame(pre_loaded=null, instance=null, do_transition=false) -> void:
 	assert(pre_loaded != null or instance != null)  # either one or the other
+	if current_minigame != null:
+		return
 	
-	if current_minigame == null:
-		ambience_man.fade_out()
-		%BtnClick.play()
-		
-		if do_transition:
-			await Globals.perform_closing_transition(owner.trans_img, owner.ui_overlay.position)
-			Globals.perform_opening_transition(owner.trans_img, owner.ui_overlay.position)
-		
-		var game = pre_loaded.instantiate() if pre_loaded != null else instance
-		current_time_scale = status_manager.time_multiplier
-		status_manager.time_multiplier = 0
-		act_menu.hide()
-		find_parent("Game").find_child("UI").add_child(game)
-		find_parent("Game").find_child("UI").move_child(game, 0)
-		current_minigame = pre_loaded.resource_path if pre_loaded != null else game.name
-		print("loading minigame '%s'" % current_minigame)
-		%ActButton.disabled = true
-		%FoodButton.disabled = true
-		%ActButton.modulate.a = DISABLED_VISIBILITY
-		%FoodButton.modulate.a = DISABLED_VISIBILITY
-		%GrowUpBtn.modulate.a = DISABLED_VISIBILITY
+	ambience_man.fade_out()
+	%BtnClick.play()
+	
+	if do_transition:
+		await Globals.perform_closing_transition(owner.trans_img, owner.ui_overlay.position)
+		Globals.perform_opening_transition(owner.trans_img, owner.ui_overlay.position)
+	
+	var game = pre_loaded.instantiate() if pre_loaded != null else instance
+	current_time_scale = status_manager.time_multiplier
+	status_manager.time_multiplier = 0
+	act_menu.hide()
+	minigame_layer.add_child(game)
+	minigame_layer.move_child(game, 0)
+	current_minigame = pre_loaded.resource_path if pre_loaded != null else game.name
+	print("loading minigame '%s'" % current_minigame)
+	%ActButton.disabled = true
+	%FoodButton.disabled = true
+	%ActButton.modulate.a = DISABLED_VISIBILITY
+	%FoodButton.modulate.a = DISABLED_VISIBILITY
+	%GrowUpBtn.modulate.a = DISABLED_VISIBILITY
 
 
 ## Tell game that a minigame is no longer open.
