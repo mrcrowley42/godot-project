@@ -27,6 +27,7 @@ func grab_saves():
 	var saves = []
 	for save_id in creature_save_ids:
 		var save_info = {}
+		save_info['id'] = save_id
 		save_info['last_saved'] = DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_LAST_SAVED, save_id)
 		save_info['creature_name'] = DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_NAME, save_id)
 		saves.append(save_info)
@@ -72,8 +73,9 @@ func _on_load_btn_button_down() -> void:
 
 
 func _on_load_save_btn_button_down() -> void:
-	# TODO LOAD CURRENTLY SELECTED GAME FILE AND MARK IT AS THE CURRENT ONE.
-	pass # Replace with function body.
+	if load_menu.current_save_id != null:
+		DataGlobals.set_metadata_value(true, DataGlobals.CURRENT_CREATURE, load_menu.current_save_id)
+		_on_continue_btn_button_down.call_deferred()
 
 func fade_out_music():
 	Globals.tween(%Music, "volume_db", -100, 0., 1., Tween.EaseType.EASE_IN_OUT)

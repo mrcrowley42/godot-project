@@ -4,7 +4,7 @@ extends Button
 @onready var date_label = find_child("DateLabel")
 @onready var creature_icon: CustomTooltipButton = find_child("CreatureIcon")
 var save_file: Dictionary
-
+var parent_menu
 
 func _ready() -> void:
 	var tz = Time.get_time_zone_from_system()
@@ -17,7 +17,9 @@ func _ready() -> void:
 		#category_icon.tooltip_string = "Category: %s" % sound_node.sound_category.category_name
 		#creature_icon.icon = save_file.icon
 
-
 func _on_hidden() -> void:
 	pass
 	#queue_free()
+
+func _on_button_down() -> void:
+	parent_menu.current_save_id = save_file.id
