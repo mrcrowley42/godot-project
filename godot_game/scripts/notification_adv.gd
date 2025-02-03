@@ -15,7 +15,7 @@ var noti_slot: int
 
 func _ready() -> void:
 	label.text = message
-	#button.icon = icon
+	button.icon = icon
 	position = btm_right + Vector2(margin.x, -size.y)
 
 func tween_in(slot: int) -> void:

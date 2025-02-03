@@ -1,16 +1,17 @@
-[gd_scene load_steps=14 format=3 uid="uid://dunvo70ey34fm"]
+[gd_scene load_steps=15 format=3 uid="uid://ig0eoqdfq5nr"]
 
 [ext_resource type="Script" path="res://scripts/main_game_scripts/main_menu.gd" id="1_lpoqi"]
 [ext_resource type="Shader" path="res://shaders/pattern_lines.gdshader" id="2_f1u7v"]
 [ext_resource type="Texture2D" uid="uid://ywjmlgi3jyuu" path="res://images/omba.png" id="2_k5vrf"]
-[ext_resource type="Texture2D" uid="uid://cmu73fglotayl" path="res://themes/main_menu_grad.tres" id="3_kva7r"]
+[ext_resource type="Texture2D" uid="uid://bew6qy27ohhib" path="res://themes/main_menu_grad.tres" id="3_kva7r"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="4_22rev"]
-[ext_resource type="Theme" uid="uid://cbwmony3pd57c" path="res://themes/action_btn_main_menu.tres" id="5_yrm4f"]
+[ext_resource type="Theme" uid="uid://be46f5clp5lhj" path="res://themes/action_btn_main_menu.tres" id="5_yrm4f"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="8_1gx8s"]
 [ext_resource type="Script" path="res://scenes/GameScenes/load_save_menu.gd" id="9_1nm66"]
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="10_46g4q"]
 [ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="11_oc74i"]
-[ext_resource type="PackedScene" uid="uid://qx7ey4e0sik6" path="res://scenes/UiScenes/save_file_listing.tscn" id="11_x6m8b"]
+[ext_resource type="PackedScene" path="res://scenes/UiScenes/save_file_listing.tscn" id="11_x6m8b"]
+[ext_resource type="AudioStream" uid="uid://bc4fnsjag56a3" path="res://music/Moa's Song - Aether OST (Emile van Krieken).mp3" id="12_xt2xn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gpy1m"]
 shader = ExtResource("2_f1u7v")
@@ -243,6 +244,11 @@ layer = 100
 position = Vector2(270, 1200)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("11_oc74i")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("12_xt2xn")
+autoplay = true
 
 [connection signal="button_down" from="MenuList/MarginContainer/VBoxContainer/NewGameBtn" to="." method="_on_new_game_btn_button_down"]
 [connection signal="button_down" from="MenuList/MarginContainer/VBoxContainer/ContinueBtn" to="." method="_on_continue_btn_button_down"]

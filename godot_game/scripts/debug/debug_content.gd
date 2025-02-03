@@ -15,6 +15,12 @@ extends Control
 @onready var ambience_man = game.find_child("AmbienceManager")
 
 var example_messages = ["random", "word", "banana", "mario", "bingus"]
+var example_icons = [
+	preload("res://images/ambience/campfire.png"),
+	preload("res://images/ambience/forest.png"),
+	preload("res://images/ambience/ocean.png"),
+	preload("res://images/ambience/ambience_electrical.png")
+]
 
 func _on_h_slider_value_changed(value) -> void:
 	stat_man.time_multiplier = value
@@ -90,7 +96,9 @@ func _on_notif_btn_button_down() -> void:
 
 
 func _on_notif_btn_2_button_down() -> void:
-	notif_man.new_adv_notification()
+	var msg = example_messages.pick_random()
+	var icon = example_icons.pick_random()
+	notif_man.new_adv_notification(msg, icon)
 
 
 func _on_wipe_btn_button_down() -> void:

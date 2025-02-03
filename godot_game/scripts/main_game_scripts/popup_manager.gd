@@ -22,7 +22,6 @@ func _ready():
 
 func _notification(what: int) -> void:
 	if what == Globals.NOTIFICATION_ALL_DATA_IS_LOADED:
-		Globals.item_unlocked.connect(new_basic_notification)
 		grow_up_btn.position.y += grow_up_btn.size.y * grow_up_btn.scale.y * 2.
 		%Creature.ready_to_grow_up.connect(grow_up_btn.show_grow_up_btn)
 		child_count = get_child_count()
@@ -50,6 +49,7 @@ func push_noti(instance: NotificationAdv, slot):
 	instance.tween_in(slot)
 	noti_slots[slot] = instance
 	instance.removed.connect(remove_noti)
+	print("ui adv notification displayed '%s'" % instance.message)
 
 func remove_noti(slot):
 	noti_slots[slot].queue_free()
@@ -63,10 +63,11 @@ func get_available_slot():
 			return key
 	return null
 
-func new_adv_notification():
+func new_adv_notification(message: String, icon: Texture2D):
 	var toast: NotificationAdv = adv_toast.instantiate()
 	toast.btm_right = noti_pos.position
-	toast.message = "bruhbuhr"
+	toast.message = message
+	toast.icon = icon
 	noti_parent.add_child(toast)
 	
 	var slot = get_available_slot()
