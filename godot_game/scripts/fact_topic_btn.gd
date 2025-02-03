@@ -20,7 +20,7 @@ func setup(new_category, the_fact_menu):
 	update_text()
 
 
-func update_text(_null=null):
+func update_text(_null=null, _null_2=null):
 	var progress = Globals.get_fact_category_progress(category)
 	count_label.text = og_text % progress
 

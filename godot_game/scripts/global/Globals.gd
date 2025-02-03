@@ -45,7 +45,7 @@ const NOTI_LOOKUP = {
 }
 
 
-signal item_unlocked(details)
+signal item_unlocked
 
 ## save incase we need to kill it for another transition
 var transition_tween: Tween = null
@@ -103,12 +103,11 @@ func unlock_fact(fact: Fact) -> void:
 	var unlocked_facts = DataGlobals.get_global_metadata_value(DataGlobals.UNLOCKED_FACTS)
 	if fact_uid in unlocked_facts:
 		return
-	# If item isn't unlocked, add it to unlocked list.
+	
 	DataGlobals.append_to_metadata_value(true, DataGlobals.UNLOCKED_FACTS, fact_uid)
-	# Display notification
-	var message = "%s Unlocked!" %[fact.title]
-	item_unlocked.emit(message)
+	
 	print("fact unlocked '%s', uid: '%s'" % [fact.title, fact_uid])
+	#item_unlocked.emit("Fact Unlocked!", null)
 
 
 ## Unlocks the passed [param cosmetic] resource
@@ -120,12 +119,11 @@ func unlock_cosmetic(cosmetic: CosmeticItem) -> void:
 	var unlocked_cosmetics = DataGlobals.get_global_metadata_value(DataGlobals.UNLOCKED_COSMETICS)
 	if cosmetic_uid in unlocked_cosmetics:
 		return
-	# If item isn't unlocked, add it to unlocked list.
+	
 	DataGlobals.append_to_metadata_value(true, DataGlobals.UNLOCKED_COSMETICS, cosmetic_uid)
-	# Display notification
-	var message = "%s Unlocked!" %[cosmetic.name]
-	item_unlocked.emit(message)
+	
 	print("cosmetic unlocked '%s', uid: '%s'" % [cosmetic.name, cosmetic_uid])
+	item_unlocked.emit("Cosmetic Unlocked!", cosmetic.thumbnail)
 
 ## Unlocks the passed [param cosmetic] resource
 func unlock_theme(theme: UiTheme) -> void:
@@ -136,12 +134,11 @@ func unlock_theme(theme: UiTheme) -> void:
 	var unlocked_themes = DataGlobals.get_global_metadata_value(DataGlobals.UNLOCKED_THEMES)
 	if theme_uid in unlocked_themes:
 		return
-	# If item isn't unlocked, add it to unlocked list.
+	
 	DataGlobals.append_to_metadata_value(true, DataGlobals.UNLOCKED_THEMES, theme_uid)
-	# Display notification
-	var message = "%s Unlocked!" %[theme.theme_name]
-	item_unlocked.emit(message)
+	
 	print("theme unlocked '%s', uid: '%s'" % [theme.theme_name, theme_uid])
+	#item_unlocked.emit("Theme Unlocked!", null)
 
 # TODO: really want to refactor these functions into one now...
 

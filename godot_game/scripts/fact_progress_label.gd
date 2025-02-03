@@ -10,7 +10,7 @@ func _notification(what: int) -> void:
 		update_text()
 
 
-func update_text(_null=null):
+func update_text(_null=null, _null_2=null):
 	var unlocked_total = 0
 	var facts_total = 0
 	for category in Fact.FactCategory.values():

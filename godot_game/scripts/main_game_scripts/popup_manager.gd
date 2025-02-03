@@ -22,6 +22,7 @@ func _ready():
 
 func _notification(what: int) -> void:
 	if what == Globals.NOTIFICATION_ALL_DATA_IS_LOADED:
+		Globals.item_unlocked.connect(new_adv_notification)
 		grow_up_btn.position.y += grow_up_btn.size.y * grow_up_btn.scale.y * 2.
 		%Creature.ready_to_grow_up.connect(grow_up_btn.show_grow_up_btn)
 		child_count = get_child_count()
