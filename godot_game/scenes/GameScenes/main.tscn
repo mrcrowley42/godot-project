@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=127 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
@@ -79,6 +79,7 @@
 [ext_resource type="Theme" uid="uid://bsd1dkhc13v47" path="res://themes/plain.tres" id="56_m6x7j"]
 [ext_resource type="Script" path="res://scripts/stat_bar.gd" id="57_ani8q"]
 [ext_resource type="Shader" path="res://shaders/pattern_wavy.gdshader" id="57_qy3v8"]
+[ext_resource type="Script" path="res://scenes/GameScenes/skip_title_c_box.gd" id="62_fffta"]
 [ext_resource type="Script" path="res://scripts/sfx_man.gd" id="65_787cd"]
 [ext_resource type="AudioStream" uid="uid://cx28efsxtr7c" path="res://sound_effects/button_click_fast.mp3" id="67_nfa6o"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/popup_manager.gd" id="69_rkm2b"]
@@ -1362,7 +1363,6 @@ script = ExtResource("35_4io20")
 [node name="SettingsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 material = SubResource("ShaderMaterial_1s3b6")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -1426,7 +1426,32 @@ layout_mode = 0
 offset_right = 391.0
 offset_bottom = 40.0
 
+[node name="GridContainer4" type="GridContainer" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/General/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="EnableSfxLabel" type="Label" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/General/VBoxContainer/GridContainer4"]
+custom_minimum_size = Vector2(272, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 20
+text = "Skip Title Screen"
+vertical_alignment = 1
+
+[node name="SkipTitleCBox" type="CheckBox" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/General/VBoxContainer/GridContainer4" groups=["settings_data"]]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme = ExtResource("42_c1jtf")
+script = ExtResource("62_fffta")
+
 [node name="Label" type="Label" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/General/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("56_m6x7j")
 text = "there's nothing here yet!"
