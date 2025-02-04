@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b6wocr0vo5s4v"]
+[gd_scene load_steps=21 format=3 uid="uid://b6wocr0vo5s4v"]
 
 [ext_resource type="Script" path="res://scripts/debug/debug_content.gd" id="1_jlyus"]
 [ext_resource type="Script" path="res://scripts/debug/water_label.gd" id="2_3h2jk"]
@@ -8,7 +8,9 @@
 [ext_resource type="Script" path="res://scripts/debug/fun_label.gd" id="3_qpwvx"]
 [ext_resource type="Script" path="res://scripts/debug/theme_label.gd" id="4_pa4py"]
 [ext_resource type="Script" path="res://scripts/debug/XpLabel.gd" id="7_5mkx4"]
+[ext_resource type="Script" path="res://scripts/debug/food_sat_label.gd" id="7_x1xdg"]
 [ext_resource type="Script" path="res://scripts/debug/debug_day_progress.gd" id="8_0d2ip"]
+[ext_resource type="Script" path="res://scripts/debug/water_sat_label.gd" id="8_btr3c"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="8_lqg4h"]
 [ext_resource type="FontFile" uid="uid://cukp5skadwgit" path="res://fonts/JetBrainsMono-VariableFont_wght.ttf" id="9_y33yi"]
 [ext_resource type="Script" path="res://scripts/debug/minimax.gd" id="10_4e6rj"]
@@ -82,10 +84,10 @@ script = ExtResource("3_jj2ny")
 
 [node name="WaterLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 274.0
-offset_top = 12.0
-offset_right = 455.0
-offset_bottom = 40.0
+offset_left = 273.0
+offset_top = 54.0
+offset_right = 465.0
+offset_bottom = 82.0
 size_flags_horizontal = 0
 size_flags_vertical = 6
 theme = ExtResource("2_5bhpe")
@@ -94,10 +96,10 @@ script = ExtResource("2_3h2jk")
 
 [node name="FunLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 274.0
-offset_top = 52.0
-offset_right = 455.0
-offset_bottom = 80.0
+offset_left = 273.0
+offset_top = 14.0
+offset_right = 465.0
+offset_bottom = 42.0
 size_flags_horizontal = 0
 size_flags_vertical = 6
 theme = ExtResource("2_5bhpe")
@@ -116,6 +118,32 @@ theme = ExtResource("2_5bhpe")
 text = "FOOD: %s (%s/sec)"
 script = ExtResource("3_kowqt")
 
+[node name="FoodSatLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 80.0
+offset_right = 226.0
+offset_bottom = 108.0
+scale = Vector2(0.6, 0.6)
+size_flags_horizontal = 0
+size_flags_vertical = 6
+theme = ExtResource("2_5bhpe")
+text = "saturation: %s"
+script = ExtResource("7_x1xdg")
+
+[node name="WaterSatLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 273.0
+offset_top = 82.0
+offset_right = 477.0
+offset_bottom = 110.0
+scale = Vector2(0.6, 0.6)
+size_flags_horizontal = 0
+size_flags_vertical = 6
+theme = ExtResource("2_5bhpe")
+text = "saturation: %s"
+script = ExtResource("8_btr3c")
+
 [node name="XpLabel" type="Label" parent="."]
 layout_mode = 0
 offset_left = 92.0
@@ -130,10 +158,10 @@ script = ExtResource("7_5mkx4")
 
 [node name="ThemeLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 26.0
-offset_top = 103.0
-offset_right = 183.0
-offset_bottom = 131.0
+offset_left = 22.0
+offset_top = 114.0
+offset_right = 179.0
+offset_bottom = 142.0
 theme = ExtResource("2_5bhpe")
 text = "Theme: %s"
 script = ExtResource("4_pa4py")
@@ -464,19 +492,19 @@ script = ExtResource("11_y5yt0")
 
 [node name="ClippyBtn" type="Button" parent="."]
 layout_mode = 0
-offset_left = 375.0
-offset_top = 96.0
-offset_right = 508.0
-offset_bottom = 130.0
+offset_left = 372.0
+offset_top = 112.0
+offset_right = 505.0
+offset_bottom = 146.0
 theme = ExtResource("8_lqg4h")
 text = "Clippy Mode"
 
 [node name="HolidayBtn" type="Button" parent="."]
 layout_mode = 0
-offset_left = 215.0
-offset_top = 96.0
-offset_right = 348.0
-offset_bottom = 130.0
+offset_left = 212.0
+offset_top = 112.0
+offset_right = 345.0
+offset_bottom = 146.0
 theme = ExtResource("8_lqg4h")
 toggle_mode = true
 text = "Holiday Mode"

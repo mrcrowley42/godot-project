@@ -14,6 +14,7 @@ const STRING_KNOWN_MODIFIED = "amount: %s (x%s)"
 var food_list: FoodList = load("res://resources/food_list.tres")
 var drink_list: DrinkList = load("res://resources/drink_list.tres")
 var btn_shader = load("res://shaders/consumable_cooldown.gdshader")
+var label_theme = load("res://themes/plain.tres")
 
 var all_screens: Array[ConsumablesScreen] = []
 var all_items: Dictionary = {}  # key: uid, value: item (Resource)
@@ -149,16 +150,23 @@ func update_item_btn(uid: String, creature: Creature):
 
 func consume_item(item: Resource):
 	var uid: String = Helpers.uid_str(item)
+	var btn: CustomTooltipButton = all_buttons[uid]['btn']
 	
 	# on cooldown, skip
 	if uid in btns_on_cooldown.keys():
 		return
 	else:
+		if is_instance_of(item, FoodItem) and %Creature.food_saturation > 0:
+			spawn_message(btn, "not hungry")
+			return
+		if is_instance_of(item, DrinkItem) and %Creature.water_saturation > 0:
+			spawn_message(btn, "not thirsty")
+			return
 		btns_on_cooldown[uid] = {
 			'cooldown': item.cooldown if item.override_auto_cooldown else item.amount * .4,
 			'start_time': Time.get_unix_time_from_system()
 		}
-	var btn: CustomTooltipButton = all_buttons[uid]['btn']
+	
 	btn.disabled = true
 	btn.update_tooltip()
 	
@@ -168,13 +176,24 @@ func consume_item(item: Resource):
 	else:
 		%ConsumablesManager.consume_drink(item)
 
+## spawns a message on the given button for 1 second before fading out
+func spawn_message(btn: Button, msg: String):
+	var label: Label = Label.new()
+	label.text = msg
+	label.add_theme_font_size_override("font_size", 18)
+	label.theme = label_theme
+	btn.add_child(label)
+	label.position = (btn.size - label.size) * .5
+	await Globals.tween(label, "modulate", Color(1, 1, 1, 0), 1.).finished
+	btn.remove_child(label)
 
 func page_changed(page_num):
 	for uid in all_buttons.keys():
 		var btn: CustomTooltipButton = all_buttons[uid]['btn']
 		var page = all_buttons[uid]['page']
-		btn.disabled = page != page_num
-		btn.update_tooltip()
+		if not btns_on_cooldown.has(uid):
+			btn.disabled = page != page_num 
+			btn.update_tooltip()
 
 func reset_buttons():
 	page_changed(0)

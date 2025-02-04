@@ -565,7 +565,6 @@ texture = ExtResource("14_k2ios")
 layer = 5
 
 [node name="FoodMenu" type="PanelContainer" parent="UI" node_paths=PackedStringArray("nav_arrows", "food_menu_open_button")]
-visible = false
 custom_minimum_size = Vector2(400, 400)
 anchors_preset = 4
 anchor_top = 0.5
@@ -974,6 +973,7 @@ metadata/_edit_use_anchors_ = true
 [node name="OptionsMenu" type="PanelContainer" parent="UI"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

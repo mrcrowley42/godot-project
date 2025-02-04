@@ -31,7 +31,9 @@ var max_water: float
 var max_food: float
 var max_fun: float
 var hp: float
+var water_saturation: float = 0
 var water: float
+var food_saturation: float = 0
 var food: float
 var fun: float
 
@@ -128,8 +130,8 @@ func add_xp(amount: float) -> void:
 func reset_stats() -> void:
 	lock_xp = true
 	heal(max_hp, Stat.HP)
-	heal(max_food, Stat.FOOD)
-	heal(max_water, Stat.WATER)
+	heal(max_food - food, Stat.FOOD)
+	heal(max_water - water, Stat.WATER)
 	heal(max_fun, Stat.FUN)
 	lock_xp = false
 
@@ -206,13 +208,18 @@ func consume_food(food_item: FoodItem):
 func add_food(amount: float, multiplier: float = 1.0):
 	assert(amount >= 0)
 	var old_food = food
-	food = min(food + (amount * multiplier), max_food)
+	var new_food = food + (amount * multiplier)
+	food = min(new_food, max_food)
+	food_saturation = max(0, new_food - max_food)  # remainder / excess
 	add_xp(food - old_food)
 	food_changed.emit()
 
 func damage_food(amount) -> void:
 	assert(amount >= 0)
-	food = max(food - amount, 0)
+	var old_saturation = food_saturation
+	var new_saturation = food_saturation - amount
+	food_saturation = max(0, new_saturation)
+	food = max(food - abs(min(0, new_saturation)), 0)
 	food_changed.emit()
 
 
@@ -236,13 +243,18 @@ func consume_drink(drink_item: DrinkItem):
 func add_water(amount: float, multiplier: float = 1.0):
 	assert(amount >= 0)
 	var old_water = water
-	water = min(water + (amount * multiplier), max_water)
+	var new_water = water + (amount * multiplier)
+	water = min(new_water, max_water)
+	water_saturation = max(0, new_water - max_water)  # remainder / excess
 	add_xp(water - old_water)
 	water_changed.emit()
 
 func damage_water(amount) -> void:
 	assert(amount >= 0)
-	water = max(water - amount, 0)
+	var old_saturation = water_saturation
+	var new_saturation = water_saturation - amount
+	water_saturation = max(0, new_saturation)
+	water = max(water - abs(min(0, new_saturation)), 0)
 	water_changed.emit()
 
 func get_current_cosmetics():
