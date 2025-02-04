@@ -1,12 +1,14 @@
 extends MiniGameLogic
 
 # there has to be a better way to do this...
-@onready var stat_man: StatusManager = $"..".get_parent().get_parent().find_child("StatusManager")
-@onready var creature: Creature = $"..".get_parent().get_parent().find_child("Creature")
+var stat_man: StatusManager
+var creature: Creature
 
 var og_state: String
 
 func _ready():
+	stat_man = $"..".get_parent().get_parent().get_parent().find_child("StatusManager")
+	creature = owner.get_parent().get_parent().get_parent().find_child("Creature")
 	creature.zen = true
 	
 	stat_man.time_multiplier = 0.25

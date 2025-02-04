@@ -19,6 +19,7 @@ var noti_queue = []
 func _ready():
 	for i in range(max_notifications):
 		noti_slots[i] = null
+	%MinigameManager.minigame_closed.connect(check_noti_queue)
 
 func _notification(what: int) -> void:
 	if what == Globals.NOTIFICATION_ALL_DATA_IS_LOADED:
@@ -27,24 +28,13 @@ func _notification(what: int) -> void:
 		%Creature.ready_to_grow_up.connect(grow_up_btn.show_grow_up_btn)
 		child_count = get_child_count()
 
-
-func new_basic_notification(message: String):
-	if clippy_area.clippy:
-		return
-	
-	# waits until no other notifications are in the ui (a queue ¯\_(ツ)_/¯)
-	while get_child_count() != child_count:
-		await get_tree().create_timer(1).timeout
-		if get_child_count() == child_count:
-			continue
-	
-	var toast_size: Vector2 = basic_toast.instantiate().size
-	var start_pos = Vector2((540-toast_size.x)/2,-toast_size.y+112)
-	var notif = basic_toast.instantiate()
-	notif.message = message
-	notif.position = start_pos
-	add_child(notif)
-	print("ui basic notification displayed  '%s'" % notif.message)
+func check_noti_queue():
+	var in_minigame = %MinigameManager.current_minigame != null
+	var in_clippy = %ClippyArea.clippy
+	var slot = get_available_slot()
+	while not in_minigame and not in_clippy and slot != null and len(noti_queue):
+		push_noti(noti_queue.pop_front(), slot)
+		slot = get_available_slot()
 
 func push_noti(instance: NotificationAdv, slot):
 	instance.tween_in(slot)
@@ -70,9 +60,27 @@ func new_adv_notification(message: String, icon: Texture2D):
 	toast.message = message
 	toast.icon = icon
 	noti_parent.add_child(toast)
+	noti_queue.append(toast)
+	check_noti_queue()
+
+
+
+func new_basic_notification(message: String):
+	printerr("please use `new_adv_notification()` instead")
+	pass
+	if clippy_area.clippy:
+		return
 	
-	var slot = get_available_slot()
-	if slot != null:
-		push_noti(toast, slot)
-	else:
-		noti_queue.append(toast)
+	# waits until no other notifications are in the ui (a queue ¯\_(ツ)_/¯)
+	while get_child_count() != child_count:
+		await get_tree().create_timer(1).timeout
+		if get_child_count() == child_count:
+			continue
+	
+	var toast_size: Vector2 = basic_toast.instantiate().size
+	var start_pos = Vector2((540-toast_size.x)/2,-toast_size.y+112)
+	var notif = basic_toast.instantiate()
+	notif.message = message
+	notif.position = start_pos
+	add_child(notif)
+	print("ui basic notification displayed  '%s'" % notif.message)

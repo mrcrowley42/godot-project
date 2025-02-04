@@ -54,6 +54,8 @@ var transition_tween: Tween = null
 # please use .erase() after extracting items to keep everything clean
 var general_dict: Dictionary = {}
 
+var fact_icons: FactIconList = preload("res://resources/fact_icons.tres")
+
 
 # ------------------------------
 #    general helper functions
@@ -107,7 +109,7 @@ func unlock_fact(fact: Fact) -> void:
 	DataGlobals.append_to_metadata_value(true, DataGlobals.UNLOCKED_FACTS, fact_uid)
 	
 	print("fact unlocked '%s', uid: '%s'" % [fact.title, fact_uid])
-	#item_unlocked.emit("Fact Unlocked!", null)
+	item_unlocked.emit("Fact Unlocked!", get_fact_category_icon(fact.category))
 
 
 ## Unlocks the passed [param cosmetic] resource
@@ -138,7 +140,17 @@ func unlock_theme(theme: UiTheme) -> void:
 	DataGlobals.append_to_metadata_value(true, DataGlobals.UNLOCKED_THEMES, theme_uid)
 	
 	print("theme unlocked '%s', uid: '%s'" % [theme.theme_name, theme_uid])
-	#item_unlocked.emit("Theme Unlocked!", null)
+	
+	# generate the image!
+	var img: Image = Image.create(32, 32, false, Image.Format.FORMAT_RGBA8)
+	for y in range(32):
+		for x in range(32):
+			var col = Color(1, 1, 1, 0)
+			var dist: float = Vector2(x, y).distance_to(Vector2(16, 16))
+			if dist < 12:
+				col = theme.primary if dist > 9 else theme.bg
+			img.set_pixel(x, y, col)
+	item_unlocked.emit("Theme Unlocked!", ImageTexture.create_from_image(img))
 
 # TODO: really want to refactor these functions into one now...
 
@@ -164,6 +176,12 @@ func get_fact_category_progress(category) -> Array[int]:
 	var facts = fact_list.filter(func(x): return x.category == category)
 	var unlocked = facts.filter(func(x): return Helpers.uid_str(x) in unlocked_facts or x.unlocked)
 	return [len(unlocked), len(facts)]
+
+func get_fact_category_icon(category: Fact.FactCategory) -> Texture2D:
+	for fact_icon: FactIcon in fact_icons.facts:
+		if fact_icon.fact_category == category:
+			return fact_icon.icon
+	return null
 
 ## fire confetti, automatically removes iteslf of finish
 func fire_confetti(parent, pos: Vector2 = Vector2(270, 560)):

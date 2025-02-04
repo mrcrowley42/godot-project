@@ -1,7 +1,0 @@
-[gd_resource type="Resource" script_class="FactIcon" load_steps=2 format=3 uid="uid://bvi81lxvybrqc"]
-
-[ext_resource type="Script" path="res://scripts/base_classses/fact_icon.gd" id="1_kh51k"]
-
-[resource]
-script = ExtResource("1_kh51k")
-fact_category = 0

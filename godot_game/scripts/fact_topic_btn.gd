@@ -15,6 +15,7 @@ func setup(new_category, the_fact_menu):
 	fact_menu = the_fact_menu
 	category = Fact.FactCategory.get(new_category)
 	title_label.text = Fact.FactCategory.keys()[category]
+	icon_btn.icon = Globals.get_fact_category_icon(category)
 	
 	Globals.item_unlocked.connect(update_text)
 	update_text()

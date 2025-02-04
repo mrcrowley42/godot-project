@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="FactIconList" load_steps=9 format=3 uid="uid://bekokpvbxwrvk"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/fact_icon.gd" id="1_7vjon"]
+[ext_resource type="Texture2D" uid="uid://cq2efm5tk8b68" path="res://images/pixel_baby.png" id="2_4lkh1"]
+[ext_resource type="Script" path="res://scripts/base_classses/fact_icon_list.gd" id="2_slar7"]
+[ext_resource type="Texture2D" uid="uid://dq73ygrgb5m0o" path="res://images/ambience/campfire.png" id="3_og7w6"]
+[ext_resource type="Texture2D" uid="uid://bgrn8k7pd06l4" path="res://images/ambience/moon.png" id="4_2qtp4"]
+
+[sub_resource type="Resource" id="Resource_hs5p4"]
+script = ExtResource("1_7vjon")
+fact_category = 0
+icon = ExtResource("2_4lkh1")
+
+[sub_resource type="Resource" id="Resource_p0gdr"]
+script = ExtResource("1_7vjon")
+fact_category = 1
+icon = ExtResource("3_og7w6")
+
+[sub_resource type="Resource" id="Resource_1m6c3"]
+script = ExtResource("1_7vjon")
+fact_category = 2
+icon = ExtResource("4_2qtp4")
+
+[resource]
+script = ExtResource("2_slar7")
+facts = Array[ExtResource("1_7vjon")]([SubResource("Resource_hs5p4"), SubResource("Resource_p0gdr"), SubResource("Resource_1m6c3")])
