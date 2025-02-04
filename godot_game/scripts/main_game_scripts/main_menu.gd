@@ -10,11 +10,13 @@ var center_pos
 var is_in_transition = true
 
 func _ready() -> void:
+	DataGlobals.load_settings_data()
 	if auto_continue:
 		Globals.change_to_scene("res://scenes/GameScenes/main.tscn")
 		return
 	
 	DataGlobals.load_data()
+	
 	Globals.send_notification(Globals.NOTIFICATION_ALL_DATA_IS_LOADED)
 	center_pos = bg_gradient.size / 2
 	# if save file
@@ -80,6 +82,10 @@ func _on_load_save_btn_button_down() -> void:
 func fade_out_music():
 	Globals.tween(%Music, "volume_db", -100, 0., 1., Tween.EaseType.EASE_IN_OUT)
 
-func load():
-	# ADD THE AUTO CONTINUE LOAD SETTING HERE, AND ADD IT TO GENERAL?
-	pass
+func load(data):
+	print(auto_continue)
+	if data.has("skip_intro"):
+		auto_continue = data["skip_intro"]
+
+func save() -> Dictionary:
+	return {"section": Globals.DEFAULT_SECTION, "skip_intro": false}

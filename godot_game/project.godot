@@ -54,6 +54,10 @@ folder_colors={
 "res://legacy/": "gray"
 }
 
+[global_group]
+
+settings_data=""
+
 [gui]
 
 timers/tooltip_delay_sec=0.2
