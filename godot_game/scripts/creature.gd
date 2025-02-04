@@ -18,7 +18,7 @@ const like_multiplier: float = 2.0
 @export var dying_colour: Color;
 @export var clippy_area: Node
 @export var xp_mulitplier: float = 1.0
-
+@export var viewport_container: Node
 
 ## XP required for the creature to reach the [param ADULT] [param LifeStage] stage
 var xp_required: float
