@@ -517,7 +517,7 @@ func load_settings_data():
 			data_to_send[key] = config.get_value(section, key)
 		node.call(LOAD, data_to_send)
 	
-	## generate dict for other reference
+	## generate dict for any external referencing
 	settings_data_last_loaded = {}
 	for section in config.get_sections():
 		settings_data_last_loaded[section] = {}

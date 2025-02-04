@@ -20,6 +20,7 @@ func _ready():
 	for i in range(max_notifications):
 		noti_slots[i] = null
 	%MinigameManager.minigame_closed.connect(check_noti_queue)
+	%ClippyArea.clippy_closed.connect(check_noti_queue)
 
 func _notification(what: int) -> void:
 	if what == Globals.NOTIFICATION_ALL_DATA_IS_LOADED:
@@ -45,8 +46,7 @@ func push_noti(instance: NotificationAdv, slot):
 func remove_noti(slot):
 	noti_slots[slot].queue_free()
 	noti_slots[slot] = null
-	if len(noti_queue) > 0:
-		push_noti(noti_queue.pop_front(), slot)
+	check_noti_queue()
 
 func get_available_slot():
 	for key in noti_slots.keys():
