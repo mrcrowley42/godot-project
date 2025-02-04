@@ -2,7 +2,7 @@ extends Button
 
 @onready var name_label = find_child("NameLabel")
 @onready var date_label = find_child("DateLabel")
-@onready var creature_icon: CustomTooltipButton = find_child("CreatureIcon")
+@onready var creature_icon: Button = find_child("CreatureIcon")
 var save_file: Dictionary
 var parent_menu
 

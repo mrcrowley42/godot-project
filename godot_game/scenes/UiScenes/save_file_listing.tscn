@@ -1,12 +1,36 @@
-[gd_scene load_steps=7 format=3 uid="uid://qx7ey4e0sik6"]
+[gd_scene load_steps=9 format=3 uid="uid://qx7ey4e0sik6"]
 
 [ext_resource type="Script" path="res://scenes/UiScenes/save_file_listing.gd" id="1_0q2oy"]
 [ext_resource type="Theme" uid="uid://dl1wes8p6lqlb" path="res://themes/invisible.tres" id="2_h15lg"]
 [ext_resource type="Texture2D" uid="uid://wo64brcmlmf8" path="res://images/ambience/forest.png" id="3_fkbr3"]
-[ext_resource type="Script" path="res://scripts/utility/custom_tooltip_script.gd" id="4_yxib2"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="5_bh6hp"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kxpsf"]
+bg_color = Color(0, 0, 0, 0.501961)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_27aj0"]
+bg_color = Color(0, 0, 0, 0.501961)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8mm5b"]
+bg_color = Color(0, 0, 0, 0.658824)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3suau"]
 bg_color = Color(0, 0, 0, 0.501961)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
@@ -23,6 +47,11 @@ offset_right = 184.5
 offset_bottom = 133.0
 grow_horizontal = 2
 size_flags_horizontal = 3
+theme_override_styles/focus = SubResource("StyleBoxFlat_kxpsf")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_27aj0")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_27aj0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_8mm5b")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3suau")
 theme_override_styles/normal = SubResource("StyleBoxFlat_27aj0")
 script = ExtResource("1_0q2oy")
 
@@ -67,13 +96,11 @@ layout_mode = 2
 [node name="CreatureIcon" type="Button" parent="MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
+mouse_filter = 2
 theme = ExtResource("2_h15lg")
 icon = ExtResource("3_fkbr3")
 icon_alignment = 1
 expand_icon = true
-script = ExtResource("4_yxib2")
-tooltip_string = "<category>"
-direction = 3
 
 [connection signal="button_down" from="." to="." method="_on_button_down"]
 [connection signal="hidden" from="." to="." method="_on_hidden"]
