@@ -1,6 +1,8 @@
 @icon("res://icons/class-icons/controller-icon.svg")
 class_name MinigameManager extends Node2D
 
+signal minigame_closed
+
 # Preload all the minigames.
 @onready var totris_scene = preload ("res://scenes/MiniGames/totris.tscn")
 @onready var memory_game_scene = preload ("res://scenes/MiniGames/memory_game.tscn")
@@ -79,6 +81,7 @@ func unload_minigame(do_transition=false, game_instance=null) -> void:
 	%FoodButton.modulate.a = 1.
 	%GrowUpBtn.modulate.a = 1.
 	can_interact = true
+	minigame_closed.emit()
 
 
 ## Trigger unloading function when a minigame scene is freed.

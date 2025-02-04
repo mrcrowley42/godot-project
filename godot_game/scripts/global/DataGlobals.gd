@@ -52,6 +52,8 @@ var _every_creature_node_data: Dictionary = {}  # key: id, value: node data list
 var _every_creature_metadata: Dictionary = {}  # key: id, value: metadata
 var _should_save_creature_metadata: bool = false
 
+var settings_data_last_loaded: Dictionary = {"load_the_settings_first_idiot": "bruh"}
+
 func get_save_data_file():
 	return Testing.TEST_SAVE_FILE if Testing.is_test_environ else Globals.SAVE_DATA_FILE
 
@@ -514,6 +516,13 @@ func load_settings_data():
 				continue
 			data_to_send[key] = config.get_value(section, key)
 		node.call(LOAD, data_to_send)
+	
+	## generate dict for other reference
+	settings_data_last_loaded = {}
+	for section in config.get_sections():
+		settings_data_last_loaded[section] = {}
+		for key in config.get_section_keys(section):
+			settings_data_last_loaded[section][key] = config.get_value(section, key)
 	print("settings data loaded from file")
 
 

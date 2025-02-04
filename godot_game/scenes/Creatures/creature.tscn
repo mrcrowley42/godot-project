@@ -48,6 +48,8 @@ script = ExtResource("2_klgk6")
 dying_colour = Color(1, 0, 0, 1)
 viewport_container = NodePath("SubViewportContainer/SubViewport")
 
+[node name="SubViewport" type="SubViewport" parent="."]
+
 [node name="Notifcations" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("2_0vuyd")

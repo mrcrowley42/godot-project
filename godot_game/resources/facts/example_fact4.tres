@@ -8,4 +8,5 @@ title = "Example 4"
 category = 0
 source = "The internet"
 fact = "2 + 2 = 4"
-unlocked = true
+unlocked = false
+hint = ""
