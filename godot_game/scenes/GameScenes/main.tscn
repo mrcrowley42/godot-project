@@ -1417,49 +1417,7 @@ text = ">"
 [node name="pages" type="Control" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="General" type="Control" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages"]
-anchors_preset = 0
-offset_right = 393.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/General"]
-layout_mode = 0
-offset_right = 391.0
-offset_bottom = 40.0
-
-[node name="GridContainer4" type="GridContainer" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/General/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 0
-theme_override_constants/h_separation = 20
-theme_override_constants/v_separation = 10
-columns = 2
-
-[node name="EnableSfxLabel" type="Label" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/General/VBoxContainer/GridContainer4"]
-custom_minimum_size = Vector2(272, 0)
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_fonts/font = ExtResource("19_3grg3")
-theme_override_font_sizes/font_size = 20
-text = "Skip Title Screen"
-vertical_alignment = 1
-
-[node name="SkipTitleCBox" type="CheckBox" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/General/VBoxContainer/GridContainer4" groups=["settings_data"]]
-custom_minimum_size = Vector2(0, 24)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-theme = ExtResource("42_c1jtf")
-script = ExtResource("62_fffta")
-
-[node name="Label" type="Label" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/General/VBoxContainer"]
-visible = false
-layout_mode = 2
-theme = ExtResource("56_m6x7j")
-text = "there's nothing here yet!"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Audio" type="Control" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages"]
-visible = false
 layout_mode = 2
 anchors_preset = 0
 offset_right = 394.0
@@ -1674,6 +1632,48 @@ text = "note: the transparent background may not work on your device"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
+
+[node name="Other" type="Control" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages"]
+visible = false
+anchors_preset = 0
+offset_right = 393.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Other"]
+layout_mode = 0
+offset_right = 391.0
+offset_bottom = 40.0
+
+[node name="GridContainer4" type="GridContainer" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Other/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="EnableSfxLabel" type="Label" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Other/VBoxContainer/GridContainer4"]
+custom_minimum_size = Vector2(272, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 20
+text = "Skip title screen on launch"
+vertical_alignment = 1
+
+[node name="SkipTitleCBox" type="CheckBox" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Other/VBoxContainer/GridContainer4" groups=["settings_data"]]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme = ExtResource("42_c1jtf")
+script = ExtResource("62_fffta")
+
+[node name="Label" type="Label" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Other/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("56_m6x7j")
+text = "there's nothing here yet!"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ControlButtons" type="Node2D" parent="UI/OptionsMenu/SettingsMenu"]
 position = Vector2(-50, -130)
