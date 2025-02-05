@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ig0eoqdfq5nr"]
+[gd_scene load_steps=14 format=3 uid="uid://ig0eoqdfq5nr"]
 
 [ext_resource type="Script" path="res://scripts/main_game_scripts/main_menu.gd" id="1_lpoqi"]
 [ext_resource type="Shader" path="res://shaders/pattern_lines.gdshader" id="2_f1u7v"]
@@ -180,17 +180,6 @@ theme_override_constants/margin_bottom = 24
 [node name="SaveList" type="VBoxContainer" parent="LoadMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 14
-
-[node name="PanelContainer" parent="LoadMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SaveList" instance=ExtResource("11_x6m8b")]
-layout_mode = 2
-
-[node name="PanelContainer2" parent="LoadMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SaveList" instance=ExtResource("11_x6m8b")]
-visible = false
-layout_mode = 2
-
-[node name="PanelContainer3" parent="LoadMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SaveList" instance=ExtResource("11_x6m8b")]
-visible = false
-layout_mode = 2
 
 [node name="SaveMenuBtns" type="Node2D" parent="LoadMenu"]
 position = Vector2(-50, -130)
