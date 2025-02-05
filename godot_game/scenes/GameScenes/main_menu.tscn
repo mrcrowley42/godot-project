@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://scenes/GameScenes/load_save_menu.gd" id="9_1nm66"]
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="10_46g4q"]
 [ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="11_oc74i"]
-[ext_resource type="PackedScene" uid="uid://qx7ey4e0sik6" path="res://scenes/UiScenes/save_file_listing.tscn" id="11_x6m8b"]
+[ext_resource type="PackedScene" path="res://scenes/UiScenes/save_file_listing.tscn" id="11_x6m8b"]
 [ext_resource type="AudioStream" uid="uid://bc4fnsjag56a3" path="res://music/Moa's Song - Aether OST (Emile van Krieken).mp3" id="12_xt2xn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gpy1m"]
@@ -41,7 +41,7 @@ shadow_color = Color(0, 0, 0, 0.54902)
 shadow_size = 8
 shadow_offset = Vector2(0, 8)
 
-[node name="MainMenu" type="Node2D" groups=["settings_data"]]
+[node name="MainMenu" type="Node2D"]
 script = ExtResource("1_lpoqi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -161,7 +161,7 @@ theme_override_constants/separation = 20
 [node name="Title" type="Label" parent="LoadMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("10_46g4q")
-text = "Saves"
+text = "Creatures"
 horizontal_alignment = 1
 vertical_alignment = 1
 

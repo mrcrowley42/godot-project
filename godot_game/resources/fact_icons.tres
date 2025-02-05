@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="FactIconList" load_steps=9 format=3 uid="uid://c165hb8e5l2ia"]
+[gd_resource type="Resource" script_class="FactIconList" load_steps=9 format=3 uid="uid://bekokpvbxwrvk"]
 
 [ext_resource type="Script" path="res://scripts/base_classses/fact_icon.gd" id="1_7vjon"]
 [ext_resource type="Texture2D" uid="uid://cq2efm5tk8b68" path="res://images/pixel_baby.png" id="2_4lkh1"]
