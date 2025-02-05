@@ -14,6 +14,8 @@ func _ready() -> void:
 		var lp_date = str(time_dict['day']) + "/" + str(time_dict['month']) + "/" + str(time_dict['year'])
 		var lp_time = " - " + str(time_dict['hour']) + ":" + str(time_dict["minute"]) + ":" + str(time_dict["second"])
 		date_label.text = lp_date + lp_time
+		var icon_path = "res://save_icon_%s.png" % [save_file.id]
+		creature_icon.icon = load(icon_path)
 		#category_icon.tooltip_string = "Category: %s" % sound_node.sound_category.category_name
 		#creature_icon.icon = save_file.icon
 
