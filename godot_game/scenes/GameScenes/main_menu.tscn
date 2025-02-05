@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ig0eoqdfq5nr"]
+[gd_scene load_steps=14 format=3 uid="uid://ig0eoqdfq5nr"]
 
 [ext_resource type="Script" path="res://scripts/main_game_scripts/main_menu.gd" id="1_lpoqi"]
 [ext_resource type="Shader" path="res://shaders/pattern_lines.gdshader" id="2_f1u7v"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" path="res://scenes/GameScenes/load_save_menu.gd" id="9_1nm66"]
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="10_46g4q"]
 [ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="11_oc74i"]
-[ext_resource type="PackedScene" uid="uid://qx7ey4e0sik6" path="res://scenes/UiScenes/save_file_listing.tscn" id="11_x6m8b"]
 [ext_resource type="AudioStream" uid="uid://bc4fnsjag56a3" path="res://music/Moa's Song - Aether OST (Emile van Krieken).mp3" id="12_xt2xn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gpy1m"]
@@ -180,17 +179,6 @@ theme_override_constants/margin_bottom = 24
 [node name="SaveList" type="VBoxContainer" parent="LoadMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 14
-
-[node name="PanelContainer" parent="LoadMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SaveList" instance=ExtResource("11_x6m8b")]
-layout_mode = 2
-
-[node name="PanelContainer2" parent="LoadMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SaveList" instance=ExtResource("11_x6m8b")]
-visible = false
-layout_mode = 2
-
-[node name="PanelContainer3" parent="LoadMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SaveList" instance=ExtResource("11_x6m8b")]
-visible = false
-layout_mode = 2
 
 [node name="SaveMenuBtns" type="Node2D" parent="LoadMenu"]
 position = Vector2(-50, -130)
