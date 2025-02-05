@@ -45,6 +45,7 @@ class UiThemeButton extends CustomTooltipButton:
 		#self.add_theme_stylebox_override("focus", box2)
 		button_group = btn_theme_group
 		update_locked()
+		Globals.theme_unlocked.connect(update_locked)
 
 	## Action when button is pressed.
 	func _pressed():
@@ -54,7 +55,7 @@ class UiThemeButton extends CustomTooltipButton:
 		sound_click.play()
 		DataGlobals.save_settings_data()
 
-	func update_locked():
+	func update_locked(new_theme_uid = null):
 		var unlocked_items = DataGlobals.get_global_metadata_value(DataGlobals.UNLOCKED_THEMES)
 		var uid = Helpers.uid_str(self.ui_theme)
 		self.disabled = false if self.ui_theme.unlocked else not uid in unlocked_items
@@ -63,6 +64,14 @@ class UiThemeButton extends CustomTooltipButton:
 		var box = self.get_theme_stylebox("pressed")
 		if not self.disabled:
 			self.add_theme_stylebox_override("focus", box)
+		
+		if new_theme_uid != null and uid == new_theme_uid:
+			var sprite: Sprite2D = Globals.spawn_exclamation_point(self)
+			button_down.connect(remove_sprite.bind(sprite))
+	
+	func remove_sprite(child):
+		remove_child(child)
+		button_down.disconnect(remove_sprite)
 
 
 func _notification(what: int) -> void:
@@ -70,9 +79,6 @@ func _notification(what: int) -> void:
 		for item: UiTheme in theme_manager.themes:
 			var theme_btn = UiThemeButton.new(item, %UI_Theme_Manager.current_theme == item)
 			add_child.call_deferred(theme_btn)
-
-func update_buttons():
-	propagate_call("update_locked")
 
 
 func _on_visibility_changed():

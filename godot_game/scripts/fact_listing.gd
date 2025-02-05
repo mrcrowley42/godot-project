@@ -6,7 +6,6 @@ extends MarginContainer
 @export var fact_body_label: Label
 @export var source_label: Label
 
-@onready var fact_btn_scene = preload("res://scenes/UiScenes/fact_btn.tscn")
 @onready var btn_sfx = find_parent("Game").find_child("BtnClick")
 
 var category: Fact.FactCategory
@@ -21,12 +20,7 @@ func _ready() -> void:
 
 func _on_back_button_down() -> void:
 	btn_sfx.play()
-	queue_free()
-
-
-func _on_hidden() -> void:
-	queue_free()
-
+	visible = false
 
 func show_fact(fact: Fact=null, unlocked: bool=true):
 	fact_body_label.modulate.a = 1
@@ -72,10 +66,13 @@ func add_facts() -> void:
 		fact_container.remove_child(child)
 	
 	## add buttons :)
+	var fact_btn_scene = load("res://scenes/UiScenes/fact_btn.tscn")
 	var i = 1
 	for fact in facts.facts:
 		if fact.category == category:
-			var btn: Button = fact_btn_scene.instantiate()
+			var btn: FactBtn = fact_btn_scene.instantiate()
+			btn.fact = fact
+			btn.num = i
 			btn.text = str(i) if is_unlocked(fact) else "???"
 			btn.toggle_mode = true
 			btn.button_pressed = false
@@ -83,3 +80,4 @@ func add_facts() -> void:
 			fact_container.add_child(btn)
 			btn.connect("button_down", fact_btn_pressed.bind(btn, fact))
 			all_buttons.append(btn)
+			Globals.fact_unlocked.connect(btn.update_locked)

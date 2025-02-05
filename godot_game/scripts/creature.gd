@@ -216,7 +216,6 @@ func add_food(amount: float, multiplier: float = 1.0):
 
 func damage_food(amount) -> void:
 	assert(amount >= 0)
-	var old_saturation = food_saturation
 	var new_saturation = food_saturation - amount
 	food_saturation = max(0, new_saturation)
 	food = max(food - abs(min(0, new_saturation)), 0)
@@ -251,7 +250,6 @@ func add_water(amount: float, multiplier: float = 1.0):
 
 func damage_water(amount) -> void:
 	assert(amount >= 0)
-	var old_saturation = water_saturation
 	var new_saturation = water_saturation - amount
 	water_saturation = max(0, new_saturation)
 	water = max(water - abs(min(0, new_saturation)), 0)
