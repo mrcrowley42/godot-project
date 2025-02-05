@@ -130,7 +130,6 @@ theme = ExtResource("5_yrm4f")
 text = "Quit"
 
 [node name="LoadMenu" type="MarginContainer" parent="." node_paths=PackedStringArray("heading", "main_script", "item_container")]
-visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -183,7 +182,6 @@ layout_mode = 2
 theme_override_constants/separation = 14
 
 [node name="PanelContainer" parent="LoadMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SaveList" instance=ExtResource("11_x6m8b")]
-visible = false
 layout_mode = 2
 
 [node name="PanelContainer2" parent="LoadMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SaveList" instance=ExtResource("11_x6m8b")]

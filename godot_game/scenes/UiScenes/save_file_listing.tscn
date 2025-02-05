@@ -1,8 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://qx7ey4e0sik6"]
+[gd_scene load_steps=10 format=3 uid="uid://qx7ey4e0sik6"]
 
 [ext_resource type="Script" path="res://scenes/UiScenes/save_file_listing.gd" id="1_0q2oy"]
 [ext_resource type="Theme" uid="uid://dl1wes8p6lqlb" path="res://themes/invisible.tres" id="2_h15lg"]
-[ext_resource type="Texture2D" uid="uid://wo64brcmlmf8" path="res://images/ambience/forest.png" id="3_fkbr3"]
+[ext_resource type="Texture2D" uid="uid://tvwjgl76m8fx" path="res://images/unknown.png" id="4_uxg2i"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="5_bh6hp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kxpsf"]
@@ -36,6 +36,18 @@ corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5g17d"]
+bg_color = Color(1, 1, 1, 0.0980392)
+border_color = Color(1, 1, 1, 0.290196)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
 
 [node name="PanelContainer" type="Button"]
 custom_minimum_size = Vector2(355, 138)
@@ -94,11 +106,13 @@ text = "Something else IDK"
 layout_mode = 2
 
 [node name="CreatureIcon" type="Button" parent="MarginContainer/HBoxContainer"]
+texture_filter = 1
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 mouse_filter = 2
 theme = ExtResource("2_h15lg")
-icon = ExtResource("3_fkbr3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_5g17d")
+icon = ExtResource("4_uxg2i")
 icon_alignment = 1
 expand_icon = true
 
