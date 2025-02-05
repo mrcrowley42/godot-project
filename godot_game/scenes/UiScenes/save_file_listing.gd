@@ -14,6 +14,11 @@ func _ready() -> void:
 		var lp_date = str(time_dict['day']) + "/" + str(time_dict['month']) + "/" + str(time_dict['year'])
 		var lp_time = " - " + str(time_dict['hour']) + ":" + str(time_dict["minute"]) + ":" + str(time_dict["second"])
 		date_label.text = lp_date + lp_time
+		var icon_path = "save_icon_%s.png" % [save_file.id]
+		if FileAccess.file_exists(icon_path):
+			var icon_img = Image.new()
+			icon_img.load(icon_path)
+			creature_icon.icon = ImageTexture.create_from_image(icon_img)
 		#category_icon.tooltip_string = "Category: %s" % sound_node.sound_category.category_name
 		#creature_icon.icon = save_file.icon
 
@@ -22,4 +27,5 @@ func _on_hidden() -> void:
 	#queue_free()
 
 func _on_button_down() -> void:
-	parent_menu.current_save_id = save_file.id
+	if save_file.has('id'):
+		parent_menu.current_save_id = save_file.id

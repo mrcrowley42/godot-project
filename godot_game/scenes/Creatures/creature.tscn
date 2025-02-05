@@ -43,9 +43,10 @@ animations = [{
 "speed": 4.0
 }]
 
-[node name="Creature" type="Node2D"]
+[node name="Creature" type="Node2D" node_paths=PackedStringArray("viewport_container")]
 script = ExtResource("2_klgk6")
 dying_colour = Color(1, 0, 0, 1)
+viewport_container = NodePath("SubViewportContainer/SubViewport")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 
@@ -74,20 +75,40 @@ unique_name_in_owner = true
 max_polyphony = 2
 bus = &"SFX"
 
-[node name="Sprites" type="CanvasGroup" parent="."]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -270.0
+offset_top = -337.5
+offset_right = 270.0
+offset_bottom = 337.5
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Main" type="AnimatedSprite2D" parent="Sprites"]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(540, 675)
+render_target_update_mode = 4
+
+[node name="Sprites" type="CanvasGroup" parent="SubViewportContainer/SubViewport"]
+position = Vector2(270, 337)
+
+[node name="Main" type="AnimatedSprite2D" parent="SubViewportContainer/SubViewport/Sprites"]
 unique_name_in_owner = true
 scale = Vector2(0.225, 0.225)
 sprite_frames = ExtResource("15_qlw6y")
 animation = &"idle"
 script = ExtResource("5_oh7gr")
 
-[node name="AccessoryManager" type="Node2D" parent="Sprites" groups=["save_data"]]
+[node name="AccessoryManager" type="Node2D" parent="SubViewportContainer/SubViewport/Sprites" groups=["save_data"]]
 unique_name_in_owner = true
 script = ExtResource("17_dc6c6")
 
-[node name="ReferenceHat" type="AnimatedSprite2D" parent="Sprites/AccessoryManager"]
+[node name="ReferenceHat" type="AnimatedSprite2D" parent="SubViewportContainer/SubViewport/Sprites/AccessoryManager"]
 visible = false
 position = Vector2(-19, -127)
 scale = Vector2(0.225, 0.225)
@@ -95,7 +116,7 @@ sprite_frames = ExtResource("18_nnrph")
 autoplay = "default"
 frame_progress = 0.770958
 
-[node name="ReferenceGlasses" type="AnimatedSprite2D" parent="Sprites/AccessoryManager"]
+[node name="ReferenceGlasses" type="AnimatedSprite2D" parent="SubViewportContainer/SubViewport/Sprites/AccessoryManager"]
 visible = false
 modulate = Color(1, 0.807843, 0.592157, 1)
 position = Vector2(-7, -33)
@@ -103,7 +124,7 @@ scale = Vector2(0.225, 0.225)
 sprite_frames = ExtResource("19_uwmsa")
 autoplay = "default"
 
-[node name="NotificationBubble" type="AnimatedSprite2D" parent="Sprites"]
+[node name="NotificationBubble" type="AnimatedSprite2D" parent="SubViewportContainer/SubViewport/Sprites"]
 unique_name_in_owner = true
 visible = false
 texture_filter = 1
@@ -112,13 +133,13 @@ scale = Vector2(1.8, 1.8)
 sprite_frames = SubResource("SpriteFrames_o130v")
 autoplay = "default"
 
-[node name="Icons" type="Node2D" parent="Sprites/NotificationBubble"]
+[node name="Icons" type="Node2D" parent="SubViewportContainer/SubViewport/Sprites/NotificationBubble"]
 editor_description = "Adds wiggle to children nodes."
 position = Vector2(17.7778, 102.778)
 scale = Vector2(0.555556, 0.555556)
 script = ExtResource("36_lmtu2")
 
-[node name="Example" type="Label" parent="Sprites/NotificationBubble/Icons"]
+[node name="Example" type="Label" parent="SubViewportContainer/SubViewport/Sprites/NotificationBubble/Icons"]
 unique_name_in_owner = true
 visible = false
 texture_filter = 1
@@ -135,7 +156,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="Icon" type="TextureRect" parent="Sprites/NotificationBubble/Icons"]
+[node name="Icon" type="TextureRect" parent="SubViewportContainer/SubViewport/Sprites/NotificationBubble/Icons"]
 unique_name_in_owner = true
 self_modulate = Color(0, 0, 0, 1)
 offset_left = -75.0

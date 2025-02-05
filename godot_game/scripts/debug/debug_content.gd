@@ -14,6 +14,7 @@ extends Control
 @onready var game = self.find_parent("Game")
 @onready var ambience_man = game.find_child("AmbienceManager")
 
+
 var example_messages = ["random", "word", "banana", "mario", "bingus"]
 var example_icons = [
 	preload("res://images/ambience/campfire.png"),
@@ -151,10 +152,5 @@ func _on_discover_btn_button_down() -> void:
 func _on_button_2_button_down() -> void:
 	creature.add_xp(10_000)
 
-
 func _on_button_4_button_down() -> void:
-	var capture = creature.get_viewport().get_texture().get_image()
-	var capture2 = capture.get_region(Rect2i(54,120,400, 400))
-	var filename = "image.png"
-	capture2.resize(128,128,Image.INTERPOLATE_CUBIC)
-	capture2.save_png(filename)
+	creature.create_save_icon()

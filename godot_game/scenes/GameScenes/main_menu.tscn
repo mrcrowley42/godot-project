@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://scenes/GameScenes/load_save_menu.gd" id="9_1nm66"]
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="10_46g4q"]
 [ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="11_oc74i"]
-[ext_resource type="PackedScene" path="res://scenes/UiScenes/save_file_listing.tscn" id="11_x6m8b"]
+[ext_resource type="PackedScene" uid="uid://qx7ey4e0sik6" path="res://scenes/UiScenes/save_file_listing.tscn" id="11_x6m8b"]
 [ext_resource type="AudioStream" uid="uid://bc4fnsjag56a3" path="res://music/Moa's Song - Aether OST (Emile van Krieken).mp3" id="12_xt2xn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gpy1m"]
@@ -221,7 +221,7 @@ theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
 theme_override_font_sizes/font_size = 18
 text = "Load"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="TitleT" type="RichTextLabel" parent="."]
 offset_top = 70.0
 offset_right = 540.0
 offset_bottom = 198.0
@@ -251,6 +251,7 @@ autoplay = true
 [connection signal="button_down" from="MenuList/MarginContainer/VBoxContainer/NewGameBtn" to="." method="_on_new_game_btn_button_down"]
 [connection signal="button_down" from="MenuList/MarginContainer/VBoxContainer/ContinueBtn" to="." method="_on_continue_btn_button_down"]
 [connection signal="button_down" from="MenuList/MarginContainer/VBoxContainer/LoadBtn" to="." method="_on_load_btn_button_down"]
+[connection signal="button_down" from="MenuList/MarginContainer/VBoxContainer/SettingsBtn" to="." method="_on_settings_btn_button_down"]
 [connection signal="button_down" from="MenuList/MarginContainer/VBoxContainer/QuitBtn" to="." method="_on_quit_btn_button_down"]
 [connection signal="hidden" from="LoadMenu" to="LoadMenu" method="_on_hidden"]
 [connection signal="button_down" from="LoadMenu/SaveMenuBtns/Back" to="LoadMenu" method="_on_back_button_down"]

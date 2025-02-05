@@ -11,16 +11,22 @@ var is_in_transition = true
 
 func _ready() -> void:
 	DataGlobals.load_settings_data()
-	if auto_continue:
+	var user_cfg = DataGlobals.settings_data_last_loaded
+	if user_cfg.has('general'):
+		auto_continue = user_cfg['general'].get('skip_intro', false)
+		
+	if auto_continue and Globals.first_launch:
+		Globals.first_launch = false
 		Globals.change_to_scene("res://scenes/GameScenes/main.tscn")
 		return
-	
 	DataGlobals.load_data()
 	
 	Globals.send_notification(Globals.NOTIFICATION_ALL_DATA_IS_LOADED)
 	center_pos = bg_gradient.size / 2
 	# if save file
+	
 	#new_game_btn.hide()
+	Globals.first_launch = false
 	do_opening_trans()
 
 
@@ -82,10 +88,7 @@ func _on_load_save_btn_button_down() -> void:
 func fade_out_music():
 	Globals.tween(%Music, "volume_db", -100, 0., 1., Tween.EaseType.EASE_IN_OUT)
 
-func load(data):
-	print(auto_continue)
-	if data.has("skip_intro"):
-		auto_continue = data["skip_intro"]
 
-func save() -> Dictionary:
-	return {"section": Globals.DEFAULT_SECTION, "skip_intro": false}
+func _on_settings_btn_button_down() -> void:
+	pass
+	#%SettingsMenu.show()

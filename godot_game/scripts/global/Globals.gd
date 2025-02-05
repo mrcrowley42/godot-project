@@ -59,6 +59,8 @@ var general_dict: Dictionary = {}
 
 var fact_icons: FactIconList = preload("res://resources/fact_icons.tres")
 
+## track whether the game has already been launched.
+var first_launch: bool = true
 
 # ------------------------------
 #    general helper functions
