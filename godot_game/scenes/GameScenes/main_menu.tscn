@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ig0eoqdfq5nr"]
+[gd_scene load_steps=21 format=3 uid="uid://ig0eoqdfq5nr"]
 
 [ext_resource type="Script" path="res://scripts/main_game_scripts/main_menu.gd" id="1_lpoqi"]
 [ext_resource type="Shader" path="res://shaders/pattern_lines.gdshader" id="2_f1u7v"]
@@ -8,10 +8,15 @@
 [ext_resource type="Theme" uid="uid://be46f5clp5lhj" path="res://themes/action_btn_main_menu.tres" id="5_yrm4f"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="8_1gx8s"]
 [ext_resource type="Script" path="res://scenes/GameScenes/load_save_menu.gd" id="9_1nm66"]
+[ext_resource type="Script" path="res://scenes/GameScenes/main_menu_settings_menu.gd" id="9_vpucw"]
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="10_46g4q"]
+[ext_resource type="Texture2D" uid="uid://pfr6wdx80m45" path="res://icons/volume-fill.svg" id="11_ajurq"]
+[ext_resource type="Script" path="res://scripts/utility/custom_tooltip_script.gd" id="11_hpuph"]
 [ext_resource type="AudioStream" uid="uid://cx28efsxtr7c" path="res://sound_effects/button_click_fast.mp3" id="11_lbdae"]
 [ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="11_oc74i"]
+[ext_resource type="Script" path="res://scripts/mute_button.gd" id="12_t0a7x"]
 [ext_resource type="AudioStream" uid="uid://bc4fnsjag56a3" path="res://music/Moa's Song - Aether OST (Emile van Krieken).mp3" id="12_xt2xn"]
+[ext_resource type="PackedScene" uid="uid://cbn0dv1k0onpb" path="res://scenes/UiScenes/vol_slider.tscn" id="13_4qvf0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gpy1m"]
 shader = ExtResource("2_f1u7v")
@@ -40,6 +45,8 @@ corner_radius_bottom_left = 12
 shadow_color = Color(0, 0, 0, 0.54902)
 shadow_size = 8
 shadow_offset = Vector2(0, 8)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uqmci"]
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_lpoqi")
@@ -211,6 +218,170 @@ theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
 theme_override_font_sizes/font_size = 18
 text = "Load"
 
+[node name="SettingsMenu" type="MarginContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 50.0
+offset_top = 210.0
+offset_right = 490.0
+offset_bottom = 635.0
+grow_horizontal = 2
+script = ExtResource("9_vpucw")
+
+[node name="Panel" type="Panel" parent="SettingsMenu"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_l5ron")
+
+[node name="MarginContainer" type="MarginContainer" parent="SettingsMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="SettingsMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("10_46g4q")
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="SettingsMenu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(386, 290)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer"]
+custom_minimum_size = Vector2(378, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 24
+
+[node name="SettingList" type="VBoxContainer" parent="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="AudioContainer" type="GridContainer" parent="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 10
+columns = 3
+
+[node name="Master" type="Label" parent="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("8_1gx8s")
+theme_override_font_sizes/font_size = 20
+text = "Master"
+vertical_alignment = 1
+
+[node name="MasterMuted" type="Button" parent="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer" groups=["settings_data"]]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_uqmci")
+text = "          "
+icon = ExtResource("11_ajurq")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("12_t0a7x")
+bus_name = "Master"
+
+[node name="MasterVolume" parent="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer" groups=["settings_data"] instance=ExtResource("13_4qvf0")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+tick_count = 1
+bus_name = "Master"
+
+[node name="Music" type="Label" parent="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = ExtResource("8_1gx8s")
+theme_override_font_sizes/font_size = 20
+text = "Ambience
+"
+vertical_alignment = 1
+
+[node name="MusicMuted" type="Button" parent="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer" groups=["settings_data"]]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_uqmci")
+text = "          "
+icon = ExtResource("11_ajurq")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("12_t0a7x")
+bus_name = "Music"
+
+[node name="MusicVolume" parent="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer" groups=["settings_data"] instance=ExtResource("13_4qvf0")]
+layout_mode = 2
+tick_count = 1
+bus_name = "Music"
+
+[node name="SFX" type="Label" parent="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("8_1gx8s")
+theme_override_font_sizes/font_size = 20
+text = "SFX"
+vertical_alignment = 1
+
+[node name="SFXMuted" type="Button" parent="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer" groups=["settings_data"]]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_uqmci")
+text = "          "
+icon = ExtResource("11_ajurq")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("12_t0a7x")
+bus_name = "SFX"
+
+[node name="SfxVolume" parent="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer" groups=["settings_data"] instance=ExtResource("13_4qvf0")]
+layout_mode = 2
+value = 0.0
+tick_count = 1
+bus_name = "SFX"
+
+[node name="WipeSaveBtn" type="Button" parent="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList"]
+custom_minimum_size = Vector2(200, 52)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("10_46g4q")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("8_1gx8s")
+theme_override_font_sizes/font_size = 20
+text = "Erase Save Data"
+script = ExtResource("11_hpuph")
+tooltip_string = "CANNOT BE UNDONE
+Requires Restart"
+direction = 3
+
+[node name="SaveMenuBtns" type="Node2D" parent="SettingsMenu"]
+position = Vector2(-50, -130)
+
+[node name="Back" type="Button" parent="SettingsMenu/SaveMenuBtns"]
+texture_filter = 5
+custom_minimum_size = Vector2(100, 40)
+offset_left = 73.0
+offset_top = 502.0
+offset_right = 173.0
+offset_bottom = 542.0
+scale = Vector2(0.75, 0.75)
+theme = ExtResource("4_22rev")
+theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
+theme_override_font_sizes/font_size = 18
+text = "Back"
+
 [node name="TitleT" type="RichTextLabel" parent="."]
 offset_top = 70.0
 offset_right = 540.0
@@ -253,3 +424,9 @@ autoplay = true
 [connection signal="hidden" from="LoadMenu" to="LoadMenu" method="_on_hidden"]
 [connection signal="button_down" from="LoadMenu/SaveMenuBtns/Back" to="LoadMenu" method="_on_back_button_down"]
 [connection signal="button_down" from="LoadMenu/SaveMenuBtns/LoadBtn" to="." method="_on_load_save_btn_button_down"]
+[connection signal="hidden" from="SettingsMenu" to="SettingsMenu" method="_on_hidden"]
+[connection signal="button_down" from="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer/MasterMuted" to="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer/MasterMuted" method="_on_button_down"]
+[connection signal="button_down" from="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer/MusicMuted" to="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer/MusicMuted" method="_on_button_down"]
+[connection signal="button_down" from="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer/SFXMuted" to="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer/SFXMuted" method="_on_button_down"]
+[connection signal="button_down" from="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/WipeSaveBtn" to="SettingsMenu" method="_on_wipe_save_btn_button_down"]
+[connection signal="button_down" from="SettingsMenu/SaveMenuBtns/Back" to="SettingsMenu" method="_on_back_button_down"]

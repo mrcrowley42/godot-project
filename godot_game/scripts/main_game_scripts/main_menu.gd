@@ -3,6 +3,7 @@ class_name MainMenu extends ScriptNode
 @export var auto_continue: bool
 
 @onready var load_menu = find_child("LoadMenu")
+@onready var settings_menu = find_child("SettingsMenu")
 @onready var bg_gradient: TextureRect = find_child("BgGradient")
 @onready var trans_img: Sprite2D = find_child("Transition")
 @onready var new_game_btn = find_child("NewGameBtn")
@@ -97,5 +98,4 @@ func fade_out_music():
 
 func _on_settings_btn_button_down() -> void:
 	btn_sfx.play()
-	pass
-	#%SettingsMenu.show()
+	settings_menu.show()

@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://ckjfqxx8f55r3"]
 
 [ext_resource type="Script" path="res://scripts/ambience_control.gd" id="1_r2qd8"]
-[ext_resource type="Texture2D" uid="uid://wo64brcmlmf8" path="res://images/ambience/forest.png" id="2_6ycye"]
 [ext_resource type="Theme" uid="uid://dl1wes8p6lqlb" path="res://themes/invisible.tres" id="2_gdv3w"]
 [ext_resource type="Script" path="res://scripts/utility/custom_tooltip_script.gd" id="2_oj86f"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="2_qoy0g"]
+[ext_resource type="Texture2D" uid="uid://tvwjgl76m8fx" path="res://images/unknown.png" id="3_vnae7"]
 [ext_resource type="Theme" uid="uid://7uy2it30gif0" path="res://themes/menu_value_range_small.tres" id="5_1xa1v"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="6_ijph6"]
 
@@ -49,7 +49,7 @@ theme_override_constants/separation = 8
 custom_minimum_size = Vector2(42, 42)
 layout_mode = 2
 theme = ExtResource("2_gdv3w")
-icon = ExtResource("2_6ycye")
+icon = ExtResource("3_vnae7")
 icon_alignment = 1
 expand_icon = true
 script = ExtResource("2_oj86f")
