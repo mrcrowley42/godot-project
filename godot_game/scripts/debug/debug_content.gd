@@ -110,7 +110,7 @@ func _on_wipe_btn_button_down() -> void:
 func _on_wipe_nodes_btn_button_down() -> void:
 	var d = DirAccess.open("res://")
 	d.remove(Globals.SAVE_DATA_FILE)
-	DataGlobals.save_only_metadata()
+	DataGlobals.save_only_global_metadata()
 	get_tree().quit()
 
 
@@ -127,10 +127,11 @@ func _on_unlock_button_button_down() -> void:
 	for ui_theme in load("res://resources/ui_theme_list.tres").theme_list:
 		Globals.unlock_theme(ui_theme)
 
+	## dont re-render here, let the game handle it
 	# Rerender unlockable item buttons
-	cosmetic_btns.update_buttons()
-	theme_btns.update_buttons()
-	facts_menu.propagate_call("update_locked")
+	#cosmetic_btns.update_buttons()
+	#theme_btns.update_buttons()
+	#facts_menu.propagate_call("update_locked")
 
 
 func _on_button_3_button_down() -> void:

@@ -46,6 +46,9 @@ const NOTI_LOOKUP = {
 
 
 signal item_unlocked
+signal cosmetic_unlocked(uid)
+signal theme_unlocked(uid)
+signal fact_unlocked(uid)
 
 ## save incase we need to kill it for another transition
 var transition_tween: Tween = null
@@ -110,6 +113,7 @@ func unlock_fact(fact: Fact) -> void:
 	
 	print("fact unlocked '%s', uid: '%s'" % [fact.title, fact_uid])
 	item_unlocked.emit("Fact Unlocked!", get_fact_category_icon(fact.category))
+	fact_unlocked.emit(fact_uid)
 
 
 ## Unlocks the passed [param cosmetic] resource
@@ -126,6 +130,7 @@ func unlock_cosmetic(cosmetic: CosmeticItem) -> void:
 	
 	print("cosmetic unlocked '%s', uid: '%s'" % [cosmetic.name, cosmetic_uid])
 	item_unlocked.emit("Cosmetic Unlocked!", cosmetic.thumbnail)
+	cosmetic_unlocked.emit(cosmetic_uid)
 
 ## Unlocks the passed [param cosmetic] resource
 func unlock_theme(theme: UiTheme) -> void:
@@ -151,6 +156,7 @@ func unlock_theme(theme: UiTheme) -> void:
 				col = theme.primary if dist > 9 else theme.bg
 			img.set_pixel(x, y, col)
 	item_unlocked.emit("Theme Unlocked!", ImageTexture.create_from_image(img))
+	theme_unlocked.emit(theme_uid)
 
 # TODO: really want to refactor these functions into one now...
 

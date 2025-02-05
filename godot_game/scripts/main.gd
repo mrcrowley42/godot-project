@@ -22,7 +22,7 @@ func _ready():
 	# if no data exists, file has been tampered with, set the bare minimum
 	# metadata is set automatically after egg opening scene, and before this scene
 	if !DataGlobals.has_save_data():
-		DataGlobals.save_only_metadata()
+		DataGlobals.save_only_global_metadata()
 
 	## load in all the data
 	DataGlobals.load_data()
