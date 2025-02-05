@@ -27,4 +27,5 @@ func _on_hidden() -> void:
 	#queue_free()
 
 func _on_button_down() -> void:
-	parent_menu.current_save_id = save_file.id
+	if save_file.has('id'):
+		parent_menu.current_save_id = save_file.id
