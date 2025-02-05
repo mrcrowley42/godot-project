@@ -14,6 +14,9 @@ extends Control
 @onready var game = self.find_parent("Game")
 @onready var ambience_man = game.find_child("AmbienceManager")
 
+var smaller_axis_to_sides := {Vector2i.AXIS_X: [SIDE_LEFT, SIDE_RIGHT],
+	Vector2i.AXIS_Y: [SIDE_TOP, SIDE_BOTTOM]}
+
 var example_messages = ["random", "word", "banana", "mario", "bingus"]
 var example_icons = [
 	preload("res://images/ambience/campfire.png"),
@@ -153,7 +156,13 @@ func _on_button_2_button_down() -> void:
 
 func _on_button_4_button_down() -> void:
 	var capture = creature.viewport_container.get_texture().get_image()
-	var capture2 = capture.get_region(capture.get_used_rect())
+	
+	var snapshot_region: Rect2i = capture.get_used_rect()
+	var smaller_index = snapshot_region.size.min_axis_index()
+	var expand_amount = abs(snapshot_region.size.x - snapshot_region.size.y) / 2
+	for side in smaller_axis_to_sides[smaller_index]:
+		snapshot_region = snapshot_region.grow_side(side, expand_amount)
+	var capture2: Image = capture.get_region(snapshot_region)
 	var filename = "image.png"
 	#capture2.resize(128,128,Image.INTERPOLATE_CUBIC)
 	capture2.save_png(filename)
