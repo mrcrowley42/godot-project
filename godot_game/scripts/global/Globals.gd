@@ -189,6 +189,15 @@ func get_fact_category_icon(category: Fact.FactCategory) -> Texture2D:
 			return fact_icon.icon
 	return null
 
+func spawn_exclamation_point(parent) -> Sprite2D:
+	var sprite: Sprite2D = Sprite2D.new()
+	sprite.position = Vector2(5, 5)
+	sprite.modulate = Color(1, 1, 0, 1)
+	sprite.scale = Vector2(.8, .8)
+	sprite.texture = load("res://icons/exclamation-lg.svg")
+	parent.add_child(sprite)
+	return sprite
+
 ## fire confetti, automatically removes iteslf of finish
 func fire_confetti(parent, pos: Vector2 = Vector2(270, 560)):
 	var remove = func(p_node):

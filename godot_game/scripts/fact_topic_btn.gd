@@ -5,10 +5,9 @@ extends Button
 @export var icon_btn: Button
 @export var count_label: Label
 
-@onready var fact_listing_scene = preload("res://scenes/UiScenes/fact_listing.tscn")
-
 var og_text
 var fact_menu: PanelContainer
+var fact_listing: MarginContainer
 
 func setup(new_category, the_fact_menu):
 	og_text = count_label.text
@@ -19,6 +18,13 @@ func setup(new_category, the_fact_menu):
 	
 	Globals.item_unlocked.connect(update_text)
 	update_text()
+	
+	var fact_listing_scene = load("res://scenes/UiScenes/fact_listing.tscn")
+	fact_listing = fact_listing_scene.instantiate()
+	fact_listing.category = category
+	fact_menu.add_child.call_deferred(fact_listing)
+	fact_listing.add_facts()
+	fact_listing.visible = false
 
 
 func update_text(_null=null, _null_2=null):
@@ -28,7 +34,4 @@ func update_text(_null=null, _null_2=null):
 
 ## When clicked add fact listing scene populated with facts matching this buttons category.
 func _on_button_down() -> void:
-	var fact_listing = fact_listing_scene.instantiate()
-	fact_listing.category = category
-	fact_menu.add_child(fact_listing)
-	fact_listing.add_facts()
+	fact_listing.visible = true

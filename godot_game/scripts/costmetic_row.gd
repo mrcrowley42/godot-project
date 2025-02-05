@@ -6,6 +6,7 @@ signal cosmetic_btn_pressed
 const BTN_SIZE: Vector2 = Vector2(64, 64)
 
 var unlockables = load("res://resources/unlockables.tres")
+
 @export var creature: Creature
 var data_is_loaded = false
 
@@ -44,7 +45,12 @@ class UnlockableIcon extends CustomTooltipButton:
 		icon = null if self.disabled else cosmetic.thumbnail
 		
 		if new_cosmetic_uid != null and uid == new_cosmetic_uid:
-			printerr("YA!")
+			var sprite: Sprite2D = Globals.spawn_exclamation_point(self)
+			button_down.connect(remove_sprite.bind(sprite))
+	
+	func remove_sprite(child):
+		remove_child(child)
+		button_down.disconnect(remove_sprite)
 
 
 func _notification(what: int) -> void:
