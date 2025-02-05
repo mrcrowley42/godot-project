@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ig0eoqdfq5nr"]
+[gd_scene load_steps=15 format=3 uid="uid://ig0eoqdfq5nr"]
 
 [ext_resource type="Script" path="res://scripts/main_game_scripts/main_menu.gd" id="1_lpoqi"]
 [ext_resource type="Shader" path="res://shaders/pattern_lines.gdshader" id="2_f1u7v"]
@@ -9,6 +9,7 @@
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="8_1gx8s"]
 [ext_resource type="Script" path="res://scenes/GameScenes/load_save_menu.gd" id="9_1nm66"]
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="10_46g4q"]
+[ext_resource type="AudioStream" uid="uid://cx28efsxtr7c" path="res://sound_effects/button_click_fast.mp3" id="11_lbdae"]
 [ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="11_oc74i"]
 [ext_resource type="AudioStream" uid="uid://bc4fnsjag56a3" path="res://music/Moa's Song - Aether OST (Emile van Krieken).mp3" id="12_xt2xn"]
 
@@ -65,11 +66,11 @@ texture = ExtResource("3_kva7r")
 position = Vector2(0, -20)
 scale = Vector2(1e-05, 1e-05)
 
-[node name="CanvasGroup2" type="CanvasGroup" parent="."]
+[node name="BGShader" type="CanvasGroup" parent="."]
 self_modulate = Color(1, 1, 1, 0.623529)
 rotation = 3.14159
 
-[node name="ColorRect" type="ColorRect" parent="CanvasGroup2"]
+[node name="ColorRect" type="ColorRect" parent="BGShader"]
 material = SubResource("ShaderMaterial_gpy1m")
 anchors_preset = 3
 anchor_left = 1.0
@@ -129,6 +130,7 @@ theme = ExtResource("5_yrm4f")
 text = "Quit"
 
 [node name="LoadMenu" type="MarginContainer" parent="." node_paths=PackedStringArray("heading", "main_script", "item_container")]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -230,6 +232,13 @@ layer = 100
 position = Vector2(270, 1200)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("11_oc74i")
+
+[node name="BtnClick" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("11_lbdae")
+volume_db = -1.0
+max_polyphony = 2
+bus = &"SFX"
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true

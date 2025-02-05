@@ -6,6 +6,8 @@ class_name MainMenu extends ScriptNode
 @onready var bg_gradient: TextureRect = find_child("BgGradient")
 @onready var trans_img: Sprite2D = find_child("Transition")
 @onready var new_game_btn = find_child("NewGameBtn")
+@onready var btn_sfx = find_child("BtnClick")
+
 var center_pos
 var is_in_transition = true
 
@@ -24,8 +26,8 @@ func _ready() -> void:
 	Globals.send_notification(Globals.NOTIFICATION_ALL_DATA_IS_LOADED)
 	center_pos = bg_gradient.size / 2
 	# if save file
-	
-	#new_game_btn.hide()
+	#if DataGlobals.get_global_metadata_value(DataGlobals.CURRENT_CREATURE) in DataGlobals.get_all_creature_ids():
+		#new_game_btn.hide()
 	Globals.first_launch = false
 	do_opening_trans()
 
@@ -62,6 +64,7 @@ func _on_quit_btn_button_down() -> void:
 
 
 func _on_continue_btn_button_down() -> void:
+	btn_sfx.play()
 	if not is_in_transition:
 		fade_out_music()
 		await do_closing_trans()
@@ -69,6 +72,7 @@ func _on_continue_btn_button_down() -> void:
 
 
 func _on_new_game_btn_button_down() -> void:
+	btn_sfx.play()
 	if not is_in_transition:
 		fade_out_music()
 		await do_closing_trans()
@@ -76,11 +80,13 @@ func _on_new_game_btn_button_down() -> void:
 
 
 func _on_load_btn_button_down() -> void:
+	btn_sfx.play()
 	if not is_in_transition:
 		load_menu.show()
 
 
 func _on_load_save_btn_button_down() -> void:
+	btn_sfx.play()
 	if load_menu.current_save_id != null:
 		DataGlobals.set_metadata_value(true, DataGlobals.CURRENT_CREATURE, load_menu.current_save_id)
 		_on_continue_btn_button_down.call_deferred()
@@ -90,5 +96,6 @@ func fade_out_music():
 
 
 func _on_settings_btn_button_down() -> void:
+	btn_sfx.play()
 	pass
 	#%SettingsMenu.show()
