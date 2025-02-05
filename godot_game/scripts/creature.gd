@@ -333,7 +333,22 @@ func _process(_delta: float) -> void:
 func get_save_uid() -> int:
 	return DataGlobals.SAVE_CREATURE_UID
 
+func create_save_icon() -> void:
+	var capture = self.viewport_container.get_texture().get_image()
+	var snapshot_region: Rect2i = capture.get_used_rect()
+	var smaller_index = snapshot_region.size.min_axis_index()
+	var expand_amount = abs(snapshot_region.size.x - snapshot_region.size.y) / 2
+	for side in Helpers.smaller_axis_to_sides[smaller_index]:
+		snapshot_region = snapshot_region.grow_side(side, expand_amount)
+	var capture2: Image = capture.get_region(snapshot_region)
+	var current_save_id = DataGlobals.get_global_metadata_value(DataGlobals.CURRENT_CREATURE)
+	var filename = "save_icon_%s.png" % [current_save_id]
+	capture2.resize(128,128,Image.INTERPOLATE_CUBIC)
+	capture2.save_png(filename)
+
+
 func save() -> Dictionary:
+	create_save_icon()
 	return {
 		"water": water, "food": food, "fun": fun, "hp": hp,
 		"xp": xp, "is_ready_to_grow_up": is_ready_to_grow_up,

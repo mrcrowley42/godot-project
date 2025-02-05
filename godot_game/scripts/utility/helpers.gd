@@ -20,3 +20,6 @@ static func load_uid_str(uid: String) -> Resource:
 
 static func load_uid_int(uid: int) -> Resource:
 	return load(ResourceUID.get_id_path(uid))
+
+static var smaller_axis_to_sides := {Vector2i.AXIS_X: [SIDE_LEFT, SIDE_RIGHT],
+	Vector2i.AXIS_Y: [SIDE_TOP, SIDE_BOTTOM]}
