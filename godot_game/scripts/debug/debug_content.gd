@@ -162,7 +162,7 @@ func _on_button_4_button_down() -> void:
 	for side in smaller_axis_to_sides[smaller_index]:
 		snapshot_region = snapshot_region.grow_side(side, expand_amount)
 	var capture2: Image = capture.get_region(snapshot_region)
-	var current_save_id = 2
+	var current_save_id = DataGlobals.get_global_metadata_value(DataGlobals.CURRENT_CREATURE)
 	var filename = "save_icon_%s.png" % [current_save_id]
 	capture2.resize(128,128,Image.INTERPOLATE_CUBIC)
 	capture2.save_png(filename)
