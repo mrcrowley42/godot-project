@@ -1363,6 +1363,7 @@ script = ExtResource("35_4io20")
 [node name="SettingsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 material = SubResource("ShaderMaterial_1s3b6")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -1825,7 +1826,6 @@ offset_left = 10.0
 offset_top = 10.0
 offset_right = 424.0
 offset_bottom = 367.0
-scroll_vertical = 100
 script = SubResource("GDScript_1bafj")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/CreditsMenu/Node2D/HScrollBar"]
@@ -1852,11 +1852,8 @@ Marcus Gellel
 [font_size=15]Based on Tbh/autism creature originally by @acmeiku on Twitter[/font_size]
 
 
-With thanks to those who supported us:
-[font_size=15]Martina Johnson
-Peperoni
-Wallsy
-oh hell this might be a long list[/font_size]
+With a very special thanks to:
+[font_size=15]Martina Johnson[/font_size]
 
 
 Music:
@@ -1868,12 +1865,7 @@ Font:
 
 Various Sound Effects:
 [font_size=15]Yippee! by unknown german kid
--- INSERT AMBIENT AUTIO SOUND WEBSITE/S --
-hyland (Freesound.org)
-beetlemuse (Freesound.org)
-kagateni (Freesound.org)
-justinvoke (Freesound.org)
-Pixabay (Pixabay)[/font_size]
+Sound effects and ambient sounds from Freesound.org, Pixabay, and BBC Sound Effects[/font_size]
 
 Various SVG Icons:
 [font_size=15]Bootstrap Icons[/font_size]"

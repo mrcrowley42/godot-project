@@ -343,6 +343,7 @@ func create_new_creature(type_uid: String, initial_creature_name: String) -> int
 
 func save_settings_data():
 	var config = ConfigFile.new()
+	config.load(get_settings_file())  # so we dont just purge everything
 	var settings_nodes = get_tree().get_nodes_in_group(Globals.SAVE_SETTINGS_GROUP)
 
 	for node in settings_nodes:
@@ -495,6 +496,7 @@ func load_settings_data():
 
 	var config = ConfigFile.new()
 	config.load(get_settings_file())
+	printerr(config.get_sections())
 
 	var settings_nodes = get_tree().get_nodes_in_group(Globals.SAVE_SETTINGS_GROUP)
 	for node in settings_nodes:

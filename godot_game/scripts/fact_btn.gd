@@ -6,7 +6,6 @@ var num: int
 func update_locked(new_fact_uid = null):
 	var uid = Helpers.uid_str(fact)
 	if new_fact_uid != null and new_fact_uid == uid:
-		var is_unlocked = true
 		self.text = str(num)
 		var sprite: Sprite2D = Globals.spawn_exclamation_point(self)
 		button_down.connect(remove_sprite.bind(sprite))
