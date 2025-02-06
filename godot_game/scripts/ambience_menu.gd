@@ -85,5 +85,3 @@ func _on_ambience_menu_visibility_changed():
 		if %AmbienceMenu.visible:
 			update_control_list()
 			update_count_label()
-		else:
-			DataGlobals.save_settings_data()

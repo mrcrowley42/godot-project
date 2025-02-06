@@ -8,6 +8,9 @@ const BTN_SIZE: Vector2 = Vector2(64, 64)
 var unlockables = load("res://resources/unlockables.tres")
 
 @export var creature: Creature
+@export var title_label: Button
+var title_label_og_text: String
+
 var data_is_loaded = false
 
 ## Class that describes the button object for each cosmetic item.
@@ -56,10 +59,16 @@ class UnlockableIcon extends CustomTooltipButton:
 func _notification(what: int) -> void:
 	if what == Globals.NOTIFICATION_ALL_DATA_IS_LOADED:
 		data_is_loaded = true
+		title_label_og_text = title_label.text
+		update_title()
+		
 		for item: CosmeticItem in unlockables.unlockables:
 			var item_btn = UnlockableIcon.new(item)
 			add_child.call_deferred(item_btn)
 
+
+func update_title():
+	title_label.text = title_label_og_text % DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_NAME)
 
 func update_toggle():
 	var loaded = creature.accessory_manager.current_cosmetics

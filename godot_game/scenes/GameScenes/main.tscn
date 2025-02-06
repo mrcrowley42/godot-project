@@ -1,4 +1,4 @@
-[gd_scene load_steps=127 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=128 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
@@ -79,6 +79,7 @@
 [ext_resource type="Theme" uid="uid://bsd1dkhc13v47" path="res://themes/plain.tres" id="56_m6x7j"]
 [ext_resource type="Script" path="res://scripts/stat_bar.gd" id="57_ani8q"]
 [ext_resource type="Shader" path="res://shaders/pattern_wavy.gdshader" id="57_qy3v8"]
+[ext_resource type="Script" path="res://scripts/edit_name_panel.gd" id="59_6wf3t"]
 [ext_resource type="Script" path="res://scenes/GameScenes/skip_title_c_box.gd" id="62_fffta"]
 [ext_resource type="Script" path="res://scripts/sfx_man.gd" id="65_787cd"]
 [ext_resource type="AudioStream" uid="uid://cx28efsxtr7c" path="res://sound_effects/button_click_fast.mp3" id="67_nfa6o"]
@@ -1219,7 +1220,6 @@ script = ExtResource("35_4io20")
 [node name="CosmeticsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 material = SubResource("ShaderMaterial_357to")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -1236,11 +1236,11 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="Button" type="Button" parent="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer"]
+[node name="Title" type="Button" parent="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("45_e031c")
 theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
-text = "Creature Cosmetics"
+text = "%s Cosmetics"
 
 [node name="PanelContainer" type="PanelContainer" parent="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -1258,7 +1258,7 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="CosmeticItems" type="GridContainer" parent="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer" node_paths=PackedStringArray("creature")]
+[node name="CosmeticItems" type="GridContainer" parent="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer" node_paths=PackedStringArray("creature", "title_label")]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/h_separation = 8
@@ -1266,6 +1266,7 @@ theme_override_constants/v_separation = 10
 columns = 5
 script = ExtResource("41_pook7")
 creature = NodePath("../../../../../../../../../Gameplay/Creature")
+title_label = NodePath("../../../../Title")
 
 [node name="PreviewContainer" type="MarginContainer" parent="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -1293,6 +1294,67 @@ theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
 theme_override_font_sizes/font_size = 18
 text = "Back"
 script = ExtResource("35_4io20")
+
+[node name="EditCreatureName" type="Button" parent="UI/OptionsMenu/CosmeticsMenu/SaveButtons"]
+offset_left = 392.0
+offset_top = 513.0
+offset_right = 492.0
+offset_bottom = 553.0
+scale = Vector2(0.75, 0.75)
+theme = ExtResource("33_1qhmu")
+text = "Edit name"
+
+[node name="EditNamePanel" type="Control" parent="UI/OptionsMenu/CosmeticsMenu" node_paths=PackedStringArray("cosmetics_grid", "line_edit")]
+layout_mode = 2
+script = ExtResource("59_6wf3t")
+cosmetics_grid = NodePath("../MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/CosmeticItems")
+line_edit = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/LineEdit")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/CosmeticsMenu/EditNamePanel"]
+layout_mode = 0
+offset_right = 434.0
+offset_bottom = 434.0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 190
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/OptionsMenu/CosmeticsMenu/EditNamePanel/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("56_m6x7j")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/CosmeticsMenu/EditNamePanel/MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/CosmeticsMenu/EditNamePanel/MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="UI/OptionsMenu/CosmeticsMenu/EditNamePanel/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "dwdawdd"
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/OptionsMenu/CosmeticsMenu/EditNamePanel/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="CancelEditBtn" type="Button" parent="UI/OptionsMenu/CosmeticsMenu/EditNamePanel/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("33_1qhmu")
+text = "Cancel"
+
+[node name="AcceptEditBtn" type="Button" parent="UI/OptionsMenu/CosmeticsMenu/EditNamePanel/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("33_1qhmu")
+text = "Accept"
 
 [node name="CreaturesMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
@@ -2118,6 +2180,9 @@ bus = &"SFX"
 [connection signal="visibility_changed" from="UI/OptionsMenu/CosmeticsMenu" to="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/CosmeticItems" method="_on_cosmetics_menu_visibility_changed"]
 [connection signal="cosmetic_btn_pressed" from="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/CosmeticItems" to="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/PreviewContainer/CreaturePreview" method="_on_cosmetic_items_cosmetic_btn_pressed"]
 [connection signal="button_down" from="UI/OptionsMenu/CosmeticsMenu/SaveButtons/Back" to="UI/OptionsMenu/CosmeticsMenu/SaveButtons/Back" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/CosmeticsMenu/SaveButtons/EditCreatureName" to="UI/OptionsMenu/CosmeticsMenu/EditNamePanel" method="_on_edit_creature_name_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/CosmeticsMenu/EditNamePanel/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CancelEditBtn" to="UI/OptionsMenu/CosmeticsMenu/EditNamePanel" method="_on_cancel_edit_btn_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/CosmeticsMenu/EditNamePanel/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/AcceptEditBtn" to="UI/OptionsMenu/CosmeticsMenu/EditNamePanel" method="_on_accept_edit_btn_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/CreaturesMenu/SaveButtons/Back" to="UI/OptionsMenu/CreaturesMenu/SaveButtons/Back" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer/MasterMuted" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer/MasterMuted" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer/MusicMuted" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer/MusicMuted" method="_on_button_down"]
