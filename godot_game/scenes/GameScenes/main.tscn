@@ -1336,10 +1336,17 @@ layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
+[node name="Label" type="Label" parent="UI/OptionsMenu/CosmeticsMenu/EditNamePanel/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("49_mgl65")
+text = "Edit creature name"
+horizontal_alignment = 1
+
 [node name="LineEdit" type="LineEdit" parent="UI/OptionsMenu/CosmeticsMenu/EditNamePanel/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "dwdawdd"
 alignment = 1
+max_length = 19
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/OptionsMenu/CosmeticsMenu/EditNamePanel/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
