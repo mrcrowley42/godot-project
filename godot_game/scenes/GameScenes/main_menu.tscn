@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://ig0eoqdfq5nr"]
+[gd_scene load_steps=23 format=3 uid="uid://ig0eoqdfq5nr"]
 
 [ext_resource type="Script" path="res://scripts/main_game_scripts/main_menu.gd" id="1_lpoqi"]
 [ext_resource type="Shader" path="res://shaders/pattern_lines.gdshader" id="2_f1u7v"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://scripts/mute_button.gd" id="12_t0a7x"]
 [ext_resource type="AudioStream" uid="uid://bc4fnsjag56a3" path="res://music/Moa's Song - Aether OST (Emile van Krieken).mp3" id="12_xt2xn"]
 [ext_resource type="PackedScene" uid="uid://cbn0dv1k0onpb" path="res://scenes/UiScenes/vol_slider.tscn" id="13_4qvf0"]
+[ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="15_qcaiy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gpy1m"]
 shader = ExtResource("2_f1u7v")
@@ -47,6 +48,21 @@ shadow_size = 8
 shadow_offset = Vector2(0, 8)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uqmci"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fk5u2"]
+bg_color = Color(0.3264, 0.33728, 0.34, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.8, 0.8, 0.8, 0.533333)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.54902)
+shadow_size = 8
+shadow_offset = Vector2(0, 8)
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_lpoqi")
@@ -396,6 +412,80 @@ theme_override_fonts/normal_font = ExtResource("8_1gx8s")
 bbcode_enabled = true
 text = "[font_size=100px][center][wave amp=50.0 freq=6.0 connected=1][rainbow freq=0.7 sat=0.7 val=0.96]YIPPEE[/rainbow][/wave][/center][/font_size]"
 
+[node name="ConfirmWipeMenu" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 540.0
+offset_bottom = 675.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.196078)
+
+[node name="ConfirmWipeSave" type="MarginContainer" parent="ConfirmWipeMenu"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -180.0
+offset_top = 310.0
+offset_right = 180.0
+offset_bottom = 510.0
+grow_horizontal = 2
+
+[node name="Panel" type="Panel" parent="ConfirmWipeMenu/ConfirmWipeSave"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fk5u2")
+
+[node name="MarginContainer" type="MarginContainer" parent="ConfirmWipeMenu/ConfirmWipeSave"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ConfirmWipeMenu/ConfirmWipeSave/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="ConfirmWipeMenu/ConfirmWipeSave/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("10_46g4q")
+text = "Confirm"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="ConfirmWipeMenu/ConfirmWipeSave/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("15_qcaiy")
+text = "Are you sure you want to
+Continue?"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ConfirmWipeMenu/ConfirmWipeSave/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="CancelWipe" type="Button" parent="ConfirmWipeMenu/ConfirmWipeSave/MarginContainer/VBoxContainer/HBoxContainer"]
+texture_filter = 5
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme = ExtResource("4_22rev")
+theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
+theme_override_font_sizes/font_size = 18
+text = "Back"
+
+[node name="ConfirmWipe" type="Button" parent="ConfirmWipeMenu/ConfirmWipeSave/MarginContainer/VBoxContainer/HBoxContainer"]
+texture_filter = 5
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme = ExtResource("4_22rev")
+theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
+theme_override_font_sizes/font_size = 18
+text = "Yes"
+
 [node name="TransLayer" type="CanvasLayer" parent="."]
 layer = 100
 
@@ -428,5 +518,7 @@ autoplay = true
 [connection signal="button_down" from="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer/MasterMuted" to="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer/MasterMuted" method="_on_button_down"]
 [connection signal="button_down" from="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer/MusicMuted" to="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer/MusicMuted" method="_on_button_down"]
 [connection signal="button_down" from="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer/SFXMuted" to="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer/SFXMuted" method="_on_button_down"]
-[connection signal="button_down" from="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/WipeSaveBtn" to="SettingsMenu" method="_on_wipe_save_btn_button_down"]
+[connection signal="button_down" from="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/WipeSaveBtn" to="." method="_on_wipe_save_btn_button_down"]
 [connection signal="button_down" from="SettingsMenu/SaveMenuBtns/Back" to="SettingsMenu" method="_on_back_button_down"]
+[connection signal="button_down" from="ConfirmWipeMenu/ConfirmWipeSave/MarginContainer/VBoxContainer/HBoxContainer/CancelWipe" to="." method="_on_cancel_wipe_button_down"]
+[connection signal="button_down" from="ConfirmWipeMenu/ConfirmWipeSave/MarginContainer/VBoxContainer/HBoxContainer/ConfirmWipe" to="." method="_on_confirm_wipe_button_down"]

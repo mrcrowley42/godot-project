@@ -17,9 +17,10 @@ func _on_back_button_down() -> void:
 
 
 func _on_wipe_save_btn_button_down() -> void:
-	var d = DirAccess.open("res://")
-	d.remove(Globals.SAVE_DATA_FILE)
-	get_tree().quit()
+	pass
+	#var d = DirAccess.open("res://")
+	#d.remove(Globals.SAVE_DATA_FILE)
+	#get_tree().quit()
 
 
 
