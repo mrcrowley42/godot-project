@@ -19,7 +19,6 @@
 
 ### Completionist
 - try every food and drink consumable
-- hatch every egg type
 - hatch every baby type
 - discover every creature type
 - unlock every cosmetic
