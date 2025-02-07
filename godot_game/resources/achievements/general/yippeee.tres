@@ -6,4 +6,5 @@
 script = ExtResource("1_yrkc2")
 title = "YIPPEEE!!!"
 hint = "Press 'y' to YIPPEEEE"
+category = 0
 secret = true
