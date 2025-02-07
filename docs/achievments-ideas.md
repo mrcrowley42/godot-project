@@ -3,9 +3,10 @@
 - creature reach child state
 - creature reach adult stage
 - enter clippy mode for the first time
-- equip max number of cosmetics at once
-- equip max number of ambient sounds at once
-- press 'y' on you keyboard to YIPPEEE
+- try a disliked food or drink consumable
+- (SECRET) equip max number of cosmetics at once
+- (SECRET) equip max number of ambient sounds at once
+- (SECRET) press 'y' on you keyboard to YIPPEEE
 
 ### Minigames
 - reach x score in totris
@@ -13,6 +14,7 @@
 - reach below x seconds in memory game timed mode
 - win x rounds against the creature in spr
 - activate zen mode for the first time
+- (SECRET) acivate zen mode 20 times
 
 ### Completionist
 - try every food and drink consumable
