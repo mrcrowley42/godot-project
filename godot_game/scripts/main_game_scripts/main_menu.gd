@@ -8,6 +8,7 @@ class_name MainMenu extends ScriptNode
 @onready var trans_img: Sprite2D = find_child("Transition")
 @onready var new_game_btn = find_child("NewGameBtn")
 @onready var btn_sfx = find_child("BtnClick")
+@onready var wipe_menu = find_child("ConfirmWipeMenu")
 
 var center_pos
 var is_in_transition = true
@@ -99,3 +100,18 @@ func fade_out_music():
 func _on_settings_btn_button_down() -> void:
 	btn_sfx.play()
 	settings_menu.show()
+
+
+func _on_confirm_wipe_button_down() -> void:
+	var d = DirAccess.open("res://")
+	d.remove(Globals.SAVE_DATA_FILE)
+	get_tree().quit()
+	
+
+
+func _on_cancel_wipe_button_down() -> void:
+	wipe_menu.hide()
+
+
+func _on_wipe_save_btn_button_down() -> void:
+	wipe_menu.show()
