@@ -2,7 +2,9 @@
 - hatch first creature
 - creature reach child state
 - creature reach adult stage
+- enter clippy mode for the first time
 - equip max number of cosmetics at once
+- equip max number of ambient sounds at once
 - press 'y' on you keyboard to YIPPEEE
 
 ### Minigames
