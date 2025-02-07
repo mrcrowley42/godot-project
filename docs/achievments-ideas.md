@@ -1,5 +1,5 @@
 ### Achievements
-- hatch first creature
+- hatch your first baby
 - creature reach child state
 - creature reach adult stage
 - enter clippy mode for the first time
