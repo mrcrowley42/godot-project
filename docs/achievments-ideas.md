@@ -1,4 +1,4 @@
-### Achievements
+### General
 - hatch your first baby
 - creature reach child state
 - creature reach adult stage
