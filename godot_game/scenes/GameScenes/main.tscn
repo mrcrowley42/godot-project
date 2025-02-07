@@ -1,4 +1,4 @@
-[gd_scene load_steps=128 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=129 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
@@ -49,6 +49,7 @@
 [ext_resource type="Texture2D" uid="uid://cawudmxbjamv0" path="res://UI stuff/Green Palette/ui_green.png" id="40_wt18k"]
 [ext_resource type="Texture2D" uid="uid://c702pbhxasm52" path="res://icons/status/heart-fill.svg" id="41_8adaw"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/main_menu_btn.gd" id="41_eeoik"]
+[ext_resource type="Texture2D" uid="uid://bccqe3io1orow" path="res://icons/award-solid.svg" id="41_offx2"]
 [ext_resource type="Script" path="res://scripts/costmetic_row.gd" id="41_pook7"]
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="42_c1jtf"]
 [ext_resource type="Texture2D" uid="uid://d84hj0mtn2hw" path="res://icons/status/mood_24dp_FILL1_wght300_GRAD0_opsz24.svg" id="43_qa2jm"]
@@ -1036,6 +1037,16 @@ layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
+[node name="SettingBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("33_1qhmu")
+icon = ExtResource("40_j1ufi")
+icon_alignment = 1
+expand_icon = true
+
 [node name="CreaturesBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
@@ -1045,13 +1056,13 @@ theme = ExtResource("33_1qhmu")
 icon = ExtResource("39_j7m1h")
 icon_alignment = 1
 
-[node name="SettingBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="AchievementsBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("33_1qhmu")
-icon = ExtResource("40_j1ufi")
+icon = ExtResource("41_offx2")
 icon_alignment = 1
 expand_icon = true
 
@@ -1115,6 +1126,69 @@ theme_manager = NodePath("../../../../../../../../../UI_Theme_Manager")
 position = Vector2(-50, -130)
 
 [node name="Back" type="Button" parent="UI/OptionsMenu/ThemeMenu/SaveButtons"]
+texture_filter = 5
+custom_minimum_size = Vector2(100, 40)
+offset_left = 73.0
+offset_top = 513.0
+offset_right = 173.0
+offset_bottom = 553.0
+scale = Vector2(0.75, 0.75)
+theme = ExtResource("33_1qhmu")
+theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
+theme_override_font_sizes/font_size = 18
+text = "Back"
+script = ExtResource("35_4io20")
+
+[node name="AchievementMenu" type="PanelContainer" parent="UI/OptionsMenu"]
+unique_name_in_owner = true
+process_mode = 3
+material = SubResource("ShaderMaterial_gyxpl")
+layout_mode = 2
+script = ExtResource("32_jvqx8")
+metadata/_edit_lock_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/AchievementMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/AchievementMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Button" type="Button" parent="UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("45_e031c")
+text = "Achievements"
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("45_u3p17")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer/PanelContainer"]
+custom_minimum_size = Vector2(0, 296)
+layout_mode = 2
+theme = ExtResource("49_mgl65")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="Achievements" type="GridContainer" parent="UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 2
+
+[node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/AchievementMenu"]
+position = Vector2(-50, -130)
+
+[node name="Back" type="Button" parent="UI/OptionsMenu/AchievementMenu/SaveButtons"]
 texture_filter = 5
 custom_minimum_size = Vector2(100, 40)
 offset_left = 73.0
@@ -1220,6 +1294,7 @@ script = ExtResource("35_4io20")
 [node name="CosmeticsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 material = SubResource("ShaderMaterial_357to")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -2178,11 +2253,13 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/ThemeBtn" to="UI/OptionsMenu" method="_on_theme_btn_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/FactBtn" to="UI/OptionsMenu" method="_on_fact_btn_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/AmbienceBtn" to="UI/OptionsMenu" method="_on_ambience_btn_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/MarginContainer/HBoxContainer/CreaturesBtn" to="UI/OptionsMenu" method="_on_creatures_btn_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/MarginContainer/HBoxContainer/SettingBtn" to="UI/OptionsMenu" method="_on_settings_btn_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/MarginContainer/HBoxContainer/CreaturesBtn" to="UI/OptionsMenu" method="_on_creatures_btn_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/MarginContainer/HBoxContainer/AchievementsBtn" to="UI/OptionsMenu" method="_on_achievements_btn_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/MarginContainer/HBoxContainer/MainMenuBtn" to="UI/OptionsMenu/MainOptMenu/VBoxContainer/MarginContainer/HBoxContainer/MainMenuBtn" method="_on_button_down"]
 [connection signal="visibility_changed" from="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/ThemeBtns" to="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/ThemeBtns" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/OptionsMenu/ThemeMenu/SaveButtons/Back" to="UI/OptionsMenu/ThemeMenu/SaveButtons/Back" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/AchievementMenu/SaveButtons/Back" to="UI/OptionsMenu/AchievementMenu/SaveButtons/Back" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/FactsMenu/Library/SaveButtons/Back" to="UI/OptionsMenu/FactsMenu/Library/SaveButtons/Back" method="_on_button_down"]
 [connection signal="visibility_changed" from="UI/OptionsMenu/CosmeticsMenu" to="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/CosmeticItems" method="_on_cosmetics_menu_visibility_changed"]
 [connection signal="cosmetic_btn_pressed" from="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/CosmeticItems" to="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/PreviewContainer/CreaturePreview" method="_on_cosmetic_items_cosmetic_btn_pressed"]
