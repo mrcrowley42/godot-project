@@ -5,8 +5,8 @@
 - adult creature lays egg for the first time
 - enter clippy mode for the first time
 - try a disliked food or drink consumable
-- (SECRET) equip max number of cosmetics at once
-- (SECRET) equip max number of ambient sounds at once
+- (SECRET) try to equip more than max number of cosmetics at once
+- (SECRET) try to equip more than max number of ambient sounds at once
 - (SECRET) press 'y' on you keyboard to YIPPEEE
 
 ### Minigames
