@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://cdj0k55cib2kh"]
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://cdj0k55cib2kh"]
 
 [ext_resource type="Script" path="res://scripts/base_classses/achievement.gd" id="1_0bfb6"]
+[ext_resource type="Texture2D" uid="uid://cr80gpat73og5" path="res://images/achievements/too_loud.png" id="1_ccbja"]
 
 [resource]
 script = ExtResource("1_0bfb6")
@@ -8,3 +9,4 @@ title = "It's getting pretty loud in here!"
 hint = "Try to add too many sounds"
 category = 0
 secret = true
+image = ExtResource("1_ccbja")
