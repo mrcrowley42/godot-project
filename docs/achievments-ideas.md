@@ -16,6 +16,7 @@
 - win x rounds against the creature in spr
 - activate zen mode for the first time
 - (SECRET) acivate zen mode 10 times
+- (SECRET) view the advanced Totris instructions
 
 ### Completionist
 - try every food and drink consumable
