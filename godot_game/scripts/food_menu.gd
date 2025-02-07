@@ -2,9 +2,8 @@ class_name FoodMenu extends ActionMenu
 
 @export var nav_arrows: NavigationArrows;
 @export var food_menu_open_button: TextureButton
+@export var food_screens: HBoxContainer
 
-
-@onready var food_screens: HBoxContainer = find_child("FoodScreens")
 var example_screen: MarginContainer
 
 const STRING_UNKNOWN = "amount: ???"
@@ -24,7 +23,7 @@ var btns_on_cooldown : Dictionary = {}  # keu: uid, value: time_started
 
 func _ready() -> void:
 	super._ready()  # do last
-	var ex = find_child("ExampleScreen")
+	var ex = find_child("ExampleScreen", true)
 	example_screen = ex.duplicate()
 	ex.queue_free()
 	

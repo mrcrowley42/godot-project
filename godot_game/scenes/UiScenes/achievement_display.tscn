@@ -23,3 +23,5 @@ expand_icon = true
 script = ExtResource("1_g1srg")
 style = 2
 direction = 3
+tooltip_scale = 0.8
+margin = 5

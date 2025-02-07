@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://bjthhukrnp7lf"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/achievement.gd" id="1_natnp"]
+
+[resource]
+script = ExtResource("1_natnp")
+title = "A worthy title for a silly creature"
+hint = "Edit your creatures name"
+category = 0
+secret = false

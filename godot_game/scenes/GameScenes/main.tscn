@@ -580,7 +580,7 @@ texture = ExtResource("14_k2ios")
 [node name="MinigameLayer" type="CanvasLayer" parent="UI"]
 layer = 5
 
-[node name="FoodMenu" type="PanelContainer" parent="UI" node_paths=PackedStringArray("nav_arrows", "food_menu_open_button")]
+[node name="FoodMenu" type="PanelContainer" parent="UI" node_paths=PackedStringArray("nav_arrows", "food_menu_open_button", "food_screens")]
 visible = false
 custom_minimum_size = Vector2(400, 400)
 anchors_preset = 4
@@ -588,7 +588,7 @@ anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 70.0
 offset_top = -200.0
-offset_right = 1270.0
+offset_right = 870.0
 offset_bottom = 200.0
 grow_vertical = 2
 mouse_filter = 1
@@ -596,6 +596,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_xvtbm")
 script = ExtResource("21_aqbs2")
 nav_arrows = NodePath("NavigationArrows")
 food_menu_open_button = NodePath("../NavigationButtons/FoodButton")
+food_screens = NodePath("Container/FoodScreens")
 
 [node name="Background" type="PanelContainer" parent="UI/FoodMenu"]
 custom_minimum_size = Vector2(400, 400)
@@ -604,29 +605,37 @@ size_flags_horizontal = 0
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_k7dc5")
 
-[node name="FoodScreens" type="HBoxContainer" parent="UI/FoodMenu"]
+[node name="Container" type="Control" parent="UI/FoodMenu"]
+clip_contents = true
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="FoodScreens" type="HBoxContainer" parent="UI/FoodMenu/Container"]
+layout_mode = 2
+offset_right = 800.0
+offset_bottom = 400.0
 theme_override_constants/separation = 0
 
-[node name="ExampleScreen" type="MarginContainer" parent="UI/FoodMenu/FoodScreens"]
+[node name="ExampleScreen" type="MarginContainer" parent="UI/FoodMenu/Container/FoodScreens"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/FoodMenu/FoodScreens/ExampleScreen"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/FoodMenu/Container/FoodScreens/ExampleScreen"]
 custom_minimum_size = Vector2(360, 360)
 layout_mode = 2
 
-[node name="FoodCont" type="GridContainer" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer"]
+[node name="FoodCont" type="GridContainer" parent="UI/FoodMenu/Container/FoodScreens/ExampleScreen/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 2
 
-[node name="FoodBtn" type="Button" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer/FoodCont"]
+[node name="FoodBtn" type="Button" parent="UI/FoodMenu/Container/FoodScreens/ExampleScreen/VBoxContainer/FoodCont"]
 texture_filter = 1
 custom_minimum_size = Vector2(170, 60)
 layout_mode = 2
@@ -640,21 +649,21 @@ script = ExtResource("18_2njxs")
 style = 2
 direction = 3
 
-[node name="Sprite2D" type="Sprite2D" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer/FoodCont/FoodBtn"]
+[node name="Sprite2D" type="Sprite2D" parent="UI/FoodMenu/Container/FoodScreens/ExampleScreen/VBoxContainer/FoodCont/FoodBtn"]
 visible = false
 modulate = Color(1, 1, 0.364706, 1)
 position = Vector2(6, 6)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("24_vdri4")
 
-[node name="Sprite2D2" type="Sprite2D" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer/FoodCont/FoodBtn"]
+[node name="Sprite2D2" type="Sprite2D" parent="UI/FoodMenu/Container/FoodScreens/ExampleScreen/VBoxContainer/FoodCont/FoodBtn"]
 visible = false
 modulate = Color(1, 0.38, 0.38, 1)
 position = Vector2(6, 6)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("25_t2eb7")
 
-[node name="Button" type="Button" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer/FoodCont/FoodBtn"]
+[node name="Button" type="Button" parent="UI/FoodMenu/Container/FoodScreens/ExampleScreen/VBoxContainer/FoodCont/FoodBtn"]
 show_behind_parent = true
 custom_minimum_size = Vector2(170, 60)
 layout_mode = 0
@@ -662,14 +671,14 @@ offset_right = 8.0
 offset_bottom = 8.0
 mouse_filter = 2
 
-[node name="DrinkCont" type="GridContainer" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer"]
+[node name="DrinkCont" type="GridContainer" parent="UI/FoodMenu/Container/FoodScreens/ExampleScreen/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 2
 
-[node name="DrinkBtn" type="Button" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer/DrinkCont"]
+[node name="DrinkBtn" type="Button" parent="UI/FoodMenu/Container/FoodScreens/ExampleScreen/VBoxContainer/DrinkCont"]
 texture_filter = 1
 custom_minimum_size = Vector2(170, 60)
 layout_mode = 2
@@ -683,21 +692,21 @@ script = ExtResource("18_2njxs")
 style = 2
 direction = 3
 
-[node name="Sprite2D" type="Sprite2D" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer/DrinkCont/DrinkBtn"]
+[node name="Sprite2D" type="Sprite2D" parent="UI/FoodMenu/Container/FoodScreens/ExampleScreen/VBoxContainer/DrinkCont/DrinkBtn"]
 visible = false
 modulate = Color(1, 1, 0.364706, 1)
 position = Vector2(6, 6)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("24_vdri4")
 
-[node name="Sprite2D2" type="Sprite2D" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer/DrinkCont/DrinkBtn"]
+[node name="Sprite2D2" type="Sprite2D" parent="UI/FoodMenu/Container/FoodScreens/ExampleScreen/VBoxContainer/DrinkCont/DrinkBtn"]
 visible = false
 modulate = Color(1, 0.38, 0.38, 1)
 position = Vector2(6, 6)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("25_t2eb7")
 
-[node name="Button" type="Button" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer/DrinkCont/DrinkBtn"]
+[node name="Button" type="Button" parent="UI/FoodMenu/Container/FoodScreens/ExampleScreen/VBoxContainer/DrinkCont/DrinkBtn"]
 show_behind_parent = true
 custom_minimum_size = Vector2(170, 60)
 layout_mode = 0
@@ -707,7 +716,7 @@ mouse_filter = 2
 
 [node name="NavigationArrows" type="Node2D" parent="UI/FoodMenu" node_paths=PackedStringArray("target_menu", "left_arrow", "right_arrow")]
 script = ExtResource("27_imll8")
-target_menu = NodePath("../FoodScreens")
+target_menu = NodePath("../Container/FoodScreens")
 left_arrow = NodePath("LeftArrow")
 right_arrow = NodePath("RightArrow")
 
@@ -771,25 +780,33 @@ layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_k7dc5")
 
-[node name="ActivityContent" type="HBoxContainer" parent="UI/ActivityMenu"]
+[node name="Container" type="Control" parent="UI/ActivityMenu"]
+clip_contents = true
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="ActivityContent" type="HBoxContainer" parent="UI/ActivityMenu/Container"]
+layout_mode = 2
+offset_right = 800.0
+offset_bottom = 400.0
 theme_override_constants/separation = 0
 
-[node name="Screen1" type="MarginContainer" parent="UI/ActivityMenu/ActivityContent"]
+[node name="Screen1" type="MarginContainer" parent="UI/ActivityMenu/Container/ActivityContent"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="GridContainer" type="GridContainer" parent="UI/ActivityMenu/ActivityContent/Screen1"]
+[node name="GridContainer" type="GridContainer" parent="UI/ActivityMenu/Container/ActivityContent/Screen1"]
 custom_minimum_size = Vector2(360, 360)
 layout_mode = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 2
 
-[node name="ScissorsPaperRock" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen1/GridContainer"]
+[node name="ScissorsPaperRock" type="Button" parent="UI/ActivityMenu/Container/ActivityContent/Screen1/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -798,7 +815,7 @@ icon = ExtResource("26_0ku4r")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Totris" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen1/GridContainer"]
+[node name="Totris" type="Button" parent="UI/ActivityMenu/Container/ActivityContent/Screen1/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -808,7 +825,7 @@ icon = ExtResource("27_2hcht")
 icon_alignment = 1
 expand_icon = true
 
-[node name="ZenMode" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen1/GridContainer"]
+[node name="ZenMode" type="Button" parent="UI/ActivityMenu/Container/ActivityContent/Screen1/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -818,133 +835,19 @@ icon = ExtResource("28_ys116")
 icon_alignment = 1
 expand_icon = true
 
-[node name="MemoryGame" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen1/GridContainer"]
+[node name="MemoryGame" type="Button" parent="UI/ActivityMenu/Container/ActivityContent/Screen1/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("18_v1mb2")
 theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
-icon = ExtResource("29_lofmd")
-icon_alignment = 1
-expand_icon = true
-
-[node name="Screen2" type="MarginContainer" parent="UI/ActivityMenu/ActivityContent"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="GridContainer" type="GridContainer" parent="UI/ActivityMenu/ActivityContent/Screen2"]
-custom_minimum_size = Vector2(360, 360)
-layout_mode = 2
-theme_override_constants/h_separation = 20
-theme_override_constants/v_separation = 20
-columns = 2
-
-[node name="ScissorsPaperRock" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen2/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("18_v1mb2")
-text = "MENU 2"
-icon = ExtResource("26_0ku4r")
-icon_alignment = 1
-expand_icon = true
-
-[node name="Tetris" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen2/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("18_v1mb2")
-theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
-text = "MENU 2"
-icon = ExtResource("27_2hcht")
-icon_alignment = 1
-expand_icon = true
-
-[node name="ZenMode" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen2/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("18_v1mb2")
-theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
-text = "MENU 2"
-icon = ExtResource("28_ys116")
-icon_alignment = 1
-expand_icon = true
-
-[node name="MemoryGame" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen2/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("18_v1mb2")
-theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
-text = "MENU 2"
-icon = ExtResource("29_lofmd")
-icon_alignment = 1
-expand_icon = true
-
-[node name="Screen3" type="MarginContainer" parent="UI/ActivityMenu/ActivityContent"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="GridContainer" type="GridContainer" parent="UI/ActivityMenu/ActivityContent/Screen3"]
-custom_minimum_size = Vector2(360, 360)
-layout_mode = 2
-theme_override_constants/h_separation = 20
-theme_override_constants/v_separation = 20
-columns = 2
-
-[node name="ScissorsPaperRock" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen3/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("18_v1mb2")
-text = "MENU 3"
-icon = ExtResource("26_0ku4r")
-icon_alignment = 1
-expand_icon = true
-
-[node name="Tetris" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen3/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("18_v1mb2")
-theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
-text = "MENU 3"
-icon = ExtResource("27_2hcht")
-icon_alignment = 1
-expand_icon = true
-
-[node name="ZenMode" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen3/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("18_v1mb2")
-theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
-text = "MENU 3"
-icon = ExtResource("28_ys116")
-icon_alignment = 1
-expand_icon = true
-
-[node name="MemoryGame" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen3/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("18_v1mb2")
-theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
-text = "MENU 3"
 icon = ExtResource("29_lofmd")
 icon_alignment = 1
 expand_icon = true
 
 [node name="NavigationArrows" type="Node2D" parent="UI/ActivityMenu" node_paths=PackedStringArray("target_menu", "left_arrow", "right_arrow")]
 script = ExtResource("27_imll8")
-target_menu = NodePath("../ActivityContent")
+target_menu = NodePath("../Container/ActivityContent")
 left_arrow = NodePath("LeftArrow")
 right_arrow = NodePath("RightArrow")
 
@@ -2292,16 +2195,10 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/FoodMenu/NavigationArrows/LeftArrow" to="UI/FoodMenu/NavigationArrows" method="_on_left_arrow_button_down"]
 [connection signal="button_down" from="UI/FoodMenu/NavigationArrows/RightArrow" to="UI/FoodMenu/NavigationArrows" method="_on_right_arrow_button_down"]
 [connection signal="visibility_changed" from="UI/ActivityMenu" to="UI/ActivityMenu" method="_on_visibility_changed"]
-[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen1/GridContainer/ScissorsPaperRock" to="MinigameManager" method="_on_scissors_paper_rock_button_down"]
-[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen1/GridContainer/Totris" to="MinigameManager" method="_on_totris_button_down"]
-[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen1/GridContainer/ZenMode" to="MinigameManager" method="_on_zen_mode_button_down"]
-[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen1/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
-[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen2/GridContainer/ScissorsPaperRock" to="MinigameManager" method="_on_scissors_paper_rock_button_down"]
-[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen2/GridContainer/ZenMode" to="MinigameManager" method="_on_zen_mode_button_down"]
-[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen2/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
-[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen3/GridContainer/ScissorsPaperRock" to="MinigameManager" method="_on_scissors_paper_rock_button_down"]
-[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen3/GridContainer/ZenMode" to="MinigameManager" method="_on_zen_mode_button_down"]
-[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen3/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
+[connection signal="button_down" from="UI/ActivityMenu/Container/ActivityContent/Screen1/GridContainer/ScissorsPaperRock" to="MinigameManager" method="_on_scissors_paper_rock_button_down"]
+[connection signal="button_down" from="UI/ActivityMenu/Container/ActivityContent/Screen1/GridContainer/Totris" to="MinigameManager" method="_on_totris_button_down"]
+[connection signal="button_down" from="UI/ActivityMenu/Container/ActivityContent/Screen1/GridContainer/ZenMode" to="MinigameManager" method="_on_zen_mode_button_down"]
+[connection signal="button_down" from="UI/ActivityMenu/Container/ActivityContent/Screen1/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
 [connection signal="visibility_changed" from="UI/ActivityMenu/NavigationArrows" to="UI/ActivityMenu/NavigationArrows" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/ActivityMenu/NavigationArrows/LeftArrow" to="UI/ActivityMenu/NavigationArrows" method="_on_left_arrow_button_down"]
 [connection signal="button_down" from="UI/ActivityMenu/NavigationArrows/RightArrow" to="UI/ActivityMenu/NavigationArrows" method="_on_right_arrow_button_down"]
