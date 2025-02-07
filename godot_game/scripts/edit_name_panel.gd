@@ -10,17 +10,20 @@ func _ready() -> void:
 
 
 func _on_edit_creature_name_button_down() -> void:
+	%BtnClick.play()
 	show()
 	cosmetics_grid.hide()
 	line_edit.text = DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_NAME)
 
 
 func _on_cancel_edit_btn_button_down() -> void:
+	%BtnClick.play()
 	hide()
 	cosmetics_grid.show()
 
 
 func _on_accept_edit_btn_button_down() -> void:
+	%BtnClick.play()
 	hide()
 	cosmetics_grid.show()
 	var new_name = line_edit.text
