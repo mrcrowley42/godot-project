@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://cv3y1fgm6b8mh"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/achievement.gd" id="1_72q6w"]
+
+[resource]
+script = ExtResource("1_72q6w")
+title = "A legally distinct, very original game"
+hint = "Get a score of over 10,000 in Totris"
+category = 1
+secret = false

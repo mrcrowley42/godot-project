@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://cdj0k55cib2kh"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/achievement.gd" id="1_0bfb6"]
+
+[resource]
+script = ExtResource("1_0bfb6")
+title = "It's getting pretty loud in here!"
+hint = "Try to add too many sounds"
+category = 0
+secret = true

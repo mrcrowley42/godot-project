@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://bn0aiwenfqyqr"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/achievement.gd" id="1_mlpou"]
+
+[resource]
+script = ExtResource("1_mlpou")
+title = "Overencumbered (but at least it looks pretty)"
+hint = "Try to equip too many cosmetics"
+category = 0
+secret = true

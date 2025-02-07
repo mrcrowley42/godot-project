@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://da2xqjfjux8al"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/achievement.gd" id="1_edpna"]
+
+[resource]
+script = ExtResource("1_edpna")
+title = "And so the cycle continues"
+hint = "Witness the laying of an egg"
+category = 0
+secret = false

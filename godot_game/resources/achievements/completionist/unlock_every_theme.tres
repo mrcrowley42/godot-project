@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://c4mntr3wby53m"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/achievement.gd" id="1_5dmwx"]
+
+[resource]
+script = ExtResource("1_5dmwx")
+title = "A theme for every occasion"
+hint = "Unlock every theme"
+category = 2
+secret = false

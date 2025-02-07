@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://bj8wncd0yrjg7"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/achievement.gd" id="1_wpfjh"]
+
+[resource]
+script = ExtResource("1_wpfjh")
+title = "How chill does it need to be?"
+hint = "Enter zen mode 10 times"
+category = 1
+secret = true

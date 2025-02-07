@@ -1,7 +1,7 @@
 extends GridContainer
 
 const BTN_SIZE: Vector2 = Vector2(172, 80)
-@export var theme_manager: Node
+@export var theme_manager: UiThemeManager
 const btn_theme_group = preload("res://resources/theme_btn_group.tres")
 const btn_theme = preload("res://themes/cosmetic_btn_theme.tres")
 

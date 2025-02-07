@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://c1t6gsmcergkh"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/achievement.gd" id="1_6hgqp"]
+
+[resource]
+script = ExtResource("1_6hgqp")
+title = "It's just standing there... cutely!"
+hint = "Enter clippy mode"
+category = 0
+secret = false

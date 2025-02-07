@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://biyy1c18yheiy"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/achievement.gd" id="1_u8ptr"]
+
+[resource]
+script = ExtResource("1_u8ptr")
+title = "I need to go HOW FAST?!"
+hint = "Finish Memory Match in under 30 seconds"
+category = 1
+secret = false

@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://6o8rue2hoclc"]
+
+[ext_resource type="Script" path="res://scripts/utility/custom_tooltip_script.gd" id="1_g1srg"]
+[ext_resource type="Script" path="res://scripts/achievement_display.gd" id="1_h6i5m"]
+[ext_resource type="Theme" uid="uid://kpqilwsnepqa" path="res://themes/nothing.tres" id="1_skprk"]
+[ext_resource type="Texture2D" uid="uid://tvwjgl76m8fx" path="res://images/unknown.png" id="2_do6sk"]
+
+[node name="AchievementDisplay" type="PanelContainer"]
+custom_minimum_size = Vector2(100, 100)
+offset_right = 100.0
+offset_bottom = 100.0
+mouse_filter = 1
+theme = ExtResource("1_skprk")
+script = ExtResource("1_h6i5m")
+
+[node name="CustomTooltipButton" type="Button" parent="."]
+texture_filter = 1
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+icon = ExtResource("2_do6sk")
+flat = true
+expand_icon = true
+script = ExtResource("1_g1srg")
+style = 2
+direction = 3

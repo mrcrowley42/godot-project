@@ -1,4 +1,4 @@
-[gd_scene load_steps=129 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=131 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
@@ -54,7 +54,7 @@
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="42_c1jtf"]
 [ext_resource type="Texture2D" uid="uid://d84hj0mtn2hw" path="res://icons/status/mood_24dp_FILL1_wght300_GRAD0_opsz24.svg" id="43_qa2jm"]
 [ext_resource type="Script" path="res://scripts/fact_progress_label.gd" id="44_t23g2"]
-[ext_resource type="PackedScene" uid="uid://dyapnl5xgvivn" path="res://scenes/UiScenes/topic_btn.tscn" id="44_y5a0d"]
+[ext_resource type="PackedScene" uid="uid://b78cwi88kdrvf" path="res://scenes/UiScenes/topic_btn.tscn" id="44_y5a0d"]
 [ext_resource type="Texture2D" uid="uid://p0oo42fr5wrp" path="res://icons/status/lunch_dining_24dp_8B1A10_FILL0_wght500_GRAD0_opsz24-svg.svg" id="45_3duvs"]
 [ext_resource type="Shader" path="res://shaders/pattern_checker.gdshader" id="45_bgevw"]
 [ext_resource type="Theme" uid="uid://x6rgwcyh7bnk" path="res://themes/menu_title.tres" id="45_e031c"]
@@ -66,6 +66,7 @@
 [ext_resource type="Script" path="res://scripts/cosmetics_preview.gd" id="49_p7hc5"]
 [ext_resource type="Script" path="res://scripts/fact_list_builder.gd" id="49_wkh8q"]
 [ext_resource type="Script" path="res://scripts/nav_button.gd" id="50_0qet7"]
+[ext_resource type="Script" path="res://scripts/achievements_menu.gd" id="50_3cyms"]
 [ext_resource type="Shader" path="res://shaders/pattern_lines.gdshader" id="50_tajtf"]
 [ext_resource type="Texture2D" uid="uid://drv50ynifh37j" path="res://UI stuff/Green Palette/green_activities_button.png" id="51_7kyvm"]
 [ext_resource type="Script" path="res://scripts/creature_menu.gd" id="51_hdtdw"]
@@ -225,6 +226,19 @@ shader_parameter/one_opacity = 0.1
 shader_parameter/two_col = Color(0.101961, 0.0196078, 0.219608, 1)
 shader_parameter/two_speed = 0.02
 shader_parameter/two_opacity = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_php73"]
+shader = ExtResource("50_tajtf")
+shader_parameter/bg_col = Color(2.03052e-08, 0.0196325, 0.0164242, 1)
+shader_parameter/rotation = 90.0
+shader_parameter/double = false
+shader_parameter/size = 6.0
+shader_parameter/one_col = Color(1.50409e-08, 0.0563218, 0.0379652, 1)
+shader_parameter/one_speed = 0.02
+shader_parameter/one_opacity = 0.2
+shader_parameter/two_col = Color(0, 0.0558821, 0.0418313, 1)
+shader_parameter/two_speed = 0.02
+shader_parameter/two_opacity = 0.2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kjclt"]
 shader = ExtResource("57_qy3v8")
@@ -1142,17 +1156,21 @@ script = ExtResource("35_4io20")
 [node name="AchievementMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-material = SubResource("ShaderMaterial_gyxpl")
+material = SubResource("ShaderMaterial_php73")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
 metadata/_edit_lock_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/AchievementMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/AchievementMenu" node_paths=PackedStringArray("general_grid", "minigame_grid", "completionist_grid")]
 layout_mode = 2
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 16
+script = ExtResource("50_3cyms")
+general_grid = NodePath("VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/VBoxContainer/GeneralAcvmnt")
+minigame_grid = NodePath("VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/VBoxContainer/MinigameAcvmnt")
+completionist_grid = NodePath("VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/VBoxContainer/CompletionistAcvmnt")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/AchievementMenu/MarginContainer"]
 layout_mode = 2
@@ -1174,16 +1192,54 @@ theme = ExtResource("49_mgl65")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="Achievements" type="GridContainer" parent="UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label3" type="Label" parent="UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "-- General --"
+horizontal_alignment = 1
+
+[node name="GeneralAcvmnt" type="GridContainer" parent="UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
 theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 12
-columns = 2
+columns = 3
+
+[node name="Label" type="Label" parent="UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "-- Minigame --"
+horizontal_alignment = 1
+
+[node name="MinigameAcvmnt" type="GridContainer" parent="UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 3
+
+[node name="Label2" type="Label" parent="UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "-- Completionist --"
+horizontal_alignment = 1
+
+[node name="CompletionistAcvmnt" type="GridContainer" parent="UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 3
 
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/AchievementMenu"]
 position = Vector2(-50, -130)
