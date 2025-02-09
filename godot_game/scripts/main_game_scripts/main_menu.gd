@@ -36,6 +36,7 @@ func _ready() -> void:
 		#new_game_btn.hide()
 	Globals.first_launch = false
 	do_opening_trans()
+	%Music.play()
 
 
 func grab_saves():

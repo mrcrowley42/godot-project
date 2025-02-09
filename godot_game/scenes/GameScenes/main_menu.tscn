@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://ig0eoqdfq5nr"]
+[gd_scene load_steps=25 format=3 uid="uid://ig0eoqdfq5nr"]
 
 [ext_resource type="Script" path="res://scripts/main_game_scripts/main_menu.gd" id="1_lpoqi"]
 [ext_resource type="Shader" path="res://shaders/pattern_lines.gdshader" id="2_f1u7v"]
@@ -18,6 +18,15 @@
 [ext_resource type="AudioStream" uid="uid://bc4fnsjag56a3" path="res://music/Moa's Song - Aether OST (Emile van Krieken).mp3" id="12_xt2xn"]
 [ext_resource type="PackedScene" uid="uid://cbn0dv1k0onpb" path="res://scenes/UiScenes/vol_slider.tscn" id="13_4qvf0"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="15_qcaiy"]
+
+[sub_resource type="Curve" id="Curve_ryjxj"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.709302, 0.774943), -0.848899, -0.848899, 0, 0, Vector2(1, 0), -6.11725, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_kfgur"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.14539, 0.326241, 0.549645, 0.716312, 0.858156)
+colors = PackedColorArray(0.242658, 0.313261, 0.91106, 1, 0.578118, 0.0510235, 0.834409, 1, 0.767778, 0.115273, 0.279381, 1, 0.883269, 0.43355, 1.15514e-06, 1, 0.877617, 0.676908, 0.0166432, 1, 0.28429, 0.682076, 0.0296636, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gpy1m"]
 shader = ExtResource("2_f1u7v")
@@ -86,8 +95,20 @@ grow_vertical = 0
 texture = ExtResource("3_kva7r")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-position = Vector2(0, -20)
-scale = Vector2(1e-05, 1e-05)
+modulate = Color(1, 1, 1, 0.541176)
+position = Vector2(268, -31)
+amount = 30
+lifetime = 8.0
+preprocess = 10.0
+emission_shape = 3
+emission_rect_extents = Vector2(280, 1)
+gravity = Vector2(0, 20)
+angular_velocity_min = -200.0
+angular_velocity_max = 200.0
+scale_amount_min = 10.0
+scale_amount_max = 30.0
+scale_amount_curve = SubResource("Curve_ryjxj")
+color_initial_ramp = SubResource("Gradient_kfgur")
 
 [node name="BGShader" type="CanvasGroup" parent="."]
 self_modulate = Color(1, 1, 1, 0.623529)
@@ -235,6 +256,7 @@ theme_override_font_sizes/font_size = 18
 text = "Load"
 
 [node name="SettingsMenu" type="MarginContainer" parent="."]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -504,7 +526,6 @@ bus = &"SFX"
 [node name="Music" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("12_xt2xn")
-autoplay = true
 
 [connection signal="button_down" from="MenuList/MarginContainer/VBoxContainer/NewGameBtn" to="." method="_on_new_game_btn_button_down"]
 [connection signal="button_down" from="MenuList/MarginContainer/VBoxContainer/ContinueBtn" to="." method="_on_continue_btn_button_down"]
