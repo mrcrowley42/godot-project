@@ -15,7 +15,7 @@ var is_in_transition: bool = false;
 
 func _ready():
 	print("--- RUNNING MAIN.GD IN %s MODE! ---" % "DEBUG" if debug_mode else "NORMAL")
-	
+
 	if unlock_fps:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 
@@ -28,20 +28,22 @@ func _ready():
 	DataGlobals.load_data()
 	DataGlobals.load_creature_data()
 	DataGlobals.load_settings_data()
-	calc_elapsed_time()
+	var elapsed_time = calc_elapsed_time()
+	apply_time_away_effect(elapsed_time)
+	
 
 	# Disable the script execution when the panel is disabled/hidden.
 	debug_window.visible = debug_mode
 	if not debug_mode:
 		debug_window.process_mode = Node.PROCESS_MODE_DISABLED
-	
+
 	# force this function to run since load() wasn't called
 	if DataGlobals.has_only_creature_metadata():
 		%Creature.setup_creature()
 		%Creature.reset_stats()
-	
+
 	Globals.send_notification(Globals.NOTIFICATION_ALL_DATA_IS_LOADED)
-	
+
 	# do last
 	set_is_in_trans(true)
 	do_opening_trans()
@@ -54,11 +56,16 @@ func set_is_in_trans(value: bool):
 	is_in_transition = value
 
 ## debug prints
-func calc_elapsed_time():
-	var elapsed_time = launch_time - DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_LAST_SAVED)
-	if debug_mode:
-		var vars = [elapsed_time, elapsed_time/86400, "were" if stat_man.holiday_mode else "were not"]
-		print("%.2f seconds (%.2f days) since last played. You %s on holiday" % vars)
+func calc_elapsed_time() -> float:
+	if Globals.first_launch:
+		var elapsed_time = launch_time - DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_LAST_SAVED)
+		if debug_mode:
+			var vars = [elapsed_time, elapsed_time/86400, "were" if stat_man.holiday_mode else "were not"]
+			print("%.2f seconds (%.2f days) since last played. You %s on holiday" % vars)
+		
+		return elapsed_time
+
+	return 0
 
 
 ## finilise & save data before closure
@@ -76,7 +83,7 @@ func _notification(noti):
 		else:
 			print("closing game from main game...")
 		return
-	
+
 	# grow up
 	if noti == Globals.NOFITICATION_GROW_TO_ADULT_SCENE and not is_in_transition:
 		if not is_in_transition:
@@ -92,8 +99,38 @@ func _input(event) -> void:
 	if debug_mode and event.is_action_pressed("ui_cancel"):
 		Globals.send_notification(NOTIFICATION_WM_CLOSE_REQUEST)
 		get_tree().quit()
-	
+
 	## fire confetti
 	if debug_mode and (event is InputEventKey) and event.pressed:
 		if event.keycode == KEY_Y:
 			Globals.fire_confetti(self)
+
+
+## Give bonus for XP until neglect threshold then start draining stats
+## bonus and drain are both disabled in holiday mode.
+func apply_time_away_effect(time_away: float):
+	if not Globals.first_launch:
+		return
+	
+	if stat_man.holiday_mode:
+		Globals.first_launch = false
+		return
+
+	var days_elapsed = time_away / 86400
+	
+	if time_away > 10:
+		apply_neglect(3)
+	else:
+		apply_bonus_xp(3)
+	
+	
+	Globals.first_launch = false
+
+func apply_neglect(amount:float):
+	print("oh no how could you")
+	pass
+	
+
+func apply_bonus_xp(amount:float):
+	print("yay bonus xp")
+	pass

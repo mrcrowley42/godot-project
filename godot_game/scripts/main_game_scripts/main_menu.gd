@@ -24,7 +24,6 @@ func _ready() -> void:
 		auto_continue = user_cfg['general'].get('skip_intro', false)
 
 	if auto_continue and Globals.first_launch:
-		Globals.first_launch = false
 		Globals.change_to_scene("res://scenes/GameScenes/main.tscn")
 		return
 	DataGlobals.load_data()
@@ -34,7 +33,7 @@ func _ready() -> void:
 	# if save file
 	#if DataGlobals.get_global_metadata_value(DataGlobals.CURRENT_CREATURE) in DataGlobals.get_all_creature_ids():
 		#new_game_btn.hide()
-	Globals.first_launch = false
+	#Globals.first_launch = false
 	do_opening_trans()
 	%Music.play()
 
