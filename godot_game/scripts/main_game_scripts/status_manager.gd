@@ -18,6 +18,8 @@ class_name StatusManager extends ScriptNode
 @export var neglect_penalty_multiplier: float = 1.0
 @export var bonus_xp_multiplier: float = 100
 @export var bonus_xp_round_to: float = 0.1
+## Stats won't drain past this percentage of the stat's max value 
+@export var neglect_limit: float = .05
 
 signal finished_loading()
 

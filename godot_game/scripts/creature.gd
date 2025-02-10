@@ -66,6 +66,12 @@ var stats_dmg: Dictionary = {Stat.HP: damage_hp, Stat.FUN: damage_fun,
 ## Map of shorthand strings to corresponding heal function
 var stats_heal: Dictionary = {Stat.HP: add_hp, Stat.FUN: add_fun,
 	Stat.WATER: add_water, Stat.FOOD: add_food}
+	
+var stats_val: Dictionary = {Stat.HP: 'hp', Stat.FUN: 'fun',
+	Stat.WATER: 'water', Stat.FOOD: 'food'}
+
+var stats_max: Dictionary = {Stat.HP: 'max_hp', Stat.FUN: 'max_fun',
+	Stat.WATER: 'max_water', Stat.FOOD: 'max_food'}
 
 func setup_creature():
 	og_pos = position
@@ -379,3 +385,14 @@ func load(data) -> void:
 
 	apply_dmg_tint()
 	setup_creature()  # do last
+
+func get_stat(stat: String) -> float:
+	var stat_enum = Stat[stat]
+	var stat_key = stats_val[stat_enum]
+	return self[stat_key]
+
+func get_stat_max(stat: String) -> float:
+	var stat_enum = Stat[stat]
+	var stat_key = stats_max[stat_enum]
+	return self[stat_key]
+	

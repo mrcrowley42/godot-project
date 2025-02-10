@@ -128,11 +128,31 @@ func apply_time_away_effect(time_away: float):
 
 func apply_neglect(amount:float):
 	var penalty = snappedf(amount * stat_man.neglect_penalty_multiplier, 0.1)
-	
-	## TODO PREVENT CREATURE FROM ACTUALLY DYING
-	
+	var stat_limit = stat_man.neglect_limit
+	if penalty <= 0:
+		return
 	for stat in creature.Stat:
+		var current_stat_val = creature.get_stat(stat)
+		var current_stat_max = creature.get_stat_max(stat)
+		# Don't reduce stats if already below limit
+		if (current_stat_max / current_stat_val) <= stat_limit:
+			if debug_mode:
+				print("too low")
+			continue
+			
+		# Set stats to limit if penalty would go below limit.
+		if (current_stat_max / (current_stat_val - penalty)) <= stat_limit:
+			if debug_mode:
+				print("underflow")
+			var new_penalty = current_stat_val - (current_stat_max * stat_limit)
+			if new_penalty <= 0:
+				continue
+			creature.stats_dmg[creature.Stat[stat]].call(new_penalty)
+			continue
+		
 		creature.stats_dmg[creature.Stat[stat]].call(penalty)
+		if debug_mode:
+			print("normal")
 	
 	if debug_mode:
 		print("oh no how could you")
