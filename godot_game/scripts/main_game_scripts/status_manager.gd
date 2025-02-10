@@ -12,6 +12,12 @@ class_name StatusManager extends ScriptNode
 @export var fun_amount: float = 1
 ## Property that scales the damage values of all passive drain timers.
 @export var time_multiplier: float = 0.5
+@export_category("Neglect Properties")
+## Threshold in days for when bonus xp becomes neglect
+@export var neglect_threshold: float = 0.01
+@export var neglect_penalty_multiplier: float = 1.0
+@export var bonus_xp_multiplier: float = 100
+@export var bonus_xp_round_to: float = 0.1
 
 signal finished_loading()
 
