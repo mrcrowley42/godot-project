@@ -160,6 +160,7 @@ func apply_neglect(amount:float):
 
 
 func apply_bonus_xp(amount:float):
+	creature.do_movement(creature.Movement.HAPPY_BOUNCE)
 	var xp_amount = snappedf((amount * stat_man.bonus_xp_multiplier), stat_man.bonus_xp_round_to)
 	creature.add_xp(xp_amount)  ## Round to 1 decimal place.
 	if debug_mode:

@@ -412,7 +412,7 @@ metadata/_edit_horizontal_guides_ = [8.0, 667.0, 112.0, 111.0, 554.0, 562.0]
 unique_name_in_owner = true
 script = ExtResource("2_aqytd")
 food_amount = 4.0
-neglect_threshold = 0.0
+neglect_threshold = 0.02
 neglect_penalty_multiplier = 4000.0
 neglect_limit = 0.1
 
