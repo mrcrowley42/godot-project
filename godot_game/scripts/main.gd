@@ -7,7 +7,7 @@ class_name Game extends Node
 @onready var stat_man: StatusManager = %StatusManager
 @onready var minigame_man: MinigameManager = %MinigameManager
 @onready var debug_window = $DebugWindow
-
+@onready var creature = %Creature
 @onready var ui_overlay: Sprite2D = find_child("UI_Overlay")
 @onready var trans_img: Sprite2D = find_child("Transition")
 
@@ -118,19 +118,30 @@ func apply_time_away_effect(time_away: float):
 
 	var days_elapsed = time_away / 86400
 	
-	if time_away > 10:
-		apply_neglect(3)
+	if days_elapsed >= stat_man.neglect_threshold:
+		apply_neglect(days_elapsed - stat_man.neglect_threshold)
 	else:
-		apply_bonus_xp(3)
-	
+		apply_bonus_xp(days_elapsed)
+
 	
 	Globals.first_launch = false
 
 func apply_neglect(amount:float):
-	print("oh no how could you")
-	pass
+	var penalty = snappedf(amount * stat_man.neglect_penalty_multiplier, 0.1)
 	
+	## TODO PREVENT CREATURE FROM ACTUALLY DYING
+	
+	for stat in creature.Stat:
+		creature.stats_dmg[creature.Stat[stat]].call(penalty)
+	
+	if debug_mode:
+		print("oh no how could you")
+		print(str(penalty))
+
 
 func apply_bonus_xp(amount:float):
-	print("yay bonus xp")
-	pass
+	var xp_amount = snappedf((amount * stat_man.bonus_xp_multiplier), stat_man.bonus_xp_round_to)
+	creature.add_xp(xp_amount)  ## Round to 1 decimal place.
+	if debug_mode:
+		print("added bonus xp")
+		print(str(xp_amount))

@@ -412,6 +412,8 @@ metadata/_edit_horizontal_guides_ = [8.0, 667.0, 112.0, 111.0, 554.0, 562.0]
 unique_name_in_owner = true
 script = ExtResource("2_aqytd")
 food_amount = 4.0
+neglect_threshold = 0.0
+neglect_penalty_multiplier = 4.0
 
 [node name="AmbienceManager" type="Node" parent="." groups=["settings_data"]]
 unique_name_in_owner = true
