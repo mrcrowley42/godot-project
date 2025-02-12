@@ -109,8 +109,10 @@ func _on_settings_btn_button_down() -> void:
 func _on_confirm_wipe_button_down() -> void:
 	var d = DirAccess.open(Globals.SAVE_LOCATION_PREFIX + "://")
 	d.remove(Globals.SAVE_DATA_FILE)
+	for filename: String in d.get_files():
+		if filename.begins_with("save_icon_"):
+			d.remove(filename)
 	get_tree().quit()
-	
 
 
 func _on_cancel_wipe_button_down() -> void:
