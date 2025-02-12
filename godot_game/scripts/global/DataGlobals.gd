@@ -21,6 +21,7 @@ const UNLOCKED_COSMETICS = "unlocked_cosmetics"
 const UNLOCKED_FACTS = "unlocked_facts"
 const UNLOCKED_THEMES = "unlocked_themes"
 const UNLOCKED_ACHIEVEMENTS = "unlocked_achievements"
+const ACHIEVEMENT_PROGRESS = "achievement_progress"
 const MINIGAME_DATA = "minigame_data"
 const ID_INCREMENTAL = "id_incremental"
 
@@ -118,6 +119,7 @@ func get_default_global_metadata() -> Dictionary:
 		UNLOCKED_FACTS: [],
 		UNLOCKED_THEMES: [],
 		UNLOCKED_ACHIEVEMENTS: [],
+		ACHIEVEMENT_PROGRESS: {},
 		MINIGAME_DATA: {},
 		ID_INCREMENTAL: 0
 	}
