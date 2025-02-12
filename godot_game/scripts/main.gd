@@ -1,8 +1,8 @@
 class_name Game extends Node
 
-@export var debug_mode: bool
+#@export var debug_mode: bool
 @export var unlock_fps: bool = false
-
+@onready var debug_mode: bool = OS.is_debug_build()
 @onready var launch_time: float = Time.get_unix_time_from_system()
 @onready var stat_man: StatusManager = %StatusManager
 @onready var minigame_man: MinigameManager = %MinigameManager
