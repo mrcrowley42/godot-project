@@ -5,11 +5,15 @@ const VERSION = "1.0.0"
 const BUILD = "BETA"
 
 # SAVE CONSTANTS
+
+var SAVE_LOCATION_PREFIX = "res" if OS.is_debug_build() else "user"
 const SAVE_DATA_GROUP = "save_data"
-const SAVE_DATA_FILE = "res://save_data.save"
+var SAVE_DATA_FILE = SAVE_LOCATION_PREFIX + "://save_data.save"
 
 const SAVE_SETTINGS_GROUP = "settings_data"
-const SAVE_SETTINGS_FILE = "res://settings.cfg"
+var SAVE_SETTINGS_FILE = SAVE_LOCATION_PREFIX + "://settings.cfg"
+
+var SAVE_ICON_FILE = SAVE_LOCATION_PREFIX + "://save_icon_{}.png"
 
 # SETTINGS SECTIONS
 const DEFAULT_SECTION = "general"

@@ -107,7 +107,7 @@ func _on_settings_btn_button_down() -> void:
 
 
 func _on_confirm_wipe_button_down() -> void:
-	var d = DirAccess.open("res://")
+	var d = DirAccess.open(Globals.SAVE_LOCATION_PREFIX + "://")
 	d.remove(Globals.SAVE_DATA_FILE)
 	get_tree().quit()
 	
