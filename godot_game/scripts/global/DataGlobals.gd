@@ -465,6 +465,7 @@ func load_creature_data(creature_id_override: int = -1):
 ## loads data, and passes it to saved nodes. returns metadata
 func load_data() -> Dictionary:
 	build_save_uid_node_atlas()
+	Helpers.setup_uid_cache()
 
 	if _should_save_global_metadata:
 		printerr("Cannot load global metadata from file as there are unsaved changes to the metadata")
