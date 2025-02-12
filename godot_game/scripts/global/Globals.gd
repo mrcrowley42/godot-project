@@ -49,6 +49,7 @@ signal item_unlocked
 signal cosmetic_unlocked(uid)
 signal theme_unlocked(uid)
 signal fact_unlocked(uid)
+signal achievement_unlocked(uid)
 
 ## save incase we need to kill it for another transition
 var transition_tween: Tween = null
@@ -159,6 +160,19 @@ func unlock_theme(theme: UiTheme) -> void:
 			img.set_pixel(x, y, col)
 	item_unlocked.emit("Theme Unlocked!", ImageTexture.create_from_image(img))
 	theme_unlocked.emit(theme_uid)
+
+## Unlocks the passed resource
+func unlock_achievement(achievement: Achievement) -> void:
+	var achievement_uid = Helpers.uid_str(achievement)
+	var unlocked_achievements = DataGlobals.get_global_metadata_value(DataGlobals.UNLOCKED_ACHIEVEMENTS)
+	if achievement_uid in unlocked_achievements:
+		return
+	
+	DataGlobals.append_to_metadata_value(true, DataGlobals.UNLOCKED_ACHIEVEMENTS, achievement_uid)
+	
+	print("achievement unlocked '%s', uid: '%s'" % [achievement.title, achievement_uid])
+	item_unlocked.emit("Achievement Unlocked!", achievement.image)
+	achievement_unlocked.emit(achievement_uid)
 
 # TODO: really want to refactor these functions into one now...
 

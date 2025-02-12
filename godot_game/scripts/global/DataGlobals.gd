@@ -1,5 +1,7 @@
 extends Node
 
+const SAVE_AS_BINARY = true
+
 ## node save UIDs (DO NOT CHANGE THESE! but you can add new ones if u want)
 const SAVE_CREATURE_UID = 0
 const SAVE_ACCESSORY_MANAGER_UID = 1
@@ -466,6 +468,9 @@ func load_creature_data(creature_id_override: int = -1):
 func load_data() -> Dictionary:
 	build_save_uid_node_atlas()
 	Helpers.setup_uid_cache()
+	
+	if not SAVE_AS_BINARY:
+		printerr("WARNING: Save data is being not saved in binary format!")
 
 	if _should_save_global_metadata:
 		printerr("Cannot load global metadata from file as there are unsaved changes to the metadata")

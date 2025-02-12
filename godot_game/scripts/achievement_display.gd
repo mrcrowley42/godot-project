@@ -9,6 +9,7 @@ func setup(the_achievement: Achievement):
 	achievement = the_achievement
 	btn = get_child(0)
 	update_locked()
+	Globals.achievement_unlocked.connect(update_locked)
 
 func update_locked(new_achievement_uid = null):
 	var unlocked_achievements: Array = DataGlobals.get_global_metadata_value(DataGlobals.UNLOCKED_ACHIEVEMENTS)
@@ -20,6 +21,7 @@ func update_locked(new_achievement_uid = null):
 	
 	if is_unlocked:
 		btn.tooltip_string = achievement.title + "\n\n(" + achievement.hint + ")"
+		btn.modulate = Color(1, 1, 1, 1)
 	else:
 		btn.tooltip_string = "It's a secret" if achievement.secret else achievement.hint
 		btn.modulate = LOCKED_MODULATE

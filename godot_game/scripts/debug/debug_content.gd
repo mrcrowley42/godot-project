@@ -127,6 +127,10 @@ func _on_unlock_button_button_down() -> void:
 	# UNLOCK ALL THEMES
 	for ui_theme in load("res://resources/ui_theme_list.tres").theme_list:
 		Globals.unlock_theme(ui_theme)
+	
+	# ACHIEVEMENTS
+	for achievement in load("res://resources/all_achievements.tres").items:
+		Globals.unlock_achievement(achievement)
 
 	## dont re-render here, let the game handle it
 	# Rerender unlockable item buttons
