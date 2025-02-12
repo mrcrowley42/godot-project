@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://6o8rue2hoclc"]
+[gd_scene load_steps=5 format=3 uid="uid://dsdl7cniwm6u"]
 
 [ext_resource type="Script" path="res://scripts/utility/custom_tooltip_script.gd" id="1_g1srg"]
 [ext_resource type="Script" path="res://scripts/achievement_display.gd" id="1_h6i5m"]

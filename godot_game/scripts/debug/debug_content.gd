@@ -72,7 +72,7 @@ func _on_color_picker_button_popup_closed() -> void:
 
 
 func _on_button_3_toggled(toggled_on) -> void:
-	stat_man.holiday_mode = toggled_on
+	stat_man.toggle_holiday_mode()
 	print(stat_man.holiday_mode)
 
 
