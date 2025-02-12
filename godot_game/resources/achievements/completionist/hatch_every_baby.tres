@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://cp07y8uams25"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/achievement.gd" id="1_kxirq"]
+
+[resource]
+script = ExtResource("1_kxirq")
+title = "So many little creatures!"
+hint = "Hatch every type of baby"
+category = 2
+secret = false

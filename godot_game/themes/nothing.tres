@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://kpqilwsnepqa"]
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://kpqilwsnepqa"]
 
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="1_lwso2"]
 
@@ -17,6 +17,15 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sb4xf"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xmob3"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4bdiw"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_01g3g"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tw12x"]
 bg_color = Color(0, 0, 0, 0)
 
@@ -28,4 +37,7 @@ Button/styles/hover = SubResource("StyleBoxFlat_onjiw")
 Button/styles/normal = SubResource("StyleBoxFlat_hey7n")
 Button/styles/pressed = SubResource("StyleBoxFlat_6jilq")
 Label/styles/normal = SubResource("StyleBoxFlat_sb4xf")
+LineEdit/styles/focus = SubResource("StyleBoxFlat_xmob3")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_4bdiw")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_01g3g")
 ScrollContainer/styles/panel = SubResource("StyleBoxFlat_tw12x")

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://c26mmvrj6gh0s"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/achievement.gd" id="1_dtlrt"]
+
+[resource]
+script = ExtResource("1_dtlrt")
+title = "It's just luck, I swear"
+hint = "Win 10 times in Scissor Paper Rock"
+category = 1
+secret = false

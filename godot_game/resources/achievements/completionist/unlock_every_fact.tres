@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://d4ldgyi682yot"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/achievement.gd" id="1_u7spq"]
+
+[resource]
+script = ExtResource("1_u7spq")
+title = "How does it retain everything?!"
+hint = "Unlock every fact"
+category = 2
+secret = false

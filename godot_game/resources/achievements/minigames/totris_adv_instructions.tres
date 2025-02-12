@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://dffx5hcn4n28f"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/achievement.gd" id="1_ylooj"]
+
+[resource]
+script = ExtResource("1_ylooj")
+title = "Wow, that's a lotta words"
+hint = "View the advanced Totris instructions"
+category = 1
+secret = true

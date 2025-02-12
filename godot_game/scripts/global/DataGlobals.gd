@@ -1,5 +1,7 @@
 extends Node
 
+const SAVE_AS_BINARY = true
+
 ## node save UIDs (DO NOT CHANGE THESE! but you can add new ones if u want)
 const SAVE_CREATURE_UID = 0
 const SAVE_ACCESSORY_MANAGER_UID = 1
@@ -343,6 +345,7 @@ func create_new_creature(type_uid: String, initial_creature_name: String) -> int
 
 func save_settings_data():
 	var config = ConfigFile.new()
+	config.load(get_settings_file())  # so we dont just purge everything
 	var settings_nodes = get_tree().get_nodes_in_group(Globals.SAVE_SETTINGS_GROUP)
 
 	for node in settings_nodes:
@@ -358,7 +361,7 @@ func save_settings_data():
 		for key in data.keys():
 			if key != SECTION:
 				config.set_value(section, key, data[key])
-		config.save(get_settings_file())
+	config.save(get_settings_file())
 	print("settings data saved to file")
 
 ## save everything every n seconds
@@ -464,6 +467,10 @@ func load_creature_data(creature_id_override: int = -1):
 ## loads data, and passes it to saved nodes. returns metadata
 func load_data() -> Dictionary:
 	build_save_uid_node_atlas()
+	Helpers.setup_uid_cache()
+	
+	if not SAVE_AS_BINARY:
+		printerr("WARNING: Save data is being not saved in binary format!")
 
 	if _should_save_global_metadata:
 		printerr("Cannot load global metadata from file as there are unsaved changes to the metadata")

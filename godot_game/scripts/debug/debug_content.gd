@@ -72,7 +72,7 @@ func _on_color_picker_button_popup_closed() -> void:
 
 
 func _on_button_3_toggled(toggled_on) -> void:
-	stat_man.holiday_mode = toggled_on
+	stat_man.toggle_holiday_mode()
 	print(stat_man.holiday_mode)
 
 
@@ -127,6 +127,10 @@ func _on_unlock_button_button_down() -> void:
 	# UNLOCK ALL THEMES
 	for ui_theme in load("res://resources/ui_theme_list.tres").theme_list:
 		Globals.unlock_theme(ui_theme)
+	
+	# ACHIEVEMENTS
+	for achievement in load("res://resources/all_achievements.tres").items:
+		Globals.unlock_achievement(achievement)
 
 	## dont re-render here, let the game handle it
 	# Rerender unlockable item buttons

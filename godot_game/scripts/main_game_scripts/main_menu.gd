@@ -3,22 +3,27 @@ class_name MainMenu extends ScriptNode
 @export var auto_continue: bool
 
 @onready var load_menu = find_child("LoadMenu")
+@onready var settings_menu = find_child("SettingsMenu")
 @onready var bg_gradient: TextureRect = find_child("BgGradient")
 @onready var trans_img: Sprite2D = find_child("Transition")
 @onready var new_game_btn = find_child("NewGameBtn")
 @onready var btn_sfx = find_child("BtnClick")
+@onready var continue_btn = find_child("ContinueBtn")
+@onready var wipe_menu = find_child("ConfirmWipeMenu")
 
 var center_pos
 var is_in_transition = true
 
 func _ready() -> void:
 	DataGlobals.load_settings_data()
+	
+	
+	continue_btn.disabled = DataGlobals.has_only_global_metadata() or not DataGlobals.has_save_data()
 	var user_cfg = DataGlobals.settings_data_last_loaded
 	if user_cfg.has('general'):
 		auto_continue = user_cfg['general'].get('skip_intro', false)
-		
+
 	if auto_continue and Globals.first_launch:
-		Globals.first_launch = false
 		Globals.change_to_scene("res://scenes/GameScenes/main.tscn")
 		return
 	DataGlobals.load_data()
@@ -28,8 +33,9 @@ func _ready() -> void:
 	# if save file
 	#if DataGlobals.get_global_metadata_value(DataGlobals.CURRENT_CREATURE) in DataGlobals.get_all_creature_ids():
 		#new_game_btn.hide()
-	Globals.first_launch = false
+	#Globals.first_launch = false
 	do_opening_trans()
+	%Music.play()
 
 
 func grab_saves():
@@ -97,5 +103,19 @@ func fade_out_music():
 
 func _on_settings_btn_button_down() -> void:
 	btn_sfx.play()
-	pass
-	#%SettingsMenu.show()
+	settings_menu.show()
+
+
+func _on_confirm_wipe_button_down() -> void:
+	var d = DirAccess.open("res://")
+	d.remove(Globals.SAVE_DATA_FILE)
+	get_tree().quit()
+	
+
+
+func _on_cancel_wipe_button_down() -> void:
+	wipe_menu.hide()
+
+
+func _on_wipe_save_btn_button_down() -> void:
+	wipe_menu.show()

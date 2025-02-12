@@ -1,4 +1,4 @@
-[gd_scene load_steps=127 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=131 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
@@ -49,11 +49,12 @@
 [ext_resource type="Texture2D" uid="uid://cawudmxbjamv0" path="res://UI stuff/Green Palette/ui_green.png" id="40_wt18k"]
 [ext_resource type="Texture2D" uid="uid://c702pbhxasm52" path="res://icons/status/heart-fill.svg" id="41_8adaw"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/main_menu_btn.gd" id="41_eeoik"]
+[ext_resource type="Texture2D" uid="uid://bccqe3io1orow" path="res://icons/award-solid.svg" id="41_offx2"]
 [ext_resource type="Script" path="res://scripts/costmetic_row.gd" id="41_pook7"]
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="42_c1jtf"]
 [ext_resource type="Texture2D" uid="uid://d84hj0mtn2hw" path="res://icons/status/mood_24dp_FILL1_wght300_GRAD0_opsz24.svg" id="43_qa2jm"]
 [ext_resource type="Script" path="res://scripts/fact_progress_label.gd" id="44_t23g2"]
-[ext_resource type="PackedScene" uid="uid://dyapnl5xgvivn" path="res://scenes/UiScenes/topic_btn.tscn" id="44_y5a0d"]
+[ext_resource type="PackedScene" uid="uid://b78cwi88kdrvf" path="res://scenes/UiScenes/topic_btn.tscn" id="44_y5a0d"]
 [ext_resource type="Texture2D" uid="uid://p0oo42fr5wrp" path="res://icons/status/lunch_dining_24dp_8B1A10_FILL0_wght500_GRAD0_opsz24-svg.svg" id="45_3duvs"]
 [ext_resource type="Shader" path="res://shaders/pattern_checker.gdshader" id="45_bgevw"]
 [ext_resource type="Theme" uid="uid://x6rgwcyh7bnk" path="res://themes/menu_title.tres" id="45_e031c"]
@@ -65,6 +66,7 @@
 [ext_resource type="Script" path="res://scripts/cosmetics_preview.gd" id="49_p7hc5"]
 [ext_resource type="Script" path="res://scripts/fact_list_builder.gd" id="49_wkh8q"]
 [ext_resource type="Script" path="res://scripts/nav_button.gd" id="50_0qet7"]
+[ext_resource type="Script" path="res://scripts/achievements_menu.gd" id="50_3cyms"]
 [ext_resource type="Shader" path="res://shaders/pattern_lines.gdshader" id="50_tajtf"]
 [ext_resource type="Texture2D" uid="uid://drv50ynifh37j" path="res://UI stuff/Green Palette/green_activities_button.png" id="51_7kyvm"]
 [ext_resource type="Script" path="res://scripts/creature_menu.gd" id="51_hdtdw"]
@@ -79,6 +81,7 @@
 [ext_resource type="Theme" uid="uid://bsd1dkhc13v47" path="res://themes/plain.tres" id="56_m6x7j"]
 [ext_resource type="Script" path="res://scripts/stat_bar.gd" id="57_ani8q"]
 [ext_resource type="Shader" path="res://shaders/pattern_wavy.gdshader" id="57_qy3v8"]
+[ext_resource type="Script" path="res://scripts/edit_name_panel.gd" id="59_6wf3t"]
 [ext_resource type="Script" path="res://scenes/GameScenes/skip_title_c_box.gd" id="62_fffta"]
 [ext_resource type="Script" path="res://scripts/sfx_man.gd" id="65_787cd"]
 [ext_resource type="AudioStream" uid="uid://cx28efsxtr7c" path="res://sound_effects/button_click_fast.mp3" id="67_nfa6o"]
@@ -223,6 +226,19 @@ shader_parameter/one_opacity = 0.1
 shader_parameter/two_col = Color(0.101961, 0.0196078, 0.219608, 1)
 shader_parameter/two_speed = 0.02
 shader_parameter/two_opacity = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_php73"]
+shader = ExtResource("50_tajtf")
+shader_parameter/bg_col = Color(7.37002e-08, 0.0863768, 0.0762472, 1)
+shader_parameter/rotation = 90.0
+shader_parameter/double = false
+shader_parameter/size = 6.0
+shader_parameter/one_col = Color(8.27247e-08, 0.0878022, 0.0642501, 1)
+shader_parameter/one_speed = 0.02
+shader_parameter/one_opacity = 0.2
+shader_parameter/two_col = Color(1.38376e-07, 0.101009, 0.0812394, 1)
+shader_parameter/two_speed = 0.02
+shader_parameter/two_opacity = 0.2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kjclt"]
 shader = ExtResource("57_qy3v8")
@@ -396,6 +412,9 @@ metadata/_edit_horizontal_guides_ = [8.0, 667.0, 112.0, 111.0, 554.0, 562.0]
 unique_name_in_owner = true
 script = ExtResource("2_aqytd")
 food_amount = 4.0
+neglect_threshold = 0.02
+neglect_penalty_multiplier = 4000.0
+neglect_limit = 0.1
 
 [node name="AmbienceManager" type="Node" parent="." groups=["settings_data"]]
 unique_name_in_owner = true
@@ -564,7 +583,7 @@ texture = ExtResource("14_k2ios")
 [node name="MinigameLayer" type="CanvasLayer" parent="UI"]
 layer = 5
 
-[node name="FoodMenu" type="PanelContainer" parent="UI" node_paths=PackedStringArray("nav_arrows", "food_menu_open_button")]
+[node name="FoodMenu" type="PanelContainer" parent="UI" node_paths=PackedStringArray("nav_arrows", "food_menu_open_button", "food_screens")]
 visible = false
 custom_minimum_size = Vector2(400, 400)
 anchors_preset = 4
@@ -572,7 +591,7 @@ anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 70.0
 offset_top = -200.0
-offset_right = 1270.0
+offset_right = 870.0
 offset_bottom = 200.0
 grow_vertical = 2
 mouse_filter = 1
@@ -580,6 +599,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_xvtbm")
 script = ExtResource("21_aqbs2")
 nav_arrows = NodePath("NavigationArrows")
 food_menu_open_button = NodePath("../NavigationButtons/FoodButton")
+food_screens = NodePath("Container/FoodScreens")
 
 [node name="Background" type="PanelContainer" parent="UI/FoodMenu"]
 custom_minimum_size = Vector2(400, 400)
@@ -588,29 +608,37 @@ size_flags_horizontal = 0
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_k7dc5")
 
-[node name="FoodScreens" type="HBoxContainer" parent="UI/FoodMenu"]
+[node name="Container" type="Control" parent="UI/FoodMenu"]
+clip_contents = true
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="FoodScreens" type="HBoxContainer" parent="UI/FoodMenu/Container"]
+layout_mode = 2
+offset_right = 800.0
+offset_bottom = 400.0
 theme_override_constants/separation = 0
 
-[node name="ExampleScreen" type="MarginContainer" parent="UI/FoodMenu/FoodScreens"]
+[node name="ExampleScreen" type="MarginContainer" parent="UI/FoodMenu/Container/FoodScreens"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/FoodMenu/FoodScreens/ExampleScreen"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/FoodMenu/Container/FoodScreens/ExampleScreen"]
 custom_minimum_size = Vector2(360, 360)
 layout_mode = 2
 
-[node name="FoodCont" type="GridContainer" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer"]
+[node name="FoodCont" type="GridContainer" parent="UI/FoodMenu/Container/FoodScreens/ExampleScreen/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 2
 
-[node name="FoodBtn" type="Button" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer/FoodCont"]
+[node name="FoodBtn" type="Button" parent="UI/FoodMenu/Container/FoodScreens/ExampleScreen/VBoxContainer/FoodCont"]
 texture_filter = 1
 custom_minimum_size = Vector2(170, 60)
 layout_mode = 2
@@ -624,21 +652,21 @@ script = ExtResource("18_2njxs")
 style = 2
 direction = 3
 
-[node name="Sprite2D" type="Sprite2D" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer/FoodCont/FoodBtn"]
+[node name="Sprite2D" type="Sprite2D" parent="UI/FoodMenu/Container/FoodScreens/ExampleScreen/VBoxContainer/FoodCont/FoodBtn"]
 visible = false
 modulate = Color(1, 1, 0.364706, 1)
 position = Vector2(6, 6)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("24_vdri4")
 
-[node name="Sprite2D2" type="Sprite2D" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer/FoodCont/FoodBtn"]
+[node name="Sprite2D2" type="Sprite2D" parent="UI/FoodMenu/Container/FoodScreens/ExampleScreen/VBoxContainer/FoodCont/FoodBtn"]
 visible = false
 modulate = Color(1, 0.38, 0.38, 1)
 position = Vector2(6, 6)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("25_t2eb7")
 
-[node name="Button" type="Button" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer/FoodCont/FoodBtn"]
+[node name="Button" type="Button" parent="UI/FoodMenu/Container/FoodScreens/ExampleScreen/VBoxContainer/FoodCont/FoodBtn"]
 show_behind_parent = true
 custom_minimum_size = Vector2(170, 60)
 layout_mode = 0
@@ -646,14 +674,14 @@ offset_right = 8.0
 offset_bottom = 8.0
 mouse_filter = 2
 
-[node name="DrinkCont" type="GridContainer" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer"]
+[node name="DrinkCont" type="GridContainer" parent="UI/FoodMenu/Container/FoodScreens/ExampleScreen/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 2
 
-[node name="DrinkBtn" type="Button" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer/DrinkCont"]
+[node name="DrinkBtn" type="Button" parent="UI/FoodMenu/Container/FoodScreens/ExampleScreen/VBoxContainer/DrinkCont"]
 texture_filter = 1
 custom_minimum_size = Vector2(170, 60)
 layout_mode = 2
@@ -667,21 +695,21 @@ script = ExtResource("18_2njxs")
 style = 2
 direction = 3
 
-[node name="Sprite2D" type="Sprite2D" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer/DrinkCont/DrinkBtn"]
+[node name="Sprite2D" type="Sprite2D" parent="UI/FoodMenu/Container/FoodScreens/ExampleScreen/VBoxContainer/DrinkCont/DrinkBtn"]
 visible = false
 modulate = Color(1, 1, 0.364706, 1)
 position = Vector2(6, 6)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("24_vdri4")
 
-[node name="Sprite2D2" type="Sprite2D" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer/DrinkCont/DrinkBtn"]
+[node name="Sprite2D2" type="Sprite2D" parent="UI/FoodMenu/Container/FoodScreens/ExampleScreen/VBoxContainer/DrinkCont/DrinkBtn"]
 visible = false
 modulate = Color(1, 0.38, 0.38, 1)
 position = Vector2(6, 6)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("25_t2eb7")
 
-[node name="Button" type="Button" parent="UI/FoodMenu/FoodScreens/ExampleScreen/VBoxContainer/DrinkCont/DrinkBtn"]
+[node name="Button" type="Button" parent="UI/FoodMenu/Container/FoodScreens/ExampleScreen/VBoxContainer/DrinkCont/DrinkBtn"]
 show_behind_parent = true
 custom_minimum_size = Vector2(170, 60)
 layout_mode = 0
@@ -691,7 +719,7 @@ mouse_filter = 2
 
 [node name="NavigationArrows" type="Node2D" parent="UI/FoodMenu" node_paths=PackedStringArray("target_menu", "left_arrow", "right_arrow")]
 script = ExtResource("27_imll8")
-target_menu = NodePath("../FoodScreens")
+target_menu = NodePath("../Container/FoodScreens")
 left_arrow = NodePath("LeftArrow")
 right_arrow = NodePath("RightArrow")
 
@@ -755,25 +783,33 @@ layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_k7dc5")
 
-[node name="ActivityContent" type="HBoxContainer" parent="UI/ActivityMenu"]
+[node name="Container" type="Control" parent="UI/ActivityMenu"]
+clip_contents = true
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="ActivityContent" type="HBoxContainer" parent="UI/ActivityMenu/Container"]
+layout_mode = 2
+offset_right = 800.0
+offset_bottom = 400.0
 theme_override_constants/separation = 0
 
-[node name="Screen1" type="MarginContainer" parent="UI/ActivityMenu/ActivityContent"]
+[node name="Screen1" type="MarginContainer" parent="UI/ActivityMenu/Container/ActivityContent"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="GridContainer" type="GridContainer" parent="UI/ActivityMenu/ActivityContent/Screen1"]
+[node name="GridContainer" type="GridContainer" parent="UI/ActivityMenu/Container/ActivityContent/Screen1"]
 custom_minimum_size = Vector2(360, 360)
 layout_mode = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 2
 
-[node name="ScissorsPaperRock" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen1/GridContainer"]
+[node name="ScissorsPaperRock" type="Button" parent="UI/ActivityMenu/Container/ActivityContent/Screen1/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -782,7 +818,7 @@ icon = ExtResource("26_0ku4r")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Totris" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen1/GridContainer"]
+[node name="Totris" type="Button" parent="UI/ActivityMenu/Container/ActivityContent/Screen1/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -792,7 +828,7 @@ icon = ExtResource("27_2hcht")
 icon_alignment = 1
 expand_icon = true
 
-[node name="ZenMode" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen1/GridContainer"]
+[node name="ZenMode" type="Button" parent="UI/ActivityMenu/Container/ActivityContent/Screen1/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -802,133 +838,19 @@ icon = ExtResource("28_ys116")
 icon_alignment = 1
 expand_icon = true
 
-[node name="MemoryGame" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen1/GridContainer"]
+[node name="MemoryGame" type="Button" parent="UI/ActivityMenu/Container/ActivityContent/Screen1/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("18_v1mb2")
 theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
-icon = ExtResource("29_lofmd")
-icon_alignment = 1
-expand_icon = true
-
-[node name="Screen2" type="MarginContainer" parent="UI/ActivityMenu/ActivityContent"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="GridContainer" type="GridContainer" parent="UI/ActivityMenu/ActivityContent/Screen2"]
-custom_minimum_size = Vector2(360, 360)
-layout_mode = 2
-theme_override_constants/h_separation = 20
-theme_override_constants/v_separation = 20
-columns = 2
-
-[node name="ScissorsPaperRock" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen2/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("18_v1mb2")
-text = "MENU 2"
-icon = ExtResource("26_0ku4r")
-icon_alignment = 1
-expand_icon = true
-
-[node name="Tetris" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen2/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("18_v1mb2")
-theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
-text = "MENU 2"
-icon = ExtResource("27_2hcht")
-icon_alignment = 1
-expand_icon = true
-
-[node name="ZenMode" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen2/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("18_v1mb2")
-theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
-text = "MENU 2"
-icon = ExtResource("28_ys116")
-icon_alignment = 1
-expand_icon = true
-
-[node name="MemoryGame" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen2/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("18_v1mb2")
-theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
-text = "MENU 2"
-icon = ExtResource("29_lofmd")
-icon_alignment = 1
-expand_icon = true
-
-[node name="Screen3" type="MarginContainer" parent="UI/ActivityMenu/ActivityContent"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="GridContainer" type="GridContainer" parent="UI/ActivityMenu/ActivityContent/Screen3"]
-custom_minimum_size = Vector2(360, 360)
-layout_mode = 2
-theme_override_constants/h_separation = 20
-theme_override_constants/v_separation = 20
-columns = 2
-
-[node name="ScissorsPaperRock" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen3/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("18_v1mb2")
-text = "MENU 3"
-icon = ExtResource("26_0ku4r")
-icon_alignment = 1
-expand_icon = true
-
-[node name="Tetris" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen3/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("18_v1mb2")
-theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
-text = "MENU 3"
-icon = ExtResource("27_2hcht")
-icon_alignment = 1
-expand_icon = true
-
-[node name="ZenMode" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen3/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("18_v1mb2")
-theme_override_colors/font_color = Color(0.27451, 0.858824, 0.337255, 1)
-text = "MENU 3"
-icon = ExtResource("28_ys116")
-icon_alignment = 1
-expand_icon = true
-
-[node name="MemoryGame" type="Button" parent="UI/ActivityMenu/ActivityContent/Screen3/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("18_v1mb2")
-theme_override_colors/font_color = Color(1, 0.129412, 0.243137, 1)
-text = "MENU 3"
 icon = ExtResource("29_lofmd")
 icon_alignment = 1
 expand_icon = true
 
 [node name="NavigationArrows" type="Node2D" parent="UI/ActivityMenu" node_paths=PackedStringArray("target_menu", "left_arrow", "right_arrow")]
 script = ExtResource("27_imll8")
-target_menu = NodePath("../ActivityContent")
+target_menu = NodePath("../Container/ActivityContent")
 left_arrow = NodePath("LeftArrow")
 right_arrow = NodePath("RightArrow")
 
@@ -1035,6 +957,16 @@ layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
+[node name="SettingBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("33_1qhmu")
+icon = ExtResource("40_j1ufi")
+icon_alignment = 1
+expand_icon = true
+
 [node name="CreaturesBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
@@ -1044,13 +976,13 @@ theme = ExtResource("33_1qhmu")
 icon = ExtResource("39_j7m1h")
 icon_alignment = 1
 
-[node name="SettingBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="AchievementsBtn" type="Button" parent="UI/OptionsMenu/MainOptMenu/VBoxContainer/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("33_1qhmu")
-icon = ExtResource("40_j1ufi")
+icon = ExtResource("41_offx2")
 icon_alignment = 1
 expand_icon = true
 
@@ -1127,9 +1059,115 @@ theme_override_font_sizes/font_size = 18
 text = "Back"
 script = ExtResource("35_4io20")
 
+[node name="AchievementMenu" type="PanelContainer" parent="UI/OptionsMenu"]
+unique_name_in_owner = true
+process_mode = 3
+material = SubResource("ShaderMaterial_php73")
+layout_mode = 2
+script = ExtResource("32_jvqx8")
+metadata/_edit_lock_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/AchievementMenu" node_paths=PackedStringArray("general_grid", "minigame_grid", "completionist_grid")]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 16
+script = ExtResource("50_3cyms")
+general_grid = NodePath("VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/VBoxContainer/GeneralAcvmnt")
+minigame_grid = NodePath("VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/VBoxContainer/MinigameAcvmnt")
+completionist_grid = NodePath("VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/VBoxContainer/CompletionAcvmnt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/AchievementMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Button" type="Button" parent="UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("45_e031c")
+text = "Achievements"
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("45_u3p17")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer/PanelContainer"]
+custom_minimum_size = Vector2(0, 296)
+layout_mode = 2
+theme = ExtResource("49_mgl65")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label3" type="Label" parent="UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "-- General --"
+horizontal_alignment = 1
+
+[node name="GeneralAcvmnt" type="GridContainer" parent="UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 3
+
+[node name="Label" type="Label" parent="UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "-- Minigame --"
+horizontal_alignment = 1
+
+[node name="MinigameAcvmnt" type="GridContainer" parent="UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 3
+
+[node name="Label2" type="Label" parent="UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "-- Completion --"
+horizontal_alignment = 1
+
+[node name="CompletionAcvmnt" type="GridContainer" parent="UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 3
+
+[node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/AchievementMenu"]
+position = Vector2(-50, -130)
+
+[node name="Back" type="Button" parent="UI/OptionsMenu/AchievementMenu/SaveButtons"]
+texture_filter = 5
+custom_minimum_size = Vector2(100, 40)
+offset_left = 73.0
+offset_top = 513.0
+offset_right = 173.0
+offset_bottom = 553.0
+scale = Vector2(0.75, 0.75)
+theme = ExtResource("33_1qhmu")
+theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
+theme_override_font_sizes/font_size = 18
+text = "Back"
+script = ExtResource("35_4io20")
+
 [node name="FactsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 material = SubResource("ShaderMaterial_kjclt")
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_cuoxy")
@@ -1235,11 +1273,11 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="Button" type="Button" parent="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer"]
+[node name="Title" type="Button" parent="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("45_e031c")
 theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
-text = "Creature Cosmetics"
+text = "%s Cosmetics"
 
 [node name="PanelContainer" type="PanelContainer" parent="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -1257,7 +1295,7 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="CosmeticItems" type="GridContainer" parent="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer" node_paths=PackedStringArray("creature")]
+[node name="CosmeticItems" type="GridContainer" parent="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer" node_paths=PackedStringArray("creature", "title_label")]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/h_separation = 8
@@ -1265,6 +1303,7 @@ theme_override_constants/v_separation = 10
 columns = 5
 script = ExtResource("41_pook7")
 creature = NodePath("../../../../../../../../../Gameplay/Creature")
+title_label = NodePath("../../../../Title")
 
 [node name="PreviewContainer" type="MarginContainer" parent="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -1292,6 +1331,74 @@ theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
 theme_override_font_sizes/font_size = 18
 text = "Back"
 script = ExtResource("35_4io20")
+
+[node name="EditCreatureName" type="Button" parent="UI/OptionsMenu/CosmeticsMenu/SaveButtons"]
+offset_left = 392.0
+offset_top = 513.0
+offset_right = 492.0
+offset_bottom = 553.0
+scale = Vector2(0.75, 0.75)
+theme = ExtResource("33_1qhmu")
+text = "Edit name"
+
+[node name="EditNamePanel" type="Control" parent="UI/OptionsMenu/CosmeticsMenu" node_paths=PackedStringArray("cosmetics_grid", "line_edit")]
+layout_mode = 2
+script = ExtResource("59_6wf3t")
+cosmetics_grid = NodePath("../MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/CosmeticItems")
+line_edit = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/LineEdit")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/CosmeticsMenu/EditNamePanel"]
+layout_mode = 0
+offset_right = 434.0
+offset_bottom = 434.0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 190
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/OptionsMenu/CosmeticsMenu/EditNamePanel/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("56_m6x7j")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/CosmeticsMenu/EditNamePanel/MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/CosmeticsMenu/EditNamePanel/MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Label" type="Label" parent="UI/OptionsMenu/CosmeticsMenu/EditNamePanel/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("49_mgl65")
+text = "Edit creature name"
+horizontal_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="UI/OptionsMenu/CosmeticsMenu/EditNamePanel/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "dwdawdd"
+alignment = 1
+max_length = 19
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/OptionsMenu/CosmeticsMenu/EditNamePanel/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="CancelEditBtn" type="Button" parent="UI/OptionsMenu/CosmeticsMenu/EditNamePanel/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("33_1qhmu")
+text = "Cancel"
+
+[node name="AcceptEditBtn" type="Button" parent="UI/OptionsMenu/CosmeticsMenu/EditNamePanel/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("33_1qhmu")
+text = "Accept"
 
 [node name="CreaturesMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
@@ -1418,6 +1525,7 @@ text = ">"
 layout_mode = 2
 
 [node name="Audio" type="Control" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages"]
+visible = false
 layout_mode = 2
 anchors_preset = 0
 offset_right = 394.0
@@ -1509,7 +1617,6 @@ tick_count = 1
 bus_name = "SFX"
 
 [node name="Clippy" type="Control" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages"]
-visible = false
 layout_mode = 2
 anchors_preset = 0
 offset_right = 394.0
@@ -1825,7 +1932,6 @@ offset_left = 10.0
 offset_top = 10.0
 offset_right = 424.0
 offset_bottom = 367.0
-scroll_vertical = 100
 script = SubResource("GDScript_1bafj")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/CreditsMenu/Node2D/HScrollBar"]
@@ -1852,11 +1958,8 @@ Marcus Gellel
 [font_size=15]Based on Tbh/autism creature originally by @acmeiku on Twitter[/font_size]
 
 
-With thanks to those who supported us:
-[font_size=15]Martina Johnson
-Peperoni
-Wallsy
-oh hell this might be a long list[/font_size]
+With a very special thanks to:
+[font_size=15]Martina Johnson[/font_size]
 
 
 Music:
@@ -1868,15 +1971,11 @@ Font:
 
 Various Sound Effects:
 [font_size=15]Yippee! by unknown german kid
--- INSERT AMBIENT AUTIO SOUND WEBSITE/S --
-hyland (Freesound.org)
-beetlemuse (Freesound.org)
-kagateni (Freesound.org)
-justinvoke (Freesound.org)
-Pixabay (Pixabay)[/font_size]
+Sound effects and ambient sounds from Freesound.org, Pixabay, and BBC Sound Effects[/font_size]
 
 Various SVG Icons:
-[font_size=15]Bootstrap Icons[/font_size]"
+[font_size=15]Bootstrap Icons
+Font Awesome[/font_size]"
 fit_content = true
 
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/CreditsMenu"]
@@ -2099,16 +2198,10 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/FoodMenu/NavigationArrows/LeftArrow" to="UI/FoodMenu/NavigationArrows" method="_on_left_arrow_button_down"]
 [connection signal="button_down" from="UI/FoodMenu/NavigationArrows/RightArrow" to="UI/FoodMenu/NavigationArrows" method="_on_right_arrow_button_down"]
 [connection signal="visibility_changed" from="UI/ActivityMenu" to="UI/ActivityMenu" method="_on_visibility_changed"]
-[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen1/GridContainer/ScissorsPaperRock" to="MinigameManager" method="_on_scissors_paper_rock_button_down"]
-[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen1/GridContainer/Totris" to="MinigameManager" method="_on_totris_button_down"]
-[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen1/GridContainer/ZenMode" to="MinigameManager" method="_on_zen_mode_button_down"]
-[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen1/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
-[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen2/GridContainer/ScissorsPaperRock" to="MinigameManager" method="_on_scissors_paper_rock_button_down"]
-[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen2/GridContainer/ZenMode" to="MinigameManager" method="_on_zen_mode_button_down"]
-[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen2/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
-[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen3/GridContainer/ScissorsPaperRock" to="MinigameManager" method="_on_scissors_paper_rock_button_down"]
-[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen3/GridContainer/ZenMode" to="MinigameManager" method="_on_zen_mode_button_down"]
-[connection signal="button_down" from="UI/ActivityMenu/ActivityContent/Screen3/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
+[connection signal="button_down" from="UI/ActivityMenu/Container/ActivityContent/Screen1/GridContainer/ScissorsPaperRock" to="MinigameManager" method="_on_scissors_paper_rock_button_down"]
+[connection signal="button_down" from="UI/ActivityMenu/Container/ActivityContent/Screen1/GridContainer/Totris" to="MinigameManager" method="_on_totris_button_down"]
+[connection signal="button_down" from="UI/ActivityMenu/Container/ActivityContent/Screen1/GridContainer/ZenMode" to="MinigameManager" method="_on_zen_mode_button_down"]
+[connection signal="button_down" from="UI/ActivityMenu/Container/ActivityContent/Screen1/GridContainer/MemoryGame" to="MinigameManager" method="_on_memory_game_button_down"]
 [connection signal="visibility_changed" from="UI/ActivityMenu/NavigationArrows" to="UI/ActivityMenu/NavigationArrows" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/ActivityMenu/NavigationArrows/LeftArrow" to="UI/ActivityMenu/NavigationArrows" method="_on_left_arrow_button_down"]
 [connection signal="button_down" from="UI/ActivityMenu/NavigationArrows/RightArrow" to="UI/ActivityMenu/NavigationArrows" method="_on_right_arrow_button_down"]
@@ -2117,15 +2210,20 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/ThemeBtn" to="UI/OptionsMenu" method="_on_theme_btn_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/FactBtn" to="UI/OptionsMenu" method="_on_fact_btn_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/AmbienceBtn" to="UI/OptionsMenu" method="_on_ambience_btn_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/MarginContainer/HBoxContainer/CreaturesBtn" to="UI/OptionsMenu" method="_on_creatures_btn_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/MarginContainer/HBoxContainer/SettingBtn" to="UI/OptionsMenu" method="_on_settings_btn_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/MarginContainer/HBoxContainer/CreaturesBtn" to="UI/OptionsMenu" method="_on_creatures_btn_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/MarginContainer/HBoxContainer/AchievementsBtn" to="UI/OptionsMenu" method="_on_achievements_btn_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/MainOptMenu/VBoxContainer/MarginContainer/HBoxContainer/MainMenuBtn" to="UI/OptionsMenu/MainOptMenu/VBoxContainer/MarginContainer/HBoxContainer/MainMenuBtn" method="_on_button_down"]
 [connection signal="visibility_changed" from="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/ThemeBtns" to="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/ThemeBtns" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/OptionsMenu/ThemeMenu/SaveButtons/Back" to="UI/OptionsMenu/ThemeMenu/SaveButtons/Back" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/AchievementMenu/SaveButtons/Back" to="UI/OptionsMenu/AchievementMenu/SaveButtons/Back" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/FactsMenu/Library/SaveButtons/Back" to="UI/OptionsMenu/FactsMenu/Library/SaveButtons/Back" method="_on_button_down"]
 [connection signal="visibility_changed" from="UI/OptionsMenu/CosmeticsMenu" to="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/CosmeticItems" method="_on_cosmetics_menu_visibility_changed"]
 [connection signal="cosmetic_btn_pressed" from="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/CosmeticItems" to="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/PreviewContainer/CreaturePreview" method="_on_cosmetic_items_cosmetic_btn_pressed"]
 [connection signal="button_down" from="UI/OptionsMenu/CosmeticsMenu/SaveButtons/Back" to="UI/OptionsMenu/CosmeticsMenu/SaveButtons/Back" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/CosmeticsMenu/SaveButtons/EditCreatureName" to="UI/OptionsMenu/CosmeticsMenu/EditNamePanel" method="_on_edit_creature_name_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/CosmeticsMenu/EditNamePanel/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CancelEditBtn" to="UI/OptionsMenu/CosmeticsMenu/EditNamePanel" method="_on_cancel_edit_btn_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/CosmeticsMenu/EditNamePanel/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/AcceptEditBtn" to="UI/OptionsMenu/CosmeticsMenu/EditNamePanel" method="_on_accept_edit_btn_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/CreaturesMenu/SaveButtons/Back" to="UI/OptionsMenu/CreaturesMenu/SaveButtons/Back" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer/MasterMuted" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer/MasterMuted" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer/MusicMuted" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer/MusicMuted" method="_on_button_down"]

@@ -37,19 +37,18 @@ func _on_right_arrow_button_down() -> void:
 		right_arrow.hide()
 	left_arrow.show()
 
-
-func _on_visibility_changed():
-	index = 0
-	left_arrow.hide()
-	
-	if screen_count < 2:
-		right_arrow.hide()
-	else:
-		right_arrow.show()
-
-
 func _input(event: InputEvent) -> void:
 	if left_arrow.visible and event.is_action_pressed("arrow_left"):
 		_on_left_arrow_button_down()
 	elif right_arrow.visible and event.is_action_pressed("arrow_right"):
 		_on_right_arrow_button_down()
+
+func _on_visibility_changed():
+	index = 0
+	left_arrow.hide()
+	target_menu.position.x = 0
+	
+	if screen_count < 2:
+		right_arrow.hide()
+	else:
+		right_arrow.show()

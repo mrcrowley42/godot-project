@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://dog83la1was12"]
+
+[ext_resource type="Texture2D" uid="uid://b1cncfvik08sm" path="res://images/achievements/hatch_baby.png" id="1_fyo88"]
+[ext_resource type="Script" path="res://scripts/base_classses/achievement.gd" id="2_n5o3j"]
+
+[resource]
+script = ExtResource("2_n5o3j")
+title = "It came from the egg!"
+hint = "Hatch your first baby"
+category = 0
+secret = false
+image = ExtResource("1_fyo88")

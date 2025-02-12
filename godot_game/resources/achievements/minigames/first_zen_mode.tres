@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://f43bs6byewf4"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/achievement.gd" id="1_51e8x"]
+
+[resource]
+script = ExtResource("1_51e8x")
+title = "Chill out!"
+hint = "Enter zen mode"
+category = 1
+secret = false

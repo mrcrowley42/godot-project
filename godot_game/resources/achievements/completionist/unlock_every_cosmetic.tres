@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://ejgcgl6ujr66"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/achievement.gd" id="1_h0lb7"]
+
+[resource]
+script = ExtResource("1_h0lb7")
+title = "Forever playing dress-up"
+hint = "Unlock every cosmetic"
+category = 2
+secret = false

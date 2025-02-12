@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://b4l5j5wla1uic"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/achievement.gd" id="1_mm8xd"]
+
+[resource]
+script = ExtResource("1_mm8xd")
+title = "Adopted and raised!"
+hint = "Reach the adult stage"
+category = 0
+secret = false
