@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://c26mmvrj6gh0s"]
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://c26mmvrj6gh0s"]
 
 [ext_resource type="Script" path="res://scripts/base_classses/achievement.gd" id="1_dtlrt"]
+[ext_resource type="Texture2D" uid="uid://dd56us626oiu8" path="res://images/achievements/rock_on_head.png" id="1_t8vft"]
 
 [resource]
 script = ExtResource("1_dtlrt")
@@ -8,3 +9,4 @@ title = "It's just luck, I swear"
 hint = "Win 10 times in Scissor Paper Rock"
 category = 1
 secret = false
+image = ExtResource("1_t8vft")

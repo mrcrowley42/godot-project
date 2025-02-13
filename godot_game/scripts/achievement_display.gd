@@ -3,7 +3,7 @@ class_name AchievementDisplay extends PanelContainer
 var achievement: Achievement
 var btn: CustomTooltipButton
 
-const LOCKED_MODULATE: Color = Color(0.156, 0.156, 0.156, 1)
+const LOCKED_MODULATE: Color = Color(0.25, 0.25, 0.25, 1)
 
 func setup(the_achievement: Achievement):
 	achievement = the_achievement

@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://dffx5hcn4n28f"]
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://dffx5hcn4n28f"]
 
+[ext_resource type="Texture2D" uid="uid://dahr4t2udfpdu" path="res://images/achievements/long_scroll.png" id="1_y280u"]
 [ext_resource type="Script" path="res://scripts/base_classses/achievement.gd" id="1_ylooj"]
 
 [resource]
@@ -8,3 +9,4 @@ title = "Wow, that's a lotta words"
 hint = "View the advanced Totris instructions"
 category = 1
 secret = true
+image = ExtResource("1_y280u")

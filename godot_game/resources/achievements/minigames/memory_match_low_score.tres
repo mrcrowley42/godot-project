@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://cjjg4yyomx026"]
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://cjjg4yyomx026"]
 
 [ext_resource type="Script" path="res://scripts/base_classses/achievement.gd" id="1_lpmkp"]
+[ext_resource type="Texture2D" uid="uid://bb82bjw3r54cb" path="res://images/achievements/remember.png" id="1_uikqd"]
 
 [resource]
 script = ExtResource("1_lpmkp")
@@ -8,3 +9,4 @@ title = "How much ram is required for this?"
 hint = "Get under 30 score in Memory Match"
 category = 1
 secret = false
+image = ExtResource("1_uikqd")

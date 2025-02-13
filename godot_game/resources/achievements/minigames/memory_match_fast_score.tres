@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://biyy1c18yheiy"]
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://biyy1c18yheiy"]
 
+[ext_resource type="Texture2D" uid="uid://ryhwx3du2177" path="res://images/achievements/big_timer.png" id="1_k5nyx"]
 [ext_resource type="Script" path="res://scripts/base_classses/achievement.gd" id="1_u8ptr"]
 
 [resource]
@@ -8,3 +9,4 @@ title = "I need to go HOW FAST?!"
 hint = "Finish Memory Match in under 30 seconds"
 category = 1
 secret = false
+image = ExtResource("1_k5nyx")
