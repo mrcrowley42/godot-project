@@ -1,4 +1,4 @@
-[gd_scene load_steps=131 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=132 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
@@ -86,6 +86,7 @@
 [ext_resource type="Script" path="res://scripts/sfx_man.gd" id="65_787cd"]
 [ext_resource type="AudioStream" uid="uid://cx28efsxtr7c" path="res://sound_effects/button_click_fast.mp3" id="67_nfa6o"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/popup_manager.gd" id="69_rkm2b"]
+[ext_resource type="Script" path="res://scenes/GameScenes/holiday_c_box.gd" id="71_5w18v"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/sound_scape_manager.gd" id="80_83777"]
 
 [sub_resource type="Gradient" id="Gradient_jl3ct"]
@@ -1472,7 +1473,6 @@ script = ExtResource("35_4io20")
 [node name="SettingsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 material = SubResource("ShaderMaterial_1s3b6")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -1620,6 +1620,7 @@ tick_count = 1
 bus_name = "SFX"
 
 [node name="Clippy" type="Control" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages"]
+visible = false
 layout_mode = 2
 anchors_preset = 0
 offset_right = 394.0
@@ -1744,7 +1745,6 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="Other" type="Control" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages"]
-visible = false
 anchors_preset = 0
 offset_right = 393.0
 
@@ -1766,7 +1766,7 @@ layout_mode = 2
 size_flags_vertical = 1
 theme_override_fonts/font = ExtResource("19_3grg3")
 theme_override_font_sizes/font_size = 20
-text = "Skip title screen on launch"
+text = "Skip Title Screen"
 vertical_alignment = 1
 
 [node name="SkipTitleCBox" type="CheckBox" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Other/VBoxContainer/GridContainer4" groups=["settings_data"]]
@@ -1776,6 +1776,23 @@ size_flags_horizontal = 6
 size_flags_vertical = 4
 theme = ExtResource("42_c1jtf")
 script = ExtResource("62_fffta")
+
+[node name="HolidayLabel" type="Label" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Other/VBoxContainer/GridContainer4"]
+custom_minimum_size = Vector2(272, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 20
+text = "Holiday Mode"
+vertical_alignment = 1
+
+[node name="HolidayCBox" type="CheckBox" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Other/VBoxContainer/GridContainer4" groups=["settings_data"]]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme = ExtResource("42_c1jtf")
+script = ExtResource("71_5w18v")
 
 [node name="Label" type="Label" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Other/VBoxContainer"]
 visible = false
@@ -2235,6 +2252,7 @@ bus = &"SFX"
 [connection signal="toggled" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Clippy/VBoxContainer/GridContainer4/SfxClippyBox" to="Gameplay/ClippyArea" method="_on_sfx_clippy_box_toggled"]
 [connection signal="toggled" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Clippy/VBoxContainer/GridContainer4/AmbClippyBox" to="Gameplay/ClippyArea" method="_on_amb_clippy_box_toggled"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Clippy/VBoxContainer/ClippyBtn" to="Gameplay/ClippyArea" method="_on_clippy_btn_button_down"]
+[connection signal="toggled" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Other/VBoxContainer/GridContainer4/HolidayCBox" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Other/VBoxContainer/GridContainer4/HolidayCBox" method="_on_toggled"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/ControlButtons/Back" to="UI/OptionsMenu/SettingsMenu/ControlButtons/Back" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/ControlButtons/CreditsBtn" to="UI/OptionsMenu" method="_on_credits_btn_button_down"]
 [connection signal="visibility_changed" from="UI/OptionsMenu/AmbienceMenu" to="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer" method="_on_ambience_menu_visibility_changed"]

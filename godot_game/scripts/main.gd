@@ -60,7 +60,8 @@ func calc_elapsed_time() -> float:
 	if Globals.first_launch:
 		var elapsed_time = launch_time - DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_LAST_SAVED)
 		if debug_mode:
-			var vars = [elapsed_time, elapsed_time/86400, "were" if stat_man.holiday_mode else "were not"]
+			var holiday_mode = DataGlobals.get_global_metadata_value(DataGlobals.HOLIDAY_MODE)
+			var vars = [elapsed_time, elapsed_time/86400, "were" if holiday_mode else "were not"]
 			print("%.2f seconds (%.2f days) since last played. You %s on holiday" % vars)
 		
 		return elapsed_time
@@ -112,8 +113,11 @@ func apply_time_away_effect(time_away: float):
 	if not Globals.first_launch:
 		return
 	
-	if stat_man.holiday_mode:
+	var holiday_mode = DataGlobals.get_global_metadata_value(DataGlobals.HOLIDAY_MODE)
+	
+	if holiday_mode:
 		Globals.first_launch = false
+		apply_bonus_xp(0)
 		return
 
 	var days_elapsed = time_away / 86400
