@@ -430,12 +430,13 @@ script = ExtResource("5_yr5ap")
 creature = NodePath("../Gameplay/Creature")
 food_menu = NodePath("../UI/FoodMenu")
 
-[node name="AchievementManager" type="Node" parent="." node_paths=PackedStringArray("general_grid", "minigame_grid", "completionist_grid")]
+[node name="AchievementManager" type="Node" parent="." node_paths=PackedStringArray("general_grid", "minigame_grid", "completionist_grid", "perc_label")]
 unique_name_in_owner = true
 script = ExtResource("6_lmnmq")
 general_grid = NodePath("../UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/VBoxContainer/GeneralAcvmnt")
 minigame_grid = NodePath("../UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/VBoxContainer/MinigameAcvmnt")
 completionist_grid = NodePath("../UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/VBoxContainer/CompletionAcvmnt")
+perc_label = NodePath("../UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer/MarginContainer/AchievementProgressLabe")
 
 [node name="MinigameManager" type="Node2D" parent="." node_paths=PackedStringArray("minigame_layer")]
 unique_name_in_owner = true
@@ -1151,6 +1152,15 @@ theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 12
 columns = 3
 
+[node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="AchievementProgressLabe" type="Label" parent="UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("42_c1jtf")
+text = "%s completed"
+
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/AchievementMenu"]
 position = Vector2(-50, -130)
 
@@ -1786,7 +1796,7 @@ theme_override_font_sizes/font_size = 20
 text = "Holiday Mode"
 vertical_alignment = 1
 
-[node name="HolidayCBox" type="CheckBox" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Other/VBoxContainer/GridContainer4" groups=["settings_data"]]
+[node name="HolidayCBox" type="CheckBox" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Other/VBoxContainer/GridContainer4"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 6

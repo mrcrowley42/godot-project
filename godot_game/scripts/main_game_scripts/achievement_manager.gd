@@ -3,6 +3,7 @@ class_name AchievementManager extends ScriptNode
 @export var general_grid: GridContainer
 @export var minigame_grid: GridContainer
 @export var completionist_grid: GridContainer
+@export var perc_label: Label
 
 var all_achievements = preload("res://resources/all_achievements.tres").items
 @onready var acheivenent_scene = preload("res://scenes/UiScenes/achievement_display.tscn")
@@ -22,6 +23,8 @@ func _notification(what):
 		## do secrest last
 		for secret in secrets:
 			add_achivement_to_grid(secret)
+		update_progress_label()
+		Globals.achievement_unlocked.connect(update_progress_label)
 
 func add_achivement_to_grid(ach: AchievementDisplay):
 	if ach.achievement.category == Achievement.ACHIEVEMENT_CATEGORY.GENERAL:
@@ -30,3 +33,8 @@ func add_achivement_to_grid(ach: AchievementDisplay):
 		minigame_grid.add_child(ach)
 	else:
 		completionist_grid.add_child(ach)
+
+func update_progress_label(_uid=-1):
+	var total_count = len(all_achievements)
+	var current_count = len(DataGlobals.get_global_metadata_value(DataGlobals.UNLOCKED_ACHIEVEMENTS))
+	perc_label.text = str(floor((float(current_count) / float(total_count)) * 100.)) + "% complete"
