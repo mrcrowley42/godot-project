@@ -1,9 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://duucock0yfeav"]
+[gd_scene load_steps=9 format=3 uid="uid://duucock0yfeav"]
 
 [ext_resource type="Texture2D" uid="uid://b5wm1uu7kfopt" path="res://images/imgonnafreakinloseit.png" id="1_7vr6t"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="2_p3dey"]
 [ext_resource type="Script" path="res://scripts/restart_btn.gd" id="3_8hq71"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="4_i6oyy"]
+
+[sub_resource type="Gradient" id="Gradient_n4d26"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.552795, 1)
+colors = PackedColorArray(1, 0.607017, 0.54818, 0, 0.321569, 0, 0, 0.282353)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_njjud"]
+gradient = SubResource("Gradient_n4d26")
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
+metadata/_snap_enabled = true
 
 [sub_resource type="Gradient" id="Gradient_bl7y7"]
 colors = PackedColorArray(0, 0, 0, 0.141176, 0, 0, 0, 0)
@@ -19,6 +31,18 @@ fill_to = Vector2(0, 1)
 position = Vector2(324, 337)
 scale = Vector2(1.25, 1.25)
 texture = ExtResource("1_7vr6t")
+
+[node name="BgGradient2" type="TextureRect" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 540.0
+offset_bottom = 675.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = SubResource("GradientTexture2D_njjud")
 
 [node name="BgGradient" type="TextureRect" parent="."]
 anchors_preset = 3
