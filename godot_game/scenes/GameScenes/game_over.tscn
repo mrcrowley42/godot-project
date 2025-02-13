@@ -1,14 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://duucock0yfeav"]
+[gd_scene load_steps=13 format=3 uid="uid://duucock0yfeav"]
 
 [ext_resource type="Texture2D" uid="uid://b5wm1uu7kfopt" path="res://images/imgonnafreakinloseit.png" id="1_7vr6t"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="2_p3dey"]
+[ext_resource type="Shader" path="res://shaders/zen_mode.gdshader" id="2_wu6tw"]
 [ext_resource type="Script" path="res://scripts/restart_btn.gd" id="3_8hq71"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="4_i6oyy"]
 
 [sub_resource type="Gradient" id="Gradient_n4d26"]
 interpolation_mode = 2
 offsets = PackedFloat32Array(0.552795, 1)
-colors = PackedColorArray(1, 0.607017, 0.54818, 0, 0.321569, 0, 0, 0.282353)
+colors = PackedColorArray(1, 0.607017, 0.54818, 0, 0.321569, 0, 0, 0.12549)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_njjud"]
 gradient = SubResource("Gradient_n4d26")
@@ -22,6 +23,22 @@ colors = PackedColorArray(0, 0, 0, 0.141176, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_03smu"]
 gradient = SubResource("Gradient_bl7y7")
+fill_from = Vector2(0, 0.111111)
+fill_to = Vector2(0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_34b3r"]
+shader = ExtResource("2_wu6tw")
+shader_parameter/color_behind = Color(0.94902, 0, 0, 0)
+shader_parameter/color = Color(0.305882, 0, 0, 0.156863)
+shader_parameter/fade_length = 0.45
+shader_parameter/intensity = 10.0
+
+[sub_resource type="Gradient" id="Gradient_5pief"]
+offsets = PackedFloat32Array(0.732919, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_njcka"]
+gradient = SubResource("Gradient_5pief")
 fill_from = Vector2(0, 0.111111)
 fill_to = Vector2(0, 1)
 
@@ -55,6 +72,19 @@ offset_bottom = 675.0
 grow_horizontal = 0
 grow_vertical = 0
 texture = SubResource("GradientTexture2D_03smu")
+
+[node name="BgGradient3" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_34b3r")
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 540.0
+offset_bottom = 675.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = SubResource("GradientTexture2D_njcka")
 
 [node name="Label" type="Label" parent="."]
 visible = false
