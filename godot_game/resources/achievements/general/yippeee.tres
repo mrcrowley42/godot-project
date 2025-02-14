@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://bcpvpvjxus07h"]
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://bcpvpvjxus07h"]
 
+[ext_resource type="Texture2D" uid="uid://cyptnign0vjqn" path="res://images/achievements/yippeeee.png" id="1_58hq8"]
 [ext_resource type="Script" path="res://scripts/base_classses/achievement.gd" id="1_yrkc2"]
 
 [resource]
@@ -8,3 +9,4 @@ title = "YIPPEEE!!!"
 hint = "Press 'y' to YIPPEEEE"
 category = 0
 secret = true
+image = ExtResource("1_58hq8")

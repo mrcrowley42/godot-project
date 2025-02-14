@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://brrtf0fvck4s3"]
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://brrtf0fvck4s3"]
 
+[ext_resource type="Texture2D" uid="uid://be2cm34rahi78" path="res://images/achievements/customise_everything.png" id="1_5ldfa"]
 [ext_resource type="Script" path="res://scripts/base_classses/achievement.gd" id="1_yi8t0"]
 
 [resource]
@@ -8,3 +9,4 @@ title = "A little bit of this, and a little bit of that"
 hint = "Customise everything"
 category = 0
 secret = false
+image = ExtResource("1_5ldfa")

@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://c4mrl54qdvgg7"]
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://c4mrl54qdvgg7"]
 
 [ext_resource type="Script" path="res://scripts/base_classses/achievement.gd" id="1_t8us8"]
+[ext_resource type="Texture2D" uid="uid://ql7qe64qra0s" path="res://images/achievements/yukkkk.png" id="1_yeoge"]
 
 [resource]
 script = ExtResource("1_t8us8")
-title = "Why would you feed it that!"
+title = "Why would you feed it that?!"
 hint = "Try a disliked food or drink"
 category = 0
 secret = false
+image = ExtResource("1_yeoge")

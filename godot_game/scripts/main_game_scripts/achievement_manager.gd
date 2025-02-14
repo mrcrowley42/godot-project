@@ -37,4 +37,5 @@ func add_achivement_to_grid(ach: AchievementDisplay):
 func update_progress_label(_uid=-1):
 	var total_count = len(all_achievements)
 	var current_count = len(DataGlobals.get_global_metadata_value(DataGlobals.UNLOCKED_ACHIEVEMENTS))
-	perc_label.text = str(floor((float(current_count) / float(total_count)) * 100.)) + "% complete"
+	var perc = floor((float(current_count) / float(total_count)) * 100.)
+	perc_label.text = str(perc) + "% complete" + ("!" if perc == 100 else "")
