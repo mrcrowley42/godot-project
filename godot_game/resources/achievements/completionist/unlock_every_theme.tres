@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://c4mntr3wby53m"]
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://c4mntr3wby53m"]
 
 [ext_resource type="Script" path="res://scripts/base_classses/achievement.gd" id="1_5dmwx"]
+[ext_resource type="Texture2D" uid="uid://dhie0yrvmevwr" path="res://images/achievements/many_themes.png" id="1_s7e6a"]
 
 [resource]
 script = ExtResource("1_5dmwx")
@@ -8,3 +9,4 @@ title = "A theme for every occasion"
 hint = "Unlock every theme"
 category = 2
 secret = false
+image = ExtResource("1_s7e6a")

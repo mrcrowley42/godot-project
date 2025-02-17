@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://ejgcgl6ujr66"]
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://ejgcgl6ujr66"]
 
+[ext_resource type="Texture2D" uid="uid://dajh5d2ndk37w" path="res://images/achievements/many_cosmetics.png" id="1_a41ab"]
 [ext_resource type="Script" path="res://scripts/base_classses/achievement.gd" id="1_h0lb7"]
 
 [resource]
@@ -8,3 +9,4 @@ title = "Forever playing dress-up"
 hint = "Unlock every cosmetic"
 category = 2
 secret = false
+image = ExtResource("1_a41ab")

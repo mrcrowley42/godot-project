@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://iql7hoey8bmk"]
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://iql7hoey8bmk"]
 
 [ext_resource type="Script" path="res://scripts/base_classses/achievement.gd" id="1_4e04i"]
+[ext_resource type="Texture2D" uid="uid://c4akxnls8kmen" path="res://images/achievements/many_foods.png" id="1_3641o"]
 
 [resource]
 script = ExtResource("1_4e04i")
@@ -8,3 +9,4 @@ title = "Is it still hungry?!"
 hint = "Try every food and drink"
 category = 2
 secret = false
+image = ExtResource("1_3641o")

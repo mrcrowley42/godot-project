@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://b74rhs5f0lfn3"]
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://b74rhs5f0lfn3"]
 
 [ext_resource type="Script" path="res://scripts/base_classses/achievement.gd" id="1_drle3"]
+[ext_resource type="Texture2D" uid="uid://clmxybhwkfwur" path="res://images/achievements/many_creatures.png" id="1_q4g5k"]
 
 [resource]
 script = ExtResource("1_drle3")
@@ -8,3 +9,4 @@ title = "I've raised them all, every single one"
 hint = "Discover every creature type"
 category = 2
 secret = false
+image = ExtResource("1_q4g5k")
