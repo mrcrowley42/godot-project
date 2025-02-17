@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://d4ldgyi682yot"]
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://d4ldgyi682yot"]
 
+[ext_resource type="Texture2D" uid="uid://sv8jnstrcn2v" path="res://images/achievements/big_brain.png" id="1_rj0im"]
 [ext_resource type="Script" path="res://scripts/base_classses/achievement.gd" id="1_u7spq"]
 
 [resource]
@@ -8,3 +9,4 @@ title = "How does it retain everything?!"
 hint = "Unlock every fact"
 category = 2
 secret = false
+image = ExtResource("1_rj0im")
