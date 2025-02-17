@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://dkye7sv8ic82b"]
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://dkye7sv8ic82b"]
 
+[ext_resource type="Texture2D" uid="uid://ia7j7kkqns8t" path="res://images/achievements/creature_evolving.png" id="1_4p3s2"]
 [ext_resource type="Script" path="res://scripts/base_classses/achievement.gd" id="1_xk76o"]
 
 [resource]
 script = ExtResource("1_xk76o")
-title = "They grow up so fast!"
+title = "What? Creature is evolving!"
 hint = "Reach the child stage"
 category = 0
 secret = false
+image = ExtResource("1_4p3s2")
