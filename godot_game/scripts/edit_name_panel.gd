@@ -3,6 +3,7 @@ extends Control
 
 @export var cosmetics_grid: GridContainer
 @export var line_edit: LineEdit
+@export var change_name_ach: Achievement
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -26,6 +27,10 @@ func _on_accept_edit_btn_button_down() -> void:
 	%BtnClick.play()
 	hide()
 	cosmetics_grid.show()
+	var old_name = DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_NAME)
 	var new_name = line_edit.text
 	DataGlobals.set_metadata_value(false, DataGlobals.CREATURE_NAME, new_name)
 	cosmetics_grid.update_title()
+	
+	if old_name != new_name:
+		Globals.unlock_achievement(change_name_ach)

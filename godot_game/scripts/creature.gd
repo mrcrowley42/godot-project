@@ -19,6 +19,7 @@ const like_multiplier: float = 2.0
 @export var clippy_area: Node
 @export var xp_mulitplier: float = 1.0
 @export var viewport_container: Node
+@export var dislike_food_ach: Achievement
 
 ## XP required for the creature to reach the [param ADULT] [param LifeStage] stage
 var xp_required: float
@@ -209,6 +210,7 @@ func consume_food(food_item: FoodItem):
 	elif pref == Preference.DISLIKES: 
 		preference_multi = dislike_multiplier
 		do_movement(Movement.CONFUSED_SHAKE)
+		Globals.unlock_achievement(dislike_food_ach)
 	add_food(food_item.amount, preference_multi)
 
 func add_food(amount: float, multiplier: float = 1.0):

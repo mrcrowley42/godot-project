@@ -5,6 +5,10 @@ class_name AchievementManager extends ScriptNode
 @export var completionist_grid: GridContainer
 @export var perc_label: Label
 
+@export var customise_everything_ach: Achievement
+
+enum CUSTOMISATIONS {COSMETIC, NAME, THEME, AMBIENCE, SETTING}
+
 var all_achievements = preload("res://resources/all_achievements.tres").items
 @onready var acheivenent_scene = preload("res://scenes/UiScenes/achievement_display.tscn")
 
@@ -39,3 +43,17 @@ func update_progress_label(_uid=-1):
 	var current_count = len(DataGlobals.get_global_metadata_value(DataGlobals.UNLOCKED_ACHIEVEMENTS))
 	var perc = floor((float(current_count) / float(total_count)) * 100.)
 	perc_label.text = str(perc) + "% complete" + ("!" if perc == 100 else "")
+
+func customise_everything_counter(customisation: CUSTOMISATIONS):
+	var ach_progress = DataGlobals.get_global_metadata_value(DataGlobals.ACHIEVEMENT_PROGRESS)
+	var current = []
+	if 'customise_everything' in ach_progress:
+		current = ach_progress['customise_everything']
+	
+	if customisation not in current:
+		current.append(customisation)
+		DataGlobals.modify_metadata_value(true, DataGlobals.ACHIEVEMENT_PROGRESS, ['customise_everything'], DataGlobals.ACTION_SET, current)
+	
+	var current_updated = DataGlobals.get_global_metadata_value(DataGlobals.ACHIEVEMENT_PROGRESS)['customise_everything']
+	if len(current_updated) == len(CUSTOMISATIONS.keys()):
+		Globals.unlock_achievement(customise_everything_ach)

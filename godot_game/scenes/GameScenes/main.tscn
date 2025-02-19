@@ -1,4 +1,4 @@
-[gd_scene load_steps=133 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=137 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
@@ -11,14 +11,17 @@
 [ext_resource type="Texture2D" uid="uid://cdbor7hjfbusn" path="res://UI stuff/Universal/background.png" id="6_oihh8"]
 [ext_resource type="Shader" path="res://shaders/background.gdshader" id="7_1pcjq"]
 [ext_resource type="Texture2D" uid="uid://bmwpenw32juko" path="res://UI stuff/Universal/background_light_map.png" id="8_aulml"]
+[ext_resource type="Resource" uid="uid://brrtf0fvck4s3" path="res://resources/achievements/general/customise_everything.tres" id="8_likk1"]
 [ext_resource type="PackedScene" uid="uid://bebjn5n2kjwgb" path="res://scenes/Creatures/creature.tscn" id="9_ulkn4"]
 [ext_resource type="Theme" uid="uid://dl1wes8p6lqlb" path="res://themes/invisible.tres" id="11_lcq7m"]
 [ext_resource type="Script" path="res://scripts/clippy_area.gd" id="12_n00c6"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/ui_theme_manager.gd" id="13_3i267"]
 [ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="14_fimo1"]
 [ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="14_k2ios"]
+[ext_resource type="Resource" uid="uid://c4mrl54qdvgg7" path="res://resources/achievements/general/try_disliked_food.tres" id="15_4s8wr"]
 [ext_resource type="Texture2D" uid="uid://do0i17klbrer7" path="res://icons/arrow-up-square.svg" id="15_8x1u0"]
 [ext_resource type="Script" path="res://scripts/grow_up_btn.gd" id="16_mj2i7"]
+[ext_resource type="Resource" uid="uid://c1t6gsmcergkh" path="res://resources/achievements/general/clippy_mode.tres" id="17_uw6yv"]
 [ext_resource type="Script" path="res://scripts/action_menu_panel.gd" id="17_wsydk"]
 [ext_resource type="Script" path="res://scripts/utility/custom_tooltip_script.gd" id="18_2njxs"]
 [ext_resource type="Theme" uid="uid://1dv11a5ar0hg" path="res://themes/action_btn.tres" id="18_v1mb2"]
@@ -84,6 +87,7 @@
 [ext_resource type="Shader" path="res://shaders/pattern_wavy.gdshader" id="57_qy3v8"]
 [ext_resource type="Script" path="res://scripts/edit_name_panel.gd" id="59_6wf3t"]
 [ext_resource type="Script" path="res://scenes/GameScenes/skip_title_c_box.gd" id="62_fffta"]
+[ext_resource type="Resource" uid="uid://bjthhukrnp7lf" path="res://resources/achievements/general/edit_name.tres" id="64_adu34"]
 [ext_resource type="Script" path="res://scripts/sfx_man.gd" id="65_787cd"]
 [ext_resource type="AudioStream" uid="uid://cx28efsxtr7c" path="res://sound_effects/button_click_fast.mp3" id="67_nfa6o"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/popup_manager.gd" id="69_rkm2b"]
@@ -439,6 +443,7 @@ general_grid = NodePath("../UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxC
 minigame_grid = NodePath("../UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/VBoxContainer/MinigameAcvmnt")
 completionist_grid = NodePath("../UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/VBoxContainer/CompletionAcvmnt")
 perc_label = NodePath("../UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer/MarginContainer/AchievementProgressLabe")
+customise_everything_ach = ExtResource("8_likk1")
 
 [node name="MinigameManager" type="Node2D" parent="." node_paths=PackedStringArray("minigame_layer")]
 unique_name_in_owner = true
@@ -494,6 +499,7 @@ unique_name_in_owner = true
 texture_filter = 1
 position = Vector2(270, 393.5)
 clippy_area = NodePath("../ClippyArea")
+dislike_food_ach = ExtResource("15_4s8wr")
 
 [node name="ClippyArea" type="Button" parent="Gameplay" node_paths=PackedStringArray("ambience_manager") groups=["settings_data"]]
 unique_name_in_owner = true
@@ -513,6 +519,7 @@ mouse_default_cursor_shape = 6
 theme = ExtResource("11_lcq7m")
 script = ExtResource("12_n00c6")
 ambience_manager = NodePath("../../AmbienceManager")
+enter_clippy_ach = ExtResource("17_uw6yv")
 metadata/_edit_lock_ = true
 
 [node name="NotificationLayer" type="CanvasLayer" parent="."]
@@ -1272,7 +1279,6 @@ script = ExtResource("35_4io20")
 [node name="CosmeticsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 material = SubResource("ShaderMaterial_357to")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -1311,7 +1317,7 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="CosmeticItems" type="GridContainer" parent="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer" node_paths=PackedStringArray("creature", "title_label")]
+[node name="CosmeticItems" type="GridContainer" parent="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer" node_paths=PackedStringArray("creature", "title_label", "achievement_manager")]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/h_separation = 8
@@ -1320,6 +1326,7 @@ columns = 5
 script = ExtResource("41_pook7")
 creature = NodePath("../../../../../../../../../Gameplay/Creature")
 title_label = NodePath("../../../../Title")
+achievement_manager = NodePath("../../../../../../../../../AchievementManager")
 
 [node name="PreviewContainer" type="MarginContainer" parent="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -1362,6 +1369,7 @@ layout_mode = 2
 script = ExtResource("59_6wf3t")
 cosmetics_grid = NodePath("../MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/CosmeticItems")
 line_edit = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/LineEdit")
+change_name_ach = ExtResource("64_adu34")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/CosmeticsMenu/EditNamePanel"]
 layout_mode = 0
@@ -1485,6 +1493,7 @@ script = ExtResource("35_4io20")
 [node name="SettingsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 material = SubResource("ShaderMaterial_1s3b6")
 layout_mode = 2
 script = ExtResource("32_jvqx8")

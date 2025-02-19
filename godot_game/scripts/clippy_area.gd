@@ -7,6 +7,7 @@ const MUTE_AMBIENCE_SETTING = "MuteAmbInClippyMode"
 ## Clippy mode and window size functions are stored here.
 @export var scale_factor: float = 2.0
 @export var ambience_manager: AmbienceManager
+@export var enter_clippy_ach: Achievement
 
 @onready var window: Window = get_window()
 @onready var viewport: Viewport = get_viewport()
@@ -146,6 +147,7 @@ func maximise() -> void:
 
 func _on_clippy_btn_button_down() -> void:
 	toggle_clippy_mode()
+	Globals.unlock_achievement(enter_clippy_ach)
 
 
 func _on_sfx_clippy_box_toggled(toggled_on: bool) -> void:

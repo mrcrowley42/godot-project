@@ -9,6 +9,7 @@ var unlockables = load("res://resources/unlockables.tres")
 
 @export var creature: Creature
 @export var title_label: Button
+@export var achievement_manager: AchievementManager
 var title_label_og_text: String
 
 var data_is_loaded = false
@@ -16,8 +17,10 @@ var data_is_loaded = false
 ## Class that describes the button object for each cosmetic item.
 class UnlockableIcon extends CustomTooltipButton:
 	var cosmetic
+	var achievement_manager: AchievementManager
 
-	func _init(unlockable: CosmeticItem):
+	func _init(unlockable: CosmeticItem, ach_man: AchievementManager):
+		achievement_manager = ach_man
 		theme = load("res://themes/cosmetic_btn_theme.tres")
 		custom_minimum_size = BTN_SIZE
 		toggle_mode = true
@@ -36,6 +39,7 @@ class UnlockableIcon extends CustomTooltipButton:
 		var manager: AccessoryManager = creature.find_child("AccessoryManager")
 		manager.toggle_cosmetic(self.cosmetic)
 		parent.cosmetic_btn_pressed.emit()
+		achievement_manager.customise_everything_counter(achievement_manager.CUSTOMISATIONS.COSMETIC)
 
 	func update_locked(new_cosmetic_uid = null):
 		var unlocked_items = DataGlobals.get_global_metadata_value(DataGlobals.UNLOCKED_COSMETICS)
@@ -63,7 +67,7 @@ func _notification(what: int) -> void:
 		update_title()
 		
 		for item: CosmeticItem in unlockables.unlockables:
-			var item_btn = UnlockableIcon.new(item)
+			var item_btn = UnlockableIcon.new(item, achievement_manager)
 			add_child.call_deferred(item_btn)
 
 
