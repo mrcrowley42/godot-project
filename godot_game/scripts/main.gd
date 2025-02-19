@@ -2,6 +2,8 @@ class_name Game extends Node
 
 #@export var debug_mode: bool
 @export var unlock_fps: bool = false
+@export var hatch_baby_ach: Achievement
+
 @onready var debug_mode: bool = OS.is_debug_build()
 @onready var launch_time: float = Time.get_unix_time_from_system()
 @onready var stat_man: StatusManager = %StatusManager
@@ -46,8 +48,9 @@ func _ready():
 
 	# do last
 	set_is_in_trans(true)
-	do_opening_trans()
+	await do_opening_trans()
 	DataGlobals.setup_auto_save(self)
+	Globals.unlock_achievement(hatch_baby_ach)
 
 func do_opening_trans():
 	Globals.perform_opening_transition(trans_img, ui_overlay.position, set_is_in_trans.bind(false))

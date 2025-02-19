@@ -1,7 +1,8 @@
-[gd_scene load_steps=132 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=133 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
+[ext_resource type="Resource" uid="uid://dog83la1was12" path="res://resources/achievements/general/hatch_first_baby.tres" id="2_dv61o"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/minigame_manager.gd" id="3_fj5ve"]
 [ext_resource type="Script" path="res://scripts/background.gd" id="4_j8clb"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/consumables_manager.gd" id="5_yr5ap"]
@@ -405,6 +406,7 @@ data = PackedByteArray("SUQzBAAAAAABAFRYWFgAAAASAAADbWFqb3JfYnJhbmQAbXA0MgBUWFhY
 
 [node name="Game" type="Node"]
 script = ExtResource("1_opnvu")
+hatch_baby_ach = ExtResource("2_dv61o")
 metadata/_edit_vertical_guides_ = [532.0, 8.0, 45.0, 53.0, 487.0, 495.0]
 metadata/_edit_horizontal_guides_ = [8.0, 667.0, 112.0, 111.0, 554.0, 562.0]
 

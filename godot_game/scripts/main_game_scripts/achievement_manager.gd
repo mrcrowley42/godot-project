@@ -20,7 +20,7 @@ func _notification(what):
 				continue
 			add_achivement_to_grid(btn)
 		
-		## do secrest last
+		## do secrest ones last
 		for secret in secrets:
 			add_achivement_to_grid(secret)
 		update_progress_label()
