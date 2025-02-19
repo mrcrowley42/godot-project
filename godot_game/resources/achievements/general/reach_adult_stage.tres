@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://b4l5j5wla1uic"]
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://b4l5j5wla1uic"]
 
 [ext_resource type="Script" path="res://scripts/base_classses/achievement.gd" id="1_mm8xd"]
+[ext_resource type="Texture2D" uid="uid://bxxyqrxk8k3jr" path="res://images/achievements/creature_evolving_2.png" id="1_vo6pt"]
 
 [resource]
 script = ExtResource("1_mm8xd")
@@ -8,3 +9,4 @@ title = "Adopted and raised!"
 hint = "Reach the adult stage"
 category = 0
 secret = false
+image = ExtResource("1_vo6pt")
