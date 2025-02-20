@@ -16,7 +16,9 @@ func _ready() -> void:
 		date_label.text = lp_date + lp_time
 		var icon_path = Globals.SAVE_ICON_FILE.replace("{}", str(save_file.id))
 		if FileAccess.file_exists(icon_path):
-			creature_icon.icon = load(icon_path)
+			var icon_img = Image.new()
+			icon_img.load(icon_path)
+			creature_icon.icon = ImageTexture.create_from_image(icon_img)
 		#category_icon.tooltip_string = "Category: %s" % sound_node.sound_category.category_name
 		#creature_icon.icon = save_file.icon
 
