@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dnfq7jawtfv5q"]
+[gd_scene load_steps=27 format=3 uid="uid://dnfq7jawtfv5q"]
 
 [ext_resource type="Script" path="res://scripts/scissors_paper_rock_root.gd" id="1_esr3m"]
 [ext_resource type="Texture2D" uid="uid://oilx4u2i6jiq" path="res://images/scissors-paper-rock/box_closed.png" id="1_g0ux3"]
@@ -8,6 +8,7 @@
 [ext_resource type="Shader" path="res://shaders/pattern_checker.gdshader" id="2_yay6w"]
 [ext_resource type="Script" path="res://scripts/minigames/scissors_paper_rock.gd" id="3_7jb5j"]
 [ext_resource type="Theme" uid="uid://bsd1dkhc13v47" path="res://themes/plain.tres" id="3_63uno"]
+[ext_resource type="Resource" uid="uid://c26mmvrj6gh0s" path="res://resources/achievements/minigames/spr_beat_creature.tres" id="3_nkpqy"]
 [ext_resource type="Texture2D" uid="uid://ctj6mmgfjdpiv" path="res://images/scissors-paper-rock/scissors.png" id="3_oahic"]
 [ext_resource type="Texture2D" uid="uid://07vyptp6eqgi" path="res://images/scissors-paper-rock/paper.png" id="4_0d63p"]
 [ext_resource type="Texture2D" uid="uid://d4t12xgr5bjg" path="res://UI stuff/Green Palette/ui_green_box_inverted.png" id="4_bk1ls"]
@@ -86,6 +87,7 @@ creature_prev = NodePath("../Gameplay/GameContainer/Node2D/creaturePrev")
 ui_overlay_sprite = NodePath("../UI/Control/UI_Overlay")
 score_ui_sprite = NodePath("../UI/Control/ScoreContainer")
 help_bg_sprite = NodePath("../Gameplay/HelpMenu/NinePatchRect")
+win_many_ach = ExtResource("3_nkpqy")
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true

@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_lpmkp")
 title = "How much ram is required for this?"
-hint = "Get under 30 score in Memory Match"
+hint = "Get under 20 score in Memory Match"
 category = 1
 secret = false
 image = ExtResource("1_uikqd")

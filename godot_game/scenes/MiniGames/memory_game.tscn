@@ -1,8 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://d3e1mocbpq7hp"]
+[gd_scene load_steps=22 format=3 uid="uid://d3e1mocbpq7hp"]
 
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="1_3y1y3"]
 [ext_resource type="Script" path="res://scripts/minigames/memory_match/memory_game.gd" id="1_ckjye"]
 [ext_resource type="Script" path="res://scripts/minigames/memory_match/memory_game_logic.gd" id="1_y2saq"]
+[ext_resource type="Resource" uid="uid://cjjg4yyomx026" path="res://resources/achievements/minigames/memory_match_low_score.tres" id="2_g05j1"]
+[ext_resource type="Resource" uid="uid://biyy1c18yheiy" path="res://resources/achievements/minigames/memory_match_fast_score.tres" id="3_n4xrt"]
 [ext_resource type="Texture2D" uid="uid://cs3dfnulji8oi" path="res://UI stuff/Green Palette/ui_memory.png" id="5_1yvmx"]
 [ext_resource type="Theme" uid="uid://kpqilwsnepqa" path="res://themes/nothing.tres" id="5_4atnw"]
 [ext_resource type="Script" path="res://scripts/sfx_man.gd" id="5_nj7bn"]
@@ -41,6 +43,8 @@ script = ExtResource("1_ckjye")
 ui_overlay_sprite = NodePath("UI/Control/UI_Overlay")
 score_ui_sprite = NodePath("UI/Control/ScoreContainer")
 help_bg_sprite = NodePath("UI/Control/TopOverlay/HelpMenu/NinePatchRect")
+low_score_ach = ExtResource("2_g05j1")
+fast_time_ach = ExtResource("3_n4xrt")
 
 [node name="MemoryGameLogic" type="Node" parent="."]
 script = ExtResource("1_y2saq")

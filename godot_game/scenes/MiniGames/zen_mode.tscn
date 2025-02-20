@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://drotl04h8ywfe"]
+[gd_scene load_steps=9 format=3 uid="uid://drotl04h8ywfe"]
 
 [ext_resource type="Shader" path="res://shaders/zen_mode.gdshader" id="1_5e7kv"]
 [ext_resource type="Script" path="res://scripts/minigames/zen_mode.gd" id="1_kb7c0"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="2_s7g67"]
+[ext_resource type="Resource" uid="uid://f43bs6byewf4" path="res://resources/achievements/minigames/first_zen_mode.tres" id="3_tafka"]
+[ext_resource type="Resource" uid="uid://bj8wncd0yrjg7" path="res://resources/achievements/minigames/tenth_zen_mode.tres" id="4_dwxk0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m5uvw"]
 shader = ExtResource("1_5e7kv")
@@ -36,6 +38,8 @@ texture = SubResource("GradientTexture2D_dq5kv")
 [node name="GameLogic" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("1_kb7c0")
+first_zen_ach = ExtResource("3_tafka")
+many_zen_ach = ExtResource("4_dwxk0")
 
 [node name="CloseBtn" type="Button" parent="."]
 offset_left = 67.0

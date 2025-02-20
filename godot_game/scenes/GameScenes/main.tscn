@@ -1,8 +1,9 @@
-[gd_scene load_steps=137 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=139 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
 [ext_resource type="Resource" uid="uid://dog83la1was12" path="res://resources/achievements/general/hatch_first_baby.tres" id="2_dv61o"]
+[ext_resource type="Resource" uid="uid://bcpvpvjxus07h" path="res://resources/achievements/general/yippeee.tres" id="3_88kd3"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/minigame_manager.gd" id="3_fj5ve"]
 [ext_resource type="Script" path="res://scripts/background.gd" id="4_j8clb"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/consumables_manager.gd" id="5_yr5ap"]
@@ -92,6 +93,7 @@
 [ext_resource type="AudioStream" uid="uid://cx28efsxtr7c" path="res://sound_effects/button_click_fast.mp3" id="67_nfa6o"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/popup_manager.gd" id="69_rkm2b"]
 [ext_resource type="Script" path="res://scenes/GameScenes/holiday_c_box.gd" id="71_5w18v"]
+[ext_resource type="Resource" uid="uid://cdj0k55cib2kh" path="res://resources/achievements/general/over_equip_ambience.tres" id="78_hlr37"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/sound_scape_manager.gd" id="80_83777"]
 
 [sub_resource type="Gradient" id="Gradient_jl3ct"]
@@ -411,6 +413,7 @@ data = PackedByteArray("SUQzBAAAAAABAFRYWFgAAAASAAADbWFqb3JfYnJhbmQAbXA0MgBUWFhY
 [node name="Game" type="Node"]
 script = ExtResource("1_opnvu")
 hatch_baby_ach = ExtResource("2_dv61o")
+yipppee_ach = ExtResource("3_88kd3")
 metadata/_edit_vertical_guides_ = [532.0, 8.0, 45.0, 53.0, 487.0, 495.0]
 metadata/_edit_horizontal_guides_ = [8.0, 667.0, 112.0, 111.0, 554.0, 562.0]
 
@@ -1875,6 +1878,7 @@ theme_override_constants/separation = 16
 script = ExtResource("53_ubf3f")
 ambience_man = NodePath("../../../../../AmbienceManager")
 ach_man = NodePath("../../../../../AchievementManager")
+amb_sounds_ach = ExtResource("78_hlr37")
 
 [node name="Button" type="Button" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2

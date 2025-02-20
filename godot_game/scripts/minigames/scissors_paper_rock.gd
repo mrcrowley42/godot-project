@@ -14,6 +14,8 @@ var choices = ['rock', 'paper', 'scissors']
 @export var score_ui_sprite: NinePatchRect
 @export var help_bg_sprite: NinePatchRect
 
+@export var win_many_ach: Achievement
+
 var choice_2_sprite = {
 	'rock': load("res://images/scissors-paper-rock/rock.png"),
 	'scissors': load("res://images/scissors-paper-rock/scissors.png"),
@@ -37,6 +39,9 @@ func win():
 	%GameStatus.text = 'Victory\nYou win'
 	%SFX.play_sound("correct")
 	creature_prev.animation = "angry"
+	
+	if player_score == 10:
+		Globals.unlock_achievement(win_many_ach)
 	
 func lose():
 	creature_score += 1

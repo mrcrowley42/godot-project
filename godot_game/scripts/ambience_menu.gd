@@ -8,6 +8,8 @@ extends VBoxContainer
 @export var ambience_man: AmbienceManager
 @export var ach_man: AchievementManager
 
+@export var amb_sounds_ach: Achievement
+
 var current_category: AmbientSoundCategory
 var current_sound
 var count_label_tween: Tween
@@ -46,6 +48,7 @@ func _on_add_sound_btn_button_down() -> void:
 			count_label_tween.stop()
 		count_label.modulate = Color.RED
 		count_label_tween = Globals.tween(count_label, "modulate", Color.WHITE, 0, 1., Tween.EASE_OUT)
+		Globals.unlock_achievement(amb_sounds_ach)
 		return
 	
 	# add sound

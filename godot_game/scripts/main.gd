@@ -3,6 +3,7 @@ class_name Game extends Node
 #@export var debug_mode: bool
 @export var unlock_fps: bool = false
 @export var hatch_baby_ach: Achievement
+@export var yipppee_ach: Achievement
 
 @onready var debug_mode: bool = OS.is_debug_build()
 @onready var launch_time: float = Time.get_unix_time_from_system()
@@ -104,10 +105,11 @@ func _input(event) -> void:
 		Globals.send_notification(NOTIFICATION_WM_CLOSE_REQUEST)
 		get_tree().quit()
 
-	## fire confetti
-	if debug_mode and (event is InputEventKey) and event.pressed:
+	## YIIIIPPEEEEE
+	if (event is InputEventKey) and event.pressed and %MinigameManager.current_minigame == null and %ClippyArea.clippy == false:
 		if event.keycode == KEY_Y:
 			Globals.fire_confetti(self)
+			Globals.unlock_achievement(yipppee_ach)
 
 
 ## Give bonus for XP until neglect threshold then start draining stats

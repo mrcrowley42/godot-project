@@ -33,6 +33,9 @@ var best_level = 0
 @export var ui_cover_sprite: Sprite2D
 @export var help_bg_sprite: NinePatchRect
 
+@export var high_score_adv: Achievement
+@export var adv_menu_ach: Achievement
+
 func show_start_menu():
 	start_menu.show()
 	var score_label = start_menu.find_child("ScoreL")
@@ -93,6 +96,9 @@ func on_game_over():
 	best_level = t_logic.level if high_level else best_level
 	kill_menu.find_child("BestScore").visible = high_score
 	kill_menu.find_child("BestLevel").visible = high_level
+	
+	if best_score > 10_000:
+		Globals.unlock_achievement(high_score_adv)
 
 ## data is the same thats returned from get_save_data()
 func load_save_data(data):
@@ -114,6 +120,7 @@ func _on_help_btn_button_down():
 	help_menu.visible = !help_menu.visible
 	if t_logic.running:
 		t_logic.paused = help_menu.visible
+	Globals.unlock_achievement(adv_menu_ach)
 
 func _on_close_btn_button_down():
 	if help_menu.visible:  # close help menu if its open

@@ -23,6 +23,9 @@ class_name MemoryGame extends Node2D
 @export var score_ui_sprite: NinePatchRect
 @export var help_bg_sprite: NinePatchRect
 
+@export var low_score_ach: Achievement
+@export var fast_time_ach: Achievement
+
 const FINAL_SCORE_LABEL_TEXT = {
 	null: "-\n-",
 	true: "Time:\n%.2f seconds",
@@ -75,6 +78,11 @@ func show_finish_menu(is_timed: bool, score: float):
 		best_time = float(score)
 	if new_lowest_guess:
 		lowest_guesses = int(score)
+	
+	if lowest_guesses < 20:
+		Globals.unlock_achievement(low_score_ach)
+	if best_time < 30:
+		Globals.unlock_achievement(fast_time_ach)
 
 
 ## data is the same thats returned from get_save_data()
