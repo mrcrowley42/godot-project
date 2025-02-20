@@ -1050,7 +1050,7 @@ theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="ThemeBtns" type="GridContainer" parent="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer" node_paths=PackedStringArray("theme_manager")]
+[node name="ThemeBtns" type="GridContainer" parent="UI/OptionsMenu/ThemeMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer" node_paths=PackedStringArray("theme_manager", "ach_man")]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/h_separation = 12
@@ -1058,6 +1058,7 @@ theme_override_constants/v_separation = 12
 columns = 2
 script = ExtResource("37_tokl0")
 theme_manager = NodePath("../../../../../../../../../UI_Theme_Manager")
+ach_man = NodePath("../../../../../../../../../AchievementManager")
 
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/ThemeMenu"]
 position = Vector2(-50, -130)
@@ -1364,11 +1365,12 @@ scale = Vector2(0.75, 0.75)
 theme = ExtResource("33_1qhmu")
 text = "Edit name"
 
-[node name="EditNamePanel" type="Control" parent="UI/OptionsMenu/CosmeticsMenu" node_paths=PackedStringArray("cosmetics_grid", "line_edit")]
+[node name="EditNamePanel" type="Control" parent="UI/OptionsMenu/CosmeticsMenu" node_paths=PackedStringArray("cosmetics_grid", "line_edit", "ach_man")]
 layout_mode = 2
 script = ExtResource("59_6wf3t")
 cosmetics_grid = NodePath("../MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/CosmeticItems")
 line_edit = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/LineEdit")
+ach_man = NodePath("../../../../AchievementManager")
 change_name_ach = ExtResource("64_adu34")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/OptionsMenu/CosmeticsMenu/EditNamePanel"]
@@ -1867,11 +1869,12 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer" node_paths=PackedStringArray("ambience_man")]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer" node_paths=PackedStringArray("ambience_man", "ach_man")]
 layout_mode = 2
 theme_override_constants/separation = 16
 script = ExtResource("53_ubf3f")
 ambience_man = NodePath("../../../../../AmbienceManager")
+ach_man = NodePath("../../../../../AchievementManager")
 
 [node name="Button" type="Button" parent="UI/OptionsMenu/AmbienceMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2

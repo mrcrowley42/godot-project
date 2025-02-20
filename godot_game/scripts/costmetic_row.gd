@@ -19,8 +19,7 @@ class UnlockableIcon extends CustomTooltipButton:
 	var cosmetic
 	var achievement_manager: AchievementManager
 
-	func _init(unlockable: CosmeticItem, ach_man: AchievementManager):
-		achievement_manager = ach_man
+	func _init(unlockable: CosmeticItem):
 		theme = load("res://themes/cosmetic_btn_theme.tres")
 		custom_minimum_size = BTN_SIZE
 		toggle_mode = true
@@ -67,7 +66,8 @@ func _notification(what: int) -> void:
 		update_title()
 		
 		for item: CosmeticItem in unlockables.unlockables:
-			var item_btn = UnlockableIcon.new(item, achievement_manager)
+			var item_btn = UnlockableIcon.new(item)
+			item_btn.achievement_manager = achievement_manager
 			add_child.call_deferred(item_btn)
 
 

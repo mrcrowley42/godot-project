@@ -6,6 +6,7 @@ extends VBoxContainer
 @onready var count_label: Label = find_child("SoundCountLabel")
 
 @export var ambience_man: AmbienceManager
+@export var ach_man: AchievementManager
 
 var current_category: AmbientSoundCategory
 var current_sound
@@ -57,6 +58,7 @@ func _on_add_sound_btn_button_down() -> void:
 	
 	DataGlobals.save_settings_data()
 	update_count_label()
+	ach_man.customise_everything_counter(ach_man.CUSTOMISATIONS.AMBIENCE)
 
 
 func _on_sound_btn_item_selected(index: int) -> void:

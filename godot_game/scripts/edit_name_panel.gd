@@ -3,6 +3,7 @@ extends Control
 
 @export var cosmetics_grid: GridContainer
 @export var line_edit: LineEdit
+@export var ach_man: AchievementManager
 @export var change_name_ach: Achievement
 
 # Called when the node enters the scene tree for the first time.
@@ -34,3 +35,4 @@ func _on_accept_edit_btn_button_down() -> void:
 	
 	if old_name != new_name:
 		Globals.unlock_achievement(change_name_ach)
+		ach_man.customise_everything_counter(ach_man.CUSTOMISATIONS.NAME)

@@ -2,12 +2,14 @@ extends GridContainer
 
 const BTN_SIZE: Vector2 = Vector2(172, 80)
 @export var theme_manager: UiThemeManager
+@export var ach_man: AchievementManager
 const btn_theme_group = preload("res://resources/theme_btn_group.tres")
 const btn_theme = preload("res://themes/cosmetic_btn_theme.tres")
 
 ## Class that describes UI theme button.
 class UiThemeButton extends CustomTooltipButton:
 	var ui_theme
+	var ach_man: AchievementManager
 	func _init(_ui_theme: UiTheme, selected: bool):
 		self.direction = DIRECTION.DOWN
 		self.custom_minimum_size = BTN_SIZE
@@ -54,6 +56,7 @@ class UiThemeButton extends CustomTooltipButton:
 		var sound_click = find_parent("Game").find_child("BtnClick")
 		sound_click.play()
 		DataGlobals.save_settings_data()
+		ach_man.customise_everything_counter(ach_man.CUSTOMISATIONS.THEME)
 
 	func update_locked(new_theme_uid = null):
 		var unlocked_items = DataGlobals.get_global_metadata_value(DataGlobals.UNLOCKED_THEMES)
@@ -78,6 +81,7 @@ func _notification(what: int) -> void:
 	if what == Globals.NOTIFICATION_ALL_DATA_IS_LOADED:
 		for item: UiTheme in theme_manager.themes:
 			var theme_btn = UiThemeButton.new(item, %UI_Theme_Manager.current_theme == item)
+			theme_btn.ach_man = ach_man
 			add_child.call_deferred(theme_btn)
 
 

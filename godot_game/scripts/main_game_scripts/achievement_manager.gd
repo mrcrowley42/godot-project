@@ -7,7 +7,7 @@ class_name AchievementManager extends ScriptNode
 
 @export var customise_everything_ach: Achievement
 
-enum CUSTOMISATIONS {COSMETIC, NAME, THEME, AMBIENCE, SETTING}
+enum CUSTOMISATIONS {COSMETIC, NAME, THEME, AMBIENCE}
 
 var all_achievements = preload("res://resources/all_achievements.tres").items
 @onready var acheivenent_scene = preload("res://scenes/UiScenes/achievement_display.tscn")
@@ -50,8 +50,8 @@ func customise_everything_counter(customisation: CUSTOMISATIONS):
 	if 'customise_everything' in ach_progress:
 		current = ach_progress['customise_everything']
 	
-	if customisation not in current:
-		current.append(customisation)
+	if str(customisation) not in current:  # must be cast to string!
+		current.append(str(customisation))
 		DataGlobals.modify_metadata_value(true, DataGlobals.ACHIEVEMENT_PROGRESS, ['customise_everything'], DataGlobals.ACTION_SET, current)
 	
 	var current_updated = DataGlobals.get_global_metadata_value(DataGlobals.ACHIEVEMENT_PROGRESS)['customise_everything']
