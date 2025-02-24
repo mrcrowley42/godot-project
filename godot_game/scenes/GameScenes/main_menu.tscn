@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://ig0eoqdfq5nr"]
+[gd_scene load_steps=29 format=3 uid="uid://ig0eoqdfq5nr"]
 
 [ext_resource type="Script" path="res://scripts/main_game_scripts/main_menu.gd" id="1_lpoqi"]
 [ext_resource type="Shader" path="res://shaders/pattern_lines.gdshader" id="2_f1u7v"]
@@ -6,9 +6,13 @@
 [ext_resource type="Texture2D" uid="uid://bew6qy27ohhib" path="res://themes/main_menu_grad.tres" id="3_kva7r"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="4_22rev"]
 [ext_resource type="Theme" uid="uid://be46f5clp5lhj" path="res://themes/action_btn_main_menu.tres" id="5_yrm4f"]
+[ext_resource type="Texture2D" uid="uid://b053kk53cuq61" path="res://icons/egg-solid.svg" id="6_1pdy6"]
+[ext_resource type="Texture2D" uid="uid://ds2ci8c6rq5o7" path="res://icons/settings_small.svg" id="6_usr4r"]
+[ext_resource type="Texture2D" uid="uid://dlrmnjhbmum4t" path="res://icons/plus-solid.svg" id="7_7g5bp"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="8_1gx8s"]
 [ext_resource type="Script" path="res://scenes/GameScenes/load_save_menu.gd" id="9_1nm66"]
 [ext_resource type="Script" path="res://scenes/GameScenes/main_menu_settings_menu.gd" id="9_vpucw"]
+[ext_resource type="Texture2D" uid="uid://duxdfoxuoidph" path="res://icons/right-from-bracket-solid.svg" id="9_y0fl7"]
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="10_46g4q"]
 [ext_resource type="Texture2D" uid="uid://pfr6wdx80m45" path="res://icons/volume-fill.svg" id="11_ajurq"]
 [ext_resource type="Script" path="res://scripts/utility/custom_tooltip_script.gd" id="11_hpuph"]
@@ -98,7 +102,7 @@ texture = ExtResource("3_kva7r")
 modulate = Color(1, 1, 1, 0.541176)
 position = Vector2(268, -31)
 amount = 30
-lifetime = 8.0
+lifetime = 9.0
 preprocess = 10.0
 emission_shape = 3
 emission_rect_extents = Vector2(280, 1)
@@ -129,7 +133,7 @@ color = Color(0.038967, 0.122809, 0.12806, 1)
 
 [node name="MenuList" type="MarginContainer" parent="."]
 offset_right = 540.0
-offset_bottom = 675.0
+offset_bottom = 710.0
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 50
@@ -143,34 +147,137 @@ theme_override_constants/margin_top = 200
 layout_mode = 2
 theme_override_constants/separation = 14
 
+[node name="HatchEggBtn" type="Button" parent="MenuList/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme = ExtResource("5_yrm4f")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuList/MarginContainer/VBoxContainer/HatchEggBtn"]
+layout_mode = 0
+offset_right = 440.0
+offset_bottom = 60.0
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MenuList/MarginContainer/VBoxContainer/HatchEggBtn/HBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("6_1pdy6")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="MenuList/MarginContainer/VBoxContainer/HatchEggBtn/HBoxContainer"]
+layout_mode = 2
+text = "Hatch Egg"
+
 [node name="NewGameBtn" type="Button" parent="MenuList/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme = ExtResource("5_yrm4f")
-text = "New Game"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuList/MarginContainer/VBoxContainer/NewGameBtn"]
+offset_right = 440.0
+offset_bottom = 60.0
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MenuList/MarginContainer/VBoxContainer/NewGameBtn/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("7_7g5bp")
+
+[node name="Label" type="Label" parent="MenuList/MarginContainer/VBoxContainer/NewGameBtn/HBoxContainer"]
+layout_mode = 2
+text = "New Creature"
 
 [node name="ContinueBtn" type="Button" parent="MenuList/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme = ExtResource("5_yrm4f")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuList/MarginContainer/VBoxContainer/ContinueBtn"]
+offset_right = 440.0
+offset_bottom = 60.0
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MenuList/MarginContainer/VBoxContainer/ContinueBtn/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="MenuList/MarginContainer/VBoxContainer/ContinueBtn/HBoxContainer"]
+layout_mode = 2
 text = "Continue"
 
 [node name="LoadBtn" type="Button" parent="MenuList/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme = ExtResource("5_yrm4f")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuList/MarginContainer/VBoxContainer/LoadBtn"]
+offset_right = 440.0
+offset_bottom = 60.0
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MenuList/MarginContainer/VBoxContainer/LoadBtn/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="MenuList/MarginContainer/VBoxContainer/LoadBtn/HBoxContainer"]
+layout_mode = 2
 text = "Load Creature"
 
 [node name="SettingsBtn" type="Button" parent="MenuList/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme = ExtResource("5_yrm4f")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuList/MarginContainer/VBoxContainer/SettingsBtn"]
+layout_mode = 0
+offset_right = 440.0
+offset_bottom = 60.0
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MenuList/MarginContainer/VBoxContainer/SettingsBtn/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("6_usr4r")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="MenuList/MarginContainer/VBoxContainer/SettingsBtn/HBoxContainer"]
+layout_mode = 2
 text = "Settings"
 
 [node name="QuitBtn" type="Button" parent="MenuList/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme = ExtResource("5_yrm4f")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuList/MarginContainer/VBoxContainer/QuitBtn"]
+layout_mode = 0
+offset_right = 440.0
+offset_bottom = 60.0
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MenuList/MarginContainer/VBoxContainer/QuitBtn/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("9_y0fl7")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="MenuList/MarginContainer/VBoxContainer/QuitBtn/HBoxContainer"]
+layout_mode = 2
 text = "Quit"
 
 [node name="LoadMenu" type="MarginContainer" parent="." node_paths=PackedStringArray("heading", "main_script", "item_container")]

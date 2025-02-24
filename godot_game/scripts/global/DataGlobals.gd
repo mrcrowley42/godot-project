@@ -234,7 +234,7 @@ func generate_global_metadata_to_save() -> Dictionary:
 	all_metadata[LAST_SAVED_GLOBAL] = Time.get_unix_time_from_system()
 	return all_metadata
 
-func generate_creature_metadata_to_save(creature_id_override = -1) -> Dictionary:
+func generate_creature_metadata_to_save(creature_id_override: int = -1) -> Dictionary:
 	var all_metadata: Dictionary = get_default_creature_metadata()
 	var creature_id = get_creature_id(creature_id_override)
 	for key in all_metadata.keys():
@@ -264,7 +264,7 @@ func save_data(creature_id_override: int = -1):
 		var creature_node_data: Array = _every_creature_node_data[creature_id]
 		
 		# update only the creature to save
-		if creature_id == creature_id_to_save:
+		if int(creature_id) == creature_id_to_save:
 			creature_data = [generate_creature_metadata_to_save(creature_id)]  # creature metadata first
 			creature_node_data.clear()
 			
@@ -303,7 +303,7 @@ func save_only_global_metadata():
 	print("global metadata saved to file")
 
 ## saves only the creature's updated metadata, its node data is not updated
-func save_only_creature_metadata(creature_id_override = -1):
+func save_only_creature_metadata(creature_id_override: int = -1):
 	_should_save_creature_metadata = false
 	
 	if not has_save_data():
@@ -335,7 +335,7 @@ func create_new_creature(type_uid: String, initial_creature_name: String) -> int
 	var creature_id = get_global_metadata_value(ID_INCREMENTAL)
 	add_to_metadata_value(true, ID_INCREMENTAL, 1)
 	
-	var new_creature_metadata = generate_creature_metadata_to_save(creature_id)
+	var new_creature_metadata = generate_creature_metadata_to_save(int(creature_id))
 	new_creature_metadata[CREATURE_TYPE_UID] = type_uid
 	new_creature_metadata[CREATURE_HATCH_TIME] = Time.get_unix_time_from_system()
 	new_creature_metadata[CREATURE_NAME] = initial_creature_name
@@ -343,7 +343,7 @@ func create_new_creature(type_uid: String, initial_creature_name: String) -> int
 	_every_creature_metadata[creature_id] = new_creature_metadata
 	_every_creature_node_data[creature_id] = []
 	print("new creature '%s' created, did not save." % creature_id)
-	return creature_id
+	return int(creature_id)
 
 func save_settings_data():
 	var config = ConfigFile.new()

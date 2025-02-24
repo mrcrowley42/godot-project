@@ -6,19 +6,20 @@ class_name MainMenu extends ScriptNode
 @onready var settings_menu = find_child("SettingsMenu")
 @onready var bg_gradient: TextureRect = find_child("BgGradient")
 @onready var trans_img: Sprite2D = find_child("Transition")
-@onready var new_game_btn = find_child("NewGameBtn")
+@onready var new_game_btn: Button = find_child("NewGameBtn")
+@onready var load_creature_btn: Button = find_child("LoadBtn")
 @onready var btn_sfx = find_child("BtnClick")
-@onready var continue_btn = find_child("ContinueBtn")
+@onready var continue_btn: Button = find_child("ContinueBtn")
 @onready var wipe_menu = find_child("ConfirmWipeMenu")
+@onready var hatch_egg_btn: Button = find_child("HatchEggBtn")
 
 var center_pos
 var is_in_transition = true
 
 func _ready() -> void:
 	DataGlobals.load_settings_data()
+	setup_btn_visibility()
 	
-	
-	continue_btn.disabled = DataGlobals.has_only_global_metadata() or not DataGlobals.has_save_data()
 	var user_cfg = DataGlobals.settings_data_last_loaded
 	if user_cfg.has('general'):
 		auto_continue = user_cfg['general'].get('skip_intro', false)
@@ -36,6 +37,13 @@ func _ready() -> void:
 	#Globals.first_launch = false
 	do_opening_trans()
 	%Music.play()
+
+
+func setup_btn_visibility():
+	new_game_btn.visible = DataGlobals.has_only_global_metadata() or not DataGlobals.has_save_data()
+	continue_btn.visible = !new_game_btn.visible
+	load_creature_btn.visible = !new_game_btn.visible
+	hatch_egg_btn.visible = false
 
 
 func grab_saves():
