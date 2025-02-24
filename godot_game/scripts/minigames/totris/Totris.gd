@@ -13,7 +13,7 @@ class_name TotrisManager
 @onready var level_box: NinePatchRect = find_child("LevelBox")
 @onready var hold_box: NinePatchRect = find_child("HoldBox")
 @onready var next_box: NinePatchRect = find_child("NextBox")
-
+@onready var creature: Creature = find_parent("Game").find_child("Creature")
 @onready var t_logic: TotrisLogic = find_child("TotrisLogic")
 
 # ORIGINAL TEXTS (so they dont get overriden when assigned to)
@@ -32,6 +32,7 @@ var best_level = 0
 @export var next_ui_sprite: NinePatchRect
 @export var ui_cover_sprite: Sprite2D
 @export var help_bg_sprite: NinePatchRect
+@export var reward_scale: float
 
 @export var high_score_adv: Achievement
 @export var adv_menu_ach: Achievement
@@ -99,6 +100,8 @@ func on_game_over():
 	
 	if best_score > 10_000:
 		Globals.unlock_achievement(high_score_adv)
+	
+	creature.add_fun(t_logic.score * reward_scale)
 
 ## data is the same thats returned from get_save_data()
 func load_save_data(data):
@@ -133,3 +136,4 @@ func _on_menu_button_down():
 	%SFX.play_sound("click")
 	kill_menu.hide()
 	show_start_menu()
+	

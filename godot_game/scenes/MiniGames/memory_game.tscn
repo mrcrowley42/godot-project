@@ -45,6 +45,7 @@ score_ui_sprite = NodePath("UI/Control/ScoreContainer")
 help_bg_sprite = NodePath("UI/Control/TopOverlay/HelpMenu/NinePatchRect")
 low_score_ach = ExtResource("2_g05j1")
 fast_time_ach = ExtResource("3_n4xrt")
+reward_amount = 100.0
 
 [node name="MemoryGameLogic" type="Node" parent="."]
 script = ExtResource("1_y2saq")

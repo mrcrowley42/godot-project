@@ -87,6 +87,7 @@ creature_prev = NodePath("../Gameplay/GameContainer/Node2D/creaturePrev")
 ui_overlay_sprite = NodePath("../UI/Control/UI_Overlay")
 score_ui_sprite = NodePath("../UI/Control/ScoreContainer")
 help_bg_sprite = NodePath("../Gameplay/HelpMenu/NinePatchRect")
+reward_amount = 50.0
 win_many_ach = ExtResource("3_nkpqy")
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]

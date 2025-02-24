@@ -57,6 +57,7 @@ hold_ui_sprite = NodePath("UI/Control/HoldBox")
 next_ui_sprite = NodePath("UI/Control/NextBox")
 ui_cover_sprite = NodePath("UI/Control/TopOverlay/TopCover")
 help_bg_sprite = NodePath("UI/Control/TopOverlay/HelpMenu/NinePatchRect")
+reward_scale = 0.1
 high_score_adv = ExtResource("2_p2mme")
 adv_menu_ach = ExtResource("3_r5im0")
 
