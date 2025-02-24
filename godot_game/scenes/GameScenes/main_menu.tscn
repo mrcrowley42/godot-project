@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://ig0eoqdfq5nr"]
+[gd_scene load_steps=30 format=3 uid="uid://ig0eoqdfq5nr"]
 
 [ext_resource type="Script" path="res://scripts/main_game_scripts/main_menu.gd" id="1_lpoqi"]
 [ext_resource type="Shader" path="res://shaders/pattern_lines.gdshader" id="2_f1u7v"]
@@ -7,10 +7,11 @@
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="4_22rev"]
 [ext_resource type="Theme" uid="uid://be46f5clp5lhj" path="res://themes/action_btn_main_menu.tres" id="5_yrm4f"]
 [ext_resource type="Texture2D" uid="uid://b053kk53cuq61" path="res://icons/egg-solid.svg" id="6_1pdy6"]
-[ext_resource type="Texture2D" uid="uid://ds2ci8c6rq5o7" path="res://icons/settings_small.svg" id="6_usr4r"]
 [ext_resource type="Texture2D" uid="uid://dlrmnjhbmum4t" path="res://icons/plus-solid.svg" id="7_7g5bp"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="8_1gx8s"]
+[ext_resource type="Texture2D" uid="uid://cajx0uak8ijoj" path="res://icons/play-solid.svg" id="8_5gexl"]
 [ext_resource type="Script" path="res://scenes/GameScenes/load_save_menu.gd" id="9_1nm66"]
+[ext_resource type="Texture2D" uid="uid://2dutkow6s6ff" path="res://icons/gear-solid.svg" id="9_i0wf5"]
 [ext_resource type="Script" path="res://scenes/GameScenes/main_menu_settings_menu.gd" id="9_vpucw"]
 [ext_resource type="Texture2D" uid="uid://duxdfoxuoidph" path="res://icons/right-from-bracket-solid.svg" id="9_y0fl7"]
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="10_46g4q"]
@@ -160,7 +161,6 @@ theme_override_constants/separation = 20
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="MenuList/MarginContainer/VBoxContainer/HatchEggBtn/HBoxContainer"]
-custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -207,6 +207,7 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+texture = ExtResource("8_5gexl")
 stretch_mode = 2
 
 [node name="Label" type="Label" parent="MenuList/MarginContainer/VBoxContainer/ContinueBtn/HBoxContainer"]
@@ -250,7 +251,7 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("6_usr4r")
+texture = ExtResource("9_i0wf5")
 stretch_mode = 2
 
 [node name="Label" type="Label" parent="MenuList/MarginContainer/VBoxContainer/SettingsBtn/HBoxContainer"]

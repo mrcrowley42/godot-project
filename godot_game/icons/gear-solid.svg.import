@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b053kk53cuq61"
-path="res://.godot/imported/egg-solid.svg-25be15caef597dae313e2efdf9496837.ctex"
+uid="uid://2dutkow6s6ff"
+path="res://.godot/imported/gear-solid.svg-e9ac57edc7a21468bac78b0e48ecbe69.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icons/egg-solid.svg"
-dest_files=["res://.godot/imported/egg-solid.svg-25be15caef597dae313e2efdf9496837.ctex"]
+source_file="res://icons/gear-solid.svg"
+dest_files=["res://.godot/imported/gear-solid.svg-e9ac57edc7a21468bac78b0e48ecbe69.ctex"]
 
 [params]
 
