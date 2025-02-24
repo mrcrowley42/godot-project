@@ -117,20 +117,16 @@ func _on_wipe_nodes_btn_button_down() -> void:
 
 func _on_unlock_button_button_down() -> void:
 	# UNLOCK ALL COSMETICS
-	for cosmetic in load("res://resources/unlockables.tres").unlockables:
-		Globals.unlock_cosmetic(cosmetic)
+	_on_unlock_cosmetics_button_down()
 
 	# UNLOCK ALL FACTS
-	for fact in load("res://resources/fact_list.tres").facts:
-		Globals.unlock_fact(fact)
+	_on_unlock_facts_button_down()
 
 	# UNLOCK ALL THEMES
-	for ui_theme in load("res://resources/ui_theme_list.tres").theme_list:
-		Globals.unlock_theme(ui_theme)
+	_on_unlock_themes_button_down()
 	
 	# ACHIEVEMENTS
-	for achievement in load("res://resources/all_achievements.tres").items:
-		Globals.unlock_achievement(achievement)
+	_on_unlock_achs_button_down()
 
 	## dont re-render here, let the game handle it
 	# Rerender unlockable item buttons
@@ -158,3 +154,23 @@ func _on_button_2_button_down() -> void:
 
 func _on_button_4_button_down() -> void:
 	creature.create_save_icon()
+
+
+func _on_unlock_facts_button_down() -> void:
+	for fact in load("res://resources/fact_list.tres").facts:
+		Globals.unlock_fact(fact)
+
+
+func _on_unlock_achs_button_down() -> void:
+	for achievement in load("res://resources/all_achievements.tres").items:
+		Globals.unlock_achievement(achievement)
+
+
+func _on_unlock_themes_button_down() -> void:
+	for ui_theme in load("res://resources/ui_theme_list.tres").theme_list:
+		Globals.unlock_theme(ui_theme)
+
+
+func _on_unlock_cosmetics_button_down() -> void:
+	for cosmetic in load("res://resources/unlockables.tres").unlockables:
+		Globals.unlock_cosmetic(cosmetic)

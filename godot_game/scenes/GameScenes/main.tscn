@@ -1,4 +1,4 @@
-[gd_scene load_steps=139 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=142 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
@@ -12,8 +12,11 @@
 [ext_resource type="Texture2D" uid="uid://cdbor7hjfbusn" path="res://UI stuff/Universal/background.png" id="6_oihh8"]
 [ext_resource type="Shader" path="res://shaders/background.gdshader" id="7_1pcjq"]
 [ext_resource type="Texture2D" uid="uid://bmwpenw32juko" path="res://UI stuff/Universal/background_light_map.png" id="8_aulml"]
+[ext_resource type="Resource" uid="uid://kgwet30vluw3" path="res://resources/food_list.tres" id="8_go3jw"]
 [ext_resource type="Resource" uid="uid://brrtf0fvck4s3" path="res://resources/achievements/general/customise_everything.tres" id="8_likk1"]
+[ext_resource type="Resource" uid="uid://cqfhcx2y843se" path="res://resources/drink_list.tres" id="9_4aq5w"]
 [ext_resource type="PackedScene" uid="uid://bebjn5n2kjwgb" path="res://scenes/Creatures/creature.tscn" id="9_ulkn4"]
+[ext_resource type="Resource" uid="uid://iql7hoey8bmk" path="res://resources/achievements/completionist/every_food_drink.tres" id="10_waniq"]
 [ext_resource type="Theme" uid="uid://dl1wes8p6lqlb" path="res://themes/invisible.tres" id="11_lcq7m"]
 [ext_resource type="Script" path="res://scripts/clippy_area.gd" id="12_n00c6"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/ui_theme_manager.gd" id="13_3i267"]
@@ -60,7 +63,7 @@
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="42_c1jtf"]
 [ext_resource type="Texture2D" uid="uid://d84hj0mtn2hw" path="res://icons/status/mood_24dp_FILL1_wght300_GRAD0_opsz24.svg" id="43_qa2jm"]
 [ext_resource type="Script" path="res://scripts/fact_progress_label.gd" id="44_t23g2"]
-[ext_resource type="PackedScene" uid="uid://dyapnl5xgvivn" path="res://scenes/UiScenes/topic_btn.tscn" id="44_y5a0d"]
+[ext_resource type="PackedScene" uid="uid://b78cwi88kdrvf" path="res://scenes/UiScenes/topic_btn.tscn" id="44_y5a0d"]
 [ext_resource type="Texture2D" uid="uid://p0oo42fr5wrp" path="res://icons/status/lunch_dining_24dp_8B1A10_FILL0_wght500_GRAD0_opsz24-svg.svg" id="45_3duvs"]
 [ext_resource type="Shader" path="res://shaders/pattern_checker.gdshader" id="45_bgevw"]
 [ext_resource type="Theme" uid="uid://x6rgwcyh7bnk" path="res://themes/menu_title.tres" id="45_e031c"]
@@ -438,6 +441,9 @@ unique_name_in_owner = true
 script = ExtResource("5_yr5ap")
 creature = NodePath("../Gameplay/Creature")
 food_menu = NodePath("../UI/FoodMenu")
+food_items = ExtResource("8_go3jw")
+drink_items = ExtResource("9_4aq5w")
+all_foods_ach = ExtResource("10_waniq")
 
 [node name="AchievementManager" type="Node" parent="." node_paths=PackedStringArray("general_grid", "minigame_grid", "completionist_grid", "perc_label")]
 unique_name_in_owner = true
@@ -1283,6 +1289,7 @@ script = ExtResource("35_4io20")
 [node name="CosmeticsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 material = SubResource("ShaderMaterial_357to")
 layout_mode = 2
 script = ExtResource("32_jvqx8")

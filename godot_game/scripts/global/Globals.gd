@@ -15,6 +15,14 @@ var SAVE_SETTINGS_FILE = SAVE_LOCATION_PREFIX + "://settings.cfg"
 
 var SAVE_ICON_FILE = SAVE_LOCATION_PREFIX + "://save_icon_{}.png"
 
+var cosmetic_list: Unlockables = load("res://resources/unlockables.tres")
+var fact_list: FactList = load("res://resources/fact_list.tres")
+var theme_list: UiThemes = load("res://resources/ui_theme_list.tres")
+
+var every_cosmetic_ach: Achievement = load("res://resources/achievements/completionist/unlock_every_cosmetic.tres")
+var every_fact_ach: Achievement = load("res://resources/achievements/completionist/unlock_every_fact.tres")
+var every_theme_ach: Achievement = load("res://resources/achievements/completionist/unlock_every_theme.tres")
+
 # SETTINGS SECTIONS
 const DEFAULT_SECTION = "general"
 const AUDIO_SECTION = "audio"
@@ -121,6 +129,11 @@ func unlock_fact(fact: Fact) -> void:
 	print("fact unlocked '%s', uid: '%s'" % [fact.title, fact_uid])
 	item_unlocked.emit("Fact Unlocked!", get_fact_category_icon(fact.category))
 	fact_unlocked.emit(fact_uid)
+	
+	unlocked_facts = DataGlobals.get_global_metadata_value(DataGlobals.UNLOCKED_FACTS)
+	var full_lis = fact_list.facts.filter(func(f: Fact): return !f.unlocked)
+	if len(unlocked_facts) == len(full_lis):
+		unlock_achievement(every_fact_ach)
 
 
 ## Unlocks the passed [param cosmetic] resource
@@ -138,6 +151,11 @@ func unlock_cosmetic(cosmetic: CosmeticItem) -> void:
 	print("cosmetic unlocked '%s', uid: '%s'" % [cosmetic.name, cosmetic_uid])
 	item_unlocked.emit("Cosmetic Unlocked!", cosmetic.thumbnail)
 	cosmetic_unlocked.emit(cosmetic_uid)
+	
+	unlocked_cosmetics = DataGlobals.get_global_metadata_value(DataGlobals.UNLOCKED_COSMETICS)
+	var full_lis = cosmetic_list.unlockables.filter(func(c: CosmeticItem): return !c.unlocked)
+	if len(unlocked_cosmetics) == len(full_lis):
+		unlock_achievement(every_cosmetic_ach)
 
 ## Unlocks the passed [param cosmetic] resource
 func unlock_theme(theme: UiTheme) -> void:
@@ -164,6 +182,11 @@ func unlock_theme(theme: UiTheme) -> void:
 			img.set_pixel(x, y, col)
 	item_unlocked.emit("Theme Unlocked!", ImageTexture.create_from_image(img))
 	theme_unlocked.emit(theme_uid)
+	
+	unlocked_themes = DataGlobals.get_global_metadata_value(DataGlobals.UNLOCKED_THEMES)
+	var full_lis = theme_list.theme_list.filter(func(t: UiTheme): return !t.unlocked)
+	if len(unlocked_themes) == len(full_lis):
+		unlock_achievement(every_theme_ach)
 
 ## Unlocks the passed resource
 func unlock_achievement(achievement: Achievement) -> void:
@@ -198,8 +221,7 @@ func has_function(node: Node, method: String) -> bool:
 ## return tuple 0: unlocked count, 1: total count
 func get_fact_category_progress(category) -> Array[int]:
 	var unlocked_facts = DataGlobals.get_global_metadata_value(DataGlobals.UNLOCKED_FACTS)
-	var fact_list = load("res://resources/fact_list.tres").facts
-	var facts = fact_list.filter(func(x): return x.category == category)
+	var facts = fact_list.facts.filter(func(x): return x.category == category)
 	var unlocked = facts.filter(func(x): return Helpers.uid_str(x) in unlocked_facts or x.unlocked)
 	return [len(unlocked), len(facts)]
 
