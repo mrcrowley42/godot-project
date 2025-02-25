@@ -7,13 +7,14 @@ extends MiniGameLogic
 var creature_score: int = 0
 var player_score: int = 0
 var choices = ['rock', 'paper', 'scissors']
+@onready var creature = find_parent("Game").find_child("Creature")
 @onready var closed = load("res://images/scissors-paper-rock/box_closed.png")
 @onready var opened = load("res://images/scissors-paper-rock/box_opened.png")
 
 @export var ui_overlay_sprite: Sprite2D
 @export var score_ui_sprite: NinePatchRect
 @export var help_bg_sprite: NinePatchRect
-
+@export var reward_amount: float
 @export var win_many_ach: Achievement
 
 var choice_2_sprite = {
@@ -42,6 +43,8 @@ func win():
 	
 	if player_score == 10:
 		Globals.unlock_achievement(win_many_ach)
+	
+	creature.add_fun(reward_amount)
 	
 func lose():
 	creature_score += 1

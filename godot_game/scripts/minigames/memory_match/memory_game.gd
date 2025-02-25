@@ -12,7 +12,7 @@ class_name MemoryGame extends Node2D
 @onready var new_best: RichTextLabel = find_child("NewBest")
 @onready var best_time_label: Label = find_child("bestTime")
 @onready var best_guesses_label: Label = find_child("bestGuesses")
-
+@onready var creature = find_parent("Game").find_child("Creature")
 @onready var m_logic: MemoryGameLogic = find_child("MemoryGameLogic")
 
 # OG TEXTS
@@ -25,6 +25,8 @@ class_name MemoryGame extends Node2D
 
 @export var low_score_ach: Achievement
 @export var fast_time_ach: Achievement
+
+@export var reward_amount: float
 
 const FINAL_SCORE_LABEL_TEXT = {
 	null: "-\n-",
@@ -78,6 +80,8 @@ func show_finish_menu(is_timed: bool, score: float):
 		best_time = float(score)
 	if new_lowest_guess:
 		lowest_guesses = int(score)
+	
+	creature.add_fun(reward_amount)
 	
 	if lowest_guesses < 20:
 		Globals.unlock_achievement(low_score_ach)
