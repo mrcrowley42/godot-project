@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://ig0eoqdfq5nr"]
+[gd_scene load_steps=32 format=3 uid="uid://ig0eoqdfq5nr"]
 
 [ext_resource type="Script" path="res://scripts/main_game_scripts/main_menu.gd" id="1_lpoqi"]
 [ext_resource type="Shader" path="res://shaders/pattern_lines.gdshader" id="2_f1u7v"]
@@ -24,6 +24,7 @@
 [ext_resource type="AudioStream" uid="uid://bc4fnsjag56a3" path="res://music/Moa's Song - Aether OST (Emile van Krieken).mp3" id="12_xt2xn"]
 [ext_resource type="PackedScene" uid="uid://cbn0dv1k0onpb" path="res://scenes/UiScenes/vol_slider.tscn" id="13_4qvf0"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="15_qcaiy"]
+[ext_resource type="Theme" uid="uid://bsd1dkhc13v47" path="res://themes/plain.tres" id="22_l4scn"]
 
 [sub_resource type="Curve" id="Curve_ryjxj"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.709302, 0.774943), -0.848899, -0.848899, 0, 0, Vector2(1, 0), -6.11725, 0.0, 0, 0]
@@ -366,6 +367,7 @@ theme_override_font_sizes/font_size = 18
 text = "Load"
 
 [node name="SettingsMenu" type="MarginContainer" parent="."]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -561,9 +563,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -180.0
-offset_top = 310.0
+offset_top = 283.52
 offset_right = 180.0
-offset_bottom = 510.0
+offset_bottom = 564.52
 grow_horizontal = 2
 
 [node name="Panel" type="Panel" parent="ConfirmWipeMenu/ConfirmWipeSave"]
@@ -601,6 +603,35 @@ theme = ExtResource("15_qcaiy")
 theme_override_font_sizes/font_size = 15
 text = "This can not be undone!"
 horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ConfirmWipeMenu/ConfirmWipeSave/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="LostList" type="Button" parent="ConfirmWipeMenu/ConfirmWipeSave/MarginContainer/VBoxContainer/HBoxContainer2"]
+modulate = Color(1, 1, 1, 0.784314)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("22_l4scn")
+text = "Values Lost"
+script = ExtResource("11_hpuph")
+tooltip_string = "- all creatures
+- all pending eggs"
+direction = 3
+
+[node name="KeptList" type="Button" parent="ConfirmWipeMenu/ConfirmWipeSave/MarginContainer/VBoxContainer/HBoxContainer2"]
+modulate = Color(1, 1, 1, 0.784314)
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("22_l4scn")
+text = "Values Kept"
+script = ExtResource("11_hpuph")
+tooltip_string = "- unlocked cosmetics, achievements, facts & themes
+- minigame data
+- creatures discovered
+- settings preferences"
+direction = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ConfirmWipeMenu/ConfirmWipeSave/MarginContainer/VBoxContainer"]
 layout_mode = 2
