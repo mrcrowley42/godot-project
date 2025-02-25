@@ -115,8 +115,17 @@ func _on_settings_btn_button_down() -> void:
 
 
 func _on_confirm_wipe_button_down() -> void:
+	# keep metadata
+	var metadata = DataGlobals.get_global_metadata_dc()
+	metadata[DataGlobals.CURRENT_CREATURE] = "-1"
+	metadata[DataGlobals.ID_INCREMENTAL] = "0"
+	
 	var d = DirAccess.open(Globals.SAVE_LOCATION_PREFIX + "://")
 	d.remove(Globals.SAVE_DATA_FILE)
+	DataGlobals.save_only_global_metadata(metadata)
+	get_tree().quit()
+	
+	# icons
 	for filename: String in d.get_files():
 		if filename.begins_with("save_icon_"):
 			d.remove(filename)

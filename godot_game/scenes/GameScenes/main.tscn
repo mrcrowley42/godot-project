@@ -63,7 +63,7 @@
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="42_c1jtf"]
 [ext_resource type="Texture2D" uid="uid://d84hj0mtn2hw" path="res://icons/status/mood_24dp_FILL1_wght300_GRAD0_opsz24.svg" id="43_qa2jm"]
 [ext_resource type="Script" path="res://scripts/fact_progress_label.gd" id="44_t23g2"]
-[ext_resource type="PackedScene" uid="uid://dyapnl5xgvivn" path="res://scenes/UiScenes/topic_btn.tscn" id="44_y5a0d"]
+[ext_resource type="PackedScene" uid="uid://b78cwi88kdrvf" path="res://scenes/UiScenes/topic_btn.tscn" id="44_y5a0d"]
 [ext_resource type="Texture2D" uid="uid://p0oo42fr5wrp" path="res://icons/status/lunch_dining_24dp_8B1A10_FILL0_wght500_GRAD0_opsz24-svg.svg" id="45_3duvs"]
 [ext_resource type="Shader" path="res://shaders/pattern_checker.gdshader" id="45_bgevw"]
 [ext_resource type="Theme" uid="uid://x6rgwcyh7bnk" path="res://themes/menu_title.tres" id="45_e031c"]

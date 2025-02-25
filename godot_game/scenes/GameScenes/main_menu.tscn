@@ -179,6 +179,7 @@ layout_mode = 2
 theme = ExtResource("5_yrm4f")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MenuList/MarginContainer/VBoxContainer/NewGameBtn"]
+layout_mode = 0
 offset_right = 440.0
 offset_bottom = 60.0
 theme_override_constants/separation = 20
@@ -200,6 +201,7 @@ layout_mode = 2
 theme = ExtResource("5_yrm4f")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MenuList/MarginContainer/VBoxContainer/ContinueBtn"]
+layout_mode = 0
 offset_right = 440.0
 offset_bottom = 60.0
 theme_override_constants/separation = 20
@@ -222,6 +224,7 @@ layout_mode = 2
 theme = ExtResource("5_yrm4f")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MenuList/MarginContainer/VBoxContainer/LoadBtn"]
+layout_mode = 0
 offset_right = 440.0
 offset_bottom = 60.0
 theme_override_constants/separation = 20
