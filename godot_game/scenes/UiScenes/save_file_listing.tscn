@@ -50,13 +50,13 @@ expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
 [node name="PanelContainer" type="Button"]
-custom_minimum_size = Vector2(355, 138)
+custom_minimum_size = Vector2(380, 138)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -184.5
-offset_right = 184.5
-offset_bottom = 133.0
+offset_left = -184.0
+offset_right = 196.0
+offset_bottom = 138.0
 grow_horizontal = 2
 size_flags_horizontal = 3
 theme_override_styles/focus = SubResource("StyleBoxFlat_kxpsf")
@@ -69,8 +69,8 @@ script = ExtResource("1_0q2oy")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
-offset_right = 369.0
-offset_bottom = 133.0
+offset_right = 380.0
+offset_bottom = 137.0
 size_flags_vertical = 0
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
@@ -79,6 +79,7 @@ theme_override_constants/margin_bottom = 16
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
@@ -93,18 +94,18 @@ theme = ExtResource("5_bh6hp")
 theme_override_font_sizes/font_size = 20
 text = "Creature Name"
 
-[node name="DateLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("5_bh6hp")
-text = "Date:"
-
 [node name="IDKLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("5_bh6hp")
+theme_override_font_sizes/font_size = 15
 text = "Something else IDK"
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="DateLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0.72549)
 layout_mode = 2
+theme = ExtResource("5_bh6hp")
+theme_override_font_sizes/font_size = 15
+text = "Date:"
 
 [node name="CreatureIcon" type="Button" parent="MarginContainer/HBoxContainer"]
 texture_filter = 1

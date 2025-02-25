@@ -608,7 +608,7 @@ offset_left = 343.0
 offset_top = 639.0
 offset_right = 450.0
 offset_bottom = 672.0
-scale = Vector2(0.7, 0.7)
+scale = Vector2(0.6, 0.6)
 tooltip_text = "wipe all save data (including metadata)"
 theme = ExtResource("8_lqg4h")
 theme_override_fonts/font = ExtResource("9_y33yi")
@@ -617,16 +617,16 @@ text = "Wipe all"
 
 [node name="WipeNodesBtn" type="Button" parent="."]
 layout_mode = 0
-offset_left = 437.0
+offset_left = 423.0
 offset_top = 639.0
-offset_right = 563.0
+offset_right = 585.0
 offset_bottom = 672.0
-scale = Vector2(0.7, 0.7)
+scale = Vector2(0.6, 0.6)
 tooltip_text = "wipe node save data (excluding metadata)"
 theme = ExtResource("8_lqg4h")
 theme_override_fonts/font = ExtResource("9_y33yi")
 theme_override_font_sizes/font_size = 20
-text = "Wipe node"
+text = "Wipe creature"
 
 [node name="Button3" type="Button" parent="."]
 layout_mode = 0

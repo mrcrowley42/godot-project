@@ -109,9 +109,13 @@ func _on_wipe_btn_button_down() -> void:
 
 
 func _on_wipe_nodes_btn_button_down() -> void:
+	var metadata = DataGlobals.get_global_metadata_dc()
+	metadata[DataGlobals.CURRENT_CREATURE] = "-1"
+	metadata[DataGlobals.ID_INCREMENTAL] = "0"
+	
 	var d = DirAccess.open("res://")
 	d.remove(Globals.SAVE_DATA_FILE)
-	DataGlobals.save_only_global_metadata()
+	DataGlobals.save_only_global_metadata(metadata)
 	get_tree().quit()
 
 

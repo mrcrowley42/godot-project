@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://ig0eoqdfq5nr"]
+[gd_scene load_steps=31 format=3 uid="uid://ig0eoqdfq5nr"]
 
 [ext_resource type="Script" path="res://scripts/main_game_scripts/main_menu.gd" id="1_lpoqi"]
 [ext_resource type="Shader" path="res://shaders/pattern_lines.gdshader" id="2_f1u7v"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cajx0uak8ijoj" path="res://icons/play-solid.svg" id="8_5gexl"]
 [ext_resource type="Script" path="res://scenes/GameScenes/load_save_menu.gd" id="9_1nm66"]
 [ext_resource type="Texture2D" uid="uid://2dutkow6s6ff" path="res://icons/gear-solid.svg" id="9_i0wf5"]
+[ext_resource type="Texture2D" uid="uid://dajv0miaghxwe" path="res://icons/floppy-disk-solid.svg" id="9_tmony"]
 [ext_resource type="Script" path="res://scenes/GameScenes/main_menu_settings_menu.gd" id="9_vpucw"]
 [ext_resource type="Texture2D" uid="uid://duxdfoxuoidph" path="res://icons/right-from-bracket-solid.svg" id="9_y0fl7"]
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="10_46g4q"]
@@ -229,6 +230,7 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+texture = ExtResource("9_tmony")
 stretch_mode = 2
 
 [node name="Label" type="Label" parent="MenuList/MarginContainer/VBoxContainer/LoadBtn/HBoxContainer"]
@@ -364,7 +366,6 @@ theme_override_font_sizes/font_size = 18
 text = "Load"
 
 [node name="SettingsMenu" type="MarginContainer" parent="."]
-visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -404,6 +405,7 @@ layout_mode = 2
 [node name="MarginContainer" type="MarginContainer" parent="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer"]
 custom_minimum_size = Vector2(378, 0)
 layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 2
@@ -501,12 +503,12 @@ bus_name = "SFX"
 custom_minimum_size = Vector2(200, 52)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 10
 theme = ExtResource("10_46g4q")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("8_1gx8s")
 theme_override_font_sizes/font_size = 20
-text = "Erase Save Data"
+text = " Erase All Creature Data "
 script = ExtResource("11_hpuph")
 tooltip_string = "CANNOT BE UNDONE
 Requires Restart"
@@ -551,7 +553,7 @@ offset_right = 540.0
 offset_bottom = 675.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.196078)
+color = Color(0, 0, 0, 0.329412)
 
 [node name="ConfirmWipeSave" type="MarginContainer" parent="ConfirmWipeMenu"]
 layout_mode = 1
@@ -590,7 +592,14 @@ vertical_alignment = 1
 layout_mode = 2
 theme = ExtResource("15_qcaiy")
 text = "Are you sure you want to
-Continue?"
+erase all creature data?"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="ConfirmWipeMenu/ConfirmWipeSave/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("15_qcaiy")
+theme_override_font_sizes/font_size = 15
+text = "This can not be undone!"
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ConfirmWipeMenu/ConfirmWipeSave/MarginContainer/VBoxContainer"]

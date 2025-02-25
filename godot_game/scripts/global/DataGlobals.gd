@@ -265,7 +265,7 @@ func save_data(creature_id_override: int = -1):
 		
 		# update only the creature to save
 		if int(creature_id) == creature_id_to_save:
-			creature_data = [generate_creature_metadata_to_save(creature_id)]  # creature metadata first
+			creature_data = [generate_creature_metadata_to_save(int(creature_id))]  # creature metadata first
 			creature_node_data.clear()
 			
 			for node in save_nodes:
@@ -283,14 +283,15 @@ func save_data(creature_id_override: int = -1):
 	print("all data saved to file (updated creature '%s')" % creature_id_to_save)
 
 ## changes only the first line (the metadata line) in save file, everything else remains unchanged
-func save_only_global_metadata():
+## CAUTION: DO NOT USE new_metadata_override WITHOUT CARE!!!
+func save_only_global_metadata(new_metadata_override = null):
 	_should_save_global_metadata = false
 	var file_existed = has_save_data()
 	var save_file = FileAccess.open(get_save_data_file(), FileAccess.READ)
 	if file_existed: save_file.get_line()  # remove old metadata
 
 	# replace existing metadata with new
-	var new_metadata = generate_global_metadata_to_save()
+	var new_metadata = generate_global_metadata_to_save() if new_metadata_override == null else new_metadata_override
 	_current_global_metadata = new_metadata
 
 	var all_lines = [new_metadata]
@@ -332,7 +333,7 @@ func save_only_creature_metadata(creature_id_override: int = -1):
 
 ## create a new creature in memory, does not save to file, call save_data yourself (returns its new id)
 func create_new_creature(type_uid: String, initial_creature_name: String) -> int:
-	var creature_id = get_global_metadata_value(ID_INCREMENTAL)
+	var creature_id: String = get_global_metadata_value(ID_INCREMENTAL)
 	add_to_metadata_value(true, ID_INCREMENTAL, 1)
 	
 	var new_creature_metadata = generate_creature_metadata_to_save(int(creature_id))
@@ -340,9 +341,11 @@ func create_new_creature(type_uid: String, initial_creature_name: String) -> int
 	new_creature_metadata[CREATURE_HATCH_TIME] = Time.get_unix_time_from_system()
 	new_creature_metadata[CREATURE_NAME] = initial_creature_name
 	
-	_every_creature_metadata[creature_id] = new_creature_metadata
-	_every_creature_node_data[creature_id] = []
-	print("new creature '%s' created, did not save." % creature_id)
+	DataGlobals.set_metadata_value(true, DataGlobals.CURRENT_CREATURE, creature_id)
+	
+	_every_creature_metadata[int(creature_id)] = new_creature_metadata
+	_every_creature_node_data[int(creature_id)] = []
+	print("new creature '%s' created (uid %s), did not save." % [creature_id, type_uid])
 	return int(creature_id)
 
 func save_settings_data():
