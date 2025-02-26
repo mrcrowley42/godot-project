@@ -4,5 +4,5 @@ class_name CreatureType extends Resource
 @export var name: String
 @export var desc: String
 @export var xp_required_for_adult: int
-@export var baby: CreatureTypePart
+@export var child: CreatureTypePart
 @export var adult: CreatureTypePart

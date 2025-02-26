@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CreatureTypePart" load_steps=3 format=3 uid="uid://bjrv5eyw58ors"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/cosmetic_position.gd" id="1_etffk"]
+[ext_resource type="Script" path="res://scripts/base_classses/creature_type_part.gd" id="2_pw2wg"]
+
+[resource]
+script = ExtResource("2_pw2wg")
+max_hp = 0
+max_water = 0
+max_food = 0
+max_fun = 0
+notification_position = Vector2(0, 0)
+cosmetic_positions = Array[ExtResource("1_etffk")]([])
+food_likes = Array[int]([])
+food_dislikes = Array[int]([])
+drink_likes = Array[int]([])
+drink_dislikes = Array[int]([])

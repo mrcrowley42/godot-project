@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/creature_showcase.gd" id="1_8yxo1"]
 [ext_resource type="Shader" path="res://shaders/pattern_animated_grid.gdshader" id="2_5dpgm"]
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="3_bsxtk"]
-[ext_resource type="SpriteFrames" uid="uid://68skicj7tsu2" path="res://resources/creatures/main_creature_adult_sprite_frames.tres" id="4_2i6ea"]
+[ext_resource type="SpriteFrames" uid="uid://68skicj7tsu2" path="res://resources/creatures/sprite_frames/little_guy_adult_sprite_frames.tres" id="4_2i6ea"]
 [ext_resource type="Shader" path="res://shaders/outline.gdshader" id="4_gbshu"]
 [ext_resource type="Theme" uid="uid://dvpqr6ekggufg" path="res://themes/menu_dropdown.tres" id="7_846fc"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="8_l2kok"]

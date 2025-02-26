@@ -17,7 +17,7 @@
 [ext_resource type="Theme" uid="uid://kpqilwsnepqa" path="res://themes/nothing.tres" id="5_lleth"]
 [ext_resource type="Script" path="res://scenes/MiniGames/minigamecreature.gd" id="11_rt8pm"]
 [ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="14_jejs6"]
-[ext_resource type="SpriteFrames" uid="uid://68skicj7tsu2" path="res://resources/creatures/main_creature_adult_sprite_frames.tres" id="15_0x7x6"]
+[ext_resource type="SpriteFrames" uid="uid://68skicj7tsu2" path="res://resources/creatures/sprite_frames/little_guy_adult_sprite_frames.tres" id="15_0x7x6"]
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="17_bmibo"]
 [ext_resource type="Texture2D" uid="uid://ctqvf3ymgk1cj" path="res://images/scissors_paper_rock_diagram.png" id="18_5mwwn"]
 
