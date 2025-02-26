@@ -18,7 +18,6 @@ var is_in_transition = true
 
 func _ready() -> void:
 	DataGlobals.load_settings_data()
-	setup_btn_visibility()
 	
 	var user_cfg = DataGlobals.settings_data_last_loaded
 	if user_cfg.has('general'):
@@ -31,10 +30,8 @@ func _ready() -> void:
 	
 	Globals.send_notification(Globals.NOTIFICATION_ALL_DATA_IS_LOADED)
 	center_pos = bg_gradient.size / 2
-	# if save file
-	#if DataGlobals.get_global_metadata_value(DataGlobals.CURRENT_CREATURE) in DataGlobals.get_all_creature_ids():
-		#new_game_btn.hide()
-	#Globals.first_launch = false
+	
+	setup_btn_visibility()
 	do_opening_trans()
 	%Music.play()
 
@@ -43,7 +40,7 @@ func setup_btn_visibility():
 	new_game_btn.visible = DataGlobals.has_only_global_metadata() or not DataGlobals.has_save_data()
 	continue_btn.visible = !new_game_btn.visible
 	load_creature_btn.visible = !new_game_btn.visible
-	hatch_egg_btn.visible = false
+	hatch_egg_btn.visible = len(DataGlobals.get_global_metadata_value(DataGlobals.PENDING_EGGS)) > 0
 
 
 func grab_saves():
@@ -119,6 +116,7 @@ func _on_confirm_wipe_button_down() -> void:
 	var metadata = DataGlobals.get_global_metadata_dc()
 	metadata[DataGlobals.CURRENT_CREATURE] = "-1"
 	metadata[DataGlobals.ID_INCREMENTAL] = "0"
+	metadata[DataGlobals.PENDING_EGGS] = []
 	
 	var d = DirAccess.open(Globals.SAVE_LOCATION_PREFIX + "://")
 	d.remove(Globals.SAVE_DATA_FILE)

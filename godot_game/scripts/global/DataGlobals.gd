@@ -15,6 +15,7 @@ const VERSION_GLOBAL = "version"
 const BUILD_GLOBAL = "build"
 const LAST_SAVED_GLOBAL = "last_saved_global"
 const CURRENT_CREATURE = "current_creature_id"
+const PENDING_EGGS = "pending_eggs"
 const CREATURES_DISCOVERED = "creatures_discovered"
 const HOLIDAY_MODE = "holiday_mode"
 const UNLOCKED_COSMETICS = "unlocked_cosmetics"
@@ -113,6 +114,7 @@ func get_default_global_metadata() -> Dictionary:
 		BUILD_GLOBAL: Globals.BUILD,
 		LAST_SAVED_GLOBAL: Time.get_unix_time_from_system(),
 		CURRENT_CREATURE: -1,
+		PENDING_EGGS: [],
 		CREATURES_DISCOVERED: {},
 		HOLIDAY_MODE: false,
 		UNLOCKED_COSMETICS: [],
