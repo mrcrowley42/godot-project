@@ -4,7 +4,7 @@
 class_name Creature extends Node2D
 
 # ENUMS
-enum LifeStage {CHILD, ADULT}
+enum LifeStage {BABY, CHILD, ADULT}
 enum Stat {HP, WATER, FOOD, FUN}
 enum Preference {LIKES, NEUTRAL, DISLIKES}
 
@@ -23,6 +23,7 @@ const like_multiplier: float = 2.0
 
 ## XP required for the creature to reach the [param ADULT] [param LifeStage] stage
 var xp_required: float
+var baby_type: CreatureBaby
 var creature_type: CreatureType
 var creature: CreatureTypePart
 
@@ -76,15 +77,17 @@ var stats_max: Dictionary = {Stat.HP: 'max_hp', Stat.FUN: 'max_fun',
 
 func setup_creature():
 	og_pos = position
-	var uid = int(DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_TYPE_UID))
-	creature_type = load(ResourceUID.get_id_path(uid))
+	var baby_uid = int(DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_BABY_UID))
+	var creature_uid = int(DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_TYPE_UID))
+	baby_type = load(ResourceUID.get_id_path(baby_uid))
+	creature_type = load(ResourceUID.get_id_path(creature_uid))
 	
 	# should grow up?
 	if Globals.general_dict.has("grow_creature_up"):
 		Globals.general_dict.erase("grow_creature_up")
 		grow_up_one_stage()
 	
-	creature = creature_type.baby if life_stage == LifeStage.CHILD else creature_type.adult
+	creature = [baby_type.baby_part, creature_type.child, creature_type.adult][life_stage]
 	setup_default_values()
 	setup_main_sprite()
 	Globals.send_notification(Globals.NOTIFICATION_CREATURE_IS_LOADED)
@@ -286,8 +289,7 @@ func change_animation(anim_name: String):
 
 func grow_up_one_stage():
 	xp = 0
-	#life_stage = clampi(life_stage + 1,0, 2)
-	life_stage = LifeStage.ADULT  # TODO: change this to add 1 instead of just assigning ADULT
+	life_stage = LifeStage.get(min(life_stage + 1, LifeStage.ADULT))
 	is_ready_to_grow_up = false
 	DataGlobals.set_new_highest_life_stage(Helpers.uid_str(creature_type), life_stage)
 

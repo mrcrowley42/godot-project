@@ -1,0 +1,14 @@
+[gd_resource type="SpriteFrames" load_steps=2 format=3 uid="uid://kp0anbxxe58f"]
+
+[ext_resource type="Texture2D" uid="uid://b1m7lcofarqka" path="res://images/creature_sprites/penguin-guy/child_placeholder_1.png" id="1_rlowe"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_rlowe")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}]

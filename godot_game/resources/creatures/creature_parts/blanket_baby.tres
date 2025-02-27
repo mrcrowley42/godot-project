@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CreatureTypePart" load_steps=4 format=3 uid="uid://db1xtxduidmsc"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/cosmetic_position.gd" id="1_lk1ci"]
+[ext_resource type="Script" path="res://scripts/base_classses/creature_type_part.gd" id="2_olqvg"]
+[ext_resource type="SpriteFrames" uid="uid://b1y41obvvh3hr" path="res://resources/creatures/sprite_frames/blanket_baby_sprite_frames.tres" id="3_evqbw"]
+
+[resource]
+script = ExtResource("2_olqvg")
+max_hp = 700
+max_water = 700
+max_food = 700
+max_fun = 700
+sprite_frames = ExtResource("3_evqbw")
+notification_position = Vector2(0, 0)
+cosmetic_positions = Array[ExtResource("1_lk1ci")]([])
+food_likes = Array[int]([])
+food_dislikes = Array[int]([])
+drink_likes = Array[int]([])
+drink_dislikes = Array[int]([])

@@ -2,18 +2,18 @@
 
 [ext_resource type="Script" path="res://scripts/base_classses/egg_entry.gd" id="1_8ok2j"]
 [ext_resource type="Texture2D" uid="uid://gi4ytib73ibf" path="res://images/egg/egg-green.png" id="1_knhbg"]
-[ext_resource type="Resource" uid="uid://cxtahs454inpc" path="res://resources/creatures/child_adult/little_guy.tres" id="1_olvu1"]
+[ext_resource type="Resource" uid="uid://h7bg2ijw80s6" path="res://resources/creatures/babies/baby_little_guy.tres" id="2_46pgf"]
 [ext_resource type="Script" path="res://scripts/base_classses/egg_creature_entry.gd" id="2_brefb"]
-[ext_resource type="Resource" uid="uid://dwv6t0fmrq612" path="res://resources/creatures/child_adult/box.tres" id="3_sibil"]
+[ext_resource type="Resource" uid="uid://7owckiqdho7a" path="res://resources/creatures/babies/baby_blanket.tres" id="3_7nuvn"]
 
 [sub_resource type="Resource" id="Resource_1h8fn"]
 script = ExtResource("2_brefb")
-creature_type = ExtResource("1_olvu1")
-weight = 0
+creature_baby = ExtResource("2_46pgf")
+weight = 1
 
 [sub_resource type="Resource" id="Resource_3y0vr"]
 script = ExtResource("2_brefb")
-creature_type = ExtResource("3_sibil")
+creature_baby = ExtResource("3_7nuvn")
 weight = 1
 
 [resource]

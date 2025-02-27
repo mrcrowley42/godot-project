@@ -28,7 +28,7 @@ class_name EggOpening extends ScriptNode
 @onready var display_shader: ColorRect = find_child("shader")
 @onready var shader_area: ColorRect = find_child("shader")
 @onready var hatch_timer: Timer = find_child("HatchTimer")
-@onready var creature_sprite: AnimatedSprite2D = find_child("Creature")
+@onready var baby_sprite: AnimatedSprite2D = find_child("Creature")
 
 @onready var continue_btn: NinePatchRect = find_child("ContinueBtn")
 @onready var back_btn: NinePatchRect = find_child("BackBtn")
@@ -245,7 +245,7 @@ func mouse_exited(i: int):
 	if can_interact and !finished_hatching:
 		if selected_egg_inx == null:  # exited a placed egg
 			scale_egg(i, BASE_EGG_SCALE)
-			set_egg_desc()
+			#set_egg_desc()
 			manual_mouse_check()  # in case there are overlapping eggs
 		elif i == selected_egg_inx:  # exited selected egg
 			tween(self, "scale_addition", Vector2(0, 0), 0., .5)
@@ -268,16 +268,20 @@ func set_egg_desc(i: int = -1):
 
 	# build hatches list
 	for creature_entry: EggCreatureEntry in egg.hatches:
-		var uid = ResourceLoader.get_resource_uid(creature_entry.creature_type.resource_path)
+		var uid = ResourceLoader.get_resource_uid(creature_entry.creature_baby.resource_path)
 		if is_creature_known(uid):
-			var texture = creature_entry.creature_type.baby.sprite_frames.get_frame_texture("idle", 0).resource_path
-			hatches_list.append("[img=30]%s[/img]" % texture)
+			var texture_path = creature_entry.creature_baby.baby_part.sprite_frames.get_frame_texture("idle", 0).resource_path
+			var texture: Image = load(texture_path).get_image()
+			var cropped_rect: Rect2i = texture.get_used_rect()
+#			cropped_rect.position.x, cropped_rect.position.y, cropped_rect.size.x, cropped_rect.size.y
+			hatches_list.append("[img reigon=%s,%s,%s,%s]%s[/img]" % [cropped_rect.position.x, cropped_rect.position.y, cropped_rect.size.x, cropped_rect.size.y, texture_path])
+			print(hatches_list)
 		else:
 			hatches_list.append("?")
 	egg_desc.text = EGG_FORMAT_STRING % [egg.name, ", ".join(hatches_list)]
 
-func set_creature_desc(creature: CreatureType):
-	egg_desc.text = "[center][u]%s![/u]\n[font top=6 s=15]%s" % [creature.name, creature.desc]
+func set_creature_desc(baby: CreatureBaby):
+	egg_desc.text = "[center][u]%s![/u]\n[font top=6 s=15]%s" % [baby.name, baby.desc]
 
 func is_creature_known(creature_type_uid: int) -> bool:
 	return DataGlobals.get_global_metadata_value(DataGlobals.CREATURES_DISCOVERED).has(str(creature_type_uid))
@@ -413,29 +417,29 @@ func finish_hatching(sprite_c: Control):
 	fade(bottom, false, .3)
 
 	# spawn creature
-	var creature_hatched: CreatureType = pick_creature_to_hatch()
-	spawn_creature(creature_hatched, sprite_c.position)
-	fade(creature_sprite, true)
-	tween(creature_sprite, "scale", Vector2(.25, .25), .3, .5).connect("finished", fire_confetti)
-	set_creature_desc(creature_hatched)
+	var baby_hatched: CreatureBaby = pick_creature_to_hatch()
+	spawn_creature(baby_hatched, sprite_c.position)
+	fade(baby_sprite, true)
+	tween(baby_sprite, "scale", Vector2(.25, .25), .3, .5).connect("finished", fire_confetti)
+	set_creature_desc(baby_hatched)
 
 	# save data
-	var uid_str: String = Helpers.uid_str(creature_hatched)
+	var uid_str: String = Helpers.uid_str(baby_hatched)
 	DataGlobals.add_to_creatures_discovered(uid_str)
-	DataGlobals.create_new_creature(uid_str, creature_hatched.name)
+	DataGlobals.create_new_creature(baby_hatched)
 	DataGlobals.save_data()
 
 ## randomly pick a creature to hatch from the selected egg
-func pick_creature_to_hatch() -> CreatureType:
-	var weighted_choices: Array[CreatureType] = []
+func pick_creature_to_hatch() -> CreatureBaby:
+	var weighted_choices: Array[CreatureBaby] = []
 	var add_weighted_choices = func(ignore_known: bool = true):
 		for egg_creature_entry: EggCreatureEntry in placed_eggs[selected_egg_inx].hatches:
-			var creature_type: CreatureType = egg_creature_entry.creature_type
-			var uid = ResourceLoader.get_resource_uid(creature_type.resource_path)
+			var baby_type: CreatureBaby = egg_creature_entry.creature_baby
+			var uid = ResourceLoader.get_resource_uid(baby_type.resource_path)
 			if ignore_known and is_creature_known(uid):
 				continue
 			for z in egg_creature_entry.weight:
-				weighted_choices.append(creature_type)
+				weighted_choices.append(baby_type)
 
 	add_weighted_choices.call()  # build list in unknown creatures
 	if weighted_choices.size() == 0:
@@ -446,7 +450,7 @@ func pick_creature_to_hatch() -> CreatureType:
 func instant_open_to_continue_screen():
 	do_opening_transition()
 	var uid = int(DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_TYPE_UID))
-	var creature_hatched: CreatureType = load(ResourceUID.get_id_path(uid))
+	var baby_hatched: CreatureBaby = load(ResourceUID.get_id_path(uid))
 
 	# setup display
 	fade(continue_btn, true, 1.).connect("finished", set_can_interact.bind(true))
@@ -457,16 +461,16 @@ func instant_open_to_continue_screen():
 	finished_hatching = true
 
 	# place creature
-	spawn_creature(creature_hatched, display_box.position - (display_box.size * display_box.scale) / 2)
-	set_creature_desc(creature_hatched)
-	creature_sprite.visible = true
-	creature_sprite.scale = Vector2(.25, .25)
+	spawn_creature(baby_hatched, display_box.position - (display_box.size * display_box.scale) / 2)
+	set_creature_desc(baby_hatched)
+	baby_sprite.visible = true
+	baby_sprite.scale = Vector2(.25, .25)
 
-func spawn_creature(creature: CreatureType, pos: Vector2):
-	creature_sprite.sprite_frames = creature.baby.sprite_frames
-	creature_sprite.animation = "idle"  # they *should* all have a baby animation
-	creature_sprite.play()
-	creature_sprite.position = pos + CREATURE_PLACEMENT_OFFSET  # offset to be centered (may need to be different for each creature)
+func spawn_creature(baby: CreatureBaby, pos: Vector2):
+	baby_sprite.sprite_frames = baby.baby_part.sprite_frames
+	baby_sprite.animation = "idle"  # they *should* all have a baby animation
+	baby_sprite.play()
+	baby_sprite.position = pos + CREATURE_PLACEMENT_OFFSET  # offset to be centered (may need to be different for each creature)
 
 ## generic scale of egg
 func scale_egg(inx: int, to_scale: Vector2, time: float = .5):

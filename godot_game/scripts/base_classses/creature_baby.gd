@@ -3,7 +3,7 @@ class_name CreatureBaby extends Resource
 
 @export var name: String
 @export var desc: String
-@export var baby: CreatureTypePart
+@export var baby_part: CreatureTypePart
 @export var xp_required_to_grow_up: int
 @export var grows_into_a: CreatureType
 @export var grows_into_b: CreatureType

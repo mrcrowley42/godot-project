@@ -1,40 +1,15 @@
-[gd_resource type="Resource" script_class="CreatureBaby" load_steps=8 format=3 uid="uid://h7bg2ijw80s6"]
+[gd_resource type="Resource" script_class="CreatureBaby" load_steps=5 format=3 uid="uid://h7bg2ijw80s6"]
 
 [ext_resource type="Script" path="res://scripts/base_classses/creature_baby.gd" id="1_08olt"]
-[ext_resource type="Script" path="res://scripts/base_classses/cosmetic_position.gd" id="1_k4ftv"]
-[ext_resource type="Script" path="res://scripts/base_classses/creature_type_part.gd" id="2_gnqv7"]
-[ext_resource type="Texture2D" uid="uid://cw7inuvjwuijr" path="res://images/creature_sprites/baby-little-guy/baby_placeholder_1.png" id="3_0fbhh"]
-[ext_resource type="Resource" uid="uid://cxtahs454inpc" path="res://resources/creatures/child_adult/little_guy.tres" id="4_ynt5n"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_k502y"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_0fbhh")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 4.0
-}]
-
-[sub_resource type="Resource" id="Resource_hpr08"]
-script = ExtResource("2_gnqv7")
-max_hp = 900
-max_water = 900
-max_food = 900
-max_fun = 900
-sprite_frames = SubResource("SpriteFrames_k502y")
-notification_position = Vector2(0, 0)
-cosmetic_positions = Array[ExtResource("1_k4ftv")]([])
-food_likes = Array[int]([])
-food_dislikes = Array[int]([])
-drink_likes = Array[int]([])
-drink_dislikes = Array[int]([])
+[ext_resource type="Resource" uid="uid://v52tqegicsiv" path="res://resources/creatures/creature_parts/little_guy_baby.tres" id="1_vsh5t"]
+[ext_resource type="Resource" uid="uid://cxtahs454inpc" path="res://resources/creatures/creature_parts/little_guy.tres" id="2_nio3b"]
+[ext_resource type="Resource" uid="uid://4qlg5ogt7yho" path="res://resources/creatures/creature_parts/penguin_guy.tres" id="3_amqty"]
 
 [resource]
 script = ExtResource("1_08olt")
 name = "Little guy"
 desc = "Just a little guy"
-baby = SubResource("Resource_hpr08")
+baby_part = ExtResource("1_vsh5t")
 xp_required_to_grow_up = 10000
-grows_into_a = ExtResource("4_ynt5n")
+grows_into_a = ExtResource("2_nio3b")
+grows_into_b = ExtResource("3_amqty")

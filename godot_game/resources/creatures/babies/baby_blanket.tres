@@ -1,42 +1,15 @@
-[gd_resource type="Resource" script_class="CreatureBaby" load_steps=9 format=3 uid="uid://7owckiqdho7a"]
+[gd_resource type="Resource" script_class="CreatureBaby" load_steps=5 format=3 uid="uid://7owckiqdho7a"]
 
-[ext_resource type="Script" path="res://scripts/base_classses/cosmetic_position.gd" id="1_5crlb"]
+[ext_resource type="Resource" uid="uid://db1xtxduidmsc" path="res://resources/creatures/creature_parts/blanket_baby.tres" id="1_1ewt5"]
 [ext_resource type="Script" path="res://scripts/base_classses/creature_baby.gd" id="1_ejcxo"]
-[ext_resource type="Script" path="res://scripts/base_classses/creature_type_part.gd" id="2_mxl7b"]
-[ext_resource type="Texture2D" uid="uid://c4bctjni1jwu2" path="res://images/creature_sprites/baby-blanket/baby_placeholder_2.png" id="3_a0eqc"]
-[ext_resource type="Resource" uid="uid://dmgqdvkbx0e0g" path="res://resources/creatures/child_adult/blanket.tres" id="4_ux2xu"]
-[ext_resource type="Resource" uid="uid://dwv6t0fmrq612" path="res://resources/creatures/child_adult/box.tres" id="5_8kkxq"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_j54nl"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_a0eqc")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 4.0
-}]
-
-[sub_resource type="Resource" id="Resource_cxf4k"]
-script = ExtResource("2_mxl7b")
-max_hp = 700
-max_water = 700
-max_food = 700
-max_fun = 700
-sprite_frames = SubResource("SpriteFrames_j54nl")
-notification_position = Vector2(0, 0)
-cosmetic_positions = Array[ExtResource("1_5crlb")]([])
-food_likes = Array[int]([])
-food_dislikes = Array[int]([])
-drink_likes = Array[int]([])
-drink_dislikes = Array[int]([])
+[ext_resource type="Resource" uid="uid://dmgqdvkbx0e0g" path="res://resources/creatures/creature_parts/blanket.tres" id="2_83x45"]
+[ext_resource type="Resource" uid="uid://dwv6t0fmrq612" path="res://resources/creatures/creature_parts/box.tres" id="3_id32l"]
 
 [resource]
 script = ExtResource("1_ejcxo")
 name = "Little Blanket"
 desc = "Is very hidden"
-baby = SubResource("Resource_cxf4k")
+baby_part = ExtResource("1_1ewt5")
 xp_required_to_grow_up = 7000
-grows_into_a = ExtResource("4_ux2xu")
-grows_into_b = ExtResource("5_8kkxq")
+grows_into_a = ExtResource("2_83x45")
+grows_into_b = ExtResource("3_id32l")

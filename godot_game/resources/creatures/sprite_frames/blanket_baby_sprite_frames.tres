@@ -1,0 +1,14 @@
+[gd_resource type="SpriteFrames" load_steps=2 format=3 uid="uid://b1y41obvvh3hr"]
+
+[ext_resource type="Texture2D" uid="uid://c4bctjni1jwu2" path="res://images/creature_sprites/baby-blanket/baby_placeholder_2.png" id="1_qh81m"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_qh81m")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}]

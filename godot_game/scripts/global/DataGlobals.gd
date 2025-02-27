@@ -28,6 +28,7 @@ const ID_INCREMENTAL = "id_incremental"
 
 ## creature-relative metadata items
 const CREATURE_ID = "creature_id"
+const CREATURE_BABY_UID = "creature_baby_uid"
 const CREATURE_TYPE_UID = "creature_type_uid"
 const CREATURE_NAME = "creature_name"
 const CREATURE_HATCH_TIME = "creature_hatch_time"
@@ -113,7 +114,7 @@ func get_default_global_metadata() -> Dictionary:
 		VERSION_GLOBAL: Globals.VERSION,
 		BUILD_GLOBAL: Globals.BUILD,
 		LAST_SAVED_GLOBAL: Time.get_unix_time_from_system(),
-		CURRENT_CREATURE: -1,
+		CURRENT_CREATURE: "-1",
 		PENDING_EGGS: [],
 		CREATURES_DISCOVERED: {},
 		HOLIDAY_MODE: false,
@@ -123,13 +124,14 @@ func get_default_global_metadata() -> Dictionary:
 		UNLOCKED_ACHIEVEMENTS: [],
 		ACHIEVEMENT_PROGRESS: {},
 		MINIGAME_DATA: {},
-		ID_INCREMENTAL: 0
+		ID_INCREMENTAL: "0"
 	}
 
 func get_default_creature_metadata() -> Dictionary:
 	## IMPORTANT: dont use null values, only use empty strings
 	return {
 		CREATURE_ID: -1,
+		CREATURE_BABY_UID: "",
 		CREATURE_TYPE_UID: "",
 		CREATURE_NAME: "",
 		CREATURE_HATCH_TIME: -1,
@@ -334,12 +336,23 @@ func save_only_creature_metadata(creature_id_override: int = -1):
 	print("Creature '%s' metadata saved (did not update node data)" % creature_id_to_save)
 
 ## create a new creature in memory, does not save to file, call save_data yourself (returns its new id)
-func create_new_creature(type_uid: String, initial_creature_name: String) -> int:
+func create_new_creature(baby_type: CreatureBaby) -> int:
+	var baby_type_uid = Helpers.uid_str(baby_type)
+	var initial_creature_name = baby_type.name
 	var creature_id: String = get_global_metadata_value(ID_INCREMENTAL)
 	add_to_metadata_value(true, ID_INCREMENTAL, 1)
 	
+	var discovered_creatures: Array = DataGlobals.get_global_metadata_value(DataGlobals.CREATURES_DISCOVERED).keys()
+	var choices = [Helpers.uid_str(baby_type.grows_into_a), Helpers.uid_str(baby_type.grows_into_b)]
+	var final_choice = [0, 1].pick_random()
+	
+	# if already discovered chosen creature and not discovered other creaturee, use other creature
+	if discovered_creatures.has(choices[final_choice]) and not discovered_creatures.has(choices[1-final_choice]):
+		final_choice = 1 - final_choice
+	
 	var new_creature_metadata = generate_creature_metadata_to_save(int(creature_id))
-	new_creature_metadata[CREATURE_TYPE_UID] = type_uid
+	new_creature_metadata[CREATURE_BABY_UID] = baby_type_uid
+	new_creature_metadata[CREATURE_TYPE_UID] = choices[final_choice]
 	new_creature_metadata[CREATURE_HATCH_TIME] = Time.get_unix_time_from_system()
 	new_creature_metadata[CREATURE_NAME] = initial_creature_name
 	
@@ -347,7 +360,7 @@ func create_new_creature(type_uid: String, initial_creature_name: String) -> int
 	
 	_every_creature_metadata[int(creature_id)] = new_creature_metadata
 	_every_creature_node_data[int(creature_id)] = []
-	print("new creature '%s' created (uid %s), did not save." % [creature_id, type_uid])
+	print("new creature '%s' created (baby uid %s, type uid %s), did not save." % [creature_id, baby_type_uid, -1])
 	return int(creature_id)
 
 func save_settings_data():
