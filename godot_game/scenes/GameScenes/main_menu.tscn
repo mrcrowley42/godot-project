@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://ig0eoqdfq5nr"]
+[gd_scene load_steps=33 format=3 uid="uid://ig0eoqdfq5nr"]
 
 [ext_resource type="Script" path="res://scripts/main_game_scripts/main_menu.gd" id="1_lpoqi"]
 [ext_resource type="Shader" path="res://shaders/pattern_lines.gdshader" id="2_f1u7v"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://cbn0dv1k0onpb" path="res://scenes/UiScenes/vol_slider.tscn" id="13_4qvf0"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="15_qcaiy"]
 [ext_resource type="Theme" uid="uid://bsd1dkhc13v47" path="res://themes/plain.tres" id="22_l4scn"]
+[ext_resource type="AudioStream" uid="uid://dd72nxiptfej6" path="res://music/Clouds - Aether OST (Emile van Krieken).mp3" id="26_5wjrk"]
 
 [sub_resource type="Curve" id="Curve_ryjxj"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.709302, 0.774943), -0.848899, -0.848899, 0, 0, Vector2(1, 0), -6.11725, 0.0, 0, 0]
@@ -659,6 +660,9 @@ theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
 theme_override_font_sizes/font_size = 18
 text = "Yes"
 
+[node name="EggOpenningLayer" type="CanvasLayer" parent="."]
+layer = 50
+
 [node name="TransLayer" type="CanvasLayer" parent="."]
 layer = 100
 
@@ -674,9 +678,13 @@ volume_db = -1.0
 max_polyphony = 2
 bus = &"SFX"
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
+[node name="Music1" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("12_xt2xn")
+
+[node name="Music2" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("26_5wjrk")
 
 [connection signal="button_down" from="MenuList/MarginContainer/VBoxContainer/NewGameBtn" to="." method="_on_new_game_btn_button_down"]
 [connection signal="button_down" from="MenuList/MarginContainer/VBoxContainer/ContinueBtn" to="." method="_on_continue_btn_button_down"]

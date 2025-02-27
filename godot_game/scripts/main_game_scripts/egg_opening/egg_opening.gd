@@ -1,5 +1,10 @@
 class_name EggOpening extends ScriptNode
 
+@warning_ignore("unused_signal")
+signal do_closing_trans
+@warning_ignore("unused_signal")
+signal back_to_main_menu
+
 @export var skip_scene: bool = false
 @export var existing_eggs: Array[EggEntry]
 @export var egg_cracks: Array[Texture2D]
@@ -17,7 +22,6 @@ class_name EggOpening extends ScriptNode
 @onready var bg: NinePatchRect = find_child("BG")
 @onready var music: AudioStreamPlayer = find_child("Music")
 @onready var display_box: NinePatchRect = find_child("DisplayBox")
-@onready var trans_img: Sprite2D = find_child("Transition")
 @onready var title_container: Control = find_child("TitleContainer")
 @onready var bar_container: Control = find_child("EggBarContainer")
 @onready var selection_area: Control = find_child("SelectionArea")
@@ -32,8 +36,6 @@ class_name EggOpening extends ScriptNode
 
 @onready var continue_btn: NinePatchRect = find_child("ContinueBtn")
 @onready var back_btn: NinePatchRect = find_child("BackBtn")
-@onready var music_btn: NinePatchRect = find_child("MusicBtn")
-@onready var sfx_btn: NinePatchRect = find_child("SfxBtn")
 
 @onready var alpha_shader = preload("res://shaders/apply_alpha_map.gdshader")
 @onready var alpha_map = preload("res://images/egg/egg-alpha-map.png")
@@ -81,7 +83,6 @@ func _ready():
 			return
 
 	# setup
-	music.play()
 	bar_container.visible = false
 	continue_btn.visible = false
 	back_btn.visible = false
@@ -91,13 +92,9 @@ func _ready():
 	# eggs
 	selection_area_center = selection_area.position + selection_area.size * .5
 	spawn_eggs()
-	do_opening_transition()
 
 func load_main_scene():
 	Globals.change_to_scene("res://scenes/GameScenes/main.tscn")
-
-func do_opening_transition():
-	Globals.perform_opening_transition(trans_img, bg.position + (bg.size * bg.scale) * .5)
 
 ## structure of egg:
 ## - Control  (scale & move this, rotate for centeral rotation)
@@ -202,6 +199,7 @@ func end_opening_animation():
 		var scale_tween = scale_egg(i, BASE_EGG_SCALE)
 		if i == placed_eggs.size() - 1:  # only on the last egg
 			scale_tween.connect("finished", manual_mouse_check)
+	fade(back_btn, true, .0, true)
 
 ## generic tween function
 func tween(obj, prop, val, delay=0., time=2., _ease=Tween.EASE_OUT):
@@ -294,7 +292,6 @@ func select_egg(egg: EggEntry, inx: int):
 	selection_title.text = select_title_text % egg.name
 	egg_desc.text = ""
 	bar.value = 0  # reset
-	fade(back_btn)
 	fade(bar_container)
 
 	# shader
@@ -445,7 +442,6 @@ func pick_creature_to_hatch() -> CreatureBaby:
 
 ## for when first loading in and continue button wasn't pressed before game was closed last
 func instant_open_to_continue_screen():
-	do_opening_transition()
 	var uid = int(DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_TYPE_UID))
 	var baby_hatched: CreatureBaby = load(ResourceUID.get_id_path(uid))
 
@@ -475,12 +471,14 @@ func scale_egg(inx: int, to_scale: Vector2, time: float = .5):
 	return tween(sprite_c, "scale", to_scale, 0., time)
 
 ## generic fade in or out
-func fade(obj, fade_in: bool = true, delay: float = 0.):
+func fade(obj, fade_in: bool = true, delay: float = 0., fast: bool = false):
 	if fade_in:
 		obj.visible = true
 		obj.modulate.a = 0
 	var col = Color.WHITE if fade_in else Color(1, 1, 1, 0)
 	var time = 1.0 if fade_in else .5
+	if fast:
+		time = .1
 	var _ease = Tween.EASE_IN_OUT if fade_in else Tween.EASE_OUT
 	return tween(obj, "modulate", col, delay, time, _ease)
 

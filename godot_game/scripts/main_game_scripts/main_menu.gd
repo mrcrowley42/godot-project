@@ -2,6 +2,9 @@ class_name MainMenu extends ScriptNode
 
 @export var auto_continue: bool
 
+@onready var egg_scene = preload("res://scenes/GameScenes/egg_opening.tscn")
+var egg_scene_instance: EggOpening = null
+
 @onready var load_menu = find_child("LoadMenu")
 @onready var settings_menu = find_child("SettingsMenu")
 @onready var bg_gradient: TextureRect = find_child("BgGradient")
@@ -12,6 +15,8 @@ class_name MainMenu extends ScriptNode
 @onready var continue_btn: Button = find_child("ContinueBtn")
 @onready var wipe_menu = find_child("ConfirmWipeMenu")
 @onready var hatch_egg_btn: Button = find_child("HatchEggBtn")
+
+@onready var egg_openning_layer: CanvasLayer = find_child("EggOpenningLayer")
 
 var center_pos
 var is_in_transition = true
@@ -33,7 +38,7 @@ func _ready() -> void:
 	
 	setup_btn_visibility()
 	do_opening_trans()
-	%Music.play()
+	[%Music1, %Music2].pick_random().play()
 
 
 func setup_btn_visibility():
@@ -85,9 +90,26 @@ func _on_continue_btn_button_down() -> void:
 func _on_new_game_btn_button_down() -> void:
 	btn_sfx.play()
 	if not is_in_transition:
-		fade_out_music()
 		await do_closing_trans()
-		Globals.change_to_scene("res://scenes/GameScenes/egg_opening.tscn")
+		egg_scene_instance = egg_scene.instantiate()
+		egg_openning_layer.add_child(egg_scene_instance)
+		egg_scene_instance.back_to_main_menu.connect(exit_egg_scene_to_main_menu)
+		egg_scene_instance.do_closing_trans.connect(go_to_main_game)
+		do_opening_trans()
+
+
+func go_to_main_game():
+	fade_out_music()
+	await do_closing_trans()
+	Globals.change_to_scene("res://scenes/GameScenes/main.tscn")
+
+
+func exit_egg_scene_to_main_menu():
+	await do_closing_trans()
+	egg_scene_instance.back_to_main_menu.disconnect(exit_egg_scene_to_main_menu)
+	egg_scene_instance.do_closing_trans.disconnect(go_to_main_game)
+	egg_scene_instance.queue_free()
+	do_opening_trans()
 
 
 func _on_load_btn_button_down() -> void:
@@ -103,7 +125,8 @@ func _on_load_save_btn_button_down() -> void:
 		_on_continue_btn_button_down.call_deferred()
 
 func fade_out_music():
-	Globals.tween(%Music, "volume_db", -100, 0., 1., Tween.EaseType.EASE_IN_OUT)
+	Globals.tween(%Music1, "volume_db", -100, 0., 1., Tween.EaseType.EASE_IN_OUT)
+	Globals.tween(%Music2, "volume_db", -100, 0., 1., Tween.EaseType.EASE_IN_OUT)
 
 
 func _on_settings_btn_button_down() -> void:
