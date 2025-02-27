@@ -12,10 +12,10 @@
 - (SECRET) press 'y' on you keyboard to YIPPEEE
 
 ### Minigames
-- reach x score in totris
-- reach x lowest score in memory game normal mode
-- reach below x seconds in memory game timed mode
-- win x rounds against the creature in spr
+- reach 10_000 score in totris
+- reach 20 lowest score in memory game normal mode
+- reach below 30 seconds in memory game timed mode
+- win 10 rounds against the creature in spr
 - activate zen mode for the first time
 - (SECRET) acivate zen mode 10 times
 - (SECRET) view the advanced Totris instructions
