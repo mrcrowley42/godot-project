@@ -245,7 +245,7 @@ func mouse_exited(i: int):
 	if can_interact and !finished_hatching:
 		if selected_egg_inx == null:  # exited a placed egg
 			scale_egg(i, BASE_EGG_SCALE)
-			#set_egg_desc()
+			set_egg_desc()
 			manual_mouse_check()  # in case there are overlapping eggs
 		elif i == selected_egg_inx:  # exited selected egg
 			tween(self, "scale_addition", Vector2(0, 0), 0., .5)
@@ -271,11 +271,8 @@ func set_egg_desc(i: int = -1):
 		var uid = ResourceLoader.get_resource_uid(creature_entry.creature_baby.resource_path)
 		if is_creature_known(uid):
 			var texture_path = creature_entry.creature_baby.baby_part.sprite_frames.get_frame_texture("idle", 0).resource_path
-			var texture: Image = load(texture_path).get_image()
-			var cropped_rect: Rect2i = texture.get_used_rect()
-#			cropped_rect.position.x, cropped_rect.position.y, cropped_rect.size.x, cropped_rect.size.y
-			hatches_list.append("[img reigon=%s,%s,%s,%s]%s[/img]" % [cropped_rect.position.x, cropped_rect.position.y, cropped_rect.size.x, cropped_rect.size.y, texture_path])
-			print(hatches_list)
+			var cropped_rect: Rect2i = load(texture_path).get_image().get_used_rect()
+			hatches_list.append("[img height=30 region=%s,%s,%s,%s]%s[/img]" % [cropped_rect.position.x, cropped_rect.position.y, cropped_rect.size.x, cropped_rect.size.y, texture_path])
 		else:
 			hatches_list.append("?")
 	egg_desc.text = EGG_FORMAT_STRING % [egg.name, ", ".join(hatches_list)]
