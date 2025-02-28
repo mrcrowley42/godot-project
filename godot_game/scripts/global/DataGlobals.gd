@@ -16,7 +16,9 @@ const BUILD_GLOBAL = "build"
 const LAST_SAVED_GLOBAL = "last_saved_global"
 const CURRENT_CREATURE = "current_creature_id"
 const PENDING_EGGS = "pending_eggs"
-const CREATURES_DISCOVERED = "creatures_discovered"
+const HATCHED_EGGS = "hatched_eggs"
+const DISCOVERED_BABIES = "discovered_babies"
+const DISCOVERED_CREATURES = "discovered_creatures"
 const HOLIDAY_MODE = "holiday_mode"
 const UNLOCKED_COSMETICS = "unlocked_cosmetics"
 const UNLOCKED_FACTS = "unlocked_facts"
@@ -28,6 +30,7 @@ const ID_INCREMENTAL = "id_incremental"
 
 ## creature-relative metadata items
 const CREATURE_ID = "creature_id"
+const CREATURE_EGG_UID = "creature_egg_uid"
 const CREATURE_BABY_UID = "creature_baby_uid"
 const CREATURE_TYPE_UID = "creature_type_uid"
 const CREATURE_NAME = "creature_name"
@@ -116,7 +119,9 @@ func get_default_global_metadata() -> Dictionary:
 		LAST_SAVED_GLOBAL: Time.get_unix_time_from_system(),
 		CURRENT_CREATURE: "-1",
 		PENDING_EGGS: [],
-		CREATURES_DISCOVERED: {},
+		HATCHED_EGGS: [],
+		DISCOVERED_BABIES: {},
+		DISCOVERED_CREATURES: {},
 		HOLIDAY_MODE: false,
 		UNLOCKED_COSMETICS: [],
 		UNLOCKED_FACTS: [],
@@ -131,6 +136,7 @@ func get_default_creature_metadata() -> Dictionary:
 	## IMPORTANT: dont use null values, only use empty strings
 	return {
 		CREATURE_ID: -1,
+		CREATURE_EGG_UID: "",
 		CREATURE_BABY_UID: "",
 		CREATURE_TYPE_UID: "",
 		CREATURE_NAME: "",
@@ -336,7 +342,8 @@ func save_only_creature_metadata(creature_id_override: int = -1):
 	print("Creature '%s' metadata saved (did not update node data)" % creature_id_to_save)
 
 ## create a new creature in memory, does not save to file, call save_data yourself (returns its new id)
-func create_new_creature(baby_type: CreatureBaby) -> int:
+func create_new_creature(egg: EggEntry, baby_type: CreatureBaby) -> int:
+	var egg_type_uid = Helpers.uid_str(egg)
 	var baby_type_uid = Helpers.uid_str(baby_type)
 	var initial_creature_name = baby_type.name
 	var creature_id: String = get_global_metadata_value(ID_INCREMENTAL)
@@ -351,6 +358,7 @@ func create_new_creature(baby_type: CreatureBaby) -> int:
 		final_choice = 1 - final_choice
 	
 	var new_creature_metadata = generate_creature_metadata_to_save(int(creature_id))
+	new_creature_metadata[CREATURE_EGG_UID] = egg_type_uid
 	new_creature_metadata[CREATURE_BABY_UID] = baby_type_uid
 	new_creature_metadata[CREATURE_TYPE_UID] = choices[final_choice]
 	new_creature_metadata[CREATURE_HATCH_TIME] = Time.get_unix_time_from_system()
@@ -557,25 +565,44 @@ func load_settings_data():
 ##    OTHER
 ## ------------
 
+func add_to_eggs_hatched(egg: EggEntry):
+	var uid = Helpers.uid_str(egg)
+	if not get_global_metadata_value(HATCHED_EGGS).has(uid):
+		append_to_metadata_value(true, HATCHED_EGGS, uid)
+
+func add_to_babies_discovered(creature_baby: CreatureBaby):
+	var uid = Helpers.uid_str(creature_baby)
+	if get_global_metadata_value(DISCOVERED_BABIES).has(uid):
+		modify_metadata_value(true, DISCOVERED_BABIES, [uid, "num_times_found"], ACTION_ADD, 1)
+		print("hatched another '%s' baby" % uid)
+	else:
+		var dict = {
+			"uid": uid,
+			"num_times_found": 1
+		}
+		modify_metadata_value(true, DISCOVERED_BABIES, [uid], ACTION_SET, dict)
+		print("new baby discovered '%s'" % uid)
+
 ## add a newly discovered creature, or add 1 to "times_hatched" if already discovered
-func add_to_creatures_discovered(uid: String):
-	if get_global_metadata_value(CREATURES_DISCOVERED).has(uid):
+func add_to_creatures_discovered(creature_type: CreatureType):
+	var uid = Helpers.uid_str(creature_type)
+	if get_global_metadata_value(DISCOVERED_CREATURES).has(uid):
 		# add 1 to times hatched
-		modify_metadata_value(true, CREATURES_DISCOVERED, [uid, "num_times_hatched"], ACTION_ADD, 1)
+		modify_metadata_value(true, DISCOVERED_CREATURES, [uid, "num_times_found"], ACTION_ADD, 1)
 		print("hatched another '%s' creature" % uid)
 	else:
 		# add new creature discovered
 		var dict = {
 			"uid": uid,
 			"max_stage_reached": 0,
-			"num_times_hatched": 1
+			"num_times_found": 1
 		}
-		modify_metadata_value(true, CREATURES_DISCOVERED, [uid], ACTION_SET, dict)
+		modify_metadata_value(true, DISCOVERED_CREATURES, [uid], ACTION_SET, dict)
 		print("new creature discovered '%s'" % uid)
 
 func set_new_highest_life_stage(uid: String, life_stage: int):
-	var current_highest = get_global_metadata_value(CREATURES_DISCOVERED)[uid]["max_stage_reached"]
-	modify_metadata_value(true, CREATURES_DISCOVERED, [uid, "max_stage_reached"], ACTION_SET, max(current_highest, life_stage))
+	var current_highest = get_global_metadata_value(DISCOVERED_CREATURES)[uid]["max_stage_reached"]
+	modify_metadata_value(true, DISCOVERED_CREATURES, [uid, "max_stage_reached"], ACTION_SET, max(current_highest, life_stage))
 
 func _process(_delta: float) -> void:
 	# save metadata here so the file only needs to be written to once in a frame

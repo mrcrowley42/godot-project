@@ -4,7 +4,7 @@
 class_name Creature extends Node2D
 
 # ENUMS
-enum LifeStage {BABY, CHILD, ADULT}
+enum LifeStage {EGG, BABY, CHILD, ADULT}
 enum Stat {HP, WATER, FOOD, FUN}
 enum Preference {LIKES, NEUTRAL, DISLIKES}
 
@@ -23,6 +23,7 @@ const like_multiplier: float = 2.0
 
 ## XP required for the creature to reach the [param ADULT] [param LifeStage] stage
 var xp_required: float
+var egg_type: EggEntry
 var baby_type: CreatureBaby
 var creature_type: CreatureType
 var creature: CreatureTypePart
@@ -77,8 +78,10 @@ var stats_max: Dictionary = {Stat.HP: 'max_hp', Stat.FUN: 'max_fun',
 
 func setup_creature():
 	og_pos = position
+	var egg_uid = int(DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_EGG_UID))
 	var baby_uid = int(DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_BABY_UID))
 	var creature_uid = int(DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_TYPE_UID))
+	egg_type = load(ResourceUID.get_id_path(egg_uid))
 	baby_type = load(ResourceUID.get_id_path(baby_uid))
 	creature_type = load(ResourceUID.get_id_path(creature_uid))
 	
@@ -87,7 +90,8 @@ func setup_creature():
 		Globals.general_dict.erase("grow_creature_up")
 		grow_up_one_stage()
 	
-	creature = [baby_type.baby_part, creature_type.child, creature_type.adult][life_stage]
+	if life_stage != LifeStage.EGG:
+		creature = [baby_type.baby_part, creature_type.child, creature_type.adult][life_stage-1]
 	setup_default_values()
 	setup_main_sprite()
 	Globals.send_notification(Globals.NOTIFICATION_CREATURE_IS_LOADED)
@@ -99,8 +103,11 @@ func setup_creature():
 
 ## Update the [param sprite_frames] of the current creature based on the current [param life_stage]
 func setup_main_sprite() -> void:
-	main_sprite.sprite_frames = creature.sprite_frames
-	main_sprite.animation = "idle"
+	if creature:
+		main_sprite.sprite_frames = creature.sprite_frames
+		main_sprite.animation = "idle"
+	else:
+		main_sprite.sprite_frames.add_frame("idle", egg_type.image)
 	main_sprite.play()
 
 func setup_default_values():

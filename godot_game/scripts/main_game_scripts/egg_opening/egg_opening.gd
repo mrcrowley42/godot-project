@@ -418,9 +418,8 @@ func finish_hatching(sprite_c: Control):
 	set_creature_desc(baby_hatched)
 
 	# save data
-	var uid_str: String = Helpers.uid_str(baby_hatched)
-	DataGlobals.add_to_creatures_discovered(uid_str)
-	DataGlobals.create_new_creature(baby_hatched)
+	DataGlobals.add_to_babies_discovered(baby_hatched)
+	DataGlobals.create_new_creature(placed_eggs[selected_egg_inx], baby_hatched)
 	DataGlobals.save_data()
 
 ## randomly pick a creature to hatch from the selected egg
