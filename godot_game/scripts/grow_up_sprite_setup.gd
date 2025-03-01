@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var parent: GrowUpToAdult = find_parent("GrowUpToAdult")
+@onready var parent: GrowUpToAdult = find_parent("GrowUp")
 @onready var current_sprite: AnimatedSprite2D = find_child("Current")
 @onready var next_sprite: AnimatedSprite2D = find_child("Next")
 @onready var display_box: NinePatchRect = find_parent("UI").find_child("DisplayBox")

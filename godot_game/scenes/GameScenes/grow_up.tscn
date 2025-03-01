@@ -1,12 +1,12 @@
 [gd_scene load_steps=12 format=3 uid="uid://cx2gycrxks36j"]
 
-[ext_resource type="Script" path="res://scripts/main_game_scripts/grow_up_to_adult.gd" id="1_gegkd"]
+[ext_resource type="Script" path="res://scripts/main_game_scripts/grow_up.gd" id="1_gegkd"]
 [ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="2_h16gn"]
 [ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="3_rs70k"]
 [ext_resource type="Shader" path="res://shaders/voronoi.gdshader" id="4_ebynq"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="5_vbb43"]
 [ext_resource type="Script" path="res://scripts/grow_btn.gd" id="6_uagaw"]
-[ext_resource type="Script" path="res://scripts/creature_grow_up.gd" id="7_15xwp"]
+[ext_resource type="Script" path="res://scripts/grow_up_sprite_setup.gd" id="7_15xwp"]
 [ext_resource type="Script" path="res://scripts/grow_up_continue_btn.gd" id="8_m0sd6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w2jld"]
@@ -24,8 +24,12 @@ font_size = 32
 [sub_resource type="LabelSettings" id="LabelSettings_0wk48"]
 font_size = 32
 
-[node name="GrowUpToAdult" type="Node2D"]
+[node name="GrowUp" type="Node2D" node_paths=PackedStringArray("current_sprite", "next_sprite", "shader_area", "display_box")]
 script = ExtResource("1_gegkd")
+current_sprite = NodePath("UI/Creature/Current")
+next_sprite = NodePath("UI/Creature/Next")
+shader_area = NodePath("UI/DisplayBox/shader")
+display_box = NodePath("UI/DisplayBox")
 
 [node name="UI" type="CanvasLayer" parent="."]
 

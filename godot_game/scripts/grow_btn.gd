@@ -10,5 +10,5 @@ func _on_gui_input(event: InputEvent) -> void:
 			.set_trans(Tween.TRANS_EXPO)\
 			.set_ease(Tween.EASE_OUT)
 		
-		%EggDesc.text = "[center]..."
+		%EggDesc.text = ""
 		owner.start_grow_up()
