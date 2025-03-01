@@ -69,11 +69,12 @@ var transition_tween: Tween = null
 ## for use when passing data between scenes
 # please use .erase() after extracting items to keep everything clean
 var general_dict: Dictionary = {}
+## track whether the game has already been launched.
+var first_launch: bool = true
+var has_creature_just_grown_up: bool = false
 
 var fact_icons: FactIconList = preload("res://resources/fact_icons.tres")
 
-## track whether the game has already been launched.
-var first_launch: bool = true
 
 # ------------------------------
 #    general helper functions

@@ -1,0 +1,262 @@
+[gd_scene load_steps=12 format=3 uid="uid://cx2gycrxks36j"]
+
+[ext_resource type="Script" path="res://scripts/main_game_scripts/grow_up_to_adult.gd" id="1_gegkd"]
+[ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="2_h16gn"]
+[ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="3_rs70k"]
+[ext_resource type="Shader" path="res://shaders/voronoi.gdshader" id="4_ebynq"]
+[ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="5_vbb43"]
+[ext_resource type="Script" path="res://scripts/grow_btn.gd" id="6_uagaw"]
+[ext_resource type="Script" path="res://scripts/creature_grow_up.gd" id="7_15xwp"]
+[ext_resource type="Script" path="res://scripts/grow_up_continue_btn.gd" id="8_m0sd6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w2jld"]
+shader = ExtResource("4_ebynq")
+shader_parameter/color = Vector4(0, 0, 0, 1)
+shader_parameter/pixel_size = 5.0
+shader_parameter/scale = 0.5
+shader_parameter/speed = 0.05
+shader_parameter/brightness = 1.0
+shader_parameter/opacity = 0.15
+
+[sub_resource type="LabelSettings" id="LabelSettings_di502"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_0wk48"]
+font_size = 32
+
+[node name="GrowUpToAdult" type="Node2D"]
+script = ExtResource("1_gegkd")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="TransLayer" type="CanvasLayer" parent="UI"]
+layer = 10
+
+[node name="Transition" type="Sprite2D" parent="UI/TransLayer"]
+position = Vector2(270, 1200)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_h16gn")
+
+[node name="BG" type="NinePatchRect" parent="UI"]
+offset_right = 1080.0
+offset_bottom = 1350.0
+scale = Vector2(0.5, 0.5)
+mouse_filter = 1
+texture = ExtResource("3_rs70k")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+metadata/_edit_use_anchors_ = true
+
+[node name="DisplayBox" type="NinePatchRect" parent="UI"]
+anchors_preset = -1
+anchor_bottom = 0.335044
+offset_left = 472.0
+offset_top = 442.0
+offset_right = 1288.0
+offset_bottom = 958.845
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_rs70k")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+metadata/_edit_use_anchors_ = true
+
+[node name="whiteBg" type="ColorRect" parent="UI/DisplayBox"]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 0.313594
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 800.0
+offset_bottom = 494.0
+metadata/_edit_use_anchors_ = true
+
+[node name="shader" type="ColorRect" parent="UI/DisplayBox"]
+material = SubResource("ShaderMaterial_w2jld")
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 0.313594
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 800.0
+offset_bottom = 494.0
+color = Color(1, 1, 1, 0.270588)
+metadata/_edit_use_anchors_ = true
+
+[node name="TitleContainer" type="Control" parent="UI"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="TitleBox" type="NinePatchRect" parent="UI/TitleContainer"]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 144.0
+offset_right = 1162.0
+offset_bottom = 270.0
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_rs70k")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="UI/TitleContainer/TitleBox"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 698.0
+offset_bottom = 110.0
+color = Color(0, 0, 0, 0.388235)
+metadata/_edit_use_anchors_ = true
+
+[node name="SelectTitle" type="RichTextLabel" parent="UI/TitleContainer"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 95.0
+offset_right = 439.0
+offset_bottom = 135.0
+theme = ExtResource("5_vbb43")
+bbcode_enabled = true
+text = "[font_size=25][center][wave amp=30 freq=-3]Grow up!"
+fit_content = true
+metadata/_edit_use_anchors_ = true
+
+[node name="DescContainer" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="EggDescBox" type="NinePatchRect" parent="UI/DescContainer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.4125
+anchor_bottom = 5.0125
+offset_left = 446.0
+offset_top = 573.0
+offset_right = 1160.0
+offset_bottom = 740.0
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_rs70k")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="UI/DescContainer/EggDescBox"]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 0.459807
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 698.0
+offset_bottom = 151.0
+color = Color(0, 0, 0, 0.388235)
+metadata/_edit_use_anchors_ = true
+
+[node name="EggDesc" type="RichTextLabel" parent="UI/DescContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.375
+anchor_bottom = -0.075
+offset_left = 98.0
+offset_top = 504.0
+offset_right = 439.0
+offset_bottom = 564.0
+theme = ExtResource("5_vbb43")
+bbcode_enabled = true
+text = "[center]Your creature is ready to grow up!"
+metadata/_edit_use_anchors_ = true
+
+[node name="GrowBtn" type="NinePatchRect" parent="UI"]
+offset_left = 202.0
+offset_top = 562.5
+offset_right = 452.0
+offset_bottom = 652.5
+scale = Vector2(0.5, 0.5)
+mouse_filter = 0
+texture = ExtResource("3_rs70k")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+script = ExtResource("6_uagaw")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="UI/GrowBtn"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.08
+anchor_bottom = 0.2
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 214.0
+offset_bottom = 56.0
+theme = ExtResource("5_vbb43")
+text = "Continue"
+label_settings = SubResource("LabelSettings_di502")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Creature" type="Node2D" parent="UI"]
+script = ExtResource("7_15xwp")
+
+[node name="Current" type="AnimatedSprite2D" parent="UI/Creature"]
+scale = Vector2(0.225, 0.225)
+
+[node name="Next" type="AnimatedSprite2D" parent="UI/Creature"]
+scale = Vector2(0.225, 0.225)
+
+[node name="ConfettiLayer" type="CanvasLayer" parent="UI"]
+unique_name_in_owner = true
+layer = 5
+
+[node name="ContinueBtn" type="NinePatchRect" parent="UI"]
+visible = false
+offset_left = 202.0
+offset_top = 563.0
+offset_right = 452.0
+offset_bottom = 653.0
+scale = Vector2(0.5, 0.5)
+mouse_filter = 0
+texture = ExtResource("3_rs70k")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+script = ExtResource("8_m0sd6")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="UI/ContinueBtn"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.08
+anchor_bottom = 0.2
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 214.0
+offset_bottom = 56.0
+theme = ExtResource("5_vbb43")
+text = "Continue"
+label_settings = SubResource("LabelSettings_0wk48")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[connection signal="gui_input" from="UI/GrowBtn" to="UI/GrowBtn" method="_on_gui_input"]
+[connection signal="gui_input" from="UI/ContinueBtn" to="UI/ContinueBtn" method="_on_gui_input"]

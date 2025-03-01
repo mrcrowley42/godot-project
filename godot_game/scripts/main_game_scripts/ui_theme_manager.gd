@@ -3,6 +3,7 @@ class_name UiThemeManager extends ScriptNode
 ## List of available UI themes.
 var themes = preload("res://resources/ui_theme_list.tres").theme_list
 var fallback_theme = load("res://resources/ui_themes/green.tres")
+@export var grow_up_btn: NinePatchRect
 @onready var food_btn = %FoodButton
 @onready var act_btn = %ActButton
 @onready var setting_btn = %SettingButton
@@ -39,7 +40,7 @@ func load(data) -> void:
 
 ## Updates the UI elements with the appropriate textures and colours, while also
 ## keeping track of the currently selected theme.
-func set_theme(ui_theme) -> void:
+func set_theme(ui_theme: UiTheme) -> void:
 	current_theme = ui_theme
 	ui_overlay.texture = ui_theme.ui_overlay
 	bg.material.set("shader_parameter/tint_colour", ui_theme.screen_tint)
@@ -49,3 +50,4 @@ func set_theme(ui_theme) -> void:
 	act_btn.texture_pressed = ui_theme.act_btn_pressed
 	setting_btn.texture_normal = ui_theme.setting_btn
 	setting_btn.texture_pressed = ui_theme.setting_btn_pressed
+	grow_up_btn.texture = ui_theme.box

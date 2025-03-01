@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://ig0eoqdfq5nr"]
+[gd_scene load_steps=34 format=3 uid="uid://ig0eoqdfq5nr"]
 
 [ext_resource type="Script" path="res://scripts/main_game_scripts/main_menu.gd" id="1_lpoqi"]
 [ext_resource type="Shader" path="res://shaders/pattern_lines.gdshader" id="2_f1u7v"]
@@ -26,6 +26,7 @@
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="15_qcaiy"]
 [ext_resource type="Theme" uid="uid://bsd1dkhc13v47" path="res://themes/plain.tres" id="22_l4scn"]
 [ext_resource type="AudioStream" uid="uid://dd72nxiptfej6" path="res://music/Clouds - Aether OST (Emile van Krieken).mp3" id="26_5wjrk"]
+[ext_resource type="AudioStream" uid="uid://b27olqij5t5h1" path="res://music/Wings (Aether 2) - Aether OST (Emile van Krieken).mp3" id="27_ksr05"]
 
 [sub_resource type="Curve" id="Curve_ryjxj"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.709302, 0.774943), -0.848899, -0.848899, 0, 0, Vector2(1, 0), -6.11725, 0.0, 0, 0]
@@ -105,7 +106,7 @@ texture = ExtResource("3_kva7r")
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 modulate = Color(1, 1, 1, 0.541176)
 position = Vector2(268, -31)
-amount = 30
+amount = 50
 lifetime = 9.0
 preprocess = 10.0
 emission_shape = 3
@@ -172,7 +173,7 @@ stretch_mode = 5
 
 [node name="Label" type="Label" parent="MenuList/MarginContainer/VBoxContainer/HatchEggBtn/HBoxContainer"]
 layout_mode = 2
-text = "Hatch Egg"
+text = "Care for an egg"
 
 [node name="NewGameBtn" type="Button" parent="MenuList/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
@@ -686,6 +687,10 @@ stream = ExtResource("12_xt2xn")
 unique_name_in_owner = true
 stream = ExtResource("26_5wjrk")
 
+[node name="Music3" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("27_ksr05")
+
 [connection signal="button_down" from="MenuList/MarginContainer/VBoxContainer/NewGameBtn" to="." method="_on_new_game_btn_button_down"]
 [connection signal="button_down" from="MenuList/MarginContainer/VBoxContainer/ContinueBtn" to="." method="_on_continue_btn_button_down"]
 [connection signal="button_down" from="MenuList/MarginContainer/VBoxContainer/LoadBtn" to="." method="_on_load_btn_button_down"]
@@ -702,3 +707,6 @@ stream = ExtResource("26_5wjrk")
 [connection signal="button_down" from="SettingsMenu/SaveMenuBtns/Back" to="SettingsMenu" method="_on_back_button_down"]
 [connection signal="button_down" from="ConfirmWipeMenu/ConfirmWipeSave/MarginContainer/VBoxContainer/HBoxContainer/CancelWipe" to="." method="_on_cancel_wipe_button_down"]
 [connection signal="button_down" from="ConfirmWipeMenu/ConfirmWipeSave/MarginContainer/VBoxContainer/HBoxContainer/ConfirmWipe" to="." method="_on_confirm_wipe_button_down"]
+[connection signal="finished" from="Music1" to="." method="_on_music_1_finished"]
+[connection signal="finished" from="Music2" to="." method="_on_music_2_finished"]
+[connection signal="finished" from="Music3" to="." method="_on_music_3_finished"]

@@ -40,10 +40,9 @@ func _ready():
 	if not debug_mode:
 		debug_window.process_mode = Node.PROCESS_MODE_DISABLED
 
-	# force this function to run since load() wasn't called
+	# creature has never been openned before!
 	if DataGlobals.has_only_creature_metadata():
-		%Creature.setup_creature()
-		%Creature.reset_stats()
+		%Creature.creature_first_openned()
 
 	Globals.send_notification(Globals.NOTIFICATION_ALL_DATA_IS_LOADED)
 
@@ -96,8 +95,9 @@ func _notification(noti):
 			DataGlobals.save_data()  # important!
 			Globals.general_dict["current_cosmetics"] = %Creature.get_current_cosmetics()
 			Globals.general_dict["loaded_cosmetics"] = %Creature.get_loaded_cosmetics()
+			Globals.general_dict["current_life_stage"] = %Creature.life_stage
 			await Globals.perform_closing_transition(trans_img, ui_overlay.position)
-			Globals.change_to_scene("res://scenes/GameScenes/grow_up_to_adult.tscn")
+			Globals.change_to_scene("res://scenes/GameScenes/grow_up.tscn")
 
 func _input(event) -> void:
 	# close when [param esc key] is pressed

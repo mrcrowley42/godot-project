@@ -11,4 +11,4 @@ func _on_gui_input(event: InputEvent) -> void:
 			.set_ease(Tween.EASE_OUT)
 		
 		%EggDesc.text = "[center]..."
-		%SlowTimer.start()
+		owner.start_grow_up()

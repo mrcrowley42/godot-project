@@ -38,7 +38,7 @@ func _ready() -> void:
 	
 	setup_btn_visibility()
 	do_opening_trans()
-	[%Music1, %Music2].pick_random().play()
+	[%Music1, %Music2, %Music3].pick_random().play()
 
 
 func setup_btn_visibility():
@@ -159,3 +159,14 @@ func _on_cancel_wipe_button_down() -> void:
 
 func _on_wipe_save_btn_button_down() -> void:
 	wipe_menu.show()
+
+
+# beautiful
+func _on_music_1_finished():
+	[%Music2, %Music3].pick_random().play()
+
+func _on_music_2_finished():
+	[%Music1, %Music3].pick_random().play()
+
+func _on_music_3_finished():
+	[%Music1, %Music2].pick_random().play()

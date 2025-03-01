@@ -34,6 +34,7 @@ const CREATURE_EGG_UID = "creature_egg_uid"
 const CREATURE_BABY_UID = "creature_baby_uid"
 const CREATURE_TYPE_UID = "creature_type_uid"
 const CREATURE_NAME = "creature_name"
+const CREATURE_INITIAL_LIFE_STAGE = "creature_initial_life_stage"
 const CREATURE_HATCH_TIME = "creature_hatch_time"
 const CREATURE_LAST_SAVED = "creature_last_saved"
 
@@ -90,6 +91,9 @@ func has_only_global_metadata() -> bool:
 func has_only_creature_metadata(creature_id_override: int = -1):
 	return len(DataGlobals.get_creature_node_data_dc(creature_id_override)) == 0
 
+func get_num_of_creatures():
+	return len(get_all_creature_ids())
+
 ## get value from last loaded (or the default if it doesn't exist in global metadata)
 func get_global_metadata_value(metadata_key: String):
 	var value = get_default_global_metadata()[metadata_key]
@@ -140,6 +144,7 @@ func get_default_creature_metadata() -> Dictionary:
 		CREATURE_BABY_UID: "",
 		CREATURE_TYPE_UID: "",
 		CREATURE_NAME: "",
+		CREATURE_INITIAL_LIFE_STAGE: 0,
 		CREATURE_HATCH_TIME: -1,
 		CREATURE_LAST_SAVED: -1
 	}
@@ -349,7 +354,7 @@ func create_new_creature(egg: EggEntry, baby_type: CreatureBaby) -> int:
 	var creature_id: String = get_global_metadata_value(ID_INCREMENTAL)
 	add_to_metadata_value(true, ID_INCREMENTAL, 1)
 	
-	var discovered_creatures: Array = DataGlobals.get_global_metadata_value(DataGlobals.CREATURES_DISCOVERED).keys()
+	var discovered_creatures: Array = DataGlobals.get_global_metadata_value(DataGlobals.DISCOVERED_CREATURES).keys()
 	var choices = [Helpers.uid_str(baby_type.grows_into_a), Helpers.uid_str(baby_type.grows_into_b)]
 	var final_choice = [0, 1].pick_random()
 	
@@ -363,6 +368,7 @@ func create_new_creature(egg: EggEntry, baby_type: CreatureBaby) -> int:
 	new_creature_metadata[CREATURE_TYPE_UID] = choices[final_choice]
 	new_creature_metadata[CREATURE_HATCH_TIME] = Time.get_unix_time_from_system()
 	new_creature_metadata[CREATURE_NAME] = initial_creature_name
+	new_creature_metadata[CREATURE_INITIAL_LIFE_STAGE] = 1 if get_num_of_creatures() == 0 else 0  # skip egg stage for first creature
 	
 	DataGlobals.set_metadata_value(true, DataGlobals.CURRENT_CREATURE, creature_id)
 	

@@ -279,7 +279,7 @@ func set_creature_desc(baby: CreatureBaby):
 	egg_desc.text = "[center][u]%s![/u]\n[font top=6 s=15]%s" % [baby.name, baby.desc]
 
 func is_creature_known(creature_type_uid: int) -> bool:
-	return DataGlobals.get_global_metadata_value(DataGlobals.CREATURES_DISCOVERED).has(str(creature_type_uid))
+	return DataGlobals.get_global_metadata_value(DataGlobals.DISCOVERED_CREATURES).has(str(creature_type_uid))
 
 ## when one egg is selected from placed eggs
 func select_egg(egg: EggEntry, inx: int):
@@ -418,6 +418,7 @@ func finish_hatching(sprite_c: Control):
 	set_creature_desc(baby_hatched)
 
 	# save data
+	DataGlobals.add_to_eggs_hatched(placed_eggs[selected_egg_inx])
 	DataGlobals.add_to_babies_discovered(baby_hatched)
 	DataGlobals.create_new_creature(placed_eggs[selected_egg_inx], baby_hatched)
 	DataGlobals.save_data()

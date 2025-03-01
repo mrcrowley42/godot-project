@@ -40,7 +40,7 @@ func setup():
 
 func get_highest_stage() -> int:
 	var uid = Helpers.uid_str(creature)
-	var encountered = DataGlobals.get_global_metadata_value(DataGlobals.CREATURES_DISCOVERED)
+	var encountered = DataGlobals.get_global_metadata_value(DataGlobals.DISCOVERED_CREATURES)
 	return encountered[uid]['max_stage_reached']
 
 func add_life_stages() -> void:

@@ -76,6 +76,12 @@ var stats_val: Dictionary = {Stat.HP: 'hp', Stat.FUN: 'fun',
 var stats_max: Dictionary = {Stat.HP: 'max_hp', Stat.FUN: 'max_fun',
 	Stat.WATER: 'max_water', Stat.FOOD: 'max_food'}
 
+## called when the creature is openned for the very first time
+func creature_first_openned():
+	life_stage = DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_INITIAL_LIFE_STAGE)
+	setup_creature()
+	reset_stats()
+
 func setup_creature():
 	og_pos = position
 	var egg_uid = int(DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_EGG_UID))
@@ -86,12 +92,11 @@ func setup_creature():
 	creature_type = load(ResourceUID.get_id_path(creature_uid))
 	
 	# should grow up?
-	if Globals.general_dict.has("grow_creature_up"):
-		Globals.general_dict.erase("grow_creature_up")
+	if Globals.has_creature_just_grown_up:
+		Globals.has_creature_just_grown_up = false
 		grow_up_one_stage()
 	
-	if life_stage != LifeStage.EGG:
-		creature = [baby_type.baby_part, creature_type.child, creature_type.adult][life_stage-1]
+	creature = [null, baby_type.baby_part, creature_type.child, creature_type.adult][life_stage]
 	setup_default_values()
 	setup_main_sprite()
 	Globals.send_notification(Globals.NOTIFICATION_CREATURE_IS_LOADED)
@@ -105,9 +110,9 @@ func setup_creature():
 func setup_main_sprite() -> void:
 	if creature:
 		main_sprite.sprite_frames = creature.sprite_frames
-		main_sprite.animation = "idle"
 	else:
 		main_sprite.sprite_frames.add_frame("idle", egg_type.image)
+	main_sprite.animation = "idle"
 	main_sprite.play()
 
 func setup_default_values():

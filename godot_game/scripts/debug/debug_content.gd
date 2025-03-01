@@ -144,7 +144,7 @@ func _on_button_3_button_down() -> void:
 
 
 func _on_discover_btn_button_down() -> void:
-	var discovered = DataGlobals.get_global_metadata_value(DataGlobals.CREATURES_DISCOVERED)
+	var discovered = DataGlobals.get_global_metadata_value(DataGlobals.DISCOVERED_CREATURES)
 	for creature_type in load("res://resources/creature_list.tres").items:
 		var uid = Helpers.uid_str(creature_type)
 		if uid not in discovered:

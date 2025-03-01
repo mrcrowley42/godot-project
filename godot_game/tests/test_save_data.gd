@@ -71,43 +71,43 @@ func test_metadata_append():
 
 func test_metadata_modify():
 	Testing.setup_test_environment(self)
-	assert_eq({}, DataGlobals.get_metadata_value(DataGlobals.CREATURES_DISCOVERED))
+	assert_eq({}, DataGlobals.get_metadata_value(DataGlobals.DISCOVERED_CREATURES))
 	
 	# set
 	var uid = "123"
 	var val = {"data": 1}
 	var expected = {uid: val.duplicate(true)}
-	DataGlobals.modify_metadata_value(DataGlobals.CREATURES_DISCOVERED, [uid], DataGlobals.ACTION_SET, val)
-	assert_eq(str(expected), str(DataGlobals.get_metadata_value(DataGlobals.CREATURES_DISCOVERED)))
+	DataGlobals.modify_metadata_value(DataGlobals.DISCOVERED_CREATURES, [uid], DataGlobals.ACTION_SET, val)
+	assert_eq(str(expected), str(DataGlobals.get_metadata_value(DataGlobals.DISCOVERED_CREATURES)))
 	
 	# add
 	var addition = 2
-	DataGlobals.modify_metadata_value(DataGlobals.CREATURES_DISCOVERED, [uid, "data"], DataGlobals.ACTION_ADD, addition)
+	DataGlobals.modify_metadata_value(DataGlobals.DISCOVERED_CREATURES, [uid, "data"], DataGlobals.ACTION_ADD, addition)
 	expected[uid]["data"] += addition
-	assert_eq(str(expected), str(DataGlobals.get_metadata_value(DataGlobals.CREATURES_DISCOVERED)))
+	assert_eq(str(expected), str(DataGlobals.get_metadata_value(DataGlobals.DISCOVERED_CREATURES)))
 	
 	# append
-	DataGlobals.modify_metadata_value(DataGlobals.CREATURES_DISCOVERED, [uid, "list"], DataGlobals.ACTION_SET, [])
+	DataGlobals.modify_metadata_value(DataGlobals.DISCOVERED_CREATURES, [uid, "list"], DataGlobals.ACTION_SET, [])
 	expected[uid]["list"] = []
-	assert_eq(str(expected), str(DataGlobals.get_metadata_value(DataGlobals.CREATURES_DISCOVERED)))
+	assert_eq(str(expected), str(DataGlobals.get_metadata_value(DataGlobals.DISCOVERED_CREATURES)))
 	
 	var one = "item1"
-	DataGlobals.modify_metadata_value(DataGlobals.CREATURES_DISCOVERED, [uid, "list"], DataGlobals.ACTION_APPEND, one)
+	DataGlobals.modify_metadata_value(DataGlobals.DISCOVERED_CREATURES, [uid, "list"], DataGlobals.ACTION_APPEND, one)
 	expected[uid]["list"].append(one)
-	assert_eq(str(expected), str(DataGlobals.get_metadata_value(DataGlobals.CREATURES_DISCOVERED)))
+	assert_eq(str(expected), str(DataGlobals.get_metadata_value(DataGlobals.DISCOVERED_CREATURES)))
 	
 	var two = "two"
 	var three = "three"
-	DataGlobals.modify_metadata_value(DataGlobals.CREATURES_DISCOVERED, [uid, "list"], DataGlobals.ACTION_APPEND, two)
-	DataGlobals.modify_metadata_value(DataGlobals.CREATURES_DISCOVERED, [uid, "list"], DataGlobals.ACTION_APPEND, three)
+	DataGlobals.modify_metadata_value(DataGlobals.DISCOVERED_CREATURES, [uid, "list"], DataGlobals.ACTION_APPEND, two)
+	DataGlobals.modify_metadata_value(DataGlobals.DISCOVERED_CREATURES, [uid, "list"], DataGlobals.ACTION_APPEND, three)
 	expected[uid]["list"].append(two)
 	expected[uid]["list"].append(three)
-	assert_eq(str(expected), str(DataGlobals.get_metadata_value(DataGlobals.CREATURES_DISCOVERED)))
+	assert_eq(str(expected), str(DataGlobals.get_metadata_value(DataGlobals.DISCOVERED_CREATURES)))
 	
 	# save to file & load from file & recheck
 	DataGlobals.save_only_metadata()
 	DataGlobals.load_metadata()
-	assert_eq(str(expected), str(DataGlobals.get_metadata_value(DataGlobals.CREATURES_DISCOVERED)))
+	assert_eq(str(expected), str(DataGlobals.get_metadata_value(DataGlobals.DISCOVERED_CREATURES)))
 
 
 ## ----------------
