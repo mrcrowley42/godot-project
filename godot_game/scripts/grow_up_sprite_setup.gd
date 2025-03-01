@@ -57,7 +57,17 @@ func _ready() -> void:
 		add_cosmetic(loaded_cosmetics[item])
 	
 	current_sprite.visible = true
-	next_sprite.visible = false
+	next_sprite.visible = true
+	
+	## offset the container (and counter offset the sprite) so the rotation pivot is centered to the next_sprite
+	var texture: Texture2D = next_creature.sprite_frames.get_frame_texture("idle", 0)
+	var used_area: Rect2i = texture.get_image().get_used_rect()
+	var offset: Vector2 = used_area.expand(current_sprite.scale).get_center()
+	offset *= current_sprite.scale
+	offset *= .25
+	self.position.y += offset.y
+	current_sprite.position.y -= offset.y
+	next_sprite.position.y -= offset.y
 
 
 ## Class to define a cosmetic as it appears in game.

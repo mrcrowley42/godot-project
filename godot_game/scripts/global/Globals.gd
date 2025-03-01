@@ -205,7 +205,7 @@ func unlock_achievement(achievement: Achievement) -> void:
 # TODO: really want to refactor these functions into one now...
 
 ## generic tween function
-func tween(obj, prop, val, delay=0., time=2., _ease=Tween.EASE_OUT):
+func tween(obj, prop, val, delay=0., time=2., _ease=Tween.EASE_OUT) -> Tween:
 	var t = create_tween()
 	t.tween_property(obj, prop, val, time)\
 			.set_trans(Tween.TRANS_EXPO)\
