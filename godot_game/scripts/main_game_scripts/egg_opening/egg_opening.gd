@@ -267,7 +267,7 @@ func set_egg_desc(i: int = -1):
 	# build hatches list
 	for creature_entry: EggCreatureEntry in egg.hatches:
 		var uid = ResourceLoader.get_resource_uid(creature_entry.creature_baby.resource_path)
-		if is_creature_known(uid):
+		if is_baby_known(uid):
 			var texture_path = creature_entry.creature_baby.baby_part.sprite_frames.get_frame_texture("idle", 0).resource_path
 			var cropped_rect: Rect2i = load(texture_path).get_image().get_used_rect()
 			hatches_list.append("[img height=30 region=%s,%s,%s,%s]%s[/img]" % [cropped_rect.position.x, cropped_rect.position.y, cropped_rect.size.x, cropped_rect.size.y, texture_path])
@@ -278,8 +278,8 @@ func set_egg_desc(i: int = -1):
 func set_creature_desc(baby: CreatureBaby):
 	egg_desc.text = "[center][u]%s![/u]\n[font top=6 s=15]%s" % [baby.name, baby.desc]
 
-func is_creature_known(creature_type_uid: int) -> bool:
-	return DataGlobals.get_global_metadata_value(DataGlobals.DISCOVERED_CREATURES).has(str(creature_type_uid))
+func is_baby_known(creature_baby_uid: int) -> bool:
+	return DataGlobals.get_global_metadata_value(DataGlobals.DISCOVERED_BABIES).has(str(creature_baby_uid))
 
 ## when one egg is selected from placed eggs
 func select_egg(egg: EggEntry, inx: int):
@@ -430,7 +430,7 @@ func pick_creature_to_hatch() -> CreatureBaby:
 		for egg_creature_entry: EggCreatureEntry in placed_eggs[selected_egg_inx].hatches:
 			var baby_type: CreatureBaby = egg_creature_entry.creature_baby
 			var uid = ResourceLoader.get_resource_uid(baby_type.resource_path)
-			if ignore_known and is_creature_known(uid):
+			if ignore_known and is_baby_known(uid):
 				continue
 			for z in egg_creature_entry.weight:
 				weighted_choices.append(baby_type)

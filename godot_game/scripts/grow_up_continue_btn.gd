@@ -1,7 +1,7 @@
 extends NinePatchRect
 
 
-@onready var parent: GrowUpToAdult = find_parent("GrowUpToAdult")
+@onready var parent: GrowUpToAdult = find_parent("GrowUp")
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event.is_pressed() and visible:

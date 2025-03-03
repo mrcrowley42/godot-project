@@ -590,12 +590,12 @@ func add_to_babies_discovered(creature_baby: CreatureBaby):
 		print("new baby discovered '%s'" % uid)
 
 ## add a newly discovered creature, or add 1 to "times_hatched" if already discovered
-func add_to_creatures_discovered(creature_type: CreatureType):
-	var uid = Helpers.uid_str(creature_type)
+func add_to_creatures_discovered(creature_type: CreatureType, _uid=null):
+	var uid = Helpers.uid_str(creature_type) if creature_type else _uid
 	if get_global_metadata_value(DISCOVERED_CREATURES).has(uid):
-		# add 1 to times hatched
+		# add 1 to times grown
 		modify_metadata_value(true, DISCOVERED_CREATURES, [uid, "num_times_found"], ACTION_ADD, 1)
-		print("hatched another '%s' creature" % uid)
+		print("grown another '%s' creature" % uid)
 	else:
 		# add new creature discovered
 		var dict = {
@@ -607,6 +607,10 @@ func add_to_creatures_discovered(creature_type: CreatureType):
 		print("new creature discovered '%s'" % uid)
 
 func set_new_highest_life_stage(uid: String, life_stage: int):
+	# if another creature grown from a baby or never grown before
+	if life_stage == 2 or not get_global_metadata_value(DISCOVERED_CREATURES).has(uid):
+		add_to_creatures_discovered(null, uid)
+	
 	var current_highest = get_global_metadata_value(DISCOVERED_CREATURES)[uid]["max_stage_reached"]
 	modify_metadata_value(true, DISCOVERED_CREATURES, [uid, "max_stage_reached"], ACTION_SET, max(current_highest, life_stage))
 
