@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cx2gycrxks36j"]
+[gd_scene load_steps=13 format=3 uid="uid://bsc6vwijnliw7"]
 
 [ext_resource type="Script" path="res://scripts/main_game_scripts/grow_up.gd" id="1_gegkd"]
 [ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="2_h16gn"]
@@ -6,49 +6,18 @@
 [ext_resource type="Shader" path="res://shaders/voronoi.gdshader" id="4_ebynq"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="5_vbb43"]
 [ext_resource type="Script" path="res://scripts/grow_btn.gd" id="6_uagaw"]
-[ext_resource type="Texture2D" uid="uid://gm3ltp1h1ihb" path="res://icons/arrow-up-square-fill.svg" id="6_xppkq"]
 [ext_resource type="Script" path="res://scripts/grow_up_sprite_setup.gd" id="7_15xwp"]
 [ext_resource type="Script" path="res://scripts/grow_up_continue_btn.gd" id="8_m0sd6"]
 [ext_resource type="Script" path="res://scripts/sfx_man.gd" id="10_14mdh"]
 
-[sub_resource type="Gradient" id="Gradient_v4l4s"]
-offsets = PackedFloat32Array(0, 0.5, 1)
-colors = PackedColorArray(1, 0.627451, 0.501961, 1, 1, 0.87451, 0.501961, 1, 0.647059, 0.831373, 0.415686, 1)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_d4a18"]
-radius = 100.0
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w2jld"]
 shader = ExtResource("4_ebynq")
-shader_parameter/color = Vector4(0, 0, 0, 1)
+shader_parameter/color = Vector4(0.2, 0.3, 1, 1)
 shader_parameter/pixel_size = 5.0
 shader_parameter/scale = 0.5
 shader_parameter/speed = 0.05
 shader_parameter/brightness = 1.0
 shader_parameter/opacity = 0.15
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p40ms"]
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-corner_detail = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sunnm"]
-bg_color = Color(0.865294, 0.372259, 0.373089, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-corner_detail = 10
 
 [sub_resource type="LabelSettings" id="LabelSettings_di502"]
 font_size = 32
@@ -56,28 +25,13 @@ font_size = 32
 [sub_resource type="LabelSettings" id="LabelSettings_0wk48"]
 font_size = 32
 
-[node name="GrowUp" type="Node2D" node_paths=PackedStringArray("creature_container", "current_sprite", "next_sprite", "shader_area", "display_box", "progress_bar_container", "bar", "area2d")]
+[node name="GrowUp" type="Node2D" node_paths=PackedStringArray("creature_container", "current_sprite", "next_sprite", "shader_area", "display_box")]
 script = ExtResource("1_gegkd")
 creature_container = NodePath("UI/Creature")
 current_sprite = NodePath("UI/Creature/Current")
 next_sprite = NodePath("UI/Creature/Next")
 shader_area = NodePath("UI/DisplayBox/shader")
 display_box = NodePath("UI/DisplayBox")
-progress_bar_container = NodePath("UI/ProgressBarContainer")
-bar = NodePath("UI/ProgressBarContainer/Bar")
-bar_progress_color = SubResource("Gradient_v4l4s")
-area2d = NodePath("CanvasLayer/Area2D")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 2
-
-[node name="Area2D" type="Area2D" parent="CanvasLayer"]
-position = Vector2(270, 270)
-disable_mode = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Area2D"]
-z_index = 2
-shape = SubResource("CircleShape2D_d4a18")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -236,48 +190,6 @@ bbcode_enabled = true
 text = "[center]Your creature is ready to grow up!"
 metadata/_edit_use_anchors_ = true
 
-[node name="ProgressBarContainer" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-metadata/_edit_use_anchors_ = true
-
-[node name="Icon" type="Control" parent="UI/ProgressBarContainer"]
-custom_minimum_size = Vector2(28, 0)
-layout_mode = 3
-anchors_preset = 0
-offset_left = 171.0
-offset_top = 551.44
-offset_right = 199.0
-offset_bottom = 551.44
-size_flags_horizontal = 4
-size_flags_vertical = 4
-metadata/_edit_use_anchors_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="UI/ProgressBarContainer/Icon"]
-modulate = Color(0.96, 0.96, 0.96, 1)
-position = Vector2(10.008, 0)
-scale = Vector2(0.688, 0.688)
-texture = ExtResource("6_xppkq")
-
-[node name="Bar" type="ProgressBar" parent="UI/ProgressBarContainer"]
-clip_contents = true
-custom_minimum_size = Vector2(160, 23)
-layout_mode = 0
-offset_left = 202.008
-offset_top = 540.0
-offset_right = 362.008
-offset_bottom = 563.0
-size_flags_horizontal = 3
-size_flags_vertical = 1
-theme_override_styles/background = SubResource("StyleBoxFlat_p40ms")
-theme_override_styles/fill = SubResource("StyleBoxFlat_sunnm")
-max_value = 1000.0
-step = 1.0
-show_percentage = false
-metadata/_edit_use_anchors_ = true
-
 [node name="GrowBtn" type="NinePatchRect" parent="UI"]
 offset_left = 202.0
 offset_top = 562.5
@@ -314,7 +226,6 @@ script = ExtResource("7_15xwp")
 
 [node name="Current" type="AnimatedSprite2D" parent="UI/Creature"]
 scale = Vector2(0.225, 0.225)
-animation = &"idle"
 
 [node name="Next" type="AnimatedSprite2D" parent="UI/Creature"]
 scale = Vector2(0.225, 0.225)
@@ -361,8 +272,15 @@ max_polyphony = 6
 bus = &"SFX"
 script = ExtResource("10_14mdh")
 
-[connection signal="input_event" from="CanvasLayer/Area2D" to="." method="_on_area_2d_input_event"]
-[connection signal="mouse_entered" from="CanvasLayer/Area2D" to="." method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer/Area2D" to="." method="_on_area_2d_mouse_exited"]
+[node name="FastTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.2
+
+[node name="SlowTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.3
+
 [connection signal="gui_input" from="UI/GrowBtn" to="UI/GrowBtn" method="_on_gui_input"]
 [connection signal="gui_input" from="UI/ContinueBtn" to="UI/ContinueBtn" method="_on_gui_input"]
+[connection signal="timeout" from="FastTimer" to="UI/Creature" method="_on_fast_timer_timeout"]
+[connection signal="timeout" from="SlowTimer" to="UI/Creature" method="_on_slow_timer_timeout"]

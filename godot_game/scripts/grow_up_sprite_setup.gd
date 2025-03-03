@@ -16,6 +16,7 @@ var adult_position_dict: Dictionary
 
 var current_cosmetics: Array
 var loaded_cosmetics: Dictionary
+var move_buffers: Array[FloatBuffer] = []
 
 func _ready() -> void:
 	var current_life_stage = Globals.general_dict["current_life_stage"]
@@ -57,17 +58,7 @@ func _ready() -> void:
 		add_cosmetic(loaded_cosmetics[item])
 	
 	current_sprite.visible = true
-	next_sprite.visible = true
-	
-	## offset the container (and counter offset the sprite) so the rotation pivot is centered to the next_sprite
-	var texture: Texture2D = next_creature.sprite_frames.get_frame_texture("idle", 0)
-	var used_area: Rect2i = texture.get_image().get_used_rect()
-	var offset: Vector2 = used_area.expand(current_sprite.scale).get_center()
-	offset *= current_sprite.scale
-	offset *= .25
-	self.position.y += offset.y
-	current_sprite.position.y -= offset.y
-	next_sprite.position.y -= offset.y
+	next_sprite.visible = false
 
 
 ## Class to define a cosmetic as it appears in game.
@@ -92,3 +83,55 @@ func add_cosmetic(cosmetic: CosmeticItem) -> void:
 	await current_sprite.frame_changed
 	baby_cos.play()
 	adult_cos.play()
+
+
+func do_start_tween():
+	var middle: Vector2 = parent.mid_display_pos
+	tween_sprite_to_goal(current_sprite, middle).connect("finished", %SlowTimer.start)
+
+
+func tween_sprite_to_goal(sprite, goal: Vector2) -> Tween:
+	var end_movement = func():
+		move_buffers.clear()
+	
+	# move animation
+	move_buffers = [FloatBuffer.new(sprite.global_position.x), FloatBuffer.new(sprite.global_position.y)]
+	Globals.tween(move_buffers[0], "value", goal.x, 0., 1.)  # x pos to center
+	Globals.tween(move_buffers[1], "value", goal.y - 50, 0., .6)  # up
+	var t = Globals.tween(move_buffers[1], "value", goal.y, 0.2, .4, Tween.EASE_IN)
+	t.connect("finished", end_movement)  # down
+	return t
+
+func _process(_delta):
+	# move creature
+	if move_buffers.size() > 0:
+		var new_p = Vector2(move_buffers[0].value, move_buffers[1].value)
+		global_position = new_p
+
+class FloatBuffer:
+	var value: float = 0.
+	func _init(v: float):
+		value = v
+
+
+var i = -1;
+func swap():
+	current_sprite.visible = i % 2 == 0
+	next_sprite.visible = i % 2 == 1
+
+func _on_fast_timer_timeout() -> void:
+	i += 1
+	
+	if i == 10: return  # stay an adult for 1 tick
+	if i == 11:
+		parent.finish_grow_up()
+		return
+	swap()
+
+func _on_slow_timer_timeout() -> void:
+	i += 1;
+	
+	if i == 4:
+		%SlowTimer.stop()
+		%FastTimer.start()
+	swap()
