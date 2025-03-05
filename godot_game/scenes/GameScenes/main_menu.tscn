@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://ig0eoqdfq5nr"]
+[gd_scene load_steps=35 format=3 uid="uid://ig0eoqdfq5nr"]
 
 [ext_resource type="Script" path="res://scripts/main_game_scripts/main_menu.gd" id="1_lpoqi"]
 [ext_resource type="Shader" path="res://shaders/pattern_lines.gdshader" id="2_f1u7v"]
