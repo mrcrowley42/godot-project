@@ -56,6 +56,7 @@ func grab_saves():
 		save_info['id'] = save_id
 		save_info['last_saved'] = DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_LAST_SAVED, save_id)
 		save_info['creature_name'] = DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_NAME, save_id)
+		save_info['status'] = DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_INITIAL_LIFE_STAGE, save_id)
 		saves.append(save_info)
 	return saves
 
