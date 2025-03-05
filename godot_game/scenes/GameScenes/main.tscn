@@ -432,7 +432,7 @@ unique_name_in_owner = true
 script = ExtResource("2_aqytd")
 food_amount = 4.0
 neglect_threshold = 0.02
-neglect_penalty_multiplier = 4000.0
+neglect_penalty_multiplier = 100.0
 neglect_limit = 0.1
 
 [node name="AmbienceManager" type="Node" parent="." groups=["settings_data"]]

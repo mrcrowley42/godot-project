@@ -3,7 +3,6 @@ class_name StatusManager extends ScriptNode
 
 @export_category("Status Controls")
 @export var hp_rate: float = 1
-@export var hp_amount: float = 5
 @export var water_rate: float = 4
 @export var water_amount: float = 8
 @export var food_rate: float = 10
@@ -27,6 +26,11 @@ signal finished_loading()
 @onready var creature: Creature = %Creature
 
 var holiday_mode: bool = false
+
+const STAT_HEAL_MAX = 10
+const STAT_HEAL_THRESHOLD = .75
+const STAT_DRAIN_MAX = 10
+const STAT_DRAIN_THRESHOLD = .5
 
 ## Creates a new timer that loops [param rate] times per second,
 ## and executes the [param timeout_func] at the end of each loop.
@@ -56,7 +60,29 @@ func _notification(what):
 
 
 func hp_timeout() -> void:
-	creature.dmg(hp_amount * time_multiplier, Creature.Stat.HP)
+	var amount = 0
+	
+	for stat in [
+			[creature.food, creature.max_food],
+			[creature.water, creature.max_water],
+			[creature.fun, creature.max_fun]
+		]:
+		var value = stat[0]
+		var max_value = stat[1]
+		var perc: float = float(value / max_value)
+		
+		# heal
+		if perc > STAT_HEAL_THRESHOLD:
+			amount += STAT_HEAL_MAX * ((perc - STAT_HEAL_THRESHOLD) / (1. - STAT_HEAL_THRESHOLD))
+		
+		# drain
+		if perc < STAT_DRAIN_THRESHOLD:
+			amount -= STAT_DRAIN_MAX * (1. - (perc / STAT_DRAIN_THRESHOLD))
+	
+	if amount > 0:
+		creature.heal(amount * time_multiplier, Creature.Stat.HP)
+	else:
+		creature.dmg(amount * time_multiplier, Creature.Stat.HP)
 
 func water_timeout() -> void:
 	creature.dmg(water_amount * time_multiplier, Creature.Stat.WATER)
