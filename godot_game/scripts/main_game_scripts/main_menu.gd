@@ -71,7 +71,7 @@ func get_creature_status(save_id):
 
 	var life_stage_val = DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_LIFE_STAGE, save_id)
 
-	return str(Creture.LifeStage.keys()[life_stage_val]).to_lower().capitalize()
+	return str(Creature.LifeStage.keys()[int(life_stage_val)]).to_lower().capitalize()
 
 
 func do_opening_trans():

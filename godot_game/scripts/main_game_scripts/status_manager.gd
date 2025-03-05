@@ -3,12 +3,12 @@ class_name StatusManager extends ScriptNode
 
 @export_category("Status Controls")
 @export var hp_rate: float = 1
-@export var water_rate: float = 4
-@export var water_amount: float = 8
-@export var food_rate: float = 10
-@export var food_amount: float = 2
-@export var fun_rate: float = 30
-@export var fun_amount: float = 1
+@export var water_rate: float = 2
+@export var water_amount: float = 6
+@export var food_rate: float = 2
+@export var food_amount: float = 3
+@export var fun_rate: float = 2
+@export var fun_amount: float = 2
 ## Property that scales the damage values of all passive drain timers.
 @export var time_multiplier: float = 1.
 @export_category("Neglect Properties")

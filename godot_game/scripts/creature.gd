@@ -167,10 +167,10 @@ func reset_stats() -> void:
 	lock_xp = false
 
 func reset_stat(stat: Stat) -> void:
-	var maxi = [max_hp, max_water, max_food, max_fun][stat]
+	var maxim = [max_hp, max_water, max_food, max_fun][stat]
 	var current = [hp, water, food, fun][stat]
 	lock_xp = true
-	heal(maxi - current, stat)
+	heal(maxim - current, stat)
 	lock_xp = false
 
 ## reset stats to max without calling stat heals or XP

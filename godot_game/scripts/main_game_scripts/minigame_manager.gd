@@ -15,6 +15,7 @@ signal minigame_closed
 @onready var ambience_man = find_parent("Game").find_child("AmbienceManager")
 
 @export var minigame_layer: CanvasLayer
+@export var zen_mode_layer: CanvasLayer
 
 var save_data: Dictionary = {}
 var current_minigame = null;
@@ -30,7 +31,7 @@ const DISABLED_VISIBILITY = .4
 
 ## Loads the minigame matching the [param minigame] variable, and places it just
 ## below options menu, but above all other elements.
-func load_minigame(pre_loaded=null, instance=null, do_transition=false) -> void:
+func load_minigame(pre_loaded=null, instance=null, do_transition=false, zen_layer=false) -> void:
 	assert(pre_loaded != null or instance != null)  # either one or the other
 	if current_minigame != null:
 		return
@@ -46,8 +47,12 @@ func load_minigame(pre_loaded=null, instance=null, do_transition=false) -> void:
 	current_time_scale = status_manager.time_multiplier
 	status_manager.time_multiplier = 0
 	act_menu.hide()
-	minigame_layer.add_child(game)
-	minigame_layer.move_child(game, 0)
+	if not zen_layer:
+		minigame_layer.add_child(game)
+		minigame_layer.move_child(game, 0)
+	else:
+		zen_mode_layer.add_child(game)
+		zen_mode_layer.move_child(game, 0)
 	current_minigame = pre_loaded.resource_path if pre_loaded != null else game.name
 	print("loading minigame '%s'" % current_minigame)
 	%ActButton.disabled = true
@@ -152,7 +157,7 @@ func _on_scissors_paper_rock_button_down() -> void:
 
 ## Loads Relaxation scene.
 func _on_zen_mode_button_down() -> void:
-	load_minigame(zen_mode_scene, null)
+	load_minigame(zen_mode_scene, null, false, true)
 
 func _on_tree_exiting() -> void:
 	# Ensure that before changing scene, if clippy mode is active it is toggled off.

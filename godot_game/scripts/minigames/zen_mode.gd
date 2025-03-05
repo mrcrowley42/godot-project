@@ -10,7 +10,7 @@ var og_state: String
 @export var many_zen_ach: Achievement
 
 func _ready():
-	stat_man = $"..".get_parent().get_parent().get_parent().find_child("StatusManager")
+	stat_man = owner.get_parent().get_parent().get_parent().find_child("StatusManager")
 	creature = owner.get_parent().get_parent().get_parent().find_child("Creature")
 	creature.zen = true
 	
@@ -31,7 +31,7 @@ func _ready():
 		Globals.unlock_achievement(many_zen_ach)
 
 func add_fun():
-	creature.add_fun(.5)
+	creature.add_fun(stat_man.fun_amount * 1.5)
 
 func _exit_tree():
 	pass
