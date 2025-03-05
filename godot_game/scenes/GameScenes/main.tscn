@@ -63,7 +63,7 @@
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="42_c1jtf"]
 [ext_resource type="Texture2D" uid="uid://d84hj0mtn2hw" path="res://icons/status/mood_24dp_FILL1_wght300_GRAD0_opsz24.svg" id="43_qa2jm"]
 [ext_resource type="Script" path="res://scripts/fact_progress_label.gd" id="44_t23g2"]
-[ext_resource type="PackedScene" uid="uid://b78cwi88kdrvf" path="res://scenes/UiScenes/topic_btn.tscn" id="44_y5a0d"]
+[ext_resource type="PackedScene" uid="uid://dyapnl5xgvivn" path="res://scenes/UiScenes/topic_btn.tscn" id="44_y5a0d"]
 [ext_resource type="Texture2D" uid="uid://p0oo42fr5wrp" path="res://icons/status/lunch_dining_24dp_8B1A10_FILL0_wght500_GRAD0_opsz24-svg.svg" id="45_3duvs"]
 [ext_resource type="Shader" path="res://shaders/pattern_checker.gdshader" id="45_bgevw"]
 [ext_resource type="Theme" uid="uid://x6rgwcyh7bnk" path="res://themes/menu_title.tres" id="45_e031c"]
@@ -1289,6 +1289,7 @@ script = ExtResource("35_4io20")
 [node name="CosmeticsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 material = SubResource("ShaderMaterial_357to")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -1504,7 +1505,6 @@ script = ExtResource("35_4io20")
 [node name="SettingsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 material = SubResource("ShaderMaterial_1s3b6")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -1560,7 +1560,6 @@ text = ">"
 layout_mode = 2
 
 [node name="Audio" type="Control" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages"]
-visible = false
 layout_mode = 2
 anchors_preset = 0
 offset_right = 394.0
@@ -1606,8 +1605,7 @@ size_flags_vertical = 1
 theme_override_constants/shadow_outline_size = 5
 theme_override_fonts/font = ExtResource("19_3grg3")
 theme_override_font_sizes/font_size = 20
-text = "Ambience
-"
+text = "Music"
 vertical_alignment = 1
 
 [node name="MusicMuted" type="Button" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer" groups=["settings_data"]]
@@ -1625,6 +1623,31 @@ bus_name = "Music"
 layout_mode = 2
 tick_count = 1
 bus_name = "Music"
+
+[node name="Ambience" type="Label" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = ExtResource("19_3grg3")
+theme_override_font_sizes/font_size = 20
+text = "Ambience"
+vertical_alignment = 1
+
+[node name="AmbienceMuted" type="Button" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer" groups=["settings_data"]]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wd2mi")
+text = "          "
+icon = ExtResource("36_g2683")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("37_xf1vk")
+bus_name = "Ambience"
+
+[node name="AmbienceVolume" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer" groups=["settings_data"] instance=ExtResource("38_17bv4")]
+layout_mode = 2
+tick_count = 1
+bus_name = "Ambience"
 
 [node name="SFX" type="Label" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer"]
 layout_mode = 2
@@ -1777,6 +1800,7 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="Other" type="Control" parent="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages"]
+visible = false
 anchors_preset = 0
 offset_right = 393.0
 
@@ -2281,6 +2305,7 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/OptionsMenu/CreaturesMenu/SaveButtons/Back" to="UI/OptionsMenu/CreaturesMenu/SaveButtons/Back" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer/MasterMuted" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer/MasterMuted" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer/MusicMuted" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer/MusicMuted" method="_on_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer/AmbienceMuted" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer/AmbienceMuted" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer/SFXMuted" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer/SFXMuted" method="_on_button_down"]
 [connection signal="value_changed" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Clippy/VBoxContainer/GridContainer3/OpacitySlider" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Clippy/VBoxContainer/GridContainer3/OpacitySlider" method="_on_value_changed"]
 [connection signal="toggled" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Clippy/VBoxContainer/GridContainer4/SfxClippyBox" to="Gameplay/ClippyArea" method="_on_sfx_clippy_box_toggled"]
