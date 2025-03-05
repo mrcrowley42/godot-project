@@ -41,7 +41,9 @@ script = ExtResource("1_kb7c0")
 first_zen_ach = ExtResource("3_tafka")
 many_zen_ach = ExtResource("4_dwxk0")
 
-[node name="CloseBtn" type="Button" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CloseBtn" type="Button" parent="CanvasLayer"]
 offset_left = 67.0
 offset_top = 135.0
 offset_right = 147.0
@@ -49,4 +51,4 @@ offset_bottom = 165.0
 theme = ExtResource("5_1e2bg")
 text = "Stop"
 
-[connection signal="button_down" from="CloseBtn" to="GameLogic" method="_on_close_btn_button_down"]
+[connection signal="button_down" from="CanvasLayer/CloseBtn" to="GameLogic" method="_on_close_btn_button_down"]

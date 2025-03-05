@@ -617,6 +617,7 @@ texture = ExtResource("14_k2ios")
 layer = 5
 
 [node name="ZenModeLayer" type="CanvasLayer" parent="UI"]
+layer = -1
 
 [node name="FoodMenu" type="PanelContainer" parent="UI" node_paths=PackedStringArray("nav_arrows", "food_menu_open_button", "food_screens")]
 visible = false
