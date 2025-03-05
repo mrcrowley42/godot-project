@@ -34,6 +34,7 @@ const CREATURE_EGG_UID = "creature_egg_uid"
 const CREATURE_BABY_UID = "creature_baby_uid"
 const CREATURE_TYPE_UID = "creature_type_uid"
 const CREATURE_NAME = "creature_name"
+const CREATURE_LIFE_STAGE = "creature_life_stage"
 const CREATURE_INITIAL_LIFE_STAGE = "creature_initial_life_stage"
 const CREATURE_HATCH_TIME = "creature_hatch_time"
 const CREATURE_LAST_SAVED = "creature_last_saved"
@@ -144,6 +145,7 @@ func get_default_creature_metadata() -> Dictionary:
 		CREATURE_BABY_UID: "",
 		CREATURE_TYPE_UID: "",
 		CREATURE_NAME: "",
+		CREATURE_LIFE_STAGE: 0,
 		CREATURE_INITIAL_LIFE_STAGE: 0,
 		CREATURE_HATCH_TIME: -1,
 		CREATURE_LAST_SAVED: -1
@@ -368,7 +370,9 @@ func create_new_creature(egg: EggEntry, baby_type: CreatureBaby) -> int:
 	new_creature_metadata[CREATURE_TYPE_UID] = choices[final_choice]
 	new_creature_metadata[CREATURE_HATCH_TIME] = Time.get_unix_time_from_system()
 	new_creature_metadata[CREATURE_NAME] = initial_creature_name
-	new_creature_metadata[CREATURE_INITIAL_LIFE_STAGE] = 1 if get_num_of_creatures() == 0 else 0  # skip egg stage for first creature
+	var init_life_stage = 1 if get_num_of_creatures() == 0 else 0  # skip egg stage for first ever creature
+	new_creature_metadata[CREATURE_LIFE_STAGE] = init_life_stage
+	new_creature_metadata[CREATURE_INITIAL_LIFE_STAGE] = init_life_stage
 	
 	DataGlobals.set_metadata_value(true, DataGlobals.CURRENT_CREATURE, creature_id)
 	
@@ -455,6 +459,7 @@ func load_creature_data(creature_id_override: int = -1):
 	var save_nodes = get_tree().get_nodes_in_group(Globals.SAVE_DATA_GROUP)
 	var node_data_skipped = []
 	for node_data in _every_creature_node_data[creature_id]:
+		printerr(node_data)
 		if SAVE_UID not in node_data or DATA not in node_data:
 			printerr("'%s' or '%s' value in save data is missing! skipping" % [SAVE_UID, DATA])
 			continue
@@ -525,7 +530,7 @@ func load_data() -> Dictionary:
 		
 		var creature_id: int = int(creature_metadata[CREATURE_ID])  ## this type assignment is VERY IMPORTANT!!!
 		_every_creature_metadata[creature_id] = creature_metadata
-		_every_creature_node_data[creature_id] = parsed_line if len(parsed_line) != 0 else []
+		_every_creature_node_data[creature_id] = parsed_line[0] if len(parsed_line) != 0 else []
 	print("all save data has been loaded from file")
 	return get_global_metadata_dc()
 

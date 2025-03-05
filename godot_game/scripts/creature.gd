@@ -80,11 +80,11 @@ var stats_max: Dictionary = {Stat.HP: 'max_hp', Stat.FUN: 'max_fun',
 
 ## called when the creature is openned for the very first time
 func creature_first_openned():
-	life_stage = DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_INITIAL_LIFE_STAGE)
 	setup_creature()
 	reset_stats()
 
 func setup_creature():
+	life_stage = int(DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_LIFE_STAGE))
 	og_pos = position
 	var egg_uid = int(DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_EGG_UID))
 	var baby_uid = int(DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_BABY_UID))
@@ -94,18 +94,21 @@ func setup_creature():
 	creature_type = load(ResourceUID.get_id_path(creature_uid))
 	
 	# should grow up?
-	if Globals.has_creature_just_grown_up:
+	var has_grown_up = Globals.has_creature_just_grown_up
+	if has_grown_up:
 		Globals.has_creature_just_grown_up = false
 		grow_up_one_stage()
 	
 	creature = [null, baby_type.baby_part, creature_type.child, creature_type.adult][life_stage]
-	setup_default_values()
+	setup_default_values(has_grown_up)
 	setup_main_sprite()
 	Globals.send_notification(Globals.NOTIFICATION_CREATURE_IS_LOADED)
 	apply_dmg_tint()
 	
 	if is_ready_to_grow_up and life_stage < LifeStage.ADULT:
 		ready_to_grow_up.emit()
+	
+	# do last
 	print("creature has been setup")
 
 ## Update the [param sprite_frames] of the current creature based on the current [param life_stage]
@@ -117,7 +120,7 @@ func setup_main_sprite() -> void:
 	main_sprite.animation = "idle"
 	main_sprite.play()
 
-func setup_default_values():
+func setup_default_values(has_grown_up=false):
 	max_hp = creature.max_hp
 	max_food = creature.max_food
 	max_fun = creature.max_fun
@@ -130,6 +133,9 @@ func setup_default_values():
 	
 	creature_name = creature_type.name
 	xp_required = creature_type.xp_required_for_adult
+	
+	if has_grown_up:
+		reset_stats_silent()
 	
 	hp_changed.emit()
 	food_changed.emit()
@@ -158,6 +164,13 @@ func reset_stats() -> void:
 	heal(max_water - water, Stat.WATER)
 	heal(max_fun, Stat.FUN)
 	lock_xp = false
+
+## reset stats to max without calling stat heals or XP
+func reset_stats_silent():
+	hp = max_hp
+	food = max_food
+	water = max_water
+	fun = max_fun
 
 
 ## function to heal a stat
@@ -305,6 +318,7 @@ func grow_up_one_stage():
 	xp = 0
 	life_stage = min(life_stage + 1, LifeStage.ADULT)
 	is_ready_to_grow_up = false
+	DataGlobals.set_metadata_value(false, DataGlobals.CREATURE_LIFE_STAGE, life_stage)
 	DataGlobals.set_new_highest_life_stage(Helpers.uid_str(creature_type), life_stage)
 	
 	if life_stage == LifeStage.CHILD:
@@ -388,15 +402,15 @@ func create_save_icon() -> void:
 
 func save() -> Dictionary:
 	create_save_icon()
+	DataGlobals.set_metadata_value(false, DataGlobals.CREATURE_LIFE_STAGE, life_stage)
 	return {
 		"water": water, "food": food, "fun": fun, "hp": hp,
 		"xp": xp, "is_ready_to_grow_up": is_ready_to_grow_up,
-		"life_stage": life_stage
 	}
 
 func load(data) -> void:
 	var prop_list = ["water", "fun", "food", "hp", "xp", 
-					"is_ready_to_grow_up", "life_stage"]
+					"is_ready_to_grow_up"]
 
 	for property in prop_list:
 		if data.has(property):
