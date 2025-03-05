@@ -38,6 +38,8 @@ const CREATURE_LIFE_STAGE = "creature_life_stage"
 const CREATURE_INITIAL_LIFE_STAGE = "creature_initial_life_stage"
 const CREATURE_HATCH_TIME = "creature_hatch_time"
 const CREATURE_LAST_SAVED = "creature_last_saved"
+const CREATURE_IS_DEAD = "creature_is_dead"
+const CREATURE_IS_INDEPENDENT = "creature_is_independent"
 
 ## other
 const SECTION = "section"
@@ -148,7 +150,9 @@ func get_default_creature_metadata() -> Dictionary:
 		CREATURE_LIFE_STAGE: 0,
 		CREATURE_INITIAL_LIFE_STAGE: 0,
 		CREATURE_HATCH_TIME: -1,
-		CREATURE_LAST_SAVED: -1
+		CREATURE_LAST_SAVED: -1,
+		CREATURE_IS_DEAD: false,
+		CREATURE_IS_INDEPENDENT: false
 	}
 
 func get_creature_id(creature_id_override: int = -1) -> int:
