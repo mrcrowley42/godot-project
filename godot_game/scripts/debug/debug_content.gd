@@ -27,10 +27,6 @@ func _on_h_slider_value_changed(value) -> void:
 	stat_man.time_multiplier = value
 
 
-func _on_button_button_down() -> void:
-	creature.reset_stats()
-
-
 func _ready() -> void:
 	var anims = creature.find_child('Main').sprite_frames.get_animation_names()
 	for anim in anims:
@@ -178,3 +174,19 @@ func _on_unlock_themes_button_down() -> void:
 func _on_unlock_cosmetics_button_down() -> void:
 	for cosmetic in load("res://resources/unlockables.tres").unlockables:
 		Globals.unlock_cosmetic(cosmetic)
+
+
+func _on_full_restore_button_down() -> void:
+	creature.reset_stats()
+
+func _on_hp_restore_button_down() -> void:
+	creature.reset_stat(creature.Stat.HP)
+
+func _on_fun_restore_button_down() -> void:
+	creature.reset_stat(creature.Stat.FUN)
+
+func _on_water_restore_button_down() -> void:
+	creature.reset_stat(creature.Stat.WATER)
+
+func _on_food_restore_button_down() -> void:
+	creature.reset_stat(creature.Stat.FOOD)

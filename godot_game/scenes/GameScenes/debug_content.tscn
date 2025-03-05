@@ -74,6 +74,17 @@ theme = ExtResource("2_7jug6")
 theme_override_font_sizes/font_size = 14
 text = "unlocks"
 
+[node name="Label9" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.631373)
+layout_mode = 0
+offset_left = 17.0
+offset_top = 236.0
+offset_right = 208.0
+offset_bottom = 312.0
+theme = ExtResource("2_7jug6")
+theme_override_font_sizes/font_size = 14
+text = "restore"
+
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0
 offset_left = 28.0
@@ -457,16 +468,66 @@ theme_override_fonts/font = ExtResource("9_y33yi")
 theme_override_font_sizes/font_size = 24
 text = "Discover All"
 
-[node name="Button" type="Button" parent="."]
+[node name="fullRestore" type="Button" parent="."]
 layout_mode = 0
-offset_left = 54.0
-offset_top = 245.0
-offset_right = 237.0
-offset_bottom = 310.0
+offset_left = 33.0
+offset_top = 271.0
+offset_right = 87.0
+offset_bottom = 304.0
+scale = Vector2(0.6, 0.6)
 theme = ExtResource("8_lqg4h")
 theme_override_fonts/font = ExtResource("9_y33yi")
 theme_override_font_sizes/font_size = 20
-text = "FULL RESTORE"
+text = "FULL"
+
+[node name="hpRestore" type="Button" parent="."]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 248.0
+offset_right = 130.0
+offset_bottom = 281.0
+scale = Vector2(0.6, 0.6)
+theme = ExtResource("8_lqg4h")
+theme_override_fonts/font = ExtResource("9_y33yi")
+theme_override_font_sizes/font_size = 20
+text = "hp"
+
+[node name="funRestore" type="Button" parent="."]
+layout_mode = 0
+offset_left = 153.0
+offset_top = 248.0
+offset_right = 195.0
+offset_bottom = 281.0
+scale = Vector2(0.6, 0.6)
+theme = ExtResource("8_lqg4h")
+theme_override_fonts/font = ExtResource("9_y33yi")
+theme_override_font_sizes/font_size = 20
+text = "fun"
+
+[node name="waterRestore" type="Button" parent="."]
+layout_mode = 0
+offset_left = 153.0
+offset_top = 282.0
+offset_right = 219.0
+offset_bottom = 315.0
+scale = Vector2(0.6, 0.6)
+theme = ExtResource("8_lqg4h")
+theme_override_fonts/font = ExtResource("9_y33yi")
+theme_override_font_sizes/font_size = 20
+text = "water"
+
+[node name="foodRestore" type="Button" parent="."]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 282.0
+offset_right = 166.0
+offset_bottom = 315.0
+scale = Vector2(0.6, 0.6)
+theme = ExtResource("8_lqg4h")
+theme_override_fonts/font = ExtResource("9_y33yi")
+theme_override_font_sizes/font_size = 20
+text = "food
+"
 
 [node name="Label4" type="Label" parent="."]
 layout_mode = 0
@@ -671,7 +732,11 @@ text = "SCREENSHOT"
 [connection signal="button_down" from="UnlockThemes" to="." method="_on_unlock_themes_button_down"]
 [connection signal="button_down" from="UnlockCosmetics" to="." method="_on_unlock_cosmetics_button_down"]
 [connection signal="button_down" from="DiscoverBtn" to="." method="_on_discover_btn_button_down"]
-[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
+[connection signal="button_down" from="fullRestore" to="." method="_on_full_restore_button_down"]
+[connection signal="button_down" from="hpRestore" to="." method="_on_hp_restore_button_down"]
+[connection signal="button_down" from="funRestore" to="." method="_on_fun_restore_button_down"]
+[connection signal="button_down" from="waterRestore" to="." method="_on_water_restore_button_down"]
+[connection signal="button_down" from="foodRestore" to="." method="_on_food_restore_button_down"]
 [connection signal="item_selected" from="AnimSelect" to="." method="_on_anim_select_item_selected"]
 [connection signal="button_down" from="WindowSizeControls/HBoxContainer/MinimiseButton" to="WindowSizeControls" method="_on_min_down"]
 [connection signal="button_down" from="WindowSizeControls/HBoxContainer/NormaliseButton" to="WindowSizeControls" method="_on_normalise_down"]

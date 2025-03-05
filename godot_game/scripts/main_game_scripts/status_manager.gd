@@ -10,7 +10,7 @@ class_name StatusManager extends ScriptNode
 @export var fun_rate: float = 30
 @export var fun_amount: float = 1
 ## Property that scales the damage values of all passive drain timers.
-@export var time_multiplier: float = 0.5
+@export var time_multiplier: float = 1.
 @export_category("Neglect Properties")
 ## Threshold in days for when bonus xp becomes neglect
 @export var neglect_threshold: float = 0.01
@@ -26,6 +26,8 @@ signal finished_loading()
 @onready var creature: Creature = %Creature
 
 var holiday_mode: bool = false
+
+var health_amount: float = 0
 
 const STAT_HEAL_MAX = 10
 const STAT_HEAL_THRESHOLD = .75
@@ -60,7 +62,7 @@ func _notification(what):
 
 
 func hp_timeout() -> void:
-	var amount = 0
+	health_amount = 0
 	
 	for stat in [
 			[creature.food, creature.max_food],
@@ -73,16 +75,15 @@ func hp_timeout() -> void:
 		
 		# heal
 		if perc > STAT_HEAL_THRESHOLD:
-			amount += STAT_HEAL_MAX * ((perc - STAT_HEAL_THRESHOLD) / (1. - STAT_HEAL_THRESHOLD))
+			health_amount += STAT_HEAL_MAX * ((perc - STAT_HEAL_THRESHOLD) / (1. - STAT_HEAL_THRESHOLD))
 		
 		# drain
 		if perc < STAT_DRAIN_THRESHOLD:
-			amount -= STAT_DRAIN_MAX * (1. - (perc / STAT_DRAIN_THRESHOLD))
-	
-	if amount > 0:
-		creature.heal(amount * time_multiplier, Creature.Stat.HP)
+			health_amount -= STAT_DRAIN_MAX * (1. - (perc / STAT_DRAIN_THRESHOLD))
+	if health_amount > 0:
+		creature.heal(health_amount * time_multiplier, Creature.Stat.HP)
 	else:
-		creature.dmg(amount * time_multiplier, Creature.Stat.HP)
+		creature.dmg(abs(health_amount * time_multiplier), Creature.Stat.HP)
 
 func water_timeout() -> void:
 	creature.dmg(water_amount * time_multiplier, Creature.Stat.WATER)
