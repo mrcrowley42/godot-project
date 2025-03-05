@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://ig0eoqdfq5nr"]
+[gd_scene load_steps=34 format=3 uid="uid://ig0eoqdfq5nr"]
 
 [ext_resource type="Script" path="res://scripts/main_game_scripts/main_menu.gd" id="1_lpoqi"]
 [ext_resource type="Shader" path="res://shaders/pattern_lines.gdshader" id="2_f1u7v"]
@@ -65,6 +65,8 @@ shadow_size = 8
 shadow_offset = Vector2(0, 8)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uqmci"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y78e6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fk5u2"]
 bg_color = Color(0.3264, 0.33728, 0.34, 1)
@@ -371,7 +373,6 @@ theme_override_font_sizes/font_size = 18
 text = "Load"
 
 [node name="SettingsMenu" type="MarginContainer" parent="."]
-visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -409,7 +410,7 @@ custom_minimum_size = Vector2(386, 290)
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer"]
-custom_minimum_size = Vector2(378, 0)
+custom_minimum_size = Vector2(392, 0)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 0
@@ -460,13 +461,12 @@ size_flags_vertical = 1
 theme_override_constants/shadow_outline_size = 5
 theme_override_fonts/font = ExtResource("8_1gx8s")
 theme_override_font_sizes/font_size = 20
-text = "Ambience
-"
+text = "Music"
 vertical_alignment = 1
 
 [node name="MusicMuted" type="Button" parent="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer" groups=["settings_data"]]
 layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_uqmci")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_y78e6")
 text = "          "
 icon = ExtResource("11_ajurq")
 flat = true
@@ -479,6 +479,31 @@ bus_name = "Music"
 layout_mode = 2
 tick_count = 1
 bus_name = "Music"
+
+[node name="Ambience" type="Label" parent="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = ExtResource("8_1gx8s")
+theme_override_font_sizes/font_size = 20
+text = "Ambience"
+vertical_alignment = 1
+
+[node name="AmbienceMuted" type="Button" parent="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer" groups=["settings_data"]]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_y78e6")
+text = "          "
+icon = ExtResource("11_ajurq")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("12_t0a7x")
+bus_name = "Ambience"
+
+[node name="AmbienceVolume" parent="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer" groups=["settings_data"] instance=ExtResource("13_4qvf0")]
+layout_mode = 2
+tick_count = 1
+bus_name = "Ambience"
 
 [node name="SFX" type="Label" parent="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer"]
 layout_mode = 2
@@ -697,6 +722,7 @@ stream = ExtResource("26_5wjrk")
 [connection signal="hidden" from="SettingsMenu" to="SettingsMenu" method="_on_hidden"]
 [connection signal="button_down" from="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer/MasterMuted" to="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer/MasterMuted" method="_on_button_down"]
 [connection signal="button_down" from="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer/MusicMuted" to="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer/MusicMuted" method="_on_button_down"]
+[connection signal="button_down" from="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer/AmbienceMuted" to="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer/AmbienceMuted" method="_on_button_down"]
 [connection signal="button_down" from="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer/SFXMuted" to="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer/SFXMuted" method="_on_button_down"]
 [connection signal="button_down" from="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/WipeSaveBtn" to="." method="_on_wipe_save_btn_button_down"]
 [connection signal="button_down" from="SettingsMenu/SaveMenuBtns/Back" to="SettingsMenu" method="_on_back_button_down"]
