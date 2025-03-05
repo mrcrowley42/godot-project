@@ -56,9 +56,22 @@ func grab_saves():
 		save_info['id'] = save_id
 		save_info['last_saved'] = DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_LAST_SAVED, save_id)
 		save_info['creature_name'] = DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_NAME, save_id)
-		save_info['status'] = DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_INITIAL_LIFE_STAGE, save_id)
+		save_info['status'] = get_creature_status(save_id)
 		saves.append(save_info)
 	return saves
+
+
+func get_creature_status(save_id):
+
+	if DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_IS_DEAD, save_id):
+		return "Dead"
+
+	if DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_IS_INDEPENDENT, save_id):
+		return "Independent"
+
+	var life_stage_val = DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_LIFE_STAGE, save_id)
+
+	return str(Creture.LifeStage.keys()[life_stage_val]).to_lower().capitalize()
 
 
 func do_opening_trans():
