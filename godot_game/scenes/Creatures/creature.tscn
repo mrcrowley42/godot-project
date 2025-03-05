@@ -1,7 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://bebjn5n2kjwgb"]
+[gd_scene load_steps=30 format=3 uid="uid://bebjn5n2kjwgb"]
 
 [ext_resource type="Script" path="res://scripts/main_game_scripts/creature_notification_manager.gd" id="2_0vuyd"]
+[ext_resource type="Resource" uid="uid://c4mrl54qdvgg7" path="res://resources/achievements/general/try_disliked_food.tres" id="2_dgcid"]
 [ext_resource type="Script" path="res://scripts/creature.gd" id="2_klgk6"]
+[ext_resource type="Resource" uid="uid://dkye7sv8ic82b" path="res://resources/achievements/general/reach_child_stage.tres" id="3_i5lhp"]
+[ext_resource type="Resource" uid="uid://b4l5j5wla1uic" path="res://resources/achievements/general/reach_adult_stage.tres" id="4_x44i5"]
 [ext_resource type="Script" path="res://scripts/creature_anim.gd" id="5_oh7gr"]
 [ext_resource type="Texture2D" uid="uid://dnud16me4mso5" path="res://icons/status/sentiment_frustrated_24dp_FFFFFF_FILL1_wght300_GRAD0_opsz24.svg" id="8_cooyl"]
 [ext_resource type="Texture2D" uid="uid://kma8r55lpxii" path="res://icons/status/sentiment_sad_24dp_FFFFFF_FILL1_wght300_GRAD0_opsz24.svg" id="9_xmwbg"]
@@ -47,6 +50,9 @@ animations = [{
 script = ExtResource("2_klgk6")
 dying_colour = Color(1, 0, 0, 1)
 viewport_container = NodePath("SubViewportContainer/SubViewport")
+dislike_food_ach = ExtResource("2_dgcid")
+child_stage_ach = ExtResource("3_i5lhp")
+adult_stage_ach = ExtResource("4_x44i5")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 

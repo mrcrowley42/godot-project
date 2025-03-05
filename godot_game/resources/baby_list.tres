@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ResourceList" load_steps=4 format=3 uid="uid://dvginkpdr10ae"]
+
+[ext_resource type="Resource" uid="uid://7owckiqdho7a" path="res://resources/creatures/babies/baby_blanket.tres" id="1_rwoea"]
+[ext_resource type="Resource" uid="uid://h7bg2ijw80s6" path="res://resources/creatures/babies/baby_little_guy.tres" id="2_p82kr"]
+[ext_resource type="Script" path="res://scripts/base_classses/resource_list.gd" id="3_q2lt1"]
+
+[resource]
+script = ExtResource("3_q2lt1")
+items = Array[Resource]([ExtResource("1_rwoea"), ExtResource("2_p82kr")])

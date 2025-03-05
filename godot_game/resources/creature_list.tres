@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="ResourceList" load_steps=5 format=3 uid="uid://c5dxhbbrhclqe"]
+[gd_resource type="Resource" script_class="ResourceList" load_steps=6 format=3 uid="uid://c5dxhbbrhclqe"]
 
 [ext_resource type="Resource" uid="uid://cxtahs454inpc" path="res://resources/creatures/creature_parts/little_guy.tres" id="1_4e3wl"]
 [ext_resource type="Script" path="res://scripts/base_classses/resource_list.gd" id="1_cdmm4"]
 [ext_resource type="Resource" uid="uid://dwv6t0fmrq612" path="res://resources/creatures/creature_parts/box.tres" id="2_rfg8g"]
 [ext_resource type="Resource" uid="uid://dmgqdvkbx0e0g" path="res://resources/creatures/creature_parts/blanket.tres" id="3_tmnwi"]
+[ext_resource type="Resource" uid="uid://4qlg5ogt7yho" path="res://resources/creatures/creature_parts/penguin_guy.tres" id="4_oafic"]
 
 [resource]
 script = ExtResource("1_cdmm4")
-items = Array[Resource]([ExtResource("1_4e3wl"), ExtResource("2_rfg8g"), ExtResource("3_tmnwi")])
+items = Array[Resource]([ExtResource("1_4e3wl"), ExtResource("2_rfg8g"), ExtResource("3_tmnwi"), ExtResource("4_oafic")])

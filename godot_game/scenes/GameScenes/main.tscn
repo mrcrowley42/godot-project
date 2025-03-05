@@ -1,4 +1,4 @@
-[gd_scene load_steps=142 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=145 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
@@ -6,11 +6,15 @@
 [ext_resource type="Resource" uid="uid://bcpvpvjxus07h" path="res://resources/achievements/general/yippeee.tres" id="3_88kd3"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/minigame_manager.gd" id="3_fj5ve"]
 [ext_resource type="Script" path="res://scripts/background.gd" id="4_j8clb"]
+[ext_resource type="Resource" uid="uid://cp07y8uams25" path="res://resources/achievements/completionist/hatch_every_baby.tres" id="4_v4rcc"]
+[ext_resource type="Resource" uid="uid://b74rhs5f0lfn3" path="res://resources/achievements/completionist/discover_every_creature.tres" id="5_kp45v"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/consumables_manager.gd" id="5_yr5ap"]
 [ext_resource type="Shader" path="res://shaders/multiply_colour.gdshader" id="5_yth5i"]
+[ext_resource type="Resource" uid="uid://dvginkpdr10ae" path="res://resources/baby_list.tres" id="6_kodr3"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/achievement_manager.gd" id="6_lmnmq"]
 [ext_resource type="Texture2D" uid="uid://cdbor7hjfbusn" path="res://UI stuff/Universal/background.png" id="6_oihh8"]
 [ext_resource type="Shader" path="res://shaders/background.gdshader" id="7_1pcjq"]
+[ext_resource type="Resource" uid="uid://c5dxhbbrhclqe" path="res://resources/creature_list.tres" id="7_alwbg"]
 [ext_resource type="Texture2D" uid="uid://bmwpenw32juko" path="res://UI stuff/Universal/background_light_map.png" id="8_aulml"]
 [ext_resource type="Resource" uid="uid://kgwet30vluw3" path="res://resources/food_list.tres" id="8_go3jw"]
 [ext_resource type="Resource" uid="uid://brrtf0fvck4s3" path="res://resources/achievements/general/customise_everything.tres" id="8_likk1"]
@@ -22,7 +26,6 @@
 [ext_resource type="Script" path="res://scripts/main_game_scripts/ui_theme_manager.gd" id="13_3i267"]
 [ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="14_fimo1"]
 [ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="14_k2ios"]
-[ext_resource type="Resource" uid="uid://c4mrl54qdvgg7" path="res://resources/achievements/general/try_disliked_food.tres" id="15_4s8wr"]
 [ext_resource type="Texture2D" uid="uid://do0i17klbrer7" path="res://icons/arrow-up-square.svg" id="15_8x1u0"]
 [ext_resource type="Script" path="res://scripts/grow_up_btn.gd" id="16_mj2i7"]
 [ext_resource type="Resource" uid="uid://c1t6gsmcergkh" path="res://resources/achievements/general/clippy_mode.tres" id="17_uw6yv"]
@@ -417,6 +420,10 @@ data = PackedByteArray("SUQzBAAAAAABAFRYWFgAAAASAAADbWFqb3JfYnJhbmQAbXA0MgBUWFhY
 script = ExtResource("1_opnvu")
 hatch_baby_ach = ExtResource("2_dv61o")
 yipppee_ach = ExtResource("3_88kd3")
+all_babies_ach = ExtResource("4_v4rcc")
+all_adults_ach = ExtResource("5_kp45v")
+all_baby_list = ExtResource("6_kodr3")
+all_creature_list = ExtResource("7_alwbg")
 metadata/_edit_vertical_guides_ = [532.0, 8.0, 45.0, 53.0, 487.0, 495.0]
 metadata/_edit_horizontal_guides_ = [8.0, 667.0, 112.0, 111.0, 554.0, 562.0]
 
@@ -509,7 +516,6 @@ unique_name_in_owner = true
 texture_filter = 1
 position = Vector2(270, 393.5)
 clippy_area = NodePath("../ClippyArea")
-dislike_food_ach = ExtResource("15_4s8wr")
 
 [node name="ClippyArea" type="Button" parent="Gameplay" node_paths=PackedStringArray("ambience_manager") groups=["settings_data"]]
 unique_name_in_owner = true

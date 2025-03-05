@@ -20,6 +20,8 @@ const like_multiplier: float = 2.0
 @export var xp_mulitplier: float = 1.0
 @export var viewport_container: Node
 @export var dislike_food_ach: Achievement
+@export var child_stage_ach: Achievement
+@export var adult_stage_ach: Achievement
 
 ## XP required for the creature to reach the [param ADULT] [param LifeStage] stage
 var xp_required: float
@@ -304,6 +306,11 @@ func grow_up_one_stage():
 	life_stage = min(life_stage + 1, LifeStage.ADULT)
 	is_ready_to_grow_up = false
 	DataGlobals.set_new_highest_life_stage(Helpers.uid_str(creature_type), life_stage)
+	
+	if life_stage == LifeStage.CHILD:
+		Globals.unlock_achievement(child_stage_ach)
+	elif life_stage == LifeStage.ADULT:
+		Globals.unlock_achievement(adult_stage_ach)
 
 # -----------
 #  MOVEMENT

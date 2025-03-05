@@ -4,6 +4,11 @@ class_name Game extends Node
 @export var unlock_fps: bool = false
 @export var hatch_baby_ach: Achievement
 @export var yipppee_ach: Achievement
+@export var all_babies_ach: Achievement
+@export var all_adults_ach: Achievement
+
+@export var all_baby_list: ResourceList
+@export var all_creature_list: ResourceList
 
 @onready var debug_mode: bool = OS.is_debug_build()
 @onready var launch_time: float = Time.get_unix_time_from_system()
@@ -51,6 +56,11 @@ func _ready():
 	await do_opening_trans()
 	DataGlobals.setup_auto_save(self)
 	Globals.unlock_achievement(hatch_baby_ach)
+	
+	if len(DataGlobals.get_global_metadata_value(DataGlobals.DISCOVERED_BABIES).keys()) == len(all_baby_list.items):
+		Globals.unlock_achievement(all_babies_ach)
+	if len(DataGlobals.get_global_metadata_value(DataGlobals.DISCOVERED_CREATURES).keys()) == len(all_creature_list.items):
+		Globals.unlock_achievement(all_adults_ach)
 
 func do_opening_trans():
 	Globals.perform_opening_transition(trans_img, ui_overlay.position, set_is_in_trans.bind(false))
