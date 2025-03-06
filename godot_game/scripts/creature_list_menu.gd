@@ -11,6 +11,8 @@ extends VBoxContainer
 
 @onready var egg_listing = load("res://scenes/UiScenes/egg_listing.tscn")
 @onready var baby_listing = load("res://scenes/UiScenes/baby_listing.tscn")
+@onready var child_listing = load("res://scenes/UiScenes/child_listing.tscn")
+@onready var adult_listing = load("res://scenes/UiScenes/adult_listing.tscn")
 @onready var creature_listing = load("res://scenes/UiScenes/creature_listing.tscn")
 
 @export var grid_container: MarginContainer
@@ -31,9 +33,23 @@ func _ready():
 	## baby list
 	for baby: CreatureBaby in baby_list.items:
 		var button: Button = baby_listing.instantiate()
-		button.icon = baby.baby_part.sprite_frames.get_frame_texture('idle', 0)
-		button.text = baby.name
+		button.icon = crop_img(baby.baby_part.sprite_frames.get_frame_texture('idle', 0))
+		button.text = "\n" + baby.name
 		grid_container.get_child(1).add_child(button)
+	
+	## child list
+	for child: CreatureType in creature_list.items:
+		var button: Button = child_listing.instantiate()
+		button.icon = crop_img(child.child.sprite_frames.get_frame_texture('idle', 0))
+		button.text = "\n" + child.name
+		grid_container.get_child(2).add_child(button)
+	
+	## adult list
+	for adult: CreatureType in creature_list.items:
+		var button: Button = adult_listing.instantiate()
+		button.icon = crop_img(adult.adult.sprite_frames.get_frame_texture('idle', 0))
+		button.text = "\n" + adult.name
+		grid_container.get_child(3).add_child(button)
 
 func crop_img(texture: Texture2D):
 	var img: Image = texture.get_image()

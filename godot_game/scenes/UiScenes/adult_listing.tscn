@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://d16smrbfymkjh"]
+[gd_scene load_steps=3 format=3 uid="uid://bcpvfmn0sk3r"]
 
-[ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="1_0wi1n"]
-[ext_resource type="Texture2D" uid="uid://xj8vcnrwuob8" path="res://images/creature_sprites/baby-little-guy/round baby normal.png" id="2_wr4yc"]
+[ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="1_v8lrd"]
+[ext_resource type="Texture2D" uid="uid://dqtjsny24a3p1" path="res://images/creature_sprites/little-guy/angry-0.png" id="2_tojtg"]
 
 [node name="Button" type="Button"]
 custom_minimum_size = Vector2(100, 100)
@@ -14,10 +14,10 @@ offset_bottom = 100.0
 grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("1_0wi1n")
+theme = ExtResource("1_v8lrd")
 theme_override_constants/icon_max_width = 50
 text = "name"
-icon = ExtResource("2_wr4yc")
+icon = ExtResource("2_tojtg")
 autowrap_mode = 2
 icon_alignment = 1
 vertical_icon_alignment = 0

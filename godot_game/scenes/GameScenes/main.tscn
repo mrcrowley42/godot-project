@@ -1528,21 +1528,21 @@ columns = 3
 
 [node name="babyGrid" type="GridContainer" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2
-theme_override_constants/h_separation = 12
-theme_override_constants/v_separation = 12
-columns = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 3
 
 [node name="childGrid" type="GridContainer" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2
-theme_override_constants/h_separation = 12
-theme_override_constants/v_separation = 12
-columns = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 3
 
 [node name="adultGrid" type="GridContainer" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2
-theme_override_constants/h_separation = 12
-theme_override_constants/v_separation = 12
-columns = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 3
 
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/CreaturesMenu"]
 position = Vector2(-50, -130)
