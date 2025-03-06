@@ -3,7 +3,7 @@ class_name CreaturePreview extends AnimatedSprite2D
 func _notification(noti: int) -> void:
 	if noti == Globals.NOTIFICATION_CREATURE_ACCESSORIES_ARE_LOADED:
 		sprite_frames = %Creature.creature.sprite_frames
-		position = sprite_frames.get_frame_texture("idle", 0).get_size() * scale * .5
+		global_position = get_parent().global_position + (get_parent().size * .5)
 		animation = "idle"
 		play()
 		update_cosmetics()

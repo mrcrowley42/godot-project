@@ -463,7 +463,6 @@ func load_creature_data(creature_id_override: int = -1):
 	var save_nodes = get_tree().get_nodes_in_group(Globals.SAVE_DATA_GROUP)
 	var node_data_skipped = []
 	for node_data in _every_creature_node_data[creature_id]:
-		printerr(node_data)
 		if SAVE_UID not in node_data or DATA not in node_data:
 			printerr("'%s' or '%s' value in save data is missing! skipping" % [SAVE_UID, DATA])
 			continue

@@ -1,14 +1,58 @@
-[gd_resource type="SpriteFrames" load_steps=2 format=3 uid="uid://o0cqfhkchtst"]
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://b0qc381m2sntd"]
 
-[ext_resource type="Texture2D" uid="uid://cw7inuvjwuijr" path="res://images/creature_sprites/baby-little-guy/baby_placeholder_1.png" id="1_neua0"]
+[ext_resource type="Texture2D" uid="uid://bkvxg33h03hsn" path="res://images/creature_sprites/baby-little-guy/round baby angry.png" id="1_org30"]
+[ext_resource type="Texture2D" uid="uid://chxae2a634tq5" path="res://images/creature_sprites/baby-little-guy/round baby confused.png" id="2_ey4r1"]
+[ext_resource type="Texture2D" uid="uid://bifqeu8gp2kww" path="res://images/creature_sprites/baby-little-guy/round baby happy.png" id="3_5nog3"]
+[ext_resource type="Texture2D" uid="uid://xj8vcnrwuob8" path="res://images/creature_sprites/baby-little-guy/round baby normal.png" id="4_37o3y"]
+[ext_resource type="Texture2D" uid="uid://d2e0otjhk5yvv" path="res://images/creature_sprites/baby-little-guy/round baby sad.png" id="5_mmcfh"]
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_neua0")
+"texture": ExtResource("1_org30")
+}],
+"loop": true,
+"name": &"angry",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ey4r1")
+}],
+"loop": true,
+"name": &"confused",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_5nog3")
+}],
+"loop": true,
+"name": &"happy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_37o3y")
 }],
 "loop": true,
 "name": &"idle",
 "speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_5nog3")
+}],
+"loop": true,
+"name": &"joy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_mmcfh")
+}],
+"loop": true,
+"name": &"sad",
+"speed": 5.0
 }]

@@ -87,15 +87,15 @@ func add_cosmetic(cosmetic: CosmeticItem) -> void:
 
 func do_start_tween():
 	var middle: Vector2 = parent.mid_display_pos
-	tween_sprite_to_goal(current_sprite, middle).connect("finished", %SlowTimer.start)
+	tween_sprite_to_goal(current_sprite.global_position, middle).connect("finished", %SlowTimer.start)
 
 
-func tween_sprite_to_goal(sprite, goal: Vector2) -> Tween:
+func tween_sprite_to_goal(start_pos: Vector2, goal: Vector2) -> Tween:
 	var end_movement = func():
 		move_buffers.clear()
 	
 	# move animation
-	move_buffers = [FloatBuffer.new(sprite.global_position.x), FloatBuffer.new(sprite.global_position.y)]
+	move_buffers = [FloatBuffer.new(start_pos.x), FloatBuffer.new(start_pos.y)]
 	Globals.tween(move_buffers[0], "value", goal.x, 0., 1.)  # x pos to center
 	Globals.tween(move_buffers[1], "value", goal.y - 50, 0., .6)  # up
 	var t = Globals.tween(move_buffers[1], "value", goal.y, 0.2, .4, Tween.EASE_IN)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=145 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=146 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
@@ -98,6 +98,7 @@
 [ext_resource type="Script" path="res://scripts/sfx_man.gd" id="65_787cd"]
 [ext_resource type="AudioStream" uid="uid://cx28efsxtr7c" path="res://sound_effects/button_click_fast.mp3" id="67_nfa6o"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/popup_manager.gd" id="69_rkm2b"]
+[ext_resource type="SpriteFrames" uid="uid://b0qc381m2sntd" path="res://resources/creatures/sprite_frames/little_guy_baby_sprite_frames.tres" id="70_0lkjr"]
 [ext_resource type="Script" path="res://scenes/GameScenes/holiday_c_box.gd" id="71_5w18v"]
 [ext_resource type="Resource" uid="uid://cdj0k55cib2kh" path="res://resources/achievements/general/over_equip_ambience.tres" id="78_hlr37"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/sound_scape_manager.gd" id="80_83777"]
@@ -932,7 +933,6 @@ metadata/_edit_use_anchors_ = true
 [node name="OptionsMenu" type="PanelContainer" parent="UI"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1300,7 +1300,6 @@ script = ExtResource("35_4io20")
 [node name="CosmeticsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 material = SubResource("ShaderMaterial_357to")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -1358,6 +1357,8 @@ size_flags_horizontal = 4
 
 [node name="CreaturePreview" type="AnimatedSprite2D" parent="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/PreviewContainer"]
 scale = Vector2(0.15, 0.15)
+sprite_frames = ExtResource("70_0lkjr")
+animation = &"idle"
 script = ExtResource("49_p7hc5")
 
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/CosmeticsMenu"]
@@ -1516,6 +1517,7 @@ script = ExtResource("35_4io20")
 [node name="SettingsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 material = SubResource("ShaderMaterial_1s3b6")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
