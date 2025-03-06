@@ -430,9 +430,8 @@ metadata/_edit_horizontal_guides_ = [8.0, 667.0, 112.0, 111.0, 554.0, 562.0]
 [node name="StatusManager" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("2_aqytd")
-food_amount = 4.0
 neglect_threshold = 0.02
-neglect_penalty_multiplier = 4000.0
+neglect_penalty_multiplier = 100.0
 neglect_limit = 0.1
 
 [node name="AmbienceManager" type="Node" parent="." groups=["settings_data"]]
@@ -462,10 +461,11 @@ completionist_grid = NodePath("../UI/OptionsMenu/AchievementMenu/MarginContainer
 perc_label = NodePath("../UI/OptionsMenu/AchievementMenu/MarginContainer/VBoxContainer/MarginContainer/AchievementProgressLabe")
 customise_everything_ach = ExtResource("8_likk1")
 
-[node name="MinigameManager" type="Node2D" parent="." node_paths=PackedStringArray("minigame_layer")]
+[node name="MinigameManager" type="Node2D" parent="." node_paths=PackedStringArray("minigame_layer", "zen_mode_layer")]
 unique_name_in_owner = true
 script = ExtResource("3_fj5ve")
 minigame_layer = NodePath("../UI/MinigameLayer")
+zen_mode_layer = NodePath("../UI/ZenModeLayer")
 
 [node name="Gameplay" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -615,6 +615,9 @@ texture = ExtResource("14_k2ios")
 
 [node name="MinigameLayer" type="CanvasLayer" parent="UI"]
 layer = 5
+
+[node name="ZenModeLayer" type="CanvasLayer" parent="UI"]
+layer = -1
 
 [node name="FoodMenu" type="PanelContainer" parent="UI" node_paths=PackedStringArray("nav_arrows", "food_menu_open_button", "food_screens")]
 visible = false

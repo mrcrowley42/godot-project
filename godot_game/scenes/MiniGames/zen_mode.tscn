@@ -2,9 +2,9 @@
 
 [ext_resource type="Shader" path="res://shaders/zen_mode.gdshader" id="1_5e7kv"]
 [ext_resource type="Script" path="res://scripts/minigames/zen_mode.gd" id="1_kb7c0"]
-[ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="2_s7g67"]
 [ext_resource type="Resource" uid="uid://f43bs6byewf4" path="res://resources/achievements/minigames/first_zen_mode.tres" id="3_tafka"]
 [ext_resource type="Resource" uid="uid://bj8wncd0yrjg7" path="res://resources/achievements/minigames/tenth_zen_mode.tres" id="4_dwxk0"]
+[ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="5_1e2bg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m5uvw"]
 shader = ExtResource("1_5e7kv")
@@ -41,12 +41,14 @@ script = ExtResource("1_kb7c0")
 first_zen_ach = ExtResource("3_tafka")
 many_zen_ach = ExtResource("4_dwxk0")
 
-[node name="CloseBtn" type="Button" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CloseBtn" type="Button" parent="CanvasLayer"]
 offset_left = 67.0
 offset_top = 135.0
 offset_right = 147.0
 offset_bottom = 165.0
-theme = ExtResource("2_s7g67")
+theme = ExtResource("5_1e2bg")
 text = "Stop"
 
-[connection signal="button_down" from="CloseBtn" to="GameLogic" method="_on_close_btn_button_down"]
+[connection signal="button_down" from="CanvasLayer/CloseBtn" to="GameLogic" method="_on_close_btn_button_down"]

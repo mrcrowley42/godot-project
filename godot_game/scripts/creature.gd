@@ -84,6 +84,7 @@ func creature_first_openned():
 	reset_stats()
 
 func setup_creature():
+	@warning_ignore("int_as_enum_without_cast")
 	life_stage = int(DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_LIFE_STAGE))
 	og_pos = position
 	var egg_uid = int(DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_EGG_UID))
@@ -163,6 +164,13 @@ func reset_stats() -> void:
 	heal(max_food - food, Stat.FOOD)
 	heal(max_water - water, Stat.WATER)
 	heal(max_fun, Stat.FUN)
+	lock_xp = false
+
+func reset_stat(stat: Stat) -> void:
+	var maxim = [max_hp, max_water, max_food, max_fun][stat]
+	var current = [hp, water, food, fun][stat]
+	lock_xp = true
+	heal(maxim - current, stat)
 	lock_xp = false
 
 ## reset stats to max without calling stat heals or XP
