@@ -23,6 +23,7 @@ func _ready() -> void:
 			var icon_img = Image.new()
 			icon_img.load(icon_path)
 			creature_icon.icon = ImageTexture.create_from_image(icon_img)
+		death_overlay.visible = str(save_file.status) == "Dead"
 		#category_icon.tooltip_string = "Category: %s" % sound_node.sound_category.category_name
 		#creature_icon.icon = save_file.icon
 
