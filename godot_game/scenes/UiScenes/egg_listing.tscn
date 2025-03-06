@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhui4mmisj10"]
+
+[ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="1_lt38j"]
+[ext_resource type="Texture2D" uid="uid://gi4ytib73ibf" path="res://images/egg/egg-green.png" id="4_r5h7o"]
+
+[node name="Button" type="Button"]
+custom_minimum_size = Vector2(100, 120)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -193.0
+offset_right = -93.0
+offset_bottom = 120.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_lt38j")
+text = "name"
+icon = ExtResource("4_r5h7o")
+autowrap_mode = 2
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EggList" load_steps=6 format=3 uid="uid://cpt43iwpe5qfg"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/egg_entry.gd" id="1_emst2"]
+[ext_resource type="Script" path="res://scripts/base_classses/egg_list.gd" id="2_mrst8"]
+[ext_resource type="Resource" uid="uid://8qkgq02pnyvq" path="res://resources/eggs/green_egg.tres" id="2_ohwyg"]
+[ext_resource type="Resource" uid="uid://xrht2i6qwx4s" path="res://resources/eggs/pink_egg.tres" id="3_byhqd"]
+[ext_resource type="Resource" uid="uid://iew8c64p2g4" path="res://resources/eggs/purple_egg.tres" id="4_40ylj"]
+
+[resource]
+script = ExtResource("2_mrst8")
+items = Array[ExtResource("1_emst2")]([ExtResource("2_ohwyg"), ExtResource("3_byhqd"), ExtResource("4_40ylj")])

@@ -1,4 +1,4 @@
-[gd_scene load_steps=146 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=145 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
@@ -80,7 +80,6 @@
 [ext_resource type="Script" path="res://scripts/nav_button.gd" id="50_0qet7"]
 [ext_resource type="Shader" path="res://shaders/pattern_lines.gdshader" id="50_tajtf"]
 [ext_resource type="Texture2D" uid="uid://drv50ynifh37j" path="res://UI stuff/Green Palette/green_activities_button.png" id="51_7kyvm"]
-[ext_resource type="Script" path="res://scripts/creature_menu.gd" id="51_hdtdw"]
 [ext_resource type="Theme" uid="uid://b0xcqhw28px6h" path="res://themes/menu_value_range.tres" id="53_buhev"]
 [ext_resource type="Texture2D" uid="uid://b5uf4jcvme855" path="res://UI stuff/Green Palette/green_settings_button.png" id="53_hpyyk"]
 [ext_resource type="Script" path="res://scripts/ambience_menu.gd" id="53_ubf3f"]
@@ -98,8 +97,8 @@
 [ext_resource type="Script" path="res://scripts/sfx_man.gd" id="65_787cd"]
 [ext_resource type="AudioStream" uid="uid://cx28efsxtr7c" path="res://sound_effects/button_click_fast.mp3" id="67_nfa6o"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/popup_manager.gd" id="69_rkm2b"]
-[ext_resource type="SpriteFrames" uid="uid://b0qc381m2sntd" path="res://resources/creatures/sprite_frames/little_guy_baby_sprite_frames.tres" id="70_0lkjr"]
 [ext_resource type="Script" path="res://scenes/GameScenes/holiday_c_box.gd" id="71_5w18v"]
+[ext_resource type="Script" path="res://scripts/creature_list_menu.gd" id="74_18d78"]
 [ext_resource type="Resource" uid="uid://cdj0k55cib2kh" path="res://resources/achievements/general/over_equip_ambience.tres" id="78_hlr37"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/sound_scape_manager.gd" id="80_83777"]
 
@@ -1300,6 +1299,7 @@ script = ExtResource("35_4io20")
 [node name="CosmeticsMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 material = SubResource("ShaderMaterial_357to")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -1357,8 +1357,6 @@ size_flags_horizontal = 4
 
 [node name="CreaturePreview" type="AnimatedSprite2D" parent="UI/OptionsMenu/CosmeticsMenu/MarginContainer/VBoxContainer/PreviewContainer"]
 scale = Vector2(0.15, 0.15)
-sprite_frames = ExtResource("70_0lkjr")
-animation = &"idle"
 script = ExtResource("49_p7hc5")
 
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/CosmeticsMenu"]
@@ -1451,7 +1449,6 @@ text = "Accept"
 [node name="CreaturesMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 material = SubResource("ShaderMaterial_vkesy")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -1464,23 +1461,55 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer" node_paths=PackedStringArray("grid_container", "menu_btns_container")]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/separation = 24
+script = ExtResource("74_18d78")
+grid_container = NodePath("PanelContainer/ScrollContainer/MarginContainer")
+menu_btns_container = NodePath("HBoxContainer")
 
 [node name="Button" type="Button" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("45_e031c")
 theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
-text = "Discovered Creatures"
+text = "Creature Compendium"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="egg" type="Button" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("42_c1jtf")
+text = " Egg "
+
+[node name="baby" type="Button" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("42_c1jtf")
+text = " Baby "
+
+[node name="child" type="Button" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("42_c1jtf")
+text = " Child "
+
+[node name="adult" type="Button" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("42_c1jtf")
+text = " Adult "
 
 [node name="PanelContainer" type="PanelContainer" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("46_r0sdd")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/PanelContainer"]
-custom_minimum_size = Vector2(0, 300)
+custom_minimum_size = Vector2(0, 240)
 layout_mode = 2
 theme = ExtResource("49_mgl65")
 
@@ -1491,11 +1520,29 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Creatures" type="GridContainer" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer"]
+[node name="eggGrid" type="GridContainer" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2
-theme_override_constants/h_separation = 0
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 3
+
+[node name="babyGrid" type="GridContainer" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 12
-script = ExtResource("51_hdtdw")
+columns = 2
+
+[node name="childGrid" type="GridContainer" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 2
+
+[node name="adultGrid" type="GridContainer" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 2
 
 [node name="SaveButtons" type="Node2D" parent="UI/OptionsMenu/CreaturesMenu"]
 position = Vector2(-50, -130)
@@ -2315,6 +2362,10 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/OptionsMenu/CosmeticsMenu/SaveButtons/EditCreatureName" to="UI/OptionsMenu/CosmeticsMenu/EditNamePanel" method="_on_edit_creature_name_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/CosmeticsMenu/EditNamePanel/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CancelEditBtn" to="UI/OptionsMenu/CosmeticsMenu/EditNamePanel" method="_on_cancel_edit_btn_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/CosmeticsMenu/EditNamePanel/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/AcceptEditBtn" to="UI/OptionsMenu/CosmeticsMenu/EditNamePanel" method="_on_accept_edit_btn_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/HBoxContainer/egg" to="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer" method="_on_egg_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/HBoxContainer/baby" to="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer" method="_on_baby_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/HBoxContainer/child" to="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer" method="_on_child_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/HBoxContainer/adult" to="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer" method="_on_adult_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/CreaturesMenu/SaveButtons/Back" to="UI/OptionsMenu/CreaturesMenu/SaveButtons/Back" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer/MasterMuted" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer/MasterMuted" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer/MusicMuted" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer/MusicMuted" method="_on_button_down"]
