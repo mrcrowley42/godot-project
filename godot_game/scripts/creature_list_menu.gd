@@ -10,6 +10,7 @@ extends VBoxContainer
 @onready var creature_info_scene = load("res://scenes/UiScenes/creature_info.tscn")
 
 @onready var egg_listing = load("res://scenes/UiScenes/egg_listing.tscn")
+@onready var baby_listing = load("res://scenes/UiScenes/baby_listing.tscn")
 @onready var creature_listing = load("res://scenes/UiScenes/creature_listing.tscn")
 
 @export var grid_container: MarginContainer
@@ -23,13 +24,22 @@ func _ready():
 	## egg list
 	for egg: EggEntry in egg_list.items:
 		var button: Button = egg_listing.instantiate()
-		button.icon = egg.image
-		button.text = egg.name
+		button.icon = crop_img(egg.image)
+		button.text = "\n" + egg.name
 		grid_container.get_child(0).add_child(button)
 	
 	## baby list
 	for baby: CreatureBaby in baby_list.items:
-		pass
+		var button: Button = baby_listing.instantiate()
+		button.icon = baby.baby_part.sprite_frames.get_frame_texture('idle', 0)
+		button.text = baby.name
+		grid_container.get_child(1).add_child(button)
+
+func crop_img(texture: Texture2D):
+	var img: Image = texture.get_image()
+	var used: Rect2i = img.get_used_rect()
+	var reigon: Image = img.get_region(used)
+	return ImageTexture.create_from_image(reigon)
 
 func update_menu_btns():
 	var i = 0

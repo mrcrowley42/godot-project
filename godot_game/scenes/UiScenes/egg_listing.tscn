@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://gi4ytib73ibf" path="res://images/egg/egg-green.png" id="4_r5h7o"]
 
 [node name="Button" type="Button"]
-custom_minimum_size = Vector2(100, 120)
+custom_minimum_size = Vector2(100, 100)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -15,6 +15,7 @@ grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_lt38j")
+theme_override_constants/icon_max_width = 50
 text = "name"
 icon = ExtResource("4_r5h7o")
 autowrap_mode = 2
