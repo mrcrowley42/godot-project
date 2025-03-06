@@ -707,14 +707,17 @@ bus = &"SFX"
 [node name="Music1" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("12_xt2xn")
+bus = &"Music"
 
 [node name="Music2" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("26_5wjrk")
+bus = &"Music"
 
 [node name="Music3" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("27_ksr05")
+bus = &"Music"
 
 [connection signal="button_down" from="MenuList/MarginContainer/VBoxContainer/NewGameBtn" to="." method="_on_new_game_btn_button_down"]
 [connection signal="button_down" from="MenuList/MarginContainer/VBoxContainer/ContinueBtn" to="." method="_on_continue_btn_button_down"]
