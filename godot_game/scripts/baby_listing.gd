@@ -5,8 +5,15 @@ var baby: CreatureBaby
 
 func setup(the_baby: CreatureBaby):
 	baby = the_baby
-	icon = Helpers.crop_img(baby.baby_part.sprite_frames.get_frame_texture('idle', 0))
-	text = "\n" + baby.name
+	var uid = Helpers.uid_str(baby)
+	var babies = DataGlobals.get_global_metadata_value(DataGlobals.DISCOVERED_BABIES)
+	
+	if uid in babies.keys():
+		disabled = false
+		icon = Helpers.crop_img(baby.baby_part.sprite_frames.get_frame_texture('idle', 0))
+		text = "\n" + baby.name
+	else:
+		disabled = true
 
 
 func _on_button_down() -> void:

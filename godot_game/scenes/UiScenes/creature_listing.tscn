@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://22mlj8o5xuqe"]
 
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="1_3pajv"]
-[ext_resource type="Texture2D" uid="uid://dwyq4ypjep2wb" path="res://images/creature_sprites/little-guy/baby-0.png" id="2_q0v2m"]
+[ext_resource type="Texture2D" uid="uid://tvwjgl76m8fx" path="res://images/unknown.png" id="2_otp4n"]
 [ext_resource type="Script" path="res://scripts/creature_listing.gd" id="3_7wweh"]
 
 [node name="Button" type="Button"]
@@ -17,8 +17,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_3pajv")
 theme_override_constants/icon_max_width = 50
-text = "name"
-icon = ExtResource("2_q0v2m")
+text = "Unknown"
+icon = ExtResource("2_otp4n")
 autowrap_mode = 2
 icon_alignment = 1
 vertical_icon_alignment = 0

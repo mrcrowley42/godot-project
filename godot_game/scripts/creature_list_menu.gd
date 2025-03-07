@@ -18,9 +18,12 @@ extends VBoxContainer
 
 var selected_menu = 0
 
-func _ready():
-	update_menu_btns()
-	
+func _notification(what: int) -> void:
+	if what == Globals.NOTIFICATION_ALL_DATA_IS_LOADED:
+		update_menu_btns()
+		generate_lists()
+
+func generate_lists():
 	## egg list
 	for egg: EggEntry in egg_list.items:
 		var button: Button = egg_listing.instantiate()
