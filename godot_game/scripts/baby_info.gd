@@ -28,7 +28,7 @@ func setup():
 	stat_window.text = stat_window.text % [num_hatched]
 	
 	for creature: CreatureType in [baby.grows_into_a, baby.grows_into_b]:
-		var scene: Button = load("res://scenes/UiScenes/child_listing.tscn").instantiate()
+		var scene: Button = load("res://scenes/UiScenes/creature_listing.tscn").instantiate()
 		scene.setup(creature)
 		scene.custom_minimum_size = Vector2(70, 90)
 		scene.size_flags_horizontal = Control.SIZE_EXPAND_FILL

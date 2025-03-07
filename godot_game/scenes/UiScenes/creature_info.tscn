@@ -1,12 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://c2sh8bso4xb3b"]
+[gd_scene load_steps=13 format=3 uid="uid://b3rl5hu5bk5tg"]
 
-[ext_resource type="Script" path="res://scripts/creature_info.gd" id="1_vck8f"]
+[ext_resource type="Script" path="res://scripts/creature_info.gd" id="1_x2qvk"]
 [ext_resource type="Shader" path="res://shaders/pattern_animated_grid.gdshader" id="2_qkvqy"]
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="3_3i3tn"]
-[ext_resource type="SpriteFrames" uid="uid://bc8bjaln2o3sf" path="res://resources/creatures/sprite_frames/blanket_child_sprite_frames.tres" id="4_5j2jk"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="4_mphc8"]
 [ext_resource type="Shader" path="res://shaders/outline.gdshader" id="4_ra6rw"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="5_nb2bl"]
+[ext_resource type="SpriteFrames" uid="uid://68skicj7tsu2" path="res://resources/creatures/sprite_frames/little_guy_adult_sprite_frames.tres" id="5_p3fqx"]
 [ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="5_sg3th"]
 [ext_resource type="Theme" uid="uid://dvpqr6ekggufg" path="res://themes/menu_dropdown.tres" id="7_dkqjy"]
 
@@ -34,15 +34,15 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8hlt5"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_51wtj"]
 shader = ExtResource("4_ra6rw")
-shader_parameter/outline_thickness = 1.69
+shader_parameter/outline_thickness = 2.0
 shader_parameter/outline_colour = Color(0.156863, 1, 0.631373, 0.352941)
 
 [node name="CreaturePanel" type="MarginContainer" node_paths=PackedStringArray("heading", "description", "preview", "stat_window")]
 offset_right = 434.0
 offset_bottom = 434.0
-script = ExtResource("1_vck8f")
+script = ExtResource("1_x2qvk")
 heading = NodePath("MarginContainer/VBoxContainer/Label")
 description = NodePath("MarginContainer/VBoxContainer/MarginContainer2/ScrollContainer/MarginContainer/Content")
 preview = NodePath("MarginContainer/VBoxContainer/HBoxContainer/PreviewContainer/CreaturePreview")
@@ -66,11 +66,12 @@ theme_override_constants/separation = 16
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("3_3i3tn")
-text = "Creature INFO"
+text = "CHILD INFO"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 theme_override_constants/separation = 20
 
@@ -85,13 +86,12 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0yx5w")
 
 [node name="CreaturePreview" type="AnimatedSprite2D" parent="MarginContainer/VBoxContainer/HBoxContainer/PreviewContainer"]
-material = SubResource("ShaderMaterial_8hlt5")
-position = Vector2(76, 76)
+material = SubResource("ShaderMaterial_51wtj")
+position = Vector2(76, 97)
 scale = Vector2(0.1, 0.1)
-sprite_frames = ExtResource("4_5j2jk")
-animation = &"confused"
+sprite_frames = ExtResource("5_p3fqx")
+animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.816056
 
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -124,7 +124,7 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0yx5w")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/MarginContainer2"]
-custom_minimum_size = Vector2(386, 140)
+custom_minimum_size = Vector2(386, 80)
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/ScrollContainer"]
@@ -140,7 +140,8 @@ layout_mode = 2
 size_flags_vertical = 1
 theme = ExtResource("4_mphc8")
 theme_override_font_sizes/font_size = 17
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eros lectus, euismod blandit nulla vitae, blandit luctus justo. Proin suscipit rutrum lectus, at ultrices ligula rutrum at. Pellentesque tristique nisi erat, vitae efficitur nibh porta at. Sed rutrum, nisi quis tincidunt euismod, elit lacus aliquam nulla, vel tincidunt ligula ante eget urna. Phasellus posuere sagittis turpis, vel finibus lectus rhoncus et. Maecenas euismod placerat augue eleifend accumsan. Integer eu feugiat erat. Quisque vel ante vitae velit ultricies auctor. Fusce lorem magna, ultricies ut semper non, fringilla eget nisi. "
+text = "desc
+"
 autowrap_mode = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
@@ -176,7 +177,9 @@ item_count = 1
 popup/item_0/text = "EMOTE"
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
+size_flags_vertical = 8
 theme = ExtResource("3_3i3tn")
 text = "  Fullscreen  "
 
@@ -197,5 +200,4 @@ theme_override_font_sizes/font_size = 18
 text = "Back"
 
 [connection signal="hidden" from="." to="." method="_on_hidden"]
-[connection signal="button_down" from="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer2/Button" to="." method="_on_button_button_down"]
 [connection signal="button_down" from="SaveButtons/Back" to="." method="_on_back_button_down"]

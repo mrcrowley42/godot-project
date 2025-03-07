@@ -89,7 +89,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_0yx5w")
 
 [node name="CreaturePreview" type="AnimatedSprite2D" parent="MarginContainer/VBoxContainer/HBoxContainer/PreviewContainer"]
 material = SubResource("ShaderMaterial_51wtj")
-position = Vector2(76, 76)
+position = Vector2(76, 101)
 scale = Vector2(0.1, 0.1)
 sprite_frames = ExtResource("5_4xyt4")
 animation = &"confused"

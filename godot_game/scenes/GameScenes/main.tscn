@@ -1492,17 +1492,11 @@ size_flags_horizontal = 3
 theme = ExtResource("42_c1jtf")
 text = " Baby "
 
-[node name="child" type="Button" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="creature" type="Button" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("42_c1jtf")
-text = " Child "
-
-[node name="adult" type="Button" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("42_c1jtf")
-text = " Adult "
+text = " Creature "
 
 [node name="PanelContainer" type="PanelContainer" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -1532,13 +1526,7 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 3
 
-[node name="childGrid" type="GridContainer" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer"]
-layout_mode = 2
-theme_override_constants/h_separation = 20
-theme_override_constants/v_separation = 20
-columns = 3
-
-[node name="adultGrid" type="GridContainer" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer"]
+[node name="creatureGrid" type="GridContainer" parent="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
@@ -2364,8 +2352,7 @@ bus = &"SFX"
 [connection signal="button_down" from="UI/OptionsMenu/CosmeticsMenu/EditNamePanel/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/AcceptEditBtn" to="UI/OptionsMenu/CosmeticsMenu/EditNamePanel" method="_on_accept_edit_btn_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/HBoxContainer/egg" to="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer" method="_on_egg_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/HBoxContainer/baby" to="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer" method="_on_baby_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/HBoxContainer/child" to="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer" method="_on_child_button_down"]
-[connection signal="button_down" from="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/HBoxContainer/adult" to="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer" method="_on_adult_button_down"]
+[connection signal="button_down" from="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer/HBoxContainer/creature" to="UI/OptionsMenu/CreaturesMenu/MarginContainer/VBoxContainer" method="_on_child_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/CreaturesMenu/SaveButtons/Back" to="UI/OptionsMenu/CreaturesMenu/SaveButtons/Back" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer/MasterMuted" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer/MasterMuted" method="_on_button_down"]
 [connection signal="button_down" from="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer/MusicMuted" to="UI/OptionsMenu/SettingsMenu/MarginContainer/VBoxContainer/pages/Audio/AudioContainer/MusicMuted" method="_on_button_down"]

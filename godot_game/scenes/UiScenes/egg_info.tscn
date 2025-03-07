@@ -87,7 +87,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_0yx5w")
 
 [node name="Sprite2D" type="Sprite2D" parent="MarginContainer/VBoxContainer/HBoxContainer/PreviewContainer"]
 material = SubResource("ShaderMaterial_qpig6")
-position = Vector2(74, 76)
+position = Vector2(75, 100)
 texture = ExtResource("4_a4s2q")
 
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]

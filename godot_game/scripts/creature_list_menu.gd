@@ -11,8 +11,6 @@ extends VBoxContainer
 
 @onready var egg_listing = load("res://scenes/UiScenes/egg_listing.tscn")
 @onready var baby_listing = load("res://scenes/UiScenes/baby_listing.tscn")
-@onready var child_listing = load("res://scenes/UiScenes/child_listing.tscn")
-@onready var adult_listing = load("res://scenes/UiScenes/adult_listing.tscn")
 @onready var creature_listing = load("res://scenes/UiScenes/creature_listing.tscn")
 
 @export var grid_container: MarginContainer
@@ -35,18 +33,11 @@ func _ready():
 		button.setup(baby)
 		grid_container.get_child(1).add_child(button)
 	
-	## child list
-	for child: CreatureType in creature_list.items:
-		var button: Button = child_listing.instantiate()
-		button.setup(child)
+	## creature list
+	for creature: CreatureType in creature_list.items:
+		var button: Button = creature_listing.instantiate()
+		button.setup(creature)
 		grid_container.get_child(2).add_child(button)
-	
-	## adult list
-	for adult: CreatureType in creature_list.items:
-		var button: Button = adult_listing.instantiate()
-		button.icon = Helpers.crop_img(adult.adult.sprite_frames.get_frame_texture('idle', 0))
-		button.text = "\n" + adult.name
-		grid_container.get_child(3).add_child(button)
 
 func update_menu_btns():
 	var i = 0
@@ -65,8 +56,4 @@ func _on_baby_button_down() -> void:
 
 func _on_child_button_down() -> void:
 	selected_menu = 2
-	update_menu_btns()
-
-func _on_adult_button_down() -> void:
-	selected_menu = 3
 	update_menu_btns()

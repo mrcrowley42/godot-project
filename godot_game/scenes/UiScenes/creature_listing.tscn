@@ -1,59 +1,28 @@
-[gd_scene load_steps=8 format=3 uid="uid://oom8t15mujx5"]
+[gd_scene load_steps=4 format=3 uid="uid://22mlj8o5xuqe"]
 
-[ext_resource type="Script" path="res://scripts/creature_listing.gd" id="1_4arri"]
-[ext_resource type="Theme" uid="uid://dl1wes8p6lqlb" path="res://themes/invisible.tres" id="2_so7yg"]
-[ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="3_36xfc"]
-[ext_resource type="Texture2D" uid="uid://wo64brcmlmf8" path="res://images/ambience/forest.png" id="3_g8mpq"]
-[ext_resource type="Theme" uid="uid://kpqilwsnepqa" path="res://themes/nothing.tres" id="3_vdwva"]
-[ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="5_gcpyt"]
-[ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="6_01uu4"]
+[ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="1_3pajv"]
+[ext_resource type="Texture2D" uid="uid://dwyq4ypjep2wb" path="res://images/creature_sprites/little-guy/baby-0.png" id="2_q0v2m"]
+[ext_resource type="Script" path="res://scripts/creature_listing.gd" id="3_7wweh"]
 
-[node name="PanelContainer" type="Button" node_paths=PackedStringArray("name_label")]
-custom_minimum_size = Vector2(355, 70)
+[node name="Button" type="Button"]
+custom_minimum_size = Vector2(100, 100)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -184.5
-offset_right = 184.5
-offset_bottom = 70.0
+offset_left = -193.0
+offset_right = -93.0
+offset_bottom = 100.0
 grow_horizontal = 2
 size_flags_horizontal = 3
-theme = ExtResource("6_01uu4")
-script = ExtResource("1_4arri")
-name_label = NodePath("MarginContainer/HBoxContainer/NameLabel")
-
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 2
-offset_top = 8.0
-offset_right = 369.0
-offset_bottom = 61.0
-size_flags_vertical = 4
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-theme = ExtResource("3_vdwva")
-theme_override_constants/separation = 16
-
-[node name="NameLabel" type="Label" parent="MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("5_gcpyt")
-theme_override_fonts/font = ExtResource("3_36xfc")
-theme_override_font_sizes/font_size = 28
-text = "Creature Name"
-
-[node name="CategoryIcon" type="Button" parent="MarginContainer/HBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(42, 42)
-layout_mode = 2
-theme = ExtResource("2_so7yg")
-icon = ExtResource("3_g8mpq")
+size_flags_vertical = 3
+theme = ExtResource("1_3pajv")
+theme_override_constants/icon_max_width = 50
+text = "name"
+icon = ExtResource("2_q0v2m")
+autowrap_mode = 2
 icon_alignment = 1
+vertical_icon_alignment = 0
 expand_icon = true
+script = ExtResource("3_7wweh")
 
 [connection signal="button_down" from="." to="." method="_on_button_down"]
