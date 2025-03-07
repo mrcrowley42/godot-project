@@ -1,0 +1,125 @@
+[gd_scene load_steps=11 format=3 uid="uid://bxiosynyloa2g"]
+
+[ext_resource type="Script" path="res://scripts/baby_showcase.gd" id="1_q30mu"]
+[ext_resource type="Shader" path="res://shaders/pattern_animated_grid.gdshader" id="2_nenoy"]
+[ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="3_g4out"]
+[ext_resource type="Shader" path="res://shaders/outline.gdshader" id="4_km8at"]
+[ext_resource type="SpriteFrames" uid="uid://b0qc381m2sntd" path="res://resources/creatures/sprite_frames/little_guy_baby_sprite_frames.tres" id="5_k7k1q"]
+[ext_resource type="Theme" uid="uid://dvpqr6ekggufg" path="res://themes/menu_dropdown.tres" id="6_tucfi"]
+[ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="7_xshjc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gygio"]
+shader = ExtResource("2_nenoy")
+shader_parameter/resolution = Vector2(200, 200)
+shader_parameter/bg_color = Color(0.0882, 0.14, 0.131367, 1)
+shader_parameter/line_color = Color(0.2025, 0.27, 0.243, 1)
+shader_parameter/thickness = 1.0
+shader_parameter/brightness = 1.0
+shader_parameter/scale = 0.68
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0yx5w"]
+bg_color = Color(0.0913, 0.11, 0.10252, 0.745098)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s2k6h"]
+shader = ExtResource("4_km8at")
+shader_parameter/outline_thickness = 1.69
+shader_parameter/outline_colour = Color(0.156863, 1, 0.631373, 0.352941)
+
+[node name="FactPopup" type="MarginContainer" node_paths=PackedStringArray("heading", "preview", "emote_btn")]
+offset_right = 434.0
+offset_bottom = 434.0
+script = ExtResource("1_q30mu")
+heading = NodePath("MarginContainer/VBoxContainer/Label")
+preview = NodePath("MarginContainer/VBoxContainer/PreviewContainer/CreaturePreview")
+emote_btn = NodePath("MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/EmoteBtn")
+
+[node name="Panel" type="Panel" parent="."]
+material = SubResource("ShaderMaterial_gygio")
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_g4out")
+text = "Baby INFO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PreviewContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/PreviewContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0yx5w")
+
+[node name="CreaturePreview" type="AnimatedSprite2D" parent="MarginContainer/VBoxContainer/PreviewContainer"]
+material = SubResource("ShaderMaterial_s2k6h")
+position = Vector2(190, 155)
+scale = Vector2(0.175, 0.175)
+sprite_frames = ExtResource("5_k7k1q")
+animation = &"confused"
+autoplay = "confused"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="EmoteBtn" type="OptionButton" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("6_tucfi")
+selected = 0
+item_count = 1
+popup/item_0/text = "EMOTION"
+
+[node name="SaveButtons" type="Node2D" parent="."]
+position = Vector2(-50, -130)
+
+[node name="Back" type="Button" parent="SaveButtons"]
+texture_filter = 5
+custom_minimum_size = Vector2(100, 40)
+offset_left = 73.0
+offset_top = 513.0
+offset_right = 173.0
+offset_bottom = 553.0
+scale = Vector2(0.75, 0.75)
+theme = ExtResource("7_xshjc")
+theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
+theme_override_font_sizes/font_size = 18
+text = "Back"
+
+[connection signal="hidden" from="." to="." method="_on_hidden"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/EmoteBtn" to="." method="_on_emote_btn_item_selected"]
+[connection signal="button_down" from="SaveButtons/Back" to="." method="_on_back_button_down"]

@@ -608,7 +608,7 @@ func add_to_creatures_discovered(creature_type: CreatureType, _uid=null):
 		# add new creature discovered
 		var dict = {
 			"uid": uid,
-			"max_stage_reached": 0,
+			"max_stage_reached": 1,
 			"num_times_found": 1
 		}
 		modify_metadata_value(true, DISCOVERED_CREATURES, [uid], ACTION_SET, dict)

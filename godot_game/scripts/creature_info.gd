@@ -5,6 +5,7 @@ extends MarginContainer
 @export var preview: AnimatedSprite2D
 @export var stat_window: Label
 @onready var btn_sfx = find_parent("Game").find_child("BtnClick")
+@onready var showcase_scene = load("res://scenes/UiScenes/creature_showcase.tscn")
 var creature: CreatureType
 
 
@@ -25,3 +26,10 @@ func setup():
 	var encountered = DataGlobals.get_global_metadata_value(DataGlobals.DISCOVERED_CREATURES)
 	var num_hatched = encountered[uid]['num_times_found']
 	stat_window.text = stat_window.text % [num_hatched]
+
+
+func _on_button_button_down() -> void:
+	var showcase = showcase_scene.instantiate()
+	showcase.creature = creature
+	showcase.setup()
+	add_child(showcase)

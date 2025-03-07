@@ -6,6 +6,7 @@ extends MarginContainer
 @export var stat_window: Label
 @export var grows_grid: GridContainer
 @onready var btn_sfx = find_parent("Game").find_child("BtnClick")
+@onready var showcase_scene = load("res://scenes/UiScenes/baby_showcase.tscn")
 var baby: CreatureBaby
 
 
@@ -34,3 +35,10 @@ func setup():
 		scene.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		scene.size_flags_vertical = Control.SIZE_EXPAND_FILL
 		grows_grid.add_child(scene)
+
+
+func _on_button_button_down() -> void:
+	var showcase = showcase_scene.instantiate()
+	showcase.baby = baby
+	showcase.setup()
+	add_child(showcase)

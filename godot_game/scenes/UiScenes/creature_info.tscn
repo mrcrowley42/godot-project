@@ -200,4 +200,5 @@ theme_override_font_sizes/font_size = 18
 text = "Back"
 
 [connection signal="hidden" from="." to="." method="_on_hidden"]
+[connection signal="button_down" from="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer2/Button" to="." method="_on_button_button_down"]
 [connection signal="button_down" from="SaveButtons/Back" to="." method="_on_back_button_down"]
