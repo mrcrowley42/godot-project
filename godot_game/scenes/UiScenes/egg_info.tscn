@@ -1,0 +1,216 @@
+[gd_scene load_steps=13 format=3 uid="uid://c48i35xdg0050"]
+
+[ext_resource type="Script" path="res://scripts/egg_info.gd" id="1_mee7v"]
+[ext_resource type="Shader" path="res://shaders/pattern_animated_grid.gdshader" id="2_g1pb8"]
+[ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="3_5ttgq"]
+[ext_resource type="Shader" path="res://shaders/outline.gdshader" id="4_6n602"]
+[ext_resource type="Texture2D" uid="uid://gi4ytib73ibf" path="res://images/egg/egg-green.png" id="4_a4s2q"]
+[ext_resource type="FontFile" uid="uid://btef3ltdrleel" path="res://fonts/VCR_OSD_MONO_1.001.ttf" id="6_7uvmo"]
+[ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="7_12nha"]
+[ext_resource type="Theme" uid="uid://dvpqr6ekggufg" path="res://themes/menu_dropdown.tres" id="8_kc483"]
+[ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="9_brag7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gygio"]
+shader = ExtResource("2_g1pb8")
+shader_parameter/resolution = Vector2(200, 200)
+shader_parameter/bg_color = Color(0.0882, 0.14, 0.131367, 1)
+shader_parameter/line_color = Color(0.2025, 0.27, 0.243, 1)
+shader_parameter/thickness = 1.0
+shader_parameter/brightness = 1.0
+shader_parameter/scale = 0.68
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0yx5w"]
+bg_color = Color(0.0913, 0.11, 0.10252, 0.745098)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qpig6"]
+shader = ExtResource("4_6n602")
+shader_parameter/outline_thickness = 0.4
+shader_parameter/outline_colour = Color(0.156863, 1, 0.631373, 0.352941)
+
+[node name="EggPanel" type="MarginContainer" node_paths=PackedStringArray("heading", "description", "preview", "hatches_grid")]
+offset_right = 434.0
+offset_bottom = 434.0
+script = ExtResource("1_mee7v")
+heading = NodePath("MarginContainer/VBoxContainer/Label")
+description = NodePath("MarginContainer/VBoxContainer/MarginContainer2/ScrollContainer/MarginContainer/Content")
+preview = NodePath("MarginContainer/VBoxContainer/HBoxContainer/PreviewContainer/Sprite2D")
+hatches_grid = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/GridContainer")
+
+[node name="Panel" type="Panel" parent="."]
+material = SubResource("ShaderMaterial_gygio")
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_5ttgq")
+text = "Egg INFO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="PreviewContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/HBoxContainer/PreviewContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0yx5w")
+
+[node name="Sprite2D" type="Sprite2D" parent="MarginContainer/VBoxContainer/HBoxContainer/PreviewContainer"]
+material = SubResource("ShaderMaterial_qpig6")
+position = Vector2(74, 76)
+texture = ExtResource("4_a4s2q")
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0yx5w")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("6_7uvmo")
+theme_override_font_sizes/font_size = 16
+text = "Hatches"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 15
+columns = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0yx5w")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(386, 80)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/ScrollContainer"]
+custom_minimum_size = Vector2(378, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 12
+
+[node name="Content" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer2/ScrollContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("7_12nha")
+theme_override_font_sizes/font_size = 17
+text = "desc"
+autowrap_mode = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 96
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 2
+
+[node name="CategoryBtn" type="OptionButton" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer2"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("8_kc483")
+selected = 0
+fit_to_longest_item = false
+allow_reselect = true
+item_count = 1
+popup/item_0/text = "STAGE"
+
+[node name="CategoryBtn2" type="OptionButton" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer2"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("8_kc483")
+selected = 0
+fit_to_longest_item = false
+allow_reselect = true
+item_count = 1
+popup/item_0/text = "EMOTE"
+
+[node name="SaveButtons" type="Node2D" parent="."]
+position = Vector2(-50, -130)
+
+[node name="Back" type="Button" parent="SaveButtons"]
+texture_filter = 5
+custom_minimum_size = Vector2(100, 40)
+offset_left = 73.0
+offset_top = 513.0
+offset_right = 173.0
+offset_bottom = 553.0
+scale = Vector2(0.75, 0.75)
+theme = ExtResource("9_brag7")
+theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
+theme_override_font_sizes/font_size = 18
+text = "Back"
+
+[connection signal="hidden" from="." to="." method="_on_hidden"]
+[connection signal="button_down" from="SaveButtons/Back" to="." method="_on_back_button_down"]

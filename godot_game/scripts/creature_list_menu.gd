@@ -26,36 +26,27 @@ func _ready():
 	## egg list
 	for egg: EggEntry in egg_list.items:
 		var button: Button = egg_listing.instantiate()
-		button.icon = crop_img(egg.image)
-		button.text = "\n" + egg.name
+		button.setup(egg)
 		grid_container.get_child(0).add_child(button)
 	
 	## baby list
 	for baby: CreatureBaby in baby_list.items:
 		var button: Button = baby_listing.instantiate()
-		button.icon = crop_img(baby.baby_part.sprite_frames.get_frame_texture('idle', 0))
-		button.text = "\n" + baby.name
+		button.setup(baby)
 		grid_container.get_child(1).add_child(button)
 	
 	## child list
 	for child: CreatureType in creature_list.items:
 		var button: Button = child_listing.instantiate()
-		button.icon = crop_img(child.child.sprite_frames.get_frame_texture('idle', 0))
-		button.text = "\n" + child.name
+		button.setup(child)
 		grid_container.get_child(2).add_child(button)
 	
 	## adult list
 	for adult: CreatureType in creature_list.items:
 		var button: Button = adult_listing.instantiate()
-		button.icon = crop_img(adult.adult.sprite_frames.get_frame_texture('idle', 0))
+		button.icon = Helpers.crop_img(adult.adult.sprite_frames.get_frame_texture('idle', 0))
 		button.text = "\n" + adult.name
 		grid_container.get_child(3).add_child(button)
-
-func crop_img(texture: Texture2D):
-	var img: Image = texture.get_image()
-	var used: Rect2i = img.get_used_rect()
-	var reigon: Image = img.get_region(used)
-	return ImageTexture.create_from_image(reigon)
 
 func update_menu_btns():
 	var i = 0

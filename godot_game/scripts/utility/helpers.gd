@@ -39,3 +39,9 @@ static func load_uid_int(uid: int) -> Resource:
 
 static var smaller_axis_to_sides := {Vector2i.AXIS_X: [SIDE_LEFT, SIDE_RIGHT],
 	Vector2i.AXIS_Y: [SIDE_TOP, SIDE_BOTTOM]}
+
+static func crop_img(texture: Texture2D) -> ImageTexture:
+	var img: Image = texture.get_image()
+	var used: Rect2i = img.get_used_rect()
+	var reigon: Image = img.get_region(used)
+	return ImageTexture.create_from_image(reigon)

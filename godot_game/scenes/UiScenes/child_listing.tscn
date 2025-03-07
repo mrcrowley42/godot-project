@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://22mlj8o5xuqe"]
+[gd_scene load_steps=4 format=3 uid="uid://22mlj8o5xuqe"]
 
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="1_3pajv"]
 [ext_resource type="Texture2D" uid="uid://dwyq4ypjep2wb" path="res://images/creature_sprites/little-guy/baby-0.png" id="2_q0v2m"]
+[ext_resource type="Script" path="res://scripts/child_listing.gd" id="3_7wweh"]
 
 [node name="Button" type="Button"]
 custom_minimum_size = Vector2(100, 100)
@@ -22,3 +23,6 @@ autowrap_mode = 2
 icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
+script = ExtResource("3_7wweh")
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
