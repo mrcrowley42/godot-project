@@ -36,7 +36,7 @@ expand_margin_bottom = 2.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qpig6"]
 shader = ExtResource("4_6n602")
-shader_parameter/outline_thickness = 0.4
+shader_parameter/outline_thickness = 0.3
 shader_parameter/outline_colour = Color(0.156863, 1, 0.631373, 0.352941)
 
 [node name="EggPanel" type="MarginContainer" node_paths=PackedStringArray("heading", "description", "preview", "hatches_grid")]
