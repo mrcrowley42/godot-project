@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bi6wrhqmx4qcd"
-path="res://.godot/imported/baby_placeholder_1.png-37c2ca9bc30d34125db5135aedbf3ba3.ctex"
+uid="uid://dp5uj6qllpuvr"
+path="res://.godot/imported/round baby happy-2.png-bd36571f396a700c0c20595b5e34a9a8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/creature_sprites/baby-little-guy/baby_placeholder_1.png"
-dest_files=["res://.godot/imported/baby_placeholder_1.png-37c2ca9bc30d34125db5135aedbf3ba3.ctex"]
+source_file="res://images/creature_sprites/baby-little-guy/round baby happy-2.png"
+dest_files=["res://.godot/imported/round baby happy-2.png-bd36571f396a700c0c20595b5e34a9a8.ctex"]
 
 [params]
 

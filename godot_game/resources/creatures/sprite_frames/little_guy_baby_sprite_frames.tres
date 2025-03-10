@@ -1,16 +1,32 @@
-[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://b0qc381m2sntd"]
+[gd_resource type="SpriteFrames" load_steps=16 format=3 uid="uid://b0qc381m2sntd"]
 
-[ext_resource type="Texture2D" uid="uid://bkvxg33h03hsn" path="res://images/creature_sprites/baby-little-guy/round baby angry.png" id="1_org30"]
-[ext_resource type="Texture2D" uid="uid://chxae2a634tq5" path="res://images/creature_sprites/baby-little-guy/round baby confused.png" id="2_ey4r1"]
-[ext_resource type="Texture2D" uid="uid://bifqeu8gp2kww" path="res://images/creature_sprites/baby-little-guy/round baby happy.png" id="3_5nog3"]
-[ext_resource type="Texture2D" uid="uid://xj8vcnrwuob8" path="res://images/creature_sprites/baby-little-guy/round baby normal.png" id="4_37o3y"]
-[ext_resource type="Texture2D" uid="uid://d2e0otjhk5yvv" path="res://images/creature_sprites/baby-little-guy/round baby sad.png" id="5_mmcfh"]
+[ext_resource type="Texture2D" uid="uid://b1w71uf3dv6px" path="res://images/creature_sprites/baby-little-guy/round baby angry-0.png" id="1_0uxdh"]
+[ext_resource type="Texture2D" uid="uid://cae8ikdwitxuf" path="res://images/creature_sprites/baby-little-guy/round baby angry-1.png" id="2_4qjph"]
+[ext_resource type="Texture2D" uid="uid://c1nasgx2btx8u" path="res://images/creature_sprites/baby-little-guy/round baby angry-2.png" id="3_mlsgl"]
+[ext_resource type="Texture2D" uid="uid://3pyffn0w8x8e" path="res://images/creature_sprites/baby-little-guy/round baby confused-0.png" id="4_apkog"]
+[ext_resource type="Texture2D" uid="uid://0pcomd80gblt" path="res://images/creature_sprites/baby-little-guy/round baby confused-1.png" id="5_jf1ki"]
+[ext_resource type="Texture2D" uid="uid://df6x8rtp4nfdf" path="res://images/creature_sprites/baby-little-guy/round baby confused-2.png" id="6_mpx1v"]
+[ext_resource type="Texture2D" uid="uid://boms30fvndi2m" path="res://images/creature_sprites/baby-little-guy/round baby happy-0.png" id="7_yurhu"]
+[ext_resource type="Texture2D" uid="uid://cy4w2rg7kpscw" path="res://images/creature_sprites/baby-little-guy/round baby happy-1.png" id="8_0anbn"]
+[ext_resource type="Texture2D" uid="uid://dp5uj6qllpuvr" path="res://images/creature_sprites/baby-little-guy/round baby happy-2.png" id="9_ldb3p"]
+[ext_resource type="Texture2D" uid="uid://blym8y61sjy6d" path="res://images/creature_sprites/baby-little-guy/round baby normal-0.png" id="10_6wrhr"]
+[ext_resource type="Texture2D" uid="uid://rcuidr1qe8js" path="res://images/creature_sprites/baby-little-guy/round baby normal-1.png" id="11_allqi"]
+[ext_resource type="Texture2D" uid="uid://b8s7wltjxnb3l" path="res://images/creature_sprites/baby-little-guy/round baby normal-2.png" id="12_bpiq2"]
+[ext_resource type="Texture2D" uid="uid://djm7n74vcbmol" path="res://images/creature_sprites/baby-little-guy/round baby sad-0.png" id="13_fypgn"]
+[ext_resource type="Texture2D" uid="uid://qttis6qxrjuk" path="res://images/creature_sprites/baby-little-guy/round baby sad-1.png" id="14_y0x12"]
+[ext_resource type="Texture2D" uid="uid://c5wwdy1b2t047" path="res://images/creature_sprites/baby-little-guy/round baby sad-2.png" id="15_rjpyj"]
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_org30")
+"texture": ExtResource("1_0uxdh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_4qjph")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_mlsgl")
 }],
 "loop": true,
 "name": &"angry",
@@ -18,7 +34,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_ey4r1")
+"texture": ExtResource("4_apkog")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_jf1ki")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_mpx1v")
 }],
 "loop": true,
 "name": &"confused",
@@ -26,7 +48,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_5nog3")
+"texture": ExtResource("7_yurhu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_0anbn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ldb3p")
 }],
 "loop": true,
 "name": &"happy",
@@ -34,7 +62,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_37o3y")
+"texture": ExtResource("10_6wrhr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_allqi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_bpiq2")
 }],
 "loop": true,
 "name": &"idle",
@@ -42,7 +76,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_5nog3")
+"texture": ExtResource("7_yurhu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_0anbn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ldb3p")
 }],
 "loop": true,
 "name": &"joy",
@@ -50,7 +90,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_mmcfh")
+"texture": ExtResource("13_fypgn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_y0x12")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_rjpyj")
 }],
 "loop": true,
 "name": &"sad",

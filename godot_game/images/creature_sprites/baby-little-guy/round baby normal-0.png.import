@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chxae2a634tq5"
-path="res://.godot/imported/round baby confused.png-49b864984b7ee953d0e87ff27bb483ae.ctex"
+uid="uid://blym8y61sjy6d"
+path="res://.godot/imported/round baby normal-0.png-ff32c091814d1709bc3acf8d67947f12.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/creature_sprites/baby-little-guy/round baby confused.png"
-dest_files=["res://.godot/imported/round baby confused.png-49b864984b7ee953d0e87ff27bb483ae.ctex"]
+source_file="res://images/creature_sprites/baby-little-guy/round baby normal-0.png"
+dest_files=["res://.godot/imported/round baby normal-0.png-ff32c091814d1709bc3acf8d67947f12.ctex"]
 
 [params]
 

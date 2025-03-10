@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bifqeu8gp2kww"
-path="res://.godot/imported/round baby happy.png-3c73f8189e35e23e677abeee9b3ed4d5.ctex"
+uid="uid://c1nasgx2btx8u"
+path="res://.godot/imported/round baby angry-2.png-0b2e9779a678f43f05587354d0179111.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/creature_sprites/baby-little-guy/round baby happy.png"
-dest_files=["res://.godot/imported/round baby happy.png-3c73f8189e35e23e677abeee9b3ed4d5.ctex"]
+source_file="res://images/creature_sprites/baby-little-guy/round baby angry-2.png"
+dest_files=["res://.godot/imported/round baby angry-2.png-0b2e9779a678f43f05587354d0179111.ctex"]
 
 [params]
 
