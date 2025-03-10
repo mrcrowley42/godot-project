@@ -22,25 +22,40 @@ func _notification(what: int) -> void:
 	if what == Globals.NOTIFICATION_ALL_DATA_IS_LOADED:
 		update_menu_btns()
 		generate_lists()
+		DataGlobals.baby_discovered.connect(generate_lists)
+		DataGlobals.creature_discovered.connect(generate_lists)
 
-func generate_lists():
+# _null parameter cause the signals pass discovered uid on emit
+func generate_lists(_null=null):
+	var egg_grid: GridContainer = grid_container.get_child(0)
+	var baby_grid: GridContainer = grid_container.get_child(1)
+	var creature_grid: GridContainer = grid_container.get_child(2)
+	
+	## clear lists
+	for child in egg_grid.get_children():
+		egg_grid.remove_child(child)
+	for child in baby_grid.get_children():
+		baby_grid.remove_child(child)
+	for child in creature_grid.get_children():
+		creature_grid.remove_child(child)
+	
 	## egg list
 	for egg: EggEntry in egg_list.items:
 		var button: Button = egg_listing.instantiate()
 		button.setup(egg)
-		grid_container.get_child(0).add_child(button)
+		egg_grid.add_child(button)
 	
 	## baby list
 	for baby: CreatureBaby in baby_list.items:
 		var button: Button = baby_listing.instantiate()
 		button.setup(baby)
-		grid_container.get_child(1).add_child(button)
+		baby_grid.add_child(button)
 	
 	## creature list
 	for creature: CreatureType in creature_list.items:
 		var button: Button = creature_listing.instantiate()
 		button.setup(creature)
-		grid_container.get_child(2).add_child(button)
+		creature_grid.add_child(button)
 
 func update_menu_btns():
 	var i = 0

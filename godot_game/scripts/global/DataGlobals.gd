@@ -1,6 +1,9 @@
 extends Node
 
-const SAVE_AS_BINARY = true
+signal baby_discovered(uid)
+signal creature_discovered(uid)
+
+const SAVE_AS_BINARY = true  ## this does nothing atm
 
 ## node save UIDs (DO NOT CHANGE THESE! but you can add new ones if u want)
 const SAVE_CREATURE_UID = 0
@@ -595,6 +598,7 @@ func add_to_babies_discovered(creature_baby: CreatureBaby):
 			"num_times_found": 1
 		}
 		modify_metadata_value(true, DISCOVERED_BABIES, [uid], ACTION_SET, dict)
+		baby_discovered.emit(uid)
 		print("new baby discovered '%s'" % uid)
 
 ## add a newly discovered creature, or add 1 to "times_hatched" if already discovered
@@ -612,6 +616,7 @@ func add_to_creatures_discovered(creature_type: CreatureType, _uid=null):
 			"num_times_found": 1
 		}
 		modify_metadata_value(true, DISCOVERED_CREATURES, [uid], ACTION_SET, dict)
+		creature_discovered.emit(uid)
 		print("new creature discovered '%s'" % uid)
 
 func set_new_highest_life_stage(uid: String, life_stage: int):

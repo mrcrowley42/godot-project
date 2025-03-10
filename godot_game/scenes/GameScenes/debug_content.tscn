@@ -85,6 +85,17 @@ theme = ExtResource("2_7jug6")
 theme_override_font_sizes/font_size = 14
 text = "restore"
 
+[node name="Label10" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.631373)
+layout_mode = 0
+offset_left = 17.0
+offset_top = 143.0
+offset_right = 208.0
+offset_bottom = 219.0
+theme = ExtResource("2_7jug6")
+theme_override_font_sizes/font_size = 14
+text = "discover"
+
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0
 offset_left = 28.0
@@ -95,10 +106,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_fjahq")
 
 [node name="HPLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 44.0
-offset_top = 12.0
-offset_right = 225.0
-offset_bottom = 40.0
+offset_left = 45.0
+offset_top = 8.0
+offset_right = 226.0
+offset_bottom = 36.0
 size_flags_horizontal = 0
 size_flags_vertical = 6
 theme = ExtResource("2_5bhpe")
@@ -107,10 +118,10 @@ script = ExtResource("3_jj2ny")
 
 [node name="WaterLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 273.0
-offset_top = 54.0
-offset_right = 465.0
-offset_bottom = 82.0
+offset_left = 274.0
+offset_top = 50.0
+offset_right = 466.0
+offset_bottom = 78.0
 size_flags_horizontal = 0
 size_flags_vertical = 6
 theme = ExtResource("2_5bhpe")
@@ -119,10 +130,10 @@ script = ExtResource("2_3h2jk")
 
 [node name="FunLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 273.0
-offset_top = 14.0
-offset_right = 465.0
-offset_bottom = 42.0
+offset_left = 274.0
+offset_top = 10.0
+offset_right = 466.0
+offset_bottom = 38.0
 size_flags_horizontal = 0
 size_flags_vertical = 6
 theme = ExtResource("2_5bhpe")
@@ -131,10 +142,10 @@ script = ExtResource("3_qpwvx")
 
 [node name="FoodLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 20.0
-offset_top = 52.0
-offset_right = 224.0
-offset_bottom = 80.0
+offset_left = 21.0
+offset_top = 48.0
+offset_right = 225.0
+offset_bottom = 76.0
 size_flags_horizontal = 0
 size_flags_vertical = 6
 theme = ExtResource("2_5bhpe")
@@ -143,10 +154,10 @@ script = ExtResource("3_kowqt")
 
 [node name="FoodSatLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 22.0
-offset_top = 80.0
-offset_right = 226.0
-offset_bottom = 108.0
+offset_left = 23.0
+offset_top = 76.0
+offset_right = 227.0
+offset_bottom = 104.0
 scale = Vector2(0.6, 0.6)
 size_flags_horizontal = 0
 size_flags_vertical = 6
@@ -156,10 +167,10 @@ script = ExtResource("7_x1xdg")
 
 [node name="WaterSatLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 273.0
-offset_top = 82.0
-offset_right = 477.0
-offset_bottom = 110.0
+offset_left = 274.0
+offset_top = 78.0
+offset_right = 478.0
+offset_bottom = 106.0
 scale = Vector2(0.6, 0.6)
 size_flags_horizontal = 0
 size_flags_vertical = 6
@@ -181,10 +192,10 @@ script = ExtResource("7_5mkx4")
 
 [node name="ThemeLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 22.0
-offset_top = 114.0
-offset_right = 179.0
-offset_bottom = 142.0
+offset_left = 19.0
+offset_top = 100.0
+offset_right = 176.0
+offset_bottom = 128.0
 theme = ExtResource("2_5bhpe")
 text = "Theme: %s"
 script = ExtResource("4_pa4py")
@@ -392,10 +403,10 @@ text = "Notification Adv"
 
 [node name="UnlockButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 288.0
-offset_top = 592.0
-offset_right = 323.0
-offset_bottom = 620.0
+offset_left = 144.0
+offset_top = 613.0
+offset_right = 199.0
+offset_bottom = 661.0
 scale = Vector2(0.8, 0.8)
 theme = ExtResource("8_lqg4h")
 theme_override_colors/font_color = Color(1, 1, 0.905882, 1)
@@ -405,9 +416,9 @@ text = "ALL"
 
 [node name="UnlockFacts" type="Button" parent="."]
 layout_mode = 0
-offset_left = 201.0
+offset_left = 285.0
 offset_top = 633.0
-offset_right = 246.0
+offset_right = 330.0
 offset_bottom = 661.0
 scale = Vector2(0.8, 0.8)
 theme = ExtResource("8_lqg4h")
@@ -418,10 +429,10 @@ text = "fact"
 
 [node name="UnlockAchs" type="Button" parent="."]
 layout_mode = 0
-offset_left = 254.0
-offset_top = 633.0
-offset_right = 299.0
-offset_bottom = 661.0
+offset_left = 285.0
+offset_top = 592.0
+offset_right = 330.0
+offset_bottom = 620.0
 scale = Vector2(0.8, 0.8)
 theme = ExtResource("8_lqg4h")
 theme_override_colors/font_color = Color(1, 1, 0.905882, 1)
@@ -431,9 +442,9 @@ text = "ach"
 
 [node name="UnlockThemes" type="Button" parent="."]
 layout_mode = 0
-offset_left = 141.0
+offset_left = 225.0
 offset_top = 633.0
-offset_right = 195.0
+offset_right = 279.0
 offset_bottom = 661.0
 scale = Vector2(0.8, 0.8)
 theme = ExtResource("8_lqg4h")
@@ -455,25 +466,51 @@ theme_override_fonts/font = ExtResource("9_y33yi")
 theme_override_font_sizes/font_size = 16
 text = "cosmetic"
 
-[node name="DiscoverBtn" type="Button" parent="."]
+[node name="DiscoverAllBtn" type="Button" parent="."]
 layout_mode = 0
-offset_left = 65.0
-offset_top = 169.0
-offset_right = 276.0
-offset_bottom = 233.0
-scale = Vector2(0.8, 0.8)
+offset_left = 33.0
+offset_top = 175.0
+offset_right = 108.0
+offset_bottom = 230.0
+scale = Vector2(0.6, 0.6)
 theme = ExtResource("8_lqg4h")
 theme_override_colors/font_color = Color(1, 1, 0.905882, 1)
 theme_override_fonts/font = ExtResource("9_y33yi")
-theme_override_font_sizes/font_size = 24
-text = "Discover All"
+theme_override_font_sizes/font_size = 20
+text = "ALL"
+
+[node name="DiscoverBabiesBtn" type="Button" parent="."]
+layout_mode = 0
+offset_left = 124.0
+offset_top = 150.0
+offset_right = 202.0
+offset_bottom = 189.0
+scale = Vector2(0.6, 0.6)
+theme = ExtResource("8_lqg4h")
+theme_override_colors/font_color = Color(1, 1, 0.905882, 1)
+theme_override_fonts/font = ExtResource("9_y33yi")
+theme_override_font_sizes/font_size = 20
+text = "babies"
+
+[node name="DiscoverCreaturesBtn" type="Button" parent="."]
+layout_mode = 0
+offset_left = 113.0
+offset_top = 187.0
+offset_right = 227.0
+offset_bottom = 226.0
+scale = Vector2(0.6, 0.6)
+theme = ExtResource("8_lqg4h")
+theme_override_colors/font_color = Color(1, 1, 0.905882, 1)
+theme_override_fonts/font = ExtResource("9_y33yi")
+theme_override_font_sizes/font_size = 20
+text = "creatures"
 
 [node name="fullRestore" type="Button" parent="."]
 layout_mode = 0
-offset_left = 33.0
-offset_top = 271.0
-offset_right = 87.0
-offset_bottom = 304.0
+offset_left = 27.0
+offset_top = 268.0
+offset_right = 100.0
+offset_bottom = 321.0
 scale = Vector2(0.6, 0.6)
 theme = ExtResource("8_lqg4h")
 theme_override_fonts/font = ExtResource("9_y33yi")
@@ -617,7 +654,7 @@ script = ExtResource("11_y5yt0")
 
 [node name="ClippyBtn" type="Button" parent="."]
 layout_mode = 0
-offset_left = 372.0
+offset_left = 395.0
 offset_top = 112.0
 offset_right = 505.0
 offset_bottom = 146.0
@@ -626,10 +663,10 @@ text = "Clippy Mode"
 
 [node name="HolidayBtn" type="Button" parent="."]
 layout_mode = 0
-offset_left = 212.0
-offset_top = 112.0
-offset_right = 345.0
-offset_bottom = 146.0
+offset_left = 253.0
+offset_top = 114.0
+offset_right = 372.0
+offset_bottom = 148.0
 theme = ExtResource("8_lqg4h")
 toggle_mode = true
 text = "Holiday Mode"
@@ -731,7 +768,9 @@ text = "SCREENSHOT"
 [connection signal="button_down" from="UnlockAchs" to="." method="_on_unlock_achs_button_down"]
 [connection signal="button_down" from="UnlockThemes" to="." method="_on_unlock_themes_button_down"]
 [connection signal="button_down" from="UnlockCosmetics" to="." method="_on_unlock_cosmetics_button_down"]
-[connection signal="button_down" from="DiscoverBtn" to="." method="_on_discover_btn_button_down"]
+[connection signal="button_down" from="DiscoverAllBtn" to="." method="_on_discover_all_btn_button_down"]
+[connection signal="button_down" from="DiscoverBabiesBtn" to="." method="_on_discover_babies_btn_button_down"]
+[connection signal="button_down" from="DiscoverCreaturesBtn" to="." method="_on_discover_creatures_btn_button_down"]
 [connection signal="button_down" from="fullRestore" to="." method="_on_full_restore_button_down"]
 [connection signal="button_down" from="hpRestore" to="." method="_on_hp_restore_button_down"]
 [connection signal="button_down" from="funRestore" to="." method="_on_fun_restore_button_down"]

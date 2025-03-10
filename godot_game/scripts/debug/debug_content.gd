@@ -139,16 +139,6 @@ func _on_button_3_button_down() -> void:
 	ambience_man.current_sounds()
 
 
-func _on_discover_btn_button_down() -> void:
-	var discovered = DataGlobals.get_global_metadata_value(DataGlobals.DISCOVERED_CREATURES)
-	for creature_type in load("res://resources/creature_list.tres").items:
-		var uid = Helpers.uid_str(creature_type)
-		if uid not in discovered:
-			DataGlobals.add_to_creatures_discovered(creature_type)
-		DataGlobals.set_new_highest_life_stage(uid, 1)
-	game.find_child("Creatures").propagate_call("update_locked")
-
-
 func _on_button_2_button_down() -> void:
 	creature.add_xp(10_000)
 
@@ -190,3 +180,25 @@ func _on_water_restore_button_down() -> void:
 
 func _on_food_restore_button_down() -> void:
 	creature.reset_stat(creature.Stat.FOOD)
+
+
+func _on_discover_all_btn_button_down() -> void:
+	_on_discover_babies_btn_button_down()
+	_on_discover_creatures_btn_button_down()
+
+
+func _on_discover_babies_btn_button_down() -> void:
+	var discovered = DataGlobals.get_global_metadata_value(DataGlobals.DISCOVERED_BABIES)
+	for baby: CreatureBaby in load("res://resources/baby_list.tres").items:
+		var uid = Helpers.uid_str(baby)
+		if uid not in discovered.keys():
+			DataGlobals.add_to_babies_discovered(baby)
+
+
+func _on_discover_creatures_btn_button_down() -> void:
+	var discovered = DataGlobals.get_global_metadata_value(DataGlobals.DISCOVERED_BABIES)
+	for creature: CreatureType in load("res://resources/creature_list.tres").items:
+		var uid = Helpers.uid_str(creature)
+		if uid not in discovered.keys():
+			DataGlobals.add_to_creatures_discovered(creature)
+		DataGlobals.set_new_highest_life_stage(uid, Creature.LifeStage.ADULT)

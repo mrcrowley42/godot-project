@@ -57,6 +57,11 @@ func _ready():
 	DataGlobals.setup_auto_save(self)
 	Globals.unlock_achievement(hatch_baby_ach)
 	
+	check_discovered_achievements()
+	DataGlobals.baby_discovered.connect(check_discovered_achievements)
+	DataGlobals.creature_discovered.connect(check_discovered_achievements)
+
+func check_discovered_achievements(_uid=null):
 	if len(DataGlobals.get_global_metadata_value(DataGlobals.DISCOVERED_BABIES).keys()) == len(all_baby_list.items):
 		Globals.unlock_achievement(all_babies_ach)
 	if len(DataGlobals.get_global_metadata_value(DataGlobals.DISCOVERED_CREATURES).keys()) == len(all_creature_list.items):
