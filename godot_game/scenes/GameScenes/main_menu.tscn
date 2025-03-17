@@ -291,8 +291,7 @@ stretch_mode = 2
 layout_mode = 2
 text = "Quit"
 
-[node name="LoadMenu" type="MarginContainer" parent="." node_paths=PackedStringArray("heading", "main_script", "item_container")]
-visible = false
+[node name="LoadMenu" type="MarginContainer" parent="." node_paths=PackedStringArray("heading", "main_script", "item_container", "load_btn")]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -305,6 +304,7 @@ script = ExtResource("9_1nm66")
 heading = NodePath("MarginContainer/VBoxContainer/Title")
 main_script = NodePath("..")
 item_container = NodePath("MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SaveList")
+load_btn = NodePath("SaveMenuBtns/LoadBtn")
 
 [node name="Panel" type="Panel" parent="LoadMenu"]
 layout_mode = 2
@@ -374,6 +374,7 @@ theme_override_font_sizes/font_size = 18
 text = "Load"
 
 [node name="SettingsMenu" type="MarginContainer" parent="."]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5

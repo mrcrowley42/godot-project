@@ -192,7 +192,7 @@ func dmg(amount: float, stat: Stat) -> void:
 
 ## Change to game over scene.
 func game_over():
-	DataGlobals.set_metadata_value(false, DataGlobals.CREATURE_IS_DEAD, true)
+	DataGlobals.set_metadata_value(false, DataGlobals.CREATURE_IS_DEAD, true, DataGlobals.get_creature_id())
 	DataGlobals.set_metadata_value(true, DataGlobals.CURRENT_CREATURE, "-1")
 	create_save_icon()
 	await get_tree().process_frame

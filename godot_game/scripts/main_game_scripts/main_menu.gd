@@ -42,9 +42,9 @@ func _ready() -> void:
 
 
 func setup_btn_visibility():
-	new_game_btn.visible = DataGlobals.has_only_global_metadata() or not DataGlobals.has_save_data()
-	continue_btn.visible = !new_game_btn.visible or DataGlobals.get_global_metadata_value(DataGlobals.CURRENT_CREATURE) != "-1"
-	load_creature_btn.visible = !new_game_btn.visible
+	new_game_btn.visible = DataGlobals.is_every_creature_dead()
+	continue_btn.visible = !new_game_btn.visible and DataGlobals.get_global_metadata_value(DataGlobals.CURRENT_CREATURE) != "-1"
+	load_creature_btn.visible = len(DataGlobals.get_all_creature_ids()) > 0
 	hatch_egg_btn.visible = len(DataGlobals.get_global_metadata_value(DataGlobals.PENDING_EGGS)) > 0
 
 

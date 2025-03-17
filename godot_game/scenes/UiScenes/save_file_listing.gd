@@ -1,5 +1,7 @@
 extends Button
 
+signal selected(creature_data)
+
 @onready var name_label = find_child("NameLabel")
 @onready var date_label = find_child("DateLabel")
 @onready var status_label = find_child("StatusLabel")
@@ -23,7 +25,10 @@ func _ready() -> void:
 			var icon_img = Image.new()
 			icon_img.load(icon_path)
 			creature_icon.icon = ImageTexture.create_from_image(icon_img)
-		death_overlay.visible = str(save_file.status) == "Dead"
+		
+		if save_file.status == "Dead":
+			death_overlay.visible = true
+			modulate = Color(0.949, 0.22, 0.082)
 		#category_icon.tooltip_string = "Category: %s" % sound_node.sound_category.category_name
 		#creature_icon.icon = save_file.icon
 
@@ -34,3 +39,4 @@ func _on_hidden() -> void:
 func _on_button_down() -> void:
 	if save_file.has('id'):
 		parent_menu.current_save_id = save_file.id
+		selected.emit(save_file)

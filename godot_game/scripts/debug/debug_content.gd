@@ -197,8 +197,8 @@ func _on_discover_babies_btn_button_down() -> void:
 
 func _on_discover_creatures_btn_button_down() -> void:
 	var discovered = DataGlobals.get_global_metadata_value(DataGlobals.DISCOVERED_BABIES)
-	for creature: CreatureType in load("res://resources/creature_list.tres").items:
-		var uid = Helpers.uid_str(creature)
+	for creature_type: CreatureType in load("res://resources/creature_list.tres").items:
+		var uid = Helpers.uid_str(creature_type)
 		if uid not in discovered.keys():
-			DataGlobals.add_to_creatures_discovered(creature)
+			DataGlobals.add_to_creatures_discovered(creature_type)
 		DataGlobals.set_new_highest_life_stage(uid, Creature.LifeStage.ADULT)

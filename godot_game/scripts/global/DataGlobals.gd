@@ -66,6 +66,7 @@ var _should_save_global_metadata: bool = false
 var _every_creature_node_data: Dictionary = {}  # key: id, value: node data list
 var _every_creature_metadata: Dictionary = {}  # key: id, value: metadata
 var _should_save_creature_metadata: bool = false
+var _should_save_creature_metadata_creature_override: int = -1
 
 var settings_data_last_loaded: Dictionary = {"load_the_settings_first_idiot": "bruh"}
 
@@ -185,6 +186,7 @@ func _update_val(global: bool, key, value, creature_id_override: int = -1):
 		_should_save_global_metadata = true
 	else:
 		_every_creature_metadata[get_creature_id(creature_id_override)][key] = value
+		_should_save_creature_metadata_creature_override = creature_id_override
 		_should_save_creature_metadata = true
 
 ## set / override a value in the metadata
@@ -245,6 +247,8 @@ func modify_metadata_value(global: bool, metadata_key: String, paths: Array, act
 	
 	_should_save_global_metadata = _should_save_global_metadata or global
 	_should_save_creature_metadata = _should_save_creature_metadata or not global
+	if _should_save_creature_metadata:
+		_should_save_creature_metadata_creature_override = creature_id_override
 
 ## takes into account the metadata to override and to add
 func generate_global_metadata_to_save() -> Dictionary:
@@ -276,6 +280,9 @@ func generate_creature_metadata_to_save(creature_id_override: int = -1) -> Dicti
 func save_data(creature_id_override: int = -1):
 	_should_save_global_metadata = false
 	_should_save_creature_metadata = false
+	creature_id_override = creature_id_override if creature_id_override > -1 else _should_save_creature_metadata_creature_override
+	_should_save_creature_metadata_creature_override = -1
+	
 	var save_file = FileAccess.open(get_save_data_file(), FileAccess.WRITE)
 	var save_nodes = get_tree().get_nodes_in_group(Globals.SAVE_DATA_GROUP)
 	var all_data = [generate_global_metadata_to_save()]  # metadata is first
@@ -285,12 +292,12 @@ func save_data(creature_id_override: int = -1):
 	# save every creature data & update current creature node data
 	for creature_id in _every_creature_metadata.keys():
 		var creature_data: Array = [_every_creature_metadata[creature_id]]  # creature metadata first
-		var creature_node_data: Array = _every_creature_node_data[creature_id]
+		var creature_node_data: Array = [_every_creature_node_data[creature_id]]  # must wrap in list
 		
 		# update only the creature to save
 		if int(creature_id) == creature_id_to_save:
 			creature_data = [generate_creature_metadata_to_save(int(creature_id))]  # creature metadata first
-			creature_node_data.clear()
+			creature_node_data = []
 			
 			for node in save_nodes:
 				if !Globals.has_function(node, SAVE) or !Globals.has_function(node, GET_SAVE_UID):
@@ -330,6 +337,8 @@ func save_only_global_metadata(new_metadata_override = null):
 ## saves only the creature's updated metadata, its node data is not updated
 func save_only_creature_metadata(creature_id_override: int = -1):
 	_should_save_creature_metadata = false
+	creature_id_override = creature_id_override if creature_id_override > -1 else _should_save_creature_metadata_creature_override
+	_should_save_creature_metadata_creature_override = -1
 	
 	if not has_save_data():
 		printerr("you idiot, save some dam metadata first >:( , aborting")
@@ -377,7 +386,8 @@ func create_new_creature(egg: EggEntry, baby_type: CreatureBaby) -> int:
 	new_creature_metadata[CREATURE_TYPE_UID] = choices[final_choice]
 	new_creature_metadata[CREATURE_HATCH_TIME] = Time.get_unix_time_from_system()
 	new_creature_metadata[CREATURE_NAME] = initial_creature_name
-	var init_life_stage = 1 if get_num_of_creatures() == 0 else 0  # skip egg stage for first ever creature
+	## TODO: use `else 0` if creature is hatching from an egg laid by a now independant creature
+	var init_life_stage = 1 if get_num_of_creatures() == 0 else 1  # skip egg stage for first ever creature
 	new_creature_metadata[CREATURE_LIFE_STAGE] = init_life_stage
 	new_creature_metadata[CREATURE_INITIAL_LIFE_STAGE] = init_life_stage
 	
@@ -626,6 +636,16 @@ func set_new_highest_life_stage(uid: String, life_stage: int):
 	
 	var current_highest = get_global_metadata_value(DISCOVERED_CREATURES)[uid]["max_stage_reached"]
 	modify_metadata_value(true, DISCOVERED_CREATURES, [uid, "max_stage_reached"], ACTION_SET, max(current_highest, life_stage))
+
+func is_every_creature_dead() -> bool:
+	if DataGlobals.has_only_global_metadata() or not DataGlobals.has_save_data():
+		return true
+	
+	var is_dead = true
+	for creature_id in _every_creature_metadata.keys():
+		if is_dead:
+			is_dead = get_creature_metadata_value(CREATURE_IS_DEAD, creature_id)
+	return is_dead
 
 func _process(_delta: float) -> void:
 	# save metadata here so the file only needs to be written to once in a frame
