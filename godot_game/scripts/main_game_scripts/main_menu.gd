@@ -87,6 +87,7 @@ func set_is_in_trans(value: bool):
 
 
 func _on_quit_btn_button_down() -> void:
+	
 	if not is_in_transition:
 		print("closing game from main menu...")
 		get_tree().quit()
@@ -167,10 +168,12 @@ func _on_confirm_wipe_button_down() -> void:
 
 
 func _on_cancel_wipe_button_down() -> void:
+	btn_sfx.play()
 	wipe_menu.hide()
 
 
 func _on_wipe_save_btn_button_down() -> void:
+	btn_sfx.play()
 	wipe_menu.show()
 
 
