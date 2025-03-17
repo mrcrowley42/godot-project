@@ -89,7 +89,7 @@ func calc_elapsed_time() -> float:
 
 ## finilise & save data before closure
 func _notification(noti):
-	# close game
+	## close game
 	if noti == NOTIFICATION_WM_CLOSE_REQUEST or noti == Globals.NOTIFICATION_QUIT_TO_MAIN_MENU:
 		print("--- Quit notification recieved, attempting safe close of main ---")
 		minigame_man.finalise_save_data()  # call before saving
@@ -103,16 +103,25 @@ func _notification(noti):
 			print("closing game from main game...")
 		return
 
-	# grow up
+	## grow up
 	if noti == Globals.NOFITICATION_GROW_TO_ADULT_SCENE and not is_in_transition:
-		if not is_in_transition:
-			set_is_in_trans(true)
-			DataGlobals.save_data()  # important!
-			Globals.general_dict["current_cosmetics"] = %Creature.get_current_cosmetics()
-			Globals.general_dict["loaded_cosmetics"] = %Creature.get_loaded_cosmetics()
-			Globals.general_dict["current_life_stage"] = %Creature.life_stage
-			await Globals.perform_closing_transition(trans_img, ui_overlay.position)
-			Globals.change_to_scene("res://scenes/GameScenes/grow_up.tscn")
+		set_is_in_trans(true)
+		DataGlobals.save_data()  # important!
+		Globals.general_dict["current_cosmetics"] = %Creature.get_current_cosmetics()
+		Globals.general_dict["loaded_cosmetics"] = %Creature.get_loaded_cosmetics()
+		Globals.general_dict["current_life_stage"] = %Creature.life_stage
+		await Globals.perform_closing_transition(trans_img, ui_overlay.position)
+		Globals.change_to_scene("res://scenes/GameScenes/grow_up.tscn")
+	
+	## lay egg
+	if noti == Globals.NOTIFICATION_LAY_EGG_SCENE and not is_in_transition:
+		set_is_in_trans(true)
+		DataGlobals.save_data()
+		Globals.general_dict["current_cosmetics"] = %Creature.get_current_cosmetics()
+		Globals.general_dict["loaded_cosmetics"] = %Creature.get_loaded_cosmetics()
+		Globals.general_dict["current_life_stage"] = %Creature.life_stage
+		await Globals.perform_closing_transition(trans_img, ui_overlay.position)
+		Globals.change_to_scene("res://scenes/GameScenes/lay_egg.tscn")
 
 func _input(event) -> void:
 	# close when [param esc key] is pressed

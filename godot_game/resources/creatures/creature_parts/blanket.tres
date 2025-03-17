@@ -8,6 +8,6 @@
 script = ExtResource("3_phrok")
 name = "Blanket guy"
 desc = "Likes their blankets"
-xp_required_for_adult = 800
+xp_threshold = 800
 child = ExtResource("2_bebm8")
 adult = ExtResource("1_mx1my")

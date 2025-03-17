@@ -45,6 +45,7 @@ var fun: float
 var lock_xp: bool = false
 var xp: float = 0
 var is_ready_to_grow_up: bool = false
+var is_ready_to_lay_egg: bool = false
 var life_stage: LifeStage
 var creature_name: String
 
@@ -63,6 +64,7 @@ signal water_changed()
 signal fun_changed()
 signal xp_changed()
 signal ready_to_grow_up()
+signal ready_to_lay_egg()
 
 ## Map of shorthand strings to corresponding damage function
 var stats_dmg: Dictionary = {Stat.HP: damage_hp, Stat.FUN: damage_fun,
@@ -108,6 +110,8 @@ func setup_creature():
 	
 	if is_ready_to_grow_up and life_stage < LifeStage.ADULT:
 		ready_to_grow_up.emit()
+	elif is_ready_to_lay_egg and life_stage == LifeStage.ADULT:
+		ready_to_lay_egg.emit()
 	
 	# do last
 	print("creature has been setup")
@@ -133,7 +137,7 @@ func setup_default_values(has_grown_up=false):
 	drink_dislikes = creature.drink_dislikes
 	
 	creature_name = creature_type.name
-	xp_required = creature_type.xp_required_for_adult
+	xp_required = creature_type.xp_threshold
 	
 	if has_grown_up:
 		reset_stats_silent()
@@ -153,6 +157,9 @@ func add_xp(amount: float) -> void:
 	if life_stage != LifeStage.ADULT and xp >= xp_required and !is_ready_to_grow_up:
 		is_ready_to_grow_up = true
 		ready_to_grow_up.emit()
+	elif life_stage == LifeStage.ADULT and xp >= xp_required and !is_ready_to_lay_egg:
+		is_ready_to_lay_egg = true
+		ready_to_lay_egg.emit()
 
 	xp_changed.emit()
 
@@ -416,13 +423,14 @@ func save() -> Dictionary:
 	create_save_icon()
 	DataGlobals.set_metadata_value(false, DataGlobals.CREATURE_LIFE_STAGE, life_stage)
 	return {
-		"water": water, "food": food, "fun": fun, "hp": hp,
-		"xp": xp, "is_ready_to_grow_up": is_ready_to_grow_up,
+		"water": water, "food": food, "fun": fun, "hp": hp, "xp": xp,
+		"is_ready_to_grow_up": is_ready_to_grow_up,
+		"is_ready_to_lay_egg": is_ready_to_lay_egg
 	}
 
 func load(data) -> void:
 	var prop_list = ["water", "fun", "food", "hp", "xp", 
-					"is_ready_to_grow_up"]
+					"is_ready_to_grow_up", "is_ready_to_lay_egg"]
 
 	for property in prop_list:
 		if data.has(property):

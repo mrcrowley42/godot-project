@@ -1,4 +1,4 @@
-[gd_scene load_steps=145 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=147 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
@@ -50,6 +50,8 @@
 [ext_resource type="Script" path="res://scripts/hidden_menu_panel.gd" id="32_jvqx8"]
 [ext_resource type="Script" path="res://scripts/options_menu.gd" id="32_wbwq3"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="33_1qhmu"]
+[ext_resource type="Script" path="res://scripts/lay_egg_btn.gd" id="33_5wygr"]
+[ext_resource type="Texture2D" uid="uid://b053kk53cuq61" path="res://icons/egg-solid.svg" id="34_i0us5"]
 [ext_resource type="Script" path="res://scripts/opt_menu_back_btn.gd" id="35_4io20"]
 [ext_resource type="Texture2D" uid="uid://pfr6wdx80m45" path="res://icons/volume-fill.svg" id="36_g2683"]
 [ext_resource type="Script" path="res://scripts/theme_display.gd" id="37_tokl0"]
@@ -438,10 +440,11 @@ neglect_limit = 0.1
 unique_name_in_owner = true
 script = ExtResource("80_83777")
 
-[node name="UI_Theme_Manager" type="Node" parent="." node_paths=PackedStringArray("grow_up_btn") groups=["settings_data"]]
+[node name="UI_Theme_Manager" type="Node" parent="." node_paths=PackedStringArray("grow_up_btn", "lay_egg_btn") groups=["settings_data"]]
 unique_name_in_owner = true
 script = ExtResource("13_3i267")
 grow_up_btn = NodePath("../NotificationLayer/NotificationManager/GrowUpBtn")
+lay_egg_btn = NodePath("../NotificationLayer/NotificationManager/LayEggBtn")
 
 [node name="ConsumablesManager" type="Node" parent="." node_paths=PackedStringArray("creature", "food_menu") groups=["save_data"]]
 unique_name_in_owner = true
@@ -550,6 +553,7 @@ noti_parent = NodePath("AdvNotiLayer")
 
 [node name="GrowUpBtn" type="NinePatchRect" parent="NotificationLayer/NotificationManager"]
 unique_name_in_owner = true
+visible = false
 anchors_preset = -1
 anchor_left = -0.00925926
 anchor_top = -0.00740741
@@ -586,7 +590,50 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_mw1wl")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_5qfy2")
 theme_override_styles/normal = SubResource("StyleBoxFlat_p2h23")
 script = ExtResource("18_2njxs")
-tooltip_string = "Grow up creature!"
+tooltip_string = " Grow up creature! "
+style = 2
+direction = 4
+optional_hitbox_scale = Vector2(0.5, 0.5)
+
+[node name="LayEggBtn" type="NinePatchRect" parent="NotificationLayer/NotificationManager"]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_left = -0.00925926
+anchor_top = -0.00740741
+anchor_right = 0.00925937
+anchor_bottom = 0.00740741
+offset_left = 437.0
+offset_top = 504.0
+offset_right = 517.0
+offset_bottom = 584.0
+scale = Vector2(0.5, 0.5)
+mouse_filter = 0
+theme = ExtResource("18_v1mb2")
+texture = ExtResource("14_fimo1")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+script = ExtResource("33_5wygr")
+metadata/_edit_use_anchors_ = true
+
+[node name="icon" type="Sprite2D" parent="NotificationLayer/NotificationManager/LayEggBtn"]
+position = Vector2(45, 44.9999)
+scale = Vector2(1.4375, 1.4375)
+texture = ExtResource("34_i0us5")
+
+[node name="CustomTooltipButton" type="Button" parent="NotificationLayer/NotificationManager/LayEggBtn"]
+layout_mode = 0
+offset_right = 90.0
+offset_bottom = 90.0
+mouse_filter = 1
+theme_override_styles/focus = SubResource("StyleBoxFlat_eh4ru")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_cyk1a")
+theme_override_styles/hover = SubResource("StyleBoxFlat_mw1wl")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5qfy2")
+theme_override_styles/normal = SubResource("StyleBoxFlat_p2h23")
+script = ExtResource("18_2njxs")
+tooltip_string = " Lay egg! "
 style = 2
 direction = 4
 optional_hitbox_scale = Vector2(0.5, 0.5)
@@ -932,6 +979,7 @@ metadata/_edit_use_anchors_ = true
 [node name="OptionsMenu" type="PanelContainer" parent="UI"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1449,6 +1497,7 @@ text = "Accept"
 [node name="CreaturesMenu" type="PanelContainer" parent="UI/OptionsMenu"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 material = SubResource("ShaderMaterial_vkesy")
 layout_mode = 2
 script = ExtResource("32_jvqx8")
@@ -2319,6 +2368,7 @@ bus = &"SFX"
 [connection signal="gui_input" from="NotificationLayer/NotificationManager/GrowUpBtn" to="NotificationLayer/NotificationManager/GrowUpBtn" method="_on_gui_input"]
 [connection signal="mouse_entered" from="NotificationLayer/NotificationManager/GrowUpBtn" to="NotificationLayer/NotificationManager/GrowUpBtn" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="NotificationLayer/NotificationManager/GrowUpBtn" to="NotificationLayer/NotificationManager/GrowUpBtn" method="_on_mouse_exited"]
+[connection signal="gui_input" from="NotificationLayer/NotificationManager/LayEggBtn" to="NotificationLayer/NotificationManager/LayEggBtn" method="_on_gui_input"]
 [connection signal="visibility_changed" from="UI/FoodMenu" to="UI/FoodMenu" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="UI/FoodMenu/NavigationArrows" to="UI/FoodMenu/NavigationArrows" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/FoodMenu/NavigationArrows/LeftArrow" to="UI/FoodMenu/NavigationArrows" method="_on_left_arrow_button_down"]
