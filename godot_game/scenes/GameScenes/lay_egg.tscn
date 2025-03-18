@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dwoemg85w6lnk"]
+[gd_scene load_steps=11 format=3 uid="uid://dwoemg85w6lnk"]
 
 [ext_resource type="Script" path="res://scripts/main_game_scripts/lay_egg.gd" id="1_x0dls"]
 [ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="2_moock"]
@@ -6,10 +6,11 @@
 [ext_resource type="Shader" path="res://shaders/voronoi.gdshader" id="4_lj8bu"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="5_ev2ba"]
 [ext_resource type="Script" path="res://scripts/lay_egg_sprite_setup.gd" id="6_l4300"]
+[ext_resource type="Script" path="res://scripts/sfx_man.gd" id="7_ruwse"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nms0h"]
 shader = ExtResource("4_lj8bu")
-shader_parameter/color = Vector4(0.2, 0.3, 1, 1)
+shader_parameter/color = Vector4(0, 0, 0, 0)
 shader_parameter/pixel_size = 5.0
 shader_parameter/scale = 0.5
 shader_parameter/speed = 0.05
@@ -284,6 +285,12 @@ scale = Vector2(0.225, 0.225)
 [node name="ConfettiLayer" type="CanvasLayer" parent="UI"]
 unique_name_in_owner = true
 layer = 5
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+max_polyphony = 6
+bus = &"SFX"
+script = ExtResource("7_ruwse")
 
 [connection signal="gui_input" from="UI/HBoxContainer/BackBtn" to="." method="_on_back_btn_gui_input"]
 [connection signal="gui_input" from="UI/HBoxContainer/LayBtn" to="." method="_on_lay_btn_gui_input"]

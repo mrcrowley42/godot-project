@@ -32,10 +32,11 @@ func _ready() -> void:
 		"You've seen %s learn and grow, through happy times and times of hardship." % creature_name,
 		"%s has tried food it loves... and food it doesn't really like." % creature_name,
 		"%s has played many games with you and has learnt the value of friendship." % creature_name,
+		"%s loves trying on different accessories, and chilling out to soft ambience." % creature_name,
 		"But %s is an adult now." % creature_name,
 		"And its able to use the valuable experience and knowledge its gained to continue on its own.",
 		"%s will miss you, it won't ever forget this journey." % creature_name,
-		"%s is ready to become independant, and continue its adventure into new and unexplored territory." % creature_name,
+		"%s is ready to become independent, and continue its adventure into new and unexplored territory." % creature_name,
 		"Are you ready for a new journey as well?"
 	]
 	
@@ -53,6 +54,9 @@ func update_dialog(dialog_addition: int = 0):
 	back_btn.modulate = DISABLED if back_disabled else DEFAULT
 	next_btn.modulate = DISABLED if next_disabled else DEFAULT
 	lay_egg_btn.modulate = DISABLED if lay_egg_disabled else DEFAULT
+	
+	if dialog_addition != 0:
+		%SFX.play_sound("click")
 
 
 func _on_back_btn_gui_input(event: InputEvent) -> void:
