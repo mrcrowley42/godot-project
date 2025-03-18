@@ -1,6 +1,290 @@
-[gd_scene load_steps=2 format=3 uid="uid://dwoemg85w6lnk"]
+[gd_scene load_steps=10 format=3 uid="uid://dwoemg85w6lnk"]
 
 [ext_resource type="Script" path="res://scripts/main_game_scripts/lay_egg.gd" id="1_x0dls"]
+[ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="2_moock"]
+[ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="3_2hary"]
+[ext_resource type="Shader" path="res://shaders/voronoi.gdshader" id="4_lj8bu"]
+[ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="5_ev2ba"]
+[ext_resource type="Script" path="res://scripts/lay_egg_sprite_setup.gd" id="6_l4300"]
 
-[node name="LayEgg" type="Node2D"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nms0h"]
+shader = ExtResource("4_lj8bu")
+shader_parameter/color = Vector4(0.2, 0.3, 1, 1)
+shader_parameter/pixel_size = 5.0
+shader_parameter/scale = 0.5
+shader_parameter/speed = 0.05
+shader_parameter/brightness = 1.0
+shader_parameter/opacity = 0.15
+
+[sub_resource type="LabelSettings" id="LabelSettings_y0x3x"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_uivvw"]
+font_size = 32
+
+[node name="LayEgg" type="Node2D" node_paths=PackedStringArray("back_btn", "next_btn", "lay_egg_btn", "display_box", "dialog_box")]
 script = ExtResource("1_x0dls")
+back_btn = NodePath("UI/HBoxContainer/BackBtn")
+next_btn = NodePath("UI/HBoxContainer/NextBtn")
+lay_egg_btn = NodePath("UI/HBoxContainer/LayBtn")
+display_box = NodePath("UI/DisplayBox")
+dialog_box = NodePath("UI/DescContainer/Text")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="TransLayer" type="CanvasLayer" parent="UI"]
+layer = 10
+
+[node name="Transition" type="Sprite2D" parent="UI/TransLayer"]
+position = Vector2(270, 1200)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_moock")
+
+[node name="BG" type="NinePatchRect" parent="UI"]
+offset_right = 1080.0
+offset_bottom = 1350.0
+scale = Vector2(0.5, 0.5)
+mouse_filter = 1
+texture = ExtResource("3_2hary")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+metadata/_edit_use_anchors_ = true
+
+[node name="DisplayBox" type="NinePatchRect" parent="UI"]
+anchors_preset = -1
+anchor_bottom = 0.335044
+offset_left = 472.0
+offset_top = 442.0
+offset_right = 1288.0
+offset_bottom = 958.845
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_2hary")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+metadata/_edit_use_anchors_ = true
+
+[node name="whiteBg" type="ColorRect" parent="UI/DisplayBox"]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 0.313594
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 800.0
+offset_bottom = 494.0
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="shader" type="ColorRect" parent="UI/DisplayBox"]
+material = SubResource("ShaderMaterial_nms0h")
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 0.313594
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 800.0
+offset_bottom = 494.0
+mouse_filter = 2
+color = Color(1, 1, 1, 0.270588)
+metadata/_edit_use_anchors_ = true
+
+[node name="TitleContainer" type="Control" parent="UI"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="TitleBox" type="NinePatchRect" parent="UI/TitleContainer"]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 144.0
+offset_right = 1162.0
+offset_bottom = 270.0
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_2hary")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="UI/TitleContainer/TitleBox"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 698.0
+offset_bottom = 110.0
+color = Color(0, 0, 0, 0.388235)
+metadata/_edit_use_anchors_ = true
+
+[node name="SelectTitle" type="RichTextLabel" parent="UI/TitleContainer"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 95.0
+offset_right = 439.0
+offset_bottom = 135.0
+theme = ExtResource("5_ev2ba")
+bbcode_enabled = true
+text = "[font_size=25][center][wave amp=30 freq=-3]Grow up!"
+fit_content = true
+metadata/_edit_use_anchors_ = true
+
+[node name="DescContainer" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="TextBox" type="NinePatchRect" parent="UI/DescContainer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.725
+anchor_bottom = 5.975
+offset_left = 446.0
+offset_top = 573.0
+offset_right = 1160.0
+offset_bottom = 740.0
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_2hary")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="UI/DescContainer/TextBox"]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 0.501484
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 698.0
+offset_bottom = 151.0
+color = Color(0, 0, 0, 0.388235)
+metadata/_edit_use_anchors_ = true
+
+[node name="Text" type="RichTextLabel" parent="UI/DescContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.375
+anchor_bottom = 0.15
+offset_left = 98.0
+offset_top = 504.0
+offset_right = 439.0
+offset_bottom = 564.0
+theme = ExtResource("5_ev2ba")
+bbcode_enabled = true
+text = "[center]dialog"
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI"]
+offset_left = 98.0
+offset_top = 580.0
+offset_right = 780.0
+offset_bottom = 676.0
+scale = Vector2(0.5, 0.5)
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="BackBtn" type="NinePatchRect" parent="UI/HBoxContainer"]
+custom_minimum_size = Vector2(100, 90)
+layout_mode = 2
+mouse_filter = 0
+texture = ExtResource("3_2hary")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="UI/HBoxContainer/BackBtn"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.16
+anchor_top = 0.166667
+anchor_right = 0.46
+anchor_bottom = 0.385417
+offset_right = 38.0
+offset_bottom = 43.0
+theme = ExtResource("5_ev2ba")
+text = "<<"
+label_settings = SubResource("LabelSettings_y0x3x")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="LayBtn" type="NinePatchRect" parent="UI/HBoxContainer"]
+custom_minimum_size = Vector2(250, 90)
+layout_mode = 2
+mouse_filter = 0
+texture = ExtResource("3_2hary")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="UI/HBoxContainer/LayBtn"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.08
+anchor_bottom = 0.2
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 214.0
+offset_bottom = 56.0
+theme = ExtResource("5_ev2ba")
+text = "Continue"
+label_settings = SubResource("LabelSettings_uivvw")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="NextBtn" type="NinePatchRect" parent="UI/HBoxContainer"]
+custom_minimum_size = Vector2(100, 90)
+layout_mode = 2
+mouse_filter = 0
+texture = ExtResource("3_2hary")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="UI/HBoxContainer/NextBtn"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.16
+anchor_top = 0.166667
+anchor_right = 0.84
+anchor_bottom = 0.833333
+theme = ExtResource("5_ev2ba")
+text = ">>"
+label_settings = SubResource("LabelSettings_y0x3x")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Creature" type="Node2D" parent="UI"]
+script = ExtResource("6_l4300")
+
+[node name="Current" type="AnimatedSprite2D" parent="UI/Creature"]
+scale = Vector2(0.225, 0.225)
+
+[node name="ConfettiLayer" type="CanvasLayer" parent="UI"]
+unique_name_in_owner = true
+layer = 5
+
+[connection signal="gui_input" from="UI/HBoxContainer/BackBtn" to="." method="_on_back_btn_gui_input"]
+[connection signal="gui_input" from="UI/HBoxContainer/LayBtn" to="." method="_on_lay_btn_gui_input"]
+[connection signal="gui_input" from="UI/HBoxContainer/NextBtn" to="." method="_on_next_btn_gui_input"]

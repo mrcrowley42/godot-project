@@ -107,9 +107,9 @@ func _notification(noti):
 	if noti == Globals.NOFITICATION_GROW_TO_ADULT_SCENE and not is_in_transition:
 		set_is_in_trans(true)
 		DataGlobals.save_data()  # important!
+		Globals.general_dict.clear()
 		Globals.general_dict["current_cosmetics"] = %Creature.get_current_cosmetics()
 		Globals.general_dict["loaded_cosmetics"] = %Creature.get_loaded_cosmetics()
-		Globals.general_dict["current_life_stage"] = %Creature.life_stage
 		await Globals.perform_closing_transition(trans_img, ui_overlay.position)
 		Globals.change_to_scene("res://scenes/GameScenes/grow_up.tscn")
 	
@@ -117,9 +117,10 @@ func _notification(noti):
 	if noti == Globals.NOTIFICATION_LAY_EGG_SCENE and not is_in_transition:
 		set_is_in_trans(true)
 		DataGlobals.save_data()
+		Globals.general_dict.clear()
 		Globals.general_dict["current_cosmetics"] = %Creature.get_current_cosmetics()
 		Globals.general_dict["loaded_cosmetics"] = %Creature.get_loaded_cosmetics()
-		Globals.general_dict["current_life_stage"] = %Creature.life_stage
+		Globals.general_dict["creature_name"] = DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_NAME)
 		await Globals.perform_closing_transition(trans_img, ui_overlay.position)
 		Globals.change_to_scene("res://scenes/GameScenes/lay_egg.tscn")
 
