@@ -351,7 +351,10 @@ func grow_up_one_stage():
 
 enum Movement {NOTHING, HAPPY_BOUNCE, CONFUSED_SHAKE}
 
-var amount_dict = {Movement.HAPPY_BOUNCE: 30, Movement.CONFUSED_SHAKE: 15}
+var amount_dict = {
+	Movement.HAPPY_BOUNCE: 30,
+	Movement.CONFUSED_SHAKE: 15
+}
 
 var current_movement: Movement = Movement.NOTHING
 var movement_queue: Movement = Movement.NOTHING

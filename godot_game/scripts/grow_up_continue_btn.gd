@@ -1,10 +1,12 @@
 extends NinePatchRect
 
+var pressed = false
 
 @onready var parent: GrowUpToAdult = find_parent("GrowUp")
 
 func _on_gui_input(event: InputEvent) -> void:
-	if event.is_pressed() and visible:
+	if event.is_pressed() and visible and not pressed:
+		pressed = true
 		Globals.has_creature_just_grown_up = true
 		Globals.perform_closing_transition(
 			parent.trans_img, 

@@ -30,7 +30,7 @@ fill_to = Vector2(0, 1)
 shader = ExtResource("2_wu6tw")
 shader_parameter/color_behind = Color(0.94902, 0, 0, 0)
 shader_parameter/color = Color(0.305882, 0, 0, 0.156863)
-shader_parameter/fade_length = 0.45
+shader_parameter/fade_length = 0.5
 shader_parameter/intensity = 10.0
 
 [sub_resource type="Gradient" id="Gradient_5pief"]
@@ -109,7 +109,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_p3dey")
 theme_override_font_sizes/font_size = 24
-text = "RESTART"
+text = "MAIN MENU"
 script = ExtResource("3_8hq71")
 
 [node name="TitleT" type="RichTextLabel" parent="."]

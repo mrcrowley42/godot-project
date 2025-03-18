@@ -90,7 +90,7 @@ func calc_elapsed_time() -> float:
 ## finilise & save data before closure
 func _notification(noti):
 	## close game
-	if noti == NOTIFICATION_WM_CLOSE_REQUEST or noti == Globals.NOTIFICATION_QUIT_TO_MAIN_MENU:
+	if (noti == NOTIFICATION_WM_CLOSE_REQUEST or noti == Globals.NOTIFICATION_QUIT_TO_MAIN_MENU) and not is_in_transition:
 		print("--- Quit notification recieved, attempting safe close of main ---")
 		minigame_man.finalise_save_data()  # call before saving
 		DataGlobals.save_data()
@@ -110,6 +110,7 @@ func _notification(noti):
 		Globals.general_dict.clear()
 		Globals.general_dict["current_cosmetics"] = %Creature.get_current_cosmetics()
 		Globals.general_dict["loaded_cosmetics"] = %Creature.get_loaded_cosmetics()
+		Globals.general_dict["current_life_stage"] = %Creature.life_stage
 		await Globals.perform_closing_transition(trans_img, ui_overlay.position)
 		Globals.change_to_scene("res://scenes/GameScenes/grow_up.tscn")
 	
