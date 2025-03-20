@@ -1,16 +1,19 @@
-[gd_scene load_steps=11 format=3 uid="uid://dwoemg85w6lnk"]
+[gd_scene load_steps=14 format=3 uid="uid://dwoemg85w6lnk"]
 
 [ext_resource type="Script" path="res://scripts/main_game_scripts/lay_egg.gd" id="1_x0dls"]
+[ext_resource type="Resource" uid="uid://cpt43iwpe5qfg" path="res://resources/egg_list.tres" id="2_7wth7"]
 [ext_resource type="Texture2D" uid="uid://b7u6t01tm12vc" path="res://images/transition_img_long.png" id="2_moock"]
 [ext_resource type="Texture2D" uid="uid://bju4ckn3irgd0" path="res://UI stuff/Green Palette/ui_green_box.png" id="3_2hary"]
 [ext_resource type="Shader" path="res://shaders/voronoi.gdshader" id="4_lj8bu"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="5_ev2ba"]
 [ext_resource type="Script" path="res://scripts/lay_egg_sprite_setup.gd" id="6_l4300"]
 [ext_resource type="Script" path="res://scripts/sfx_man.gd" id="7_ruwse"]
+[ext_resource type="Texture2D" uid="uid://gi4ytib73ibf" path="res://images/egg/egg-green.png" id="8_06ihg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nms0h"]
 shader = ExtResource("4_lj8bu")
-shader_parameter/color = Vector4(0, 0, 0, 0)
+shader_parameter/color = Vector4(0, 0, 0, 1)
+shader_parameter/offset = Vector2(0, 0)
 shader_parameter/pixel_size = 5.0
 shader_parameter/scale = 0.5
 shader_parameter/speed = 0.05
@@ -23,13 +26,23 @@ font_size = 32
 [sub_resource type="LabelSettings" id="LabelSettings_uivvw"]
 font_size = 32
 
-[node name="LayEgg" type="Node2D" node_paths=PackedStringArray("back_btn", "next_btn", "lay_egg_btn", "display_box", "dialog_box")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_c3b31"]
+radius = 30.0
+
+[node name="LayEgg" type="Node2D" node_paths=PackedStringArray("back_btn", "next_btn", "continue_btn", "display_box", "dialog_box", "creature", "creature_sprite", "egg", "egg_sprite", "egg_collision", "shader_area")]
 script = ExtResource("1_x0dls")
 back_btn = NodePath("UI/HBoxContainer/BackBtn")
 next_btn = NodePath("UI/HBoxContainer/NextBtn")
-lay_egg_btn = NodePath("UI/HBoxContainer/LayBtn")
+continue_btn = NodePath("UI/HBoxContainer/ContinueBtn")
 display_box = NodePath("UI/DisplayBox")
 dialog_box = NodePath("UI/DescContainer/Text")
+creature = NodePath("UI/Creature")
+creature_sprite = NodePath("UI/Creature/CurrentCreature")
+egg = NodePath("UI/Egg")
+egg_sprite = NodePath("UI/Egg/CurrentEgg")
+egg_collision = NodePath("UI/Egg/EggArea")
+shader_area = NodePath("UI/DisplayBox/shader")
+all_eggs = ExtResource("2_7wth7")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -40,6 +53,45 @@ layer = 10
 position = Vector2(270, 1200)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_moock")
+
+[node name="Overlay" type="CanvasLayer" parent="UI"]
+layer = 2
+
+[node name="Panel" type="Panel" parent="UI/Overlay"]
+clip_contents = true
+offset_right = 72.0
+offset_bottom = 465.0
+
+[node name="BG" type="NinePatchRect" parent="UI/Overlay/Panel"]
+layout_mode = 1
+anchors_preset = -1
+offset_right = 1080.0
+offset_bottom = 1350.0
+scale = Vector2(0.5, 0.5)
+mouse_filter = 1
+texture = ExtResource("3_2hary")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+metadata/_edit_use_anchors_ = true
+
+[node name="DisplayBox" type="NinePatchRect" parent="UI/Overlay/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 0.486355
+offset_left = 472.0
+offset_top = 442.0
+offset_right = 1288.0
+offset_bottom = 958.845
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_2hary")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+metadata/_edit_use_anchors_ = true
 
 [node name="BG" type="NinePatchRect" parent="UI"]
 offset_right = 1080.0
@@ -224,7 +276,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="LayBtn" type="NinePatchRect" parent="UI/HBoxContainer"]
+[node name="ContinueBtn" type="NinePatchRect" parent="UI/HBoxContainer"]
 custom_minimum_size = Vector2(250, 90)
 layout_mode = 2
 mouse_filter = 0
@@ -235,7 +287,7 @@ patch_margin_right = 16
 patch_margin_bottom = 16
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="UI/HBoxContainer/LayBtn"]
+[node name="Label" type="Label" parent="UI/HBoxContainer/ContinueBtn"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.08
@@ -279,8 +331,23 @@ metadata/_edit_use_anchors_ = true
 [node name="Creature" type="Node2D" parent="UI"]
 script = ExtResource("6_l4300")
 
-[node name="Current" type="AnimatedSprite2D" parent="UI/Creature"]
+[node name="CurrentCreature" type="AnimatedSprite2D" parent="UI/Creature"]
 scale = Vector2(0.225, 0.225)
+
+[node name="Egg" type="Node2D" parent="UI"]
+position = Vector2(-250, 261)
+scale = Vector2(1.6, 1.6)
+
+[node name="CurrentEgg" type="Sprite2D" parent="UI/Egg"]
+modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+texture = ExtResource("8_06ihg")
+
+[node name="EggArea" type="Area2D" parent="UI/Egg"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Egg/EggArea"]
+scale = Vector2(1, 1)
+shape = SubResource("CircleShape2D_c3b31")
 
 [node name="ConfettiLayer" type="CanvasLayer" parent="UI"]
 unique_name_in_owner = true
@@ -293,5 +360,8 @@ bus = &"SFX"
 script = ExtResource("7_ruwse")
 
 [connection signal="gui_input" from="UI/HBoxContainer/BackBtn" to="." method="_on_back_btn_gui_input"]
-[connection signal="gui_input" from="UI/HBoxContainer/LayBtn" to="." method="_on_lay_btn_gui_input"]
+[connection signal="gui_input" from="UI/HBoxContainer/ContinueBtn" to="." method="_on_continue_btn_gui_input"]
 [connection signal="gui_input" from="UI/HBoxContainer/NextBtn" to="." method="_on_next_btn_gui_input"]
+[connection signal="input_event" from="UI/Egg/EggArea" to="." method="_on_egg_area_input_event"]
+[connection signal="mouse_entered" from="UI/Egg/EggArea" to="." method="_on_egg_area_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Egg/EggArea" to="." method="_on_egg_area_mouse_exited"]

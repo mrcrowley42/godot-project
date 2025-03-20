@@ -7,6 +7,7 @@ original vorinoi code: https://godotshaders.com/shader/voronoi-%e7%bb%86%e8%83%9
 shader_type canvas_item;
 
 uniform vec4 color = vec4(0.0,0.0,0.0,1.0);
+uniform vec2 offset = vec2(0.0,0.0);
 uniform float pixel_size : hint_range(1., 20., 1.) = 5;
 uniform float scale : hint_range(0.01, 5., 0.01) = .5;
 uniform float speed : hint_range(0.01, 5.0, 0.01) = 0.05;
@@ -87,6 +88,6 @@ void fragment() {
 	remainder *= vec2(pixel_size);  // revert pixel space
 	remainder /= screenDim;  // revert screen space
 
-	COLOR = voronoi(SCREEN_PIXEL_SIZE, SCREEN_UV - remainder);
+	COLOR = voronoi(SCREEN_PIXEL_SIZE, SCREEN_UV - remainder + offset);
 	COLOR.a = opacity;
 }

@@ -30,7 +30,7 @@ func _on_hidden() -> void:
 
 
 func creature_selected(creature_data):
-	load_btn.disabled = creature_data['status'] == "Dead"
+	load_btn.disabled = creature_data['status'] == "Dead" or creature_data['status'] == "Independent"
 
 
 func add_saves() -> void:

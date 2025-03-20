@@ -13,6 +13,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w2jld"]
 shader = ExtResource("4_ebynq")
 shader_parameter/color = Vector4(0.2, 0.3, 1, 1)
+shader_parameter/offset = Vector2(0, 0)
 shader_parameter/pixel_size = 5.0
 shader_parameter/scale = 0.5
 shader_parameter/speed = 0.05

@@ -2,6 +2,8 @@ extends Button
 
 signal selected(creature_data)
 
+@export var independent_star: TextureRect
+
 @onready var name_label = find_child("NameLabel")
 @onready var date_label = find_child("DateLabel")
 @onready var status_label = find_child("StatusLabel")
@@ -27,9 +29,13 @@ func _ready() -> void:
 			creature_icon.icon = ImageTexture.create_from_image(icon_img)
 		death_overlay.visible = false
 		
+		independent_star.hide()
 		if save_file.status == "Dead":
 			death_overlay.visible = true
 			modulate = Color(0.949, 0.22, 0.082)
+		if save_file.status == "Independent":
+			independent_star.show()
+			modulate = Color(1, 0.819, 0.635)
 		#category_icon.tooltip_string = "Category: %s" % sound_node.sound_category.category_name
 		#creature_icon.icon = save_file.icon
 

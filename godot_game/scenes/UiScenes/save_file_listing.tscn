@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://qx7ey4e0sik6"]
+[gd_scene load_steps=13 format=3 uid="uid://qx7ey4e0sik6"]
 
 [ext_resource type="Script" path="res://scenes/UiScenes/save_file_listing.gd" id="1_0q2oy"]
 [ext_resource type="Theme" uid="uid://dl1wes8p6lqlb" path="res://themes/invisible.tres" id="2_h15lg"]
+[ext_resource type="Texture2D" uid="uid://rgai51krxd6w" path="res://icons/star-fill.svg" id="3_sgtfm"]
 [ext_resource type="Texture2D" uid="uid://tvwjgl76m8fx" path="res://images/unknown.png" id="4_uxg2i"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="5_bh6hp"]
 [ext_resource type="Texture2D" uid="uid://bcvvax6soqnmq" path="res://icons/skull-solid.svg" id="5_eynn3"]
@@ -57,7 +58,7 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[node name="PanelContainer" type="Button"]
+[node name="PanelContainer" type="Button" node_paths=PackedStringArray("independent_star")]
 custom_minimum_size = Vector2(380, 138)
 anchors_preset = 5
 anchor_left = 0.5
@@ -74,6 +75,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_8mm5b")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_3suau")
 theme_override_styles/normal = SubResource("StyleBoxFlat_27aj0")
 script = ExtResource("1_0q2oy")
+independent_star = NodePath("MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/TextureRect")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -102,7 +104,16 @@ theme = ExtResource("5_bh6hp")
 theme_override_font_sizes/font_size = 20
 text = "Creature Name"
 
-[node name="StatusLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_sgtfm")
+expand_mode = 2
+
+[node name="StatusLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("5_bh6hp")
 theme_override_font_sizes/font_size = 15
@@ -131,6 +142,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="DeathOverlay" type="Control" parent="MarginContainer/HBoxContainer/Node2D"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0

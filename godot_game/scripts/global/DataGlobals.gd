@@ -292,7 +292,7 @@ func save_data(creature_id_override: int = -1):
 	# save every creature data & update current creature node data
 	for creature_id in _every_creature_metadata.keys():
 		var creature_data: Array = [_every_creature_metadata[creature_id]]  # creature metadata first
-		var creature_node_data: Array = [_every_creature_node_data[creature_id]]  # must wrap in list
+		var creature_node_data: Array = _every_creature_node_data[creature_id]
 		
 		# update only the creature to save
 		if int(creature_id) == creature_id_to_save:
@@ -356,6 +356,8 @@ func save_only_creature_metadata(creature_id_override: int = -1):
 
 		if creature_metadata[CREATURE_ID] == creature_id_to_save:
 			var new_metadata = generate_creature_metadata_to_save(creature_id_to_save)
+			if is_instance_of(parsed_line[0], TYPE_ARRAY):  # idk why but it puts itself inside another array sometimes
+				parsed_line = parsed_line[0]
 			line = [new_metadata, parsed_line]
 			_every_creature_metadata[creature_id_to_save] = new_metadata
 		all_lines.append(line)

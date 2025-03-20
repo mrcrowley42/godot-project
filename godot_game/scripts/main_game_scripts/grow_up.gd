@@ -18,7 +18,7 @@ func _ready() -> void:
 
 
 func start_grow_up():
-	Globals.tween(shader_area.material, "shader_parameter/color", Vector4(-1, -1, .6, 1), .0, 3)
+	Globals.tween(shader_area.material, "shader_parameter/color", Vector4(-1, -1, .8, 1), .0, 3)
 	creature_container.do_start_tween()
 
 
