@@ -346,7 +346,6 @@ texture = ExtResource("8_06ihg")
 [node name="EggArea" type="Area2D" parent="UI/Egg"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Egg/EggArea"]
-scale = Vector2(1, 1)
 shape = SubResource("CircleShape2D_c3b31")
 
 [node name="ConfettiLayer" type="CanvasLayer" parent="UI"]

@@ -37,6 +37,7 @@ const CREATURE_EGG_UID = "creature_egg_uid"
 const CREATURE_BABY_UID = "creature_baby_uid"
 const CREATURE_TYPE_UID = "creature_type_uid"
 const CREATURE_NAME = "creature_name"
+const CREATURE_PARENT_ID = "creature_parent_id"
 const CREATURE_LIFE_STAGE = "creature_life_stage"
 const CREATURE_INITIAL_LIFE_STAGE = "creature_initial_life_stage"
 const CREATURE_HATCH_TIME = "creature_hatch_time"
@@ -151,6 +152,7 @@ func get_default_creature_metadata() -> Dictionary:
 		CREATURE_BABY_UID: "",
 		CREATURE_TYPE_UID: "",
 		CREATURE_NAME: "",
+		CREATURE_PARENT_ID: "-1",
 		CREATURE_LIFE_STAGE: 0,
 		CREATURE_INITIAL_LIFE_STAGE: 0,
 		CREATURE_HATCH_TIME: -1,
@@ -161,6 +163,9 @@ func get_default_creature_metadata() -> Dictionary:
 
 func get_creature_id(creature_id_override: int = -1) -> int:
 	return creature_id_override if creature_id_override != -1 else int(get_global_metadata_value(CURRENT_CREATURE))
+
+func does_creature_exist(creature_id: int) -> bool:
+	return creature_id in _every_creature_metadata.keys()
 
 func get_all_creature_ids() -> Array:
 	return _every_creature_metadata.keys()
@@ -356,7 +361,7 @@ func save_only_creature_metadata(creature_id_override: int = -1):
 
 		if creature_metadata[CREATURE_ID] == creature_id_to_save:
 			var new_metadata = generate_creature_metadata_to_save(creature_id_to_save)
-			if is_instance_of(parsed_line[0], TYPE_ARRAY):  # idk why but it puts itself inside another array sometimes
+			if len(parsed_line) > 0 and is_instance_of(parsed_line[0], TYPE_ARRAY):  # idk why but it puts itself inside another array sometimes
 				parsed_line = parsed_line[0]
 			line = [new_metadata, parsed_line]
 			_every_creature_metadata[creature_id_to_save] = new_metadata
@@ -365,6 +370,27 @@ func save_only_creature_metadata(creature_id_override: int = -1):
 	save_file = FileAccess.open(get_save_data_file(), FileAccess.WRITE)
 	save_file.store_string("\n".join(all_lines))
 	print("Creature '%s' metadata saved (did not update node data)" % creature_id_to_save)
+
+func create_new_egg_creature(egg: EggEntry, parent_id):
+	var egg_type_uid = Helpers.uid_str(egg)
+	var initial_creature_name = egg.name
+	var creature_id: String = get_global_metadata_value(ID_INCREMENTAL)
+	add_to_metadata_value(true, ID_INCREMENTAL, 1)
+	
+	var new_creature_metadata = generate_creature_metadata_to_save(int(creature_id))
+	new_creature_metadata[CREATURE_EGG_UID] = egg_type_uid
+	new_creature_metadata[CREATURE_PARENT_ID] = str(parent_id)
+	new_creature_metadata[CREATURE_NAME] = initial_creature_name
+	var init_life_stage = 0
+	new_creature_metadata[CREATURE_LIFE_STAGE] = init_life_stage
+	new_creature_metadata[CREATURE_INITIAL_LIFE_STAGE] = init_life_stage
+	
+	DataGlobals.set_metadata_value(true, DataGlobals.CURRENT_CREATURE, creature_id)
+	
+	_every_creature_metadata[int(creature_id)] = new_creature_metadata
+	_every_creature_node_data[int(creature_id)] = []
+	print("new egg creature '%s' created (type uid %s), did not save." % [creature_id, egg_type_uid])
+	return int(creature_id)
 
 ## create a new creature in memory, does not save to file, call save_data yourself (returns its new id)
 func create_new_creature(egg: EggEntry, baby_type: CreatureBaby) -> int:
@@ -388,8 +414,7 @@ func create_new_creature(egg: EggEntry, baby_type: CreatureBaby) -> int:
 	new_creature_metadata[CREATURE_TYPE_UID] = choices[final_choice]
 	new_creature_metadata[CREATURE_HATCH_TIME] = Time.get_unix_time_from_system()
 	new_creature_metadata[CREATURE_NAME] = initial_creature_name
-	## TODO: use `else 0` if creature is hatching from an egg laid by a now independant creature
-	var init_life_stage = 1 if get_num_of_creatures() == 0 else 1  # skip egg stage for first ever creature
+	var init_life_stage = 1  # skip egg stage for first ever creature
 	new_creature_metadata[CREATURE_LIFE_STAGE] = init_life_stage
 	new_creature_metadata[CREATURE_INITIAL_LIFE_STAGE] = init_life_stage
 	
@@ -397,7 +422,7 @@ func create_new_creature(egg: EggEntry, baby_type: CreatureBaby) -> int:
 	
 	_every_creature_metadata[int(creature_id)] = new_creature_metadata
 	_every_creature_node_data[int(creature_id)] = []
-	print("new creature '%s' created (baby uid %s, type uid %s), did not save." % [creature_id, baby_type_uid, -1])
+	print("new creature '%s' created (baby uid %s, type uid %s), did not save." % [creature_id, baby_type_uid, choices[final_choice]])
 	return int(creature_id)
 
 func save_settings_data():
@@ -648,6 +673,13 @@ func is_every_creature_dead() -> bool:
 		if is_dead:
 			is_dead = get_creature_metadata_value(CREATURE_IS_DEAD, creature_id)
 	return is_dead
+
+func add_pending_egg(egg: EggEntry, parent_id):
+	var data = {
+		'egg_uid': Helpers.uid_str(egg),
+		'parent_id': parent_id
+	}
+	append_to_metadata_value(true, DataGlobals.PENDING_EGGS, data)
 
 func _process(_delta: float) -> void:
 	# save metadata here so the file only needs to be written to once in a frame

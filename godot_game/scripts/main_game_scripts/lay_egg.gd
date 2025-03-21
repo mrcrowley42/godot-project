@@ -74,10 +74,10 @@ func _ready() -> void:
 	## pick from pool of eggs that havent been hatched before
 	var hatched_eggs = DataGlobals.get_global_metadata_value(DataGlobals.HATCHED_EGGS)
 	var egg_choices = all_eggs.items
-	for egg in egg_choices:
-		var uid = Helpers.uid_str(egg)
+	for egg_c in egg_choices:
+		var uid = Helpers.uid_str(egg_c)
 		if uid in hatched_eggs:
-			egg_choices.erase(egg)
+			egg_choices.erase(egg_c)
 	if len(egg_choices) == 0:  # all eggs have been hatched true random
 		egg_choices = all_eggs.items
 	chosen_egg = egg_choices.pick_random()
@@ -139,7 +139,6 @@ func play_select_egg_animation():
 	egg_og_pos = egg_sprite.position
 	egg_bobbing = true
 	
-	await get_tree().create_timer(1.).timeout
 	dialog_box.text = '[center]%s left you a %s as a gift!' % [creature_name, chosen_egg.name]
 	continue_btn.modulate = DEFAULT
 	continue_disabled = false
@@ -172,7 +171,7 @@ func _on_continue_btn_gui_input(event: InputEvent) -> void:
 			play_find_egg_animation()
 			
 			DataGlobals.set_metadata_value(false, DataGlobals.CREATURE_IS_INDEPENDENT, true)
-			DataGlobals.append_to_metadata_value(true, DataGlobals.PENDING_EGGS, Helpers.uid_str(chosen_egg))
+			DataGlobals.add_pending_egg(chosen_egg, DataGlobals.get_global_metadata_value(DataGlobals.CURRENT_CREATURE))
 		else:
 			DataGlobals.set_metadata_value(true, DataGlobals.CURRENT_CREATURE, "-1")
 			await Globals.perform_closing_transition(trans_img, mid_pos)
@@ -230,7 +229,7 @@ func _on_egg_area_mouse_exited() -> void:
 		Globals.tween(self, "egg_scale_add", Vector2(0., 0.), 0., .5)
 
 
-func _on_egg_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func _on_egg_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_pressed() and not egg_disabled:
 		egg_pressed = true
 		egg_disabled = true

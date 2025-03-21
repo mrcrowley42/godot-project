@@ -55,6 +55,8 @@ func _ready() -> void:
 
 func _notification(noti: int) -> void:
 	if noti == Globals.NOTIFICATION_CREATURE_IS_LOADED:
+		if not creature.creature:
+			return
 		notification_bubble.position = creature.creature.notification_position
 		pain_threshold = warning_threshold / 2 * creature.max_hp
 		water_threshold = warning_threshold * creature.max_water

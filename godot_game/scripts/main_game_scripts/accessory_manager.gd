@@ -45,12 +45,12 @@ func set_ready():
 	ready_to_place_cosmetics = true
 
 func place_all_cosmetics():
+	if not creature.creature:
+		return
+	
 	# Build dictionary for each cosmetic items appropriate position for the current creature
 	for item in find_parent("Creature").creature.cosmetic_positions:
 		position_dict[item.item] = item
-		
-	#for item in find_parent("Creature").creature.cosmetic_positions:
-		
 	
 	# place cosmetics on creature
 	for cosmetic in current_cosmetics:

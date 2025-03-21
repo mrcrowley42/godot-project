@@ -1,0 +1,135 @@
+[gd_scene load_steps=12 format=3 uid="uid://laykoy6ei4i6"]
+
+[ext_resource type="Script" path="res://scenes/UiScenes/pending_egg_listing.gd" id="1_b86qp"]
+[ext_resource type="Texture2D" uid="uid://gi4ytib73ibf" path="res://images/egg/egg-green.png" id="2_3ovy5"]
+[ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="3_emtow"]
+[ext_resource type="Theme" uid="uid://dl1wes8p6lqlb" path="res://themes/invisible.tres" id="3_l5dt2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t7m0v"]
+bg_color = Color(0, 0, 0, 0.501961)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ihsfb"]
+bg_color = Color(0, 0, 0, 0.501961)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_062qh"]
+bg_color = Color(0, 0, 0, 0.501961)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a5eu6"]
+bg_color = Color(0, 0, 0, 0.658824)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yy42l"]
+bg_color = Color(0, 0, 0, 0.501961)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_px5el"]
+bg_color = Color(0, 0, 0, 0.501961)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_06hmm"]
+bg_color = Color(1, 1, 1, 0.0980392)
+border_color = Color(1, 1, 1, 0.290196)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[node name="PendingEggListing" type="Button" node_paths=PackedStringArray("egg_name_label", "parent_label", "icon_btn")]
+custom_minimum_size = Vector2(380, 138)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -190.0
+offset_right = 190.0
+offset_bottom = 138.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+theme_override_styles/focus = SubResource("StyleBoxFlat_t7m0v")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_ihsfb")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_062qh")
+theme_override_styles/hover = SubResource("StyleBoxFlat_a5eu6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yy42l")
+theme_override_styles/normal = SubResource("StyleBoxFlat_px5el")
+script = ExtResource("1_b86qp")
+egg_name_label = NodePath("MarginContainer/HBoxContainer/VBoxContainer/NameLabel")
+parent_label = NodePath("MarginContainer/HBoxContainer/VBoxContainer/StatusLabel")
+icon_btn = NodePath("MarginContainer/HBoxContainer/Node2D/CreatureIcon")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_right = 380.0
+offset_bottom = 137.0
+size_flags_vertical = 0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+size_flags_stretch_ratio = 3.0
+theme_override_constants/separation = 8
+
+[node name="NameLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_emtow")
+theme_override_font_sizes/font_size = 20
+text = "Egg Name"
+
+[node name="StatusLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+modulate = Color(0.762404, 0.762404, 0.762404, 1)
+layout_mode = 2
+theme = ExtResource("3_emtow")
+theme_override_font_sizes/font_size = 14
+text = "parent"
+
+[node name="Node2D" type="Node2D" parent="MarginContainer/HBoxContainer"]
+
+[node name="CreatureIcon" type="Button" parent="MarginContainer/HBoxContainer/Node2D"]
+texture_filter = 1
+custom_minimum_size = Vector2(100, 100)
+offset_left = 252.0
+offset_right = 352.0
+offset_bottom = 100.0
+mouse_filter = 2
+theme = ExtResource("3_l5dt2")
+theme_override_styles/normal = SubResource("StyleBoxFlat_06hmm")
+icon = ExtResource("2_3ovy5")
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]

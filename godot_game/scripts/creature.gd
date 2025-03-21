@@ -93,8 +93,9 @@ func setup_creature():
 	var baby_uid = int(DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_BABY_UID))
 	var creature_uid = int(DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_TYPE_UID))
 	egg_type = load(ResourceUID.get_id_path(egg_uid))
-	baby_type = load(ResourceUID.get_id_path(baby_uid))
-	creature_type = load(ResourceUID.get_id_path(creature_uid))
+	if life_stage > 0:
+		baby_type = load(ResourceUID.get_id_path(baby_uid))
+		creature_type = load(ResourceUID.get_id_path(creature_uid))
 	
 	# should grow up?
 	var has_grown_up = Globals.has_creature_just_grown_up
@@ -102,8 +103,11 @@ func setup_creature():
 		Globals.has_creature_just_grown_up = false
 		grow_up_one_stage()
 	
-	creature = [null, baby_type.baby_part, creature_type.child, creature_type.adult][life_stage]
-	setup_default_values(has_grown_up)
+	if life_stage == 0:
+		creature = null
+	else:
+		creature = [null, baby_type.baby_part, creature_type.child, creature_type.adult][life_stage]
+		setup_default_values(has_grown_up)
 	setup_main_sprite()
 	Globals.send_notification(Globals.NOTIFICATION_CREATURE_IS_LOADED)
 	apply_dmg_tint()

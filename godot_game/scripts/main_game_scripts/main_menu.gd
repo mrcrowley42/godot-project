@@ -6,6 +6,7 @@ class_name MainMenu extends ScriptNode
 var egg_scene_instance: EggOpening = null
 
 @onready var load_menu = find_child("LoadMenu")
+@onready var egg_menu = find_child("PendingEggMenu")
 @onready var settings_menu = find_child("SettingsMenu")
 @onready var bg_gradient: TextureRect = find_child("BgGradient")
 @onready var trans_img: Sprite2D = find_child("Transition")
@@ -100,7 +101,6 @@ func _on_continue_btn_button_down() -> void:
 		await do_closing_trans()
 		Globals.change_to_scene("res://scenes/GameScenes/main.tscn")
 
-
 func _on_new_game_btn_button_down() -> void:
 	btn_sfx.play()
 	if not is_in_transition:
@@ -132,6 +132,11 @@ func _on_load_btn_button_down() -> void:
 		load_menu.show()
 
 
+func _on_hatch_egg_btn_button_down() -> void:
+	btn_sfx.play()
+	if not is_in_transition:
+		egg_menu.show()
+
 func _on_load_save_btn_button_down() -> void:
 	btn_sfx.play()
 	if load_menu.current_save_id != null:
@@ -152,7 +157,6 @@ func _on_confirm_wipe_button_down() -> void:
 	# keep metadata
 	var metadata = DataGlobals.get_global_metadata_dc()
 	metadata[DataGlobals.CURRENT_CREATURE] = "-1"
-	metadata[DataGlobals.ID_INCREMENTAL] = "0"
 	metadata[DataGlobals.PENDING_EGGS] = []
 	
 	var d = DirAccess.open(Globals.SAVE_LOCATION_PREFIX + "://")

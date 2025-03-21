@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://ig0eoqdfq5nr"]
+[gd_scene load_steps=36 format=3 uid="uid://ig0eoqdfq5nr"]
 
 [ext_resource type="Script" path="res://scripts/main_game_scripts/main_menu.gd" id="1_lpoqi"]
 [ext_resource type="Shader" path="res://shaders/pattern_lines.gdshader" id="2_f1u7v"]
@@ -23,6 +23,7 @@
 [ext_resource type="Script" path="res://scripts/mute_button.gd" id="12_t0a7x"]
 [ext_resource type="AudioStream" uid="uid://bc4fnsjag56a3" path="res://music/Moa's Song - Aether OST (Emile van Krieken).mp3" id="12_xt2xn"]
 [ext_resource type="PackedScene" uid="uid://cbn0dv1k0onpb" path="res://scenes/UiScenes/vol_slider.tscn" id="13_4qvf0"]
+[ext_resource type="Script" path="res://scripts/pending_egg_menu.gd" id="15_8mu5v"]
 [ext_resource type="Theme" uid="uid://c6pbhcyqdefqk" path="res://themes/monospace_font.tres" id="15_qcaiy"]
 [ext_resource type="Theme" uid="uid://bsd1dkhc13v47" path="res://themes/plain.tres" id="22_l4scn"]
 [ext_resource type="AudioStream" uid="uid://dd72nxiptfej6" path="res://music/Clouds - Aether OST (Emile van Krieken).mp3" id="26_5wjrk"]
@@ -292,6 +293,7 @@ layout_mode = 2
 text = "Quit"
 
 [node name="LoadMenu" type="MarginContainer" parent="." node_paths=PackedStringArray("heading", "main_script", "item_container", "load_btn")]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -372,6 +374,87 @@ theme = ExtResource("4_22rev")
 theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
 theme_override_font_sizes/font_size = 18
 text = "Load"
+
+[node name="PendingEggMenu" type="MarginContainer" parent="." node_paths=PackedStringArray("main_script", "select_btn", "item_container")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 50.0
+offset_top = 210.0
+offset_right = 490.0
+offset_bottom = 635.0
+grow_horizontal = 2
+script = ExtResource("15_8mu5v")
+main_script = NodePath("..")
+select_btn = NodePath("SaveMenuBtns/LoadBtn")
+item_container = NodePath("MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/EggList")
+
+[node name="Panel" type="Panel" parent="PendingEggMenu"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_l5ron")
+
+[node name="MarginContainer" type="MarginContainer" parent="PendingEggMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PendingEggMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="PendingEggMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("10_46g4q")
+text = "Pending Eggs"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PendingEggMenu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(386, 290)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PendingEggMenu/MarginContainer/VBoxContainer/ScrollContainer"]
+custom_minimum_size = Vector2(378, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 24
+
+[node name="EggList" type="VBoxContainer" parent="PendingEggMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="SaveMenuBtns" type="Node2D" parent="PendingEggMenu"]
+position = Vector2(-50, -130)
+
+[node name="Back" type="Button" parent="PendingEggMenu/SaveMenuBtns"]
+texture_filter = 5
+custom_minimum_size = Vector2(100, 40)
+offset_left = 73.0
+offset_top = 502.0
+offset_right = 173.0
+offset_bottom = 542.0
+scale = Vector2(0.75, 0.75)
+theme = ExtResource("4_22rev")
+theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
+theme_override_font_sizes/font_size = 18
+text = "Back"
+
+[node name="LoadBtn" type="Button" parent="PendingEggMenu/SaveMenuBtns"]
+texture_filter = 5
+custom_minimum_size = Vector2(100, 40)
+offset_left = 385.0
+offset_top = 502.0
+offset_right = 485.0
+offset_bottom = 542.0
+scale = Vector2(0.75, 0.75)
+theme = ExtResource("4_22rev")
+theme_override_colors/font_hover_color = Color(1, 0.533612, 0.468613, 1)
+theme_override_font_sizes/font_size = 18
+text = "Select"
 
 [node name="SettingsMenu" type="MarginContainer" parent="."]
 visible = false
@@ -575,7 +658,7 @@ theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_outline_size = 25
 theme_override_fonts/normal_font = ExtResource("8_1gx8s")
 bbcode_enabled = true
-text = "[font_size=100px][center][wave amp=50.0 freq=6.0 connected=1][rainbow freq=0.7 sat=0.7 val=0.96]YIPPEE[/rainbow][/wave][/center][/font_size]"
+text = "[font_size=100px][center][wave amp=50.0 freq=-6.0 connected=1][rainbow freq=0.7 sat=0.7 val=0.96]YIPPEE[/rainbow][/wave][/center][/font_size]"
 
 [node name="ConfirmWipeMenu" type="ColorRect" parent="."]
 visible = false
@@ -720,14 +803,17 @@ unique_name_in_owner = true
 stream = ExtResource("27_ksr05")
 bus = &"Music"
 
+[connection signal="button_down" from="MenuList/MarginContainer/VBoxContainer/HatchEggBtn" to="." method="_on_hatch_egg_btn_button_down"]
 [connection signal="button_down" from="MenuList/MarginContainer/VBoxContainer/NewGameBtn" to="." method="_on_new_game_btn_button_down"]
 [connection signal="button_down" from="MenuList/MarginContainer/VBoxContainer/ContinueBtn" to="." method="_on_continue_btn_button_down"]
 [connection signal="button_down" from="MenuList/MarginContainer/VBoxContainer/LoadBtn" to="." method="_on_load_btn_button_down"]
 [connection signal="button_down" from="MenuList/MarginContainer/VBoxContainer/SettingsBtn" to="." method="_on_settings_btn_button_down"]
 [connection signal="button_down" from="MenuList/MarginContainer/VBoxContainer/QuitBtn" to="." method="_on_quit_btn_button_down"]
-[connection signal="hidden" from="LoadMenu" to="LoadMenu" method="_on_hidden"]
 [connection signal="button_down" from="LoadMenu/SaveMenuBtns/Back" to="LoadMenu" method="_on_back_button_down"]
 [connection signal="button_down" from="LoadMenu/SaveMenuBtns/LoadBtn" to="." method="_on_load_save_btn_button_down"]
+[connection signal="hidden" from="PendingEggMenu" to="PendingEggMenu" method="_on_hidden"]
+[connection signal="button_down" from="PendingEggMenu/SaveMenuBtns/Back" to="PendingEggMenu" method="_on_back_button_down"]
+[connection signal="button_down" from="PendingEggMenu/SaveMenuBtns/LoadBtn" to="PendingEggMenu" method="_on_load_btn_button_down"]
 [connection signal="hidden" from="SettingsMenu" to="SettingsMenu" method="_on_hidden"]
 [connection signal="button_down" from="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer/MasterMuted" to="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer/MasterMuted" method="_on_button_down"]
 [connection signal="button_down" from="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer/MusicMuted" to="SettingsMenu/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/SettingList/AudioContainer/MusicMuted" method="_on_button_down"]
