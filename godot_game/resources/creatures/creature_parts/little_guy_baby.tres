@@ -9,21 +9,21 @@
 
 [sub_resource type="Resource" id="Resource_unbhm"]
 script = ExtResource("1_0jq5h")
-position = Vector2(0, 0)
+position = Vector2(-2, 4)
 item = ExtResource("2_ylv4p")
-scale = 1.0
+scale = 0.5
 
 [sub_resource type="Resource" id="Resource_je8j7"]
 script = ExtResource("1_0jq5h")
-position = Vector2(0, 0)
+position = Vector2(-10, -60)
 item = ExtResource("3_61v8e")
 scale = 1.0
 
 [sub_resource type="Resource" id="Resource_bskkc"]
 script = ExtResource("1_0jq5h")
-position = Vector2(0, 0)
+position = Vector2(-4, -6)
 item = ExtResource("4_fqpro")
-scale = 1.0
+scale = 0.5
 
 [resource]
 script = ExtResource("2_73a0t")
