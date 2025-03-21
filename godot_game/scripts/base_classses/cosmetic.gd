@@ -1,7 +1,7 @@
 extends Resource
 class_name CosmeticItem
 
-enum Cosmetic_Category {HAT, GLASSES}
+enum Cosmetic_Category {HAT, GLASSES, NOSE}
 
 ## A custom resource to store the information about an unlockable cosmetic.
 @export var name: String

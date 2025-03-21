@@ -1,0 +1,22 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://cckhpmri70a8b"]
+
+[ext_resource type="Texture2D" uid="uid://bsw0mfbgmdaa5" path="res://images/cosmetics/nose-0.png" id="1_q3nm2"]
+[ext_resource type="Texture2D" uid="uid://dkamrfykm06y5" path="res://images/cosmetics/nose-1.png" id="2_t0oif"]
+[ext_resource type="Texture2D" uid="uid://dqa4q33o50tbj" path="res://images/cosmetics/nose-2.png" id="3_3e8fk"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_q3nm2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_t0oif")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_3e8fk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
