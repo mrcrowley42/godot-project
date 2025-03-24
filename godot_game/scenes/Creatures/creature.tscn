@@ -124,6 +124,7 @@ autoplay = "default"
 frame_progress = 0.770958
 
 [node name="ReferenceNose" type="AnimatedSprite2D" parent="SubViewportContainer/SubViewport/Sprites/AccessoryManager"]
+visible = false
 position = Vector2(-10, -20)
 scale = Vector2(0.225, 0.225)
 sprite_frames = ExtResource("21_y1atj")
