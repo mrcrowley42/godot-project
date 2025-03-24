@@ -12,6 +12,7 @@ signal minigame_closed
 @onready var clippy_area = %ClippyArea
 @onready var act_menu = %ActivityMenu
 @onready var status_manager = %StatusManager
+@onready var creature: Creature = %Creature
 @onready var ambience_man = find_parent("Game").find_child("AmbienceManager")
 
 @export var minigame_layer: CanvasLayer
@@ -81,10 +82,12 @@ func unload_minigame(do_transition=false, game_instance=null) -> void:
 	status_manager.time_multiplier = current_time_scale
 	ambience_man.fade_in()
 	%ActButton.disabled = false
-	%FoodButton.disabled = false
 	%ActButton.modulate.a = 1.
-	%FoodButton.modulate.a = 1.
 	%GrowUpBtn.modulate.a = 1.
+	
+	if creature.life_stage != Creature.LifeStage.EGG:
+		%FoodButton.disabled = false
+		%FoodButton.modulate.a = 1.
 	can_interact = true
 	minigame_closed.emit()
 

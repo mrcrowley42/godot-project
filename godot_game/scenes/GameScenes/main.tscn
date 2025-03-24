@@ -667,7 +667,6 @@ layer = 5
 layer = -1
 
 [node name="FoodMenu" type="PanelContainer" parent="UI" node_paths=PackedStringArray("nav_arrows", "food_menu_open_button", "food_screens")]
-visible = false
 custom_minimum_size = Vector2(400, 400)
 anchors_preset = 4
 anchor_top = 0.5
@@ -976,9 +975,10 @@ texture_normal = ExtResource("30_kovtb")
 script = ExtResource("31_1bhch")
 metadata/_edit_use_anchors_ = true
 
-[node name="OptionsMenu" type="PanelContainer" parent="UI"]
+[node name="OptionsMenu" type="PanelContainer" parent="UI" node_paths=PackedStringArray("cosmenits_btn")]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -992,6 +992,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_kxv3i")
 script = ExtResource("32_wbwq3")
+cosmenits_btn = NodePath("MainOptMenu/VBoxContainer/AppearanceBtn")
 metadata/_edit_lock_ = true
 
 [node name="MainOptMenu" type="MarginContainer" parent="UI/OptionsMenu"]

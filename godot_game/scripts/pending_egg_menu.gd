@@ -34,7 +34,7 @@ func _on_load_btn_button_down() -> void:
 	DataGlobals.set_metadata_value(true, DataGlobals.CURRENT_CREATURE, str(id))
 	btn_sfx.play()
 	DataGlobals.save_data()
-	#main_script.go_to_main_game()
+	main_script.go_to_main_game()
 
 func egg_selected(index):
 	select_btn.disabled = false

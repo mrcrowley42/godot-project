@@ -1,5 +1,7 @@
 class_name ConsumablesManager extends ScriptNode
 
+const DISABLED_VISIBILITY = .4
+
 @export var creature: Creature
 @export var food_menu: FoodMenu
 
@@ -43,3 +45,9 @@ func _notification(what: int) -> void:
 		total_colsumables_count = len(food_items.items) + len(drink_items.items)
 		for uid in consumables_tried:
 			food_menu.update_item_btn(uid, creature)
+	
+	## disable food menu btn
+	if what == Globals.NOTIFICATION_CREATURE_IS_LOADED:
+		if creature.life_stage == Creature.LifeStage.EGG:
+			%FoodButton.disabled = true
+			%FoodButton.modulate.a = DISABLED_VISIBILITY

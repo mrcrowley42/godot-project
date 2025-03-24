@@ -1,4 +1,7 @@
 extends PanelContainer
+
+@export var cosmenits_btn: Button
+
 @onready var credits = %CreditsMenu
 @onready var main_menu = %MainOptMenu
 @onready var theme_menu = %ThemeMenu
@@ -8,6 +11,7 @@ extends PanelContainer
 @onready var ambience_menu = %AmbienceMenu
 @onready var creatures_menu = %CreaturesMenu
 @onready var achievement_menu = %AchievementMenu
+@onready var creature: Creature = %Creature
 
 enum Menu {CREDITS, SETTINGS, THEME, FACTS, APPEARANCE, AMBIENCE, CREATURES, ACHIEVEMENTS}
 @onready var menus = {Menu.CREDITS: credits, Menu.SETTINGS: settings_menu,
@@ -19,6 +23,11 @@ var current_menu
 
 func _ready():
 	self.visible = false
+
+func _notification(what: int) -> void:
+	if what == Globals.NOTIFICATION_CREATURE_IS_LOADED:
+		if creature.life_stage == Creature.LifeStage.EGG:
+			cosmenits_btn.disabled = true
 
 func return_to_main():
 	if current_menu != null:

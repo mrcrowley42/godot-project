@@ -3,7 +3,8 @@ extends AnimatedSprite2D
 
 func gen_preview():
 	var creature = find_parent("Game").find_child("Creature")
-	sprite_frames = creature.creature.sprite_frames
+	sprite_frames = creature.main_sprite.sprite_frames
+	scale = Vector2(1, 1) if creature.life_stage == Creature.LifeStage.EGG else scale
 	animation = "idle"
 	play()
 	update_cosmetics()

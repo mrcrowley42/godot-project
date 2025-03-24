@@ -116,7 +116,7 @@ func setup_creature():
 	Globals.send_notification(Globals.NOTIFICATION_CREATURE_IS_LOADED)
 	apply_dmg_tint()
 	
-	if is_ready_to_grow_up and life_stage < LifeStage.ADULT:
+	if is_ready_to_grow_up and life_stage < LifeStage.ADULT and life_stage != LifeStage.EGG:
 		ready_to_grow_up.emit()
 	elif is_ready_to_lay_egg and life_stage == LifeStage.ADULT:
 		ready_to_lay_egg.emit()
@@ -337,7 +337,8 @@ func get_loaded_cosmetics():
 ## change the animation without waiting for the frame change
 func force_change_animation(anim_name: String):
 	if not main_sprite.sprite_frames.has_animation(anim_name):
-		printerr("current creature has no animation: " + anim_name)
+		if life_stage != LifeStage.EGG:
+			printerr("current creature has no animation: " + anim_name)
 		return false
 	if anim_name == main_sprite.animation:
 		return true
