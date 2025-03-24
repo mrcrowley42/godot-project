@@ -41,6 +41,8 @@ extends Node
 ## Bool to keep track whether notifications should still be on cooldown or not.
 var on_cooldown: bool = false
 
+var notifications_enabled = true
+
 func _ready() -> void:
 	# TODO Update this when creature changes.
 	cooldown_timer.wait_time = cooldown_period
@@ -56,6 +58,7 @@ func _ready() -> void:
 func _notification(noti: int) -> void:
 	if noti == Globals.NOTIFICATION_CREATURE_IS_LOADED:
 		if not creature.creature:
+			notifications_enabled = false
 			return
 		notification_bubble.position = creature.creature.notification_position
 		pain_threshold = warning_threshold / 2 * creature.max_hp
@@ -65,6 +68,9 @@ func _notification(noti: int) -> void:
 		hp_threshold = warning_threshold * creature.max_hp
 
 func _process(_delta) -> void:
+	if not notifications_enabled:
+		return
+	
 	if creature.hp <= pain_threshold:
 		%STAHP.play_random()
 	notification_bubble.visible = notif_sounds.playing
@@ -97,6 +103,9 @@ func done() -> void:
 
 
 func queue_warning(sound_file: AudioStream) -> void:
+	if not notifications_enabled:
+		return
+	
 	if not notif_sounds.playing and not on_cooldown:
 		notif_sounds.stream = sound_file
 		if creature.clippy_area.mute_sfx:

@@ -11,6 +11,9 @@ enum Preference {LIKES, NEUTRAL, DISLIKES}
 const dislike_multiplier: float = 0.5
 const like_multiplier: float = 2.0
 
+const CREATURE_SCALE: Vector2 = Vector2(.225, .225)
+const EGG_SCALE: Vector2 = Vector2(1.5, 1.5)
+
 
 ## A Reference to the main sprite so it can be manipulated
 @onready var accessory_manager: AccessoryManager = find_child("AccessoryManager")
@@ -103,6 +106,7 @@ func setup_creature():
 		Globals.has_creature_just_grown_up = false
 		grow_up_one_stage()
 	
+	# cant use ternery here :(
 	if life_stage == 0:
 		creature = null
 	else:
@@ -122,10 +126,16 @@ func setup_creature():
 
 ## Update the [param sprite_frames] of the current creature based on the current [param life_stage]
 func setup_main_sprite() -> void:
-	if creature:
+	if creature != null:
 		main_sprite.sprite_frames = creature.sprite_frames
+		main_sprite.scale = CREATURE_SCALE
 	else:
-		main_sprite.sprite_frames.add_frame("idle", egg_type.image)
+		var egg_frames: SpriteFrames = SpriteFrames.new()
+		egg_frames.add_animation("idle")
+		egg_frames.add_frame("idle", egg_type.image)
+		main_sprite.sprite_frames = egg_frames
+		main_sprite.scale = EGG_SCALE
+		main_sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	main_sprite.animation = "idle"
 	main_sprite.play()
 
@@ -212,6 +222,8 @@ func game_over():
 
 ## Tint the Create using the dying_colour set in inspector scaling the tint based on how low HP is.
 func apply_dmg_tint() -> void:
+	if creature == null:
+		return
 	main_sprite.modulate.b = clampf(1 - (1 - hp / max_hp) + dying_colour.b, 0, 1)
 	main_sprite.modulate.g = clampf(1 - (1 - hp / max_hp) + dying_colour.g, 0, 1)
 	main_sprite.modulate.r = clampf(1 - (1 - hp / max_hp) + dying_colour.r, 0, 1)

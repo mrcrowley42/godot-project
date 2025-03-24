@@ -85,6 +85,7 @@ parent_label = NodePath("MarginContainer/HBoxContainer/VBoxContainer/StatusLabel
 icon_btn = NodePath("MarginContainer/HBoxContainer/Node2D/CreatureIcon")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
 offset_right = 380.0
 offset_bottom = 137.0
 size_flags_vertical = 0

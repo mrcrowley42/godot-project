@@ -297,7 +297,7 @@ func save_data(creature_id_override: int = -1):
 	# save every creature data & update current creature node data
 	for creature_id in _every_creature_metadata.keys():
 		var creature_data: Array = [_every_creature_metadata[creature_id]]  # creature metadata first
-		var creature_node_data: Array = _every_creature_node_data[creature_id]
+		var creature_node_data: Array = [_every_creature_node_data[creature_id]]
 		
 		# update only the creature to save
 		if int(creature_id) == creature_id_to_save:
@@ -573,7 +573,7 @@ func load_data() -> Dictionary:
 		
 		var creature_id: int = int(creature_metadata[CREATURE_ID])  ## this type assignment is VERY IMPORTANT!!!
 		_every_creature_metadata[creature_id] = creature_metadata
-		_every_creature_node_data[creature_id] = parsed_line[0] if len(parsed_line) != 0 else []
+		_every_creature_node_data[creature_id] = parsed_line[0] if len(parsed_line) == 1 else []  # expecting a list
 	print("all save data has been loaded from file")
 	return get_global_metadata_dc()
 
