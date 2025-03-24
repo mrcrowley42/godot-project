@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bebjn5n2kjwgb"]
+[gd_scene load_steps=31 format=3 uid="uid://bebjn5n2kjwgb"]
 
 [ext_resource type="Script" path="res://scripts/main_game_scripts/creature_notification_manager.gd" id="2_0vuyd"]
 [ext_resource type="Resource" uid="uid://c4mrl54qdvgg7" path="res://resources/achievements/general/try_disliked_food.tres" id="2_dgcid"]
@@ -17,6 +17,7 @@
 [ext_resource type="SpriteFrames" uid="uid://cpitoi4php8a2" path="res://resources/cosmetics/propeller_hat_sprite_frames.tres" id="18_nnrph"]
 [ext_resource type="AudioStream" uid="uid://bux02e7112jdt" path="res://sound_effects/pain5.wav" id="18_qdg0m"]
 [ext_resource type="SpriteFrames" uid="uid://blmif1nujgs1a" path="res://resources/cosmetics/standard_glasses_sprite_frames.tres" id="19_uwmsa"]
+[ext_resource type="SpriteFrames" uid="uid://cckhpmri70a8b" path="res://resources/cosmetics/clown_nose_sprite_frames.tres" id="21_y1atj"]
 [ext_resource type="AudioStream" uid="uid://cl8pxd7pob5tr" path="res://sound_effects/hunger_low.wav" id="26_b0wvq"]
 [ext_resource type="AudioStream" uid="uid://p3x28bbk45v4" path="res://sound_effects/fun_low.wav" id="27_uvaw6"]
 [ext_resource type="AudioStream" uid="uid://bay1xn7u3rdq4" path="res://sound_effects/regulation_low.wav" id="28_qtceu"]
@@ -121,6 +122,12 @@ scale = Vector2(0.225, 0.225)
 sprite_frames = ExtResource("18_nnrph")
 autoplay = "default"
 frame_progress = 0.770958
+
+[node name="ReferenceNose" type="AnimatedSprite2D" parent="SubViewportContainer/SubViewport/Sprites/AccessoryManager"]
+position = Vector2(-10, -20)
+scale = Vector2(0.225, 0.225)
+sprite_frames = ExtResource("21_y1atj")
+autoplay = "default"
 
 [node name="ReferenceGlasses" type="AnimatedSprite2D" parent="SubViewportContainer/SubViewport/Sprites/AccessoryManager"]
 visible = false
