@@ -48,6 +48,9 @@ func setup_btn_visibility():
 	hatch_egg_btn.visible = len(DataGlobals.get_global_metadata_value(DataGlobals.PENDING_EGGS)) > 0
 
 
+func sort_saves(a, b):
+	return a['last_saved'] > b['last_saved']
+
 func grab_saves():
 	var creature_save_ids = DataGlobals.get_all_creature_ids()
 	var saves = []
@@ -58,6 +61,9 @@ func grab_saves():
 		save_info['creature_name'] = DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_NAME, save_id)
 		save_info['status'] = get_creature_status(save_id)
 		saves.append(save_info)
+		
+	saves.sort_custom(sort_saves)
+	
 	return saves
 
 
