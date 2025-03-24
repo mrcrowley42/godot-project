@@ -23,6 +23,7 @@ const EGG_SCALE: Vector2 = Vector2(1.5, 1.5)
 @export var xp_mulitplier: float = 1.0
 @export var viewport_container: Node
 @export var dislike_food_ach: Achievement
+@export var lay_egg_ach: Achievement
 @export var child_stage_ach: Achievement
 @export var adult_stage_ach: Achievement
 
@@ -128,6 +129,9 @@ func setup_creature():
 		ready_to_grow_up.emit()
 	elif is_ready_to_lay_egg and life_stage == LifeStage.ADULT:
 		ready_to_lay_egg.emit()
+	
+	if life_stage == LifeStage.EGG:
+		Globals.unlock_achievement(lay_egg_ach)
 	
 	# do last
 	print("creature has been setup")
