@@ -38,6 +38,8 @@ const CREATURE_BABY_UID = "creature_baby_uid"
 const CREATURE_TYPE_UID = "creature_type_uid"
 const CREATURE_NAME = "creature_name"
 const CREATURE_PARENT_ID = "creature_parent_id"
+const CREATURE_INITIAL_EGG_TIME = "creature_initial_egg_time"
+const CREATURE_EGG_TIME_REMAINING = "creature_egg_time_remaining"
 const CREATURE_LIFE_STAGE = "creature_life_stage"
 const CREATURE_INITIAL_LIFE_STAGE = "creature_initial_life_stage"
 const CREATURE_HATCH_TIME = "creature_hatch_time"
@@ -153,6 +155,8 @@ func get_default_creature_metadata() -> Dictionary:
 		CREATURE_TYPE_UID: "",
 		CREATURE_NAME: "",
 		CREATURE_PARENT_ID: "-1",
+		CREATURE_INITIAL_EGG_TIME: 0,
+		CREATURE_EGG_TIME_REMAINING: 0,
 		CREATURE_LIFE_STAGE: 0,
 		CREATURE_INITIAL_LIFE_STAGE: 0,
 		CREATURE_HATCH_TIME: -1,
@@ -381,6 +385,9 @@ func create_new_egg_creature(egg: EggEntry, parent_id):
 	new_creature_metadata[CREATURE_EGG_UID] = egg_type_uid
 	new_creature_metadata[CREATURE_PARENT_ID] = str(parent_id)
 	new_creature_metadata[CREATURE_NAME] = initial_creature_name
+	var init_egg_time = randi_range(9_000, 11_000)  # in seconds
+	new_creature_metadata[CREATURE_INITIAL_EGG_TIME] = init_egg_time
+	new_creature_metadata[CREATURE_EGG_TIME_REMAINING] = init_egg_time
 	var init_life_stage = 0
 	new_creature_metadata[CREATURE_LIFE_STAGE] = init_life_stage
 	new_creature_metadata[CREATURE_INITIAL_LIFE_STAGE] = init_life_stage

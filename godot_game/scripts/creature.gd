@@ -47,10 +47,13 @@ var fun: float
 
 var lock_xp: bool = false
 var xp: float = 0
-var is_ready_to_grow_up: bool = false
-var is_ready_to_lay_egg: bool = false
 var life_stage: LifeStage
 var creature_name: String
+var egg_time_remaining: int = 0
+
+var is_ready_to_hatch: bool = false
+var is_ready_to_grow_up: bool = false
+var is_ready_to_lay_egg: bool = false
 
 var food_likes: Array[FoodItem.FoodType]
 var food_dislikes: Array[FoodItem.FoodType]
@@ -66,6 +69,8 @@ signal food_changed()
 signal water_changed()
 signal fun_changed()
 signal xp_changed()
+signal egg_time_remaining_changed()
+signal ready_to_hatch()
 signal ready_to_grow_up()
 signal ready_to_lay_egg()
 
@@ -109,6 +114,7 @@ func setup_creature():
 	# cant use ternery here :(
 	if life_stage == 0:
 		creature = null
+		egg_time_remaining = int(DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_EGG_TIME_REMAINING))
 	else:
 		creature = [null, baby_type.baby_part, creature_type.child, creature_type.adult][life_stage]
 		setup_default_values(has_grown_up)
@@ -116,6 +122,8 @@ func setup_creature():
 	Globals.send_notification(Globals.NOTIFICATION_CREATURE_IS_LOADED)
 	apply_dmg_tint()
 	
+	if is_ready_to_hatch and life_stage == LifeStage.EGG:
+		ready_to_hatch.emit()
 	if is_ready_to_grow_up and life_stage < LifeStage.ADULT and life_stage != LifeStage.EGG:
 		ready_to_grow_up.emit()
 	elif is_ready_to_lay_egg and life_stage == LifeStage.ADULT:
@@ -168,7 +176,7 @@ func add_xp(amount: float) -> void:
 	xp += amount
 
 	# The creature is ready to become an adult
-	if life_stage != LifeStage.ADULT and xp >= xp_required and !is_ready_to_grow_up:
+	if life_stage != LifeStage.ADULT and life_stage != LifeStage.EGG and xp >= xp_required and !is_ready_to_grow_up:
 		is_ready_to_grow_up = true
 		ready_to_grow_up.emit()
 	elif life_stage == LifeStage.ADULT and xp >= xp_required and !is_ready_to_lay_egg:
@@ -328,6 +336,16 @@ func damage_water(amount) -> void:
 	water = max(water - abs(min(0, new_saturation)), 0)
 	water_changed.emit()
 
+func reduce_egg_time_remaining(amount: int) -> void:
+	assert(amount > 0)
+	if is_ready_to_hatch:
+		return
+	egg_time_remaining = max(0, egg_time_remaining - amount)
+	if egg_time_remaining == 0:
+		is_ready_to_hatch = true
+		ready_to_hatch.emit()
+	egg_time_remaining_changed.emit()
+
 func get_current_cosmetics():
 	return %AccessoryManager.current_cosmetics
 
@@ -442,15 +460,17 @@ func create_save_icon() -> void:
 func save() -> Dictionary:
 	create_save_icon()
 	DataGlobals.set_metadata_value(false, DataGlobals.CREATURE_LIFE_STAGE, life_stage)
+	DataGlobals.set_metadata_value(false, DataGlobals.CREATURE_EGG_TIME_REMAINING, egg_time_remaining)
 	return {
 		"water": water, "food": food, "fun": fun, "hp": hp, "xp": xp,
+		"is_ready_to_hatch": is_ready_to_hatch,
 		"is_ready_to_grow_up": is_ready_to_grow_up,
 		"is_ready_to_lay_egg": is_ready_to_lay_egg
 	}
 
 func load(data) -> void:
 	var prop_list = ["water", "fun", "food", "hp", "xp", 
-					"is_ready_to_grow_up", "is_ready_to_lay_egg"]
+					"is_ready_to_hatch", "is_ready_to_grow_up", "is_ready_to_lay_egg"]
 
 	for property in prop_list:
 		if data.has(property):

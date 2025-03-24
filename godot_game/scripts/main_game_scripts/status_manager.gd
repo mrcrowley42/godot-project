@@ -54,6 +54,8 @@ func _notification(what):
 			new_timer(water_rate, water_timeout)
 			new_timer(food_rate, food_timeout)
 			new_timer(fun_rate, fun_timeout)
+		else:
+			new_timer(1., egg_remaining_timeout)
 		finished_loading.emit()
 	
 	if what == Globals.NOTIFICATION_ALL_DATA_IS_LOADED:
@@ -91,3 +93,6 @@ func food_timeout() -> void:
 
 func fun_timeout() -> void:
 	creature.dmg(fun_amount * time_multiplier, Creature.Stat.FUN)
+
+func egg_remaining_timeout() -> void:
+	creature.reduce_egg_time_remaining(1)
