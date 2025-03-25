@@ -1,0 +1,22 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://b1eadhfbq7hth"]
+
+[ext_resource type="Texture2D" uid="uid://rhj035vvq1yq" path="res://images/cosmetics/party-hat-0.png" id="1_w1i70"]
+[ext_resource type="Texture2D" uid="uid://dstndlyk8wxib" path="res://images/cosmetics/party-hat-1.png" id="2_ehxh4"]
+[ext_resource type="Texture2D" uid="uid://ddiilo8efdvmk" path="res://images/cosmetics/party-hat-2.png" id="3_rgs7n"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_w1i70")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ehxh4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_rgs7n")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
