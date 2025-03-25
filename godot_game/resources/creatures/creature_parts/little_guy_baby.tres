@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CreatureTypePart" load_steps=10 format=3 uid="uid://v52tqegicsiv"]
+[gd_resource type="Resource" script_class="CreatureTypePart" load_steps=12 format=3 uid="uid://v52tqegicsiv"]
 
 [ext_resource type="Script" path="res://scripts/base_classses/cosmetic_position.gd" id="1_0jq5h"]
 [ext_resource type="Script" path="res://scripts/base_classses/creature_type_part.gd" id="2_73a0t"]
@@ -6,6 +6,7 @@
 [ext_resource type="SpriteFrames" uid="uid://o0cqfhkchtst" path="res://resources/creatures/sprite_frames/little_guy_baby_sprite_frames.tres" id="3_8qkv2"]
 [ext_resource type="Resource" uid="uid://boatniuf6yx3d" path="res://resources/cosmetics/propeller_hat.tres" id="3_61v8e"]
 [ext_resource type="Resource" uid="uid://c0gf34lgpdkmh" path="res://resources/cosmetics/standard_glasses.tres" id="4_fqpro"]
+[ext_resource type="Resource" uid="uid://pcy07k7fjhe7" path="res://resources/cosmetics/party_hat.tres" id="5_j2kab"]
 
 [sub_resource type="Resource" id="Resource_unbhm"]
 script = ExtResource("1_0jq5h")
@@ -25,6 +26,12 @@ position = Vector2(-4, -6)
 item = ExtResource("4_fqpro")
 scale = 0.5
 
+[sub_resource type="Resource" id="Resource_qx4w7"]
+script = ExtResource("1_0jq5h")
+position = Vector2(-6, -64)
+item = ExtResource("5_j2kab")
+scale = 0.9
+
 [resource]
 script = ExtResource("2_73a0t")
 max_hp = 900
@@ -33,7 +40,7 @@ max_food = 900
 max_fun = 900
 sprite_frames = ExtResource("3_8qkv2")
 notification_position = Vector2(-50, -105)
-cosmetic_positions = Array[ExtResource("1_0jq5h")]([SubResource("Resource_unbhm"), SubResource("Resource_je8j7"), SubResource("Resource_bskkc")])
+cosmetic_positions = Array[ExtResource("1_0jq5h")]([SubResource("Resource_unbhm"), SubResource("Resource_je8j7"), SubResource("Resource_bskkc"), SubResource("Resource_qx4w7")])
 food_likes = Array[int]([])
 food_dislikes = Array[int]([])
 drink_likes = Array[int]([])
