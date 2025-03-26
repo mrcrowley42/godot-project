@@ -4,8 +4,8 @@
 [ext_resource type="Resource" uid="uid://boatniuf6yx3d" path="res://resources/cosmetics/propeller_hat.tres" id="2_nvm17"]
 [ext_resource type="Resource" uid="uid://c0gf34lgpdkmh" path="res://resources/cosmetics/standard_glasses.tres" id="3_ibdt6"]
 [ext_resource type="Script" path="res://scripts/base_classses/creature_type_part.gd" id="4_lkqu7"]
-[ext_resource type="Resource" path="res://resources/cosmetics/clown_nose.tres" id="4_y0hto"]
-[ext_resource type="Resource" path="res://resources/cosmetics/party_hat.tres" id="5_67uoe"]
+[ext_resource type="Resource" uid="uid://cv4y2i7jg7x85" path="res://resources/cosmetics/clown_nose.tres" id="4_y0hto"]
+[ext_resource type="Resource" uid="uid://pcy07k7fjhe7" path="res://resources/cosmetics/party_hat.tres" id="5_67uoe"]
 [ext_resource type="SpriteFrames" uid="uid://bc8bjaln2o3sf" path="res://resources/creatures/sprite_frames/blanket_child_sprite_frames.tres" id="5_abhuy"]
 
 [sub_resource type="Resource" id="Resource_264s0"]
