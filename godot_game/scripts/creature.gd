@@ -404,7 +404,8 @@ const MOVEMENT_TIME: float = 1;
 
 func do_movement(movement: Movement):
 	if current_movement != Movement.NOTHING:
-		movement_queue = movement
+		if movement != Movement.EGG_WIGGLE:
+			movement_queue = movement
 		return
 	
 	if life_stage != LifeStage.EGG:
