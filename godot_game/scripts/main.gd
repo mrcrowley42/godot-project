@@ -43,7 +43,8 @@ func _ready():
 		debug_window.process_mode = Node.PROCESS_MODE_DISABLED
 
 	# creature has never been openned before!
-	if DataGlobals.has_only_creature_metadata():
+	if DataGlobals.has_only_creature_metadata() or Globals.general_dict.has("newly_hatched"):
+		Globals.general_dict.erase("newly_hatched")
 		%Creature.creature_first_openned()
 	
 	var elapsed_time = calc_elapsed_time()
@@ -98,6 +99,15 @@ func _notification(noti):
 		else:
 			print("closing game from main game...")
 		return
+
+	## hatch egg
+	if noti == Globals.NOTIFICATION_HATCH_EGG_SCENE and not is_in_transition:
+		set_is_in_trans(true)
+		DataGlobals.save_data()
+		Globals.general_dict.clear()
+		Globals.general_dict["egg_creature_id"] = DataGlobals.get_creature_id()
+		await Globals.perform_closing_transition(trans_img, ui_overlay.position)
+		Globals.change_to_scene("res://scenes/GameScenes/main_menu.tscn")
 
 	## grow up
 	if noti == Globals.NOFITICATION_GROW_TO_ADULT_SCENE and not is_in_transition:

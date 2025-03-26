@@ -45,7 +45,7 @@ func add_eggs() -> void:
 	for pending_egg_data in DataGlobals.get_global_metadata_value(DataGlobals.PENDING_EGGS):
 		var egg_uid = pending_egg_data['egg_uid']
 		var parent_id = int(pending_egg_data['parent_id'])
-		var parent_name = DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_NAME, parent_id) if DataGlobals.does_creature_exist(parent_id) else 'Unknown'
+		var parent_name = DataGlobals.find_parent_name(parent_id)
 		var egg: EggEntry = load(ResourceUID.get_id_path(int(egg_uid)))
 		
 		var new_listing: Button = egg_listing_scene.instantiate()

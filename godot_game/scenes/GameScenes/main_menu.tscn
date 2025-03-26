@@ -376,6 +376,7 @@ theme_override_font_sizes/font_size = 18
 text = "Load"
 
 [node name="PendingEggMenu" type="MarginContainer" parent="." node_paths=PackedStringArray("main_script", "select_btn", "item_container")]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5

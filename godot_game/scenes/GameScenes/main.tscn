@@ -2483,6 +2483,7 @@ bus = &"SFX"
 [connection signal="mouse_entered" from="NotificationLayer/NotificationManager/GrowUpBtn" to="NotificationLayer/NotificationManager/GrowUpBtn" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="NotificationLayer/NotificationManager/GrowUpBtn" to="NotificationLayer/NotificationManager/GrowUpBtn" method="_on_mouse_exited"]
 [connection signal="gui_input" from="NotificationLayer/NotificationManager/LayEggBtn" to="NotificationLayer/NotificationManager/LayEggBtn" method="_on_gui_input"]
+[connection signal="gui_input" from="NotificationLayer/NotificationManager/HatchBtn" to="NotificationLayer/NotificationManager/HatchBtn" method="_on_gui_input"]
 [connection signal="visibility_changed" from="UI/FoodMenu" to="UI/FoodMenu" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="UI/FoodMenu/NavigationArrows" to="UI/FoodMenu/NavigationArrows" method="_on_visibility_changed"]
 [connection signal="button_down" from="UI/FoodMenu/NavigationArrows/LeftArrow" to="UI/FoodMenu/NavigationArrows" method="_on_left_arrow_button_down"]

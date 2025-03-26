@@ -206,6 +206,12 @@ func unlock_achievement(achievement: Achievement) -> void:
 
 # TODO: really want to refactor these functions into one now...
 
+func delete_creature_icon(creature_id):
+	var d = DirAccess.open(Globals.SAVE_LOCATION_PREFIX + "://")
+	for filename: String in d.get_files():
+		if filename.begins_with("save_icon_" + str(creature_id)):
+			d.remove(filename)
+
 ## generic tween function
 func tween(obj, prop, val, delay=0., time=2., _ease=Tween.EASE_OUT, _trans=Tween.TRANS_EXPO) -> Tween:
 	var t = create_tween()

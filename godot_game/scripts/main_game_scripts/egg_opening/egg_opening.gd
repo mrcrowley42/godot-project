@@ -5,7 +5,6 @@ signal do_closing_trans
 @warning_ignore("unused_signal")
 signal back_to_main_menu
 
-@export var skip_scene: bool = false
 @export var existing_eggs: Array[EggEntry]
 @export var egg_cracks: Array[Texture2D]
 @export var egg_alpha_map: Texture2D  # trust me bro
@@ -64,6 +63,7 @@ var can_interact: bool = false  # turn off while tweening stuff around
 var hatching: bool = false
 var finished_hatching: bool = false
 var hatch_progress: int = 0
+var egg_creature_id: int = -1
 
 var placed_eggs: Array[EggEntry] = []
 var placed_egg_sprites: Array[Control] = []
@@ -71,17 +71,11 @@ var original_egg_positions: Array[Vector2] = []
 var selected_egg_inx = null  # int
 var scale_addition: Vector2 = Vector2(0, 0)
 
+var eggs_to_place: Array[EggEntry] = existing_eggs.slice(choices_start_inx, choices_start_inx + choices_amnt)
+
 func _ready():
 	DataGlobals.load_data()
-	var current_creature = DataGlobals.get_creature_id()
-	if (skip_scene or DataGlobals.has_save_data()) and current_creature != -1:
-		if DataGlobals.has_only_creature_metadata():
-			instant_open_to_continue_screen()
-			return
-		else:
-			load_main_scene()
-			return
-
+	
 	# setup
 	bar_container.visible = false
 	continue_btn.visible = false
@@ -91,10 +85,13 @@ func _ready():
 
 	# eggs
 	selection_area_center = selection_area.position + selection_area.size * .5
+	if Globals.general_dict.has("egg_creature_id"):  # override default to hatch just 1 egg
+		egg_creature_id = int(Globals.general_dict["egg_creature_id"])
+		Globals.general_dict.clear()
+		var the_egg: EggEntry = load(ResourceUID.get_id_path(int(DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_EGG_UID))))
+		eggs_to_place.clear()
+		eggs_to_place = [the_egg]
 	spawn_eggs()
-
-func load_main_scene():
-	Globals.change_to_scene("res://scenes/GameScenes/main.tscn")
 
 ## structure of egg:
 ## - Control  (scale & move this, rotate for centeral rotation)
@@ -108,7 +105,6 @@ func load_main_scene():
 ##     - CollisionShape2D
 func spawn_eggs():
 	# find the eggs to be placed
-	var eggs_to_place: Array[EggEntry] = existing_eggs.slice(choices_start_inx, choices_start_inx + choices_amnt)
 	if limit_to_one:
 		eggs_to_place = [existing_eggs[egg_index]]
 	if limit_to_many:
@@ -420,7 +416,11 @@ func finish_hatching(sprite_c: Control):
 	# save data
 	DataGlobals.add_to_eggs_hatched(placed_eggs[selected_egg_inx])
 	DataGlobals.add_to_babies_discovered(baby_hatched)
-	DataGlobals.create_new_creature(placed_eggs[selected_egg_inx], baby_hatched)
+	if egg_creature_id == -1:
+		DataGlobals.create_new_creature(placed_eggs[selected_egg_inx], baby_hatched)
+	else:
+		DataGlobals.hatch_creature(egg_creature_id, baby_hatched)
+		Globals.general_dict["newly_hatched"] = true
 	DataGlobals.save_data()
 
 ## randomly pick a creature to hatch from the selected egg
@@ -439,25 +439,6 @@ func pick_creature_to_hatch() -> CreatureBaby:
 	if weighted_choices.size() == 0:
 		add_weighted_choices.call(false)  # build list of known creatures
 	return weighted_choices.pick_random()
-
-## for when first loading in and continue button wasn't pressed before game was closed last
-func instant_open_to_continue_screen():
-	var uid = int(DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_TYPE_UID))
-	var baby_hatched: CreatureBaby = load(ResourceUID.get_id_path(uid))
-
-	# setup display
-	fade(continue_btn, true, 1.).connect("finished", set_can_interact.bind(true))
-	display_box.size += DISPLAY_BOX_ADITION
-	display_bg.size += DISPLAY_BOX_ADITION
-	display_shader.size += DISPLAY_BOX_ADITION
-	bar_container.visible = false
-	finished_hatching = true
-
-	# place creature
-	spawn_creature(baby_hatched, display_box.position - (display_box.size * display_box.scale) / 2)
-	set_creature_desc(baby_hatched)
-	baby_sprite.visible = true
-	baby_sprite.scale = Vector2(.25, .25)
 
 func spawn_creature(baby: CreatureBaby, pos: Vector2):
 	baby_sprite.sprite_frames = baby.baby_part.sprite_frames

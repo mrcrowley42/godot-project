@@ -388,7 +388,7 @@ func create_new_egg_creature(egg: EggEntry, parent_id):
 	var init_egg_time = randi_range(9_000, 11_000)  # in seconds
 	new_creature_metadata[CREATURE_INITIAL_EGG_TIME] = init_egg_time
 	new_creature_metadata[CREATURE_EGG_TIME_REMAINING] = init_egg_time
-	var init_life_stage = 0
+	var init_life_stage = Creature.LifeStage.EGG
 	new_creature_metadata[CREATURE_LIFE_STAGE] = init_life_stage
 	new_creature_metadata[CREATURE_INITIAL_LIFE_STAGE] = init_life_stage
 	
@@ -407,6 +407,42 @@ func create_new_creature(egg: EggEntry, baby_type: CreatureBaby) -> int:
 	var creature_id: String = get_global_metadata_value(ID_INCREMENTAL)
 	add_to_metadata_value(true, ID_INCREMENTAL, 1)
 	
+	var creature_choice = _choose_creature_baby_grows_into(baby_type)
+	
+	var new_creature_metadata = generate_creature_metadata_to_save(int(creature_id))
+	new_creature_metadata[CREATURE_EGG_UID] = egg_type_uid
+	new_creature_metadata[CREATURE_BABY_UID] = baby_type_uid
+	new_creature_metadata[CREATURE_TYPE_UID] = creature_choice
+	new_creature_metadata[CREATURE_HATCH_TIME] = Time.get_unix_time_from_system()
+	new_creature_metadata[CREATURE_NAME] = initial_creature_name
+	var init_life_stage = Creature.LifeStage.BABY  # skip egg stage for first ever creature
+	new_creature_metadata[CREATURE_LIFE_STAGE] = init_life_stage
+	new_creature_metadata[CREATURE_INITIAL_LIFE_STAGE] = init_life_stage
+	
+	set_metadata_value(true, DataGlobals.CURRENT_CREATURE, creature_id)
+	
+	_every_creature_metadata[int(creature_id)] = new_creature_metadata
+	_every_creature_node_data[int(creature_id)] = []
+	print("new creature '%s' created (baby uid %s, type uid %s), did not save." % [creature_id, baby_type_uid, creature_choice])
+	return int(creature_id)
+
+## hatches a creature in memory, updating the creature metadata for the given creature id
+func hatch_creature(creature_id: int, baby_type: CreatureBaby):
+	var baby_type_uid = Helpers.uid_str(baby_type)
+	var initial_creature_name = baby_type.name
+	var creature_choice = _choose_creature_baby_grows_into(baby_type)
+	
+	set_metadata_value(false, CREATURE_BABY_UID, baby_type_uid, creature_id)
+	set_metadata_value(false, CREATURE_TYPE_UID, creature_choice, creature_id)
+	set_metadata_value(false, CREATURE_HATCH_TIME, Time.get_unix_time_from_system(), creature_id)
+	set_metadata_value(false, CREATURE_NAME, initial_creature_name, creature_id)
+	set_metadata_value(false, CREATURE_LIFE_STAGE, Creature.LifeStage.BABY, creature_id)
+	
+	set_metadata_value(true, DataGlobals.CURRENT_CREATURE, creature_id)
+	Globals.delete_creature_icon(creature_id)
+
+## choose a creature type uid that given baby should grow into
+func _choose_creature_baby_grows_into(baby_type: CreatureBaby) -> String:
 	var discovered_creatures: Array = DataGlobals.get_global_metadata_value(DataGlobals.DISCOVERED_CREATURES).keys()
 	var choices = [Helpers.uid_str(baby_type.grows_into_a), Helpers.uid_str(baby_type.grows_into_b)]
 	var final_choice = [0, 1].pick_random()
@@ -414,23 +450,7 @@ func create_new_creature(egg: EggEntry, baby_type: CreatureBaby) -> int:
 	# if already discovered chosen creature and not discovered other creaturee, use other creature
 	if discovered_creatures.has(choices[final_choice]) and not discovered_creatures.has(choices[1-final_choice]):
 		final_choice = 1 - final_choice
-	
-	var new_creature_metadata = generate_creature_metadata_to_save(int(creature_id))
-	new_creature_metadata[CREATURE_EGG_UID] = egg_type_uid
-	new_creature_metadata[CREATURE_BABY_UID] = baby_type_uid
-	new_creature_metadata[CREATURE_TYPE_UID] = choices[final_choice]
-	new_creature_metadata[CREATURE_HATCH_TIME] = Time.get_unix_time_from_system()
-	new_creature_metadata[CREATURE_NAME] = initial_creature_name
-	var init_life_stage = 1  # skip egg stage for first ever creature
-	new_creature_metadata[CREATURE_LIFE_STAGE] = init_life_stage
-	new_creature_metadata[CREATURE_INITIAL_LIFE_STAGE] = init_life_stage
-	
-	DataGlobals.set_metadata_value(true, DataGlobals.CURRENT_CREATURE, creature_id)
-	
-	_every_creature_metadata[int(creature_id)] = new_creature_metadata
-	_every_creature_node_data[int(creature_id)] = []
-	print("new creature '%s' created (baby uid %s, type uid %s), did not save." % [creature_id, baby_type_uid, choices[final_choice]])
-	return int(creature_id)
+	return choices[final_choice]
 
 func save_settings_data():
 	var config = ConfigFile.new()
@@ -687,6 +707,9 @@ func add_pending_egg(egg: EggEntry, parent_id):
 		'parent_id': parent_id
 	}
 	append_to_metadata_value(true, DataGlobals.PENDING_EGGS, data)
+
+func find_parent_name(parent_id) -> String:
+	return DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_NAME, int(parent_id)) if DataGlobals.does_creature_exist(int(parent_id)) else 'Unknown'
 
 func _process(_delta: float) -> void:
 	# save metadata here so the file only needs to be written to once in a frame

@@ -341,8 +341,7 @@ func damage_water(amount) -> void:
 	water_changed.emit()
 
 func reduce_egg_time_remaining(amount: int) -> void:
-	assert(amount > 0)
-	if is_ready_to_hatch:
+	if amount <= 0 or is_ready_to_hatch:
 		return
 	egg_time_remaining = max(0, egg_time_remaining - amount)
 	if egg_time_remaining == 0:

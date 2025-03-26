@@ -18,7 +18,9 @@ func _notification(what: int) -> void:
 func update_bar():
 	max_value = max_v
 	value = max_v - creature.egg_time_remaining
-	label.text = str((float(value) / float(max_value)) * 100.) + "%"
+	var perc = (float(value) / float(max_value)) * 100.
+	perc = floor(perc * 100) / 100
+	label.text = str(perc) + "%"
 
 
 func _on_mouse_entered() -> void:
