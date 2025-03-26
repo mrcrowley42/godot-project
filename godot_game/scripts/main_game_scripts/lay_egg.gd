@@ -209,7 +209,7 @@ func _process(_delta):
 	
 	var walk_t = Time.get_unix_time_from_system() - walk_movement_start
 	if walk_t < 100:
-		creature_sprite.position.y = walk_mov_og_y + (-abs(sin(walk_t * 8)) * 10) * min(walk_t, 1)
+		creature_sprite.position.y = walk_mov_og_y + (-abs(sin(walk_t * 8)) * 13) * min(walk_t, 1)
 
 class FloatBuffer:
 	var value: float = 0.
