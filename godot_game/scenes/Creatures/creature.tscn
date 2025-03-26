@@ -106,7 +106,16 @@ render_target_update_mode = 4
 [node name="Sprites" type="CanvasGroup" parent="SubViewportContainer/SubViewport"]
 position = Vector2(270, 337)
 
-[node name="Main" type="AnimatedSprite2D" parent="SubViewportContainer/SubViewport/Sprites"]
+[node name="PivotOffset" type="Control" parent="SubViewportContainer/SubViewport/Sprites"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+pivot_offset = Vector2(0, 20)
+mouse_filter = 2
+
+[node name="Main" type="AnimatedSprite2D" parent="SubViewportContainer/SubViewport/Sprites/PivotOffset"]
 unique_name_in_owner = true
 scale = Vector2(0.225, 0.225)
 sprite_frames = ExtResource("15_qlw6y")
@@ -180,6 +189,7 @@ offset_top = -229.0
 offset_right = 25.0
 offset_bottom = -165.0
 scale = Vector2(0.9, 0.9)
+mouse_filter = 2
 texture = ExtResource("39_5380y")
 expand_mode = 2
 stretch_mode = 5

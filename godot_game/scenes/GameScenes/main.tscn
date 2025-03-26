@@ -1,4 +1,4 @@
-[gd_scene load_steps=151 format=4 uid="uid://d0km03f47180a"]
+[gd_scene load_steps=153 format=4 uid="uid://d0km03f47180a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_opnvu"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/status_manager.gd" id="2_aqytd"]
@@ -43,6 +43,7 @@
 [ext_resource type="Texture2D" uid="uid://cx2q4cedbcgn" path="res://images/rock-paper-scissors.png" id="26_0ku4r"]
 [ext_resource type="Texture2D" uid="uid://d3f8r28w20i4e" path="res://icons/crossword_48dp_FILL0_wght400_GRAD0_opsz48.svg" id="27_2hcht"]
 [ext_resource type="Script" path="res://scripts/navigation_arrows.gd" id="27_imll8"]
+[ext_resource type="Script" path="res://scripts/creature_egg_click_area.gd" id="27_nhd4u"]
 [ext_resource type="Texture2D" uid="uid://bqv3aix0mh4m8" path="res://icons/self_improvement_32dp_FFFFFF_FILL0_wght500_GRAD0_opsz20.svg" id="28_ys116"]
 [ext_resource type="Texture2D" uid="uid://douy7lywu41bc" path="res://icons/playing_cards_48dp_FILL0_wght400_GRAD0_opsz48.svg" id="29_lofmd"]
 [ext_resource type="Texture2D" uid="uid://dckcusgfn24wj" path="res://icons/arrow.svg" id="30_kovtb"]
@@ -195,6 +196,9 @@ shader_parameter/moon_curve_intensity = 2.5
 shader_parameter/m_shadow_dist = 0.05
 shader_parameter/m_shadow_rot = 0.0
 shader_parameter/LIGHT_MAP = ExtResource("8_aulml")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_olng0"]
+radius = 40.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eh4ru"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -525,6 +529,7 @@ offset_left = -434.0
 offset_top = -434.0
 offset_right = 434.0
 offset_bottom = 434.0
+mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
 [node name="TimeTint" type="CanvasModulate" parent="Gameplay/Background/BGCanvasLayer"]
@@ -555,6 +560,13 @@ script = ExtResource("12_n00c6")
 ambience_manager = NodePath("../../AmbienceManager")
 enter_clippy_ach = ExtResource("17_uw6yv")
 metadata/_edit_lock_ = true
+
+[node name="EggClickArea" type="Area2D" parent="Gameplay"]
+position = Vector2(271, 394)
+script = ExtResource("27_nhd4u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gameplay/EggClickArea"]
+shape = SubResource("CircleShape2D_olng0")
 
 [node name="NotificationLayer" type="CanvasLayer" parent="."]
 layer = 0
@@ -2479,6 +2491,7 @@ bus = &"SFX"
 [connection signal="timeout" from="Gameplay/Background/bg_update_ticker" to="Gameplay/Background" method="_on_bg_update_ticker_timeout"]
 [connection signal="button_down" from="Gameplay/ClippyArea" to="Gameplay/ClippyArea" method="_on_button_down"]
 [connection signal="button_up" from="Gameplay/ClippyArea" to="Gameplay/ClippyArea" method="_on_button_up"]
+[connection signal="input_event" from="Gameplay/EggClickArea" to="Gameplay/EggClickArea" method="_on_input_event"]
 [connection signal="gui_input" from="NotificationLayer/NotificationManager/GrowUpBtn" to="NotificationLayer/NotificationManager/GrowUpBtn" method="_on_gui_input"]
 [connection signal="mouse_entered" from="NotificationLayer/NotificationManager/GrowUpBtn" to="NotificationLayer/NotificationManager/GrowUpBtn" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="NotificationLayer/NotificationManager/GrowUpBtn" to="NotificationLayer/NotificationManager/GrowUpBtn" method="_on_mouse_exited"]

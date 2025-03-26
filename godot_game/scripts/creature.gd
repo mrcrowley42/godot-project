@@ -18,6 +18,7 @@ const EGG_SCALE: Vector2 = Vector2(1.5, 1.5)
 ## A Reference to the main sprite so it can be manipulated
 @onready var accessory_manager: AccessoryManager = find_child("AccessoryManager")
 @onready var main_sprite: MainSprite = %Main
+@onready var pivot_offset: Control = %PivotOffset
 @export var dying_colour: Color;
 @export var clippy_area: Node
 @export var xp_mulitplier: float = 1.0
@@ -387,11 +388,12 @@ func grow_up_one_stage():
 #  MOVEMENT
 # -----------
 
-enum Movement {NOTHING, HAPPY_BOUNCE, CONFUSED_SHAKE}
+enum Movement {NOTHING, HAPPY_BOUNCE, CONFUSED_SHAKE, EGG_WIGGLE}
 
 var amount_dict = {
 	Movement.HAPPY_BOUNCE: 30,
-	Movement.CONFUSED_SHAKE: 15
+	Movement.CONFUSED_SHAKE: 15,
+	Movement.EGG_WIGGLE: .2
 }
 
 var current_movement: Movement = Movement.NOTHING
@@ -405,7 +407,8 @@ func do_movement(movement: Movement):
 		movement_queue = movement
 		return
 	
-	await main_sprite.frame_changed
+	if life_stage != LifeStage.EGG:
+		await main_sprite.frame_changed
 	current_movement = movement
 	movement_start = Time.get_unix_time_from_system()
 	
@@ -414,6 +417,8 @@ func do_movement(movement: Movement):
 		force_change_animation("chill")
 	if movement == Movement.CONFUSED_SHAKE:
 		force_change_animation("confused")
+	if movement == Movement.EGG_WIGGLE:
+		reduce_egg_time_remaining(5)  # lol why not
 
 func end_movement():
 	position = og_pos
@@ -425,6 +430,10 @@ func end_movement():
 	movement_queue = Movement.NOTHING
 
 func _process(_delta: float) -> void:
+	var rot = 0
+	if life_stage == LifeStage.EGG:
+		rot = sin(Time.get_unix_time_from_system() * .5) * .15
+	
 	if current_movement != Movement.NOTHING:
 		var t = Time.get_unix_time_from_system() - movement_start
 		if t >= MOVEMENT_TIME:
@@ -437,6 +446,12 @@ func _process(_delta: float) -> void:
 		
 		if current_movement == Movement.CONFUSED_SHAKE:
 			position.x = og_pos.x + (sin(t * 14) * amount_dict[current_movement]) * inv_percent
+		
+		if current_movement == Movement.EGG_WIGGLE:
+			rot += (sin(t * 8) * amount_dict[current_movement]) * inv_percent
+	
+	if life_stage == LifeStage.EGG:
+		pivot_offset.rotation = rot
 
 
 # -------
@@ -495,4 +510,3 @@ func get_stat_max(stat: String) -> float:
 	var stat_enum = Stat[stat]
 	var stat_key = stats_max[stat_enum]
 	return self[stat_key]
-	
