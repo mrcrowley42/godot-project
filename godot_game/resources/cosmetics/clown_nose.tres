@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CosmeticItem" load_steps=4 format=3 uid="uid://cv4y2i7jg7x85"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/cosmetic.gd" id="1_ei5cn"]
+[ext_resource type="SpriteFrames" uid="uid://cckhpmri70a8b" path="res://resources/cosmetics/clown_nose_sprite_frames.tres" id="2_5ansq"]
+[ext_resource type="Texture2D" uid="uid://bsw0mfbgmdaa5" path="res://images/cosmetics/nose-0.png" id="3_j1urm"]
+
+[resource]
+script = ExtResource("1_ei5cn")
+name = "Clown Nose"
+desc = "*Honk*"
+unlocked = true
+thumbnail = ExtResource("3_j1urm")
+category = 2
+sprite = ExtResource("2_5ansq")
+hint = ""

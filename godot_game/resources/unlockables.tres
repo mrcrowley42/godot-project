@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="Unlockables" load_steps=5 format=3 uid="uid://sc3p3bwjnend"]
+[gd_resource type="Resource" script_class="Unlockables" load_steps=7 format=3 uid="uid://sc3p3bwjnend"]
 
 [ext_resource type="Script" path="res://scripts/base_classses/unlockables.gd" id="1_gdfgk"]
 [ext_resource type="Resource" uid="uid://boatniuf6yx3d" path="res://resources/cosmetics/propeller_hat.tres" id="2_1jikp"]
 [ext_resource type="Script" path="res://scripts/base_classses/cosmetic.gd" id="2_jtf78"]
 [ext_resource type="Resource" uid="uid://c0gf34lgpdkmh" path="res://resources/cosmetics/standard_glasses.tres" id="3_6e8cd"]
+[ext_resource type="Resource" uid="uid://cv4y2i7jg7x85" path="res://resources/cosmetics/clown_nose.tres" id="5_vjxlf"]
+[ext_resource type="Resource" uid="uid://pcy07k7fjhe7" path="res://resources/cosmetics/party_hat.tres" id="6_f6ojs"]
 
 [resource]
 script = ExtResource("1_gdfgk")
-unlockables = Array[ExtResource("2_jtf78")]([ExtResource("2_1jikp"), ExtResource("3_6e8cd")])
+unlockables = Array[ExtResource("2_jtf78")]([ExtResource("2_1jikp"), ExtResource("3_6e8cd"), ExtResource("5_vjxlf"), ExtResource("6_f6ojs")])

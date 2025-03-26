@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CosmeticItem" load_steps=4 format=3 uid="uid://pcy07k7fjhe7"]
+
+[ext_resource type="Script" path="res://scripts/base_classses/cosmetic.gd" id="1_2kup6"]
+[ext_resource type="SpriteFrames" uid="uid://b1eadhfbq7hth" path="res://resources/cosmetics/party_hat_sprite_frames.tres" id="2_dyi2c"]
+[ext_resource type="Texture2D" uid="uid://rhj035vvq1yq" path="res://images/cosmetics/party-hat-0.png" id="3_sgns7"]
+
+[resource]
+script = ExtResource("1_2kup6")
+name = "Party hat"
+desc = ""
+unlocked = true
+thumbnail = ExtResource("3_sgns7")
+category = 0
+sprite = ExtResource("2_dyi2c")
+hint = ""
