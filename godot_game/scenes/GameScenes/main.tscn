@@ -10,7 +10,7 @@
 [ext_resource type="Resource" uid="uid://b74rhs5f0lfn3" path="res://resources/achievements/completionist/discover_every_creature.tres" id="5_kp45v"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/consumables_manager.gd" id="5_yr5ap"]
 [ext_resource type="Shader" path="res://shaders/multiply_colour.gdshader" id="5_yth5i"]
-[ext_resource type="Resource" path="res://resources/baby_list.tres" id="6_kodr3"]
+[ext_resource type="Resource" uid="uid://dvginkpdr10ae" path="res://resources/baby_list.tres" id="6_kodr3"]
 [ext_resource type="Script" path="res://scripts/main_game_scripts/achievement_manager.gd" id="6_lmnmq"]
 [ext_resource type="Texture2D" uid="uid://cdbor7hjfbusn" path="res://UI stuff/Universal/background.png" id="6_oihh8"]
 [ext_resource type="Shader" path="res://shaders/background.gdshader" id="7_1pcjq"]
@@ -2122,18 +2122,16 @@ theme = ExtResource("39_8ebm3")
 bbcode_enabled = true
 text = "[center]Created by [wave amp=50.0 freq=5.0 connected=1][rainbow freq=1.0 sat=0.8 val=0.9]Team Yippee[/rainbow][/wave]
 
-Maggie O'Connell
 Matthew Crowley
 Bryce van Ewyk
-Lachlan Cameron
-Ryan Gasnier
-Marcus Gellel
+Maggie O'Connell
 
 [font_size=15]Based on Tbh/autism creature originally by @acmeiku on Twitter[/font_size]
 
 
 With a very special thanks to:
-[font_size=15]Martina Johnson[/font_size]
+[font_size=15]Martina Johnson for being our biggest supporter
+Our colleagues who assisted with testing and feedback[/font_size]
 
 
 Music:
