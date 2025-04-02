@@ -38,6 +38,7 @@ signal back_to_main_menu
 
 @onready var alpha_shader = preload("res://shaders/apply_alpha_map.gdshader")
 @onready var alpha_map = preload("res://images/egg/egg-alpha-map.png")
+@onready var all_eggs: EggList = preload("res://resources/egg_list.tres")
 
 const BAR_CLICK_ADDITION: int = 100
 const BAR_DRAIN_AMOUNT: int = 200
@@ -91,6 +92,8 @@ func _ready():
 		var the_egg: EggEntry = load(ResourceUID.get_id_path(int(DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_EGG_UID))))
 		eggs_to_place.clear()
 		eggs_to_place = [the_egg]
+	else:
+		eggs_to_place = all_eggs.items
 	spawn_eggs()
 
 ## structure of egg:
