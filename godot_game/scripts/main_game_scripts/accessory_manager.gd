@@ -11,7 +11,7 @@ var current_cosmetics: Array
 var position_dict: Dictionary
 var scale_dict: Dictionary
 var unlockables_dict: Dictionary
-
+var name_to_category: Dictionary
 var ready_to_place_cosmetics: bool = false
 
 signal cosmetics_loaded
@@ -28,6 +28,7 @@ func _ready() -> void:
 	# Build dictionary for each unlockable item with the key being the items name.
 	for item in unlockables:
 		unlockables_dict[item.name] = item
+
 
 func _notification(noti: int) -> void:
 	if noti == Globals.NOTIFICATION_CREATURE_IS_LOADED:
@@ -69,6 +70,7 @@ func place_cosmetic(cosmetic: CosmeticItem):
 	# Should maintain sync with main sprite
 	await %Main.frame_changed
 	new_sprite.play()
+	return cosmetic.category
 
 ## If the passed cosmetic item isn't already in the scene, and add it, at the location set
 ## for the current creature. If it does exist, remove that instance.
@@ -77,17 +79,20 @@ func toggle_cosmetic(cosmetic: CosmeticItem) -> void:
 		place_cosmetic(cosmetic)
 		current_cosmetics.append(cosmetic.name)
 	else:
-		# this is ridiculous
-		var children = get_children()
-		for child in children:
-			if child.name == cosmetic.name:
-				remove_child(child)
+		remove_cosmetic(cosmetic)
 
-		# Painful to do this with an array but whatever
-		for i in range(len(current_cosmetics)):
-			if current_cosmetics[i] == cosmetic.name:
-				current_cosmetics.remove_at(i)
-				break
+## YUCK
+func remove_cosmetic(cosmetic):
+	var children = get_children()
+	for child in children:
+		if child.name == cosmetic.name:
+			remove_child(child)
+
+	# Painful to do this with an array but whatever
+	for i in range(len(current_cosmetics)):
+		if current_cosmetics[i] == cosmetic.name:
+			current_cosmetics.remove_at(i)
+			break
 
 
 func get_save_uid() -> int:

@@ -11,8 +11,9 @@ var unlockables = load("res://resources/unlockables.tres")
 @export var title_label: Button
 @export var achievement_manager: AchievementManager
 var title_label_og_text: String
-
+var button_groups: Dictionary = {}
 var data_is_loaded = false
+
 
 ## Class that describes the button object for each cosmetic item.
 class UnlockableIcon extends CustomTooltipButton:
@@ -66,8 +67,11 @@ func _notification(what: int) -> void:
 		update_title()
 		
 		for item: CosmeticItem in unlockables.unlockables:
+			if item.category not in button_groups.keys():
+				button_groups[item.category] = ButtonGroup.new()
 			var item_btn = UnlockableIcon.new(item)
 			item_btn.achievement_manager = achievement_manager
+			item_btn.button_group = button_groups[item.category]
 			add_child.call_deferred(item_btn)
 
 
