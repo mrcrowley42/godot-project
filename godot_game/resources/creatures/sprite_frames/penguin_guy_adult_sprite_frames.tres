@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=12 format=3 uid="uid://bwrybd61b6ki0"]
+[gd_resource type="SpriteFrames" load_steps=16 format=3 uid="uid://bwrybd61b6ki0"]
 
 [ext_resource type="Texture2D" uid="uid://dqnimeubdfjdd" path="res://images/creature_sprites/penguin-guy/peng-guy-angry-0.png" id="1_e6bhm"]
 [ext_resource type="Texture2D" uid="uid://bn03jcm4d85pw" path="res://images/creature_sprites/penguin-guy/peng-guy-confused-0.png" id="2_ifq7i"]
@@ -8,9 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://bk57ntgy7t7lc" path="res://images/creature_sprites/penguin-guy/peng-guy-joy-0.png" id="4_g74q5"]
 [ext_resource type="Texture2D" uid="uid://y42i8sxkon1v" path="res://images/creature_sprites/penguin-guy/peng-guy-idle-1.png" id="4_meop0"]
 [ext_resource type="Texture2D" uid="uid://qmydli387n38" path="res://images/creature_sprites/penguin-guy/peng-guy-idle-2.png" id="5_bontf"]
+[ext_resource type="Texture2D" uid="uid://cwa5psgr87cd5" path="res://images/creature_sprites/penguin-guy/peng-guy-confused-1.png" id="5_kug8u"]
 [ext_resource type="Texture2D" uid="uid://bg6317hfxyp6p" path="res://images/creature_sprites/penguin-guy/peng-guy-sad-0.png" id="5_n2mto"]
+[ext_resource type="Texture2D" uid="uid://2ewjle50yfl8" path="res://images/creature_sprites/penguin-guy/peng-guy-confused-2.png" id="6_ktu0q"]
 [ext_resource type="Texture2D" uid="uid://b6ixwlkcg0et3" path="res://images/creature_sprites/penguin-guy/peng-guy-joy-1.png" id="9_u58nj"]
 [ext_resource type="Texture2D" uid="uid://626pau88gm0h" path="res://images/creature_sprites/penguin-guy/peng-guy-joy-2.png" id="10_8idy2"]
+[ext_resource type="Texture2D" uid="uid://cl81csvyd3sd" path="res://images/creature_sprites/penguin-guy/peng-guy-sad-1.png" id="14_lxuyp"]
+[ext_resource type="Texture2D" uid="uid://4dsely4l18us" path="res://images/creature_sprites/penguin-guy/peng-guy-sad-2.png" id="15_2kk75"]
 
 [resource]
 animations = [{
@@ -31,6 +35,12 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_ifq7i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_kug8u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ktu0q")
 }],
 "loop": true,
 "name": &"confused",
@@ -67,6 +77,12 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("5_n2mto")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_lxuyp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_2kk75")
 }],
 "loop": true,
 "name": &"sad",
