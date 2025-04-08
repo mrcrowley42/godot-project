@@ -5,9 +5,9 @@
 [ext_resource type="Resource" uid="uid://c0gf34lgpdkmh" path="res://resources/cosmetics/standard_glasses.tres" id="3_k223i"]
 [ext_resource type="Resource" path="res://resources/cosmetics/clown_nose.tres" id="4_inugv"]
 [ext_resource type="Script" path="res://scripts/base_classses/creature_type_part.gd" id="4_lhheh"]
-[ext_resource type="Resource" path="res://resources/cosmetics/party_hat.tres" id="5_na21f"]
+[ext_resource type="Resource" uid="uid://pcy07k7fjhe7" path="res://resources/cosmetics/party_hat.tres" id="5_na21f"]
 [ext_resource type="SpriteFrames" uid="uid://y7r6kfnngoko" path="res://resources/creatures/sprite_frames/little_guy_child_sprite_frames.tres" id="5_ol4yb"]
-[ext_resource type="Resource" path="res://resources/cosmetics/jester-hat.tres" id="6_4e6b2"]
+[ext_resource type="Resource" uid="uid://b5oecrkiyl2w6" path="res://resources/cosmetics/jester-hat.tres" id="6_4e6b2"]
 
 [sub_resource type="Resource" id="Resource_4vd6u"]
 script = ExtResource("1_kmjjr")
