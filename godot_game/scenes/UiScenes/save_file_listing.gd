@@ -7,6 +7,7 @@ signal selected(creature_data)
 @onready var name_label = find_child("NameLabel")
 @onready var date_label = find_child("DateLabel")
 @onready var status_label = find_child("StatusLabel")
+@onready var parent_label = find_child("ParentLabel")
 @onready var death_overlay = find_child("DeathOverlay")
 
 @onready var creature_icon: Button = find_child("CreatureIcon")
@@ -17,7 +18,7 @@ func _ready() -> void:
 	var tz = Time.get_time_zone_from_system()
 	if save_file:
 		name_label.text = save_file.creature_name
-		status_label.text = str(save_file.status)
+		status_label.text = "Status: %s" %  str(save_file.status)
 		var time_dict = Time.get_datetime_dict_from_unix_time(save_file.last_saved + (tz['bias'] * 60))
 		var lp_date = str(time_dict['day']) + "/" + str(time_dict['month']) + "/" + str(time_dict['year'])
 		var lp_time = " - " + str(time_dict['hour']) + ":" + str(time_dict["minute"]) + ":" + str(time_dict["second"])
@@ -36,6 +37,11 @@ func _ready() -> void:
 		if save_file.status == "Independent":
 			independent_star.show()
 			modulate = Color(1, 0.819, 0.635)
+		
+		parent_label.hide()
+		if save_file.parent_id != "-1":
+			parent_label.show()
+			parent_label.text = "Parent: %s" % save_file.parent_name
 		#category_icon.tooltip_string = "Category: %s" % sound_node.sound_category.category_name
 		#creature_icon.icon = save_file.icon
 

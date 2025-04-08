@@ -119,11 +119,18 @@ theme = ExtResource("5_bh6hp")
 theme_override_font_sizes/font_size = 15
 text = "Something else IDK"
 
+[node name="ParentLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0.72549)
+layout_mode = 2
+theme = ExtResource("5_bh6hp")
+theme_override_font_sizes/font_size = 14
+text = "Parent:"
+
 [node name="DateLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 modulate = Color(1, 1, 1, 0.72549)
 layout_mode = 2
 theme = ExtResource("5_bh6hp")
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 14
 text = "Date:"
 
 [node name="Node2D" type="Node2D" parent="MarginContainer/HBoxContainer"]

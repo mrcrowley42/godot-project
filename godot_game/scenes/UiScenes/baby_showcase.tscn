@@ -4,7 +4,7 @@
 [ext_resource type="Shader" path="res://shaders/pattern_animated_grid.gdshader" id="2_nenoy"]
 [ext_resource type="Theme" uid="uid://d0m1upkiiwl2s" path="res://themes/menu_btn_dark.tres" id="3_g4out"]
 [ext_resource type="Shader" path="res://shaders/outline.gdshader" id="4_km8at"]
-[ext_resource type="SpriteFrames" uid="uid://o0cqfhkchtst" path="res://resources/creatures/sprite_frames/little_guy_baby_sprite_frames.tres" id="5_k7k1q"]
+[ext_resource type="SpriteFrames" uid="uid://b0qc381m2sntd" path="res://resources/creatures/sprite_frames/little_guy_baby_sprite_frames.tres" id="5_k7k1q"]
 [ext_resource type="Theme" uid="uid://dvpqr6ekggufg" path="res://themes/menu_dropdown.tres" id="6_tucfi"]
 [ext_resource type="Theme" uid="uid://bkynhi7gd36bl" path="res://themes/menu_btn.tres" id="7_xshjc"]
 

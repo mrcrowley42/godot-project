@@ -41,25 +41,25 @@ func new_timer(rate: float, timeout_func: Callable) -> void:
 	timer.wait_time = 1 / rate
 	timer.autostart = true
 	timer.timeout.connect(timeout_func)
-	add_child(timer)
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	new_timer(hp_rate, hp_timeout)
-	new_timer(water_rate, water_timeout)
-	new_timer(food_rate, food_timeout)
-	new_timer(fun_rate, fun_timeout)
-
+	add_child.call_deferred(timer)
 
 func toggle_holiday_mode():
 	holiday_mode = !holiday_mode
 	DataGlobals.set_metadata_value(true, DataGlobals.HOLIDAY_MODE, holiday_mode)
 
 func _notification(what):
+	if what == Globals.NOTIFICATION_CREATURE_IS_LOADED:
+		if creature.life_stage != Creature.LifeStage.EGG:
+			new_timer(hp_rate, hp_timeout)
+			new_timer(water_rate, water_timeout)
+			new_timer(food_rate, food_timeout)
+			new_timer(fun_rate, fun_timeout)
+		else:
+			new_timer(1., egg_remaining_timeout)
+		finished_loading.emit()
+	
 	if what == Globals.NOTIFICATION_ALL_DATA_IS_LOADED:
 		holiday_mode = DataGlobals.get_global_metadata_value(DataGlobals.HOLIDAY_MODE)
-	finished_loading.emit()
-
 
 func hp_timeout() -> void:
 	health_amount = 0
@@ -93,3 +93,6 @@ func food_timeout() -> void:
 
 func fun_timeout() -> void:
 	creature.dmg(fun_amount * time_multiplier, Creature.Stat.FUN)
+
+func egg_remaining_timeout() -> void:
+	creature.reduce_egg_time_remaining(1)

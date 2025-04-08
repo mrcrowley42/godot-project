@@ -36,9 +36,6 @@ func _ready():
 	DataGlobals.load_data()
 	DataGlobals.load_creature_data()
 	DataGlobals.load_settings_data()
-	var elapsed_time = calc_elapsed_time()
-	apply_time_away_effect(elapsed_time)
-	
 
 	# Disable the script execution when the panel is disabled/hidden.
 	debug_window.visible = debug_mode
@@ -46,11 +43,15 @@ func _ready():
 		debug_window.process_mode = Node.PROCESS_MODE_DISABLED
 
 	# creature has never been openned before!
-	if DataGlobals.has_only_creature_metadata():
+	if DataGlobals.has_only_creature_metadata() or Globals.general_dict.has("newly_hatched"):
+		Globals.general_dict.erase("newly_hatched")
 		%Creature.creature_first_openned()
-
+	
+	var elapsed_time = calc_elapsed_time()
+	apply_time_away_effect(elapsed_time)
+	
 	Globals.send_notification(Globals.NOTIFICATION_ALL_DATA_IS_LOADED)
-
+	
 	# do last
 	set_is_in_trans(true)
 	await do_opening_trans()
@@ -75,16 +76,12 @@ func set_is_in_trans(value: bool):
 
 ## debug prints
 func calc_elapsed_time() -> float:
-	if Globals.first_launch:
-		var elapsed_time = launch_time - DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_LAST_SAVED)
-		if debug_mode:
-			var holiday_mode = DataGlobals.get_global_metadata_value(DataGlobals.HOLIDAY_MODE)
-			var vars = [elapsed_time, elapsed_time/86400, "were" if holiday_mode else "were not"]
-			print("%.2f seconds (%.2f days) since last played. You %s on holiday" % vars)
-		
-		return elapsed_time
-
-	return 0
+	var elapsed_time = launch_time - DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_LAST_SAVED)
+	if debug_mode:
+		var holiday_mode = DataGlobals.get_global_metadata_value(DataGlobals.HOLIDAY_MODE)
+		var vars = [elapsed_time, elapsed_time/86400, "were" if holiday_mode else "were not"]
+		print("%.2f seconds (%.2f days) since last played. You %s on holiday" % vars)
+	return elapsed_time
 
 
 ## finilise & save data before closure
@@ -102,6 +99,15 @@ func _notification(noti):
 		else:
 			print("closing game from main game...")
 		return
+
+	## hatch egg
+	if noti == Globals.NOTIFICATION_HATCH_EGG_SCENE and not is_in_transition:
+		set_is_in_trans(true)
+		DataGlobals.save_data()
+		Globals.general_dict.clear()
+		Globals.general_dict["egg_creature_id"] = DataGlobals.get_creature_id()
+		await Globals.perform_closing_transition(trans_img, ui_overlay.position)
+		Globals.change_to_scene("res://scenes/GameScenes/main_menu.tscn")
 
 	## grow up
 	if noti == Globals.NOFITICATION_GROW_TO_ADULT_SCENE and not is_in_transition:
@@ -140,23 +146,25 @@ func _input(event) -> void:
 
 ## Give bonus for XP until neglect threshold then start draining stats
 ## bonus and drain are both disabled in holiday mode.
-func apply_time_away_effect(time_away: float):
+func apply_time_away_effect(secs_away: float):
+	if creature.life_stage == Creature.LifeStage.EGG:
+		creature.reduce_egg_time_remaining(secs_away)
+	
 	if not Globals.first_launch:
 		return
 	
 	var holiday_mode = DataGlobals.get_global_metadata_value(DataGlobals.HOLIDAY_MODE)
-	
 	if holiday_mode:
 		Globals.first_launch = false
 		apply_bonus_xp(0)
 		return
 
-	var days_elapsed = time_away / 86400
-	
-	if days_elapsed >= stat_man.neglect_threshold:
-		apply_neglect(days_elapsed - stat_man.neglect_threshold)
-	else:
-		apply_bonus_xp(days_elapsed)
+	var days_elapsed = secs_away / 86400
+	if creature.life_stage != Creature.LifeStage.EGG:
+		if days_elapsed >= stat_man.neglect_threshold:
+			apply_neglect(days_elapsed - stat_man.neglect_threshold)
+		else:
+			apply_bonus_xp(days_elapsed)
 
 	
 	Globals.first_launch = false

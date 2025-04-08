@@ -42,6 +42,7 @@ const NOTIFICATION_AMBIENT_SOUNDS_REMOVED = 505
 const NOTIFICATION_ALL_DATA_IS_LOADED = 506
 const NOTIFICATION_QUIT_TO_MAIN_MENU = 507
 const NOTIFICATION_LAY_EGG_SCENE = 508
+const NOTIFICATION_HATCH_EGG_SCENE = 509
 
 const NOTI_LOOKUP = {
 	NOTIFICATION_MINIGAME_CLOSED: "NOTIFICATION_MINIGAME_CLOSED",
@@ -204,6 +205,12 @@ func unlock_achievement(achievement: Achievement) -> void:
 	achievement_unlocked.emit(achievement_uid)
 
 # TODO: really want to refactor these functions into one now...
+
+func delete_creature_icon(creature_id):
+	var d = DirAccess.open(Globals.SAVE_LOCATION_PREFIX + "://")
+	for filename: String in d.get_files():
+		if filename.begins_with("save_icon_" + str(creature_id)):
+			d.remove(filename)
 
 ## generic tween function
 func tween(obj, prop, val, delay=0., time=2., _ease=Tween.EASE_OUT, _trans=Tween.TRANS_EXPO) -> Tween:

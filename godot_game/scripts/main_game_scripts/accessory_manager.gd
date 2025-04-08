@@ -11,8 +11,9 @@ var current_cosmetics: Array
 var position_dict: Dictionary
 var scale_dict: Dictionary
 var unlockables_dict: Dictionary
-
+var name_to_category: Dictionary
 var ready_to_place_cosmetics: bool = false
+var item_to_cat: Dictionary
 
 signal cosmetics_loaded
 
@@ -28,6 +29,7 @@ func _ready() -> void:
 	# Build dictionary for each unlockable item with the key being the items name.
 	for item in unlockables:
 		unlockables_dict[item.name] = item
+		item_to_cat[item.name] = item.category
 
 func _notification(noti: int) -> void:
 	if noti == Globals.NOTIFICATION_CREATURE_IS_LOADED:
@@ -45,12 +47,12 @@ func set_ready():
 	ready_to_place_cosmetics = true
 
 func place_all_cosmetics():
+	if not creature.creature:
+		return
+	
 	# Build dictionary for each cosmetic items appropriate position for the current creature
 	for item in find_parent("Creature").creature.cosmetic_positions:
 		position_dict[item.item] = item
-		
-	#for item in find_parent("Creature").creature.cosmetic_positions:
-		
 	
 	# place cosmetics on creature
 	for cosmetic in current_cosmetics:
@@ -70,24 +72,38 @@ func place_cosmetic(cosmetic: CosmeticItem):
 	await %Main.frame_changed
 	new_sprite.play()
 
+
 ## If the passed cosmetic item isn't already in the scene, and add it, at the location set
 ## for the current creature. If it does exist, remove that instance.
 func toggle_cosmetic(cosmetic: CosmeticItem) -> void:
 	if cosmetic.name not in current_cosmetics:
 		place_cosmetic(cosmetic)
 		current_cosmetics.append(cosmetic.name)
-	else:
-		# this is ridiculous
-		var children = get_children()
-		for child in children:
-			if child.name == cosmetic.name:
-				remove_child(child)
 
-		# Painful to do this with an array but whatever
-		for i in range(len(current_cosmetics)):
-			if current_cosmetics[i] == cosmetic.name:
-				current_cosmetics.remove_at(i)
-				break
+	else:
+		remove_cosmetic(cosmetic)
+
+
+func toggle_category(group: ButtonGroup, current_item):
+	var g = group.get_buttons()
+	for btn in g:
+		var item = btn.cosmetic
+		if item.name == current_item:
+			continue
+		remove_cosmetic(item)
+
+## YUCK
+func remove_cosmetic(cosmetic):
+	var children = get_children()
+	for child in children:
+		if child.name == cosmetic.name:
+			remove_child(child)
+
+	# Painful to do this with an array but whatever
+	for i in range(len(current_cosmetics)):
+		if current_cosmetics[i] == cosmetic.name:
+			current_cosmetics.remove_at(i)
+			break
 
 
 func get_save_uid() -> int:

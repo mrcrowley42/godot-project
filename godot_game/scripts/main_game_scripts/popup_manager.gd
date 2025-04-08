@@ -5,6 +5,7 @@ class_name NotificationManager extends ScriptNode
 @onready var adv_toast = preload("res://scenes/UiScenes/notification_adv.tscn")
 @onready var grow_up_btn: NinePatchRect = find_child("GrowUpBtn")
 @onready var lay_egg_btn: NinePatchRect = find_child("LayEggBtn")
+@onready var hatch_btn: NinePatchRect = find_child("HatchBtn")
 
 @export var max_notifications: int = 3
 @export var clippy_area: Node
@@ -25,11 +26,13 @@ func _ready():
 	Globals.item_unlocked.connect(new_adv_notification)
 	%MinigameManager.minigame_closed.connect(check_noti_queue)
 	%ClippyArea.clippy_closed.connect(check_noti_queue)
+	%Creature.ready_to_hatch.connect(hatch_btn.show_hatch_btn)
 	%Creature.ready_to_grow_up.connect(grow_up_btn.show_grow_up_btn)
 	%Creature.ready_to_lay_egg.connect(lay_egg_btn.show_lay_egg_btn)
 
 func _notification(what: int) -> void:
 	if what == Globals.NOTIFICATION_ALL_DATA_IS_LOADED:
+		hatch_btn.position.y += hatch_btn.size.y * hatch_btn.scale.y * 2.
 		grow_up_btn.position.y += grow_up_btn.size.y * grow_up_btn.scale.y * 2.
 		lay_egg_btn.position.y += lay_egg_btn.size.y * lay_egg_btn.scale.y * 2.
 		child_count = get_child_count()

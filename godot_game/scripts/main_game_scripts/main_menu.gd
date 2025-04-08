@@ -6,6 +6,7 @@ class_name MainMenu extends ScriptNode
 var egg_scene_instance: EggOpening = null
 
 @onready var load_menu = find_child("LoadMenu")
+@onready var egg_menu = find_child("PendingEggMenu")
 @onready var settings_menu = find_child("SettingsMenu")
 @onready var bg_gradient: TextureRect = find_child("BgGradient")
 @onready var trans_img: Sprite2D = find_child("Transition")
@@ -37,6 +38,11 @@ func _ready() -> void:
 	center_pos = bg_gradient.size / 2
 	
 	setup_btn_visibility()
+	
+	## if hatching egg, open scene immediatly
+	if Globals.general_dict.has("egg_creature_id"):
+		change_to_egg_hatch_scene()
+	
 	do_opening_trans()
 	[%Music1, %Music2, %Music3].pick_random().play()
 
@@ -59,6 +65,8 @@ func grab_saves():
 		save_info['id'] = save_id
 		save_info['last_saved'] = DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_LAST_SAVED, save_id)
 		save_info['creature_name'] = DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_NAME, save_id)
+		save_info['parent_id'] = DataGlobals.get_creature_metadata_value(DataGlobals.CREATURE_PARENT_ID, save_id)
+		save_info['parent_name'] = DataGlobals.find_parent_name(save_info['parent_id'])
 		save_info['status'] = get_creature_status(save_id)
 		saves.append(save_info)
 		
@@ -106,17 +114,18 @@ func _on_continue_btn_button_down() -> void:
 		await do_closing_trans()
 		Globals.change_to_scene("res://scenes/GameScenes/main.tscn")
 
-
 func _on_new_game_btn_button_down() -> void:
 	btn_sfx.play()
 	if not is_in_transition:
 		await do_closing_trans()
-		egg_scene_instance = egg_scene.instantiate()
-		egg_openning_layer.add_child(egg_scene_instance)
-		egg_scene_instance.back_to_main_menu.connect(exit_egg_scene_to_main_menu)
-		egg_scene_instance.do_closing_trans.connect(go_to_main_game)
-		do_opening_trans()
+		change_to_egg_hatch_scene()
 
+func change_to_egg_hatch_scene():
+	egg_scene_instance = egg_scene.instantiate()
+	egg_openning_layer.add_child(egg_scene_instance)
+	egg_scene_instance.back_to_main_menu.connect(exit_egg_scene_to_main_menu)
+	egg_scene_instance.do_closing_trans.connect(go_to_main_game)
+	do_opening_trans()
 
 func go_to_main_game():
 	fade_out_music()
@@ -138,6 +147,11 @@ func _on_load_btn_button_down() -> void:
 		load_menu.show()
 
 
+func _on_hatch_egg_btn_button_down() -> void:
+	btn_sfx.play()
+	if not is_in_transition:
+		egg_menu.show()
+
 func _on_load_save_btn_button_down() -> void:
 	btn_sfx.play()
 	if load_menu.current_save_id != null:
@@ -158,7 +172,6 @@ func _on_confirm_wipe_button_down() -> void:
 	# keep metadata
 	var metadata = DataGlobals.get_global_metadata_dc()
 	metadata[DataGlobals.CURRENT_CREATURE] = "-1"
-	metadata[DataGlobals.ID_INCREMENTAL] = "0"
 	metadata[DataGlobals.PENDING_EGGS] = []
 	
 	var d = DirAccess.open(Globals.SAVE_LOCATION_PREFIX + "://")
