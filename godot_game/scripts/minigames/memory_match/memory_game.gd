@@ -83,9 +83,9 @@ func show_finish_menu(is_timed: bool, score: float):
 	
 	creature.add_fun(reward_amount)
 	
-	if lowest_guesses < 20:
+	if lowest_guesses && lowest_guesses < 20:
 		Globals.unlock_achievement(low_score_ach)
-	if best_time < 30:
+	if best_time && best_time < 30:
 		Globals.unlock_achievement(fast_time_ach)
 
 
