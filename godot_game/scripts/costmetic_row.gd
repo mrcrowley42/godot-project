@@ -38,6 +38,7 @@ class UnlockableIcon extends CustomTooltipButton:
 		var creature: Creature = parent.creature
 		var manager: AccessoryManager = creature.find_child("AccessoryManager")
 		manager.toggle_cosmetic(self.cosmetic)
+		manager.toggle_category(self.button_group, self.cosmetic.name)
 		parent.cosmetic_btn_pressed.emit()
 		achievement_manager.customise_everything_counter(achievement_manager.CUSTOMISATIONS.COSMETIC)
 

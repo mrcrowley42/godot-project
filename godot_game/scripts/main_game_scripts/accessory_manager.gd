@@ -13,6 +13,7 @@ var scale_dict: Dictionary
 var unlockables_dict: Dictionary
 var name_to_category: Dictionary
 var ready_to_place_cosmetics: bool = false
+var item_to_cat: Dictionary
 
 signal cosmetics_loaded
 
@@ -28,7 +29,7 @@ func _ready() -> void:
 	# Build dictionary for each unlockable item with the key being the items name.
 	for item in unlockables:
 		unlockables_dict[item.name] = item
-
+		item_to_cat[item.name] = item.category
 
 func _notification(noti: int) -> void:
 	if noti == Globals.NOTIFICATION_CREATURE_IS_LOADED:
@@ -70,7 +71,7 @@ func place_cosmetic(cosmetic: CosmeticItem):
 	# Should maintain sync with main sprite
 	await %Main.frame_changed
 	new_sprite.play()
-	return cosmetic.category
+
 
 ## If the passed cosmetic item isn't already in the scene, and add it, at the location set
 ## for the current creature. If it does exist, remove that instance.
@@ -78,8 +79,18 @@ func toggle_cosmetic(cosmetic: CosmeticItem) -> void:
 	if cosmetic.name not in current_cosmetics:
 		place_cosmetic(cosmetic)
 		current_cosmetics.append(cosmetic.name)
+
 	else:
 		remove_cosmetic(cosmetic)
+
+
+func toggle_category(group: ButtonGroup, current_item):
+	var g = group.get_buttons()
+	for btn in g:
+		var item = btn.cosmetic
+		if item.name == current_item:
+			continue
+		remove_cosmetic(item)
 
 ## YUCK
 func remove_cosmetic(cosmetic):
