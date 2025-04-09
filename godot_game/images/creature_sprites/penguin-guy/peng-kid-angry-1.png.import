@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dq0of7wi7sbbx"
-path="res://.godot/imported/peng-kid-happy-0.png-2b405673d92ddf7797c5a46fe375510e.ctex"
+uid="uid://ddsewn7avuy2o"
+path="res://.godot/imported/peng-kid-angry-1.png-4b45ea05034bdaeb6cf905373a411a59.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/creature_sprites/penguin-guy/peng-kid-happy-0.png"
-dest_files=["res://.godot/imported/peng-kid-happy-0.png-2b405673d92ddf7797c5a46fe375510e.ctex"]
+source_file="res://images/creature_sprites/penguin-guy/peng-kid-angry-1.png"
+dest_files=["res://.godot/imported/peng-kid-angry-1.png-4b45ea05034bdaeb6cf905373a411a59.ctex"]
 
 [params]
 

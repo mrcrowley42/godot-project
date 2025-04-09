@@ -1,16 +1,32 @@
-[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://kp0anbxxe58f"]
+[gd_resource type="SpriteFrames" load_steps=16 format=3 uid="uid://kp0anbxxe58f"]
 
 [ext_resource type="Texture2D" uid="uid://bya2r2afbp7g2" path="res://images/creature_sprites/penguin-guy/peng-kid-angry-0.png" id="1_ilirb"]
 [ext_resource type="Texture2D" uid="uid://dksi6ls4bo2il" path="res://images/creature_sprites/penguin-guy/peng-kid-confused-0.png" id="2_j7gir"]
+[ext_resource type="Texture2D" uid="uid://ddsewn7avuy2o" path="res://images/creature_sprites/penguin-guy/peng-kid-angry-1.png" id="2_rbbth"]
+[ext_resource type="Texture2D" uid="uid://c8as57jjtegce" path="res://images/creature_sprites/penguin-guy/peng-kid-angry-2.png" id="3_13vu0"]
 [ext_resource type="Texture2D" uid="uid://bhh81255hb8wl" path="res://images/creature_sprites/penguin-guy/peng-kid-0.png" id="3_dvdav"]
-[ext_resource type="Texture2D" uid="uid://dq0of7wi7sbbx" path="res://images/creature_sprites/penguin-guy/peng-kid-happy-0.png" id="4_qetm1"]
+[ext_resource type="Texture2D" uid="uid://b84cis27ocjoi" path="res://images/creature_sprites/penguin-guy/peng-kid-confused-1.png" id="3_eg6sr"]
+[ext_resource type="Texture2D" uid="uid://ceremh0a8s3ld" path="res://images/creature_sprites/penguin-guy/peng-kid-1.png" id="4_kdv8a"]
+[ext_resource type="Texture2D" uid="uid://bwdrn3r2lma08" path="res://images/creature_sprites/penguin-guy/peng-kid-confused-2.png" id="4_w5sfy"]
 [ext_resource type="Texture2D" uid="uid://cvb04h43s6g4w" path="res://images/creature_sprites/penguin-guy/peng-kid-sad-0.png" id="5_47lo5"]
+[ext_resource type="Texture2D" uid="uid://x4odvqdqnsom" path="res://images/creature_sprites/penguin-guy/peng-kid-2.png" id="5_sw41j"]
+[ext_resource type="Texture2D" uid="uid://c0icv6aggw8lr" path="res://images/creature_sprites/penguin-guy/peng-kid-joy-0.png" id="6_nk73v"]
+[ext_resource type="Texture2D" uid="uid://6si3x1xp8icp" path="res://images/creature_sprites/penguin-guy/peng-kid-joy-1.png" id="7_j3sel"]
+[ext_resource type="Texture2D" uid="uid://be2i2tl5pkjnk" path="res://images/creature_sprites/penguin-guy/peng-kid-joy-2.png" id="8_082ys"]
+[ext_resource type="Texture2D" uid="uid://c8bg6ib71t5w2" path="res://images/creature_sprites/penguin-guy/peng-kid-sad-1.png" id="12_qutgh"]
+[ext_resource type="Texture2D" uid="uid://bnqywtkvp5ano" path="res://images/creature_sprites/penguin-guy/peng-kid-sad-2.png" id="13_b1n1w"]
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_ilirb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_rbbth")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_13vu0")
 }],
 "loop": true,
 "name": &"angry",
@@ -19,6 +35,12 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_j7gir")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_eg6sr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_w5sfy")
 }],
 "loop": true,
 "name": &"confused",
@@ -27,6 +49,12 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("3_dvdav")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_kdv8a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_sw41j")
 }],
 "loop": true,
 "name": &"idle",
@@ -34,7 +62,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_qetm1")
+"texture": ExtResource("6_nk73v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_j3sel")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_082ys")
 }],
 "loop": true,
 "name": &"joy",
@@ -43,6 +77,12 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("5_47lo5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_qutgh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_b1n1w")
 }],
 "loop": true,
 "name": &"sad",
