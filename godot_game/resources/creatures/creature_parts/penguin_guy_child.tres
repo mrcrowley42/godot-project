@@ -1,8 +1,43 @@
-[gd_resource type="Resource" script_class="CreatureTypePart" load_steps=4 format=3 uid="uid://bjrv5eyw58ors"]
+[gd_resource type="Resource" script_class="CreatureTypePart" load_steps=14 format=3 uid="uid://bjrv5eyw58ors"]
 
 [ext_resource type="Script" path="res://scripts/base_classses/cosmetic_position.gd" id="1_etffk"]
 [ext_resource type="Script" path="res://scripts/base_classses/creature_type_part.gd" id="2_pw2wg"]
+[ext_resource type="Resource" uid="uid://cv4y2i7jg7x85" path="res://resources/cosmetics/clown_nose.tres" id="2_sfqif"]
+[ext_resource type="Resource" uid="uid://c0gf34lgpdkmh" path="res://resources/cosmetics/standard_glasses.tres" id="3_m1x6y"]
 [ext_resource type="SpriteFrames" uid="uid://kp0anbxxe58f" path="res://resources/creatures/sprite_frames/penguin_guy_child_sprite_frames.tres" id="3_upwyk"]
+[ext_resource type="Resource" uid="uid://pcy07k7fjhe7" path="res://resources/cosmetics/party_hat.tres" id="4_pik6e"]
+[ext_resource type="Resource" uid="uid://b5oecrkiyl2w6" path="res://resources/cosmetics/jester-hat.tres" id="5_jrw8u"]
+[ext_resource type="Resource" uid="uid://boatniuf6yx3d" path="res://resources/cosmetics/propeller_hat.tres" id="6_pe27i"]
+
+[sub_resource type="Resource" id="Resource_56yol"]
+script = ExtResource("1_etffk")
+position = Vector2(0, 10)
+item = ExtResource("2_sfqif")
+scale = 0.6
+
+[sub_resource type="Resource" id="Resource_c52gh"]
+script = ExtResource("1_etffk")
+position = Vector2(7, -21)
+item = ExtResource("3_m1x6y")
+scale = 0.7
+
+[sub_resource type="Resource" id="Resource_2nc1l"]
+script = ExtResource("1_etffk")
+position = Vector2(4, -74)
+item = ExtResource("4_pik6e")
+scale = 0.8
+
+[sub_resource type="Resource" id="Resource_eu3r5"]
+script = ExtResource("1_etffk")
+position = Vector2(14, -71)
+item = ExtResource("5_jrw8u")
+scale = 0.9
+
+[sub_resource type="Resource" id="Resource_b5auw"]
+script = ExtResource("1_etffk")
+position = Vector2(1, -67)
+item = ExtResource("6_pe27i")
+scale = 0.9
 
 [resource]
 script = ExtResource("2_pw2wg")
@@ -12,7 +47,7 @@ max_food = 900
 max_fun = 900
 sprite_frames = ExtResource("3_upwyk")
 notification_position = Vector2(0, 0)
-cosmetic_positions = Array[ExtResource("1_etffk")]([])
+cosmetic_positions = Array[ExtResource("1_etffk")]([SubResource("Resource_56yol"), SubResource("Resource_c52gh"), SubResource("Resource_2nc1l"), SubResource("Resource_eu3r5"), SubResource("Resource_b5auw")])
 food_likes = Array[int]([])
 food_dislikes = Array[int]([])
 drink_likes = Array[int]([])

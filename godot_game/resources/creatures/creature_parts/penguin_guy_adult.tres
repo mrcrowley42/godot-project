@@ -1,8 +1,43 @@
-[gd_resource type="Resource" script_class="CreatureTypePart" load_steps=4 format=3 uid="uid://cerx7crg1towh"]
+[gd_resource type="Resource" script_class="CreatureTypePart" load_steps=14 format=3 uid="uid://cerx7crg1towh"]
 
 [ext_resource type="Script" path="res://scripts/base_classses/cosmetic_position.gd" id="1_urj1e"]
 [ext_resource type="Script" path="res://scripts/base_classses/creature_type_part.gd" id="2_fg8g2"]
-[ext_resource type="SpriteFrames" uid="uid://wyr4tjqfegxx" path="res://resources/creatures/sprite_frames/penguin_guy_adult_sprite_frames.tres" id="3_bl7hv"]
+[ext_resource type="Resource" uid="uid://cv4y2i7jg7x85" path="res://resources/cosmetics/clown_nose.tres" id="2_uf3nl"]
+[ext_resource type="Resource" uid="uid://b5oecrkiyl2w6" path="res://resources/cosmetics/jester-hat.tres" id="3_3c8yi"]
+[ext_resource type="SpriteFrames" uid="uid://bwrybd61b6ki0" path="res://resources/creatures/sprite_frames/penguin_guy_adult_sprite_frames.tres" id="3_bl7hv"]
+[ext_resource type="Resource" uid="uid://pcy07k7fjhe7" path="res://resources/cosmetics/party_hat.tres" id="4_d66sg"]
+[ext_resource type="Resource" uid="uid://boatniuf6yx3d" path="res://resources/cosmetics/propeller_hat.tres" id="5_ieuts"]
+[ext_resource type="Resource" uid="uid://c0gf34lgpdkmh" path="res://resources/cosmetics/standard_glasses.tres" id="6_j6t4j"]
+
+[sub_resource type="Resource" id="Resource_wlafr"]
+script = ExtResource("1_urj1e")
+position = Vector2(-20, -50)
+item = ExtResource("2_uf3nl")
+scale = 0.7
+
+[sub_resource type="Resource" id="Resource_5s6jj"]
+script = ExtResource("1_urj1e")
+position = Vector2(11, -125)
+item = ExtResource("3_3c8yi")
+scale = 0.9
+
+[sub_resource type="Resource" id="Resource_3gesn"]
+script = ExtResource("1_urj1e")
+position = Vector2(-9, -122)
+item = ExtResource("4_d66sg")
+scale = 0.8
+
+[sub_resource type="Resource" id="Resource_tm45r"]
+script = ExtResource("1_urj1e")
+position = Vector2(-9, -133)
+item = ExtResource("5_ieuts")
+scale = 0.8
+
+[sub_resource type="Resource" id="Resource_pia8m"]
+script = ExtResource("1_urj1e")
+position = Vector2(-3, -61)
+item = ExtResource("6_j6t4j")
+scale = 0.8
 
 [resource]
 script = ExtResource("2_fg8g2")
@@ -12,7 +47,7 @@ max_food = 900
 max_fun = 900
 sprite_frames = ExtResource("3_bl7hv")
 notification_position = Vector2(0, 0)
-cosmetic_positions = Array[ExtResource("1_urj1e")]([])
+cosmetic_positions = Array[ExtResource("1_urj1e")]([SubResource("Resource_wlafr"), SubResource("Resource_5s6jj"), SubResource("Resource_3gesn"), SubResource("Resource_tm45r"), SubResource("Resource_pia8m")])
 food_likes = Array[int]([])
 food_dislikes = Array[int]([])
 drink_likes = Array[int]([])
