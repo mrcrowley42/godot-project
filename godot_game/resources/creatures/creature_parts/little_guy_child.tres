@@ -35,9 +35,9 @@ scale = 1.0
 
 [sub_resource type="Resource" id="Resource_0anng"]
 script = ExtResource("1_kmjjr")
-position = Vector2(0, 0)
+position = Vector2(11, -50)
 item = ExtResource("6_4e6b2")
-scale = 1.0
+scale = 0.9
 
 [resource]
 script = ExtResource("4_lhheh")

@@ -1,10 +1,13 @@
-[gd_resource type="Resource" script_class="CreatureTypePart" load_steps=8 format=3 uid="uid://c6bogi1y7uk6v"]
+[gd_resource type="Resource" script_class="CreatureTypePart" load_steps=14 format=3 uid="uid://c6bogi1y7uk6v"]
 
 [ext_resource type="Script" path="res://scripts/base_classses/cosmetic_position.gd" id="1_puklj"]
 [ext_resource type="Script" path="res://scripts/base_classses/creature_type_part.gd" id="2_3cqod"]
 [ext_resource type="Resource" uid="uid://boatniuf6yx3d" path="res://resources/cosmetics/propeller_hat.tres" id="2_yy1fk"]
 [ext_resource type="Resource" uid="uid://c0gf34lgpdkmh" path="res://resources/cosmetics/standard_glasses.tres" id="3_o4ow7"]
 [ext_resource type="SpriteFrames" uid="uid://hwolbvnn76v3" path="res://resources/creatures/sprite_frames/box_adult_sprite_frames.tres" id="3_s1beh"]
+[ext_resource type="Resource" path="res://resources/cosmetics/clown_nose.tres" id="4_t068v"]
+[ext_resource type="Resource" path="res://resources/cosmetics/party_hat.tres" id="5_6a8dy"]
+[ext_resource type="Resource" path="res://resources/cosmetics/jester-hat.tres" id="6_j3vyi"]
 
 [sub_resource type="Resource" id="Resource_2q62l"]
 script = ExtResource("1_puklj")
@@ -18,6 +21,24 @@ position = Vector2(-13, -90)
 item = ExtResource("3_o4ow7")
 scale = 1.0
 
+[sub_resource type="Resource" id="Resource_u1tdi"]
+script = ExtResource("1_puklj")
+position = Vector2(0, -77)
+item = ExtResource("4_t068v")
+scale = 0.9
+
+[sub_resource type="Resource" id="Resource_4lksd"]
+script = ExtResource("1_puklj")
+position = Vector2(-29, -158)
+item = ExtResource("5_6a8dy")
+scale = 0.9
+
+[sub_resource type="Resource" id="Resource_l278q"]
+script = ExtResource("1_puklj")
+position = Vector2(51, -147)
+item = ExtResource("6_j3vyi")
+scale = 0.75
+
 [resource]
 script = ExtResource("2_3cqod")
 max_hp = 1100
@@ -26,7 +47,7 @@ max_food = 900
 max_fun = 800
 sprite_frames = ExtResource("3_s1beh")
 notification_position = Vector2(-48, -185)
-cosmetic_positions = Array[ExtResource("1_puklj")]([SubResource("Resource_2q62l"), SubResource("Resource_u36e3")])
+cosmetic_positions = Array[ExtResource("1_puklj")]([SubResource("Resource_2q62l"), SubResource("Resource_u36e3"), SubResource("Resource_u1tdi"), SubResource("Resource_4lksd"), SubResource("Resource_l278q")])
 food_likes = Array[int]([])
 food_dislikes = Array[int]([])
 drink_likes = Array[int]([])

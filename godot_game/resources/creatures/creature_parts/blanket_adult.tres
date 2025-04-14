@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CreatureTypePart" load_steps=12 format=3 uid="uid://dxb5upsxk6pk2"]
+[gd_resource type="Resource" script_class="CreatureTypePart" load_steps=14 format=3 uid="uid://dxb5upsxk6pk2"]
 
 [ext_resource type="Script" path="res://scripts/base_classses/cosmetic_position.gd" id="1_ndmg6"]
 [ext_resource type="Resource" uid="uid://boatniuf6yx3d" path="res://resources/cosmetics/propeller_hat.tres" id="2_qf3vy"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/base_classses/creature_type_part.gd" id="4_j1hmq"]
 [ext_resource type="Resource" path="res://resources/cosmetics/party_hat.tres" id="5_h5r8p"]
 [ext_resource type="SpriteFrames" uid="uid://bd2n23rxu0e7l" path="res://resources/creatures/sprite_frames/blanket_adult_sprite_frames.tres" id="5_tug6p"]
+[ext_resource type="Resource" path="res://resources/cosmetics/jester-hat.tres" id="6_5r0b0"]
 
 [sub_resource type="Resource" id="Resource_xrua1"]
 script = ExtResource("1_ndmg6")
@@ -22,15 +23,21 @@ scale = 0.75
 
 [sub_resource type="Resource" id="Resource_ay15t"]
 script = ExtResource("1_ndmg6")
-position = Vector2(-10, 41)
+position = Vector2(-10, -37)
 item = ExtResource("4_2lou3")
-scale = 0.8
+scale = 0.7
 
 [sub_resource type="Resource" id="Resource_yk463"]
 script = ExtResource("1_ndmg6")
 position = Vector2(-11, -115)
 item = ExtResource("5_h5r8p")
 scale = 1.0
+
+[sub_resource type="Resource" id="Resource_e1mpl"]
+script = ExtResource("1_ndmg6")
+position = Vector2(1, -107)
+item = ExtResource("6_5r0b0")
+scale = 0.9
 
 [resource]
 script = ExtResource("4_j1hmq")
@@ -40,7 +47,7 @@ max_food = 1500
 max_fun = 1900
 sprite_frames = ExtResource("5_tug6p")
 notification_position = Vector2(-44, -142)
-cosmetic_positions = Array[ExtResource("1_ndmg6")]([SubResource("Resource_xrua1"), SubResource("Resource_g885l"), SubResource("Resource_ay15t"), SubResource("Resource_yk463")])
+cosmetic_positions = Array[ExtResource("1_ndmg6")]([SubResource("Resource_xrua1"), SubResource("Resource_g885l"), SubResource("Resource_ay15t"), SubResource("Resource_yk463"), SubResource("Resource_e1mpl")])
 food_likes = Array[int]([])
 food_dislikes = Array[int]([])
 drink_likes = Array[int]([])
