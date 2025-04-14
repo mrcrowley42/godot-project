@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://scripts/base_classses/cosmetic_position.gd" id="1_etffk"]
 [ext_resource type="Script" path="res://scripts/base_classses/creature_type_part.gd" id="2_pw2wg"]
-[ext_resource type="Resource" uid="uid://cv4y2i7jg7x85" path="res://resources/cosmetics/clown_nose.tres" id="2_sfqif"]
+[ext_resource type="Resource" path="res://resources/cosmetics/clown_nose.tres" id="2_sfqif"]
 [ext_resource type="Resource" uid="uid://c0gf34lgpdkmh" path="res://resources/cosmetics/standard_glasses.tres" id="3_m1x6y"]
 [ext_resource type="SpriteFrames" uid="uid://kp0anbxxe58f" path="res://resources/creatures/sprite_frames/penguin_guy_child_sprite_frames.tres" id="3_upwyk"]
-[ext_resource type="Resource" uid="uid://pcy07k7fjhe7" path="res://resources/cosmetics/party_hat.tres" id="4_pik6e"]
-[ext_resource type="Resource" uid="uid://b5oecrkiyl2w6" path="res://resources/cosmetics/jester-hat.tres" id="5_jrw8u"]
+[ext_resource type="Resource" path="res://resources/cosmetics/party_hat.tres" id="4_pik6e"]
+[ext_resource type="Resource" path="res://resources/cosmetics/jester-hat.tres" id="5_jrw8u"]
 [ext_resource type="Resource" uid="uid://boatniuf6yx3d" path="res://resources/cosmetics/propeller_hat.tres" id="6_pe27i"]
 
 [sub_resource type="Resource" id="Resource_56yol"]
