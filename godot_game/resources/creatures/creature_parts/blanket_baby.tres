@@ -1,53 +1,53 @@
 [gd_resource type="Resource" script_class="CreatureTypePart" load_steps=14 format=3 uid="uid://db1xtxduidmsc"]
 
-[ext_resource type="Script" path="res://scripts/base_classses/cosmetic_position.gd" id="1_lk1ci"]
-[ext_resource type="Resource" path="res://resources/cosmetics/clown_nose.tres" id="2_1mvhb"]
-[ext_resource type="Script" path="res://scripts/base_classses/creature_type_part.gd" id="2_olqvg"]
-[ext_resource type="SpriteFrames" uid="uid://b1y41obvvh3hr" path="res://resources/creatures/sprite_frames/blanket_baby_sprite_frames.tres" id="3_evqbw"]
-[ext_resource type="Resource" path="res://resources/cosmetics/jester-hat.tres" id="3_mgc5y"]
-[ext_resource type="Resource" path="res://resources/cosmetics/party_hat.tres" id="4_6nd86"]
-[ext_resource type="Resource" uid="uid://boatniuf6yx3d" path="res://resources/cosmetics/propeller_hat.tres" id="5_v2s08"]
-[ext_resource type="Resource" uid="uid://c0gf34lgpdkmh" path="res://resources/cosmetics/standard_glasses.tres" id="6_og3ci"]
+[ext_resource type="Script" path="res://scripts/base_classses/cosmetic_position.gd" id="1_lha58"]
+[ext_resource type="Resource" uid="uid://boatniuf6yx3d" path="res://resources/cosmetics/propeller_hat.tres" id="2_nvm17"]
+[ext_resource type="Resource" uid="uid://c0gf34lgpdkmh" path="res://resources/cosmetics/standard_glasses.tres" id="3_ibdt6"]
+[ext_resource type="Script" path="res://scripts/base_classses/creature_type_part.gd" id="4_lkqu7"]
+[ext_resource type="Resource" path="res://resources/cosmetics/clown_nose.tres" id="4_y0hto"]
+[ext_resource type="Resource" path="res://resources/cosmetics/party_hat.tres" id="5_67uoe"]
+[ext_resource type="SpriteFrames" uid="uid://bc8bjaln2o3sf" path="res://resources/creatures/sprite_frames/blanket_child_sprite_frames.tres" id="5_abhuy"]
+[ext_resource type="Resource" path="res://resources/cosmetics/jester-hat.tres" id="6_0x4a6"]
 
-[sub_resource type="Resource" id="Resource_fqy3k"]
-script = ExtResource("1_lk1ci")
-position = Vector2(0, 0)
-item = ExtResource("2_1mvhb")
-scale = 1.0
+[sub_resource type="Resource" id="Resource_264s0"]
+script = ExtResource("1_lha58")
+position = Vector2(-19, 47)
+item = ExtResource("2_nvm17")
+scale = 0.7
 
-[sub_resource type="Resource" id="Resource_amjws"]
-script = ExtResource("1_lk1ci")
-position = Vector2(0, 0)
-item = ExtResource("3_mgc5y")
-scale = 1.0
+[sub_resource type="Resource" id="Resource_kyalv"]
+script = ExtResource("1_lha58")
+position = Vector2(-2, 94)
+item = ExtResource("3_ibdt6")
+scale = 0.5
 
-[sub_resource type="Resource" id="Resource_v4ne1"]
-script = ExtResource("1_lk1ci")
-position = Vector2(0, 0)
-item = ExtResource("4_6nd86")
-scale = 1.0
+[sub_resource type="Resource" id="Resource_11avc"]
+script = ExtResource("1_lha58")
+position = Vector2(-3, 100)
+item = ExtResource("4_y0hto")
+scale = 0.5
 
-[sub_resource type="Resource" id="Resource_fkuqf"]
-script = ExtResource("1_lk1ci")
-position = Vector2(0, 0)
-item = ExtResource("5_v2s08")
-scale = 1.0
+[sub_resource type="Resource" id="Resource_1ldj6"]
+script = ExtResource("1_lha58")
+position = Vector2(-11, 50)
+item = ExtResource("5_67uoe")
+scale = 0.5
 
-[sub_resource type="Resource" id="Resource_5vnop"]
-script = ExtResource("1_lk1ci")
-position = Vector2(0, 0)
-item = ExtResource("6_og3ci")
-scale = 1.0
+[sub_resource type="Resource" id="Resource_4fxwl"]
+script = ExtResource("1_lha58")
+position = Vector2(11, 43)
+item = ExtResource("6_0x4a6")
+scale = 0.6
 
 [resource]
-script = ExtResource("2_olqvg")
-max_hp = 700
-max_water = 700
-max_food = 700
-max_fun = 700
-sprite_frames = ExtResource("3_evqbw")
-notification_position = Vector2(0, 0)
-cosmetic_positions = Array[ExtResource("1_lk1ci")]([SubResource("Resource_fqy3k"), SubResource("Resource_amjws"), SubResource("Resource_v4ne1"), SubResource("Resource_fkuqf"), SubResource("Resource_5vnop")])
+script = ExtResource("4_lkqu7")
+max_hp = 600
+max_water = 600
+max_food = 600
+max_fun = 500
+sprite_frames = ExtResource("5_abhuy")
+notification_position = Vector2(-32, 0)
+cosmetic_positions = Array[ExtResource("1_lha58")]([SubResource("Resource_264s0"), SubResource("Resource_kyalv"), SubResource("Resource_11avc"), SubResource("Resource_1ldj6"), SubResource("Resource_4fxwl")])
 food_likes = Array[int]([])
 food_dislikes = Array[int]([])
 drink_likes = Array[int]([])

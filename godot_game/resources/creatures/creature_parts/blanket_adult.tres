@@ -6,8 +6,8 @@
 [ext_resource type="Resource" path="res://resources/cosmetics/clown_nose.tres" id="4_2lou3"]
 [ext_resource type="Script" path="res://scripts/base_classses/creature_type_part.gd" id="4_j1hmq"]
 [ext_resource type="Resource" path="res://resources/cosmetics/party_hat.tres" id="5_h5r8p"]
-[ext_resource type="SpriteFrames" uid="uid://bd2n23rxu0e7l" path="res://resources/creatures/sprite_frames/blanket_adult_sprite_frames.tres" id="5_tug6p"]
 [ext_resource type="Resource" path="res://resources/cosmetics/jester-hat.tres" id="6_5r0b0"]
+[ext_resource type="SpriteFrames" uid="uid://b4sr2s82n3br3" path="res://resources/creatures/sprite_frames/blanket_actual-adult_sprite_frames.tres" id="8_qkhl5"]
 
 [sub_resource type="Resource" id="Resource_xrua1"]
 script = ExtResource("1_ndmg6")
@@ -45,7 +45,7 @@ max_hp = 1200
 max_water = 1500
 max_food = 1500
 max_fun = 1900
-sprite_frames = ExtResource("5_tug6p")
+sprite_frames = ExtResource("8_qkhl5")
 notification_position = Vector2(-44, -142)
 cosmetic_positions = Array[ExtResource("1_ndmg6")]([SubResource("Resource_xrua1"), SubResource("Resource_g885l"), SubResource("Resource_ay15t"), SubResource("Resource_yk463"), SubResource("Resource_e1mpl")])
 food_likes = Array[int]([])
