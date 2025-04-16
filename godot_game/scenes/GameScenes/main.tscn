@@ -451,8 +451,14 @@ metadata/_edit_horizontal_guides_ = [8.0, 667.0, 112.0, 111.0, 554.0, 562.0]
 [node name="StatusManager" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("2_aqytd")
-neglect_threshold = 0.02
-neglect_penalty_multiplier = 100.0
+hp_rate = 0.5
+water_rate = 1.0
+water_amount = 2.0
+food_rate = 1.0
+food_amount = 1.5
+fun_rate = 1.0
+fun_amount = 1.0
+neglect_threshold = 2.0
 neglect_limit = 0.1
 
 [node name="AmbienceManager" type="Node" parent="." groups=["settings_data"]]
