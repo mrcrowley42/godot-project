@@ -1,10 +1,12 @@
-[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://b4sr2s82n3br3"]
+[gd_resource type="SpriteFrames" load_steps=8 format=3 uid="uid://b4sr2s82n3br3"]
 
 [ext_resource type="Texture2D" uid="uid://dd6v14t8rgkxn" path="res://images/creature_sprites/blanket/teddy-adult-angry-0.png" id="1_dcoyd"]
 [ext_resource type="Texture2D" uid="uid://jg47sxv8iusk" path="res://images/creature_sprites/blanket/teddy-adult-happy-0.png" id="2_4rtmi"]
 [ext_resource type="Texture2D" uid="uid://b5abeuwqfl21f" path="res://images/creature_sprites/blanket/teddy-adult-confused-0.png" id="3_d04qg"]
 [ext_resource type="Texture2D" uid="uid://pr81im3btulx" path="res://images/creature_sprites/blanket/teddy-adult-idle-0.png" id="4_frfo8"]
 [ext_resource type="Texture2D" uid="uid://w3h8jk1l1int" path="res://images/creature_sprites/blanket/teddy-adult-sad-0.png" id="5_aqwcs"]
+[ext_resource type="Texture2D" uid="uid://cl3n5420d2oqe" path="res://images/creature_sprites/blanket/teddy-adult-idle-1.png" id="5_hehl5"]
+[ext_resource type="Texture2D" uid="uid://cosbri1fvubiy" path="res://images/creature_sprites/blanket/teddy-adult-idle-2.png" id="6_fsdql"]
 
 [resource]
 animations = [{
@@ -35,6 +37,12 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("4_frfo8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_hehl5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_fsdql")
 }],
 "loop": true,
 "name": &"idle",
